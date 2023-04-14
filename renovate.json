@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "groupName": "Kotlin, KSP and Compose Compiler",
+      "groupSlug": "kotlin",
+      "matchPackagePrefixes": [
+        "org.jetbrains.kotlin.*",
+        "com.google.devtools.ksp",
+        "androidx.compose.compiler"
+      ]
+    }
+  ]
+}
