@@ -26,8 +26,8 @@ internal fun BaseExtension.configureAndroid(libs: LibrariesForLibs) {
                 devices.register<ManagedVirtualDevice>("pixel6Api${api}Aosp") {
                     device = "Pixel 6"
                     apiLevel = api
-                    // ATD is only supported on api [30..31] at the moment
-                    systemImageSource = if (api in 30..31) "aosp-atd" else "aosp"
+                    // ATD is only supported on api 30 at the moment
+                    systemImageSource = if (api == 30) "aosp-atd" else "aosp"
                 }
             }
         }

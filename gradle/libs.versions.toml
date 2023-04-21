@@ -182,6 +182,7 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
+baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxBenchmark" }
 cacheFix = { id = "org.gradle.android.cache-fix", version.ref = "cacheFix" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradlePlugin" }

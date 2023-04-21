@@ -14,11 +14,11 @@ public class AndroidLibraryPlugin : Plugin<Project> {
         val libs = the<LibrariesForLibs>()
 
         with(pluginManager) {
-            apply(libs.plugins.android.library.get().pluginId)
-            apply(libs.plugins.kotlin.android.get().pluginId)
-            apply(libs.plugins.cacheFix.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
             apply("app.rickandmorty.spotless")
+            apply(libs.plugins.android.library.get().pluginId)
+            apply(libs.plugins.cacheFix.get().pluginId)
+            apply(libs.plugins.kotlin.android.get().pluginId)
+            apply(libs.plugins.sortDependencies.get().pluginId)
         }
 
         configureKotlin(libs)

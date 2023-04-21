@@ -1,6 +1,7 @@
 plugins {
     id("app.rickandmorty.android-application")
     id("app.rickandmorty.compose")
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -14,5 +15,9 @@ android {
 }
 
 dependencies {
+    baselineProfile(projects.benchmark)
+
     implementation(libs.androidx.activity.compose)
+
+    runtimeOnly(libs.androidx.profileinstaller)
 }
