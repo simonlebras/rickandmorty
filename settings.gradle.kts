@@ -33,3 +33,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "rickandmorty"
 
 include(":app")
+
+include(":benchmark")

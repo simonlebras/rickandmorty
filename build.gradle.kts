@@ -5,10 +5,12 @@ buildscript {
 }
 
 plugins {
+    id("app.rickandmorty.root")
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.apollo) apply false
+    alias(libs.plugins.baselineprofile) apply false
     alias(libs.plugins.cacheFix) apply false
     alias(libs.plugins.dependencyAnalysis) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
@@ -25,6 +27,4 @@ plugins {
     alias(libs.plugins.protobuf) apply false
     alias(libs.plugins.sortDependencies) apply false
     alias(libs.plugins.spotless) apply false
-
-    id("app.rickandmorty.root")
 }

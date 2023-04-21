@@ -11,9 +11,9 @@ public class JvmLibraryPlugin : Plugin<Project> {
         val libs = the<LibrariesForLibs>()
 
         with(pluginManager) {
+            apply("app.rickandmorty.spotless")
             apply(libs.plugins.kotlin.jvm.get().pluginId)
             apply(libs.plugins.sortDependencies.get().pluginId)
-            apply("app.rickandmorty.spotless")
         }
 
         configureKotlin(libs)
