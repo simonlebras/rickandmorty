@@ -36,3 +36,6 @@ rootProject.name = "rickandmorty"
 include(":app")
 
 include(":benchmark")
+
+include(":core:coil")
+include(":core:okhttp")
