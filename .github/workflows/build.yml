@@ -51,7 +51,7 @@ jobs:
         run: ./gradlew buildHealth
 
       - name: Build all build type and flavor permutations
-        run: ./gradlew assemble bundle
+        run: ./gradlew assemble -x :benchmark:pixel6Api31AospSetup -x :benchmark:pixel6Api31AospNonMinifiedReleaseAndroidTest -x :benchmark:collectNonMinifiedReleaseBaselineProfile
 
       - name: Upload build outputs
         uses: actions/upload-artifact@v3
