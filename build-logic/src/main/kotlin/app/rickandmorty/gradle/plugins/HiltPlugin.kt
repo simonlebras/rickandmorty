@@ -15,8 +15,8 @@ public class HiltPlugin : Plugin<Project> {
         val libs = the<LibrariesForLibs>()
 
         with(pluginManager) {
-            apply(libs.plugins.kotlin.kapt.get().pluginId)
             apply(libs.plugins.hilt.get().pluginId)
+            apply(libs.plugins.kotlin.kapt.get().pluginId)
         }
 
         configure<KaptExtension> {

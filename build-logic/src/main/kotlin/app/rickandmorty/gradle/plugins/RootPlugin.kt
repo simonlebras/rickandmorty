@@ -34,8 +34,24 @@ public class RootPlugin : Plugin<Project> {
                     onAny {
                         severity("fail")
                     }
+                    onUnusedDependencies {
+                        exclude(
+                            "com.google.dagger:hilt-android",
+                        )
+                    }
                     onUsedTransitiveDependencies {
                         severity("ignore")
+                    }
+                }
+
+                project(":app") {
+                    onUnusedDependencies {
+                        exclude(
+                            // Submodules used by Hilt
+                            // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
+                            ":core:coil",
+                            ":core:okhttp",
+                        )
                     }
                 }
             }
