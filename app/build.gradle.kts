@@ -24,4 +24,8 @@ dependencies {
     implementation(projects.core.okhttp)
 
     runtimeOnly(libs.androidx.profileinstaller)
+
+    runtimeOnly(libs.leakcanary.plumber)
+
+    debugRuntimeOnly(libs.leakcanary)
 }
