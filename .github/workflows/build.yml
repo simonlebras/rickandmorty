@@ -50,6 +50,9 @@ jobs:
       - name: Detect unused and misused dependencies
         run: ./gradlew buildHealth
 
+      - name: Check module graph
+        run: ./gradlew assertModuleGraph
+
       - name: Build all build type and flavor permutations
         run: ./gradlew assemble -x :benchmark:pixel6Api31AospSetup -x :benchmark:pixel6Api31AospNonMinifiedReleaseAndroidTest -x :benchmark:collectNonMinifiedReleaseBaselineProfile
 

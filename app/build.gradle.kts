@@ -3,6 +3,7 @@ plugins {
     id("app.rickandmorty.compose")
     id("app.rickandmorty.hilt")
     alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.moduleGraphAssert)
 }
 
 android {
@@ -28,4 +29,12 @@ dependencies {
     runtimeOnly(libs.leakcanary.plumber)
 
     debugRuntimeOnly(libs.leakcanary)
+}
+
+moduleGraphAssert {
+    maxHeight = 4
+    allowed = arrayOf(
+        ":app -> :feature:.*",
+        ":.* -> :core:.*",
+    )
 }
