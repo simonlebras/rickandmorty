@@ -1,7 +1,11 @@
 package app.rickandmorty.gradle.plugins
 
-import app.rickandmorty.gradle.util.configureSpotless
 import app.rickandmorty.gradle.util.isRootProject
+import app.rickandmorty.gradle.util.ktlint
+import app.rickandmorty.gradle.util.ktlintGradle
+import app.rickandmorty.gradle.util.misc
+import app.rickandmorty.gradle.util.prettier
+import app.rickandmorty.gradle.util.xml
 import com.autonomousapps.DependencyAnalysisExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessExtensionPredeclare
@@ -65,11 +69,44 @@ public class RootPlugin : Plugin<Project> {
         }
 
         configure<SpotlessExtension> {
-            configureSpotless()
+            ktlint {
+                target("build-logic/src/**/*.kt")
+            }
+
+            ktlintGradle {
+                target(
+                    "*.kts",
+                    "build-logic/*.kts",
+                )
+            }
+
+            misc {
+                target(
+                    ".editorconfig",
+                    ".gitattributes",
+                    ".gitignore",
+                    "*.md",
+                    "*.properties",
+                    "gradle/libs.versions.toml",
+                )
+            }
+
+            prettier {
+                target(
+                    "*.json",
+                    ".github/**/*.yml",
+                )
+            }
+
+            xml {
+                target("*.xml")
+            }
+
             predeclareDeps()
         }
         configure<SpotlessExtensionPredeclare> {
-            configureSpotless()
+            ktlint { }
+            prettier { }
         }
     }
 }
