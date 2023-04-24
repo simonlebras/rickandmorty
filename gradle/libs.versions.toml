@@ -36,6 +36,7 @@ cacheFix = "2.7.1"
 coil = "2.3.0"
 composeLints = "1.2.0"
 dependencyAnalysis = "1.20.0"
+easylauncher = "6.1.0"
 firebaseBom = "31.5.0"
 firebaseCrashlyticsGradlePlugin = "2.9.5"
 firebasePerfGradlePlugin = "1.4.2"
@@ -186,6 +187,7 @@ apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxBenchmark" }
 cacheFix = { id = "org.gradle.android.cache-fix", version.ref = "cacheFix" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
+easylauncher = { id = "com.starter.easylauncher", version.ref = "easylauncher" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradlePlugin" }
 firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfGradlePlugin" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }

@@ -3,6 +3,7 @@ plugins {
     id("app.rickandmorty.compose")
     id("app.rickandmorty.hilt")
     alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.easylauncher)
     alias(libs.plugins.moduleGraphAssert)
 }
 
@@ -13,6 +14,12 @@ android {
         applicationId = "app.rickandmorty"
         versionCode = 1
         versionName = "1.0"
+    }
+
+    buildTypes {
+        val debug by getting
+
+        val release by getting
     }
 }
 
@@ -29,6 +36,14 @@ dependencies {
     runtimeOnly(libs.leakcanary.plumber)
 
     debugRuntimeOnly(libs.leakcanary)
+}
+
+easylauncher {
+    buildTypes {
+        val debug by creating {
+            filters(chromeLike())
+        }
+    }
 }
 
 moduleGraphAssert {

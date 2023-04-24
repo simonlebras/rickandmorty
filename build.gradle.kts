@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.baselineprofile) apply false
     alias(libs.plugins.cacheFix) apply false
     alias(libs.plugins.dependencyAnalysis) apply false
+    alias(libs.plugins.easylauncher) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
     alias(libs.plugins.firebase.perf) apply false
     alias(libs.plugins.googleServices) apply false
