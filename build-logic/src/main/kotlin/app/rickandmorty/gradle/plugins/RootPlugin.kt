@@ -9,6 +9,7 @@ import app.rickandmorty.gradle.util.xml
 import com.autonomousapps.DependencyAnalysisExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessExtensionPredeclare
+import com.diffplug.spotless.LineEnding
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -69,6 +70,9 @@ public class RootPlugin : Plugin<Project> {
         }
 
         configure<SpotlessExtension> {
+            // https://github.com/diffplug/spotless/issues/1644
+            lineEndings = LineEnding.PLATFORM_NATIVE
+
             ktlint {
                 target("build-logic/src/**/*.kt")
             }
