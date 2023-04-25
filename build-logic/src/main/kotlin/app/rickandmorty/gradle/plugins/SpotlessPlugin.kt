@@ -6,6 +6,7 @@ import app.rickandmorty.gradle.util.misc
 import app.rickandmorty.gradle.util.prettier
 import app.rickandmorty.gradle.util.xml
 import com.diffplug.gradle.spotless.SpotlessExtension
+import com.diffplug.spotless.LineEnding
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -22,6 +23,9 @@ public class SpotlessPlugin : Plugin<Project> {
         }
 
         configure<SpotlessExtension> {
+            // https://github.com/diffplug/spotless/issues/1644
+            lineEndings = LineEnding.PLATFORM_NATIVE
+
             ktlint {
                 target("src/**/*.kt")
             }
