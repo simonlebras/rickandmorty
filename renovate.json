@@ -5,11 +5,18 @@
     {
       "groupName": "Kotlin, KSP and Compose Compiler",
       "groupSlug": "kotlin",
+      "matchPackagePatterns": ["org.jetbrains.kotlin.*"],
       "matchPackagePrefixes": [
-        "org.jetbrains.kotlin.*",
         "com.google.devtools.ksp",
         "androidx.compose.compiler"
       ]
+    },
+    {
+      "description": "Automatically merge minor and patch-level updates",
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
     }
   ]
 }
