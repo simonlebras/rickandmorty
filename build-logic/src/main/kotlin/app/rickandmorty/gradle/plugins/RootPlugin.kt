@@ -56,6 +56,7 @@ public class RootPlugin : Plugin<Project> {
                             // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
                             ":core:coil",
                             ":core:coil-logging",
+                            ":core:jankstats",
                             ":core:okhttp",
                             ":core:okhttp-logging",
                         )
