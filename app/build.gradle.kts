@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
 
     implementation(projects.core.coil)
+    implementation(projects.core.jankstats)
     implementation(projects.core.okhttp)
 
     qaImplementation(projects.core.coilLogging)
