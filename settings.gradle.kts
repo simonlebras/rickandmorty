@@ -38,4 +38,6 @@ include(":app")
 include(":benchmark")
 
 include(":core:coil")
+include(":core:coil-logging")
 include(":core:okhttp")
+include(":core:okhttp-logging")

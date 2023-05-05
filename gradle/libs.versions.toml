@@ -128,6 +128,7 @@ apollo-normalizedCache-sqlite = { group = "com.apollographql.apollo3", name = "a
 apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
 
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-base = { group = "io.coil-kt", name = "coil-base", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 compose-lints = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "composeLints" }

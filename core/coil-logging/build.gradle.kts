@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.okhttp"
+    namespace = "app.rickandmorty.coil.logging"
 }
 
 androidComponents {
@@ -14,5 +14,5 @@ androidComponents {
 }
 
 dependencies {
-    api(libs.okhttp)
+    api(libs.coil.base)
 }

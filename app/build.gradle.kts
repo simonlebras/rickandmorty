@@ -20,8 +20,15 @@ android {
         val debug by getting
 
         val release by getting
+
+        val qa by creating {
+            initWith(release)
+            matchingFallbacks += listOf("release")
+        }
     }
 }
+
+val qaImplementation by configurations
 
 dependencies {
     baselineProfile(projects.benchmark)
@@ -30,6 +37,12 @@ dependencies {
 
     implementation(projects.core.coil)
     implementation(projects.core.okhttp)
+
+    qaImplementation(projects.core.coilLogging)
+    qaImplementation(projects.core.okhttpLogging)
+
+    debugImplementation(projects.core.coilLogging)
+    debugImplementation(projects.core.okhttpLogging)
 
     runtimeOnly(libs.androidx.profileinstaller)
 
