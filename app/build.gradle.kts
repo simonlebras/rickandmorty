@@ -14,10 +14,14 @@ android {
         applicationId = "app.rickandmorty"
         versionCode = 1
         versionName = "1.0"
+
+        resourceConfigurations += listOf("en", "fr")
     }
 
     buildTypes {
-        val debug by getting
+        val debug by getting {
+            isPseudoLocalesEnabled = true
+        }
 
         val release by getting
 
