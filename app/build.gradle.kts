@@ -33,6 +33,7 @@ android {
 }
 
 val qaImplementation by configurations
+val qaRuntimeOnly by configurations
 
 dependencies {
     baselineProfile(projects.benchmark)
@@ -53,7 +54,11 @@ dependencies {
 
     runtimeOnly(libs.leakcanary.plumber)
 
+    qaRuntimeOnly(projects.core.strictmode)
+
     debugRuntimeOnly(libs.leakcanary)
+
+    debugRuntimeOnly(projects.core.strictmode)
 }
 
 easylauncher {

@@ -59,6 +59,7 @@ public class RootPlugin : Plugin<Project> {
                             ":core:jankstats",
                             ":core:okhttp",
                             ":core:okhttp-logging",
+                            ":core:strictmode",
                         )
                     }
                 }
