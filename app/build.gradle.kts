@@ -20,6 +20,8 @@ android {
 
     buildTypes {
         val debug by getting {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
             isPseudoLocalesEnabled = true
         }
 
@@ -27,6 +29,8 @@ android {
 
         val qa by creating {
             initWith(release)
+            applicationIdSuffix = ".qa"
+            versionNameSuffix = "-qa"
             matchingFallbacks += listOf("release")
         }
     }
