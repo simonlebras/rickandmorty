@@ -37,6 +37,8 @@ include(":app")
 
 include(":baselineprofile")
 
+include(":catalog")
+
 include(":core:coil")
 include(":core:coil-logging")
 include(":core:jankstats")
