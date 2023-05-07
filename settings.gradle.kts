@@ -35,7 +35,7 @@ rootProject.name = "rickandmorty"
 
 include(":app")
 
-include(":benchmark")
+include(":baselineprofile")
 
 include(":core:coil")
 include(":core:coil-logging")

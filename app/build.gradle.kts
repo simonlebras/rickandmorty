@@ -40,7 +40,7 @@ val qaImplementation by configurations
 val qaRuntimeOnly by configurations
 
 dependencies {
-    baselineProfile(projects.benchmark)
+    baselineProfile(projects.baselineprofile)
 
     implementation(libs.androidx.activity.compose)
 
