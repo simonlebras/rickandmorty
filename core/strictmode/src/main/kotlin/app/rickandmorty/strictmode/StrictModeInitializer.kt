@@ -10,7 +10,6 @@ import androidx.startup.Initializer
 import java.util.concurrent.Executors
 
 internal class StrictModeInitializer : Initializer<Unit> {
-    // TODO inject default dispatcher
     private val penaltyListenerExecutor by lazy(LazyThreadSafetyMode.NONE) {
         Executors.newSingleThreadExecutor()
     }
