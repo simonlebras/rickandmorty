@@ -41,6 +41,7 @@ include(":catalog")
 
 include(":core:coil")
 include(":core:coil-logging")
+include(":core:coroutines")
 include(":core:jankstats")
 include(":core:okhttp")
 include(":core:okhttp-logging")
