@@ -1,6 +1,5 @@
 package app.rickandmorty.gradle.plugins
 
-import app.rickandmorty.gradle.util.implementation
 import app.rickandmorty.gradle.util.ksp
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -15,7 +14,6 @@ public class ShowkasePlugin : Plugin<Project> {
         pluginManager.apply(libs.plugins.ksp.get().pluginId)
 
         dependencies {
-            implementation(libs.showkase)
             ksp(libs.showkase.processor)
         }
     }
