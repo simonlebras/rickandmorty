@@ -1,11 +1,11 @@
 [versions]
 accompanist = "0.31.0-alpha"
-androidCompileSdk = "33"
+androidCompileSdk = "UpsideDownCake"
 androidDesugarJdkLibs = "2.0.3"
 androidGradlePlugin = "8.1.0-beta02"
 androidMinSdk = "24"
 androidTargetSdk = "33"
-androidxActivity = "1.7.1"
+androidxActivity = "1.8.0-alpha03"
 androidxAppcompat = "1.7.0-alpha02"
 androidxBenchmark = "1.2.0-alpha14"
 androidxBrowser = "1.5.0"
@@ -13,7 +13,7 @@ androidxComposeBom = "2023.04.00-alpha03"
 androidxComposeCompiler = "1.4.7"
 androidxComposeMaterial3 = "1.1.0-rc01"
 androidxComposeRuntimeTracing = "1.0.0-alpha03"
-androidxCore = "1.11.0-alpha03"
+androidxCore = "1.12.0-alpha03"
 androidxCoreSplashscreen = "1.1.0-alpha01"
 androidxDatastore = "1.1.0-alpha04"
 androidxHiltNavigationCompose = "1.1.0-alpha01"
@@ -72,7 +72,6 @@ accompanist-adaptive = { group = "com.google.accompanist", name = "accompanist-a
 accompanist-navigation-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "accompanist" }
 accompanist-navigation-material = { group = "com.google.accompanist", name = "accompanist-navigation-material", version.ref = "accompanist" }
 accompanist-placeholder-material = { group = "com.google.accompanist", name = "accompanist-placeholder-material", version.ref = "accompanist" }
-accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
 accompanist-testharness = { group = "com.google.accompanist", name = "accompanist-testharness", version.ref = "accompanist" }
 
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }

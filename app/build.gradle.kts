@@ -43,6 +43,8 @@ dependencies {
     baselineProfile(projects.baselineprofile)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(projects.core.coil)
     implementation(projects.core.jankstats)
