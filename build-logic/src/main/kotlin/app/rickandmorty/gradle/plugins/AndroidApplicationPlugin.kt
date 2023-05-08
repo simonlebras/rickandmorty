@@ -2,7 +2,7 @@ package app.rickandmorty.gradle.plugins
 
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureKotlin
-import com.android.build.gradle.AppExtension
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -27,10 +27,10 @@ public class AndroidApplicationPlugin : Plugin<Project> {
             explicitApi = ExplicitApiMode.Disabled,
         )
 
-        configure<AppExtension> {
+        configure<BaseAppModuleExtension> {
             configureAndroid(libs)
 
-            packagingOptions {
+            packaging {
                 resources {
                     excludes += "/META-INF/{AL2.0,LGPL2.1}"
                 }
