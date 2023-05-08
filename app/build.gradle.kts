@@ -70,6 +70,10 @@ easylauncher {
         val debug by creating {
             filters(chromeLike())
         }
+
+        val qa by creating {
+            filters(chromeLike())
+        }
     }
 }
 
