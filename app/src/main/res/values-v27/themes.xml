@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App theme -->
+    <style name="Platform.V27.Theme.Rickandmorty" parent="Platform.V24.Theme.Rickandmorty">
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar">@bool/light_system_bars</item>
+    </style>
+
+    <style name="Platform.Theme.Rickandmorty" parent="Platform.V27.Theme.Rickandmorty" />
+
+    <!-- Splash theme -->
+    <style name="Platform.V27.Theme.Rickandmorty.Splash" parent="Platform.V24.Theme.Rickandmorty.Splash">
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar">@bool/light_system_bars</item>
+    </style>
+
+    <style name="Platform.Theme.Rickandmorty.Splash" parent="Platform.V27.Theme.Rickandmorty.Splash" />
+
+</resources>

@@ -14,7 +14,7 @@ androidxComposeCompiler = "1.4.7"
 androidxComposeMaterial3 = "1.1.0-rc01"
 androidxComposeRuntimeTracing = "1.0.0-alpha03"
 androidxCore = "1.11.0-alpha03"
-androidxCoreSplashscreen = "1.1.0-alpha01"
+androidxCoreSplashscreen = "1.0.1"
 androidxDatastore = "1.1.0-alpha04"
 androidxHiltNavigationCompose = "1.1.0-alpha01"
 androidxLifecycle = "2.6.1"
@@ -51,6 +51,7 @@ kotlinxCoroutines = "1.7.0"
 kotlinxDatetime = "0.4.0"
 ksp = "1.8.21-1.0.11"
 leakcanary = "2.10"
+material3 = "1.9.0"
 moduleGraphAssert = "2.3.1"
 nodeGradle = "4.0.0"
 okhttp = "4.11.0"
@@ -157,6 +158,8 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
+
+material3 = { group = "com.google.android.material", name = "material", version.ref = "material3" }
 
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
