@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.gradle.enterprise") version "3.13.1"
+    id("com.gradle.enterprise") version "3.13.2"
     id("com.gradle.common-custom-user-data-gradle-plugin") version "1.10"
 }
 
