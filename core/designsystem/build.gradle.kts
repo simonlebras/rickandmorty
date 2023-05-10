@@ -1,10 +1,10 @@
 plugins {
     id("app.rickandmorty.android-library")
-    id("app.rickandmorty.showkase")
+    id("app.rickandmorty.compose")
 }
 
 android {
-    namespace = "app.rickandmorty.catalog"
+    namespace = "app.rickandmorty.designsystem"
 }
 
 androidComponents {
@@ -14,5 +14,6 @@ androidComponents {
 }
 
 dependencies {
-    implementation(libs.showkase.annotation)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.text.googleFonts)
 }

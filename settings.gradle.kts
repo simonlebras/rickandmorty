@@ -37,10 +37,9 @@ include(":app")
 
 include(":baselineprofile")
 
-include(":catalog")
-
 include(":core:coil")
 include(":core:coroutines")
+include(":core:designsystem")
 include(":core:graphql")
 include(":core:hilt")
 include(":core:jankstats")
