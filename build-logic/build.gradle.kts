@@ -74,10 +74,6 @@ gradlePlugin {
             id = "app.rickandmorty.root"
             implementationClass = "app.rickandmorty.gradle.plugins.RootPlugin"
         }
-        register("showkase") {
-            id = "app.rickandmorty.showkase"
-            implementationClass = "app.rickandmorty.gradle.plugins.ShowkasePlugin"
-        }
         register("spotless") {
             id = "app.rickandmorty.spotless"
             implementationClass = "app.rickandmorty.gradle.plugins.SpotlessPlugin"

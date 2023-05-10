@@ -57,7 +57,6 @@ playOssLicenses = "17.0.1"
 playOssLicensesGradlePlugin = "0.10.6"
 protobuf = "3.23.2"
 protobufGradlePlugin = "0.9.3"
-showkase = "1.0.0-beta18"
 sortDependencies = "0.2"
 spotless = "6.19.0"
 testParameterInjector = "1.12"
@@ -91,6 +90,7 @@ androidx-compose-runtime-tracing = { group = "androidx.compose.runtime", name = 
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-ui-text-googleFonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
@@ -162,10 +162,6 @@ play-ossLicenses-gradlePlugin = { group = "com.google.android.gms", name = "oss-
 protobuf-gradlePlugin = { group = "com.google.protobuf", name = "protobuf-gradle-plugin", version.ref = "protobufGradlePlugin" }
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
-
-showkase = { group = "com.airbnb.android", name = "showkase", version.ref = "showkase" }
-showkase-annotation = { group = "com.airbnb.android", name = "showkase-annotation", version.ref = "showkase" }
-showkase-processor = { group = "com.airbnb.android", name = "showkase-processor", version.ref = "showkase" }
 
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 

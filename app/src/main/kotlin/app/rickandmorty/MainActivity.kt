@@ -9,6 +9,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.metrics.performance.JankStats
+import app.rickandmorty.designsystem.theme.RamTheme
 import app.rickandmorty.hilt.HiltLazy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -31,6 +32,9 @@ class MainActivity : AppCompatActivity() {
             DisposableEffect(darkMode) {
                 enableEdgeToEdge()
                 onDispose { }
+            }
+
+            RamTheme {
             }
         }
     }
