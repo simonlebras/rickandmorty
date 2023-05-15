@@ -33,6 +33,10 @@ jobs:
           distribution: "zulu"
           java-version: 19
 
+      # TODO remove when AGP uses stable build tools
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
         with:

@@ -4,13 +4,8 @@ plugins {
     `kotlin-dsl`
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get()))
-    }
-}
-
 kotlin {
+    jvmToolchain(libs.versions.java.get().toInt())
     explicitApi()
 }
 
