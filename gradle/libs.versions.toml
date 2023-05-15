@@ -53,7 +53,6 @@ leakcanary = "2.10"
 moduleGraphAssert = "2.3.1"
 nodeGradle = "5.0.0"
 okhttp = "4.11.0"
-paparazzi = "1.2.0"
 playOssLicenses = "17.0.1"
 playOssLicensesGradlePlugin = "0.10.6"
 protobuf = "3.23.0"
@@ -200,7 +199,6 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 moduleGraphAssert = { id = "com.jraska.module.graph.assertion", version.ref = "moduleGraphAssert" }
 nodeGradle = { id = "com.github.node-gradle.node", version.ref = "nodeGradle" }
-paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 play-ossLicenses = { id = "com.google.android.gms.oss-licenses-plugin" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufGradlePlugin" }
 sortDependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortDependencies" }
