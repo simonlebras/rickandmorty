@@ -15,7 +15,11 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        resourceConfigurations += listOf("en", "fr")
+        resourceConfigurations += listOf("en")
+    }
+
+    androidResources {
+        generateLocaleConfig = true
     }
 
     buildTypes {
