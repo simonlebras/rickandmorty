@@ -47,6 +47,7 @@ include(":app")
 include(":baselineprofile")
 
 include(":core:coil")
+include(":core:contentview")
 include(":core:core")
 include(":core:coroutines")
 include(":core:designsystem")
