@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.rickandmorty.android.application) apply false
     alias(libs.plugins.rickandmorty.android.library) apply false
     alias(libs.plugins.rickandmorty.android.test) apply false
+    alias(libs.plugins.rickandmorty.autodagger) apply false
     alias(libs.plugins.rickandmorty.compose) apply false
     alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
     alias(libs.plugins.rickandmorty.firebase.perf) apply false

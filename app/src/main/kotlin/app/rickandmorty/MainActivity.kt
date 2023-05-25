@@ -3,8 +3,8 @@ package app.rickandmorty
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +17,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
@@ -25,6 +26,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.metrics.performance.JankStats
 import androidx.navigation.compose.rememberNavController
+import app.rickandmorty.contentview.ContentViewSetter
 import app.rickandmorty.designsystem.theme.RamTheme
 import app.rickandmorty.resourcestate.Loading
 import app.rickandmorty.theme.domain.NightMode
@@ -49,10 +51,12 @@ private val lightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
  */
 private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var contentViewSetter: ContentViewSetter
 
     @Inject
     lateinit var jankStats: Lazy<JankStats>
@@ -78,48 +82,12 @@ class MainActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        setContent {
-            val darkTheme = uiState.useDarkTheme()
-
-            DisposableEffect(darkTheme) {
-                enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
-                        lightScrim = Color.TRANSPARENT,
-                        darkScrim = Color.TRANSPARENT,
-                        detectDarkMode = { darkTheme },
-                    ),
-                    navigationBarStyle = SystemBarStyle.auto(
-                        lightScrim = lightScrim,
-                        darkScrim = darkScrim,
-                        detectDarkMode = { darkTheme },
-                    ),
-                )
-                onDispose { }
-            }
-
-            val navController = rememberNavController()
-
-            DisposableEffect(navController) {
-                val listener = Consumer<Intent> {
-                    navController.handleDeepLink(it)
-                }
-                addOnNewIntentListener(listener)
-                onDispose { removeOnNewIntentListener(listener) }
-            }
-
-            RamTheme(
-                darkTheme = darkTheme,
-                dynamicColor = uiState.useDynamicColor(),
-            ) {
-                val windowSizeClass = calculateWindowSizeClass(this)
-                val displayFeatures = calculateDisplayFeatures(this).toImmutableList()
-                RamApp(
-                    navController = navController,
-                    windowSizeClass = windowSizeClass,
-                    displayFeatures = displayFeatures,
-                )
+        val composeView = ComposeView(this).apply {
+            setContent {
+                RamContent(uiState = uiState)
             }
         }
+        contentViewSetter.setContentView(this, composeView)
     }
 
     override fun onResume() {
@@ -132,6 +100,52 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
 
         jankStats.get().isTrackingEnabled = false
+    }
+}
+
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@Composable
+private fun ComponentActivity.RamContent(uiState: MainUiState) {
+    val darkTheme = uiState.useDarkTheme()
+
+    DisposableEffect(darkTheme) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                lightScrim = Color.TRANSPARENT,
+                darkScrim = Color.TRANSPARENT,
+                detectDarkMode = { darkTheme },
+            ),
+            navigationBarStyle = SystemBarStyle.auto(
+                lightScrim = lightScrim,
+                darkScrim = darkScrim,
+                detectDarkMode = { darkTheme },
+            ),
+        )
+        onDispose { }
+    }
+
+    val navController = rememberNavController()
+
+    DisposableEffect(navController) {
+        val listener = Consumer<Intent> {
+            navController.handleDeepLink(it)
+        }
+        addOnNewIntentListener(listener)
+        onDispose { removeOnNewIntentListener(listener) }
+    }
+
+    RamTheme(
+        darkTheme = darkTheme,
+        dynamicColor = uiState.useDynamicColor(),
+    ) {
+        val windowSizeClass = calculateWindowSizeClass(this@RamContent)
+        val displayFeatures =
+            calculateDisplayFeatures(this@RamContent).toImmutableList()
+        RamApp(
+            navController = navController,
+            windowSizeClass = windowSizeClass,
+            displayFeatures = displayFeatures,
+        )
     }
 }
 

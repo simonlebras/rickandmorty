@@ -10,5 +10,7 @@ android {
 dependencies {
     api(libs.okhttp)
 
+    debugApi(projects.core.logging)
+
     debugImplementation(libs.okhttp.logginginterceptor)
 }

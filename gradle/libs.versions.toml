@@ -31,8 +31,10 @@ androidx-test-uiautomator = "2.3.0-alpha04"
 androidx-tracing = "1.2.0-rc01"
 androidx-window = "1.2.0-beta03"
 apollo = "4.0.0-beta.1"
+autodagger = "0.10.0"
 cachefix = "2.8.1"
 coil = "2.4.0"
+debugdrawer = "0.9.8"
 dependencyanalysis = "1.24.0"
 easylauncher = "6.2.0"
 firebase-bom = "32.3.1"
@@ -122,9 +124,16 @@ apollo-normalizedcache = { group = "com.apollographql.apollo3", name = "apollo-n
 apollo-normalizedcache-sqlite = { group = "com.apollographql.apollo3", name = "apollo-normalized-cache-sqlite", version.ref = "apollo" }
 apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime", version.ref = "apollo" }
 
+autodagger-compiler = { group = "se.ansman.dagger.auto", name = "compiler", version.ref = "autodagger" }
+autodagger-core = { group = "se.ansman.dagger.auto", name = "core", version.ref = "autodagger" }
+
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-base = { group = "io.coil-kt", name = "coil-base", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+debugdrawer = { group = "au.com.gridstone.debugdrawer", name = "debugdrawer", version.ref = "debugdrawer" }
+debugdrawer-okhttplogger = { group = "au.com.gridstone.debugdrawer", name = "debugdrawer-okhttp-logger", version.ref = "debugdrawer" }
+debugdrawer-timber = { group = "au.com.gridstone.debugdrawer", name = "debugdrawer-timber", version.ref = "debugdrawer" }
 
 dependencyanalysis-plugin = { group = "com.autonomousapps", name = "dependency-analysis-gradle-plugin", version.ref = "dependencyanalysis" }
 
@@ -180,6 +189,7 @@ wire-runtime = { group = "com.squareup.wire", name = "wire-runtime", version.ref
 rickandmorty-android-application = { id = "app.rickandmorty.android-application", version = "unspecified" }
 rickandmorty-android-library = { id = "app.rickandmorty.android-library", version = "unspecified" }
 rickandmorty-android-test = { id = "app.rickandmorty.android-test", version = "unspecified" }
+rickandmorty-autodagger = { id = "app.rickandmorty.autodagger", version = "unspecified" }
 rickandmorty-compose = { id = "app.rickandmorty.compose", version = "unspecified" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics", version = "unspecified" }
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf", version = "unspecified" }

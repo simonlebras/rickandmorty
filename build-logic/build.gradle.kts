@@ -44,6 +44,10 @@ gradlePlugin {
             id = "app.rickandmorty.android-test"
             implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
         }
+        register("autodagger") {
+            id = "app.rickandmorty.autodagger"
+            implementationClass = "app.rickandmorty.gradle.plugin.AutoDaggerPlugin"
+        }
         register("compose") {
             id = "app.rickandmorty.compose"
             implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"

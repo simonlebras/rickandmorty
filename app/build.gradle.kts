@@ -80,7 +80,6 @@ dependencies {
 
     implementation(libs.accompanist.adaptive)
 
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.material3.windowsizeclass)
     implementation(libs.androidx.core.splashscreen)
@@ -92,6 +91,7 @@ dependencies {
     implementation(libs.microsoft.compose.twopanelayout)
 
     implementation(projects.core.coil)
+    implementation(projects.core.contentview)
     implementation(projects.core.core)
     implementation(projects.core.coroutines)
     implementation(projects.core.designsystem)
