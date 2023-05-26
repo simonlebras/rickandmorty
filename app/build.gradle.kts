@@ -14,8 +14,6 @@ android {
         applicationId = "app.rickandmorty"
         versionCode = 1
         versionName = "1.0"
-
-        resourceConfigurations += listOf("en")
     }
 
     androidResources {
