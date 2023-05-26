@@ -7,12 +7,6 @@ android {
     namespace = "app.rickandmorty.coil"
 }
 
-androidComponents {
-    beforeVariants(selector().withBuildType("debug")) { builder ->
-        builder.enable = false
-    }
-}
-
 dependencies {
     api(libs.coil)
 

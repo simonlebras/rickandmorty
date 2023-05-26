@@ -7,12 +7,8 @@ android {
     namespace = "app.rickandmorty.okhttp"
 }
 
-androidComponents {
-    beforeVariants(selector().withBuildType("debug")) { builder ->
-        builder.enable = false
-    }
-}
-
 dependencies {
     api(libs.okhttp)
+
+    debugImplementation(libs.okhttp.loggingInterceptor)
 }

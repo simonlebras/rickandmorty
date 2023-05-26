@@ -1,6 +1,5 @@
-package app.rickandmorty.okhttp.logging
+package app.rickandmorty.okhttp
 
-import app.rickandmorty.okhttp.HttpLogging
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -28,18 +28,8 @@ android {
         }
 
         val release by getting
-
-        val qa by creating {
-            initWith(release)
-            applicationIdSuffix = ".qa"
-            versionNameSuffix = "-qa"
-            matchingFallbacks += listOf("release")
-        }
     }
 }
-
-val qaImplementation by configurations
-val qaRuntimeOnly by configurations
 
 dependencies {
     baselineProfile(projects.baselineprofile)
@@ -52,17 +42,9 @@ dependencies {
     implementation(projects.core.jankstats)
     implementation(projects.core.okhttp)
 
-    qaImplementation(projects.core.coilLogging)
-    qaImplementation(projects.core.okhttpLogging)
-
-    debugImplementation(projects.core.coilLogging)
-    debugImplementation(projects.core.okhttpLogging)
-
     runtimeOnly(libs.androidx.profileinstaller)
 
     runtimeOnly(libs.leakcanary.plumber)
-
-    qaRuntimeOnly(projects.core.strictmode)
 
     debugRuntimeOnly(libs.leakcanary)
 
@@ -72,10 +54,6 @@ dependencies {
 easylauncher {
     buildTypes {
         val debug by creating {
-            filters(chromeLike())
-        }
-
-        val qa by creating {
             filters(chromeLike())
         }
     }

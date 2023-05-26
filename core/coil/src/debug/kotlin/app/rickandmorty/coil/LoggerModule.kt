@@ -1,4 +1,4 @@
-package app.rickandmorty.coil.logging
+package app.rickandmorty.coil
 
 import coil.util.DebugLogger
 import coil.util.Logger
