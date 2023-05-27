@@ -1,0 +1,16 @@
+name: Clear caches
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: clear-caches-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  clear-caches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clear caches
+        uses: easimon/wipe-cache@v2
