@@ -32,87 +32,103 @@ public class RootPlugin : Plugin<Project> {
             apply(libs.plugins.spotless.get().pluginId)
         }
 
-        configure<DependencyAnalysisExtension> {
-            issues {
-                all {
-                    ignoreKtx(true)
-                    onAny {
-                        severity("fail")
-                    }
-                    onUnusedDependencies {
-                        exclude(
-                            "com.google.dagger:hilt-android",
-                        )
-                    }
-                    onUsedTransitiveDependencies {
-                        severity("ignore")
-                    }
-                }
+        configureDependencyAnalysis()
 
-                project(":app") {
-                    onUnusedDependencies {
-                        exclude(
-                            // Submodules used by Hilt
-                            // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
-                            ":core:coil",
-                            ":core:jankstats",
-                            ":core:okhttp",
-                            ":core:strictmode",
-                        )
-                    }
+        configureSpotless()
+    }
+}
+
+private fun Project.configureDependencyAnalysis() {
+    configure<DependencyAnalysisExtension> {
+        issues {
+            all {
+                ignoreKtx(true)
+                onAny {
+                    severity("fail")
+                }
+                onUnusedDependencies {
+                    exclude(
+                        "com.google.dagger:hilt-android",
+                    )
+                }
+                onUsedTransitiveDependencies {
+                    severity("ignore")
                 }
             }
 
-            abi {
-                exclusions {
-                    ignoreInternalPackages()
-                    ignoreGeneratedCode()
+            project(":app") {
+                onUnusedDependencies {
+                    exclude(
+                        // Submodules used by Hilt
+                        // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
+                        ":core:coil",
+                        ":core:jankstats",
+                        ":core:okhttp",
+                        ":core:strictmode",
+                    )
+                }
+            }
+
+            project(":core:graphql") {
+                onUnusedDependencies {
+                    exclude(
+                        "com.apollographql.apollo3:apollo-normalized-cache-sqlite",
+                    )
                 }
             }
         }
 
-        configure<SpotlessExtension> {
-            // https://github.com/diffplug/spotless/issues/1644
-            lineEndings = LineEnding.PLATFORM_NATIVE
-
-            ktlint {
-                target("build-logic/src/**/*.kt")
+        abi {
+            exclusions {
+                ignoreInternalPackages()
+                ignoreGeneratedCode()
             }
-
-            ktlintGradle {
-                target(
-                    "*.kts",
-                    "build-logic/*.kts",
-                )
-            }
-
-            misc {
-                target(
-                    ".editorconfig",
-                    ".gitattributes",
-                    ".gitignore",
-                    "*.md",
-                    "*.properties",
-                    "gradle/libs.versions.toml",
-                )
-            }
-
-            prettier {
-                target(
-                    "*.json",
-                    ".github/**/*.yml",
-                )
-            }
-
-            xml {
-                target("*.xml")
-            }
-
-            predeclareDeps()
         }
-        configure<SpotlessExtensionPredeclare> {
-            ktlint { }
-            prettier { }
+    }
+}
+
+private fun Project.configureSpotless() {
+    configure<SpotlessExtension> {
+        // https://github.com/diffplug/spotless/issues/1644
+        lineEndings = LineEnding.PLATFORM_NATIVE
+
+        ktlint {
+            target("build-logic/src/**/*.kt")
         }
+
+        ktlintGradle {
+            target(
+                "*.kts",
+                "build-logic/*.kts",
+            )
+        }
+
+        misc {
+            target(
+                ".editorconfig",
+                ".gitattributes",
+                ".gitignore",
+                "*.md",
+                "*.properties",
+                "gradle/libs.versions.toml",
+            )
+        }
+
+        prettier {
+            target(
+                "*.json",
+                ".github/**/*.yml",
+            )
+        }
+
+        xml {
+            target("*.xml")
+        }
+
+        predeclareDeps()
+    }
+    configure<SpotlessExtensionPredeclare> {
+        ktlint { }
+        prettier { }
     }
 }

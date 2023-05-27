@@ -41,6 +41,7 @@ include(":catalog")
 
 include(":core:coil")
 include(":core:coroutines")
+include(":core:graphql")
 include(":core:jankstats")
 include(":core:okhttp")
 include(":core:strictmode")
