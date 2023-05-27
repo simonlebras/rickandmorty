@@ -22,7 +22,7 @@ import okhttp3.OkHttpClient
 @InstallIn(SingletonComponent::class)
 internal interface ImageLoaderFactoryModule {
     @BindsOptionalOf
-    fun bindOptionalLogger(): Logger
+    fun bindLogger(): Logger
 
     companion object {
         @Provides
