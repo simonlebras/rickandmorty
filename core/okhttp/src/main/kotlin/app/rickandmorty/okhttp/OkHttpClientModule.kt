@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient
 internal interface OkHttpClientModule {
     @BindsOptionalOf
     @HttpLogging
-    fun bindOptionalHttpLoggingInterceptor(): Interceptor
+    fun bindHttpLoggingInterceptor(): Interceptor
 
     companion object {
         @Provides
