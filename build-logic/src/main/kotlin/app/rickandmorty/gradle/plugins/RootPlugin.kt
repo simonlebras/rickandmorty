@@ -1,5 +1,6 @@
 package app.rickandmorty.gradle.plugins
 
+import app.rickandmorty.gradle.utils.configureRootCiUnitTest
 import app.rickandmorty.gradle.utils.isRootProject
 import app.rickandmorty.gradle.utils.ktlint
 import app.rickandmorty.gradle.utils.ktlintGradle
@@ -22,6 +23,8 @@ public class RootPlugin : Plugin<Project> {
         require(isRootProject) {
             "Root plugin should only be applied on the root project."
         }
+
+        configureRootCiUnitTest()
 
         val libs = the<LibrariesForLibs>()
 

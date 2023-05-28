@@ -1,6 +1,7 @@
 package app.rickandmorty.gradle.plugins
 
 import app.rickandmorty.gradle.utils.apply
+import app.rickandmorty.gradle.utils.configureJvmCiUnitTest
 import app.rickandmorty.gradle.utils.configureKotlinJvm
 import app.rickandmorty.gradle.utils.configureSpotless
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -20,5 +21,7 @@ public class JvmLibraryPlugin : Plugin<Project> {
         configureKotlinJvm(libs)
 
         configureSpotless(libs)
+
+        configureJvmCiUnitTest()
     }
 }

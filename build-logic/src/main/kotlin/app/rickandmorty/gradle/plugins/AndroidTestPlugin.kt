@@ -2,6 +2,7 @@ package app.rickandmorty.gradle.plugins
 
 import app.rickandmorty.gradle.utils.apply
 import app.rickandmorty.gradle.utils.configureAndroid
+import app.rickandmorty.gradle.utils.configureAndroidTesting
 import app.rickandmorty.gradle.utils.configureKotlinAndroid
 import app.rickandmorty.gradle.utils.configureSpotless
 import com.android.build.gradle.TestExtension
@@ -28,6 +29,12 @@ public class AndroidTestPlugin : Plugin<Project> {
 
         configure<TestExtension> {
             configureAndroid(libs)
+
+            configureAndroidTesting()
+
+            defaultConfig {
+                testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            }
         }
     }
 }

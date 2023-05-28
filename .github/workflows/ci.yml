@@ -1,0 +1,191 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD }}
+      ORG_GRADLE_PROJECT_RAM_RELEASE_KEY_PWD: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEY_PWD }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Check LFS files
+        uses: actionsdesk/lfs-warning@v3.2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 20
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: Decrypt secrets
+        uses: ./.github/actions/decrypt-secrets
+        with:
+          key: ${{ secrets.DECRYPT_KEY }}
+
+      - name: Check code style
+        run: ./gradlew spotlessCheck
+
+      - name: Check lint
+        run: ./gradlew lint
+
+      - name: Check dependencies order
+        run: ./gradlew checkSortDependencies
+
+      - name: Detect unused and misused dependencies
+        if: ${{ false }} # https://github.com/google/horologist/issues/1314
+        run: ./gradlew buildHealth
+
+      - name: Check module graph
+        run: ./gradlew assertModuleGraph
+
+      - name: Run unit tests
+        run: ./gradlew globalCiUnitTest
+
+      - name: Run build-logic checks
+        run: ./gradlew check -p build-logic
+
+      - name: Build all build type and flavor permutations
+        run: |
+          ./gradlew assemble \
+          -x :baselineprofile:pixel6proapi33googleSetup \
+          -Pandroidx.baselineprofile.skipgeneration
+
+      - name: Upload build outputs
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-outputs
+          path: app/build/outputs
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: |
+            **/build/reports/**
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            **/build/test-results/*
+
+  android-test-cfg:
+    needs: build
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+    steps:
+      - name: Set matrix
+        id: set-matrix
+        run: |
+          MATRIX='
+            {"device": "nexus4", "api-level": "24", "target": "aosp"},
+            {"device": "pixel2", "api-level": "26", "target": "aosp"},
+            {"device": "pixel6pro", "api-level": "30", "target": "aospatd"}
+          '
+          echo "matrix={\"include\":[${MATRIX//$'\n'/}]}" >> $GITHUB_OUTPUT
+
+  android-test-cfg-check:
+    needs: android-test-cfg
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check matrix configuration
+        run: |
+          matrix='${{ needs.android-test-cfg.outputs.matrix }}'
+          echo $matrix
+          echo $matrix | jq .
+
+  android-test:
+    needs: android-test-cfg
+    runs-on: macos-latest
+    timeout-minutes: 120
+
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.android-test-cfg.outputs.matrix) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 20
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: Accept license
+        run: echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_SDK_ROOT/licenses/android-sdk-preview-license"
+
+      - name: Cache AVD
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.android/avd/*
+          key: ${{ runner.os }}-gmd-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.target }}
+
+      - name: Package for tests
+        run: ./gradlew packageDebugAndroidTest
+
+      - name: Run tests
+        run: |
+          ./gradlew ${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.target }}DebugAndroidTest \
+              -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
+              --log-file=logcat.txt \
+              --no-configuration-cache \
+              --no-parallel \
+              -Dorg.gradle.workers.max=1
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.target }}
+          path: logcat.txt
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.target }}
+          path: |
+            **/build/reports/*
+            **/build/outputs/*/connected/*
+            **/out/failures/

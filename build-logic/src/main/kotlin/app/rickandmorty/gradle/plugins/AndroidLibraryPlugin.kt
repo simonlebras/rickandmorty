@@ -2,6 +2,7 @@ package app.rickandmorty.gradle.plugins
 
 import app.rickandmorty.gradle.utils.apply
 import app.rickandmorty.gradle.utils.configureAndroid
+import app.rickandmorty.gradle.utils.configureAndroidCiUnitTest
 import app.rickandmorty.gradle.utils.configureKotlinAndroid
 import app.rickandmorty.gradle.utils.configureSpotless
 import com.android.build.gradle.LibraryExtension
@@ -28,6 +29,8 @@ public class AndroidLibraryPlugin : Plugin<Project> {
 
         configure<LibraryExtension> {
             configureAndroid(libs)
+
+            configureAndroidCiUnitTest()
 
             buildTypes {
                 named("release") {

@@ -35,6 +35,10 @@ gradlePlugin {
             id = "app.rickandmorty.android-application"
             implementationClass = "app.rickandmorty.gradle.plugins.AndroidApplicationPlugin"
         }
+        register("androidInstrumentationTesting") {
+            id = "app.rickandmorty.android-instrumentation-testing"
+            implementationClass = "app.rickandmorty.gradle.plugins.AndroidInstrumentationTestingPlugin"
+        }
         register("androidLibrary") {
             id = "app.rickandmorty.android-library"
             implementationClass = "app.rickandmorty.gradle.plugins.AndroidLibraryPlugin"
