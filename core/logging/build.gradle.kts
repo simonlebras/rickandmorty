@@ -12,6 +12,8 @@ dependencies {
 
     implementation(libs.timber)
 
+    implementation(projects.core.hilt)
+
     releaseImplementation(platform(libs.firebase.bom))
     releaseImplementation(libs.firebase.crashlytics)
 }

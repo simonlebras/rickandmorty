@@ -39,6 +39,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
 
     implementation(projects.core.coil)
+    implementation(projects.core.hilt)
     implementation(projects.core.jankstats)
     implementation(projects.core.okhttp)
 
