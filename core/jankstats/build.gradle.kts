@@ -20,4 +20,6 @@ dependencies {
     api(libs.androidx.metrics)
 
     implementation(libs.androidx.compose.ui)
+
+    implementation(projects.core.logging)
 }
