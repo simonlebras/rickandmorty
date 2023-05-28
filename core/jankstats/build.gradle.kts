@@ -8,12 +8,6 @@ android {
     namespace = "app.rickandmorty.jankstats"
 }
 
-androidComponents {
-    beforeVariants(selector().withBuildType("debug")) { builder ->
-        builder.enable = false
-    }
-}
-
 dependencies {
     api(libs.androidx.compose.foundation)
     api(libs.androidx.compose.runtime)

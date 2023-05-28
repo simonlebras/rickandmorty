@@ -13,7 +13,6 @@ public class JvmLibraryPlugin : Plugin<Project> {
         with(pluginManager) {
             apply("app.rickandmorty.spotless")
             apply(libs.plugins.kotlin.jvm.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
         }
 
         configureKotlin(libs)

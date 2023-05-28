@@ -19,7 +19,6 @@ public class AndroidTestPlugin : Plugin<Project> {
             apply(libs.plugins.android.test.get().pluginId)
             apply(libs.plugins.cacheFix.get().pluginId)
             apply(libs.plugins.kotlin.android.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
         }
 
         configureKotlin(

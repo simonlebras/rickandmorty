@@ -1,0 +1,158 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Check LFS files
+        uses: actionsdesk/lfs-warning@v3.2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 19
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+
+      # TODO remove when AGP uses stable build tools
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Run build-logic checks
+        run: ./gradlew check -p build-logic
+
+      - name: Run checks
+        run: ./gradlew check
+
+      - name: Build all build type and flavor permutations
+        run: |
+          ./gradlew assemble \
+              -x :baselineprofile:pixel6proApi33GoogleSetup \
+              -x :baselineprofile:pixel6proApi33GoogleNonMinifiedReleaseAndroidTest \
+              -x :baselineprofile:collectNonMinifiedReleaseBaselineProfile
+
+      - name: Upload build outputs
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-outputs
+          path: app/build/outputs
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: |
+            **/build/reports/**
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            **/build/test-results/*
+
+  android-test-cfg:
+    needs: build
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+    steps:
+      - name: Set matrix
+        id: set-matrix
+        run: |
+          MATRIX='
+            {"device": "nexus4", "api-level": "24", "target": "aosp"},
+            {"device": "pixel2", "api-level": "26", "target": "aosp"},
+            {"device": "pixel6pro", "api-level": "30", "target": "aospatd"}
+          '
+          echo "matrix={\"include\":[${MATRIX//$'\n'/}]}" >> $GITHUB_OUTPUT
+
+  android-test:
+    needs: android-test-cfg
+    runs-on: macos-latest
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.android-test-cfg.outputs.matrix) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 19
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Cache AVD
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.android/avd/*
+          key: ${{ runner.os }}-gmd-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.target }}
+
+      - name: Run tests
+        run: |
+          ./gradlew ${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.target }}DebugAndroidTest \
+              -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
+              --log-file=logcat.txt \
+              --no-configuration-cache \
+              --no-parallel \
+              -Dorg.gradle.workers.max=1
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.target }}
+          path: logcat.txt
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.target }}
+          path: |
+            **/build/reports/*
+            **/build/outputs/*/connected/*
+            **/out/failures/

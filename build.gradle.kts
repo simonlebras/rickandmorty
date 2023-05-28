@@ -12,7 +12,6 @@ plugins {
     alias(libs.plugins.apollo) apply false
     alias(libs.plugins.baselineprofile) apply false
     alias(libs.plugins.cacheFix) apply false
-    alias(libs.plugins.dependencyAnalysis) apply false
     alias(libs.plugins.easylauncher) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
     alias(libs.plugins.firebase.perf) apply false
@@ -26,6 +25,5 @@ plugins {
     alias(libs.plugins.moduleGraphAssert) apply false
     alias(libs.plugins.nodeGradle) apply false
     alias(libs.plugins.protobuf) apply false
-    alias(libs.plugins.sortDependencies) apply false
     alias(libs.plugins.spotless) apply false
 }

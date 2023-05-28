@@ -2,6 +2,8 @@ package app.rickandmorty.gradle.plugins
 
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureKotlin
+import app.rickandmorty.gradle.util.disableEmptyAndroidTests
+import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -18,7 +20,6 @@ public class AndroidLibraryPlugin : Plugin<Project> {
             apply(libs.plugins.android.library.get().pluginId)
             apply(libs.plugins.cacheFix.get().pluginId)
             apply(libs.plugins.kotlin.android.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
         }
 
         configureKotlin(libs)
@@ -31,6 +32,9 @@ public class AndroidLibraryPlugin : Plugin<Project> {
                     consumerProguardFiles("consumer-rules.pro")
                 }
             }
+        }
+        configure<LibraryAndroidComponentsExtension> {
+            disableEmptyAndroidTests()
         }
     }
 }
