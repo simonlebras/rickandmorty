@@ -1,6 +1,9 @@
 package app.rickandmorty.logging
 
 public interface Logger {
+    /** Set a one-time tag for use on the next logging call.  */
+    public fun tag(tag: String): Logger
+
     /** Log a verbose message with optional format args.  */
     public fun v(message: String, vararg args: Any?)
 

@@ -1,5 +1,6 @@
 plugins {
     id("app.rickandmorty.android-library")
+    id("app.rickandmorty.hilt")
 }
 
 android {
@@ -14,4 +15,6 @@ androidComponents {
 
 dependencies {
     implementation(libs.androidx.startup)
+
+    implementation(projects.core.logging)
 }

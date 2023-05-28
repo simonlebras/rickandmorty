@@ -4,6 +4,11 @@ import javax.inject.Inject
 import timber.log.Timber
 
 internal class TimberLogger @Inject constructor() : Logger {
+    override fun tag(tag: String): Logger {
+        Timber.tag(tag)
+        return this
+    }
+
     override fun v(message: String, vararg args: Any?) {
         Timber.v(message, *args)
     }
