@@ -3,11 +3,11 @@ package app.rickandmorty.coil
 import android.app.ActivityManager
 import android.content.Context
 import androidx.core.content.getSystemService
+import app.rickandmorty.hilt.HiltLazy
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.util.Logger
 import dagger.BindsOptionalOf
-import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +28,7 @@ internal interface ImageLoaderFactoryModule {
         @Provides
         fun provideImageLoaderFactory(
             @ApplicationContext context: Context,
-            okHttpClient: Lazy<OkHttpClient>,
+            okHttpClient: HiltLazy<OkHttpClient>,
             logger: Optional<Logger>,
         ): ImageLoaderFactory = ImageLoaderFactory {
             ImageLoader.Builder(context)

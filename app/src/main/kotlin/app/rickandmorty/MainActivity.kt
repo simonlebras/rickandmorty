@@ -9,14 +9,14 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.metrics.performance.JankStats
-import dagger.Lazy
+import app.rickandmorty.hilt.HiltLazy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
-    lateinit var jankStats: Lazy<JankStats>
+    lateinit var jankStats: HiltLazy<JankStats>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

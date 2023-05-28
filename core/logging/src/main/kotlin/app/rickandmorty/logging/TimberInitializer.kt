@@ -2,6 +2,7 @@ package app.rickandmorty.logging
 
 import android.content.Context
 import androidx.startup.Initializer
+import app.rickandmorty.hilt.HiltSet
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
@@ -11,7 +12,7 @@ import timber.log.Timber
 
 internal class TimberInitializer : Initializer<Unit> {
     @Inject
-    lateinit var timberTrees: Set<@JvmSuppressWildcards Timber.Tree>
+    lateinit var timberTrees: HiltSet<Timber.Tree>
 
     override fun create(context: Context) {
         EntryPointAccessors
