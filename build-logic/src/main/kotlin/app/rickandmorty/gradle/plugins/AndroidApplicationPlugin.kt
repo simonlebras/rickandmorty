@@ -2,6 +2,8 @@ package app.rickandmorty.gradle.plugins
 
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureKotlin
+import app.rickandmorty.gradle.util.disableEmptyAndroidTests
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -19,7 +21,6 @@ public class AndroidApplicationPlugin : Plugin<Project> {
             apply(libs.plugins.android.application.get().pluginId)
             apply(libs.plugins.cacheFix.get().pluginId)
             apply(libs.plugins.kotlin.android.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
         }
 
         configureKotlin(
@@ -46,6 +47,9 @@ public class AndroidApplicationPlugin : Plugin<Project> {
                     )
                 }
             }
+        }
+        configure<ApplicationAndroidComponentsExtension> {
+            disableEmptyAndroidTests()
         }
     }
 }

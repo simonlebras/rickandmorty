@@ -6,7 +6,6 @@ import app.rickandmorty.gradle.util.ktlintGradle
 import app.rickandmorty.gradle.util.misc
 import app.rickandmorty.gradle.util.prettier
 import app.rickandmorty.gradle.util.xml
-import com.autonomousapps.DependencyAnalysisExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessExtensionPredeclare
 import com.diffplug.spotless.LineEnding
@@ -25,65 +24,12 @@ public class RootPlugin : Plugin<Project> {
         val libs = the<LibrariesForLibs>()
 
         with(pluginManager) {
-            apply(libs.plugins.dependencyAnalysis.get().pluginId)
             apply(libs.plugins.gradleDoctor.get().pluginId)
             apply(libs.plugins.nodeGradle.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
             apply(libs.plugins.spotless.get().pluginId)
         }
 
-        configureDependencyAnalysis()
-
         configureSpotless()
-    }
-}
-
-private fun Project.configureDependencyAnalysis() {
-    configure<DependencyAnalysisExtension> {
-        issues {
-            all {
-                ignoreKtx(true)
-                onAny {
-                    severity("fail")
-                }
-                onUnusedDependencies {
-                    exclude(
-                        "com.google.dagger:hilt-android",
-                    )
-                }
-                onUsedTransitiveDependencies {
-                    severity("ignore")
-                }
-            }
-
-            project(":app") {
-                onUnusedDependencies {
-                    exclude(
-                        // Submodules used by Hilt
-                        // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
-                        ":core:coil",
-                        ":core:jankstats",
-                        ":core:okhttp",
-                        ":core:strictmode",
-                    )
-                }
-            }
-
-            project(":core:graphql") {
-                onUnusedDependencies {
-                    exclude(
-                        "com.apollographql.apollo3:apollo-normalized-cache-sqlite",
-                    )
-                }
-            }
-        }
-
-        abi {
-            exclusions {
-                ignoreInternalPackages()
-                ignoreGeneratedCode()
-            }
-        }
     }
 }
 

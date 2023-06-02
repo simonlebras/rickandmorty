@@ -1,12 +1,10 @@
 package app.rickandmorty.gradle.util
 
 import com.android.build.api.dsl.CommonExtension
-import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.gradle.BaseExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.register
 
 context(Project)
 internal fun <T> T.configureAndroid(
@@ -25,16 +23,7 @@ internal fun <T> T.configureAndroid(
     testOptions {
         animationsDisabled = true
 
-        managedDevices {
-            (27..33).forEach { api ->
-                devices.register<ManagedVirtualDevice>("pixel6Api${api}Aosp") {
-                    device = "Pixel 6"
-                    apiLevel = api
-                    // ATD is only supported on api 30 at the moment
-                    systemImageSource = if (api == 30) "aosp-atd" else "aosp"
-                }
-            }
-        }
+        configureGradleManagedDevices()
     }
 
     compileOptions {
