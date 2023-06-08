@@ -1,6 +1,5 @@
 package app.rickandmorty.gradle.util
 
-import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.gradle.BaseExtension
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -9,11 +8,8 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.register
 
 context(Project)
-internal fun <T> T.configureAndroid(
-    libs: LibrariesForLibs,
-) where T : CommonExtension<*, *, *, *, *>,
-      T : BaseExtension {
-    compileSdkPreview = libs.versions.androidCompileSdk.get()
+internal fun BaseExtension.configureAndroid(libs: LibrariesForLibs) {
+    compileSdkVersion(libs.versions.androidCompileSdk.get().toInt())
 
     defaultConfig.apply {
         minSdk = libs.versions.androidMinSdk.get().toInt()
