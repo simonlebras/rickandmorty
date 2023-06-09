@@ -49,7 +49,7 @@ jobs:
         run: ./gradlew lint
 
       - name: Check dependencies order
-        run: ./gradlew sortDependencies --mode check
+        run: ./gradlew checkSortDependencies
 
       - name: Detect unused and misused dependencies
         if: ${{ false }} # https://github.com/google/horologist/issues/1314
