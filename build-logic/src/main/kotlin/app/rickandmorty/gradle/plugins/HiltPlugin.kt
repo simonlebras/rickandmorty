@@ -1,7 +1,7 @@
 package app.rickandmorty.gradle.plugins
 
-import app.rickandmorty.gradle.util.implementation
-import app.rickandmorty.gradle.util.kapt
+import app.rickandmorty.gradle.utils.implementation
+import app.rickandmorty.gradle.utils.kapt
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project

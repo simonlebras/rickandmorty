@@ -8,12 +8,6 @@ android {
     namespace = "app.rickandmorty.graphql"
 }
 
-androidComponents {
-    beforeVariants(selector().withBuildType("debug")) { builder ->
-        builder.enable = false
-    }
-}
-
 apollo {
     service("rickandmorty") {
         packageName.set("app.rickandmorty.graphql")
