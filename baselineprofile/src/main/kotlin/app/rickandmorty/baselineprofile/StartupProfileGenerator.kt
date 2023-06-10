@@ -8,16 +8,18 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 @LargeTest
+@RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 29)
-class BaselineProfileGenerator {
+class StartupProfileGenerator {
     @get:Rule
-    val rule = BaselineProfileRule()
+    val baselineProfileRule = BaselineProfileRule()
 
     @Test
-    fun generateBaselineProfile() = rule.collectBaselineProfile(packageName = PACKAGE_NAME) {
-        pressHome()
+    fun generateStartupProfile() = baselineProfileRule.collectBaselineProfile(
+        packageName = PACKAGE_NAME,
+        includeInStartupProfile = true,
+    ) {
         startActivityAndWait()
     }
 }
