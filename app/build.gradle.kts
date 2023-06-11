@@ -2,6 +2,7 @@ plugins {
     id("app.rickandmorty.android-application")
     id("app.rickandmorty.compose")
     id("app.rickandmorty.hilt")
+    id("app.rickandmorty.oss-licenses")
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.easylauncher)
     alias(libs.plugins.moduleGraphAssert)
@@ -61,6 +62,7 @@ dependencies {
     implementation(projects.feature.characters)
     implementation(projects.feature.episodes)
     implementation(projects.feature.locations)
+    implementation(projects.feature.settings)
 
     runtimeOnly(libs.androidx.profileinstaller)
 

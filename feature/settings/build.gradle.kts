@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.characters"
+    namespace = "app.rickandmorty.settings"
 }
 
 dependencies {
