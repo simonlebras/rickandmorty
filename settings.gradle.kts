@@ -46,3 +46,7 @@ include(":core:jankstats")
 include(":core:logging")
 include(":core:okhttp")
 include(":core:strictmode")
+
+include(":feature:characters")
+include(":feature:episodes")
+include(":feature:locations")
