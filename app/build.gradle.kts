@@ -31,6 +31,11 @@ android {
     }
 }
 
+baselineProfile {
+    baselineProfileRulesRewrite = true
+    dexLayoutOptimization = true
+}
+
 dependencies {
     baselineProfile(projects.baselineprofile)
 
