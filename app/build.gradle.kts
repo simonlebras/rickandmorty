@@ -34,15 +34,28 @@ android {
 dependencies {
     baselineProfile(projects.baselineprofile)
 
+    implementation(libs.accompanist.adaptive)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material3.windowSizeClass)
+    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.window)
+
+    implementation(libs.kotlinx.collections.immutable)
 
     implementation(projects.core.coil)
     implementation(projects.core.designsystem)
     implementation(projects.core.hilt)
     implementation(projects.core.jankstats)
     implementation(projects.core.okhttp)
+
+    implementation(projects.feature.characters)
+    implementation(projects.feature.episodes)
+    implementation(projects.feature.locations)
 
     runtimeOnly(libs.androidx.profileinstaller)
 
