@@ -59,7 +59,10 @@ jobs:
         run: ./gradlew assertModuleGraph
 
       - name: Build all build type and flavor permutations
-        run: ./gradlew assemble -x :baselineprofile:pixel6Api31AospSetup -x :baselineprofile:pixel6Api31AospNonMinifiedReleaseAndroidTest -x :baselineprofile:collectNonMinifiedReleaseBaselineProfile
+        run: |
+          ./gradlew assemble \
+          -x :baselineprofile:pixel6Api31AospSetup \
+          -Pandroidx.baselineprofile.skipgeneration
 
       - name: Upload build outputs
         uses: actions/upload-artifact@v3
