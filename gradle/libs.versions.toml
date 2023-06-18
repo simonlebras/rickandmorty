@@ -61,7 +61,7 @@ sortDependencies = "0.3"
 spotless = "6.19.0"
 testParameterInjector = "1.12"
 timber = "5.0.1"
-truth = "1.1.4"
+truth = "1.1.5"
 turbine = "0.13.0"
 
 [libraries]
