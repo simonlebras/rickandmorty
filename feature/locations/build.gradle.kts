@@ -9,4 +9,6 @@ android {
 
 dependencies {
     api(libs.androidx.navigation.compose)
+
+    implementation(libs.androidx.activity.compose)
 }

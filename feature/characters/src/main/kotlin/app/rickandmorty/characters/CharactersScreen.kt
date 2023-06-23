@@ -1,5 +1,6 @@
 package app.rickandmorty.characters
 
+import androidx.activity.compose.ReportDrawn
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -21,6 +22,8 @@ import app.rickandmorty.ui.resources.R as UiR
 internal fun CharactersScreen(
     onNavigateToSettings: () -> Unit,
 ) {
+    ReportDrawn()
+
     Scaffold(
         topBar = {
             CharactersAppBar(
