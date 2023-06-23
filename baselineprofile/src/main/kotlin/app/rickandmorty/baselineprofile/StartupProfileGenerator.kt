@@ -16,7 +16,7 @@ class StartupProfileGenerator {
     val baselineProfileRule = BaselineProfileRule()
 
     @Test
-    fun generateStartupProfile() = baselineProfileRule.collectBaselineProfile(
+    fun generateStartupProfile() = baselineProfileRule.collect(
         packageName = PACKAGE_NAME,
         includeInStartupProfile = true,
     ) {
