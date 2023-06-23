@@ -1,9 +1,10 @@
-package app.rickandmorty.characters
+package app.rickandmorty.settings
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -18,38 +19,43 @@ import app.rickandmorty.ui.resources.R as UiR
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun CharactersScreen(
-    onNavigateToSettings: () -> Unit,
+internal fun SettingsScreen(
+    onNavigateUp: () -> Unit,
+    onNavigateToOssLicenses: () -> Unit,
 ) {
     Scaffold(
         topBar = {
-            CharactersAppBar(
-                onNavigateToSettings = onNavigateToSettings,
+            SettingsAppBar(
+                onNavigateUp = onNavigateUp,
             )
         },
     ) { padding ->
-        Box(
+        LazyColumn(
             modifier = Modifier
                 .padding(padding)
-                .consumeWindowInsets(padding),
+                .consumeWindowInsets(padding)
+                .fillMaxSize(),
         ) {
+            aboutSettings(
+                onNavigateToOssLicenses = onNavigateToOssLicenses,
+            )
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun CharactersAppBar(
-    onNavigateToSettings: () -> Unit,
+private fun SettingsAppBar(
+    onNavigateUp: () -> Unit,
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(R.string.characters_title))
+            Text(text = stringResource(R.string.settings_title))
         },
-        actions = {
-            IconButton(onClick = onNavigateToSettings) {
+        navigationIcon = {
+            IconButton(onClick = onNavigateUp) {
                 Icon(
-                    imageVector = RamIcons.Filled.Settings,
+                    imageVector = RamIcons.Filled.ArrowBack,
                     contentDescription = stringResource(UiR.string.navigate_up),
                 )
             }

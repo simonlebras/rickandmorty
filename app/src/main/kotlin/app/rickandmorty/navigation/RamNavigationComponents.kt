@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
 import app.rickandmorty.utils.NavigationContentPosition
 import kotlinx.collections.immutable.ImmutableList
 
@@ -154,4 +155,12 @@ private fun navigationMeasurePolicy(
             contentPlaceable.placeRelative(0, contentPlaceableY)
         }
     }
+}
+
+private fun TopLevelDestination.isInHierarchy(destination: NavDestination?): Boolean {
+    return destination
+        ?.hierarchy
+        ?.any {
+            it.route?.contains(route, true) ?: false
+        } ?: false
 }
