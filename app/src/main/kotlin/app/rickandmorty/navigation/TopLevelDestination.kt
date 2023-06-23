@@ -2,8 +2,6 @@ package app.rickandmorty.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
 import app.rickandmorty.characters.R as CharactersR
 import app.rickandmorty.characters.charactersRoute
 import app.rickandmorty.designsystem.icon.RamIcons
@@ -36,12 +34,4 @@ enum class TopLevelDestination(
         unselectedIcon = RamIcons.Outlined.Map,
         label = LocationsR.string.locations_title,
     ),
-}
-
-fun TopLevelDestination.isInHierarchy(destination: NavDestination?): Boolean {
-    return destination
-        ?.hierarchy
-        ?.any {
-            it.route?.contains(route, true) ?: false
-        } ?: false
 }

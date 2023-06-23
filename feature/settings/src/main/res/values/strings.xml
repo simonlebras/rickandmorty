@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_title">Settings</string>
+    <string name="settings_about_title">About</string>
+    <string name="settings_oss_licenses_title">Open source licenses</string>
+    <string name="settings_oss_licenses_summary">License details for open source software</string>
+    <string name="settings_oss_licenses_tap_action">Open open source licenses</string>
+    <string name="settings_app_version">App version</string>
+</resources>

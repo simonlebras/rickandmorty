@@ -11,8 +11,12 @@ public fun NavController.navigateToCharacters(navOptions: NavOptions? = null) {
     navigate(charactersRoute, navOptions)
 }
 
-public fun NavGraphBuilder.characters() {
+public fun NavGraphBuilder.characters(
+    onNavigateToSettings: () -> Unit,
+) {
     composable(route = charactersRoute) {
-        CharactersScreen()
+        CharactersScreen(
+            onNavigateToSettings = onNavigateToSettings,
+        )
     }
 }
