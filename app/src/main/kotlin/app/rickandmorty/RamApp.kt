@@ -125,11 +125,13 @@ fun RamApp(
     val topLevelDestinations = TopLevelDestination.values().toList().toImmutableList()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
+    val showTopLevelNavigation = topLevelDestinations.any { it.route == currentDestination?.route }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         bottomBar = {
             AnimatedVisibility(
-                visible = navigationType == NavigationType.BOTTOM_APP_BAR,
+                visible = showTopLevelNavigation && navigationType == NavigationType.BOTTOM_APP_BAR,
                 enter = slideInVertically { it },
                 exit = slideOutVertically { it },
                 label = "bottomNavigation",
@@ -145,8 +147,11 @@ fun RamApp(
     ) { padding ->
         Row(modifier = Modifier.fillMaxSize()) {
             AnimatedVisibility(
-                visible = navigationType == NavigationType.NAVIGATION_RAIL ||
-                    navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER,
+                visible = showTopLevelNavigation &&
+                    (
+                        navigationType == NavigationType.NAVIGATION_RAIL ||
+                            navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER
+                        ),
                 enter = slideInHorizontally { -it },
                 exit = slideOutHorizontally { -it },
                 label = "sideNavigation",
