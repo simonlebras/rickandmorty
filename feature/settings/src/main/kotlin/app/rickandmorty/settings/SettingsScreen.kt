@@ -1,5 +1,6 @@
 package app.rickandmorty.settings
 
+import androidx.activity.compose.ReportDrawn
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +24,8 @@ internal fun SettingsScreen(
     onNavigateUp: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
 ) {
+    ReportDrawn()
+
     Scaffold(
         topBar = {
             SettingsAppBar(

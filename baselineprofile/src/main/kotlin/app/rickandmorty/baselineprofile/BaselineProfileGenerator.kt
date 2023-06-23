@@ -16,7 +16,7 @@ class BaselineProfileGenerator {
     val rule = BaselineProfileRule()
 
     @Test
-    fun generateBaselineProfile() = rule.collectBaselineProfile(packageName = PACKAGE_NAME) {
+    fun generateBaselineProfile() = rule.collect(packageName = PACKAGE_NAME) {
         pressHome()
         startActivityAndWait()
     }
