@@ -64,6 +64,7 @@ dependencies {
     implementation(projects.feature.locations)
     implementation(projects.feature.settings)
 
+    runtimeOnly(libs.androidx.compose.runtime.tracing)
     runtimeOnly(libs.androidx.profileinstaller)
 
     runtimeOnly(libs.leakcanary.plumber)
