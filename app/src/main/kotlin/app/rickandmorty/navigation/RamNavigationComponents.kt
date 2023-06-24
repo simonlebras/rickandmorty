@@ -144,7 +144,7 @@ private fun navigationMeasurePolicy(
     return MeasurePolicy { measurables, constraints ->
         check(measurables.size == 1)
         val contentPlaceable = measurables.first().measure(constraints)
-        layout(constraints.maxWidth, constraints.maxHeight) {
+        layout(contentPlaceable.width, contentPlaceable.height) {
             val contentPlaceableY = when (navigationContentPosition) {
                 NavigationContentPosition.TOP -> 0
                 NavigationContentPosition.CENTER -> {
