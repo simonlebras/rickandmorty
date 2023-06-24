@@ -1,6 +1,6 @@
 package app.rickandmorty.gradle.plugins
 
-import app.rickandmorty.gradle.util.configureKotlin
+import app.rickandmorty.gradle.utils.configureKotlin
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project

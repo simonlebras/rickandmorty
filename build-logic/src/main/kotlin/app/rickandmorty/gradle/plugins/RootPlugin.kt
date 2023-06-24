@@ -1,11 +1,11 @@
 package app.rickandmorty.gradle.plugins
 
-import app.rickandmorty.gradle.util.isRootProject
-import app.rickandmorty.gradle.util.ktlint
-import app.rickandmorty.gradle.util.ktlintGradle
-import app.rickandmorty.gradle.util.misc
-import app.rickandmorty.gradle.util.prettier
-import app.rickandmorty.gradle.util.xml
+import app.rickandmorty.gradle.utils.isRootProject
+import app.rickandmorty.gradle.utils.ktlint
+import app.rickandmorty.gradle.utils.ktlintGradle
+import app.rickandmorty.gradle.utils.misc
+import app.rickandmorty.gradle.utils.prettier
+import app.rickandmorty.gradle.utils.xml
 import com.autonomousapps.DependencyAnalysisExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessExtensionPredeclare

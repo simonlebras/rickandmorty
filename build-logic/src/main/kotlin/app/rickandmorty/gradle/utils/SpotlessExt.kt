@@ -1,4 +1,4 @@
-package app.rickandmorty.gradle.util
+package app.rickandmorty.gradle.utils
 
 import com.diffplug.gradle.spotless.FormatExtension
 import com.diffplug.gradle.spotless.KotlinExtension
