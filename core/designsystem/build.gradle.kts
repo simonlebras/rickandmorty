@@ -7,12 +7,6 @@ android {
     namespace = "app.rickandmorty.designsystem"
 }
 
-androidComponents {
-    beforeVariants(selector().withBuildType("debug")) { builder ->
-        builder.enable = false
-    }
-}
-
 dependencies {
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.compose.material3)

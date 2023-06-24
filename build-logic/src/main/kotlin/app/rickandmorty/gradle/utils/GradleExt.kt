@@ -1,4 +1,4 @@
-package app.rickandmorty.gradle.util
+package app.rickandmorty.gradle.utils
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyHandler

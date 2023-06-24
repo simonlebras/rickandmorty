@@ -1,8 +1,8 @@
 package app.rickandmorty.gradle.plugins
 
-import app.rickandmorty.gradle.util.androidTestImplementation
-import app.rickandmorty.gradle.util.implementation
-import app.rickandmorty.gradle.util.lintChecks
+import app.rickandmorty.gradle.utils.androidTestImplementation
+import app.rickandmorty.gradle.utils.implementation
+import app.rickandmorty.gradle.utils.lintChecks
 import com.android.build.gradle.BaseExtension
 import java.io.File
 import org.gradle.accessors.dm.LibrariesForLibs

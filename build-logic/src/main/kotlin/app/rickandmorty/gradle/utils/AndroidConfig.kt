@@ -1,4 +1,4 @@
-package app.rickandmorty.gradle.util
+package app.rickandmorty.gradle.utils
 
 import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.gradle.BaseExtension
