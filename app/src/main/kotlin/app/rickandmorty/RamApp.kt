@@ -1,5 +1,6 @@
 package app.rickandmorty
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInHorizontally
@@ -122,6 +123,12 @@ fun RamApp(
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
     val showTopLevelNavigation = topLevelDestinations.any { it.route == currentDestination?.route }
+
+    BackHandler(
+        enabled = showTopLevelNavigation && currentDestination?.route != CHARACTERS.route,
+    ) {
+        navController.navigateToTopLevelDestination(CHARACTERS)
+    }
 
     LookaheadScope {
         AppScaffold(
