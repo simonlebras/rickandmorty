@@ -10,8 +10,8 @@ import app.rickandmorty.characters.characters
 import app.rickandmorty.characters.charactersRoute
 import app.rickandmorty.episodes.episodes
 import app.rickandmorty.locations.locations
-import app.rickandmorty.settings.navigateToSettings
-import app.rickandmorty.settings.settings
+import app.rickandmorty.settings.navigation.navigateToMainSettings
+import app.rickandmorty.settings.navigation.settings
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 @Composable
@@ -27,7 +27,7 @@ fun RamNavHost(
         modifier = modifier,
     ) {
         characters(
-            onNavigateToSettings = navController::navigateToSettings,
+            onNavigateToSettings = navController::navigateToMainSettings,
         )
 
         episodes()
@@ -35,6 +35,7 @@ fun RamNavHost(
         locations()
 
         settings(
+            navController = navController,
             onNavigateUp = navController::navigateUp,
             onNavigateToOssLicenses = {
                 context.startActivity(Intent(context, OssLicensesMenuActivity::class.java))

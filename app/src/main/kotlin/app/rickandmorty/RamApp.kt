@@ -7,21 +7,17 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
+import androidx.compose.ui.layout.LookaheadScope
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -49,7 +45,7 @@ import app.rickandmorty.utils.isSeparating
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun RamApp(
     windowSizeClass: WindowSizeClass,
@@ -127,82 +123,71 @@ fun RamApp(
 
     val showTopLevelNavigation = topLevelDestinations.any { it.route == currentDestination?.route }
 
-    Scaffold(
-        modifier = modifier.fillMaxSize(),
-        bottomBar = {
-            AnimatedVisibility(
-                visible = showTopLevelNavigation && navigationType == NavigationType.BOTTOM_APP_BAR,
-                enter = slideInVertically { it },
-                exit = slideOutVertically { it },
-                label = "bottomNavigation",
-            ) {
-                RamBottomAppBar(
-                    destinations = topLevelDestinations,
-                    currentDestination = currentDestination,
-                    onNavigateToDestination = navController::navigateToTopLevelDestination,
-                )
-            }
-        },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
-    ) { padding ->
-        Row(modifier = Modifier.fillMaxSize()) {
-            AnimatedVisibility(
-                visible = showTopLevelNavigation &&
-                    (
-                        navigationType == NavigationType.NAVIGATION_RAIL ||
-                            navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER
-                        ),
-                enter = slideInHorizontally { -it },
-                exit = slideOutHorizontally { -it },
-                label = "sideNavigation",
-            ) {
-                AnimatedContent(
-                    targetState = navigationType,
-                    label = "sideNavigationBar",
-                ) { targetState ->
-                    when (targetState) {
-                        NavigationType.PERMANENT_NAVIGATION_DRAWER -> {
-                            RamPermanentNavigationDrawer(
-                                destinations = topLevelDestinations,
-                                currentDestination = currentDestination,
-                                navigationContentPosition = navigationContentPosition,
-                                onNavigateToDestination = navController::navigateToTopLevelDestination,
-                            )
-                        }
+    LookaheadScope {
+        AppScaffold(
+            modifier = modifier.fillMaxSize(),
+            startBar = {
+                AnimatedVisibility(
+                    visible = showTopLevelNavigation &&
+                        (
+                            navigationType == NavigationType.NAVIGATION_RAIL ||
+                                navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER
+                            ),
+                    enter = slideInHorizontally { -it },
+                    exit = slideOutHorizontally { -it },
+                    label = "sideNavigation",
+                ) {
+                    AnimatedContent(
+                        targetState = navigationType,
+                        label = "sideNavigationBar",
+                    ) { targetState ->
+                        when (targetState) {
+                            NavigationType.PERMANENT_NAVIGATION_DRAWER -> {
+                                RamPermanentNavigationDrawer(
+                                    destinations = topLevelDestinations,
+                                    currentDestination = currentDestination,
+                                    navigationContentPosition = navigationContentPosition,
+                                    onNavigateToDestination = navController::navigateToTopLevelDestination,
+                                )
+                            }
 
-                        else -> {
-                            RamNavigationRail(
-                                destinations = topLevelDestinations,
-                                currentDestination = currentDestination,
-                                navigationContentPosition = navigationContentPosition,
-                                onNavigateToDestination = navController::navigateToTopLevelDestination,
-                            )
+                            else -> {
+                                RamNavigationRail(
+                                    destinations = topLevelDestinations,
+                                    currentDestination = currentDestination,
+                                    navigationContentPosition = navigationContentPosition,
+                                    onNavigateToDestination = navController::navigateToTopLevelDestination,
+                                )
+                            }
                         }
                     }
                 }
-            }
-
+            },
+            bottomBar = {
+                AnimatedVisibility(
+                    visible = showTopLevelNavigation && navigationType == NavigationType.BOTTOM_APP_BAR,
+                    enter = slideInVertically { it },
+                    exit = slideOutVertically { it },
+                    label = "bottomNavigation",
+                ) {
+                    RamBottomAppBar(
+                        destinations = topLevelDestinations,
+                        currentDestination = currentDestination,
+                        onNavigateToDestination = navController::navigateToTopLevelDestination,
+                    )
+                }
+            },
+            contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        ) { padding ->
             RamNavHost(
                 navController = navController,
                 modifier = Modifier
-                    .weight(1f)
+                    .fillMaxSize()
                     .padding(padding)
-                    .consumeWindowInsets(padding)
-                    .consumeNavigationInsets(navigationType),
+                    .consumeWindowInsets(padding),
             )
         }
     }
-}
-
-private fun Modifier.consumeNavigationInsets(
-    navigationType: NavigationType,
-): Modifier = composed {
-    val insets = if (navigationType == NavigationType.BOTTOM_APP_BAR) {
-        WindowInsets(0)
-    } else {
-        WindowInsets.safeDrawing.only(WindowInsetsSides.Start)
-    }
-    then(Modifier.consumeWindowInsets(insets))
 }
 
 private fun NavController.navigateToTopLevelDestination(destination: TopLevelDestination) {

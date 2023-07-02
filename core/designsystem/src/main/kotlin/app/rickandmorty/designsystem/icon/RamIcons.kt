@@ -2,6 +2,7 @@ package app.rickandmorty.designsystem.icon
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Settings
@@ -14,6 +15,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 public object RamIcons {
     public object Filled {
         public val ArrowBack: ImageVector = Icons.Filled.ArrowBack
+        public val Check: ImageVector = Icons.Filled.Check
         public val Face: ImageVector = Icons.Filled.Face
         public val Map: ImageVector = Icons.Filled.Map
         public val Settings: ImageVector = Icons.Filled.Settings

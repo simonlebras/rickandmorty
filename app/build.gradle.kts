@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
 
     implementation(projects.core.coil)
+    implementation(projects.core.core)
     implementation(projects.core.designsystem)
     implementation(projects.core.hilt)
     implementation(projects.core.jankstats)
