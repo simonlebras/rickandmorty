@@ -1,5 +1,6 @@
 package app.rickandmorty
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -9,8 +10,10 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.DisposableEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
 import androidx.metrics.performance.JankStats
+import androidx.navigation.compose.rememberNavController
 import app.rickandmorty.designsystem.theme.RamTheme
 import app.rickandmorty.hilt.HiltLazy
 import com.google.accompanist.adaptive.calculateDisplayFeatures
@@ -39,10 +42,21 @@ class MainActivity : AppCompatActivity() {
                 onDispose { }
             }
 
+            val navController = rememberNavController()
+
+            DisposableEffect(Unit) {
+                val listener = Consumer<Intent> {
+                    navController.handleDeepLink(it)
+                }
+                addOnNewIntentListener(listener)
+                onDispose { removeOnNewIntentListener(listener) }
+            }
+
             RamTheme {
                 val windowSizeClass = calculateWindowSizeClass(this)
                 val displayFeatures = calculateDisplayFeatures(this).toImmutableList()
                 RamApp(
+                    navController = navController,
                     windowSizeClass = windowSizeClass,
                     displayFeatures = displayFeatures,
                 )
