@@ -53,6 +53,7 @@ internal class ApolloClientModule {
             .httpEngine(httpEngine)
             .normalizedCache(cacheFactory)
             .dispatcher(ioDispatcher)
+            .enableAutoPersistedQueries(true)
             .build()
     }
 }
