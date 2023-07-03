@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LookaheadScope
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import androidx.window.layout.DisplayFeature
 import androidx.window.layout.FoldingFeature
@@ -49,6 +49,7 @@ import kotlinx.collections.immutable.toImmutableList
 @OptIn(ExperimentalLayoutApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun RamApp(
+    navController: NavHostController,
     windowSizeClass: WindowSizeClass,
     displayFeatures: ImmutableList<DisplayFeature>,
     modifier: Modifier = Modifier,
@@ -116,8 +117,6 @@ fun RamApp(
             NavigationContentPosition.TOP
         }
     }
-
-    val navController = rememberNavController()
 
     val topLevelDestinations = TopLevelDestination.values().toList().toImmutableList()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
