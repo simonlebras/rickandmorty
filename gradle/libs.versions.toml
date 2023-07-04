@@ -33,7 +33,6 @@ androidxWindow = "1.2.0-alpha03"
 apollo = "4.0.0-alpha.2"
 cacheFix = "2.7.2"
 coil = "2.4.0"
-composeLints = "1.2.0"
 dependencyAnalysis = "1.20.0"
 easylauncher = "6.2.0"
 firebaseBom = "32.1.1"
@@ -50,6 +49,7 @@ kotlinxCoroutines = "1.7.2"
 kotlinxDatetime = "0.4.0"
 ksp = "1.9.0-1.0.11"
 leakcanary = "2.12"
+microsoftComposeTwopanelayout = "1.0.1-alpha08"
 moduleGraphAssert = "2.4.1"
 nodeGradle = "5.0.0"
 okhttp = "4.11.0"
@@ -57,6 +57,7 @@ playOssLicenses = "17.0.1"
 playOssLicensesGradlePlugin = "0.10.6"
 protobuf = "3.23.4"
 protobufGradlePlugin = "0.9.3"
+slackComposeLints = "1.2.0"
 sortDependencies = "0.3"
 spotless = "6.19.0"
 testParameterInjector = "1.12"
@@ -126,8 +127,6 @@ coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-base = { group = "io.coil-kt", name = "coil-base", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
-compose-lints = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "composeLints" }
-
 dependencyAnalysis-gradlePlugin = { group = "com.autonomousapps", name = "dependency-analysis-gradle-plugin", version.ref = "dependencyAnalysis" }
 
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
@@ -153,6 +152,8 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
 
+microsoft-compose-twopanelayout = { group = "com.microsoft.device.dualscreen", name = "twopanelayout", version.ref = "microsoftComposeTwopanelayout" }
+
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
@@ -162,6 +163,8 @@ play-ossLicenses-gradlePlugin = { group = "com.google.android.gms", name = "oss-
 protobuf-gradlePlugin = { group = "com.google.protobuf", name = "protobuf-gradle-plugin", version.ref = "protobufGradlePlugin" }
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
+
+slack-compose-lints = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slackComposeLints" }
 
 spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 

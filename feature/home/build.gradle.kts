@@ -4,17 +4,20 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.characters"
+    namespace = "app.rickandmorty.home"
 }
 
 dependencies {
+    api(libs.androidx.compose.material3.windowSizeClass)
+
     api(libs.androidx.navigation.compose)
 
-    implementation(libs.androidx.activity.compose)
+    api(libs.kotlinx.collections.immutable)
+
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.util)
 
     implementation(libs.microsoft.compose.twopanelayout)
 
-    implementation(projects.core.designsystem)
-    implementation(projects.core.uiResources)
+    implementation(projects.core.ui)
 }

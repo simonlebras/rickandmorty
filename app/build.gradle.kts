@@ -53,6 +53,8 @@ dependencies {
 
     implementation(libs.kotlinx.collections.immutable)
 
+    implementation(libs.microsoft.compose.twopanelayout)
+
     implementation(projects.core.coil)
     implementation(projects.core.core)
     implementation(projects.core.designsystem)
@@ -62,6 +64,7 @@ dependencies {
 
     implementation(projects.feature.characters)
     implementation(projects.feature.episodes)
+    implementation(projects.feature.home)
     implementation(projects.feature.locations)
     implementation(projects.feature.settings)
 
