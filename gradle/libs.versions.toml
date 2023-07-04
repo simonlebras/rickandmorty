@@ -2,7 +2,7 @@
 accompanist = "0.31.5-beta"
 androidCompileSdk = "34"
 androidDesugarJdkLibs = "2.0.3"
-androidGradlePlugin = "8.1.0-rc01"
+androidGradlePlugin = "8.2.0-alpha13"
 androidMinSdk = "24"
 androidTargetSdk = "34"
 androidxActivity = "1.8.0-alpha06"
