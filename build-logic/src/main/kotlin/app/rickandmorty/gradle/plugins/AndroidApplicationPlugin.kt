@@ -8,7 +8,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.the
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 public class AndroidApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
@@ -24,7 +23,7 @@ public class AndroidApplicationPlugin : Plugin<Project> {
 
         configureKotlin(
             libs = libs,
-            explicitApi = ExplicitApiMode.Disabled,
+            explicitApi = false,
         )
 
         configure<BaseAppModuleExtension> {
