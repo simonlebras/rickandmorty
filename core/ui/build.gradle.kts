@@ -9,4 +9,5 @@ android {
 
 dependencies {
     api(libs.androidx.compose.foundation)
+    api(libs.androidx.window)
 }

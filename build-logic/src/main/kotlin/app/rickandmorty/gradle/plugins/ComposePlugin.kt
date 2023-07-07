@@ -49,7 +49,7 @@ private fun Project.configureCompose(libs: LibrariesForLibs) {
 
         androidTestImplementation(platform(libs.androidx.compose.bom))
 
-        lintChecks(libs.compose.lints)
+        lintChecks(libs.slack.compose.lints)
     }
 }
 

@@ -8,7 +8,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class RickandmortyApplication : Application(), ImageLoaderFactory {
+class RamApplication : Application(), ImageLoaderFactory {
     @Inject
     lateinit var imageLoaderFactory: ImageLoaderFactory
 

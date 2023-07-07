@@ -1,4 +1,4 @@
-package app.rickandmorty
+package app.rickandmorty.home
 
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.MutableWindowInsets
@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
+import androidx.compose.material.Surface
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScaffoldDefaults
-import androidx.compose.material3.Surface
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -24,7 +24,7 @@ import androidx.compose.ui.util.fastMaxBy
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun AppScaffold(
+internal fun HomeNavigationScaffold(
     modifier: Modifier = Modifier,
     startBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
@@ -44,7 +44,7 @@ fun AppScaffold(
         color = containerColor,
         contentColor = contentColor,
     ) {
-        AppScaffoldLayout(
+        HomeNavigationScaffoldLayout(
             startBar = startBar,
             bottomBar = bottomBar,
             content = content,
@@ -54,7 +54,7 @@ fun AppScaffold(
 }
 
 @Composable
-private fun AppScaffoldLayout(
+private fun HomeNavigationScaffoldLayout(
     startBar: @Composable () -> Unit,
     content: @Composable (PaddingValues) -> Unit,
     contentWindowInsets: WindowInsets,

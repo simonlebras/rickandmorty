@@ -1,8 +1,8 @@
 package app.rickandmorty.settings.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
+import androidx.navigation.NavHostController
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.composable
 import app.rickandmorty.settings.language.LanguageSettingsScreen
 import app.rickandmorty.settings.main.MainSettingsScreen
@@ -10,16 +10,22 @@ import app.rickandmorty.settings.main.MainSettingsScreen
 private const val mainSettingsRoute = "mainSettings"
 private const val languageSettingsRoute = "languageSettings"
 
-public fun NavController.navigateToMainSettings(navOptions: NavOptions? = null) {
-    navigate(mainSettingsRoute, navOptions)
+public fun NavHostController.navigateToMainSettings(builder: NavOptionsBuilder.() -> Unit = {}) {
+    navigate(
+        route = mainSettingsRoute,
+        builder = builder,
+    )
 }
 
-private fun NavController.navigateToLanguageSettings(navOptions: NavOptions? = null) {
-    navigate(languageSettingsRoute, navOptions)
+private fun NavHostController.navigateToLanguageSettings(builder: NavOptionsBuilder.() -> Unit = {}) {
+    navigate(
+        route = languageSettingsRoute,
+        builder = builder,
+    )
 }
 
 public fun NavGraphBuilder.settings(
-    navController: NavController,
+    navController: NavHostController,
     onNavigateUp: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
 ) {

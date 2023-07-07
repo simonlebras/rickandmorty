@@ -16,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 public fun TrackJank(
     vararg keys: Any?,
-    reportMetrics: suspend CoroutineScope.(metricsStateHolder: Holder) -> Unit,
+    reportMetrics: suspend CoroutineScope.(Holder) -> Unit,
 ) {
     val metricsStateHolder = rememberMetricsStateHolder()
     LaunchedEffect(metricsStateHolder, *keys) {
@@ -27,7 +27,7 @@ public fun TrackJank(
 @Composable
 public fun TrackDisposableJank(
     vararg keys: Any?,
-    reportMetrics: DisposableEffectScope.(metricsStateHolder: Holder) -> DisposableEffectResult,
+    reportMetrics: DisposableEffectScope.(Holder) -> DisposableEffectResult,
 ) {
     val metricsStateHolder = rememberMetricsStateHolder()
     DisposableEffect(metricsStateHolder, *keys) {

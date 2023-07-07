@@ -66,7 +66,7 @@ internal fun LanguageSettingsScreen(
 private fun LanguageSettingsScreen(
     uiState: LanguageSettingsUiState,
     onNavigateUp: () -> Unit,
-    onSelectLocale: (locale: Locale?) -> Unit,
+    onSelectLocale: (Locale?) -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
@@ -143,7 +143,7 @@ private fun LanguageSettingsAppBar(
 
 private fun LazyListScope.systemDefault(
     applicationLocale: Locale?,
-    onSelectLocale: (locale: Locale?) -> Unit,
+    onSelectLocale: (Locale?) -> Unit,
 ) {
     item(
         key = "system_default",
@@ -160,7 +160,7 @@ private fun LazyListScope.systemDefault(
 private fun LazyListScope.supportedLocales(
     applicationLocale: Locale?,
     supportedLocales: ImmutableList<Locale>,
-    onSelectLocale: (locale: Locale?) -> Unit,
+    onSelectLocale: (Locale?) -> Unit,
 ) {
     items(
         items = supportedLocales,

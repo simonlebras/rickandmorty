@@ -55,5 +55,6 @@ include(":core:ui-resources")
 
 include(":feature:characters")
 include(":feature:episodes")
+include(":feature:home")
 include(":feature:locations")
 include(":feature:settings")

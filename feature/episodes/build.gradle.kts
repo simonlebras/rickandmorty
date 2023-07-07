@@ -11,4 +11,7 @@ dependencies {
     api(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3)
+
+    implementation(libs.microsoft.compose.twopanelayout)
 }

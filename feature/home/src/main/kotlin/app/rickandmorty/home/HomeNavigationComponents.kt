@@ -1,4 +1,4 @@
-package app.rickandmorty.navigation
+package app.rickandmorty.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,45 +23,44 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
-import app.rickandmorty.utils.NavigationContentPosition
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-fun RamBottomAppBar(
-    destinations: ImmutableList<TopLevelDestination>,
+internal fun HomeBottomAppBar(
+    navigationItems: ImmutableList<HomeNavigationItem>,
     currentDestination: NavDestination?,
-    onNavigateToDestination: (TopLevelDestination) -> Unit,
+    onNavigationItemClick: (HomeNavigationItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BottomAppBar(modifier = modifier) {
-        destinations.fastForEach { destination ->
-            val selected = destination.isInHierarchy(currentDestination)
+        navigationItems.fastForEach { item ->
+            val selected = item.isInHierarchy(currentDestination)
             NavigationBarItem(
                 selected = selected,
-                onClick = { onNavigateToDestination(destination) },
+                onClick = { onNavigationItemClick(item) },
                 icon = {
                     val icon = if (selected) {
-                        destination.selectedIcon
+                        item.selectedIcon
                     } else {
-                        destination.unselectedIcon
+                        item.unselectedIcon
                     }
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
                     )
                 },
-                label = { Text(text = stringResource(destination.label)) },
+                label = { Text(text = stringResource(item.label)) },
             )
         }
     }
 }
 
 @Composable
-fun RamNavigationRail(
-    destinations: ImmutableList<TopLevelDestination>,
+internal fun HomeNavigationRail(
+    navigationItems: ImmutableList<HomeNavigationItem>,
     currentDestination: NavDestination?,
     navigationContentPosition: NavigationContentPosition,
-    onNavigateToDestination: (TopLevelDestination) -> Unit,
+    onNavigationItemClick: (HomeNavigationItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     NavigationRail(modifier = modifier) {
@@ -71,23 +70,23 @@ fun RamNavigationRail(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
-                    destinations.fastForEach { destination ->
-                        val selected = destination.isInHierarchy(currentDestination)
+                    navigationItems.fastForEach { item ->
+                        val selected = item.isInHierarchy(currentDestination)
                         NavigationRailItem(
                             selected = selected,
-                            onClick = { onNavigateToDestination(destination) },
+                            onClick = { onNavigationItemClick(item) },
                             icon = {
                                 val icon = if (selected) {
-                                    destination.selectedIcon
+                                    item.selectedIcon
                                 } else {
-                                    destination.unselectedIcon
+                                    item.unselectedIcon
                                 }
                                 Icon(
                                     imageVector = icon,
                                     contentDescription = null,
                                 )
                             },
-                            label = { Text(text = stringResource(destination.label)) },
+                            label = { Text(text = stringResource(item.label)) },
                         )
                     }
                 }
@@ -98,31 +97,36 @@ fun RamNavigationRail(
 }
 
 @Composable
-fun RamPermanentNavigationDrawer(
-    destinations: ImmutableList<TopLevelDestination>,
+internal fun HomePermanentNavigationDrawer(
+    navigationItems: ImmutableList<HomeNavigationItem>,
     currentDestination: NavDestination?,
     navigationContentPosition: NavigationContentPosition,
-    onNavigateToDestination: (TopLevelDestination) -> Unit,
+    onNavigationItemClick: (HomeNavigationItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    PermanentDrawerSheet(modifier = modifier.sizeIn(minWidth = 200.dp, maxWidth = 300.dp)) {
+    PermanentDrawerSheet(
+        modifier = modifier.sizeIn(
+            minWidth = 200.dp,
+            maxWidth = 300.dp,
+        ),
+    ) {
         Layout(
             content = {
                 Column(
                     modifier = Modifier.verticalScroll(rememberScrollState()),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    destinations.fastForEach { destination ->
-                        val selected = destination.isInHierarchy(currentDestination)
+                    navigationItems.fastForEach { item ->
+                        val selected = item.isInHierarchy(currentDestination)
                         NavigationDrawerItem(
-                            label = { Text(text = stringResource(destination.label)) },
+                            label = { Text(text = stringResource(item.label)) },
                             selected = selected,
-                            onClick = { onNavigateToDestination(destination) },
+                            onClick = { onNavigationItemClick(item) },
                             icon = {
                                 val icon = if (selected) {
-                                    destination.selectedIcon
+                                    item.selectedIcon
                                 } else {
-                                    destination.unselectedIcon
+                                    item.unselectedIcon
                                 }
                                 Icon(
                                     imageVector = icon,
@@ -136,6 +140,14 @@ fun RamPermanentNavigationDrawer(
             measurePolicy = navigationMeasurePolicy(navigationContentPosition),
         )
     }
+}
+
+private fun HomeNavigationItem.isInHierarchy(destination: NavDestination?): Boolean {
+    return destination
+        ?.hierarchy
+        ?.any {
+            it.route?.contains(route, true) ?: false
+        } ?: false
 }
 
 private fun navigationMeasurePolicy(
@@ -157,10 +169,20 @@ private fun navigationMeasurePolicy(
     }
 }
 
-private fun TopLevelDestination.isInHierarchy(destination: NavDestination?): Boolean {
-    return destination
-        ?.hierarchy
-        ?.any {
-            it.route?.contains(route, true) ?: false
-        } ?: false
+/**
+ * Different type of app navigation depending on device size and state.
+ */
+internal enum class NavigationType {
+    BOTTOM_APP_BAR,
+    NAVIGATION_RAIL,
+    PERMANENT_NAVIGATION_DRAWER,
+}
+
+/**
+ * Different position of navigation content inside navigation rail and navigation drawer
+ * depending on device size and state.
+ */
+internal enum class NavigationContentPosition {
+    TOP,
+    CENTER,
 }
