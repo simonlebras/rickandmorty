@@ -1,6 +1,8 @@
 package app.rickandmorty.gradle.plugins
 
-import app.rickandmorty.gradle.utils.configureKotlin
+import app.rickandmorty.gradle.utils.apply
+import app.rickandmorty.gradle.utils.configureKotlinJvm
+import app.rickandmorty.gradle.utils.configureSpotless
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -10,12 +12,13 @@ public class JvmLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = the<LibrariesForLibs>()
 
-        with(pluginManager) {
-            apply("app.rickandmorty.spotless")
-            apply(libs.plugins.kotlin.jvm.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
-        }
+        pluginManager.apply(
+            libs.plugins.kotlin.jvm,
+            libs.plugins.sortDependencies,
+        )
 
-        configureKotlin(libs)
+        configureKotlinJvm(libs)
+
+        configureSpotless(libs)
     }
 }

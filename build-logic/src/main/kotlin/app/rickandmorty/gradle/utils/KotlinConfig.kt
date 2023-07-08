@@ -7,22 +7,33 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-internal fun Project.configureKotlin(
-    libs: LibrariesForLibs,
-    explicitApi: Boolean = true,
-) {
+internal fun Project.configureKotlinAndroid(libs: LibrariesForLibs) {
+    configureKotlin(libs)
+    pluginManager.withPlugin(libs.plugins.android.library) {
+        explicitApi()
+    }
+}
+
+internal fun Project.configureKotlinJvm(libs: LibrariesForLibs) {
+    configureKotlin(libs)
+    explicitApi()
+}
+
+private fun Project.configureKotlin(libs: LibrariesForLibs) {
     configure<KotlinProjectExtension> {
         val javaVersion = libs.versions.java.get().toInt()
         jvmToolchain(javaVersion)
-
-        if (explicitApi && !name.contains("test", ignoreCase = true)) {
-            explicitApi()
-        }
     }
 
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
             freeCompilerArgs += listOf("-Xcontext-receivers")
         }
+    }
+}
+
+private fun Project.explicitApi() {
+    configure<KotlinProjectExtension> {
+        explicitApi()
     }
 }

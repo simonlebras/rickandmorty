@@ -5,6 +5,7 @@ import app.rickandmorty.gradle.utils.ktlint
 import app.rickandmorty.gradle.utils.ktlintGradle
 import app.rickandmorty.gradle.utils.misc
 import app.rickandmorty.gradle.utils.prettier
+import app.rickandmorty.gradle.utils.withPlugin
 import app.rickandmorty.gradle.utils.xml
 import com.autonomousapps.DependencyAnalysisExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
@@ -24,17 +25,13 @@ public class RootPlugin : Plugin<Project> {
 
         val libs = the<LibrariesForLibs>()
 
-        with(pluginManager) {
-            apply(libs.plugins.dependencyAnalysis.get().pluginId)
-            apply(libs.plugins.gradleDoctor.get().pluginId)
-            apply(libs.plugins.nodeGradle.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
-            apply(libs.plugins.spotless.get().pluginId)
+        pluginManager.withPlugin(libs.plugins.dependencyAnalysis) {
+            configureDependencyAnalysis()
         }
 
-        configureDependencyAnalysis()
-
-        configureSpotless()
+        pluginManager.withPlugin(libs.plugins.spotless) {
+            configureSpotless()
+        }
     }
 }
 
@@ -46,41 +43,14 @@ private fun Project.configureDependencyAnalysis() {
                 onAny {
                     severity("fail")
                 }
-                onUnusedDependencies {
-                    exclude(
-                        "com.google.dagger:hilt-android",
-                    )
-                }
                 onUsedTransitiveDependencies {
                     severity("ignore")
-                }
-            }
-
-            project(":app") {
-                onUnusedDependencies {
-                    exclude(
-                        // Submodules used by Hilt
-                        // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
-                        ":core:coil",
-                        ":core:jankstats",
-                        ":core:okhttp",
-                        ":core:strictmode",
-                    )
-                }
-            }
-
-            project(":core:graphql") {
-                onUnusedDependencies {
-                    exclude(
-                        "com.apollographql.apollo3:apollo-normalized-cache-sqlite",
-                    )
                 }
             }
         }
 
         abi {
             exclusions {
-                ignoreInternalPackages()
                 ignoreGeneratedCode()
             }
         }
@@ -92,15 +62,8 @@ private fun Project.configureSpotless() {
         // https://github.com/diffplug/spotless/issues/1644
         lineEndings = LineEnding.PLATFORM_NATIVE
 
-        ktlint {
-            target("build-logic/src/**/*.kt")
-        }
-
         ktlintGradle {
-            target(
-                "*.kts",
-                "build-logic/*.kts",
-            )
+            target("*.kts")
         }
 
         misc {
@@ -127,8 +90,9 @@ private fun Project.configureSpotless() {
 
         predeclareDeps()
     }
+
     configure<SpotlessExtensionPredeclare> {
-        ktlint { }
-        prettier { }
+        ktlint()
+        prettier()
     }
 }

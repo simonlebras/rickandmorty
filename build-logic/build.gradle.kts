@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.spotless)
 }
 
 kotlin {
@@ -30,15 +31,15 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("android-application") {
+        register("androidApplication") {
             id = "app.rickandmorty.android-application"
             implementationClass = "app.rickandmorty.gradle.plugins.AndroidApplicationPlugin"
         }
-        register("android-library") {
+        register("androidLibrary") {
             id = "app.rickandmorty.android-library"
             implementationClass = "app.rickandmorty.gradle.plugins.AndroidLibraryPlugin"
         }
-        register("android-test") {
+        register("androidTest") {
             id = "app.rickandmorty.android-test"
             implementationClass = "app.rickandmorty.gradle.plugins.AndroidTestPlugin"
         }
@@ -46,11 +47,11 @@ gradlePlugin {
             id = "app.rickandmorty.compose"
             implementationClass = "app.rickandmorty.gradle.plugins.ComposePlugin"
         }
-        register("firebase-crashlytics") {
+        register("firebaseCrashlytics") {
             id = "app.rickandmorty.firebase-crashlytics"
             implementationClass = "app.rickandmorty.gradle.plugins.FirebaseCrashlyticsPlugin"
         }
-        register("firebase-perf") {
+        register("firebasePerf") {
             id = "app.rickandmorty.firebase-perf"
             implementationClass = "app.rickandmorty.gradle.plugins.FirebasePerfPlugin"
         }
@@ -58,11 +59,11 @@ gradlePlugin {
             id = "app.rickandmorty.hilt"
             implementationClass = "app.rickandmorty.gradle.plugins.HiltPlugin"
         }
-        register("jvm-library") {
+        register("jvmLibrary") {
             id = "app.rickandmorty.jvm-library"
             implementationClass = "app.rickandmorty.gradle.plugins.JvmLibraryPlugin"
         }
-        register("oss-licenses") {
+        register("ossLicenses") {
             id = "app.rickandmorty.oss-licenses"
             implementationClass = "app.rickandmorty.gradle.plugins.OssLicensesPlugin"
         }
@@ -74,9 +75,17 @@ gradlePlugin {
             id = "app.rickandmorty.root"
             implementationClass = "app.rickandmorty.gradle.plugins.RootPlugin"
         }
-        register("spotless") {
-            id = "app.rickandmorty.spotless"
-            implementationClass = "app.rickandmorty.gradle.plugins.SpotlessPlugin"
-        }
+    }
+}
+
+spotless {
+    kotlin {
+        target("src/**/*.kt")
+        ktlint()
+    }
+
+    kotlinGradle {
+        target("*.kts")
+        ktlint()
     }
 }
