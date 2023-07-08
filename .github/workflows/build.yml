@@ -54,6 +54,9 @@ jobs:
       - name: Check module graph
         run: ./gradlew assertModuleGraph
 
+      - name: Run build-logic checks
+        run: ./gradlew check -p build-logic
+
       - name: Build all build type and flavor permutations
         run: |
           ./gradlew assemble \

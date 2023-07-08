@@ -3,6 +3,7 @@ package app.rickandmorty.gradle.plugins
 import app.rickandmorty.gradle.utils.androidTestImplementation
 import app.rickandmorty.gradle.utils.implementation
 import app.rickandmorty.gradle.utils.lintChecks
+import app.rickandmorty.gradle.utils.withPlugins
 import com.android.build.gradle.BaseExtension
 import java.io.File
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -17,14 +18,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 public class ComposePlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = the<LibrariesForLibs>()
-        with(pluginManager) {
-            withPlugin(libs.plugins.android.application.get().pluginId) {
-                configureCompose(libs)
-            }
 
-            withPlugin(libs.plugins.android.library.get().pluginId) {
-                configureCompose(libs)
-            }
+        pluginManager.withPlugins(
+            libs.plugins.android.application,
+            libs.plugins.android.library,
+        ) {
+            configureCompose(libs)
         }
     }
 }

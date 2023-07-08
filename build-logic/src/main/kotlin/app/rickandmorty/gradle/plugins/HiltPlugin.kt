@@ -1,7 +1,10 @@
 package app.rickandmorty.gradle.plugins
 
+import app.rickandmorty.gradle.utils.apply
 import app.rickandmorty.gradle.utils.implementation
 import app.rickandmorty.gradle.utils.kapt
+import app.rickandmorty.gradle.utils.withPlugin
+import com.autonomousapps.DependencyAnalysisSubExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -15,8 +18,20 @@ public class HiltPlugin : Plugin<Project> {
         val libs = the<LibrariesForLibs>()
 
         with(pluginManager) {
-            apply(libs.plugins.hilt.get().pluginId)
-            apply(libs.plugins.kotlin.kapt.get().pluginId)
+            apply(
+                libs.plugins.hilt,
+                libs.plugins.kotlin.kapt,
+            )
+
+            withPlugin(libs.plugins.dependencyAnalysis) {
+                configure<DependencyAnalysisSubExtension> {
+                    issues {
+                        onUnusedDependencies {
+                            exclude("com.google.dagger:hilt-android")
+                        }
+                    }
+                }
+            }
         }
 
         configure<KaptExtension> {

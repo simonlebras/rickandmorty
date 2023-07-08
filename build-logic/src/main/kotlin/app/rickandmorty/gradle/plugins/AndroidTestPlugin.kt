@@ -1,7 +1,9 @@
 package app.rickandmorty.gradle.plugins
 
+import app.rickandmorty.gradle.utils.apply
 import app.rickandmorty.gradle.utils.configureAndroid
-import app.rickandmorty.gradle.utils.configureKotlin
+import app.rickandmorty.gradle.utils.configureKotlinAndroid
+import app.rickandmorty.gradle.utils.configureSpotless
 import com.android.build.gradle.TestExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -13,18 +15,16 @@ public class AndroidTestPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = the<LibrariesForLibs>()
 
-        with(pluginManager) {
-            apply("app.rickandmorty.spotless")
-            apply(libs.plugins.android.test.get().pluginId)
-            apply(libs.plugins.cacheFix.get().pluginId)
-            apply(libs.plugins.kotlin.android.get().pluginId)
-            apply(libs.plugins.sortDependencies.get().pluginId)
-        }
-
-        configureKotlin(
-            libs = libs,
-            explicitApi = false,
+        pluginManager.apply(
+            libs.plugins.android.test,
+            libs.plugins.cacheFix,
+            libs.plugins.kotlin.android,
+            libs.plugins.sortDependencies,
         )
+
+        configureKotlinAndroid(libs)
+
+        configureSpotless(libs)
 
         configure<TestExtension> {
             configureAndroid(libs)
