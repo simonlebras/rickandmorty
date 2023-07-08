@@ -13,6 +13,6 @@ internal data class LanguageSettingsUiState(
     val supportedLocales: ResourceState<ImmutableList<Locale>> = Uninitialized,
 ) {
     val isLoading: Boolean
-        get() = applicationLocale is Incomplete &&
+        get() = applicationLocale is Incomplete ||
             supportedLocales is Incomplete
 }
