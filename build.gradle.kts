@@ -25,7 +25,7 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.moduleGraphAssert) apply false
     alias(libs.plugins.nodeGradle)
-    alias(libs.plugins.protobuf) apply false
     alias(libs.plugins.sortDependencies)
     alias(libs.plugins.spotless)
+    alias(libs.plugins.wire) apply false
 }

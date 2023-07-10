@@ -1,5 +1,6 @@
 plugins {
     id("app.rickandmorty.android-library")
+    id("app.rickandmorty.hilt")
 }
 
 android {
@@ -7,4 +8,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.datastore)
+
+    implementation(projects.core.themeProto)
 }

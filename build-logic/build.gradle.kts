@@ -22,8 +22,8 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.dependencyAnalysis.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
-    compileOnly(libs.protobuf.gradlePlugin)
     compileOnly(libs.spotless.gradlePlugin)
+    compileOnly(libs.wire.gradlePlugin)
 
     // Workaround for https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
@@ -67,13 +67,13 @@ gradlePlugin {
             id = "app.rickandmorty.oss-licenses"
             implementationClass = "app.rickandmorty.gradle.plugins.OssLicensesPlugin"
         }
-        register("protobuf") {
-            id = "app.rickandmorty.protobuf"
-            implementationClass = "app.rickandmorty.gradle.plugins.ProtobufPlugin"
-        }
         register("root") {
             id = "app.rickandmorty.root"
             implementationClass = "app.rickandmorty.gradle.plugins.RootPlugin"
+        }
+        register("wire") {
+            id = "app.rickandmorty.wire"
+            implementationClass = "app.rickandmorty.gradle.plugins.WirePlugin"
         }
     }
 }
