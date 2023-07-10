@@ -1,5 +1,6 @@
 package app.rickandmorty.settings.main
 
+import app.rickandmorty.ui.resources.R as UiR
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -11,12 +12,14 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -26,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -36,12 +40,14 @@ import app.rickandmorty.settings.Header
 import app.rickandmorty.settings.R
 import app.rickandmorty.settings.SettingsContentType
 import app.rickandmorty.settings.loader
+import app.rickandmorty.settings.utils.toText
 import app.rickandmorty.settings.utils.versionName
-import app.rickandmorty.ui.resources.R as UiR
+import app.rickandmorty.theme.domain.Theme
 
 @Composable
 internal fun MainSettingsScreen(
     onNavigateUp: () -> Unit,
+    onNavigateToDarkThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
     viewModel: MainSettingsViewModel = hiltViewModel(),
@@ -53,6 +59,8 @@ internal fun MainSettingsScreen(
     MainSettingsScreen(
         uiState = uiState,
         onNavigateUp = onNavigateUp,
+        onUpdateDynamicColor = viewModel::setDynamicColor,
+        onNavigateToDarkThemeSettings = onNavigateToDarkThemeSettings,
         onNavigateToLanguageSettings = onNavigateToLanguageSettings,
         onNavigateToOssLicenses = onNavigateToOssLicenses,
     )
@@ -63,6 +71,8 @@ internal fun MainSettingsScreen(
 private fun MainSettingsScreen(
     uiState: MainSettingsUiState,
     onNavigateUp: () -> Unit,
+    onUpdateDynamicColor: (Boolean) -> Unit,
+    onNavigateToDarkThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
 ) {
@@ -99,7 +109,10 @@ private fun MainSettingsScreen(
 
                 else -> {
                     generalSettings(
+                        theme = uiState.theme()!!,
                         applicationLocale = uiState.applicationLocale(),
+                        onUpdateDynamicColor = onUpdateDynamicColor,
+                        onNavigateToDarkThemeSettings = onNavigateToDarkThemeSettings,
                         onNavigateToLanguageSettings = onNavigateToLanguageSettings,
                     )
 
@@ -135,7 +148,10 @@ private fun MainSettingsAppBar(
 }
 
 private fun LazyListScope.generalSettings(
+    theme: Theme,
     applicationLocale: Locale?,
+    onUpdateDynamicColor: (Boolean) -> Unit,
+    onNavigateToDarkThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
 ) {
     item(
@@ -145,6 +161,49 @@ private fun LazyListScope.generalSettings(
         Header(
             text = stringResource(R.string.settings_general_title),
             modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    item(
+        key = "dark_mode",
+        contentType = SettingsContentType.LIST_ITEM,
+    ) {
+        ListItem(
+            headlineContent = {
+                Text(text = stringResource(R.string.settings_dark_mode_title))
+            },
+            modifier = Modifier
+                .semantics(mergeDescendants = true) { }
+                .clickable(
+                    onClickLabel = stringResource(R.string.settings_dark_mode_tap_action),
+                    onClick = onNavigateToDarkThemeSettings,
+                ),
+            supportingContent = {
+                Text(text = theme.nightMode.toText())
+            },
+        )
+    }
+
+    item(
+        key = "dynamic_color",
+        contentType = SettingsContentType.LIST_ITEM,
+    ) {
+        ListItem(
+            headlineContent = {
+                Text(text = stringResource(R.string.settings_dynamic_color_title))
+            },
+            modifier = Modifier
+                .toggleable(
+                    value = theme.useDynamicColor,
+                    role = Role.RadioButton,
+                    onValueChange = onUpdateDynamicColor,
+                ),
+            trailingContent = {
+                Switch(
+                    checked = theme.useDynamicColor,
+                    onCheckedChange = null,
+                )
+            },
         )
     }
 

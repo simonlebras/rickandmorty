@@ -5,9 +5,17 @@
     <string name="settings_language_title">Language</string>
     <string name="settings_language_tap_action">Open language settings</string>
     <string name="settings_language_system_default">System default</string>
+    <string name="settings_dark_mode_title">Dark mode</string>
+    <string name="settings_dark_mode_tap_action">Open dark mode settings</string>
     <string name="settings_about_title">About</string>
     <string name="settings_oss_licenses_title">Open source licenses</string>
     <string name="settings_oss_licenses_summary">License details for open source software</string>
     <string name="settings_oss_licenses_tap_action">Open open source licenses</string>
     <string name="settings_app_version">App version</string>
+    <string name="settings_dark_mode_auto_battery">Battery</string>
+    <string name="settings_dark_mode_follow_system">Follow system</string>
+    <string name="settings_dark_mode_light">Light</string>
+    <string name="settings_dark_mode_dark">Dark</string>
+    <string name="dismiss_dialog_button_text">Dismiss</string>
+    <string name="settings_dynamic_color_title">Use dynamic color</string>
 </resources>
