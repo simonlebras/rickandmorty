@@ -7,6 +7,14 @@ import org.gradle.api.plugins.PluginManager
 import org.gradle.api.provider.Provider
 import org.gradle.plugin.use.PluginDependency
 
+internal fun DependencyHandler.api(
+    vararg dependencyNotations: Any,
+) {
+    dependencyNotations.forEach {
+        add("api", it)
+    }
+}
+
 internal fun DependencyHandler.implementation(
     vararg dependencyNotations: Any,
 ) {

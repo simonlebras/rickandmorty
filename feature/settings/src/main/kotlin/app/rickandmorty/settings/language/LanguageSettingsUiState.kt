@@ -10,9 +10,9 @@ import kotlinx.collections.immutable.ImmutableList
 @Immutable
 internal data class LanguageSettingsUiState(
     val applicationLocale: ResourceState<Locale?> = Uninitialized,
-    val supportedLocales: ResourceState<ImmutableList<Locale>> = Uninitialized,
+    val availableLocales: ResourceState<ImmutableList<Locale>> = Uninitialized,
 ) {
     val isLoading: Boolean
         get() = applicationLocale is Incomplete ||
-            supportedLocales is Incomplete
+            availableLocales is Incomplete
 }

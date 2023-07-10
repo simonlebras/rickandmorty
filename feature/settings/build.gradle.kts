@@ -13,6 +13,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
 
@@ -23,6 +24,7 @@ dependencies {
     implementation(projects.core.jankstats)
     implementation(projects.core.locale)
     implementation(projects.core.resourceState)
+    implementation(projects.core.theme)
     implementation(projects.core.ui)
     implementation(projects.core.uiResources)
 }

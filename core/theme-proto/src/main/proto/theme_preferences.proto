@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "night_mode.proto";
+
+option java_multiple_files = true;
+option java_package = "app.rickandmorty.theme.proto";
+
+message ThemePreferences {
+  NightMode night_mode = 1;
+  bool use_dynamic_color = 2;
+}

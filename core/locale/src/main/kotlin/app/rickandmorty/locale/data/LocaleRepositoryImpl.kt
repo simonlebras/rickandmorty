@@ -42,7 +42,7 @@ internal class LocaleRepositoryImpl @Inject constructor(
     }
 
     @SuppressLint("DiscouragedApi")
-    override suspend fun getSupportedLocales(): ImmutableList<Locale> {
+    override suspend fun getAvailableLocales(): ImmutableList<Locale> {
         val locales = mutableListOf<Locale>()
         val localeConfigFileId = context.resources.getIdentifier(
             LOCALE_CONFIG_FILE,

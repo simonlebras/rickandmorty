@@ -57,10 +57,13 @@ dependencies {
 
     implementation(projects.core.coil)
     implementation(projects.core.core)
+    implementation(projects.core.coroutines)
     implementation(projects.core.designsystem)
     implementation(projects.core.hilt)
     implementation(projects.core.jankstats)
     implementation(projects.core.okhttp)
+    implementation(projects.core.resourceState)
+    implementation(projects.core.theme)
 
     implementation(projects.feature.characters)
     implementation(projects.feature.episodes)

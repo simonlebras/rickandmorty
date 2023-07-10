@@ -50,6 +50,8 @@ include(":core:logging")
 include(":core:okhttp")
 include(":core:resource-state")
 include(":core:strictmode")
+include(":core:theme")
+include(":core:theme-proto")
 include(":core:ui")
 include(":core:ui-resources")
 
