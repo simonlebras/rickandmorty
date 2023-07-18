@@ -53,7 +53,8 @@ internal fun LanguageSettingsScreen(
         uiState = uiState,
         onNavigateUp = onNavigateUp,
         onSelectLocale = remember(viewModel, onNavigateUp) {
-            { locale ->
+            {
+                    locale ->
                 viewModel.setApplicationLocale(locale)
                 onNavigateUp()
             }
