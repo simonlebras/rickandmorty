@@ -62,15 +62,15 @@ internal fun Project.configureSpotless(libs: LibrariesForLibs) {
 
 internal fun SpotlessExtension.ktlint(block: KotlinExtension.() -> Unit = {}) {
     kotlin {
-        block()
         ktlint()
+        block()
     }
 }
 
 internal fun SpotlessExtension.ktlintGradle(block: KotlinGradleExtension.() -> Unit = {}) {
     kotlinGradle {
-        block()
         ktlint()
+        block()
     }
 }
 
@@ -85,17 +85,17 @@ internal fun SpotlessExtension.misc(block: FormatExtension.() -> Unit = {}) {
 context(Project)
 internal fun SpotlessExtension.prettier(block: FormatExtension.() -> Unit = {}) {
     format("styling") {
-        block()
         prettier().npmInstallCache("${project.rootProject.rootDir}/.gradle/spotless-npm-cache")
         trimTrailingWhitespace()
         endWithNewline()
+        block()
     }
 }
 
 internal fun SpotlessExtension.xml(block: FormatExtension.() -> Unit = {}) {
     format("xml") {
-        block()
         trimTrailingWhitespace()
         endWithNewline()
+        block()
     }
 }

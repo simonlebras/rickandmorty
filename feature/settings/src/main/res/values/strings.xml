@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="settings_title">Settings</string>
+
     <string name="settings_general_title">General</string>
+
+    <string name="settings_appearance_title">Dark mode</string>
+    <string name="settings_appearance_tap_action">Open dark mode settings</string>
+    <string name="settings_appearance_auto_battery">Battery</string>
+    <string name="settings_appearance_follow_system">Follow system</string>
+    <string name="settings_appearance_light">Light</string>
+    <string name="settings_appearance_dark">Dark</string>
+
+    <string name="settings_dynamic_color_title">Use dynamic color</string>
+
     <string name="settings_language_title">Language</string>
     <string name="settings_language_tap_action">Open language settings</string>
     <string name="settings_language_system_default">System default</string>
+
     <string name="settings_about_title">About</string>
+
     <string name="settings_oss_licenses_title">Open source licenses</string>
     <string name="settings_oss_licenses_summary">License details for open source software</string>
     <string name="settings_oss_licenses_tap_action">Open open source licenses</string>
+
     <string name="settings_app_version">App version</string>
 </resources>

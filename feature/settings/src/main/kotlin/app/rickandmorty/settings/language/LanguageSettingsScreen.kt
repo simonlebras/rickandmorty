@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.semantics
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.designsystem.icon.RamIcons
@@ -108,10 +107,10 @@ private fun LanguageSettingsScreen(
                         onSelectLocale = onSelectLocale,
                     )
 
-                    val supportedLocales = uiState.supportedLocales()!!
-                    supportedLocales(
+                    val availableLocales = uiState.availableLocales()!!
+                    availableLocales(
                         applicationLocale = applicationLocale,
-                        supportedLocales = supportedLocales,
+                        availableLocales = availableLocales,
                         onSelectLocale = onSelectLocale,
                     )
                 }
@@ -158,13 +157,13 @@ private fun LazyListScope.systemDefault(
     }
 }
 
-private fun LazyListScope.supportedLocales(
+private fun LazyListScope.availableLocales(
     applicationLocale: Locale?,
-    supportedLocales: ImmutableList<Locale>,
+    availableLocales: ImmutableList<Locale>,
     onSelectLocale: (Locale?) -> Unit,
 ) {
     items(
-        items = supportedLocales,
+        items = availableLocales,
         key = { locale -> locale.toLanguageTag() },
     ) { locale ->
         LocaleItem(
@@ -184,7 +183,6 @@ private fun LocaleItem(
     ListItem(
         headlineContent = { Text(text = text) },
         modifier = Modifier
-            .semantics(mergeDescendants = true) { }
             .fillMaxWidth()
             .selectable(
                 selected = isSelected,

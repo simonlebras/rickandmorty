@@ -73,6 +73,7 @@ private fun Project.configureSpotless() {
                 ".gitignore",
                 "*.md",
                 "*.properties",
+                "proguard/*.pro",
                 "gradle/libs.versions.toml",
             )
         }
