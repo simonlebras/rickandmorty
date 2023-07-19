@@ -8,5 +8,5 @@ internal interface LocaleRepository {
 
     fun setApplicationLocale(locale: Locale?)
 
-    suspend fun getAvailableLocales(): ImmutableList<Locale>
+    suspend fun getAvailableApplicationLocales(): ImmutableList<Locale>
 }

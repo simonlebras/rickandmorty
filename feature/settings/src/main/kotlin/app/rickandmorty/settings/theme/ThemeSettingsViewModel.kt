@@ -1,4 +1,4 @@
-package app.rickandmorty.settings.appearance
+package app.rickandmorty.settings.theme
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-internal class AppearanceSettingsViewModel @Inject constructor(
+internal class ThemeSettingsViewModel @Inject constructor(
     getThemeUseCase: GetThemeUseCase,
     getAvailableNightModes: GetAvailableNightModesUseCase,
     private val setNightMode: SetNightModeUseCase,
@@ -29,17 +29,17 @@ internal class AppearanceSettingsViewModel @Inject constructor(
         resource = suspend { getAvailableNightModes() },
     )
 
-    val uiState: StateFlow<AppearanceSettingsUiState> = combine(
+    val uiState: StateFlow<ThemeSettingsUiState> = combine(
         theme.state,
         availableNightModes.state,
     ) { theme, availableNightModes ->
-        AppearanceSettingsUiState(
+        ThemeSettingsUiState(
             theme = theme,
             availableNightModes = availableNightModes,
         )
     }.stateIn(
         scope = viewModelScope,
-        initialValue = AppearanceSettingsUiState(),
+        initialValue = ThemeSettingsUiState(),
         started = WhileViewSubscribed,
     )
 

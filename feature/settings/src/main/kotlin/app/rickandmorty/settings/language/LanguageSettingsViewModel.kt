@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.rickandmorty.coroutines.WhileViewSubscribed
 import app.rickandmorty.locale.domain.GetApplicationLocaleUseCase
-import app.rickandmorty.locale.domain.GetAvailableLocalesUseCase
+import app.rickandmorty.locale.domain.GetAvailableApplicationLocalesUseCase
 import app.rickandmorty.locale.domain.Locale
 import app.rickandmorty.locale.domain.SetApplicationLocaleUseCase
 import app.rickandmorty.resourcestate.ResourceController
@@ -19,23 +19,23 @@ import kotlinx.coroutines.launch
 internal class LanguageSettingsViewModel @Inject constructor(
     getApplicationLocale: GetApplicationLocaleUseCase,
     private val setApplicationLocale: SetApplicationLocaleUseCase,
-    getAvailableLocales: GetAvailableLocalesUseCase,
+    getAvailableApplicationLocales: GetAvailableApplicationLocalesUseCase,
 ) : ViewModel() {
     private val applicationLocale = ResourceController(
         resource = getApplicationLocale(),
     )
 
-    private val availableLocales = ResourceController(
-        resource = suspend { getAvailableLocales() },
+    private val availableApplicationLocales = ResourceController(
+        resource = suspend { getAvailableApplicationLocales() },
     )
 
     val uiState: StateFlow<LanguageSettingsUiState> = combine(
         applicationLocale.state,
-        availableLocales.state,
-    ) { applicationLocale, availableLocales ->
+        availableApplicationLocales.state,
+    ) { applicationLocale, availableApplicationLocales ->
         LanguageSettingsUiState(
             applicationLocale = applicationLocale,
-            availableLocales = availableLocales,
+            availableApplicationLocales = availableApplicationLocales,
         )
     }.stateIn(
         scope = viewModelScope,

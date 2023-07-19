@@ -32,6 +32,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.designsystem.icon.RamIcons
+import app.rickandmorty.designsystem.theme.supportsDynamicTheming
 import app.rickandmorty.jankstats.TrackScrollJank
 import app.rickandmorty.locale.domain.Locale
 import app.rickandmorty.settings.Header
@@ -46,7 +47,7 @@ import app.rickandmorty.ui.resources.R as UiR
 @Composable
 internal fun MainSettingsScreen(
     onNavigateUp: () -> Unit,
-    onNavigateToAppearanceSettings: () -> Unit,
+    onNavigateToThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
     viewModel: MainSettingsViewModel = hiltViewModel(),
@@ -59,7 +60,7 @@ internal fun MainSettingsScreen(
         uiState = uiState,
         onNavigateUp = onNavigateUp,
         onUpdateUseDynamicColor = viewModel::setUseDynamicColor,
-        onNavigateToAppearanceSettings = onNavigateToAppearanceSettings,
+        onNavigateToThemeSettings = onNavigateToThemeSettings,
         onNavigateToLanguageSettings = onNavigateToLanguageSettings,
         onNavigateToOssLicenses = onNavigateToOssLicenses,
     )
@@ -71,9 +72,10 @@ private fun MainSettingsScreen(
     uiState: MainSettingsUiState,
     onNavigateUp: () -> Unit,
     onUpdateUseDynamicColor: (Boolean) -> Unit,
-    onNavigateToAppearanceSettings: () -> Unit,
+    onNavigateToThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
+    supportsDynamicTheming: Boolean = supportsDynamicTheming(),
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
@@ -108,10 +110,11 @@ private fun MainSettingsScreen(
 
                 else -> {
                     generalSettings(
-                        theme = uiState.theme()!!,
-                        applicationLocale = uiState.applicationLocale(),
+                        currentTheme = uiState.theme()!!,
+                        currentApplicationLocale = uiState.applicationLocale(),
+                        supportsDynamicTheming = supportsDynamicTheming,
                         onUpdateUseDynamicColor = onUpdateUseDynamicColor,
-                        onNavigateToAppearanceSettings = onNavigateToAppearanceSettings,
+                        onNavigateToThemeSettings = onNavigateToThemeSettings,
                         onNavigateToLanguageSettings = onNavigateToLanguageSettings,
                     )
 
@@ -147,10 +150,11 @@ private fun MainSettingsAppBar(
 }
 
 private fun LazyListScope.generalSettings(
-    theme: Theme,
-    applicationLocale: Locale?,
+    currentTheme: Theme,
+    currentApplicationLocale: Locale?,
+    supportsDynamicTheming: Boolean,
     onUpdateUseDynamicColor: (Boolean) -> Unit,
-    onNavigateToAppearanceSettings: () -> Unit,
+    onNavigateToThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
 ) {
     item(
@@ -164,44 +168,46 @@ private fun LazyListScope.generalSettings(
     }
 
     item(
-        key = "appearance",
+        key = "theme",
         contentType = SettingsContentType.LIST_ITEM,
     ) {
         ListItem(
             headlineContent = {
-                Text(text = stringResource(R.string.settings_appearance_title))
+                Text(text = stringResource(R.string.settings_theme_title))
             },
             modifier = Modifier
                 .clickable(
-                    onClickLabel = stringResource(R.string.settings_appearance_tap_action),
-                    onClick = onNavigateToAppearanceSettings,
+                    onClickLabel = stringResource(R.string.settings_theme_tap_action),
+                    onClick = onNavigateToThemeSettings,
                 ),
             supportingContent = {
-                Text(text = stringResource(theme.nightMode.label))
+                Text(text = stringResource(currentTheme.nightMode.label))
             },
         )
     }
 
-    item(
-        key = "dynamic_color",
-        contentType = SettingsContentType.LIST_ITEM,
-    ) {
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(R.string.settings_dynamic_color_title))
-            },
-            modifier = Modifier.toggleable(
-                value = theme.useDynamicColor,
-                role = Role.RadioButton,
-                onValueChange = onUpdateUseDynamicColor,
-            ),
-            trailingContent = {
-                Switch(
-                    checked = theme.useDynamicColor,
-                    onCheckedChange = null,
-                )
-            },
-        )
+    if (supportsDynamicTheming) {
+        item(
+            key = "dynamic_color",
+            contentType = SettingsContentType.LIST_ITEM,
+        ) {
+            ListItem(
+                headlineContent = {
+                    Text(text = stringResource(R.string.settings_dynamic_color_title))
+                },
+                modifier = Modifier.toggleable(
+                    value = currentTheme.useDynamicColor,
+                    role = Role.RadioButton,
+                    onValueChange = onUpdateUseDynamicColor,
+                ),
+                trailingContent = {
+                    Switch(
+                        checked = currentTheme.useDynamicColor,
+                        onCheckedChange = null,
+                    )
+                },
+            )
+        }
     }
 
     item(
@@ -218,7 +224,7 @@ private fun LazyListScope.generalSettings(
                     onClick = onNavigateToLanguageSettings,
                 ),
             supportingContent = {
-                val localeName = applicationLocale?.getDisplayName(applicationLocale)
+                val localeName = currentApplicationLocale?.getDisplayName(currentApplicationLocale)
                     ?: stringResource(R.string.settings_language_system_default)
                 Text(text = localeName)
             },

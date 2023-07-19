@@ -40,9 +40,9 @@ internal class ThemeRepositoryImpl @Inject constructor(
 
     override fun getAvailableNightModes(): ImmutableList<NightMode> {
         return persistentListOf(
-            defaultNightMode,
             NightMode.LIGHT,
             NightMode.DARK,
+            defaultNightMode,
         )
     }
 }

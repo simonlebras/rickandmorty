@@ -1,4 +1,4 @@
-package app.rickandmorty.settings.appearance
+package app.rickandmorty.settings.theme
 
 import androidx.compose.runtime.Immutable
 import app.rickandmorty.resourcestate.Incomplete
@@ -9,7 +9,7 @@ import app.rickandmorty.theme.domain.Theme
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable
-internal data class AppearanceSettingsUiState(
+internal data class ThemeSettingsUiState(
     val theme: ResourceState<Theme> = Uninitialized,
     val availableNightModes: ResourceState<ImmutableList<NightMode>> = Uninitialized,
 ) {
