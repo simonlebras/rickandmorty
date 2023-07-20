@@ -4,12 +4,12 @@
 
     <string name="settings_general_title">General</string>
 
-    <string name="settings_appearance_title">Dark mode</string>
-    <string name="settings_appearance_tap_action">Open dark mode settings</string>
-    <string name="settings_appearance_auto_battery">Battery</string>
-    <string name="settings_appearance_follow_system">Follow system</string>
-    <string name="settings_appearance_light">Light</string>
-    <string name="settings_appearance_dark">Dark</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_theme_tap_action">Open theme settings</string>
+    <string name="settings_theme_auto_battery">Battery</string>
+    <string name="settings_theme_follow_system">Follow system</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
 
     <string name="settings_dynamic_color_title">Use dynamic color</string>
 

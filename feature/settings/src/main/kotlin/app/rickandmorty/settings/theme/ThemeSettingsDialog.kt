@@ -1,4 +1,4 @@
-package app.rickandmorty.settings.appearance
+package app.rickandmorty.settings.theme
 
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.clickable
@@ -31,15 +31,15 @@ import app.rickandmorty.theme.domain.NightMode
 import app.rickandmorty.ui.resources.R as UiR
 
 @Composable
-internal fun AppearanceSettingsDialog(
+internal fun ThemeSettingsDialog(
     onDismiss: () -> Unit,
-    viewModel: AppearanceSettingsViewModel = hiltViewModel(),
+    viewModel: ThemeSettingsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     ReportDrawnWhen { !uiState.isLoading }
 
-    AppearanceSettingsDialog(
+    ThemeSettingsDialog(
         uiState = uiState,
         onDismiss = onDismiss,
         onSelectNightNode = viewModel::setNightMode,
@@ -47,15 +47,15 @@ internal fun AppearanceSettingsDialog(
 }
 
 @Composable
-private fun AppearanceSettingsDialog(
-    uiState: AppearanceSettingsUiState,
+private fun ThemeSettingsDialog(
+    uiState: ThemeSettingsUiState,
     onDismiss: () -> Unit,
     onSelectNightNode: (NightMode) -> Unit,
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text(text = stringResource(R.string.settings_appearance_title))
+            Text(text = stringResource(R.string.settings_theme_title))
         },
         text = {
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
@@ -67,10 +67,11 @@ private fun AppearanceSettingsDialog(
                     }
 
                     else -> {
+                        val currentNightMode = uiState.theme()!!.nightMode
                         uiState.availableNightModes()!!.fastForEach { nightMode ->
                             ThemeItem(
                                 text = stringResource(nightMode.label),
-                                selected = nightMode == uiState.theme()!!.nightMode,
+                                selected = nightMode == currentNightMode,
                                 onClick = { onSelectNightNode(nightMode) },
                             )
                         }

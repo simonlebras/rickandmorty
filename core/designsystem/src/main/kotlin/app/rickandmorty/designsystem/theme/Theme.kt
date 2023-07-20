@@ -1,6 +1,7 @@
 package app.rickandmorty.designsystem.theme
 
 import android.os.Build
+import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -31,3 +32,6 @@ public fun RamTheme(
         content = content,
     )
 }
+
+@ChecksSdkIntAtLeast(api = Build.VERSION_CODES.S)
+public fun supportsDynamicTheming(): Boolean = Build.VERSION.SDK_INT >= 31

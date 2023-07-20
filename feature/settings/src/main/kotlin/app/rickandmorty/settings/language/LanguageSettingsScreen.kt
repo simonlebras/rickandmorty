@@ -100,17 +100,17 @@ private fun LanguageSettingsScreen(
                 }
 
                 else -> {
-                    val applicationLocale = uiState.applicationLocale()
+                    val currentApplicationLocale = uiState.applicationLocale()
 
                     systemDefault(
-                        applicationLocale = applicationLocale,
+                        currentApplicationLocale = currentApplicationLocale,
                         onSelectLocale = onSelectLocale,
                     )
 
-                    val availableLocales = uiState.availableLocales()!!
-                    availableLocales(
-                        applicationLocale = applicationLocale,
-                        availableLocales = availableLocales,
+                    val availableApplicationLocales = uiState.availableApplicationLocales()!!
+                    availableApplicationLocales(
+                        currentApplicationLocale = currentApplicationLocale,
+                        availableApplicationLocales = availableApplicationLocales,
                         onSelectLocale = onSelectLocale,
                     )
                 }
@@ -142,7 +142,7 @@ private fun LanguageSettingsAppBar(
 }
 
 private fun LazyListScope.systemDefault(
-    applicationLocale: Locale?,
+    currentApplicationLocale: Locale?,
     onSelectLocale: (Locale?) -> Unit,
 ) {
     item(
@@ -151,24 +151,24 @@ private fun LazyListScope.systemDefault(
     ) {
         LocaleItem(
             text = stringResource(R.string.settings_language_system_default),
-            isSelected = applicationLocale == null,
+            isSelected = currentApplicationLocale == null,
             onClick = { onSelectLocale(null) },
         )
     }
 }
 
-private fun LazyListScope.availableLocales(
-    applicationLocale: Locale?,
-    availableLocales: ImmutableList<Locale>,
+private fun LazyListScope.availableApplicationLocales(
+    currentApplicationLocale: Locale?,
+    availableApplicationLocales: ImmutableList<Locale>,
     onSelectLocale: (Locale?) -> Unit,
 ) {
     items(
-        items = availableLocales,
+        items = availableApplicationLocales,
         key = { locale -> locale.toLanguageTag() },
     ) { locale ->
         LocaleItem(
             text = locale.getDisplayName(locale),
-            isSelected = locale == applicationLocale,
+            isSelected = locale == currentApplicationLocale,
             onClick = { onSelectLocale(locale) },
         )
     }
