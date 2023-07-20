@@ -13,6 +13,10 @@ internal class CrashlyticsTree @Inject constructor(
     }
 
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
-        firebaseCrashlytics.log(message)
+        try {
+            firebaseCrashlytics.log(message)
+        } catch (_: IllegalStateException) {
+            // Firebase is likely not setup in this project.
+        }
     }
 }

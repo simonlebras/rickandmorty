@@ -1,0 +1,12 @@
+name: Clean secrets
+
+description: Clean secrets
+
+runs:
+  using: "composite"
+
+  steps:
+    - run: |
+        rm -f keystore/release.jks
+        rm -f app/google-services.json
+      shell: bash

@@ -1,0 +1,17 @@
+name: Decrypt secrets
+
+description: Decrypt secrets
+
+inputs:
+  key:
+    description: Decrypt key
+    required: true
+
+runs:
+  using: "composite"
+
+  steps:
+    - run: |
+        ./scripts/decrypt-secret.sh -k ${{ inputs.key }} firebase/google-services.gpg app/google-services.json
+        ./scripts/decrypt-secret.sh -k ${{ inputs.key }} keystore/release.gpg keystore/release.jks
+      shell: bash
