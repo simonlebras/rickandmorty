@@ -62,7 +62,7 @@ testParameterInjector = "1.12"
 timber = "5.0.1"
 truth = "1.1.5"
 turbine = "1.0.0"
-wire = "4.7.2"
+wire = "4.8.0"
 
 [libraries]
 accompanist-adaptive = { group = "com.google.accompanist", name = "accompanist-adaptive", version.ref = "accompanist" }
