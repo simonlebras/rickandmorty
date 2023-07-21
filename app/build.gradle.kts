@@ -1,3 +1,5 @@
+import com.google.firebase.perf.plugin.FirebasePerfExtension
+
 plugins {
     id("app.rickandmorty.android-application")
     id("app.rickandmorty.compose")
@@ -7,6 +9,14 @@ plugins {
     alias(libs.plugins.easylauncher)
     alias(libs.plugins.moduleGraphAssert)
 }
+
+val useFirebase = file("google-services.json").exists()
+if (useFirebase) {
+    apply(plugin = "app.rickandmorty.firebase-crashlytics")
+    apply(plugin = "app.rickandmorty.firebase-perf")
+}
+
+val useReleaseKeystore = rootProject.file("keystore/release.jks").exists()
 
 android {
     namespace = "app.rickandmorty"
@@ -21,14 +31,41 @@ android {
         generateLocaleConfig = true
     }
 
+    signingConfigs {
+        getByName("debug") {
+            storeFile = rootProject.file("keystore/debug.jks")
+            storePassword = "rickandmorty"
+            keyAlias = "debug"
+            keyPassword = "rickandmorty"
+        }
+
+        create("release") {
+            if (useReleaseKeystore) {
+                storeFile = rootProject.file("keystore/release.jks")
+                storePassword = properties["RAM_RELEASE_KEYSTORE_PWD"]?.toString() ?: ""
+                keyAlias = "release"
+                keyPassword = properties["RAM_RELEASE_KEY_PWD"]?.toString() ?: ""
+            }
+        }
+    }
+
     buildTypes {
         val debug by getting {
+            signingConfig = signingConfigs["debug"]
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             isPseudoLocalesEnabled = true
+
+            if (useFirebase) {
+                configure<FirebasePerfExtension> {
+                    setInstrumentationEnabled(false)
+                }
+            }
         }
 
-        val release by getting
+        val release by getting {
+            signingConfig = signingConfigs[if (useReleaseKeystore) "release" else "debug"]
+        }
     }
 }
 
