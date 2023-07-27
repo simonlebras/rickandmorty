@@ -3,6 +3,7 @@ package app.rickandmorty.locale.data
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.LocaleManagerCompat
 import androidx.core.os.LocaleListCompat
 import app.rickandmorty.core.AppDelegate
 import app.rickandmorty.locale.domain.Locale
@@ -25,7 +26,7 @@ internal class LocaleRepositoryImpl @Inject constructor(
     override fun getApplicationLocale(): Flow<Locale?> {
         return appDelegate.configuration
             .map {
-                AppCompatDelegate.getApplicationLocales().get(0)?.let { locale ->
+                LocaleManagerCompat.getApplicationLocales(context).get(0)?.let { locale ->
                     Locale(languageTag = locale.toLanguageTag())
                 }
             }
