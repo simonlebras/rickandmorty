@@ -8,7 +8,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.startup)
-
+    implementation(projects.core.hilt)
     implementation(projects.core.logging)
+    implementation(projects.core.startup)
 }

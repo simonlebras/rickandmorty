@@ -100,6 +100,7 @@ dependencies {
     implementation(projects.core.jankstats)
     implementation(projects.core.okhttp)
     implementation(projects.core.resourceState)
+    implementation(projects.core.startup)
     implementation(projects.core.theme)
 
     implementation(projects.feature.characters)
