@@ -5,34 +5,27 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.getSystemService
-import androidx.startup.Initializer
 import app.rickandmorty.coroutines.ApplicationScope
+import app.rickandmorty.startup.Initializer
 import app.rickandmorty.theme.domain.GetThemeUseCase
 import app.rickandmorty.theme.domain.NightMode
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
-internal class NightModeInitializer : Initializer<Unit> {
-    @Inject
-    lateinit var getTheme: GetThemeUseCase
-
+internal class NightModeInitializer @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val getTheme: GetThemeUseCase,
+) : Initializer {
     @Inject
     @ApplicationScope
     lateinit var applicationScope: CoroutineScope
 
-    override fun create(context: Context) {
-        EntryPointAccessors
-            .fromApplication<NightModeInitializerEntryPoint>(context)
-            .inject(this)
-
-        val uiModeManager = context.getSystemService<UiModeManager>()
+    override fun initialize() {
+        val uiModeManager = context.getSystemService<UiModeManager>()!!
 
         getTheme()
             .map { theme -> theme.nightMode }
@@ -40,13 +33,11 @@ internal class NightModeInitializer : Initializer<Unit> {
                 AppCompatDelegate.setDefaultNightMode(nightMode.toAppCompatNightMode())
 
                 if (Build.VERSION.SDK_INT >= 31) {
-                    uiModeManager?.setApplicationNightMode(nightMode.toUiModeManagerNightMode())
+                    uiModeManager.setApplicationNightMode(nightMode.toUiModeManagerNightMode())
                 }
             }
             .launchIn(applicationScope)
     }
-
-    override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()
 }
 
 @AppCompatDelegate.NightMode
@@ -62,10 +53,4 @@ private fun NightMode.toUiModeManagerNightMode() = when (this) {
     NightMode.LIGHT -> UiModeManager.MODE_NIGHT_NO
     NightMode.DARK -> UiModeManager.MODE_NIGHT_YES
     else -> throw IllegalStateException("Unsupported night mode: $this")
-}
-
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-internal interface NightModeInitializerEntryPoint {
-    fun inject(initializer: NightModeInitializer)
 }

@@ -12,10 +12,10 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.datastore)
-    implementation(libs.androidx.startup)
 
     implementation(libs.kotlinx.collections.immutable)
 
     implementation(projects.core.coroutines)
+    implementation(projects.core.startup)
     implementation(projects.core.themeProto)
 }

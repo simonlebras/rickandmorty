@@ -8,11 +8,10 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.startup)
-
     implementation(libs.timber)
 
     implementation(projects.core.hilt)
+    implementation(projects.core.startup)
 
     releaseImplementation(platform(libs.firebase.bom))
     releaseImplementation(libs.firebase.crashlytics)
