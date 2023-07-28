@@ -1,5 +1,6 @@
 [versions]
 accompanist = "0.31.5-beta"
+affectedmoduledetector = "0.2.1"
 androidCompileSdk = "34"
 androidDesugarJdkLibs = "2.0.3"
 androidGradlePlugin = "8.2.0-alpha14"
@@ -67,6 +68,8 @@ wire = "4.8.0"
 accompanist-adaptive = { group = "com.google.accompanist", name = "accompanist-adaptive", version.ref = "accompanist" }
 accompanist-placeholder-material3 = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
 accompanist-testharness = { group = "com.google.accompanist", name = "accompanist-testharness", version.ref = "accompanist" }
+
+affectedmoduledetector-gradlePlugin = { group = "com.dropbox.affectedmoduledetector", name = "affectedmoduledetector", version.ref = "affectedmoduledetector" }
 
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 
@@ -173,6 +176,7 @@ wire-gradlePlugin = { group = "com.squareup.wire", name = "wire-gradle-plugin", 
 wire-runtime = { group = "com.squareup.wire", name = "wire-runtime", version.ref = "wire" }
 
 [plugins]
+affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.ref = "affectedmoduledetector" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
