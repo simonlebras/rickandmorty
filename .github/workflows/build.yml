@@ -22,6 +22,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
+          # Fetch expanded history, which is needed for affected module detection
+          fetch-depth: "500"
           lfs: true
 
       - name: Validate Gradle Wrapper
@@ -70,6 +72,14 @@ jobs:
           ./gradlew assemble \
           -x :baselineprofile:pixel6Api31AospSetup \
           -Pandroidx.baselineprofile.skipgeneration
+
+      - name: Run unit tests
+        run: |
+          ./gradlew runAffectedUnitTests \
+          --no-configuration-cache \
+          -Paffected_module_detector.enable \
+          -Paffected_module_detector.dependentProjects \
+          -Paffected_base_ref=$BASE_REF
 
       - name: Upload build outputs
         uses: actions/upload-artifact@v3

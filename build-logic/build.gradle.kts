@@ -19,6 +19,7 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 dependencies {
+    compileOnly(libs.affectedmoduledetector.gradlePlugin)
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.dependencyAnalysis.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)

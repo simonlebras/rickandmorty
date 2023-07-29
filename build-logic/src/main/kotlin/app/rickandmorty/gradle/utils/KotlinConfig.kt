@@ -21,8 +21,7 @@ internal fun Project.configureKotlinJvm(libs: LibrariesForLibs) {
 
 private fun Project.configureKotlin(libs: LibrariesForLibs) {
     configure<KotlinProjectExtension> {
-        val javaVersion = libs.versions.java.get().toInt()
-        jvmToolchain(javaVersion)
+        jvmToolchain(libs.versions.java.get().toInt())
     }
 
     tasks.withType<KotlinCompile>().configureEach {
