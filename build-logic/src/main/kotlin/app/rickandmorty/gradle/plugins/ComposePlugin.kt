@@ -5,7 +5,6 @@ import app.rickandmorty.gradle.utils.implementation
 import app.rickandmorty.gradle.utils.lintChecks
 import app.rickandmorty.gradle.utils.withPlugins
 import com.android.build.gradle.BaseExtension
-import java.io.File
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -57,24 +56,24 @@ private fun Project.buildComposeMetricsParameters(): List<String> {
         val enableMetricsProvider = providers.gradleProperty("enableComposeCompilerMetrics")
         val enableMetrics = enableMetricsProvider.orNull == "true"
         if (enableMetrics) {
-            val metricsFolder = File(buildDir, "compose-metrics")
+            val metricsFolder = layout.buildDirectory.dir("compose-metrics").get()
             add("-P")
             add(
                 "plugin" +
                     ":androidx.compose.compiler.plugins.kotlin" +
-                    ":metricsDestination=${metricsFolder.absolutePath}",
+                    ":metricsDestination=$metricsFolder",
             )
         }
 
         val enableReportsProvider = providers.gradleProperty("enableComposeCompilerReports")
         val enableReports = enableReportsProvider.orNull == "true"
         if (enableReports) {
-            val reportsFolder = File(buildDir, "compose-reports")
+            val reportsFolder = layout.buildDirectory.dir("compose-reports").get()
             add("-P")
             add(
                 "plugin" +
                     ":androidx.compose.compiler.plugins.kotlin" +
-                    ":reportsDestination=${reportsFolder.absolutePath}",
+                    ":reportsDestination=$reportsFolder",
             )
         }
     }
