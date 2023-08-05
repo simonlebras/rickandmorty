@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath(libs.play.ossLicenses.gradlePlugin)
+        classpath(libs.play.osslicenses.plugin)
     }
 }
 
@@ -12,21 +12,21 @@ plugins {
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.apollo) apply false
     alias(libs.plugins.baselineprofile) apply false
-    alias(libs.plugins.cacheFix) apply false
-    alias(libs.plugins.dependencyAnalysis)
+    alias(libs.plugins.cachefix) apply false
+    alias(libs.plugins.dependencyanalysis)
     alias(libs.plugins.easylauncher) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
     alias(libs.plugins.firebase.perf) apply false
-    alias(libs.plugins.googleServices) apply false
-    alias(libs.plugins.gradleDoctor)
+    alias(libs.plugins.googleservices) apply false
+    alias(libs.plugins.gradledoctor)
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.moduleGraphAssert) apply false
-    alias(libs.plugins.nodeGradle)
-    alias(libs.plugins.sortDependencies)
+    alias(libs.plugins.modulegraphassert) apply false
+    alias(libs.plugins.nodegradle)
+    alias(libs.plugins.sortdependencies)
     alias(libs.plugins.spotless)
     alias(libs.plugins.wire) apply false
 }

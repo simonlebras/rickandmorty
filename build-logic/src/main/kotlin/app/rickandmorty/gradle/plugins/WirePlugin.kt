@@ -20,7 +20,7 @@ public class WirePlugin : Plugin<Project> {
         with(pluginManager) {
             apply(libs.plugins.wire)
 
-            withPlugin(libs.plugins.dependencyAnalysis) {
+            withPlugin(libs.plugins.dependencyanalysis) {
                 configure<DependencyAnalysisSubExtension> {
                     issues {
                         onUnusedDependencies {

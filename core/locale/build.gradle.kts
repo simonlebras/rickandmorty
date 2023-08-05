@@ -8,7 +8,7 @@ android {
 }
 
 dependencies {
-    api(libs.kotlinx.collections.immutable)
+    api(libs.kotlinx.collectionsimmutable)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.appcompat)

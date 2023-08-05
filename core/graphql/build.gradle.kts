@@ -20,7 +20,7 @@ apollo {
 }
 
 dependencies {
-    implementation(libs.apollo.normalizedCache.sqlite)
+    implementation(libs.apollo.normalizedcache.sqlite)
     implementation(libs.apollo.runtime)
 
     implementation(projects.core.coroutines)

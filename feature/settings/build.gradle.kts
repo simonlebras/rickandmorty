@@ -17,7 +17,7 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
 
-    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.collectionsimmutable)
 
     implementation(projects.core.coroutines)
     implementation(projects.core.designsystem)

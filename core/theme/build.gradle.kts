@@ -13,7 +13,7 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.datastore)
 
-    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.collectionsimmutable)
 
     implementation(projects.core.coroutines)
     implementation(projects.core.startup)

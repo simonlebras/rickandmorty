@@ -8,7 +8,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(libs.androidx.compose.material.iconsextended)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui.text.googleFonts)
+    implementation(libs.androidx.compose.ui.text.googlefonts)
 }

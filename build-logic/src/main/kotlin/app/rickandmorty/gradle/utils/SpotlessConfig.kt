@@ -15,7 +15,7 @@ internal fun Project.configureSpotless(libs: LibrariesForLibs) {
     }
 
     pluginManager.apply(
-        libs.plugins.nodeGradle,
+        libs.plugins.nodegradle,
         libs.plugins.spotless,
     )
 

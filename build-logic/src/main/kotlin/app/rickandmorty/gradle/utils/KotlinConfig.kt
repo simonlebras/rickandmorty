@@ -21,7 +21,7 @@ internal fun Project.configureKotlinJvm(libs: LibrariesForLibs) {
 
 private fun Project.configureKotlin(libs: LibrariesForLibs) {
     configure<KotlinProjectExtension> {
-        jvmToolchain(libs.versions.java.get().toInt())
+        jvmToolchain(libs.versions.jdk.get().toInt())
     }
 
     tasks.withType<KotlinCompile>().configureEach {

@@ -6,7 +6,7 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(libs.versions.java.get().toInt())
+    jvmToolchain(libs.versions.jdk.get().toInt())
     explicitApi()
 }
 
@@ -19,12 +19,12 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 dependencies {
-    compileOnly(libs.affectedmoduledetector.gradlePlugin)
-    compileOnly(libs.android.gradlePlugin)
-    compileOnly(libs.dependencyAnalysis.gradlePlugin)
-    compileOnly(libs.kotlin.gradlePlugin)
-    compileOnly(libs.spotless.gradlePlugin)
-    compileOnly(libs.wire.gradlePlugin)
+    compileOnly(libs.affectedmoduledetector.plugin)
+    compileOnly(libs.android.plugin)
+    compileOnly(libs.dependencyanalysis.plugin)
+    compileOnly(libs.kotlin.plugin)
+    compileOnly(libs.spotless.plugin)
+    compileOnly(libs.wire.plugin)
 
     // Workaround for https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))

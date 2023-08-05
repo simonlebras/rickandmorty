@@ -8,11 +8,11 @@ android {
 }
 
 dependencies {
-    api(libs.androidx.compose.material3.windowSizeClass)
+    api(libs.androidx.compose.material3.windowsizeclass)
 
     api(libs.androidx.navigation.compose)
 
-    api(libs.kotlinx.collections.immutable)
+    api(libs.kotlinx.collectionsimmutable)
 
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.util)

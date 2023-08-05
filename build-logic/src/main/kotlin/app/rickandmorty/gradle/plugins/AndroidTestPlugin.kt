@@ -17,9 +17,9 @@ public class AndroidTestPlugin : Plugin<Project> {
 
         pluginManager.apply(
             libs.plugins.android.test,
-            libs.plugins.cacheFix,
+            libs.plugins.cachefix,
             libs.plugins.kotlin.android,
-            libs.plugins.sortDependencies,
+            libs.plugins.sortdependencies,
         )
 
         configureKotlinAndroid(libs)

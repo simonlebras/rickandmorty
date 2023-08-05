@@ -23,7 +23,7 @@ public class HiltPlugin : Plugin<Project> {
                 libs.plugins.kotlin.kapt,
             )
 
-            withPlugin(libs.plugins.dependencyAnalysis) {
+            withPlugin(libs.plugins.dependencyanalysis) {
                 configure<DependencyAnalysisSubExtension> {
                     issues {
                         onUnusedDependencies {

@@ -17,9 +17,9 @@ public class AndroidLibraryPlugin : Plugin<Project> {
 
         pluginManager.apply(
             libs.plugins.android.library,
-            libs.plugins.cacheFix,
+            libs.plugins.cachefix,
             libs.plugins.kotlin.android,
-            libs.plugins.sortDependencies,
+            libs.plugins.sortdependencies,
         )
 
         configureKotlinAndroid(libs)

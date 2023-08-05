@@ -30,7 +30,7 @@ public class RootPlugin : Plugin<Project> {
             configureAffectedModuleDetector()
         }
 
-        pluginManager.withPlugin(libs.plugins.dependencyAnalysis) {
+        pluginManager.withPlugin(libs.plugins.dependencyanalysis) {
             configureDependencyAnalysis()
         }
 

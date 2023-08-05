@@ -12,10 +12,10 @@ public class OssLicensesPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = the<LibrariesForLibs>()
 
-        pluginManager.apply(libs.plugins.play.ossLicenses)
+        pluginManager.apply(libs.plugins.play.osslicenses)
 
         dependencies {
-            implementation(libs.play.ossLicenses)
+            implementation(libs.play.osslicenses)
         }
     }
 }
