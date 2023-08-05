@@ -17,7 +17,7 @@ baselineProfile {
 dependencies {
     implementation(libs.androidx.benchmark.macro)
     implementation(libs.androidx.test.espresso.core)
-    implementation(libs.androidx.test.ext.junit)
+    implementation(libs.androidx.test.junit)
 
     implementation(libs.junit4)
 }

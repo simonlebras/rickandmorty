@@ -13,7 +13,7 @@ public class FirebaseCrashlyticsPlugin : Plugin<Project> {
         val libs = the<LibrariesForLibs>()
 
         pluginManager.apply(
-            libs.plugins.googleServices,
+            libs.plugins.googleservices,
             libs.plugins.firebase.crashlytics,
         )
 

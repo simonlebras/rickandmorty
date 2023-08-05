@@ -9,11 +9,11 @@ import org.gradle.kotlin.dsl.register
 
 context(Project)
 internal fun BaseExtension.configureAndroid(libs: LibrariesForLibs) {
-    compileSdkVersion(libs.versions.androidCompileSdk.get().toInt())
+    compileSdkVersion(libs.versions.android.sdk.compile.get().toInt())
 
     defaultConfig.apply {
-        minSdk = libs.versions.androidMinSdk.get().toInt()
-        targetSdk = libs.versions.androidTargetSdk.get().toInt()
+        minSdk = libs.versions.android.sdk.min.get().toInt()
+        targetSdk = libs.versions.android.sdk.target.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,6 +45,6 @@ internal fun BaseExtension.configureAndroid(libs: LibrariesForLibs) {
     }
 
     dependencies {
-        coreLibraryDesugaring(libs.android.desugarJdkLibs)
+        coreLibraryDesugaring(libs.android.desugarjdklibs)
     }
 }

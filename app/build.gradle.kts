@@ -7,7 +7,7 @@ plugins {
     id("app.rickandmorty.oss-licenses")
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.easylauncher)
-    alias(libs.plugins.moduleGraphAssert)
+    alias(libs.plugins.modulegraphassert)
 }
 
 val useFirebase = file("google-services.json").exists()
@@ -82,13 +82,13 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.windowSizeClass)
+    implementation(libs.androidx.compose.material3.windowsizeclass)
     implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.window)
 
-    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.collectionsimmutable)
 
     implementation(libs.microsoft.compose.twopanelayout)
 

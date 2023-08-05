@@ -14,7 +14,7 @@ public class JvmLibraryPlugin : Plugin<Project> {
 
         pluginManager.apply(
             libs.plugins.kotlin.jvm,
-            libs.plugins.sortDependencies,
+            libs.plugins.sortdependencies,
         )
 
         configureKotlinJvm(libs)

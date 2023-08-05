@@ -32,7 +32,7 @@ private fun Project.configureCompose(libs: LibrariesForLibs) {
         buildFeatures.compose = true
 
         composeOptions {
-            kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
+            kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
         }
     }
 
