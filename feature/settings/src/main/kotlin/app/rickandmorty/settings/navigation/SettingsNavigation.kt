@@ -1,28 +1,23 @@
 package app.rickandmorty.settings.navigation
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
 import app.rickandmorty.settings.language.LanguageSettingsScreen
 import app.rickandmorty.settings.main.MainSettingsScreen
 import app.rickandmorty.settings.theme.ThemeSettingsDialog
 
 private const val mainSettingsRoute = "mainSettings"
-private const val themeSettingsRoute = "themeSettings"
 private const val languageSettingsRoute = "languageSettings"
 
 public fun NavHostController.navigateToMainSettings(builder: NavOptionsBuilder.() -> Unit = {}) {
     navigate(
         route = mainSettingsRoute,
-        builder = builder,
-    )
-}
-
-private fun NavHostController.navigateToThemeSettings(builder: NavOptionsBuilder.() -> Unit = {}) {
-    navigate(
-        route = themeSettingsRoute,
         builder = builder,
     )
 }
@@ -40,17 +35,21 @@ public fun NavGraphBuilder.settings(
     onNavigateToOssLicenses: () -> Unit,
 ) {
     composable(route = mainSettingsRoute) {
+        var showThemeSettingsDialog by rememberSaveable {
+            mutableStateOf(false)
+        }
+
+        if (showThemeSettingsDialog) {
+            ThemeSettingsDialog(
+                onDismiss = { showThemeSettingsDialog = false },
+            )
+        }
+
         MainSettingsScreen(
             onNavigateUp = onNavigateUp,
-            onNavigateToThemeSettings = navController::navigateToThemeSettings,
+            onNavigateToThemeSettings = { showThemeSettingsDialog = true },
             onNavigateToLanguageSettings = navController::navigateToLanguageSettings,
             onNavigateToOssLicenses = onNavigateToOssLicenses,
-        )
-    }
-
-    dialog(route = themeSettingsRoute) {
-        ThemeSettingsDialog(
-            onDismiss = navController::popBackStack,
         )
     }
 
