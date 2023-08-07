@@ -76,10 +76,9 @@ jobs:
       - name: Run unit tests
         run: |
           ./gradlew runAffectedUnitTests \
-          --no-configuration-cache \
           -Paffected_module_detector.enable \
-          -Paffected_module_detector.dependentProjects \
-          -Paffected_base_ref=$BASE_REF
+          -PaffectedBaseRef=$BASE_REF \
+          --no-configuration-cache
 
       - name: Upload build outputs
         uses: actions/upload-artifact@v3
@@ -105,3 +104,107 @@ jobs:
 
       - name: Clean secrets
         uses: ./.github/actions/clean-secrets
+
+  android-test-cfg:
+    needs: build
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+    steps:
+      - name: Set matrix
+        id: set-matrix
+        run: |
+          MATRIX='
+            {"device": "pixel4", "api-level": "30", "system-image-source": "aospatd"},
+            {"device": "pixel6", "api-level": "31", "system-image-source": "aosp"},
+            {"device": "pixelc", "api-level": "30", "system-image-source": "aospatd"}
+          '
+          echo "matrix={\"include\":[${MATRIX//$'\n'/}]}" >> $GITHUB_OUTPUT
+
+  android-test-cfg-check:
+    needs: android-test-cfg
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check matrix configuration
+        run: |
+          matrix='${{ needs.android-test-cfg.outputs.matrix }}'
+          echo $matrix
+          echo $matrix | jq .
+
+  android-test:
+    needs: android-test-cfg
+    runs-on: macos-latest
+    timeout-minutes: 120
+
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.android-test-cfg.outputs.matrix) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # Fetch expanded history, which is needed for affected module detection
+          fetch-depth: "500"
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 20
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: Accept license
+        run: echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_SDK_ROOT/licenses/android-sdk-preview-license"
+
+      - name: Cache AVD
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.android/avd/*
+          key: ${{ runner.os }}-gmd-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
+
+      - name: Build instrumentation tests
+        run: |
+          ./gradlew assembleAffectedAndroidTests \
+          -Paffected_module_detector.enable \
+          -PaffectedBaseRef=$BASE_REF \
+          --no-configuration-cache
+
+      - name: Run instrumentation tests
+        run: |
+          adb logcat > logcat.txt &
+          ./gradlew runAffectedAndroidTests \
+          -Paffected_module_detector.enable \
+          -PaffectedBaseRef=$BASE_REF \
+          -PaffectedGradleManagedDevice=${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.system-image-source }} \
+          -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
+          --no-configuration-cache \
+          --no-parallel \
+          -Dorg.gradle.workers.max=1
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
+          path: logcat.txt
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
+          path: |
+            **/build/reports/*
+            **/build/outputs/*/connected/*
+            **/out/failures/
