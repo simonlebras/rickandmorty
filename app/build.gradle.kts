@@ -103,11 +103,11 @@ dependencies {
     implementation(projects.core.startup)
     implementation(projects.core.theme)
 
-    implementation(projects.feature.characters)
-    implementation(projects.feature.episodes)
-    implementation(projects.feature.home)
-    implementation(projects.feature.locations)
-    implementation(projects.feature.settings)
+    implementation(projects.features.characters)
+    implementation(projects.features.episodes)
+    implementation(projects.features.home)
+    implementation(projects.features.locations)
+    implementation(projects.features.settings)
 
     runtimeOnly(libs.androidx.compose.runtime.tracing)
     runtimeOnly(libs.androidx.profileinstaller)
@@ -145,7 +145,7 @@ easylauncher {
 moduleGraphAssert {
     maxHeight = 4
     allowed = arrayOf(
-        ":app -> :feature:.*",
+        ":app -> :features:.*",
         ":.* -> :core:.*",
     )
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import app.rickandmorty.settings.navigation.settings
+import app.rickandmorty.feature.settings.navigation.settings
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 fun NavGraphBuilder.settings(
