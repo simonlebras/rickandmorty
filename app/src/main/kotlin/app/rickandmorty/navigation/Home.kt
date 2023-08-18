@@ -4,26 +4,26 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.window.layout.DisplayFeature
-import app.rickandmorty.characters.R as CharactersR
-import app.rickandmorty.characters.navigation.characterDetails
-import app.rickandmorty.characters.navigation.characterDetailsRoute
-import app.rickandmorty.characters.navigation.characterList
-import app.rickandmorty.characters.navigation.characterListRoute
-import app.rickandmorty.characters.navigation.navigateToCharacterDetails
 import app.rickandmorty.designsystem.icon.RamIcons
-import app.rickandmorty.episodes.R as EpisodesR
-import app.rickandmorty.episodes.navigation.episodeDetails
-import app.rickandmorty.episodes.navigation.episodeList
-import app.rickandmorty.episodes.navigation.episodeListRoute
-import app.rickandmorty.home.HomeNavigationItem
-import app.rickandmorty.home.navigation.home
-import app.rickandmorty.home.navigation.homeNavigation
-import app.rickandmorty.home.navigation.homeNavigationRoute
-import app.rickandmorty.locations.R as LocationsR
-import app.rickandmorty.locations.navigation.locationDetails
-import app.rickandmorty.locations.navigation.locationList
-import app.rickandmorty.locations.navigation.locationListRoute
-import app.rickandmorty.settings.navigation.navigateToMainSettings
+import app.rickandmorty.feature.characters.R as CharactersR
+import app.rickandmorty.feature.characters.navigation.characterDetails
+import app.rickandmorty.feature.characters.navigation.characterDetailsRoute
+import app.rickandmorty.feature.characters.navigation.characterList
+import app.rickandmorty.feature.characters.navigation.characterListRoute
+import app.rickandmorty.feature.characters.navigation.navigateToCharacterDetails
+import app.rickandmorty.feature.episodes.R as EpisodesR
+import app.rickandmorty.feature.episodes.navigation.episodeDetails
+import app.rickandmorty.feature.episodes.navigation.episodeList
+import app.rickandmorty.feature.episodes.navigation.episodeListRoute
+import app.rickandmorty.feature.home.HomeNavigationItem
+import app.rickandmorty.feature.home.navigation.home
+import app.rickandmorty.feature.home.navigation.homeNavigation
+import app.rickandmorty.feature.home.navigation.homeNavigationRoute
+import app.rickandmorty.feature.locations.R as LocationsR
+import app.rickandmorty.feature.locations.navigation.locationDetails
+import app.rickandmorty.feature.locations.navigation.locationList
+import app.rickandmorty.feature.locations.navigation.locationListRoute
+import app.rickandmorty.feature.settings.navigation.navigateToMainSettings
 import com.microsoft.device.dualscreen.twopanelayout.Screen
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf

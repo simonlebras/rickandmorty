@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.window.layout.DisplayFeature
-import app.rickandmorty.home.navigation.homeRoute
+import app.rickandmorty.feature.home.navigation.homeRoute
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
