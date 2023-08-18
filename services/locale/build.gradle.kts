@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.locale"
+    namespace = "app.rickandmorty.service.locale"
 }
 
 dependencies {
@@ -15,6 +15,5 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.core)
 
-    implementation(projects.core.core)
     implementation(projects.core.coroutines)
 }

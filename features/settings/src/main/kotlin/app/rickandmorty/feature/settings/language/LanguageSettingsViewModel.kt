@@ -3,11 +3,9 @@ package app.rickandmorty.feature.settings.language
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.rickandmorty.coroutines.WhileViewSubscribed
-import app.rickandmorty.locale.domain.GetApplicationLocaleUseCase
-import app.rickandmorty.locale.domain.GetAvailableApplicationLocalesUseCase
-import app.rickandmorty.locale.domain.Locale
-import app.rickandmorty.locale.domain.SetApplicationLocaleUseCase
 import app.rickandmorty.resourcestate.ResourceController
+import app.rickandmorty.service.locale.LocaleService
+import app.rickandmorty.service.locale.model.Locale
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
@@ -17,16 +15,14 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 internal class LanguageSettingsViewModel @Inject constructor(
-    getApplicationLocale: GetApplicationLocaleUseCase,
-    private val setApplicationLocale: SetApplicationLocaleUseCase,
-    getAvailableApplicationLocales: GetAvailableApplicationLocalesUseCase,
+    private val localeService: LocaleService,
 ) : ViewModel() {
     private val applicationLocale = ResourceController(
-        resource = getApplicationLocale(),
+        resource = localeService.getApplicationLocale(),
     )
 
     private val availableApplicationLocales = ResourceController(
-        resource = suspend { getAvailableApplicationLocales() },
+        resource = suspend { localeService.getAvailableApplicationLocales() },
     )
 
     val uiState: StateFlow<LanguageSettingsUiState> = combine(
@@ -45,7 +41,7 @@ internal class LanguageSettingsViewModel @Inject constructor(
 
     fun setApplicationLocale(locale: Locale?) {
         viewModelScope.launch {
-            setApplicationLocale.invoke(locale)
+            localeService.setApplicationLocale(locale)
         }
     }
 }

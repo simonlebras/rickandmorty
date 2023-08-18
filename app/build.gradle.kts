@@ -146,6 +146,9 @@ moduleGraphAssert {
     maxHeight = 4
     allowed = arrayOf(
         ":app -> :features:.*",
+        ":app -> :services:.*",
+        ":features:.* -> :services:.*",
+        ":services:.* -> :services:.*",
         ":.* -> :core:.*",
     )
 }

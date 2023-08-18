@@ -40,7 +40,7 @@ import app.rickandmorty.feature.settings.loader
 import app.rickandmorty.feature.settings.utils.label
 import app.rickandmorty.feature.settings.utils.versionName
 import app.rickandmorty.jankstats.TrackScrollJank
-import app.rickandmorty.locale.domain.Locale
+import app.rickandmorty.service.locale.model.Locale
 import app.rickandmorty.theme.domain.Theme
 import app.rickandmorty.ui.resources.R as UiR
 

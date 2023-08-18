@@ -22,9 +22,10 @@ dependencies {
     implementation(projects.core.coroutines)
     implementation(projects.core.designsystem)
     implementation(projects.core.jankstats)
-    implementation(projects.core.locale)
     implementation(projects.core.resourceState)
     implementation(projects.core.theme)
     implementation(projects.core.ui)
     implementation(projects.core.uiResources)
+
+    implementation(projects.services.locale)
 }

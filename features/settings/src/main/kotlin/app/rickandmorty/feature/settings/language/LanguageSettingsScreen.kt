@@ -35,7 +35,7 @@ import app.rickandmorty.feature.settings.R
 import app.rickandmorty.feature.settings.SettingsContentType
 import app.rickandmorty.feature.settings.loader
 import app.rickandmorty.jankstats.TrackScrollJank
-import app.rickandmorty.locale.domain.Locale
+import app.rickandmorty.service.locale.model.Locale
 import app.rickandmorty.ui.resources.R as UiR
 import kotlinx.collections.immutable.ImmutableList
 

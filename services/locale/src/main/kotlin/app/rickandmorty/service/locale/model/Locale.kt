@@ -1,4 +1,4 @@
-package app.rickandmorty.locale.domain
+package app.rickandmorty.service.locale.model
 
 import androidx.compose.runtime.Immutable
 import java.util.Locale as JavaLocale
