@@ -2,7 +2,7 @@
 accompanist = "0.33.0-alpha"
 affectedmoduledetector = "0.2.1"
 android-desugarjdklibs = "2.0.3"
-android-plugin = "8.2.0-alpha16"
+android-plugin = "8.2.0-beta01"
 android-sdk-compile = "34"
 android-sdk-min = "24"
 android-sdk-target = "34"
