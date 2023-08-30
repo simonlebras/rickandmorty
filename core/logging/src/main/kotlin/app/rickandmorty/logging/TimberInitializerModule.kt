@@ -10,7 +10,7 @@ import dagger.multibindings.IntoSet
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface TimberInitializerModule {
-    @get:Binds
-    @get:IntoSet
-    val TimberInitializer.bindInitializer: Initializer
+    @Binds
+    @IntoSet
+    fun bindInitializer(timberInitializer: TimberInitializer): Initializer
 }

@@ -12,9 +12,9 @@ import timber.log.Timber
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface CrashlyticsTreeModule {
-    @get:Binds
-    @get:IntoSet
-    val CrashlyticsTree.bindTree: Timber.Tree
+    @Binds
+    @IntoSet
+    fun bindTree(crashlyticsTree: CrashlyticsTree): Timber.Tree
 
     companion object {
         @Provides
