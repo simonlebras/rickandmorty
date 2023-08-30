@@ -13,9 +13,9 @@ import java.util.concurrent.Executors
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface StrictModeInitializerModule {
-    @get:Binds
-    @get:IntoSet
-    val StrictModeInitializer.bindInitializer: Initializer
+    @Binds
+    @IntoSet
+    fun bindInitializer(strictModeInitializer: StrictModeInitializer): Initializer
 
     companion object {
         @Provides

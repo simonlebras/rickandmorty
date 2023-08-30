@@ -8,6 +8,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface LoggerModule {
-    @get:Binds
-    val TimberLogger.bindLogger: Logger
+    @Binds
+    fun bindLogger(timberLogger: TimberLogger): Logger
 }

@@ -23,8 +23,8 @@ private const val PREFERENCES_FILE_NAME = "theme_preferences.pb"
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface ThemeRepositoryModule {
-    @get:Binds
-    val ThemeRepositoryImpl.bindThemeRepository: ThemeRepository
+    @Binds
+    fun bindThemeRepository(themeRepository: ThemeRepositoryImpl): ThemeRepository
 
     companion object {
         @Provides

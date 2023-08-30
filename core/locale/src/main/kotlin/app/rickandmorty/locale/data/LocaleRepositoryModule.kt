@@ -9,6 +9,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface LocaleRepositoryModule {
-    @get:Binds
-    val LocaleRepositoryImpl.bindLocaleRepository: LocaleRepository
+    @Binds
+    fun bindLocaleRepository(localeRepository: LocaleRepositoryImpl): LocaleRepository
 }

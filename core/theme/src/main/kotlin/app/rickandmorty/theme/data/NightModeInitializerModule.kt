@@ -10,7 +10,7 @@ import dagger.multibindings.IntoSet
 @Module
 @InstallIn(SingletonComponent::class)
 internal interface NightModeInitializerModule {
-    @get:Binds
-    @get:IntoSet
-    val NightModeInitializer.bindInitializer: Initializer
+    @Binds
+    @IntoSet
+    fun bindInitializer(nightModeInitializer: NightModeInitializer): Initializer
 }

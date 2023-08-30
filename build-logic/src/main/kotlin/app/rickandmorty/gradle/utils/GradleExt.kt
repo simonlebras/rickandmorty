@@ -31,14 +31,6 @@ internal fun DependencyHandler.androidTestImplementation(
     }
 }
 
-internal fun DependencyHandler.kapt(
-    vararg dependencyNotations: Any,
-) {
-    dependencyNotations.forEach {
-        add("kapt", it)
-    }
-}
-
 internal fun DependencyHandler.ksp(
     vararg dependencyNotations: Any,
 ) {
