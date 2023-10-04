@@ -2,7 +2,6 @@ package app.rickandmorty.feature.characters.list
 
 import androidx.activity.compose.ReportDrawn
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,7 +18,6 @@ import app.rickandmorty.designsystem.icon.RamIcons
 import app.rickandmorty.feature.characters.R
 import app.rickandmorty.ui.resources.R as UiR
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun CharacterListScreen(
     onNavigateToSettings: () -> Unit,

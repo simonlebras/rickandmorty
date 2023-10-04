@@ -1,7 +1,6 @@
 package app.rickandmorty.feature.settings.language
 
 import androidx.activity.compose.ReportDrawnWhen
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -61,7 +60,7 @@ internal fun LanguageSettingsScreen(
     )
 }
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LanguageSettingsScreen(
     uiState: LanguageSettingsUiState,
