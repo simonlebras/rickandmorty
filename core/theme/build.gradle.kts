@@ -8,14 +8,14 @@ android {
 }
 
 dependencies {
+    api(projects.core.coroutines)
+    api(projects.core.startup)
+    api(projects.core.themeProto)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.datastore)
 
     implementation(libs.kotlinx.collectionsimmutable)
-
-    implementation(projects.core.coroutines)
-    implementation(projects.core.startup)
-    implementation(projects.core.themeProto)
 }

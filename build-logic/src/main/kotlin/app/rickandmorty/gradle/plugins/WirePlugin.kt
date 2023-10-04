@@ -4,7 +4,6 @@ import app.rickandmorty.gradle.utils.api
 import app.rickandmorty.gradle.utils.apply
 import app.rickandmorty.gradle.utils.withPlugin
 import com.android.build.gradle.LibraryExtension
-import com.autonomousapps.DependencyAnalysisSubExtension
 import com.squareup.wire.gradle.WireExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -19,16 +18,6 @@ public class WirePlugin : Plugin<Project> {
 
         with(pluginManager) {
             apply(libs.plugins.wire)
-
-            withPlugin(libs.plugins.dependencyanalysis) {
-                configure<DependencyAnalysisSubExtension> {
-                    issues {
-                        onUnusedDependencies {
-                            exclude("com.squareup.wire:wire-runtime")
-                        }
-                    }
-                }
-            }
 
             withPlugin(libs.plugins.android.library) {
                 configure<LibraryExtension> {

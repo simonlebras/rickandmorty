@@ -5,9 +5,9 @@ import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.os.StrictMode.VmPolicy
 import android.os.strictmode.UntaggedSocketViolation
-import app.rickandmorty.hilt.HiltLazy
 import app.rickandmorty.logging.Logger
 import app.rickandmorty.startup.Initializer
+import dagger.Lazy
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ private const val TAG = "StrictMode"
 
 internal class StrictModeInitializer @Inject constructor(
     private val logger: Logger,
-    @StrictModeExecutor private val penaltyListenerExecutor: HiltLazy<ExecutorService>,
+    @StrictModeExecutor private val penaltyListenerExecutor: Lazy<ExecutorService>,
 ) : Initializer {
     override fun initialize() {
         val threadPolicy = ThreadPolicy.Builder()

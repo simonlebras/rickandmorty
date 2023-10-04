@@ -7,8 +7,7 @@ android {
 }
 
 dependencies {
-    api(libs.kotlinx.coroutines.core)
+    api(libs.hilt.android)
 
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.core)
+    api(libs.kotlinx.coroutines.core)
 }
