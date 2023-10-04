@@ -12,5 +12,4 @@ dependencies {
     implementation(libs.apollo.runtime)
 
     implementation(projects.core.coroutines)
-    implementation(projects.core.hilt)
 }

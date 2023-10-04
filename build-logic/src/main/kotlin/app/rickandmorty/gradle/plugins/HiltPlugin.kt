@@ -1,8 +1,9 @@
 package app.rickandmorty.gradle.plugins
 
+import app.rickandmorty.gradle.utils.api
 import app.rickandmorty.gradle.utils.apply
-import app.rickandmorty.gradle.utils.implementation
 import app.rickandmorty.gradle.utils.ksp
+import app.rickandmorty.gradle.utils.toIdentifier
 import app.rickandmorty.gradle.utils.withPlugin
 import com.autonomousapps.DependencyAnalysisSubExtension
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -25,8 +26,12 @@ public class HiltPlugin : Plugin<Project> {
             withPlugin(libs.plugins.dependencyanalysis) {
                 configure<DependencyAnalysisSubExtension> {
                     issues {
+                        val hiltAndroid = libs.hilt.android.asProvider().get().toIdentifier()!!
                         onUnusedDependencies {
-                            exclude("com.google.dagger:hilt-android")
+                            exclude(hiltAndroid)
+                        }
+                        onIncorrectConfiguration {
+                            exclude(hiltAndroid)
                         }
                     }
                 }
@@ -34,7 +39,7 @@ public class HiltPlugin : Plugin<Project> {
         }
 
         dependencies {
-            implementation(libs.hilt.android)
+            api(libs.hilt.android)
             ksp(libs.hilt.android.compiler)
         }
     }

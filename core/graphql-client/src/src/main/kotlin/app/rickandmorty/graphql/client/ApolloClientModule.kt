@@ -2,7 +2,6 @@ package app.rickandmorty.graphql
 
 import android.content.Context
 import app.rickandmorty.coroutines.IODispatcher
-import app.rickandmorty.hilt.HiltLazy
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.cache.normalized.api.MemoryCacheFactory
 import com.apollographql.apollo3.cache.normalized.api.NormalizedCacheFactory
@@ -10,6 +9,7 @@ import com.apollographql.apollo3.cache.normalized.normalizedCache
 import com.apollographql.apollo3.cache.normalized.sql.SqlNormalizedCacheFactory
 import com.apollographql.apollo3.network.http.DefaultHttpEngine
 import com.apollographql.apollo3.network.http.HttpEngine
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +27,7 @@ private const val MEMORY_CACHE_SIZE = 10 * 1024 * 1024 // 10 MB
 @InstallIn(SingletonComponent::class)
 internal class ApolloClientModule {
     @Provides
-    fun provideHttpEngine(client: HiltLazy<OkHttpClient>): HttpEngine {
+    fun provideHttpEngine(client: Lazy<OkHttpClient>): HttpEngine {
         return DefaultHttpEngine { client.get().newCall(it) }
     }
 

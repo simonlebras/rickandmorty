@@ -1,3 +1,4 @@
+import app.rickandmorty.gradle.utils.toIdentifier
 import com.google.firebase.perf.plugin.FirebasePerfExtension
 
 plugins {
@@ -81,9 +82,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.windowsizeclass)
-    implementation(libs.androidx.compose.ui.util)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.window)
@@ -96,7 +95,6 @@ dependencies {
     implementation(projects.core.core)
     implementation(projects.core.coroutines)
     implementation(projects.core.designsystem)
-    implementation(projects.core.hilt)
     implementation(projects.core.jankstats)
     implementation(projects.core.okhttp)
     implementation(projects.core.resourceState)
@@ -125,10 +123,10 @@ dependencyAnalysis {
             exclude(
                 // Submodules used by Hilt
                 // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
-                ":core:coil",
-                ":core:jankstats",
-                ":core:okhttp",
-                ":core:strictmode",
+                projects.core.coil.toIdentifier()!!,
+                projects.core.jankstats.toIdentifier()!!,
+                projects.core.okhttp.toIdentifier()!!,
+                projects.core.strictmode.toIdentifier()!!,
             )
         }
     }

@@ -15,5 +15,5 @@ apollo {
 }
 
 dependencies {
-    implementation(libs.apollo.runtime)
+    implementation(libs.apollo.api)
 }

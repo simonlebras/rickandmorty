@@ -11,6 +11,4 @@ dependencies {
     api(libs.coil)
 
     implementation(libs.androidx.core)
-
-    implementation(projects.core.hilt)
 }

@@ -8,7 +8,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.hilt)
-    implementation(projects.core.logging)
-    implementation(projects.core.startup)
+    api(projects.core.logging)
+    api(projects.core.startup)
 }

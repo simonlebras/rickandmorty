@@ -13,7 +13,7 @@ dependencies {
     api(libs.androidx.compose.runtime)
     api(libs.androidx.metrics)
 
-    implementation(libs.androidx.compose.ui)
+    api(projects.core.logging)
 
-    implementation(projects.core.logging)
+    implementation(libs.androidx.compose.ui)
 }
