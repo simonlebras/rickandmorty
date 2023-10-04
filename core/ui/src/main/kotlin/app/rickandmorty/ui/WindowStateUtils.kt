@@ -9,7 +9,7 @@ import kotlin.contracts.contract
  * Information about the posture of the device.
  */
 public sealed interface DevicePosture {
-    public object NormalPosture : DevicePosture
+    public data object NormalPosture : DevicePosture
 
     public data class BookPosture(
         val hingePosition: Rect,
