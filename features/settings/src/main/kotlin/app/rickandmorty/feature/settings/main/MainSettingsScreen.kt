@@ -2,7 +2,6 @@ package app.rickandmorty.feature.settings.main
 
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -66,7 +65,7 @@ internal fun MainSettingsScreen(
     )
 }
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainSettingsScreen(
     uiState: MainSettingsUiState,

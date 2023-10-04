@@ -7,7 +7,6 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -32,7 +31,6 @@ import app.rickandmorty.ui.isBookPosture
 import app.rickandmorty.ui.isSeparating
 import kotlinx.collections.immutable.ImmutableList
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun HomeNavigationScreen(
     navController: NavHostController,
