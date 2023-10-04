@@ -58,7 +58,6 @@ jobs:
         run: ./gradlew checkSortDependencies
 
       - name: Detect unused and misused dependencies
-        if: ${{ false }} # https://github.com/google/horologist/issues/1314
         run: ./gradlew buildHealth
 
       - name: Check module graph
