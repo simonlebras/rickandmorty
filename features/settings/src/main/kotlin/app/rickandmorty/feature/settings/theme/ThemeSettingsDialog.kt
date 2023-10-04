@@ -27,6 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.feature.settings.R
 import app.rickandmorty.feature.settings.utils.label
+import app.rickandmorty.jankstats.TrackScrollJank
 import app.rickandmorty.theme.domain.NightMode
 import app.rickandmorty.ui.resources.R as UiR
 
@@ -58,7 +59,14 @@ private fun ThemeSettingsDialog(
             Text(text = stringResource(R.string.settings_theme_title))
         },
         text = {
-            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+            val scrollState = rememberScrollState()
+
+            TrackScrollJank(
+                scrollableState = scrollState,
+                stateName = "themeSettings:dialog",
+            )
+
+            Column(modifier = Modifier.verticalScroll(scrollState)) {
                 when {
                     uiState.isLoading -> {
                         CircularProgressIndicator(
