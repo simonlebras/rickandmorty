@@ -1,15 +1,7 @@
 package app.rickandmorty.gradle.utils
 
-import org.gradle.api.GradleException
 import org.gradle.api.Project
-import org.gradle.api.artifacts.Dependency
-import org.gradle.api.artifacts.FileCollectionDependency
-import org.gradle.api.artifacts.ModuleDependency
-import org.gradle.api.artifacts.ProjectDependency
-import org.gradle.api.artifacts.SelfResolvingDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import org.gradle.api.file.ConfigurableFileCollection
-import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.plugins.AppliedPlugin
 import org.gradle.api.plugins.PluginManager
 import org.gradle.api.provider.Provider
@@ -61,34 +53,6 @@ internal fun DependencyHandler.lintChecks(
     dependencyNotations.forEach {
         add("lintChecks", it)
     }
-}
-
-public fun Dependency.toIdentifier(): String? = when (this) {
-    is ProjectDependency -> dependencyProject.path.intern()
-    // Flat JAR/AAR files have no group
-    is ModuleDependency -> if (group != null) "$group:$name" else name
-    is FileCollectionDependency -> {
-        // Note that this only gets the first file in the collection, ignoring the rest
-        when (val files = files) {
-            is ConfigurableFileCollection -> {
-                files.from.firstOrNull()?.let { first ->
-                    // https://github.com/gradle/gradle/pull/26317
-                    val firstFile = if (first is Array<*>) {
-                        first.firstOrNull()
-                    } else {
-                        first
-                    }
-                    firstFile?.toString()?.substringAfterLast("/")
-                }?.intern()
-            }
-
-            is ConfigurableFileTree -> files.firstOrNull()?.name?.intern()
-            else -> null
-        }
-    }
-    // Not enough information, ignore it
-    is SelfResolvingDependency -> null
-    else -> throw GradleException("Unknown Dependency subtype: \n$this\n${javaClass.name}")
 }
 
 internal val Project.isRootProject: Boolean
