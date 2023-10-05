@@ -3,7 +3,6 @@ package app.rickandmorty
 import android.app.Application
 import android.content.res.Configuration
 import app.rickandmorty.core.AppDelegate
-import app.rickandmorty.hilt.HiltSet
 import app.rickandmorty.startup.Initializer
 import coil.ImageLoaderFactory
 import dagger.hilt.android.HiltAndroidApp
@@ -18,7 +17,7 @@ class RamApplication : Application(), ImageLoaderFactory {
     lateinit var appDelegate: AppDelegate
 
     @Inject
-    lateinit var initializers: HiltSet<Initializer>
+    lateinit var initializers: Set<@JvmSuppressWildcards Initializer>
 
     override fun onCreate() {
         super.onCreate()

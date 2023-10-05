@@ -26,10 +26,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.metrics.performance.JankStats
 import androidx.navigation.compose.rememberNavController
 import app.rickandmorty.designsystem.theme.RamTheme
-import app.rickandmorty.hilt.HiltLazy
 import app.rickandmorty.resourcestate.Loading
 import app.rickandmorty.theme.domain.NightMode
 import com.google.accompanist.adaptive.calculateDisplayFeatures
+import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.collections.immutable.toImmutableList
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
     @Inject
-    lateinit var jankStats: HiltLazy<JankStats>
+    lateinit var jankStats: Lazy<JankStats>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()

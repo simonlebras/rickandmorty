@@ -8,10 +8,9 @@ android {
 }
 
 dependencies {
-    api(libs.androidx.navigation.compose)
+    api(libs.microsoft.compose.twopanelayout)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
-
-    implementation(libs.microsoft.compose.twopanelayout)
+    implementation(libs.androidx.navigation.compose)
 }
