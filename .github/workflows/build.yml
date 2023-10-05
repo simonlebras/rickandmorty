@@ -80,10 +80,12 @@ jobs:
           --no-configuration-cache
 
       - name: Upload build outputs
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: build-outputs
-          path: app/build/outputs
+          path: |
+            app/build/outputs
 
       - name: Upload reports
         if: always()
@@ -91,7 +93,8 @@ jobs:
         with:
           name: reports
           path: |
-            **/build/reports/*
+            build/reports/dependency-analysis/build-health-report.txt
+            **/build/reports/lint-results-*.html
 
       - name: Upload test results
         if: always()
@@ -102,6 +105,7 @@ jobs:
             **/build/test-results/*
 
       - name: Clean secrets
+        if: always()
         uses: ./.github/actions/clean-secrets
 
   android-test-cfg:
