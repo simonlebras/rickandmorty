@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-import "night_mode.proto";
+import "app/rickandmorty/theme/proto/night_mode.proto";
 
-option java_multiple_files = true;
 option java_package = "app.rickandmorty.theme.proto";
+option java_multiple_files = true;
 
 message ThemePreferences {
   NightMode night_mode = 1;

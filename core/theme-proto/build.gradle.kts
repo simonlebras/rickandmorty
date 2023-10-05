@@ -1,6 +1,6 @@
 plugins {
-    id("app.rickandmorty.android-library")
-    id("app.rickandmorty.wire")
+    alias(libs.plugins.rickandmorty.android.library)
+    alias(libs.plugins.rickandmorty.wire)
 }
 
 android {

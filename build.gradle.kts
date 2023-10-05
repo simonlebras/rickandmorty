@@ -1,11 +1,16 @@
-buildscript {
-    dependencies {
-        classpath(libs.play.osslicenses.plugin)
-    }
-}
-
 plugins {
-    id("app.rickandmorty.root")
+    alias(libs.plugins.rickandmorty.android.application) apply false
+    alias(libs.plugins.rickandmorty.android.library) apply false
+    alias(libs.plugins.rickandmorty.android.test) apply false
+    alias(libs.plugins.rickandmorty.compose) apply false
+    alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
+    alias(libs.plugins.rickandmorty.firebase.perf) apply false
+    alias(libs.plugins.rickandmorty.hilt) apply false
+    alias(libs.plugins.rickandmorty.jvm.library) apply false
+    alias(libs.plugins.rickandmorty.osslicenses) apply false
+    alias(libs.plugins.rickandmorty.root)
+    alias(libs.plugins.rickandmorty.wire) apply false
+
     alias(libs.plugins.affectedmoduledetector)
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
@@ -24,7 +29,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.modulegraphassert) apply false
-    alias(libs.plugins.nodegradle)
+    alias(libs.plugins.play.osslicenses) apply false
     alias(libs.plugins.sortdependencies)
     alias(libs.plugins.spotless)
     alias(libs.plugins.wire) apply false

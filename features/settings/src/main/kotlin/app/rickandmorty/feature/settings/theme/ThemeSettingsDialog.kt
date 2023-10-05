@@ -43,7 +43,7 @@ internal fun ThemeSettingsDialog(
     ThemeSettingsDialog(
         uiState = uiState,
         onDismiss = onDismiss,
-        onSelectNightNode = viewModel::setNightMode,
+        onSelectNightMode = viewModel::setNightMode,
     )
 }
 
@@ -51,7 +51,7 @@ internal fun ThemeSettingsDialog(
 private fun ThemeSettingsDialog(
     uiState: ThemeSettingsUiState,
     onDismiss: () -> Unit,
-    onSelectNightNode: (NightMode) -> Unit,
+    onSelectNightMode: (NightMode) -> Unit,
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -80,7 +80,7 @@ private fun ThemeSettingsDialog(
                             ThemeItem(
                                 text = stringResource(nightMode.label),
                                 selected = nightMode == currentNightMode,
-                                onClick = { onSelectNightNode(nightMode) },
+                                onClick = { onSelectNightMode(nightMode) },
                             )
                         }
                     }

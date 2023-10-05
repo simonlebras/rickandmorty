@@ -1,4 +1,4 @@
-package app.rickandmorty.gradle.utils
+package app.rickandmorty.gradle.util
 
 import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.api.dsl.TestOptions

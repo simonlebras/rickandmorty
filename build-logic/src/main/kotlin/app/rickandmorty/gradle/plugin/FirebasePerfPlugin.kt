@@ -1,7 +1,7 @@
-package app.rickandmorty.gradle.plugins
+package app.rickandmorty.gradle.plugin
 
-import app.rickandmorty.gradle.utils.apply
-import app.rickandmorty.gradle.utils.implementation
+import app.rickandmorty.gradle.util.apply
+import app.rickandmorty.gradle.util.implementation
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project

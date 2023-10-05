@@ -1,10 +1,10 @@
-package app.rickandmorty.gradle.plugins
+package app.rickandmorty.gradle.plugin
 
-import app.rickandmorty.gradle.utils.apply
-import app.rickandmorty.gradle.utils.configureAffectedAndroidTest
-import app.rickandmorty.gradle.utils.configureAndroid
-import app.rickandmorty.gradle.utils.configureKotlinAndroid
-import app.rickandmorty.gradle.utils.configureSpotless
+import app.rickandmorty.gradle.util.apply
+import app.rickandmorty.gradle.util.configureAffectedAndroidTest
+import app.rickandmorty.gradle.util.configureAndroid
+import app.rickandmorty.gradle.util.configureKotlinAndroid
+import app.rickandmorty.gradle.util.configureSpotless
 import com.android.build.gradle.LibraryExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin

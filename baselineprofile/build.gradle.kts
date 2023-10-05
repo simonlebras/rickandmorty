@@ -1,5 +1,6 @@
 plugins {
-    id("app.rickandmorty.android-test")
+    alias(libs.plugins.rickandmorty.android.test)
+
     alias(libs.plugins.baselineprofile)
 }
 

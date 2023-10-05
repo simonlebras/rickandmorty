@@ -1,5 +1,5 @@
 plugins {
-    id("app.rickandmorty.jvm-library")
+    alias(libs.plugins.rickandmorty.jvm.library)
 }
 
 dependencies {
