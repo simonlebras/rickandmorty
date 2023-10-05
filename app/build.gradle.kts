@@ -1,4 +1,3 @@
-import app.rickandmorty.gradle.utils.toIdentifier
 import com.google.firebase.perf.plugin.FirebasePerfExtension
 
 plugins {
@@ -123,10 +122,9 @@ dependencyAnalysis {
             exclude(
                 // Submodules used by Hilt
                 // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
-                projects.core.coil.toIdentifier()!!,
-                projects.core.jankstats.toIdentifier()!!,
-                projects.core.okhttp.toIdentifier()!!,
-                projects.core.strictmode.toIdentifier()!!,
+                ":core:coil",
+                ":core:jankstats",
+                ":core:okhttp",
             )
         }
     }
