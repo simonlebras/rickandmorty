@@ -34,59 +34,59 @@ gradlePlugin {
     plugins {
         register("androidApplication") {
             id = "app.rickandmorty.android-application"
-            implementationClass = "app.rickandmorty.gradle.plugins.AndroidApplicationPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.AndroidApplicationPlugin"
         }
         register("androidLibrary") {
             id = "app.rickandmorty.android-library"
-            implementationClass = "app.rickandmorty.gradle.plugins.AndroidLibraryPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.AndroidLibraryPlugin"
         }
         register("androidTest") {
             id = "app.rickandmorty.android-test"
-            implementationClass = "app.rickandmorty.gradle.plugins.AndroidTestPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
         }
         register("compose") {
             id = "app.rickandmorty.compose"
-            implementationClass = "app.rickandmorty.gradle.plugins.ComposePlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
         }
         register("firebaseCrashlytics") {
             id = "app.rickandmorty.firebase-crashlytics"
-            implementationClass = "app.rickandmorty.gradle.plugins.FirebaseCrashlyticsPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.FirebaseCrashlyticsPlugin"
         }
         register("firebasePerf") {
             id = "app.rickandmorty.firebase-perf"
-            implementationClass = "app.rickandmorty.gradle.plugins.FirebasePerfPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
         }
         register("hilt") {
             id = "app.rickandmorty.hilt"
-            implementationClass = "app.rickandmorty.gradle.plugins.HiltPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.HiltPlugin"
         }
         register("jvmLibrary") {
             id = "app.rickandmorty.jvm-library"
-            implementationClass = "app.rickandmorty.gradle.plugins.JvmLibraryPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.JvmLibraryPlugin"
         }
         register("ossLicenses") {
             id = "app.rickandmorty.oss-licenses"
-            implementationClass = "app.rickandmorty.gradle.plugins.OssLicensesPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.OssLicensesPlugin"
         }
         register("root") {
             id = "app.rickandmorty.root"
-            implementationClass = "app.rickandmorty.gradle.plugins.RootPlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.RootPlugin"
         }
         register("wire") {
             id = "app.rickandmorty.wire"
-            implementationClass = "app.rickandmorty.gradle.plugins.WirePlugin"
+            implementationClass = "app.rickandmorty.gradle.plugin.WirePlugin"
         }
     }
 }
 
 spotless {
+    val ktlintVersion = libs.versions.ktlint.get()
     kotlin {
+        ktlint(ktlintVersion)
         target("src/**/*.kt")
-        ktlint()
     }
-
     kotlinGradle {
+        ktlint(ktlintVersion)
         target("*.kts")
-        ktlint()
     }
 }

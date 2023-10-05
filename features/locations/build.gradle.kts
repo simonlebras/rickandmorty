@@ -1,6 +1,6 @@
 plugins {
-    id("app.rickandmorty.android-library")
-    id("app.rickandmorty.compose")
+    alias(libs.plugins.rickandmorty.android.library)
+    alias(libs.plugins.rickandmorty.compose)
 }
 
 android {

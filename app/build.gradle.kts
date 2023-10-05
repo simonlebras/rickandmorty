@@ -1,10 +1,11 @@
 import com.google.firebase.perf.plugin.FirebasePerfExtension
 
 plugins {
-    id("app.rickandmorty.android-application")
-    id("app.rickandmorty.compose")
-    id("app.rickandmorty.hilt")
-    id("app.rickandmorty.oss-licenses")
+    alias(libs.plugins.rickandmorty.android.application)
+    alias(libs.plugins.rickandmorty.compose)
+    alias(libs.plugins.rickandmorty.hilt)
+    alias(libs.plugins.rickandmorty.osslicenses)
+
     alias(libs.plugins.baselineprofile)
     alias(libs.plugins.easylauncher)
     alias(libs.plugins.modulegraphassert)

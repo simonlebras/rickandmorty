@@ -1,8 +1,8 @@
-package app.rickandmorty.gradle.plugins
+package app.rickandmorty.gradle.plugin
 
-import app.rickandmorty.gradle.utils.apply
-import app.rickandmorty.gradle.utils.configureKotlinJvm
-import app.rickandmorty.gradle.utils.configureSpotless
+import app.rickandmorty.gradle.util.apply
+import app.rickandmorty.gradle.util.configureKotlinJvm
+import app.rickandmorty.gradle.util.configureSpotless
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project

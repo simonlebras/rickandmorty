@@ -1,9 +1,9 @@
-package app.rickandmorty.gradle.plugins
+package app.rickandmorty.gradle.plugin
 
-import app.rickandmorty.gradle.utils.apply
-import app.rickandmorty.gradle.utils.implementation
-import app.rickandmorty.gradle.utils.ksp
-import app.rickandmorty.gradle.utils.withPlugin
+import app.rickandmorty.gradle.util.apply
+import app.rickandmorty.gradle.util.implementation
+import app.rickandmorty.gradle.util.ksp
+import app.rickandmorty.gradle.util.withPlugin
 import com.autonomousapps.DependencyAnalysisSubExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin

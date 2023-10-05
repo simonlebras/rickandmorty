@@ -1,4 +1,4 @@
-package app.rickandmorty.gradle.utils
+package app.rickandmorty.gradle.util
 
 import com.dropbox.affectedmoduledetector.AffectedTestConfiguration
 import org.gradle.api.Project

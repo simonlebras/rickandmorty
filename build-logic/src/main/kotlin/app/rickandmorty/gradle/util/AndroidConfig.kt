@@ -1,4 +1,4 @@
-package app.rickandmorty.gradle.utils
+package app.rickandmorty.gradle.util
 
 import com.android.build.gradle.BaseExtension
 import org.gradle.accessors.dm.LibrariesForLibs

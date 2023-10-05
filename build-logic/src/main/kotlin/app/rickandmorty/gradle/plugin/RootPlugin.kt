@@ -1,16 +1,9 @@
-package app.rickandmorty.gradle.plugins
+package app.rickandmorty.gradle.plugin
 
-import app.rickandmorty.gradle.utils.isRootProject
-import app.rickandmorty.gradle.utils.ktlint
-import app.rickandmorty.gradle.utils.ktlintGradle
-import app.rickandmorty.gradle.utils.misc
-import app.rickandmorty.gradle.utils.prettier
-import app.rickandmorty.gradle.utils.withPlugin
-import app.rickandmorty.gradle.utils.xml
+import app.rickandmorty.gradle.util.configureSpotless
+import app.rickandmorty.gradle.util.isRootProject
+import app.rickandmorty.gradle.util.withPlugin
 import com.autonomousapps.DependencyAnalysisExtension
-import com.diffplug.gradle.spotless.SpotlessExtension
-import com.diffplug.gradle.spotless.SpotlessExtensionPredeclare
-import com.diffplug.spotless.LineEnding
 import com.dropbox.affectedmoduledetector.AffectedModuleConfiguration
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -35,7 +28,7 @@ public class RootPlugin : Plugin<Project> {
         }
 
         pluginManager.withPlugin(libs.plugins.spotless) {
-            configureSpotless()
+            configureSpotless(libs)
         }
     }
 }
@@ -87,46 +80,5 @@ private fun Project.configureDependencyAnalysis() {
                 ignoreGeneratedCode()
             }
         }
-    }
-}
-
-private fun Project.configureSpotless() {
-    configure<SpotlessExtension> {
-        // https://github.com/diffplug/spotless/issues/1644
-        lineEndings = LineEnding.PLATFORM_NATIVE
-
-        ktlintGradle {
-            target("*.kts")
-        }
-
-        misc {
-            target(
-                ".editorconfig",
-                ".gitattributes",
-                ".gitignore",
-                "*.md",
-                "*.properties",
-                "proguard/*.pro",
-                "gradle/libs.versions.toml",
-            )
-        }
-
-        prettier {
-            target(
-                "*.json",
-                ".github/**/*.yml",
-            )
-        }
-
-        xml {
-            target("*.xml")
-        }
-
-        predeclareDeps()
-    }
-
-    configure<SpotlessExtensionPredeclare> {
-        ktlint()
-        prettier()
     }
 }

@@ -48,16 +48,16 @@ kotlinx-collectionsimmutable = "0.3.6"
 kotlinx-coroutines = "1.7.3"
 kotlinx-datetime = "0.4.1"
 ksp = "1.9.10-1.0.13"
+ktlint = "0.50.0"
 leakcanary = "2.12"
 microsoft-compose-twopanelayout = "1.0.1-alpha08"
 modulegraphassert = "2.5.0"
-nodegradle = "7.0.0"
 okhttp = "4.11.0"
 play-osslicenses = "17.0.1"
 play-osslicenses-plugin = "0.10.6"
 slack-composelints = "1.2.0"
 sortdependencies = "0.4"
-spotless = "6.21.0"
+spotless = "6.22.0"
 testparameterinjector = "1.12"
 timber = "5.0.1"
 truth = "1.1.5"
@@ -159,7 +159,6 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhtt
 okhttp-logginginterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
 play-osslicenses = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "play-osslicenses" }
-play-osslicenses-plugin = { group = "com.google.android.gms", name = "oss-licenses-plugin", version.ref = "play-osslicenses-plugin" }
 
 slack-compose-lints = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slack-composelints" }
 
@@ -177,6 +176,19 @@ wire-plugin = { group = "com.squareup.wire", name = "wire-gradle-plugin", versio
 wire-runtime = { group = "com.squareup.wire", name = "wire-runtime", version.ref = "wire" }
 
 [plugins]
+# Convention plugins
+rickandmorty-android-application = { id = "app.rickandmorty.android-application", version = "unspecified" }
+rickandmorty-android-library = { id = "app.rickandmorty.android-library", version = "unspecified" }
+rickandmorty-android-test = { id = "app.rickandmorty.android-test", version = "unspecified" }
+rickandmorty-compose = { id = "app.rickandmorty.compose", version = "unspecified" }
+rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics", version = "unspecified" }
+rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf", version = "unspecified" }
+rickandmorty-hilt = { id = "app.rickandmorty.hilt", version = "unspecified" }
+rickandmorty-jvm-library = { id = "app.rickandmorty.jvm-library", version = "unspecified" }
+rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses", version = "unspecified" }
+rickandmorty-root = { id = "app.rickandmorty.root", version = "unspecified" }
+rickandmorty-wire = { id = "app.rickandmorty.wire", version = "unspecified" }
+
 affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.ref = "affectedmoduledetector" }
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
@@ -195,8 +207,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }
-nodegradle = { id = "com.github.node-gradle.node", version.ref = "nodegradle" }
-play-osslicenses = { id = "com.google.android.gms.oss-licenses-plugin" }
+play-osslicenses = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "play-osslicenses-plugin" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 wire = { id = "com.squareup.wire", version.ref = "wire" }
