@@ -91,7 +91,7 @@ jobs:
         with:
           name: reports
           path: |
-            **/build/reports/**
+            **/build/reports/*
 
       - name: Upload test results
         if: always()
