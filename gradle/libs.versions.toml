@@ -33,7 +33,6 @@ androidx-window = "1.2.0-beta03"
 apollo = "4.0.0-beta.1"
 cachefix = "2.8.1"
 coil = "2.4.0"
-compose-stablemarker = "1.0.1"
 dependencyanalysis = "1.24.0"
 easylauncher = "6.2.0"
 firebase-bom = "32.3.1"
@@ -126,8 +125,6 @@ apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime",
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-base = { group = "io.coil-kt", name = "coil-base", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
-
-compose-stablemarker = { group = "com.github.skydoves", name = "compose-stable-marker", version.ref = "compose-stablemarker" }
 
 dependencyanalysis-plugin = { group = "com.autonomousapps", name = "dependency-analysis-gradle-plugin", version.ref = "dependencyanalysis" }
 
