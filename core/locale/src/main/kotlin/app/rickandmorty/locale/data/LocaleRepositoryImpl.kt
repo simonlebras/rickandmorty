@@ -16,9 +16,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import org.xmlpull.v1.XmlPullParser
+import se.ansman.dagger.auto.AutoBind
 
 private const val LOCALE_CONFIG_FILE = "_generated_res_locale_config"
 
+@AutoBind
 internal class LocaleRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val appDelegate: AppDelegate,

@@ -12,7 +12,9 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import se.ansman.dagger.auto.AutoBind
 
+@AutoBind
 internal class ThemeRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<ThemePreferences>,
 ) : ThemeRepository {

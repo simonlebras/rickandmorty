@@ -1,8 +1,10 @@
 package app.rickandmorty.logging
 
 import javax.inject.Inject
+import se.ansman.dagger.auto.AutoBind
 import timber.log.Timber
 
+@AutoBind
 internal class TimberLogger @Inject constructor() : Logger {
     override fun tag(tag: String): Logger {
         Timber.tag(tag)
