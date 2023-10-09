@@ -71,6 +71,5 @@ include(":core:ui-resources")
 
 include(":features:characters")
 include(":features:episodes")
-include(":features:home")
 include(":features:locations")
 include(":features:settings")

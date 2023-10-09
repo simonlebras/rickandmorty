@@ -8,8 +8,6 @@ android {
 }
 
 dependencies {
-    api(libs.microsoft.compose.twopanelayout)
-
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.compose)

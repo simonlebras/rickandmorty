@@ -9,8 +9,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.ReadOnlyComposable
@@ -28,13 +26,11 @@ import androidx.metrics.performance.JankStats
 import androidx.navigation.compose.rememberNavController
 import app.rickandmorty.contentview.ContentViewSetter
 import app.rickandmorty.designsystem.theme.RamTheme
-import app.rickandmorty.resourcestate.Loading
+import app.rickandmorty.resourcestate.Incomplete
 import app.rickandmorty.theme.domain.NightMode
-import com.google.accompanist.adaptive.calculateDisplayFeatures
 import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -103,7 +99,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 private fun ComponentActivity.RamContent(uiState: MainUiState) {
     val darkTheme = uiState.useDarkTheme()
@@ -138,21 +133,14 @@ private fun ComponentActivity.RamContent(uiState: MainUiState) {
         darkTheme = darkTheme,
         dynamicColor = uiState.useDynamicColor(),
     ) {
-        val windowSizeClass = calculateWindowSizeClass(this@RamContent)
-        val displayFeatures =
-            calculateDisplayFeatures(this@RamContent).toImmutableList()
-        RamApp(
-            navController = navController,
-            windowSizeClass = windowSizeClass,
-            displayFeatures = displayFeatures,
-        )
+        RamApp(navController = navController)
     }
 }
 
 @Composable
 @ReadOnlyComposable
 private fun MainUiState.useDarkTheme() = when (theme) {
-    is Loading -> isSystemInDarkTheme()
+    is Incomplete -> isSystemInDarkTheme()
     else -> when (theme()!!.nightMode) {
         NightMode.AUTO_BATTERY,
         NightMode.FOLLOW_SYSTEM,

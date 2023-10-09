@@ -53,7 +53,6 @@ kotlinx-datetime = "0.4.1"
 ksp = "1.9.10-1.0.13"
 ktlint = "0.50.0"
 leakcanary = "2.12"
-microsoft-compose-twopanelayout = "1.0.1-alpha08"
 modulegraphassert = "2.5.0"
 okhttp = "4.11.0"
 play-osslicenses = "17.0.1"
@@ -68,7 +67,6 @@ turbine = "1.0.0"
 wire = "4.9.1"
 
 [libraries]
-accompanist-adaptive = { group = "com.google.accompanist", name = "accompanist-adaptive", version.ref = "accompanist" }
 accompanist-placeholder-material3 = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
 accompanist-testharness = { group = "com.google.accompanist", name = "accompanist-testharness", version.ref = "accompanist" }
 
@@ -89,7 +87,6 @@ androidx-compose-foundation-layout = { group = "androidx.compose.foundation", na
 androidx-compose-material-iconsextended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-material3-adaptive = { group = "androidx.compose.material3", name = "material3-adaptive", version.ref = "androidx-compose-material3-adaptive" }
-androidx-compose-material3-windowsizeclass = { group = "androidx.compose.material3", name = "material3-window-size-class" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 androidx-compose-runtime-tracing = { group = "androidx.compose.runtime", name = "runtime-tracing", version.ref = "androidx-compose-runtimetracing" }
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
@@ -163,8 +160,6 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
-
-microsoft-compose-twopanelayout = { group = "com.microsoft.device.dualscreen", name = "twopanelayout", version.ref = "microsoft-compose-twopanelayout" }
 
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-logginginterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
