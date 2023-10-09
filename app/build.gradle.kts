@@ -78,17 +78,10 @@ baselineProfile {
 dependencies {
     baselineProfile(projects.baselineprofile)
 
-    implementation(libs.accompanist.adaptive)
-
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.compose.material3.windowsizeclass)
+    implementation(libs.androidx.compose.material3.adaptive)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.window)
-
-    implementation(libs.kotlinx.collectionsimmutable)
-
-    implementation(libs.microsoft.compose.twopanelayout)
 
     implementation(projects.core.coil)
     implementation(projects.core.contentview)
@@ -103,7 +96,6 @@ dependencies {
 
     implementation(projects.features.characters)
     implementation(projects.features.episodes)
-    implementation(projects.features.home)
     implementation(projects.features.locations)
     implementation(projects.features.settings)
 

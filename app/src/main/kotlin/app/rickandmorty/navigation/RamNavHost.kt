@@ -1,38 +1,46 @@
 package app.rickandmorty.navigation
 
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.window.layout.DisplayFeature
-import app.rickandmorty.feature.home.navigation.homeRoute
-import kotlinx.collections.immutable.ImmutableList
+import app.rickandmorty.feature.characters.navigation.characterList
+import app.rickandmorty.feature.characters.navigation.characterListRoute
+import app.rickandmorty.feature.episodes.navigation.episodeList
+import app.rickandmorty.feature.locations.navigation.locationList
+import app.rickandmorty.feature.settings.navigation.navigateToMainSettings
+import app.rickandmorty.feature.settings.navigation.settings
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 @Composable
 fun RamNavHost(
     navController: NavHostController,
-    windowSizeClass: WindowSizeClass,
-    displayFeatures: ImmutableList<DisplayFeature>,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
 
     NavHost(
         navController = navController,
-        startDestination = homeRoute,
+        startDestination = characterListRoute,
         modifier = modifier,
     ) {
-        home(
-            navController = navController,
-            windowSizeClass = windowSizeClass,
-            displayFeatures = displayFeatures,
+        characterList(
+            onNavigateToSettings = navController::navigateToMainSettings,
+            onNavigateToCharacterDetails = {},
         )
 
+        episodeList()
+
+        locationList()
+
         settings(
-            context = context,
             navController = navController,
+            onNavigateUp = navController::navigateUp,
+            onNavigateToOssLicenses = {
+                context.startActivity(Intent(context, OssLicensesMenuActivity::class.java))
+            },
         )
     }
 }
