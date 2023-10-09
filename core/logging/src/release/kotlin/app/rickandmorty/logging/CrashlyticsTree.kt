@@ -3,8 +3,10 @@ package app.rickandmorty.logging
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import javax.inject.Inject
+import se.ansman.dagger.auto.AutoBindIntoSet
 import timber.log.Timber
 
+@AutoBindIntoSet
 internal class CrashlyticsTree @Inject constructor(
     private val firebaseCrashlytics: FirebaseCrashlytics,
 ) : Timber.Tree() {

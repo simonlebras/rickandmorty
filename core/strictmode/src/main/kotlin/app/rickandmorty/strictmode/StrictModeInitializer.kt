@@ -10,9 +10,11 @@ import app.rickandmorty.startup.Initializer
 import dagger.Lazy
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
+import se.ansman.dagger.auto.AutoBind
 
 private const val TAG = "StrictMode"
 
+@AutoBind
 internal class StrictModeInitializer @Inject constructor(
     private val logger: Logger,
     @StrictModeExecutor private val penaltyListenerExecutor: Lazy<ExecutorService>,

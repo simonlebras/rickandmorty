@@ -15,7 +15,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import se.ansman.dagger.auto.AutoBindIntoSet
 
+@AutoBindIntoSet
 internal class NightModeInitializer @Inject constructor(
     @ApplicationContext private val context: Context,
     private val getTheme: GetThemeUseCase,
