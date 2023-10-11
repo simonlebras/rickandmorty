@@ -13,7 +13,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     env:
       ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD }}
       ORG_GRADLE_PROJECT_RAM_RELEASE_KEY_PWD: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEY_PWD }}
