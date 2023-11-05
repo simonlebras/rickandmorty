@@ -21,9 +21,8 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         google()
-        maven {
-            url = uri("https://androidx.dev/snapshots/builds/10915585/artifacts/repository")
-        }
+        maven { url = uri("https://androidx.dev/snapshots/builds/10915585/artifacts/repository/") }
+        maven { url = uri("https://androidx.dev/storage/compose-compiler/repository/") }
     }
 }
 
