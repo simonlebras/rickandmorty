@@ -22,7 +22,10 @@ dependencyResolutionManagement {
         mavenCentral()
         google()
         maven {
-            url = uri("https://androidx.dev/snapshots/builds/10915585/artifacts/repository")
+            url = uri("https://androidx.dev/storage/compose-compiler/repository/")
+        }
+        maven {
+            url = uri("https://androidx.dev/snapshots/builds/11052362/artifacts/repository")
         }
     }
 }
@@ -30,7 +33,6 @@ dependencyResolutionManagement {
 plugins {
     id("com.gradle.enterprise") version "3.15.1"
     id("com.gradle.common-custom-user-data-gradle-plugin") version "1.12"
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
 }
 
 gradleEnterprise {
