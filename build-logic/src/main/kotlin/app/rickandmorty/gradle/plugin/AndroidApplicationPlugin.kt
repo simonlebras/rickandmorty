@@ -33,17 +33,6 @@ public class AndroidApplicationPlugin : Plugin<Project> {
                     excludes += "/META-INF/{AL2.0,LGPL2.1}"
                 }
             }
-
-            buildTypes {
-                named("release") {
-                    isShrinkResources = true
-                    isMinifyEnabled = true
-                    proguardFiles(
-                        getDefaultProguardFile("proguard-android-optimize.txt"),
-                        "proguard-rules.pro",
-                    )
-                }
-            }
         }
     }
 }

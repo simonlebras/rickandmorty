@@ -6,4 +6,10 @@ plugins {
 
 android {
     namespace = "app.rickandmorty.theme.proto"
+
+    buildTypes {
+        val release by getting {
+            consumerProguardFiles("consumer-rules.pro")
+        }
+    }
 }

@@ -67,6 +67,12 @@ android {
 
         val release by getting {
             signingConfig = signingConfigs[if (useReleaseKeystore) "release" else "debug"]
+            isShrinkResources = true
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 }
