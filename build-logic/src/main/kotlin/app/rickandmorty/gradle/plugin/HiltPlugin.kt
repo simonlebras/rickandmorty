@@ -29,7 +29,7 @@ public class HiltPlugin : Plugin<Project> {
                             exclude("com.google.dagger:hilt-android")
                         }
 
-                        onIncorrectConfiguration() {
+                        onIncorrectConfiguration {
                             exclude("com.google.dagger:hilt-android")
                         }
                     }
