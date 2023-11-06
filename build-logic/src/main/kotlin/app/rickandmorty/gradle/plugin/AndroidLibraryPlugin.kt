@@ -27,12 +27,6 @@ public class AndroidLibraryPlugin : Plugin<Project> {
 
         configure<LibraryExtension> {
             configureAndroid(libs)
-
-            buildTypes {
-                named("release") {
-                    consumerProguardFiles("consumer-rules.pro")
-                }
-            }
         }
     }
 }
