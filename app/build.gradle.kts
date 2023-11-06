@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.rickandmorty.android.application)
     alias(libs.plugins.rickandmorty.compose)
     alias(libs.plugins.rickandmorty.hilt)
+    alias(libs.plugins.rickandmorty.kotlin.android)
     alias(libs.plugins.rickandmorty.osslicenses)
 
     alias(libs.plugins.baselineprofile)
@@ -111,6 +112,10 @@ dependencies {
 
 dependencyAnalysis {
     issues {
+        onIncorrectConfiguration {
+            exclude("org.jetbrains.kotlin:kotlin-stdlib")
+        }
+
         onUnusedDependencies {
             exclude(
                 // Submodules used by Hilt

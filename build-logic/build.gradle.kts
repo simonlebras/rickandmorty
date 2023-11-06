@@ -68,6 +68,14 @@ gradlePlugin {
             id = "app.rickandmorty.jvm-library"
             implementationClass = "app.rickandmorty.gradle.plugin.JvmLibraryPlugin"
         }
+        register("kotlinAndroid") {
+            id = "app.rickandmorty.kotlin-android"
+            implementationClass = "app.rickandmorty.gradle.plugin.KotlinAndroidPlugin"
+        }
+        register("kotlinJvm") {
+            id = "app.rickandmorty.kotlin-jvm"
+            implementationClass = "app.rickandmorty.gradle.plugin.KotlinJvmPlugin"
+        }
         register("ossLicenses") {
             id = "app.rickandmorty.oss-licenses"
             implementationClass = "app.rickandmorty.gradle.plugin.OssLicensesPlugin"

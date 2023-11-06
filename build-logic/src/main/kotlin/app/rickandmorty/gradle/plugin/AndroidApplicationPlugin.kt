@@ -3,7 +3,6 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.util.apply
 import app.rickandmorty.gradle.util.configureAffectedAndroidTest
 import app.rickandmorty.gradle.util.configureAndroid
-import app.rickandmorty.gradle.util.configureKotlinAndroid
 import app.rickandmorty.gradle.util.configureSpotless
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -19,11 +18,8 @@ public class AndroidApplicationPlugin : Plugin<Project> {
         pluginManager.apply(
             libs.plugins.android.application,
             libs.plugins.cachefix,
-            libs.plugins.kotlin.android,
             libs.plugins.sortdependencies,
         )
-
-        configureKotlinAndroid(libs)
 
         configureSpotless(libs)
 
