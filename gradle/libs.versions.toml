@@ -149,7 +149,6 @@ hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hi
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 
 kotlin-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 
 kotlinx-collectionsimmutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collectionsimmutable" }
 
@@ -193,6 +192,8 @@ rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytic
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf", version = "unspecified" }
 rickandmorty-hilt = { id = "app.rickandmorty.hilt", version = "unspecified" }
 rickandmorty-jvm-library = { id = "app.rickandmorty.jvm-library", version = "unspecified" }
+rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android", version = "unspecified" }
+rickandmorty-kotlin-jvm = { id = "app.rickandmorty.kotlin-jvm", version = "unspecified" }
 rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses", version = "unspecified" }
 rickandmorty-root = { id = "app.rickandmorty.root", version = "unspecified" }
 rickandmorty-wire = { id = "app.rickandmorty.wire", version = "unspecified" }
