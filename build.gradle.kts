@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.rickandmorty.firebase.perf) apply false
     alias(libs.plugins.rickandmorty.hilt) apply false
     alias(libs.plugins.rickandmorty.jvm.library) apply false
+    alias(libs.plugins.rickandmorty.kotlin.android) apply false
+    alias(libs.plugins.rickandmorty.kotlin.jvm) apply false
     alias(libs.plugins.rickandmorty.osslicenses) apply false
     alias(libs.plugins.rickandmorty.root)
     alias(libs.plugins.rickandmorty.wire) apply false
