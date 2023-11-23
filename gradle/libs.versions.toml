@@ -64,7 +64,7 @@ testparameterinjector = "1.14"
 timber = "5.0.1"
 truth = "1.1.5"
 turbine = "1.0.0"
-wire = "4.9.2"
+wire = "4.9.3"
 
 [libraries]
 accompanist-placeholder-material3 = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
