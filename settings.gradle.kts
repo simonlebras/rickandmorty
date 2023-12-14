@@ -1,7 +1,12 @@
 pluginManagement {
     repositories {
+        google {
+            content {
+                includeGroupByRegex(".*google.*")
+                includeGroupByRegex(".*android.*")
+            }
+        }
         mavenCentral()
-        google()
         gradlePluginPortal()
     }
 
@@ -19,10 +24,13 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        google {
+            content {
+                includeGroupByRegex(".*google.*")
+                includeGroupByRegex(".*android.*")
+            }
+        }
         mavenCentral()
-        google()
-        maven { url = uri("https://androidx.dev/snapshots/builds/11056117/artifacts/repository/") }
-        maven { url = uri("https://androidx.dev/storage/compose-compiler/repository/") }
     }
 }
 
