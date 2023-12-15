@@ -118,10 +118,6 @@ dependencies {
 
 dependencyAnalysis {
     issues {
-        onIncorrectConfiguration {
-            exclude("org.jetbrains.kotlin:kotlin-stdlib")
-        }
-
         onUnusedDependencies {
             exclude(
                 // Submodules used by Hilt

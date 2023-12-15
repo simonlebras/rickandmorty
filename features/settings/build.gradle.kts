@@ -11,7 +11,6 @@ android {
 
 dependencies {
     api(projects.core.locale)
-    api(projects.core.resourceState)
     api(projects.core.theme)
 
     implementation(libs.androidx.activity.compose)
@@ -26,5 +25,6 @@ dependencies {
     implementation(projects.core.coroutines)
     implementation(projects.core.designsystem)
     implementation(projects.core.jankstats)
+    implementation(projects.core.resourceState)
     implementation(projects.core.uiResources)
 }

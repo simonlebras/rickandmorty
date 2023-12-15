@@ -11,7 +11,6 @@ android {
 
 dependencies {
     api(projects.core.coroutines)
-    api(projects.core.startup)
     api(projects.core.themeProto)
 
     implementation(platform(libs.androidx.compose.bom))
@@ -20,4 +19,6 @@ dependencies {
     implementation(libs.androidx.datastore)
 
     implementation(libs.kotlinx.collectionsimmutable)
+
+    implementation(projects.core.startup)
 }

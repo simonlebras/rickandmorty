@@ -12,7 +12,7 @@ android {
 dependencies {
     api(libs.timber)
 
-    api(projects.core.startup)
+    implementation(projects.core.startup)
 
     releaseImplementation(platform(libs.firebase.bom))
     releaseImplementation(libs.firebase.crashlytics)
