@@ -11,5 +11,6 @@ android {
 
 dependencies {
     api(projects.core.logging)
-    api(projects.core.startup)
+
+    implementation(projects.core.startup)
 }

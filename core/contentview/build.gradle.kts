@@ -12,8 +12,8 @@ android {
 dependencies {
     debugApi(libs.debugdrawer.okhttplogger)
 
-    debugApi(projects.core.okhttp)
-
     debugImplementation(libs.debugdrawer)
     debugImplementation(libs.debugdrawer.timber)
+
+    debugImplementation(projects.core.okhttp)
 }

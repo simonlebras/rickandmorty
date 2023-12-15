@@ -65,9 +65,11 @@ private fun Project.configureDependencyAnalysis() {
     configure<DependencyAnalysisExtension> {
         issues {
             all {
-                ignoreKtx(true)
                 onAny {
                     severity("fail")
+                }
+                onIncorrectConfiguration {
+                    exclude("org.jetbrains.kotlin:kotlin-stdlib")
                 }
                 onUsedTransitiveDependencies {
                     severity("ignore")

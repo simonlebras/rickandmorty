@@ -37,7 +37,7 @@ autodagger = "0.11.0"
 cachefix = "3.0"
 coil = "2.5.0"
 debugdrawer = "0.9.8"
-dependencyanalysis = "1.24.0"
+dependencyanalysis = "1.28.0"
 easylauncher = "6.2.0"
 firebase-bom = "32.7.0"
 firebase-crashlytics-plugin = "2.9.9"
@@ -138,10 +138,10 @@ debugdrawer-timber = { group = "au.com.gridstone.debugdrawer", name = "debugdraw
 
 dependencyanalysis-plugin = { group = "com.autonomousapps", name = "dependency-analysis-gradle-plugin", version.ref = "dependencyanalysis" }
 
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
-firebase-perf = { group = "com.google.firebase", name = "firebase-perf-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }

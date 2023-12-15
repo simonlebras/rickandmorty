@@ -13,10 +13,10 @@ dependencies {
     api(libs.kotlinx.collectionsimmutable)
 
     api(projects.core.core)
-    api(projects.core.coroutines)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.core)
+
+    implementation(projects.core.coroutines)
 }
