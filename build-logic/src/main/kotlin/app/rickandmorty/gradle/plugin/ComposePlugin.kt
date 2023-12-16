@@ -38,7 +38,7 @@ private fun Project.configureCompose(libs: LibrariesForLibs) {
 
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
-            freeCompilerArgs += buildComposeMetricsParameters()
+            freeCompilerArgs += buildComposeCompilerArgs()
         }
     }
 
@@ -51,7 +51,7 @@ private fun Project.configureCompose(libs: LibrariesForLibs) {
     }
 }
 
-private fun Project.buildComposeMetricsParameters(): List<String> {
+private fun Project.buildComposeCompilerArgs(): List<String> {
     return buildList {
         val enableMetrics = findProperty("enableComposeCompilerMetrics") == "true"
         if (enableMetrics) {
@@ -74,5 +74,13 @@ private fun Project.buildComposeMetricsParameters(): List<String> {
                     ":reportsDestination=$reportsFolder",
             )
         }
+
+        // Enable strong skipping mode https://android-review.googlesource.com/c/platform/frameworks/support/+/2671135
+        add("-P")
+        add(
+            "plugin" +
+                ":androidx.compose.compiler.plugins.kotlin" +
+                ":experimentalStrongSkipping=true",
+        )
     }
 }
