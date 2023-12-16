@@ -14,9 +14,7 @@ dependencies {
 
     api(projects.core.core)
 
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.compose.runtime)
 
     implementation(projects.core.coroutines)
 }
