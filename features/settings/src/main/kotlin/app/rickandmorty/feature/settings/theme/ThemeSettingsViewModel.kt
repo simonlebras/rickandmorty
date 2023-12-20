@@ -3,11 +3,9 @@ package app.rickandmorty.feature.settings.theme
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.rickandmorty.coroutines.WhileViewSubscribed
+import app.rickandmorty.data.model.NightMode
+import app.rickandmorty.data.theme.ThemeRepository
 import app.rickandmorty.resourcestate.ResourceController
-import app.rickandmorty.theme.domain.GetAvailableNightModesUseCase
-import app.rickandmorty.theme.domain.GetThemeUseCase
-import app.rickandmorty.theme.domain.NightMode
-import app.rickandmorty.theme.domain.SetNightModeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
@@ -17,16 +15,14 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 internal class ThemeSettingsViewModel @Inject constructor(
-    getThemeUseCase: GetThemeUseCase,
-    getAvailableNightModes: GetAvailableNightModesUseCase,
-    private val setNightMode: SetNightModeUseCase,
+    private val themeRepository: ThemeRepository,
 ) : ViewModel() {
     private val theme = ResourceController(
-        resource = getThemeUseCase(),
+        resource = themeRepository.getTheme(),
     )
 
     private val availableNightModes = ResourceController(
-        resource = suspend { getAvailableNightModes() },
+        resource = suspend { themeRepository.getAvailableNightModes() },
     )
 
     val uiState: StateFlow<ThemeSettingsUiState> = combine(
@@ -45,7 +41,7 @@ internal class ThemeSettingsViewModel @Inject constructor(
 
     fun setNightMode(nightMode: NightMode) {
         viewModelScope.launch {
-            setNightMode.invoke(nightMode)
+            themeRepository.setNightMode(nightMode)
         }
     }
 }

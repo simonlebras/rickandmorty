@@ -11,7 +11,8 @@ android {
 
 dependencies {
     api(projects.core.locale)
-    api(projects.core.theme)
+
+    api(projects.data.theme)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)

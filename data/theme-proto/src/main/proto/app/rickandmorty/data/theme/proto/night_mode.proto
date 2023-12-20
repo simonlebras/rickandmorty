@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "app.rickandmorty.data.theme.proto";
+
+enum NightMode {
+  UNSPECIFIED = 0;
+  AUTO_BATTERY = 1;
+  FOLLOW_SYSTEM = 2;
+  LIGHT = 3;
+  DARK = 4;
+}

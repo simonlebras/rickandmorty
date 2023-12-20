@@ -3,10 +3,9 @@ package app.rickandmorty.feature.settings.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.rickandmorty.coroutines.WhileViewSubscribed
+import app.rickandmorty.data.theme.ThemeRepository
 import app.rickandmorty.locale.domain.GetApplicationLocaleUseCase
 import app.rickandmorty.resourcestate.ResourceController
-import app.rickandmorty.theme.domain.GetThemeUseCase
-import app.rickandmorty.theme.domain.SetUseDynamicColorUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
@@ -16,12 +15,11 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 internal class MainSettingsViewModel @Inject constructor(
-    getThemeUseCase: GetThemeUseCase,
+    private val themeRepository: ThemeRepository,
     getApplicationLocale: GetApplicationLocaleUseCase,
-    private val setUseDynamicColor: SetUseDynamicColorUseCase,
 ) : ViewModel() {
     private val theme = ResourceController(
-        resource = getThemeUseCase(),
+        resource = themeRepository.getTheme(),
     )
 
     private val applicationLocale = ResourceController(
@@ -44,7 +42,7 @@ internal class MainSettingsViewModel @Inject constructor(
 
     fun setUseDynamicColor(useDynamicColor: Boolean) {
         viewModelScope.launch {
-            setUseDynamicColor.invoke(useDynamicColor)
+            themeRepository.setUseDynamicColor(useDynamicColor)
         }
     }
 }
