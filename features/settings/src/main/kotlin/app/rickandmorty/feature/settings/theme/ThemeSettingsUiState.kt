@@ -1,11 +1,11 @@
 package app.rickandmorty.feature.settings.theme
 
 import androidx.compose.runtime.Immutable
+import app.rickandmorty.data.model.NightMode
+import app.rickandmorty.data.model.Theme
 import app.rickandmorty.resourcestate.Incomplete
 import app.rickandmorty.resourcestate.ResourceState
 import app.rickandmorty.resourcestate.Uninitialized
-import app.rickandmorty.theme.domain.NightMode
-import app.rickandmorty.theme.domain.Theme
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable

@@ -99,7 +99,8 @@ dependencies {
     implementation(projects.core.okhttp)
     implementation(projects.core.resourceState)
     implementation(projects.core.startup)
-    implementation(projects.core.theme)
+
+    implementation(projects.data.theme)
 
     implementation(projects.features.characters)
     implementation(projects.features.episodes)
@@ -142,6 +143,9 @@ moduleGraphAssert {
     maxHeight = 4
     allowed = arrayOf(
         ":app -> :features:.*",
+        ":app -> :data:.*",
+        ":features:.* -> :data:.*",
+        ":data:.* -> :data:.*",
         ":.* -> :core:.*",
     )
 }

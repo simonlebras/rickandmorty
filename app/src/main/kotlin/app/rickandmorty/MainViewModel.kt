@@ -3,8 +3,8 @@ package app.rickandmorty
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.rickandmorty.coroutines.WhileViewSubscribed
+import app.rickandmorty.data.theme.ThemeRepository
 import app.rickandmorty.resourcestate.ResourceController
-import app.rickandmorty.theme.domain.GetThemeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.stateIn
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    getTheme: GetThemeUseCase,
+    themeRepository: ThemeRepository,
 ) : ViewModel() {
     private val theme = ResourceController(
-        resource = getTheme(),
+        resource = themeRepository.getTheme(),
     )
 
     val uiState: StateFlow<MainUiState> = theme.state

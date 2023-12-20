@@ -1,8 +1,8 @@
 package app.rickandmorty.feature.settings.utils
 
 import androidx.annotation.StringRes
+import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.feature.settings.R
-import app.rickandmorty.theme.domain.NightMode
 
 @get:StringRes
 internal val NightMode.label: Int

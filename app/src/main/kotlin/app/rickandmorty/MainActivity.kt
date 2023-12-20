@@ -25,9 +25,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.metrics.performance.JankStats
 import androidx.navigation.compose.rememberNavController
 import app.rickandmorty.contentview.ContentViewSetter
+import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.designsystem.theme.RamTheme
 import app.rickandmorty.resourcestate.Incomplete
-import app.rickandmorty.theme.domain.NightMode
 import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
