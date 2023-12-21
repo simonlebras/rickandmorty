@@ -63,6 +63,9 @@ jobs:
       - name: Check module graph
         run: ./gradlew assertModuleGraph
 
+      - name: Check badging
+        run: ./gradlew :app:checkReleaseBadging
+
       - name: Run build-logic checks
         run: ./gradlew check -p build-logic
 

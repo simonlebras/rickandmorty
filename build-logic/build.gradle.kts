@@ -18,13 +18,23 @@ tasks.withType<KotlinCompile>().configureEach {
     }
 }
 
+tasks {
+    validatePlugins {
+        enableStricterValidation = true
+        failOnWarning = true
+    }
+}
+
 dependencies {
     compileOnly(libs.affectedmoduledetector.plugin)
     compileOnly(libs.android.plugin)
+    compileOnly(libs.android.tools.common)
     compileOnly(libs.dependencyanalysis.plugin)
     compileOnly(libs.kotlin.plugin)
     compileOnly(libs.spotless.plugin)
     compileOnly(libs.wire.plugin)
+
+    implementation(libs.truth)
 
     // Workaround for https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))

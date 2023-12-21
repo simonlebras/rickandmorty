@@ -5,6 +5,14 @@
   ],
   "packageRules": [
     {
+      "groupName": "AGP and Android Tools",
+      "groupSlug": "android",
+      "matchPackagePatterns": [
+        "^com.android.tools.build",
+        "^com.android.tools"
+      ]
+    },
+    {
       "groupName": "Kotlin, KSP and Compose Compiler",
       "groupSlug": "kotlin",
       "matchPackagePatterns": [
