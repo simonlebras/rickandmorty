@@ -30,18 +30,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.designsystem.theme.supportsDynamicTheming
+import app.rickandmorty.core.metrics.TrackScrollJank
+import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.Theme
-import app.rickandmorty.designsystem.icon.RamIcons
-import app.rickandmorty.designsystem.theme.supportsDynamicTheming
 import app.rickandmorty.feature.settings.Header
 import app.rickandmorty.feature.settings.R
 import app.rickandmorty.feature.settings.SettingsContentType
 import app.rickandmorty.feature.settings.loader
 import app.rickandmorty.feature.settings.utils.label
 import app.rickandmorty.feature.settings.utils.versionName
-import app.rickandmorty.jankstats.TrackScrollJank
 import app.rickandmorty.locale.domain.Locale
-import app.rickandmorty.ui.resources.R as UiR
 
 @Composable
 internal fun MainSettingsScreen(

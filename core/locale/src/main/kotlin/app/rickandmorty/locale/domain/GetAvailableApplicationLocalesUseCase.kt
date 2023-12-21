@@ -1,6 +1,6 @@
 package app.rickandmorty.locale.domain
 
-import app.rickandmorty.coroutines.IODispatcher
+import app.rickandmorty.core.coroutines.IODispatcher
 import javax.inject.Inject
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.CoroutineDispatcher

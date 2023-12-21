@@ -2,7 +2,7 @@ package app.rickandmorty.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
-import app.rickandmorty.designsystem.icon.RamIcons
+import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.feature.characters.R as CharactersR
 import app.rickandmorty.feature.characters.navigation.characterListRoute
 import app.rickandmorty.feature.episodes.R as EpisodesR

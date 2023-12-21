@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.okhttp"
+    namespace = "app.rickandmorty.core.okhttp"
 }
 
 dependencies {

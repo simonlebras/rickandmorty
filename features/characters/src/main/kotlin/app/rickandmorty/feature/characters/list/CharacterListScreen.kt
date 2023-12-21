@@ -14,9 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import app.rickandmorty.designsystem.icon.RamIcons
+import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.feature.characters.R
-import app.rickandmorty.ui.resources.R as UiR
 
 @Composable
 internal fun CharacterListScreen(

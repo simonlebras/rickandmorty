@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.logging"
+    namespace = "app.rickandmorty.core.logging"
 }
 
 dependencies {

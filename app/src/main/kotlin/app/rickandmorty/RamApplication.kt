@@ -3,7 +3,7 @@ package app.rickandmorty
 import android.app.Application
 import android.content.res.Configuration
 import app.rickandmorty.core.AppDelegate
-import app.rickandmorty.startup.Initializer
+import app.rickandmorty.core.startup.Initializer
 import coil.ImageLoaderFactory
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject

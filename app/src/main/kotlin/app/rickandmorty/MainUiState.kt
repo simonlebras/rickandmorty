@@ -1,10 +1,10 @@
 package app.rickandmorty
 
 import androidx.compose.runtime.Immutable
+import app.rickandmorty.core.resourcestate.Incomplete
+import app.rickandmorty.core.resourcestate.ResourceState
+import app.rickandmorty.core.resourcestate.Uninitialized
 import app.rickandmorty.data.model.Theme
-import app.rickandmorty.resourcestate.Incomplete
-import app.rickandmorty.resourcestate.ResourceState
-import app.rickandmorty.resourcestate.Uninitialized
 
 @Immutable
 data class MainUiState(

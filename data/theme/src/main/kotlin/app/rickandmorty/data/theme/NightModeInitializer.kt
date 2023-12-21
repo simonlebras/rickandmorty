@@ -1,8 +1,8 @@
 package app.rickandmorty.data.theme
 
-import app.rickandmorty.coroutines.ApplicationScope
-import app.rickandmorty.startup.Initializer
-import app.rickandmorty.strictmode.allowThreadDiskReads
+import app.rickandmorty.core.coroutines.ApplicationScope
+import app.rickandmorty.core.startup.Initializer
+import app.rickandmorty.core.strictmode.allowThreadDiskReads
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.distinctUntilChanged

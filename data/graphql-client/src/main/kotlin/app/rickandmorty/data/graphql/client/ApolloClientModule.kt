@@ -1,7 +1,7 @@
 package app.rickandmorty.data.graphql.client
 
 import android.content.Context
-import app.rickandmorty.coroutines.IODispatcher
+import app.rickandmorty.core.coroutines.IODispatcher
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.cache.normalized.api.MemoryCacheFactory
 import com.apollographql.apollo3.cache.normalized.api.NormalizedCacheFactory

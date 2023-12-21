@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.ui"
+    namespace = "app.rickandmorty.core.ui"
 }
 
 dependencies {
