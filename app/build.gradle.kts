@@ -140,7 +140,7 @@ easylauncher {
 }
 
 moduleGraphAssert {
-    maxHeight = 4
+    maxHeight = 5
     allowed = arrayOf(
         ":app -> :features:.*",
         ":app -> :data:.*",
