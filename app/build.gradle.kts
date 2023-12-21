@@ -83,7 +83,7 @@ baselineProfile {
 }
 
 dependencies {
-    baselineProfile(projects.baselineprofile)
+    baselineProfile(projects.baselineProfile)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.material3.adaptive.navigationsuite)
@@ -91,11 +91,11 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(projects.core.coil)
-    implementation(projects.core.contentview)
+    implementation(projects.core.contentView)
     implementation(projects.core.core)
     implementation(projects.core.coroutines)
-    implementation(projects.core.designsystem)
-    implementation(projects.core.jankstats)
+    implementation(projects.core.designSystem)
+    implementation(projects.core.metrics)
     implementation(projects.core.okhttp)
     implementation(projects.core.resourceState)
     implementation(projects.core.startup)
@@ -114,7 +114,7 @@ dependencies {
 
     debugRuntimeOnly(libs.leakcanary)
 
-    debugRuntimeOnly(projects.core.strictmode)
+    debugRuntimeOnly(projects.core.strictMode)
 }
 
 dependencyAnalysis {
@@ -124,7 +124,7 @@ dependencyAnalysis {
                 // Submodules used by Hilt
                 // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
                 ":core:coil",
-                ":core:jankstats",
+                ":core:metrics",
                 ":core:okhttp",
             )
         }

@@ -24,10 +24,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.metrics.performance.JankStats
 import androidx.navigation.compose.rememberNavController
-import app.rickandmorty.contentview.ContentViewSetter
+import app.rickandmorty.core.contentview.ContentViewSetter
+import app.rickandmorty.core.designsystem.theme.RamTheme
+import app.rickandmorty.core.resourcestate.Incomplete
 import app.rickandmorty.data.model.NightMode
-import app.rickandmorty.designsystem.theme.RamTheme
-import app.rickandmorty.resourcestate.Incomplete
 import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

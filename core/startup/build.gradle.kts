@@ -5,5 +5,5 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.startup"
+    namespace = "app.rickandmorty.core.startup"
 }

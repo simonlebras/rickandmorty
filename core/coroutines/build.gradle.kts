@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.coroutines"
+    namespace = "app.rickandmorty.core.coroutines"
 }
 
 dependencies {

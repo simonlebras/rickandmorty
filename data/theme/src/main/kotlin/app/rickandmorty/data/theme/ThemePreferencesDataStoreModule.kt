@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
-import app.rickandmorty.coroutines.ApplicationScope
-import app.rickandmorty.coroutines.IODispatcher
+import app.rickandmorty.core.coroutines.ApplicationScope
+import app.rickandmorty.core.coroutines.IODispatcher
 import app.rickandmorty.data.theme.proto.ThemePreferences
 import dagger.Module
 import dagger.Provides

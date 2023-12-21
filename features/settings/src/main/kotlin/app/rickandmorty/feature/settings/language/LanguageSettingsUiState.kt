@@ -1,10 +1,10 @@
 package app.rickandmorty.feature.settings.language
 
 import androidx.compose.runtime.Immutable
+import app.rickandmorty.core.resourcestate.Incomplete
+import app.rickandmorty.core.resourcestate.ResourceState
+import app.rickandmorty.core.resourcestate.Uninitialized
 import app.rickandmorty.locale.domain.Locale
-import app.rickandmorty.resourcestate.Incomplete
-import app.rickandmorty.resourcestate.ResourceState
-import app.rickandmorty.resourcestate.Uninitialized
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable

@@ -25,11 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.rickandmorty.core.metrics.TrackScrollJank
+import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.feature.settings.R
 import app.rickandmorty.feature.settings.utils.label
-import app.rickandmorty.jankstats.TrackScrollJank
-import app.rickandmorty.ui.resources.R as UiR
 
 @Composable
 internal fun ThemeSettingsDialog(

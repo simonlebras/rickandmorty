@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.coil"
+    namespace = "app.rickandmorty.core.coil"
 }
 
 dependencies {

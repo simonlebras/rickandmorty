@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.hilt.test"
+    namespace = "app.rickandmorty.core.hilt.test"
 }
 
 dependencies {

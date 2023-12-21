@@ -20,5 +20,5 @@ dependencies {
 
     implementation(projects.core.coroutines)
     implementation(projects.core.startup)
-    implementation(projects.core.strictmode)
+    implementation(projects.core.strictMode)
 }

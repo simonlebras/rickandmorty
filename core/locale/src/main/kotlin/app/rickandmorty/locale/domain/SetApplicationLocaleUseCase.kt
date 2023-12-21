@@ -1,7 +1,7 @@
 package app.rickandmorty.locale.domain
 
-import app.rickandmorty.coroutines.ApplicationScope
-import app.rickandmorty.coroutines.MainDispatcher
+import app.rickandmorty.core.coroutines.ApplicationScope
+import app.rickandmorty.core.coroutines.MainDispatcher
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope

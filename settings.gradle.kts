@@ -54,21 +54,21 @@ rootProject.name = "rickandmorty"
 
 include(":app")
 
-include(":baselineprofile")
+include(":baseline-profile")
 
 include(":core:coil")
-include(":core:contentview")
+include(":core:content-view")
 include(":core:core")
 include(":core:coroutines")
-include(":core:designsystem")
+include(":core:design-system")
 include(":core:hilt-test")
-include(":core:jankstats")
 include(":core:locale")
 include(":core:logging")
+include(":core:metrics")
 include(":core:okhttp")
 include(":core:resource-state")
 include(":core:startup")
-include(":core:strictmode")
+include(":core:strict-mode")
 include(":core:ui")
 include(":core:ui-resources")
 

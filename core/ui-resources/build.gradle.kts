@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.ui.resources"
+    namespace = "app.rickandmorty.core.ui.resources"
 }

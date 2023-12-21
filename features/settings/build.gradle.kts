@@ -24,8 +24,8 @@ dependencies {
     implementation(libs.kotlinx.collectionsimmutable)
 
     implementation(projects.core.coroutines)
-    implementation(projects.core.designsystem)
-    implementation(projects.core.jankstats)
+    implementation(projects.core.designSystem)
+    implementation(projects.core.metrics)
     implementation(projects.core.resourceState)
     implementation(projects.core.uiResources)
 }
