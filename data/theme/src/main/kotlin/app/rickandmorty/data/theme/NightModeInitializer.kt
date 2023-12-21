@@ -2,6 +2,7 @@ package app.rickandmorty.data.theme
 
 import app.rickandmorty.coroutines.ApplicationScope
 import app.rickandmorty.startup.Initializer
+import app.rickandmorty.strictmode.allowThreadDiskReads
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -19,19 +20,23 @@ internal class NightModeInitializer @Inject constructor(
     @ApplicationScope private val applicationScope: CoroutineScope,
 ) : Initializer {
     override fun initialize() {
-        val nightMode = runBlocking {
-            themeRepository
-                .getTheme()
-                .first()
-                .nightMode
+        // Set default night mode during app startup
+        val currentNightMode = allowThreadDiskReads {
+            runBlocking {
+                themeRepository
+                    .getTheme()
+                    .first()
+                    .nightMode
+            }
         }
-        nightModeManager.setNightMode(nightMode)
+        nightModeManager.setNightMode(currentNightMode)
 
+        // Update default night mode to match the theme
         themeRepository.getTheme()
             .map { theme -> theme.nightMode }
             .distinctUntilChanged()
-            .onEach {
-                nightModeManager.setNightMode(it)
+            .onEach { nightMode ->
+                nightModeManager.setNightMode(nightMode)
             }
             .launchIn(applicationScope)
     }
