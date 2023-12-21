@@ -6,6 +6,7 @@ android-plugin = "8.2.0"
 android-sdk-compile = "34"
 android-sdk-min = "24"
 android-sdk-target = "34"
+android-tools = "31.2.0"
 androidx-activity = "1.8.2"
 androidx-appcompat = "1.7.0-alpha03"
 androidx-benchmark = "1.2.2"
@@ -75,6 +76,7 @@ affectedmoduledetector-plugin = { group = "com.dropbox.affectedmoduledetector", 
 
 android-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
 android-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android-plugin" }
+android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools" }
 
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }

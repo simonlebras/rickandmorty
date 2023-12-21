@@ -3,8 +3,9 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.util.apply
 import app.rickandmorty.gradle.util.configureAffectedAndroidTest
 import app.rickandmorty.gradle.util.configureAndroid
+import app.rickandmorty.gradle.util.configureBadgingTasks
 import app.rickandmorty.gradle.util.configureSpotless
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import com.android.build.gradle.AppExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -25,10 +26,12 @@ public class AndroidApplicationPlugin : Plugin<Project> {
 
         configureAffectedAndroidTest()
 
-        configure<BaseAppModuleExtension> {
+        configure<AppExtension> {
             configureAndroid(libs)
 
-            packaging {
+            configureBadgingTasks()
+
+            packagingOptions {
                 resources {
                     excludes += "/META-INF/{AL2.0,LGPL2.1}"
                 }
