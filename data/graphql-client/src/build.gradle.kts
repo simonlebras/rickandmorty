@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.graphql.client"
+    namespace = "app.rickandmorty.data.graphql.client"
 }
 
 dependencies {

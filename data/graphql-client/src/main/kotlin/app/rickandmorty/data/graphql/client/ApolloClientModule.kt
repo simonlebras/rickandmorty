@@ -1,4 +1,4 @@
-package app.rickandmorty.graphql
+package app.rickandmorty.data.graphql.client
 
 import android.content.Context
 import app.rickandmorty.coroutines.IODispatcher
