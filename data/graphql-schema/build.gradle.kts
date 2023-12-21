@@ -7,11 +7,11 @@ plugins {
 
 apollo {
     service("rickandmorty") {
-        packageName.set("app.rickandmorty.graphql.schema")
+        packageName.set("app.rickandmorty.data.graphql.schema")
         generateDataBuilders.set(true)
         introspection {
             endpointUrl.set("https://rickandmortyapi.com/graphql")
-            schemaFile.set(file("src/main/graphql/app/rickandmorty/graphql/schema/schema.graphqls"))
+            schemaFile.set(file("src/main/graphql/app/rickandmorty/data/graphql/schema/schema.graphqls"))
         }
     }
 }
