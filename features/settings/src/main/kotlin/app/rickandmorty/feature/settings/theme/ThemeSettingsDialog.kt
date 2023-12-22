@@ -29,7 +29,7 @@ import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.feature.settings.R
-import app.rickandmorty.feature.settings.utils.label
+import app.rickandmorty.feature.settings.util.label
 
 @Composable
 internal fun ThemeSettingsDialog(

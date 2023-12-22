@@ -1,6 +1,5 @@
 package app.rickandmorty
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigation.suite.ExperimentalMaterial3AdaptiveNavigationSuiteApi
@@ -25,32 +24,31 @@ fun RamApp(
 ) {
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
-    Box(modifier = modifier) {
-        NavigationSuiteScaffold(
-            navigationSuiteItems = {
-                TopLevelDestination.entries.fastForEach { destination ->
-                    val selected = destination.isInHierarchy(currentDestination)
-                    item(
-                        selected = selected,
-                        icon = {
-                            val icon = if (selected) {
-                                destination.selectedIcon
-                            } else {
-                                destination.unselectedIcon
-                            }
-                            Icon(
-                                imageVector = icon,
-                                contentDescription = null,
-                            )
-                        },
-                        label = { Text(text = stringResource(destination.label)) },
-                        onClick = { navController.navigateToTopLevelDestination(destination) },
-                    )
-                }
-            },
-        ) {
-            RamNavHost(navController = navController)
-        }
+    NavigationSuiteScaffold(
+        navigationSuiteItems = {
+            TopLevelDestination.entries.fastForEach { destination ->
+                val selected = destination.isInHierarchy(currentDestination)
+                item(
+                    selected = selected,
+                    icon = {
+                        val icon = if (selected) {
+                            destination.selectedIcon
+                        } else {
+                            destination.unselectedIcon
+                        }
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = null,
+                        )
+                    },
+                    label = { Text(text = stringResource(destination.label)) },
+                    onClick = { navController.navigateToTopLevelDestination(destination) },
+                )
+            }
+        },
+        modifier = modifier,
+    ) {
+        RamNavHost(navController = navController)
     }
 }
 

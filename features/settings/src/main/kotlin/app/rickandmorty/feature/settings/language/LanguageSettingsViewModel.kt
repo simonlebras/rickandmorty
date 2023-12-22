@@ -4,10 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.rickandmorty.core.coroutines.WhileViewSubscribed
 import app.rickandmorty.core.resourcestate.ResourceController
-import app.rickandmorty.locale.domain.GetApplicationLocaleUseCase
-import app.rickandmorty.locale.domain.GetAvailableApplicationLocalesUseCase
-import app.rickandmorty.locale.domain.Locale
-import app.rickandmorty.locale.domain.SetApplicationLocaleUseCase
+import app.rickandmorty.data.locale.LocaleRepository
+import app.rickandmorty.data.model.Locale
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
@@ -17,25 +15,23 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 internal class LanguageSettingsViewModel @Inject constructor(
-    getApplicationLocale: GetApplicationLocaleUseCase,
-    private val setApplicationLocale: SetApplicationLocaleUseCase,
-    getAvailableApplicationLocales: GetAvailableApplicationLocalesUseCase,
+    private val localeRepository: LocaleRepository,
 ) : ViewModel() {
-    private val applicationLocale = ResourceController(
-        resource = getApplicationLocale(),
+    private val appLocale = ResourceController(
+        resource = localeRepository.getAppLocale(),
     )
 
-    private val availableApplicationLocales = ResourceController(
-        resource = suspend { getAvailableApplicationLocales() },
+    private val availableAppLocales = ResourceController(
+        resource = suspend { localeRepository.getAvailableAppLocales() },
     )
 
     val uiState: StateFlow<LanguageSettingsUiState> = combine(
-        applicationLocale.state,
-        availableApplicationLocales.state,
-    ) { applicationLocale, availableApplicationLocales ->
+        appLocale.state,
+        availableAppLocales.state,
+    ) { appLocale, availableAppLocales ->
         LanguageSettingsUiState(
-            applicationLocale = applicationLocale,
-            availableApplicationLocales = availableApplicationLocales,
+            appLocale = appLocale,
+            availableAppLocales = availableAppLocales,
         )
     }.stateIn(
         scope = viewModelScope,
@@ -43,9 +39,9 @@ internal class LanguageSettingsViewModel @Inject constructor(
         started = WhileViewSubscribed,
     )
 
-    fun setApplicationLocale(locale: Locale?) {
+    fun setAppLocale(locale: Locale?) {
         viewModelScope.launch {
-            setApplicationLocale.invoke(locale)
+            localeRepository.setAppLocale(locale)
         }
     }
 }

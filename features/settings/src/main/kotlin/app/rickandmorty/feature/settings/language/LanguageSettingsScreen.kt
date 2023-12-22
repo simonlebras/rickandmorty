@@ -32,10 +32,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.resources.R as UiR
+import app.rickandmorty.data.model.Locale
 import app.rickandmorty.feature.settings.R
 import app.rickandmorty.feature.settings.SettingsContentType
 import app.rickandmorty.feature.settings.loader
-import app.rickandmorty.locale.domain.Locale
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -53,7 +53,7 @@ internal fun LanguageSettingsScreen(
         onSelectLocale = remember(viewModel, onNavigateUp) {
             {
                     locale ->
-                viewModel.setApplicationLocale(locale)
+                viewModel.setAppLocale(locale)
                 onNavigateUp()
             }
         },
@@ -99,17 +99,17 @@ private fun LanguageSettingsScreen(
                 }
 
                 else -> {
-                    val currentApplicationLocale = uiState.applicationLocale()
+                    val currentAppLocale = uiState.appLocale()
 
                     systemDefault(
-                        currentApplicationLocale = currentApplicationLocale,
+                        currentAppLocale = currentAppLocale,
                         onSelectLocale = onSelectLocale,
                     )
 
-                    val availableApplicationLocales = uiState.availableApplicationLocales()!!
-                    availableApplicationLocales(
-                        currentApplicationLocale = currentApplicationLocale,
-                        availableApplicationLocales = availableApplicationLocales,
+                    val availableAppLocales = uiState.availableAppLocales()!!
+                    availableAppLocales(
+                        currentAppLocale = currentAppLocale,
+                        availableAppLocales = availableAppLocales,
                         onSelectLocale = onSelectLocale,
                     )
                 }
@@ -141,7 +141,7 @@ private fun LanguageSettingsAppBar(
 }
 
 private fun LazyListScope.systemDefault(
-    currentApplicationLocale: Locale?,
+    currentAppLocale: Locale?,
     onSelectLocale: (Locale?) -> Unit,
 ) {
     item(
@@ -150,24 +150,24 @@ private fun LazyListScope.systemDefault(
     ) {
         LocaleItem(
             text = stringResource(R.string.settings_language_system_default),
-            isSelected = currentApplicationLocale == null,
+            isSelected = currentAppLocale == null,
             onClick = { onSelectLocale(null) },
         )
     }
 }
 
-private fun LazyListScope.availableApplicationLocales(
-    currentApplicationLocale: Locale?,
-    availableApplicationLocales: ImmutableList<Locale>,
+private fun LazyListScope.availableAppLocales(
+    currentAppLocale: Locale?,
+    availableAppLocales: ImmutableList<Locale>,
     onSelectLocale: (Locale?) -> Unit,
 ) {
     items(
-        items = availableApplicationLocales,
+        items = availableAppLocales,
         key = { locale -> locale.toLanguageTag() },
     ) { locale ->
         LocaleItem(
             text = locale.getDisplayName(locale),
-            isSelected = locale == currentApplicationLocale,
+            isSelected = locale == currentAppLocale,
             onClick = { onSelectLocale(locale) },
         )
     }
