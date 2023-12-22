@@ -2,7 +2,6 @@ package app.rickandmorty.data.theme
 
 import app.rickandmorty.core.coroutines.ApplicationScope
 import app.rickandmorty.core.startup.Initializer
-import app.rickandmorty.core.strictmode.allowThreadDiskReads
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -21,13 +20,11 @@ internal class NightModeInitializer @Inject constructor(
 ) : Initializer {
     override fun initialize() {
         // Set default night mode during app startup
-        val currentNightMode = allowThreadDiskReads {
-            runBlocking {
-                themeRepository
-                    .getTheme()
-                    .first()
-                    .nightMode
-            }
+        val currentNightMode = runBlocking {
+            themeRepository
+                .getTheme()
+                .first()
+                .nightMode
         }
         nightModeManager.setNightMode(currentNightMode)
 
