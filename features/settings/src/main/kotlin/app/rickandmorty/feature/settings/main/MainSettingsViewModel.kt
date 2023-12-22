@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.rickandmorty.core.coroutines.WhileViewSubscribed
 import app.rickandmorty.core.resourcestate.ResourceController
+import app.rickandmorty.data.locale.LocaleRepository
 import app.rickandmorty.data.theme.ThemeRepository
-import app.rickandmorty.locale.domain.GetApplicationLocaleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
@@ -16,23 +16,23 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 internal class MainSettingsViewModel @Inject constructor(
     private val themeRepository: ThemeRepository,
-    getApplicationLocale: GetApplicationLocaleUseCase,
+    localeRepository: LocaleRepository,
 ) : ViewModel() {
     private val theme = ResourceController(
         resource = themeRepository.getTheme(),
     )
 
-    private val applicationLocale = ResourceController(
-        resource = getApplicationLocale(),
+    private val appLocale = ResourceController(
+        resource = localeRepository.getAppLocale(),
     )
 
     val uiState: StateFlow<MainSettingsUiState> = combine(
         theme.state,
-        applicationLocale.state,
-    ) { theme, applicationLocale ->
+        appLocale.state,
+    ) { theme, appLocale ->
         MainSettingsUiState(
             theme = theme,
-            applicationLocale = applicationLocale,
+            appLocale = appLocale,
         )
     }.stateIn(
         scope = viewModelScope,

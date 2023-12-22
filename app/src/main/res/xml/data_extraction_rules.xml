@@ -5,12 +5,20 @@
         <include
             domain="file"
             path="datastore/theme_preferences.pb" />
+
+        <include
+            domain="file"
+            path="datastore/locale_preferences.pb" />
     </cloud-backup>
 
     <device-transfer>
         <include
             domain="file"
             path="datastore/theme_preferences.pb" />
+
+        <include
+            domain="file"
+            path="datastore/locale_preferences.pb" />
     </device-transfer>
 
 </data-extraction-rules>

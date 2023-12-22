@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <full-backup-content>
+
     <include
         domain="file"
         path="datastore/theme_preferences.pb" />
+
+    <include
+        domain="file"
+        path="datastore/locale_preferences.pb" />
+
 </full-backup-content>

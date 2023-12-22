@@ -1,1 +1,1 @@
--keep class app.rickandmorty.theme.proto.** { *; }
+-keep class app.rickandmorty.data.theme.proto.** { *; }

@@ -34,14 +34,14 @@ import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.theme.supportsDynamicTheming
 import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.resources.R as UiR
+import app.rickandmorty.data.model.Locale
 import app.rickandmorty.data.model.Theme
 import app.rickandmorty.feature.settings.Header
 import app.rickandmorty.feature.settings.R
 import app.rickandmorty.feature.settings.SettingsContentType
 import app.rickandmorty.feature.settings.loader
-import app.rickandmorty.feature.settings.utils.label
-import app.rickandmorty.feature.settings.utils.versionName
-import app.rickandmorty.locale.domain.Locale
+import app.rickandmorty.feature.settings.util.label
+import app.rickandmorty.feature.settings.util.versionName
 
 @Composable
 internal fun MainSettingsScreen(
@@ -110,7 +110,7 @@ private fun MainSettingsScreen(
                 else -> {
                     generalSettings(
                         currentTheme = uiState.theme()!!,
-                        currentApplicationLocale = uiState.applicationLocale(),
+                        currentAppLocale = uiState.appLocale(),
                         supportsDynamicTheming = supportsDynamicTheming,
                         onUpdateUseDynamicColor = onUpdateUseDynamicColor,
                         onNavigateToThemeSettings = onNavigateToThemeSettings,
@@ -150,7 +150,7 @@ private fun MainSettingsAppBar(
 
 private fun LazyListScope.generalSettings(
     currentTheme: Theme,
-    currentApplicationLocale: Locale?,
+    currentAppLocale: Locale?,
     supportsDynamicTheming: Boolean,
     onUpdateUseDynamicColor: (Boolean) -> Unit,
     onNavigateToThemeSettings: () -> Unit,
@@ -223,7 +223,7 @@ private fun LazyListScope.generalSettings(
                     onClick = onNavigateToLanguageSettings,
                 ),
             supportingContent = {
-                val localeName = currentApplicationLocale?.getDisplayName(currentApplicationLocale)
+                val localeName = currentAppLocale?.getDisplayName(currentAppLocale)
                     ?: stringResource(R.string.settings_language_system_default)
                 Text(text = localeName)
             },

@@ -10,8 +10,7 @@ android {
 }
 
 dependencies {
-    api(projects.core.locale)
-
+    api(projects.data.locale)
     api(projects.data.theme)
 
     implementation(libs.androidx.activity.compose)

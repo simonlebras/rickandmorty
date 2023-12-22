@@ -92,7 +92,6 @@ dependencies {
 
     implementation(projects.core.coil)
     implementation(projects.core.contentView)
-    implementation(projects.core.core)
     implementation(projects.core.coroutines)
     implementation(projects.core.designSystem)
     implementation(projects.core.metrics)
