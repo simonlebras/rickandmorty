@@ -3,7 +3,10 @@ package app.rickandmorty
 import android.app.Application
 import app.rickandmorty.core.coroutines.DefaultDispatcher
 import app.rickandmorty.core.startup.Initializer
-import coil.ImageLoaderFactory
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.SingletonImageLoader
+import dagger.Lazy
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
@@ -12,9 +15,9 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 
 @HiltAndroidApp
-class RamApplication : Application(), ImageLoaderFactory {
+class RamApplication : Application(), SingletonImageLoader.Factory {
     @Inject
-    lateinit var imageLoaderFactory: ImageLoaderFactory
+    lateinit var imageLoader: Lazy<ImageLoader>
 
     @Inject
     lateinit var initializers: Set<@JvmSuppressWildcards Initializer>
@@ -37,5 +40,7 @@ class RamApplication : Application(), ImageLoaderFactory {
         }
     }
 
-    override fun newImageLoader() = imageLoaderFactory.newImageLoader()
+    override fun newImageLoader(context: PlatformContext): ImageLoader {
+        return imageLoader.get()
+    }
 }

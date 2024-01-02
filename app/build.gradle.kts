@@ -90,6 +90,8 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
 
+    implementation(libs.coil)
+
     implementation(projects.core.coil)
     implementation(projects.core.contentView)
     implementation(projects.core.coroutines)
