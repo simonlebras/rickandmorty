@@ -1,5 +1,4 @@
 [versions]
-accompanist = "0.33.2-alpha"
 affectedmoduledetector = "0.2.1"
 android-desugarjdklibs = "2.0.4"
 android-plugin = "8.2.0"
@@ -69,9 +68,6 @@ turbine = "1.0.0"
 wire = "4.9.3"
 
 [libraries]
-accompanist-placeholder-material3 = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
-accompanist-testharness = { group = "com.google.accompanist", name = "accompanist-testharness", version.ref = "accompanist" }
-
 affectedmoduledetector-plugin = { group = "com.dropbox.affectedmoduledetector", name = "affectedmoduledetector", version.ref = "affectedmoduledetector" }
 
 android-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
