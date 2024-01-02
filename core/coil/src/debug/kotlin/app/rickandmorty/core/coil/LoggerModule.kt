@@ -1,7 +1,7 @@
 package app.rickandmorty.core.coil
 
-import coil.util.DebugLogger
-import coil.util.Logger
+import coil3.util.DebugLogger
+import coil3.util.Logger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

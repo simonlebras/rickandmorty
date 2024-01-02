@@ -35,7 +35,7 @@ androidx-window = "1.2.0"
 apollo = "4.0.0-beta.4"
 autodagger = "1.0.0"
 cachefix = "3.0"
-coil = "2.5.0"
+coil = "3.0.0-alpha01"
 debugdrawer = "0.9.8"
 dependencyanalysis = "1.28.0"
 easylauncher = "6.2.0"
@@ -53,9 +53,10 @@ kotlinx-coroutines = "1.7.3"
 kotlinx-datetime = "0.5.0"
 ksp = "2.0.0-Beta2-1.0.16"
 ktlint = "1.1.0"
+ktor = "2.3.7"
 leakcanary = "2.12"
 modulegraphassert = "2.5.0"
-okhttp = "4.12.0"
+okhttp = "5.0.0-alpha.12"
 play-osslicenses = "17.0.1"
 play-osslicenses-plugin = "0.10.6"
 slack-composelints = "1.2.0"
@@ -126,9 +127,10 @@ apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime",
 autodagger-compiler = { group = "se.ansman.dagger.auto", name = "compiler", version.ref = "autodagger" }
 autodagger-core = { group = "se.ansman.dagger.auto", name = "core", version.ref = "autodagger" }
 
-coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
-coil-base = { group = "io.coil-kt", name = "coil-base", version.ref = "coil" }
-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-core = { group = "io.coil-kt.coil3", name = "coil-core", version.ref = "coil" }
+coil-network = { group = "io.coil-kt.coil3", name = "coil-network", version.ref = "coil" }
 
 debugdrawer = { group = "au.com.gridstone.debugdrawer", name = "debugdrawer", version.ref = "debugdrawer" }
 debugdrawer-okhttplogger = { group = "au.com.gridstone.debugdrawer", name = "debugdrawer-okhttp-logger", version.ref = "debugdrawer" }
@@ -157,6 +159,8 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
