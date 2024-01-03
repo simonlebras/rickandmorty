@@ -1,7 +1,7 @@
 [versions]
 affectedmoduledetector = "0.2.1"
 android-desugarjdklibs = "2.0.4"
-android-plugin = "8.2.0"
+android-plugin = "8.2.1"
 android-sdk-compile = "34"
 android-sdk-min = "24"
 android-sdk-target = "34"
