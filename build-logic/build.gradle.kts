@@ -29,8 +29,10 @@ dependencies {
     compileOnly(libs.affectedmoduledetector.plugin)
     compileOnly(libs.android.plugin)
     compileOnly(libs.android.tools.common)
+    compileOnly(libs.androidx.room.plugin)
     compileOnly(libs.dependencyanalysis.plugin)
     compileOnly(libs.kotlin.plugin)
+    compileOnly(libs.ksp.plugin)
     compileOnly(libs.spotless.plugin)
     compileOnly(libs.wire.plugin)
 
@@ -89,6 +91,10 @@ gradlePlugin {
         register("ossLicenses") {
             id = "app.rickandmorty.oss-licenses"
             implementationClass = "app.rickandmorty.gradle.plugin.OssLicensesPlugin"
+        }
+        register("room") {
+            id = "app.rickandmorty.room"
+            implementationClass = "app.rickandmorty.gradle.plugin.RoomPlugin"
         }
         register("root") {
             id = "app.rickandmorty.root"

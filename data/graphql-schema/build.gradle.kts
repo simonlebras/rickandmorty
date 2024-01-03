@@ -9,10 +9,16 @@ apollo {
     service("rickandmorty") {
         packageName.set("app.rickandmorty.data.graphql.schema")
         generateDataBuilders.set(true)
+        generateApolloMetadata = true
+        schemaFiles.setFrom(
+            "src/main/graphql/schema.graphqls",
+            "src/main/graphql/extra.graphqls",
+        )
         introspection {
             endpointUrl.set("https://rickandmortyapi.com/graphql")
-            schemaFile.set(file("src/main/graphql/app/rickandmorty/data/graphql/schema/schema.graphqls"))
+            schemaFile.set(file("src/main/graphql/schema.graphqls"))
         }
+        isADependencyOf(projects.data.character)
     }
 }
 

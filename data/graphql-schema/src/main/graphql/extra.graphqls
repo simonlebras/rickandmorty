@@ -1,0 +1,20 @@
+extend schema @link(
+    url: "https://specs.apollo.dev/nullability/v0.1",
+    import: ["@catch", "CatchTo", "@semanticNonNull"]
+)
+
+extend schema @catch(to: THROW)
+
+extend type Info @semanticNonNull(field: "count")
+extend type Info @semanticNonNull(field: "next")
+
+extend type Characters @semanticNonNull(field: "info")
+extend type Characters @semanticNonNull(field: "results")
+
+extend type Character @semanticNonNull(field: "id")
+extend type Character @semanticNonNull(field: "name")
+extend type Character @semanticNonNull(field: "status")
+extend type Character @semanticNonNull(field: "species")
+extend type Character @semanticNonNull(field: "type")
+extend type Character @semanticNonNull(field: "gender")
+extend type Character @semanticNonNull(field: "image")
