@@ -20,7 +20,9 @@ androidx-hilt-navigation-compose = "1.1.0"
 androidx-lifecycle = "2.7.0"
 androidx-metrics = "1.0.0-beta01"
 androidx-navigation = "2.7.6"
+androidx-paging = "3.3.0-alpha02"
 androidx-profileinstaller = "1.3.1"
+androidx-room = "2.6.1"
 androidx-test-core = "1.6.0-alpha04"
 androidx-test-espresso = "3.6.0-alpha02"
 androidx-test-junit = "1.2.0-alpha02"
@@ -35,7 +37,7 @@ autodagger = "1.0.0"
 cachefix = "3.0"
 coil = "3.0.0-alpha02"
 debugdrawer = "0.9.8"
-dependencyanalysis = "1.29.0"
+dependencyanalysis = "1.28.0"
 easylauncher = "6.2.0"
 firebase-bom = "32.7.1"
 firebase-crashlytics-plugin = "2.9.9"
@@ -46,6 +48,7 @@ hilt = "2.50"
 jdk = "17"
 junit4 = "4.13.2"
 kotlin = "2.0.0-Beta2"
+kotlinx-atomicfu = "0.23.1"
 kotlinx-collectionsimmutable = "0.3.7"
 kotlinx-coroutines = "1.7.3"
 kotlinx-datetime = "0.5.0"
@@ -60,6 +63,7 @@ play-osslicenses-plugin = "0.10.6"
 slack-composelints = "1.2.0"
 sortdependencies = "0.6"
 spotless = "6.24.0"
+store = "5.0.0"
 testparameterinjector = "1.15"
 timber = "5.0.1"
 truth = "1.3.0"
@@ -105,7 +109,16 @@ androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "l
 androidx-metrics = { group = "androidx.metrics", name = "metrics-performance", version.ref = "androidx-metrics" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidx-navigation" }
+androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "androidx-paging" }
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging" }
+androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidx-paging" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "androidx-profileinstaller" }
+androidx-room = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
+androidx-room-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidx-room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "androidx-room" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidx-test-core" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }
 androidx-test-junit = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-junit" }
@@ -122,6 +135,7 @@ apollo-runtime = { group = "com.apollographql.apollo3", name = "apollo-runtime",
 
 autodagger-compiler = { group = "se.ansman.dagger.auto", name = "compiler", version.ref = "autodagger" }
 autodagger-core = { group = "se.ansman.dagger.auto", name = "core", version.ref = "autodagger" }
+autodagger-room = { group = "se.ansman.dagger.auto", name = "androidx-room", version.ref = "autodagger" }
 
 coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
@@ -148,6 +162,8 @@ junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 
 kotlin-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
+kotlinx-atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version.ref = "kotlinx-atomicfu" }
+
 kotlinx-collectionsimmutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collectionsimmutable" }
 
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
@@ -155,6 +171,8 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+ksp-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
 ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 
@@ -169,6 +187,8 @@ play-osslicenses = { group = "com.google.android.gms", name = "play-services-oss
 slack-compose-lints = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slack-composelints" }
 
 spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
+
+store = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store" }
 
 testparameterinjector = { group = "com.google.testparameterinjector", name = "test-parameter-injector", version.ref = "testparameterinjector" }
 
@@ -195,6 +215,7 @@ rickandmorty-jvm-library = { id = "app.rickandmorty.jvm-library", version = "uns
 rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android", version = "unspecified" }
 rickandmorty-kotlin-jvm = { id = "app.rickandmorty.kotlin-jvm", version = "unspecified" }
 rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses", version = "unspecified" }
+rickandmorty-room = { id = "app.rickandmorty.room", version = "unspecified" }
 rickandmorty-root = { id = "app.rickandmorty.root", version = "unspecified" }
 rickandmorty-wire = { id = "app.rickandmorty.wire", version = "unspecified" }
 
@@ -217,6 +238,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }
 play-osslicenses = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "play-osslicenses-plugin" }
+room = { id = "androidx.room", version.ref = "androidx-room" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 wire = { id = "com.squareup.wire", version.ref = "wire" }

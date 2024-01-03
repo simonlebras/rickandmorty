@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.rickandmorty.kotlin.android) apply false
     alias(libs.plugins.rickandmorty.kotlin.jvm) apply false
     alias(libs.plugins.rickandmorty.osslicenses) apply false
+    alias(libs.plugins.rickandmorty.room) apply false
     alias(libs.plugins.rickandmorty.root)
     alias(libs.plugins.rickandmorty.wire) apply false
 
@@ -33,6 +34,7 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.modulegraphassert) apply false
     alias(libs.plugins.play.osslicenses) apply false
+    alias(libs.plugins.room) apply false
     alias(libs.plugins.sortdependencies)
     alias(libs.plugins.spotless)
     alias(libs.plugins.wire) apply false

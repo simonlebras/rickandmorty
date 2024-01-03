@@ -107,6 +107,7 @@ dependencies {
     implementation(projects.core.resourceState)
     implementation(projects.core.startup)
 
+    implementation(projects.data.graphqlClient)
     implementation(projects.data.theme)
 
     implementation(projects.features.characters)
@@ -133,6 +134,7 @@ dependencyAnalysis {
                 ":core:coil",
                 ":core:metrics",
                 ":core:okhttp",
+                ":data:graphql-client",
             )
         }
     }
