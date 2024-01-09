@@ -33,6 +33,12 @@ android {
         generateLocaleConfig = true
     }
 
+    packaging {
+        resources {
+            excludes += "DebugProbesKt.bin"
+        }
+    }
+
     signingConfigs {
         getByName("debug") {
             storeFile = rootProject.file("keystore/debug.jks")
