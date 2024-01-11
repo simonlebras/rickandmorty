@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.core.content.getSystemService
 import coil3.ImageLoader
 import coil3.annotation.ExperimentalCoilApi
-import coil3.fetch.NetworkFetcher
+import coil3.network.NetworkFetcher
 import coil3.request.allowRgb565
 import coil3.util.Logger
 import dagger.BindsOptionalOf
