@@ -1,4 +1,4 @@
-query GetLocations($page: Int) {
+query GetLocations($page: Int!) {
     locations(page: $page) {
         info {
             count
