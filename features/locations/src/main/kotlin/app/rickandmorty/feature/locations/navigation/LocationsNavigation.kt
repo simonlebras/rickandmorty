@@ -16,8 +16,12 @@ public fun NavHostController.navigateToLocationList(builder: NavOptionsBuilder.(
     )
 }
 
-public fun NavGraphBuilder.locationList() {
+public fun NavGraphBuilder.locationList(
+    onNavigateToSettings: () -> Unit,
+) {
     composable(route = locationListRoute) {
-        LocationListScreen()
+        LocationListScreen(
+            onNavigateToSettings = onNavigateToSettings,
+        )
     }
 }

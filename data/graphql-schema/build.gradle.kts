@@ -14,11 +14,14 @@ apollo {
             "src/main/graphql/schema.graphqls",
             "src/main/graphql/extra.graphqls",
         )
+
         introspection {
             endpointUrl.set("https://rickandmortyapi.com/graphql")
             schemaFile.set(file("src/main/graphql/schema.graphqls"))
         }
+
         isADependencyOf(projects.data.character)
+        isADependencyOf(projects.data.location)
     }
 }
 
