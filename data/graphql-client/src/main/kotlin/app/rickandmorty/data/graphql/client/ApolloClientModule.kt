@@ -19,8 +19,8 @@ private const val SERVER_URL = "https://rickandmortyapi.com/graphql"
 @InstallIn(SingletonComponent::class)
 internal class ApolloClientModule {
     @Provides
-    fun provideHttpEngine(client: Lazy<OkHttpClient>): HttpEngine {
-        return DefaultHttpEngine { client.get().newCall(it) }
+    fun provideHttpEngine(okHttpClient: Lazy<OkHttpClient>): HttpEngine {
+        return DefaultHttpEngine { okHttpClient.get().newCall(it) }
     }
 
     @Provides
