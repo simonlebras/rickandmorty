@@ -19,6 +19,14 @@ extend type Character @semanticNonNull(field: "type")
 extend type Character @semanticNonNull(field: "gender")
 extend type Character @semanticNonNull(field: "image")
 
+extend type Episodes @semanticNonNull(field: "info")
+extend type Episodes @semanticNonNull(field: "results")
+
+extend type Episode @semanticNonNull(field: "id")
+extend type Episode @semanticNonNull(field: "name")
+extend type Episode @semanticNonNull(field: "air_date")
+extend type Episode @semanticNonNull(field: "episode")
+
 extend type Locations @semanticNonNull(field: "info")
 extend type Locations @semanticNonNull(field: "results")
 

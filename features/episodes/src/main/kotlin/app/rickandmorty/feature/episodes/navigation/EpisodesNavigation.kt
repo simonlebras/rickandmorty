@@ -16,8 +16,12 @@ public fun NavHostController.navigateToEpisodeList(builder: NavOptionsBuilder.()
     )
 }
 
-public fun NavGraphBuilder.episodeList() {
+public fun NavGraphBuilder.episodeList(
+    onNavigateToSettings: () -> Unit,
+) {
     composable(route = episodeListRoute) {
-        EpisodeListScreen()
+        EpisodeListScreen(
+            onNavigateToSettings = onNavigateToSettings,
+        )
     }
 }
