@@ -75,6 +75,7 @@ include(":core:ui-resources")
 
 include(":data:character")
 include(":data:database")
+include(":data:episode")
 include(":data:graphql-client")
 include(":data:graphql-schema")
 include(":data:locale")

@@ -21,6 +21,7 @@ apollo {
         }
 
         isADependencyOf(projects.data.character)
+        isADependencyOf(projects.data.episode)
         isADependencyOf(projects.data.location)
     }
 }
