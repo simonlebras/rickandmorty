@@ -33,7 +33,9 @@ fun RamNavHost(
 
         episodeList()
 
-        locationList()
+        locationList(
+            onNavigateToSettings = navController::navigateToMainSettings,
+        )
 
         settings(
             navController = navController,

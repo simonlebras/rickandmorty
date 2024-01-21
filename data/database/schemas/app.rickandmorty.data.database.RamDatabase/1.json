@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0ba29656d96b36727de7c11546a0fb26",
+    "identityHash": "5437fe452ce5504cb605ae041d197757",
     "entities": [
       {
         "tableName": "character",
@@ -90,12 +90,105 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "location",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `type` TEXT NOT NULL, `dimension` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dimension",
+            "columnName": "dimension",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "location_paged_entry",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`page` INTEGER NOT NULL, `index` INTEGER NOT NULL, `location_id` TEXT NOT NULL, PRIMARY KEY(`page`, `index`), FOREIGN KEY(`location_id`) REFERENCES `location`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "page",
+            "columnName": "page",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "index",
+            "columnName": "index",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationId",
+            "columnName": "location_id",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "page",
+            "index"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_location_paged_entry_location_id",
+            "unique": false,
+            "columnNames": [
+              "location_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_location_paged_entry_location_id` ON `${TABLE_NAME}` (`location_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "location",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "location_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0ba29656d96b36727de7c11546a0fb26')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5437fe452ce5504cb605ae041d197757')"
     ]
   }
 }
