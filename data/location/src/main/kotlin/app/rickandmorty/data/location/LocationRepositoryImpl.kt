@@ -16,7 +16,6 @@ import app.rickandmorty.data.paging.FIRST_PAGE_KEY
 import app.rickandmorty.data.paging.PageKeyedRemoteMediator
 import app.rickandmorty.data.paging.PageResult
 import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.api.Optional
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -37,7 +36,7 @@ internal class LocationRepositoryImpl @Inject constructor(
             },
             pageFetcher = { page ->
                 val data = apolloClient
-                    .query(GetLocationsQuery(page = Optional.present(page)))
+                    .query(GetLocationsQuery(page = page))
                     .execute()
                     .dataAssertNoErrors
 
