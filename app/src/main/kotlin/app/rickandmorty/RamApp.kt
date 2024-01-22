@@ -2,8 +2,10 @@ package app.rickandmorty
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.navigation.suite.ExperimentalMaterial3AdaptiveNavigationSuiteApi
-import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteScaffold
+import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -13,10 +15,14 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import app.rickandmorty.core.designsystem.component.HazeNavigationSuiteScaffold
 import app.rickandmorty.navigation.RamNavHost
 import app.rickandmorty.navigation.TopLevelDestination
 
-@OptIn(ExperimentalMaterial3AdaptiveNavigationSuiteApi::class)
+@OptIn(
+    ExperimentalMaterial3AdaptiveApi::class,
+    ExperimentalMaterial3AdaptiveNavigationSuiteApi::class,
+)
 @Composable
 fun RamApp(
     navController: NavHostController,
@@ -24,7 +30,10 @@ fun RamApp(
 ) {
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
-    NavigationSuiteScaffold(
+    val layoutType = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(
+        currentWindowAdaptiveInfo(),
+    )
+    HazeNavigationSuiteScaffold(
         navigationSuiteItems = {
             TopLevelDestination.entries.fastForEach { destination ->
                 val selected = destination.isInHierarchy(currentDestination)
@@ -46,8 +55,9 @@ fun RamApp(
                 )
             }
         },
+        layoutType = layoutType,
         modifier = modifier,
-    ) {
+    ) { padding ->
         RamNavHost(navController = navController)
     }
 }
