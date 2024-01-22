@@ -6,7 +6,7 @@ import org.gradle.kotlin.dsl.configure
 
 internal fun Project.configureAffectedAndroidTest() {
     configure<AffectedTestConfiguration> {
-        val gradleManagedDevice = findProperty("affectedGradleManagedDevice") as? String
+        val gradleManagedDevice = providers.gradleProperty("affectedGradleManagedDevice").orNull
         if (!gradleManagedDevice.isNullOrEmpty()) {
             runAndroidTestTask = "${gradleManagedDevice}DebugAndroidTest"
         }

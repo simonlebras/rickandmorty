@@ -50,9 +50,9 @@ android {
         create("release") {
             if (useReleaseKeystore) {
                 storeFile = rootProject.file("keystore/release.jks")
-                storePassword = properties["RAM_RELEASE_KEYSTORE_PWD"]?.toString() ?: ""
+                storePassword = providers.gradleProperty("RAM_RELEASE_KEYSTORE_PWD").getOrElse("")
                 keyAlias = "release"
-                keyPassword = properties["RAM_RELEASE_KEY_PWD"]?.toString() ?: ""
+                keyPassword = providers.gradleProperty("RAM_RELEASE_KEY_PWD").getOrElse("")
             }
         }
     }

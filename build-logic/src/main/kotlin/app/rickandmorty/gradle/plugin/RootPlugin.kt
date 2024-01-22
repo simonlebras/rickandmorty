@@ -51,7 +51,7 @@ private fun Project.configureAffectedModuleDetector() {
             .get()
         logFolder = "$reportsFolder"
 
-        val baseRef = findProperty("affectedBaseRef") as? String
+        val baseRef = providers.gradleProperty("affectedBaseRef").orNull
         if (!baseRef.isNullOrEmpty()) {
             specifiedBranch = baseRef.replace("refs/heads/", "")
             compareFrom = "SpecifiedBranchCommit"

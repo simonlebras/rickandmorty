@@ -53,7 +53,7 @@ private fun Project.configureCompose(libs: LibrariesForLibs) {
 
 private fun Project.buildComposeCompilerArgs(): List<String> {
     return buildList {
-        val enableMetrics = findProperty("enableComposeCompilerMetrics") == "true"
+        val enableMetrics = providers.gradleProperty("enableComposeCompilerMetrics").orNull == "true"
         if (enableMetrics) {
             val metricsFolder = layout.buildDirectory.dir("compose-metrics").get()
             add("-P")
@@ -64,7 +64,7 @@ private fun Project.buildComposeCompilerArgs(): List<String> {
             )
         }
 
-        val enableReports = findProperty("enableComposeCompilerReports") == "true"
+        val enableReports = providers.gradleProperty("enableComposeCompilerReports").orNull == "true"
         if (enableReports) {
             val reportsFolder = layout.buildDirectory.dir("compose-reports").get()
             add("-P")
