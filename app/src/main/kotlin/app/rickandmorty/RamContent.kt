@@ -24,7 +24,7 @@ import app.rickandmorty.navigation.TopLevelDestination
     ExperimentalMaterial3AdaptiveNavigationSuiteApi::class,
 )
 @Composable
-fun RamApp(
+fun RamContent(
     navController: NavHostController,
     modifier: Modifier = Modifier,
 ) {
@@ -57,7 +57,7 @@ fun RamApp(
         },
         layoutType = layoutType,
         modifier = modifier,
-    ) { padding ->
+    ) { _ ->
         RamNavHost(navController = navController)
     }
 }

@@ -17,7 +17,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -29,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.resources.R as UiR
@@ -69,15 +69,16 @@ private fun LanguageSettingsScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    Scaffold(
+    HazeScaffold(
         topBar = {
             LanguageSettingsAppBar(
                 onNavigateUp = onNavigateUp,
                 scrollBehavior = scrollBehavior,
             )
         },
+        blurTopBar = true,
         contentWindowInsets = WindowInsets.safeDrawing,
-    ) { padding ->
+    ) { contentPadding ->
         val listState = rememberLazyListState()
 
         TrackScrollJank(
@@ -89,9 +90,9 @@ private fun LanguageSettingsScreen(
             modifier = Modifier
                 .selectableGroup()
                 .fillMaxSize()
-                .consumeWindowInsets(padding),
+                .consumeWindowInsets(contentPadding),
             state = listState,
-            contentPadding = padding,
+            contentPadding = contentPadding,
         ) {
             when {
                 uiState.isLoading -> {

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.MutableWindowInsets
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -24,13 +25,19 @@ import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteScope
 import androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteType
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMaxBy
+import app.rickandmorty.core.designsystem.component.util.LocalScaffoldContentPadding
+import app.rickandmorty.core.designsystem.component.util.PaddingValuesInsets
+import app.rickandmorty.core.ui.minus
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.haze
 import dev.chrisbanes.haze.hazeChild
@@ -58,8 +65,16 @@ public fun HazeNavigationSuiteScaffold(
     contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets,
     content: @Composable (PaddingValues) -> Unit = {},
 ) {
-    val safeInsets = remember(contentWindowInsets) {
-        MutableWindowInsets(contentWindowInsets)
+    val upstreamContentPadding = LocalScaffoldContentPadding.current
+
+    val insets = remember {
+        MutableWindowInsets(contentWindowInsets.add(PaddingValuesInsets(upstreamContentPadding)))
+    }
+
+    val layoutDirection = LocalLayoutDirection.current
+
+    LaunchedEffect(contentWindowInsets, upstreamContentPadding, layoutDirection) {
+        insets.insets = contentWindowInsets.add(PaddingValuesInsets(upstreamContentPadding))
     }
 
     val hazeState = remember { HazeState() }
@@ -67,7 +82,7 @@ public fun HazeNavigationSuiteScaffold(
     Surface(
         modifier = modifier.onConsumedWindowInsetsChanged { consumedWindowInsets ->
             // Exclude currently consumed window insets from user provided contentWindowInsets
-            safeInsets.insets = contentWindowInsets.exclude(consumedWindowInsets)
+            insets.insets = contentWindowInsets.exclude(consumedWindowInsets)
         },
         color = containerColor,
         contentColor = contentColor,
@@ -82,15 +97,22 @@ public fun HazeNavigationSuiteScaffold(
                 )
             },
             layoutType = layoutType,
-            contentWindowInsets = safeInsets,
-        ) { padding ->
+            contentWindowInsets = insets,
+        ) { contentPadding ->
             Box(
                 modifier = Modifier.haze(
                     state = hazeState,
                     backgroundColor = navigationSuiteContainerColor,
                 ),
             ) {
-                content(padding)
+                val contentPaddingMinusInsets = contentPadding.minus(
+                    padding = contentWindowInsets.asPaddingValues(),
+                    layoutDirection = layoutDirection,
+                )
+
+                CompositionLocalProvider(LocalScaffoldContentPadding provides contentPaddingMinusInsets) {
+                    content(contentPadding)
+                }
             }
         }
     }
