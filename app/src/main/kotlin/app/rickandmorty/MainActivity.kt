@@ -133,7 +133,7 @@ private fun ComponentActivity.RamContent(uiState: MainUiState) {
         darkTheme = darkTheme,
         dynamicColor = uiState.useDynamicColor(),
     ) {
-        RamApp(navController = navController)
+        RamContent(navController = navController)
     }
 }
 
