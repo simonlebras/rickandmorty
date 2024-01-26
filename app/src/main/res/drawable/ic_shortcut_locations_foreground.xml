@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <path
+        android:fillColor="@color/shortcut_icon_tint"
+        android:pathData="M30,42L18,37.8L8.7,41.4C8.033,41.667 7.417,41.592 6.85,41.175C6.283,40.758 6,40.2 6,39.5V11.5C6,11.067 6.125,10.683 6.375,10.35C6.625,10.017 6.967,9.767 7.4,9.6L18,6L30,10.2L39.3,6.6C39.967,6.333 40.583,6.408 41.15,6.825C41.717,7.242 42,7.8 42,8.5V36.5C42,36.933 41.875,37.317 41.625,37.65C41.375,37.983 41.033,38.233 40.6,38.4L30,42ZM28,37.1V13.7L20,10.9V34.3L28,37.1ZM32,37.1L38,35.1V11.4L32,13.7V37.1ZM10,36.6L16,34.3V10.9L10,12.9V36.6Z" />
+</vector>
