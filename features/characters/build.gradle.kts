@@ -21,5 +21,7 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(projects.core.designSystem)
+    implementation(projects.core.metrics)
+    implementation(projects.core.ui)
     implementation(projects.core.uiResources)
 }
