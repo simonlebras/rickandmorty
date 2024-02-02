@@ -38,11 +38,15 @@ import androidx.compose.ui.util.fastMaxBy
 import app.rickandmorty.core.designsystem.component.util.LocalScaffoldContentPadding
 import app.rickandmorty.core.designsystem.component.util.PaddingValuesInsets
 import app.rickandmorty.core.ui.minus
+import dev.chrisbanes.haze.HazeDefaults
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.haze
 import dev.chrisbanes.haze.hazeChild
+import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
+import dev.chrisbanes.haze.materials.HazeMaterials
 
 @OptIn(
+    ExperimentalHazeMaterialsApi::class,
     ExperimentalLayoutApi::class,
     ExperimentalMaterial3AdaptiveApi::class,
     ExperimentalMaterial3AdaptiveNavigationSuiteApi::class,
@@ -90,7 +94,10 @@ public fun HazeNavigationSuiteScaffold(
         HazeNavigationSuiteScaffoldLayout(
             navigationSuite = {
                 NavigationSuite(
-                    modifier = Modifier.hazeChild(state = hazeState),
+                    modifier = Modifier.hazeChild(
+                        state = hazeState,
+                        style = HazeMaterials.thin(),
+                    ),
                     layoutType = layoutType,
                     colors = navigationSuiteColors,
                     content = navigationSuiteItems,
@@ -102,7 +109,7 @@ public fun HazeNavigationSuiteScaffold(
             Box(
                 modifier = Modifier.haze(
                     state = hazeState,
-                    backgroundColor = navigationSuiteContainerColor,
+                    style = HazeDefaults.style(backgroundColor = navigationSuiteContainerColor),
                 ),
             ) {
                 val contentPaddingMinusInsets = contentPadding.minus(

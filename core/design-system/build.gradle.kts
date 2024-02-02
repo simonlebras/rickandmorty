@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.text.googlefonts)
 
     implementation(libs.haze)
+    implementation(libs.haze.materials)
 
     implementation(projects.core.ui)
 }
