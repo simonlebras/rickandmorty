@@ -37,7 +37,7 @@ internal interface ImageLoaderModule {
                 .components {
                     add(
                         OkHttpNetworkFetcherFactory(
-                            httpClient = lazy { okHttpClient.get() },
+                            callFactory = { okHttpClient.get() },
                         ),
                     )
                 }
