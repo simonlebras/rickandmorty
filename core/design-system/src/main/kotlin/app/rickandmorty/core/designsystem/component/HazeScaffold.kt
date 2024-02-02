@@ -22,10 +22,14 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import app.rickandmorty.core.designsystem.component.util.LocalScaffoldContentPadding
 import app.rickandmorty.core.designsystem.component.util.PaddingValuesInsets
 import app.rickandmorty.core.ui.minus
+import dev.chrisbanes.haze.HazeDefaults
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.haze
 import dev.chrisbanes.haze.hazeChild
+import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
+import dev.chrisbanes.haze.materials.HazeMaterials
 
+@OptIn(ExperimentalHazeMaterialsApi::class)
 @Composable
 public fun HazeScaffold(
     modifier: Modifier = Modifier,
@@ -48,7 +52,12 @@ public fun HazeScaffold(
         modifier = modifier,
         topBar = {
             if (blurTopBar) {
-                Box(modifier = Modifier.hazeChild(state = hazeState)) {
+                Box(
+                    modifier = Modifier.hazeChild(
+                        state = hazeState,
+                        style = HazeMaterials.thin(),
+                    ),
+                ) {
                     topBar()
                 }
             } else {
@@ -57,7 +66,12 @@ public fun HazeScaffold(
         },
         bottomBar = {
             if (blurBottomBar) {
-                Box(modifier = Modifier.hazeChild(state = hazeState)) {
+                Box(
+                    modifier = Modifier.hazeChild(
+                        state = hazeState,
+                        style = HazeMaterials.thin(),
+                    ),
+                ) {
                     bottomBar()
                 }
             } else {
@@ -74,7 +88,7 @@ public fun HazeScaffold(
         Box(
             modifier = Modifier.haze(
                 state = hazeState,
-                backgroundColor = appBarContainerColor,
+                style = HazeDefaults.style(backgroundColor = appBarContainerColor),
             ),
         ) {
             content(contentPadding)

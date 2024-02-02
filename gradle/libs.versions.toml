@@ -43,7 +43,7 @@ firebase-crashlytics-plugin = "2.9.9"
 firebase-perf-plugin = "1.4.2"
 googleservices = "4.4.0"
 gradledoctor = "0.9.1"
-haze = "0.4.5"
+haze = "0.5.0"
 hilt = "2.50"
 jdk = "17"
 junit4 = "4.13.2"
@@ -151,7 +151,8 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 
-haze = { group = "dev.chrisbanes.haze", name = "haze-jetpack-compose", version.ref = "haze" }
+haze = { group = "dev.chrisbanes.haze", name = "haze", version.ref = "haze" }
+haze-materials = { group = "dev.chrisbanes.haze", name = "haze-materials", version.ref = "haze" }
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
