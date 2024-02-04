@@ -16,9 +16,19 @@ dependencies {
     implementation(libs.androidx.compose.material3.adaptive)
     implementation(libs.androidx.compose.ui.text.googlefonts)
 
+    implementation(libs.coil.compose)
+
     implementation(libs.haze)
     implementation(libs.haze.materials)
 
     implementation(projects.core.ui)
     implementation(projects.core.uiResources)
+}
+
+dependencyAnalysis {
+    issues {
+        onUnusedDependencies {
+            exclude("io.coil-kt.coil3:coil-compose")
+        }
+    }
 }

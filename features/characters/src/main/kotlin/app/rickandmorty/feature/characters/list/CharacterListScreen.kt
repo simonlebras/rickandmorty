@@ -14,6 +14,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
@@ -32,6 +34,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
+import app.rickandmorty.core.designsystem.component.AsyncImage
 import app.rickandmorty.core.designsystem.component.Error
 import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.component.Loader
@@ -47,7 +50,6 @@ import app.rickandmorty.core.ui.isNotLoading
 import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.Character
 import app.rickandmorty.feature.characters.R
-import coil3.compose.AsyncImage
 
 @Composable
 internal fun CharacterListScreen(
@@ -170,7 +172,9 @@ private fun CharacterItem(character: Character) {
             AsyncImage(
                 model = character.imageUrl,
                 contentDescription = null,
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier
+                    .size(64.dp)
+                    .clip(MaterialTheme.shapes.small),
             )
         },
     )
