@@ -18,8 +18,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.paging.compose)
 
-    implementation(libs.coil.compose)
-
     implementation(projects.core.designSystem)
     implementation(projects.core.metrics)
     implementation(projects.core.ui)
