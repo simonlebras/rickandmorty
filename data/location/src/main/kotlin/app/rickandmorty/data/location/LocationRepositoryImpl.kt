@@ -32,7 +32,9 @@ internal class LocationRepositoryImpl @Inject constructor(
     override fun getPagedLocations(config: PagingConfig): Flow<PagingData<Location>> {
         val remoteMediator = PageKeyedRemoteMediator<LocationEntity>(
             pageResolver = { location ->
-                locationPagedEntryDao.getPage(location.id)!!
+                transactionRunner {
+                    locationPagedEntryDao.getPage(location.id)!!
+                }
             },
             pageFetcher = { page ->
                 val data = apolloClient
