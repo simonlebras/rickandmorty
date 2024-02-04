@@ -32,7 +32,9 @@ internal class CharacterRepositoryImpl @Inject constructor(
     override fun getPagedCharacters(config: PagingConfig): Flow<PagingData<Character>> {
         val remoteMediator = PageKeyedRemoteMediator<CharacterEntity>(
             pageResolver = { character ->
-                characterPagedEntryDao.getPage(character.id)!!
+                transactionRunner {
+                    characterPagedEntryDao.getPage(character.id)!!
+                }
             },
             pageFetcher = { page ->
                 val data = apolloClient

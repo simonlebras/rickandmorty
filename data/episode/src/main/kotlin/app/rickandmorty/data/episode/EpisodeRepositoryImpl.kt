@@ -32,7 +32,9 @@ internal class EpisodeRepositoryImpl @Inject constructor(
     override fun getPagedEpisodes(config: PagingConfig): Flow<PagingData<Episode>> {
         val remoteMediator = PageKeyedRemoteMediator<EpisodeEntity>(
             pageResolver = { episode ->
-                episodePagedEntryDao.getPage(episode.id)!!
+                transactionRunner {
+                    episodePagedEntryDao.getPage(episode.id)!!
+                }
             },
             pageFetcher = { page ->
                 val data = apolloClient
