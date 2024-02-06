@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import app.rickandmorty.data.database.entity.EpisodeEntity
 
 @Dao
@@ -12,6 +13,7 @@ public interface EpisodeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public suspend fun insertAll(episodes: List<EpisodeEntity>)
 
+    @Transaction
     @Query(
         """
             SELECT episode.* FROM episode
