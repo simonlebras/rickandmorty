@@ -142,11 +142,11 @@ private fun ComponentActivity.RamContent(uiState: MainUiState) {
 private fun MainUiState.useDarkTheme() = when (theme) {
     is Incomplete -> isSystemInDarkTheme()
     else -> when (theme()!!.nightMode) {
-        NightMode.AUTO_BATTERY,
-        NightMode.FOLLOW_SYSTEM,
+        NightMode.AutoBattery,
+        NightMode.FollowSystem,
         -> isSystemInDarkTheme()
 
-        NightMode.LIGHT -> false
-        NightMode.DARK -> true
+        NightMode.Light -> false
+        NightMode.Dark -> true
     }
 }

@@ -9,11 +9,19 @@ import app.rickandmorty.data.model.Character
 public data class CharacterEntity(
     @PrimaryKey @ColumnInfo(name = "id") val id: String,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "image_url") val imageUrl: String,
+    @ColumnInfo(name = "status") val status: String,
+    @ColumnInfo(name = "species") val species: String,
+    @ColumnInfo(name = "type") val type: String,
+    @ColumnInfo(name = "gender") val gender: String,
+    @ColumnInfo(name = "image") val image: String,
 )
 
 public fun CharacterEntity.toCharacter(): Character = Character(
     id = id,
     name = name,
-    imageUrl = imageUrl,
+    status = Character.Status.from(status),
+    species = Character.Species.from(species),
+    type = type,
+    gender = Character.Gender.from(gender),
+    image = image,
 )
