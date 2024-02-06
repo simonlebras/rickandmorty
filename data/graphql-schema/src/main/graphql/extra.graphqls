@@ -6,7 +6,6 @@ extend schema @link(
 extend schema @catch(to: THROW)
 
 extend type Info @semanticNonNull(field: "count")
-extend type Info @semanticNonNull(field: "next")
 
 extend type Characters @semanticNonNull(field: "info")
 extend type Characters @semanticNonNull(field: "results")
