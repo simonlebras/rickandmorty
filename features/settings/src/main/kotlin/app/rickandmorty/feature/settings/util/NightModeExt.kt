@@ -7,8 +7,8 @@ import app.rickandmorty.feature.settings.R
 @get:StringRes
 internal val NightMode.label: Int
     get() = when (this) {
-        NightMode.AUTO_BATTERY -> R.string.settings_theme_auto_battery
-        NightMode.FOLLOW_SYSTEM -> R.string.settings_theme_follow_system
-        NightMode.LIGHT -> R.string.settings_theme_light
-        NightMode.DARK -> R.string.settings_theme_dark
+        NightMode.AutoBattery -> R.string.settings_theme_auto_battery
+        NightMode.FollowSystem -> R.string.settings_theme_follow_system
+        NightMode.Light -> R.string.settings_theme_light
+        NightMode.Dark -> R.string.settings_theme_dark
     }

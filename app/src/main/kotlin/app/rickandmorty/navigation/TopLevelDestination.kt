@@ -16,19 +16,19 @@ enum class TopLevelDestination(
     val unselectedIcon: ImageVector,
     @StringRes val label: Int,
 ) {
-    CHARACTER_LIST(
+    CharacterList(
         route = characterListRoute,
         selectedIcon = RamIcons.Filled.Face,
         unselectedIcon = RamIcons.Outlined.Face,
         label = CharactersR.string.character_list_title,
     ),
-    EPISODE_LIST(
+    EpisodeList(
         route = episodeListRoute,
         selectedIcon = RamIcons.Filled.Tv,
         unselectedIcon = RamIcons.Outlined.Tv,
         label = EpisodesR.string.episode_list_title,
     ),
-    LOCATION_LIST(
+    LocationList(
         route = locationListRoute,
         selectedIcon = RamIcons.Filled.Map,
         unselectedIcon = RamIcons.Outlined.Map,

@@ -57,15 +57,15 @@ internal class NightModeInitializer @Inject constructor(
 
 @AppCompatDelegate.NightMode
 private fun NightMode.toAppCompatNightMode() = when (this) {
-    NightMode.AUTO_BATTERY -> AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
-    NightMode.FOLLOW_SYSTEM -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-    NightMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
-    NightMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
+    NightMode.AutoBattery -> AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+    NightMode.FollowSystem -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+    NightMode.Light -> AppCompatDelegate.MODE_NIGHT_NO
+    NightMode.Dark -> AppCompatDelegate.MODE_NIGHT_YES
 }
 
 private fun NightMode.toUiModeManagerNightMode() = when (this) {
-    NightMode.FOLLOW_SYSTEM -> UiModeManager.MODE_NIGHT_AUTO
-    NightMode.LIGHT -> UiModeManager.MODE_NIGHT_NO
-    NightMode.DARK -> UiModeManager.MODE_NIGHT_YES
+    NightMode.FollowSystem -> UiModeManager.MODE_NIGHT_AUTO
+    NightMode.Light -> UiModeManager.MODE_NIGHT_NO
+    NightMode.Dark -> UiModeManager.MODE_NIGHT_YES
     else -> throw IllegalStateException("Unsupported night mode: $this")
 }

@@ -1,9 +1,10 @@
 package app.rickandmorty.feature.characters.list
 
 import androidx.activity.compose.ReportDrawnWhen
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -23,6 +24,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -42,11 +44,13 @@ import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.component.appendLoadState
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.metrics.TrackScrollJank
+import app.rickandmorty.core.ui.CharacterStatusIndicator
 import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.core.ui.isNotLoading
+import app.rickandmorty.core.ui.label
 import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.Character
 import app.rickandmorty.feature.characters.R
@@ -109,7 +113,7 @@ private fun CharacterListScreen(
                 loadState.refresh.isLoading && characters.isEmpty -> {
                     Loader(
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxSize()
                             .wrapContentSize()
                             .padding(contentPadding),
                     )
@@ -121,6 +125,7 @@ private fun CharacterListScreen(
                         onRetry = characters::retry,
                         modifier = Modifier
                             .fillMaxSize()
+                            .wrapContentSize()
                             .padding(contentPadding),
                     )
                 }
@@ -168,9 +173,19 @@ private fun CharacterItem(character: Character) {
         headlineContent = {
             Text(text = character.name)
         },
+        supportingContent = {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                CharacterStatusIndicator(status = character.status)
+
+                Text(text = stringResource(character.status.label))
+            }
+        },
         leadingContent = {
             AsyncImage(
-                model = character.imageUrl,
+                model = character.image,
                 contentDescription = null,
                 modifier = Modifier
                     .size(64.dp)
@@ -200,6 +215,7 @@ private fun CharacterListScreenAppBar(
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = Color.Transparent,
+            scrolledContainerColor = Color.Transparent,
         ),
         scrollBehavior = scrollBehavior,
     )

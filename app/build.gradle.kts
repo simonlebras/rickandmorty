@@ -155,6 +155,7 @@ moduleGraphAssert {
         ":app -> :data:.*",
         ":features:.* -> :data:.*",
         ":data:.* -> :data:.*",
+        ":core:.* -> :data:model",
         ":.* -> :core:.*",
     )
 }

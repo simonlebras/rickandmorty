@@ -51,24 +51,24 @@ internal class ThemeRepositoryImpl @Inject constructor(
 
     override fun getAvailableNightModes(): ImmutableList<NightMode> {
         return persistentListOf(
-            NightMode.LIGHT,
-            NightMode.DARK,
+            NightMode.Light,
+            NightMode.Dark,
             defaultNightMode,
         )
     }
 }
 
 private val defaultNightMode = if (Build.VERSION.SDK_INT >= 29) {
-    NightMode.FOLLOW_SYSTEM
+    NightMode.FollowSystem
 } else {
-    NightMode.AUTO_BATTERY
+    NightMode.AutoBattery
 }
 
 private fun NightMode.toProtoNightMode() = when (this) {
-    NightMode.AUTO_BATTERY -> ProtoNightMode.AUTO_BATTERY
-    NightMode.FOLLOW_SYSTEM -> ProtoNightMode.FOLLOW_SYSTEM
-    NightMode.LIGHT -> ProtoNightMode.LIGHT
-    NightMode.DARK -> ProtoNightMode.DARK
+    NightMode.AutoBattery -> ProtoNightMode.AUTO_BATTERY
+    NightMode.FollowSystem -> ProtoNightMode.FOLLOW_SYSTEM
+    NightMode.Light -> ProtoNightMode.LIGHT
+    NightMode.Dark -> ProtoNightMode.DARK
 }
 
 private fun ProtoNightMode.toNightMode() = when (this) {
@@ -77,6 +77,6 @@ private fun ProtoNightMode.toNightMode() = when (this) {
     ProtoNightMode.FOLLOW_SYSTEM,
     -> defaultNightMode
 
-    ProtoNightMode.LIGHT -> NightMode.LIGHT
-    ProtoNightMode.DARK -> NightMode.DARK
+    ProtoNightMode.LIGHT -> NightMode.Light
+    ProtoNightMode.DARK -> NightMode.Dark
 }

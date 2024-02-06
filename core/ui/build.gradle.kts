@@ -12,4 +12,8 @@ dependencies {
     api(libs.androidx.compose.foundation.layout)
     api(libs.androidx.paging.compose)
     api(libs.androidx.window)
+
+    api(projects.data.model)
+
+    implementation(projects.core.uiResources)
 }

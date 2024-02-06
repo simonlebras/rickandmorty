@@ -51,7 +51,11 @@ internal class CharacterRepositoryImpl @Inject constructor(
                     val character = CharacterEntity(
                         id = remoteCharacter.id,
                         name = remoteCharacter.name,
-                        imageUrl = remoteCharacter.image,
+                        status = remoteCharacter.status,
+                        species = remoteCharacter.species,
+                        type = remoteCharacter.type,
+                        gender = remoteCharacter.gender,
+                        image = remoteCharacter.image,
                     )
                     characters.add(character)
 
