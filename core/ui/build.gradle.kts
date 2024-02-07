@@ -15,5 +15,6 @@ dependencies {
 
     api(projects.data.model)
 
+    implementation(projects.core.designSystem)
     implementation(projects.core.uiResources)
 }

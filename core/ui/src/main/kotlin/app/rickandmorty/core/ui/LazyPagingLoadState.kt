@@ -1,4 +1,4 @@
-package app.rickandmorty.core.designsystem.component
+package app.rickandmorty.core.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -8,8 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import app.rickandmorty.core.ui.errorOrNull
-import app.rickandmorty.core.ui.isLoading
+import app.rickandmorty.core.designsystem.component.Loader
 
 public fun <T : Any> LazyListScope.appendLoadState(
     items: LazyPagingItems<T>,

@@ -20,9 +20,6 @@ dependencies {
 
     implementation(libs.haze)
     implementation(libs.haze.materials)
-
-    implementation(projects.core.ui)
-    implementation(projects.core.uiResources)
 }
 
 dependencyAnalysis {
