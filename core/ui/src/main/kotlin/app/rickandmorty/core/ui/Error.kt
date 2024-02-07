@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import app.rickandmorty.core.ui.resources.R as UiR
+import app.rickandmorty.core.l10n.R as L10nR
 
 @Composable
 public fun Error(
@@ -25,7 +25,7 @@ public fun Error(
         Text(text = text)
 
         ElevatedButton(onClick = onRetry) {
-            Text(text = stringResource(UiR.string.retry))
+            Text(text = stringResource(L10nR.string.retry))
         }
     }
 }

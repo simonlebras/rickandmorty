@@ -41,6 +41,7 @@ import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.l10n.R as L10nR
 import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.CharacterStatusIndicator
 import app.rickandmorty.core.ui.Empty
@@ -52,9 +53,7 @@ import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.core.ui.isNotLoading
 import app.rickandmorty.core.ui.label
-import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.Character
-import app.rickandmorty.feature.characters.R
 
 @Composable
 internal fun CharacterListScreen(
@@ -141,7 +140,7 @@ private fun CharacterListScreen(
                             )
                         },
                         title = {
-                            Text(text = stringResource(R.string.character_list_empty))
+                            Text(text = stringResource(L10nR.string.character_list_empty))
                         },
                         modifier = Modifier
                             .fillMaxSize()
@@ -219,13 +218,13 @@ private fun CharacterListScreenAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(R.string.character_list_title))
+            Text(text = stringResource(L10nR.string.character_list_title))
         },
         actions = {
             IconButton(onClick = onNavigateToSettings) {
                 Icon(
                     imageVector = RamIcons.Filled.Settings,
-                    contentDescription = stringResource(UiR.string.navigate_up),
+                    contentDescription = stringResource(L10nR.string.navigate_up),
                 )
             }
         },

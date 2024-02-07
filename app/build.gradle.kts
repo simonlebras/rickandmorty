@@ -102,6 +102,7 @@ dependencies {
     implementation(projects.core.contentView)
     implementation(projects.core.coroutines)
     implementation(projects.core.designSystem)
+    implementation(projects.core.l10n)
     implementation(projects.core.metrics)
     implementation(projects.core.okhttp)
     implementation(projects.core.resourceState)
