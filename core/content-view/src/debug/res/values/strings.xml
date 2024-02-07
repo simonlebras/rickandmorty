@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="debugdrawer_device_info_title">Device Info</string>
-    <string name="debugdrawer_logs_title">Logs</string>
-</resources>

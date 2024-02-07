@@ -15,5 +15,6 @@ dependencies {
     debugImplementation(libs.debugdrawer)
     debugImplementation(libs.debugdrawer.timber)
 
+    debugImplementation(projects.core.l10n)
     debugImplementation(projects.core.okhttp)
 }
