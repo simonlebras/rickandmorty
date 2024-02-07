@@ -4,6 +4,7 @@ import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -24,11 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
+import app.rickandmorty.core.designsystem.component.Empty
 import app.rickandmorty.core.designsystem.component.Error
 import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.component.Loader
@@ -120,7 +123,22 @@ private fun LocationListScreen(
                 }
 
                 loadState.refresh.isNotLoading && locations.isEmpty -> {
-                    // Todo empty state
+                    Empty(
+                        graphic = {
+                            Icon(
+                                imageVector = RamIcons.Outlined.Map,
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                            )
+                        },
+                        title = {
+                            Text(text = stringResource(R.string.location_list_empty))
+                        },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .wrapContentSize()
+                            .padding(contentPadding),
+                    )
                 }
 
                 else -> {
