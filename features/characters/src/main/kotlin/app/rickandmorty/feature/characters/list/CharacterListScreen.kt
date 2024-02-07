@@ -37,6 +37,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import app.rickandmorty.core.designsystem.component.AsyncImage
+import app.rickandmorty.core.designsystem.component.Empty
 import app.rickandmorty.core.designsystem.component.Error
 import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.component.Loader
@@ -131,7 +132,22 @@ private fun CharacterListScreen(
                 }
 
                 loadState.refresh.isNotLoading && characters.isEmpty -> {
-                    // Todo empty state
+                    Empty(
+                        graphic = {
+                            Icon(
+                                imageVector = RamIcons.Outlined.Face,
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                            )
+                        },
+                        title = {
+                            Text(text = stringResource(R.string.character_list_empty))
+                        },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .wrapContentSize()
+                            .padding(contentPadding),
+                    )
                 }
 
                 else -> {
