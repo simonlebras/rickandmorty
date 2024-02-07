@@ -1,20 +1,10 @@
-package app.rickandmorty.core.ui
+package app.rickandmorty.core.designsystem.component.util
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-
-public fun PaddingValues.plus(
-    padding: PaddingValues,
-    layoutDirection: LayoutDirection = LayoutDirection.Ltr,
-): PaddingValues = PaddingValues(
-    start = calculateStartPadding(layoutDirection) + padding.calculateStartPadding(layoutDirection),
-    top = calculateTopPadding() + padding.calculateTopPadding(),
-    end = calculateEndPadding(layoutDirection) + padding.calculateEndPadding(layoutDirection),
-    bottom = calculateBottomPadding() + padding.calculateBottomPadding(),
-)
 
 public fun PaddingValues.minus(
     padding: PaddingValues,

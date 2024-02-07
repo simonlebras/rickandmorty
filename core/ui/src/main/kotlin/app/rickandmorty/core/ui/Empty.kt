@@ -1,20 +1,18 @@
-package app.rickandmorty.core.designsystem.component
+package app.rickandmorty.core.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import app.rickandmorty.core.ui.resources.R as UiR
 
 @Composable
-public fun Error(
-    text: String,
-    onRetry: () -> Unit,
+public fun Empty(
+    graphic: @Composable () -> Unit,
+    title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -22,10 +20,10 @@ public fun Error(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(text = text)
+        graphic()
 
-        ElevatedButton(onClick = onRetry) {
-            Text(text = stringResource(UiR.string.retry))
+        ProvideTextStyle(MaterialTheme.typography.headlineMedium) {
+            title()
         }
     }
 }

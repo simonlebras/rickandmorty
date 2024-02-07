@@ -37,7 +37,7 @@ import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMaxBy
 import app.rickandmorty.core.designsystem.component.util.LocalScaffoldContentPadding
 import app.rickandmorty.core.designsystem.component.util.PaddingValuesInsets
-import app.rickandmorty.core.ui.minus
+import app.rickandmorty.core.designsystem.component.util.minus
 import dev.chrisbanes.haze.HazeDefaults
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.haze
