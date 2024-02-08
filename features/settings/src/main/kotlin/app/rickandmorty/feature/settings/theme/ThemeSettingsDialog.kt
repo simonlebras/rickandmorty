@@ -27,10 +27,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.rickandmorty.core.l10n.R as L10nR
 import app.rickandmorty.core.metrics.TrackScrollJank
-import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.NightMode
-import app.rickandmorty.feature.settings.R
 import app.rickandmorty.feature.settings.util.label
 
 @Composable
@@ -58,7 +57,7 @@ private fun ThemeSettingsDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text(text = stringResource(R.string.settings_theme_title))
+            Text(text = stringResource(L10nR.string.settings_theme_title))
         },
         text = {
             val scrollState = rememberScrollState()
@@ -97,7 +96,7 @@ private fun ThemeSettingsDialog(
         },
         confirmButton = {
             Text(
-                text = stringResource(UiR.string.dismiss),
+                text = stringResource(L10nR.string.dismiss),
                 modifier = Modifier.clickable { onDismiss() },
             )
         },

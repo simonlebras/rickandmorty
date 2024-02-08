@@ -35,6 +35,7 @@ import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.l10n.R as L10nR
 import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
@@ -44,9 +45,7 @@ import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.core.ui.isNotLoading
-import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.Episode
-import app.rickandmorty.feature.episodes.R
 
 @Composable
 internal fun EpisodeListScreen(
@@ -132,7 +131,7 @@ private fun EpisodeListScreen(
                             )
                         },
                         title = {
-                            Text(text = stringResource(R.string.episode_list_empty))
+                            Text(text = stringResource(L10nR.string.episode_list_empty))
                         },
                         modifier = Modifier
                             .fillMaxSize()
@@ -194,13 +193,13 @@ private fun EpisodeListScreenAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(R.string.episode_list_title))
+            Text(text = stringResource(L10nR.string.episode_list_title))
         },
         actions = {
             IconButton(onClick = onNavigateToSettings) {
                 Icon(
                     imageVector = RamIcons.Filled.Settings,
-                    contentDescription = stringResource(UiR.string.navigate_up),
+                    contentDescription = stringResource(L10nR.string.navigate_up),
                 )
             }
         },

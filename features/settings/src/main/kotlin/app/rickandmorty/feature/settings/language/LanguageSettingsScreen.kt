@@ -30,10 +30,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.l10n.R as L10nR
 import app.rickandmorty.core.metrics.TrackScrollJank
-import app.rickandmorty.core.ui.resources.R as UiR
 import app.rickandmorty.data.model.Locale
-import app.rickandmorty.feature.settings.R
 import app.rickandmorty.feature.settings.SettingsContentType
 import app.rickandmorty.feature.settings.loader
 import kotlinx.collections.immutable.ImmutableList
@@ -127,13 +126,13 @@ private fun LanguageSettingsAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(R.string.settings_language_title))
+            Text(text = stringResource(L10nR.string.settings_language_title))
         },
         navigationIcon = {
             IconButton(onClick = onNavigateUp) {
                 Icon(
                     imageVector = RamIcons.Filled.ArrowBack,
-                    contentDescription = stringResource(UiR.string.navigate_up),
+                    contentDescription = stringResource(L10nR.string.navigate_up),
                 )
             }
         },
@@ -150,7 +149,7 @@ private fun LazyListScope.systemDefault(
         contentType = SettingsContentType.LIST_ITEM,
     ) {
         LocaleItem(
-            text = stringResource(R.string.settings_language_system_default),
+            text = stringResource(L10nR.string.settings_language_system_default),
             isSelected = currentAppLocale == null,
             onClick = { onSelectLocale(null) },
         )
