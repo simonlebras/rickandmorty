@@ -53,7 +53,9 @@ private fun Project.configureCompose(libs: LibrariesForLibs) {
 
 private fun Project.buildComposeCompilerArgs(): List<String> {
     return buildList {
-        val enableMetrics = providers.gradleProperty("enableComposeCompilerMetrics").orNull == "true"
+        val enableMetrics = providers
+            .gradleProperty("enableComposeCompilerMetrics")
+            .orNull == "true"
         if (enableMetrics) {
             val metricsFolder = layout.buildDirectory.dir("compose-metrics").get()
             add("-P")
@@ -64,7 +66,9 @@ private fun Project.buildComposeCompilerArgs(): List<String> {
             )
         }
 
-        val enableReports = providers.gradleProperty("enableComposeCompilerReports").orNull == "true"
+        val enableReports = providers
+            .gradleProperty("enableComposeCompilerReports")
+            .orNull == "true"
         if (enableReports) {
             val reportsFolder = layout.buildDirectory.dir("compose-reports").get()
             add("-P")
@@ -75,12 +79,20 @@ private fun Project.buildComposeCompilerArgs(): List<String> {
             )
         }
 
-        // Enable strong skipping mode https://android-review.googlesource.com/c/platform/frameworks/support/+/2671135
+        // https://android-review.googlesource.com/c/platform/frameworks/support/+/2671135
         add("-P")
         add(
             "plugin" +
                 ":androidx.compose.compiler.plugins.kotlin" +
                 ":experimentalStrongSkipping=true",
+        )
+
+        // https://android-review.googlesource.com/c/platform/frameworks/support/+/2912628
+        add("-P")
+        add(
+            "plugin" +
+                ":androidx.compose.compiler.plugins.kotlin" +
+                ":nonSkippingGroupOptimization=true",
         )
     }
 }
