@@ -1,5 +1,5 @@
 [versions]
-affectedmoduledetector = "0.2.2"
+affectedmoduledetector = "0.3.0"
 android-desugarjdklibs = "2.0.4"
 android-plugin = "8.2.2"
 android-sdk-compile = "34"
