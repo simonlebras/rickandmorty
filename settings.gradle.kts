@@ -59,6 +59,7 @@ include(":app")
 
 include(":baseline-profile")
 
+include(":core:base")
 include(":core:coil")
 include(":core:content-view")
 include(":core:coroutines")

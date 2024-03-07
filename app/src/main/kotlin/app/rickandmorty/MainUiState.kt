@@ -13,8 +13,6 @@ data class MainUiState(
     val isLoading: Boolean
         get() = theme is Incomplete
 
-    fun useDynamicColor() = when {
-        isLoading -> false
-        else -> theme()!!.useDynamicColor
-    }
+    val useDynamicColor: Boolean
+        get() = theme()?.useDynamicColor ?: false
 }

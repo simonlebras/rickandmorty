@@ -1,16 +1,25 @@
 package app.rickandmorty.data.theme
 
+import android.app.Application
 import android.app.UiModeManager
-import android.content.Context
+import android.content.ComponentName
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.getSystemService
+import app.rickandmorty.core.base.allowThreadDiskReads
+import app.rickandmorty.core.base.doOnActivityPreCreated
+import app.rickandmorty.core.base.isComponentEnabled
+import app.rickandmorty.core.base.setComponentEnabled
+import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.coroutines.ApplicationScope
+import app.rickandmorty.core.coroutines.IODispatcher
 import app.rickandmorty.core.startup.Initializer
 import app.rickandmorty.data.model.NightMode
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
@@ -21,51 +30,96 @@ import se.ansman.dagger.auto.AutoBindIntoSet
 
 @AutoBindIntoSet
 internal class NightModeInitializer @Inject constructor(
-    @ApplicationContext private val context: Context,
+    private val application: Application,
     private val themeRepository: ThemeRepository,
     @ApplicationScope private val applicationScope: CoroutineScope,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : Initializer {
     override fun initialize() {
-        // Set default night mode during app startup
-        val currentNightMode = runBlocking {
+        val nightModeImpl = if (Build.VERSION.SDK_INT >= 31) {
+            NightMode31Impl(application)
+        } else {
+            NightMode23Impl(application)
+        }
+
+        val nightModeDeferred = applicationScope.async(context = ioDispatcher) {
             themeRepository
                 .getTheme()
                 .first()
                 .nightMode
         }
-        setNightMode(currentNightMode)
+        nightModeImpl.initializeNightMode {
+            allowThreadDiskReads {
+                runBlocking {
+                    nightModeDeferred.await()
+                }
+            }
+        }
 
-        // Update default night mode to match the theme
+        // Update application night mode to match the theme
         themeRepository.getTheme()
             .map { theme -> theme.nightMode }
             .distinctUntilChanged()
             .onEach { nightMode ->
-                setNightMode(nightMode)
+                nightModeImpl.setApplicationNightMode(nightMode)
             }
             .launchIn(applicationScope)
     }
+}
 
-    private fun setNightMode(nightMode: NightMode) {
-        if (Build.VERSION.SDK_INT >= 31) {
-            val uiModeManager = context.getSystemService<UiModeManager>()!!
-            uiModeManager.setApplicationNightMode(nightMode.toUiModeManagerNightMode())
-        } else {
-            AppCompatDelegate.setDefaultNightMode(nightMode.toAppCompatNightMode())
+private interface NightModeImpl {
+    fun initializeNightMode(nightModeProvider: () -> NightMode)
+
+    fun setApplicationNightMode(nightMode: NightMode)
+}
+
+@RequiresApi(31)
+private class NightMode31Impl(private val application: Application) : NightModeImpl {
+    private val uiModeManager by unsafeLazy {
+        application.getSystemService<UiModeManager>()!!
+    }
+
+    override fun initializeNightMode(nightModeProvider: () -> NightMode) {
+        val nightModeComponent = ComponentName(application, NightModeService::class.java)
+        if (!application.isComponentEnabled(nightModeComponent)) {
+            application.doOnActivityPreCreated {
+                val nightMode = nightModeProvider()
+                setApplicationNightMode(nightMode)
+
+                application.setComponentEnabled(nightModeComponent, true)
+            }
         }
+    }
+
+    override fun setApplicationNightMode(nightMode: NightMode) {
+        uiModeManager.setApplicationNightMode(nightMode.toUiModeManagerNightMode())
+    }
+
+    private fun NightMode.toUiModeManagerNightMode() = when (this) {
+        NightMode.FollowSystem -> UiModeManager.MODE_NIGHT_AUTO
+        NightMode.Light -> UiModeManager.MODE_NIGHT_NO
+        NightMode.Dark -> UiModeManager.MODE_NIGHT_YES
+        else -> throw IllegalArgumentException("Unsupported night mode: $this")
     }
 }
 
-@AppCompatDelegate.NightMode
-private fun NightMode.toAppCompatNightMode() = when (this) {
-    NightMode.AutoBattery -> AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
-    NightMode.FollowSystem -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-    NightMode.Light -> AppCompatDelegate.MODE_NIGHT_NO
-    NightMode.Dark -> AppCompatDelegate.MODE_NIGHT_YES
-}
+private class NightMode23Impl(private val application: Application) : NightModeImpl {
+    override fun initializeNightMode(nightModeProvider: () -> NightMode) {
+        application.doOnActivityPreCreated {
+            val nightMode = nightModeProvider()
+            setApplicationNightMode(nightMode)
+        }
+    }
 
-private fun NightMode.toUiModeManagerNightMode() = when (this) {
-    NightMode.FollowSystem -> UiModeManager.MODE_NIGHT_AUTO
-    NightMode.Light -> UiModeManager.MODE_NIGHT_NO
-    NightMode.Dark -> UiModeManager.MODE_NIGHT_YES
-    else -> throw IllegalStateException("Unsupported night mode: $this")
+    override fun setApplicationNightMode(nightMode: NightMode) {
+        AppCompatDelegate.setDefaultNightMode(nightMode.toAppCompatNightMode())
+    }
+
+    @AppCompatDelegate.NightMode
+    private fun NightMode.toAppCompatNightMode() = when (this) {
+        NightMode.AutoBattery -> AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+        NightMode.FollowSystem -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        NightMode.Light -> AppCompatDelegate.MODE_NIGHT_NO
+        NightMode.Dark -> AppCompatDelegate.MODE_NIGHT_YES
+    }
 }
