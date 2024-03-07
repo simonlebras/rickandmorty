@@ -18,6 +18,7 @@ dependencies {
 
     implementation(libs.kotlinx.collectionsimmutable)
 
+    implementation(projects.core.base)
     implementation(projects.core.coroutines)
     implementation(projects.core.startup)
 }

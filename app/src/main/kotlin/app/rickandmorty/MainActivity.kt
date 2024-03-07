@@ -2,12 +2,10 @@ package app.rickandmorty
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -63,7 +61,28 @@ class MainActivity : AppCompatActivity() {
 
         val composeView = ComposeView(this).apply {
             setContent {
-                RamContent(uiState = uiState)
+                val navController = rememberNavController()
+
+                DisposableEffect(navController) {
+                    val listener = Consumer<Intent> {
+                        navController.handleDeepLink(it)
+                    }
+                    addOnNewIntentListener(listener)
+                    onDispose { removeOnNewIntentListener(listener) }
+                }
+
+                val darkTheme = isSystemInDarkTheme()
+
+                LaunchedEffect(darkTheme) {
+                    enableEdgeToEdge()
+                }
+
+                RamTheme(
+                    darkTheme = darkTheme,
+                    dynamicColor = uiState.useDynamicColor,
+                ) {
+                    RamContent(navController = navController)
+                }
             }
         }
         contentViewSetter.setContentView(this, composeView)
@@ -79,31 +98,5 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
 
         jankStats.get().isTrackingEnabled = false
-    }
-}
-
-@Composable
-private fun ComponentActivity.RamContent(uiState: MainUiState) {
-    val darkTheme = isSystemInDarkTheme()
-
-    LaunchedEffect(darkTheme) {
-        enableEdgeToEdge()
-    }
-
-    val navController = rememberNavController()
-
-    DisposableEffect(navController) {
-        val listener = Consumer<Intent> {
-            navController.handleDeepLink(it)
-        }
-        addOnNewIntentListener(listener)
-        onDispose { removeOnNewIntentListener(listener) }
-    }
-
-    RamTheme(
-        darkTheme = darkTheme,
-        dynamicColor = uiState.useDynamicColor(),
-    ) {
-        RamContent(navController = navController)
     }
 }
