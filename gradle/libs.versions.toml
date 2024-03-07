@@ -66,7 +66,7 @@ store = "5.0.0"
 testparameterinjector = "1.15"
 timber = "5.0.1"
 truth = "1.4.2"
-turbine = "1.0.0"
+turbine = "1.1.0"
 wire = "4.9.7"
 
 [libraries]
