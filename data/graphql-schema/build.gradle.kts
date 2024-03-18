@@ -19,10 +19,6 @@ apollo {
             endpointUrl.set("https://rickandmortyapi.com/graphql")
             schemaFile.set(file("src/main/graphql/schema.graphqls"))
         }
-
-        isADependencyOf(projects.data.character)
-        isADependencyOf(projects.data.episode)
-        isADependencyOf(projects.data.location)
     }
 }
 
