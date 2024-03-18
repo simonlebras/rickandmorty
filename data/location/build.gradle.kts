@@ -14,7 +14,6 @@ android {
 apollo {
     service("rickandmorty") {
         packageName.set("app.rickandmorty.data.location")
-        generateApolloMetadata.set(true)
         dependsOn(projects.data.graphqlSchema)
     }
 }
