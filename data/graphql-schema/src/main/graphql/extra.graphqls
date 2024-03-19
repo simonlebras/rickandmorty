@@ -1,35 +1,35 @@
 extend schema @link(
-    url: "https://specs.apollo.dev/nullability/v0.1",
-    import: ["@catch", "CatchTo", "@semanticNonNull"]
+    url: "https://specs.apollo.dev/nullability/v0.3",
+    import: ["@catch", "CatchTo", "@semanticNonNull", "@semanticNonNullField"]
 )
 
 extend schema @catch(to: THROW)
 
-extend type Info @semanticNonNull(field: "count")
+extend type Info @semanticNonNullField(name: "count")
 
-extend type Characters @semanticNonNull(field: "info")
-extend type Characters @semanticNonNull(field: "results")
+extend type Characters @semanticNonNullField(name: "info")
+extend type Characters @semanticNonNullField(name: "results", levels: [0, 1])
 
-extend type Character @semanticNonNull(field: "id")
-extend type Character @semanticNonNull(field: "name")
-extend type Character @semanticNonNull(field: "status")
-extend type Character @semanticNonNull(field: "species")
-extend type Character @semanticNonNull(field: "type")
-extend type Character @semanticNonNull(field: "gender")
-extend type Character @semanticNonNull(field: "image")
+extend type Character @semanticNonNullField(name: "id")
+extend type Character @semanticNonNullField(name: "name")
+extend type Character @semanticNonNullField(name: "status")
+extend type Character @semanticNonNullField(name: "species")
+extend type Character @semanticNonNullField(name: "type")
+extend type Character @semanticNonNullField(name: "gender")
+extend type Character @semanticNonNullField(name: "image")
 
-extend type Episodes @semanticNonNull(field: "info")
-extend type Episodes @semanticNonNull(field: "results")
+extend type Episodes @semanticNonNullField(name: "info")
+extend type Episodes @semanticNonNullField(name: "results", levels: [0, 1])
 
-extend type Episode @semanticNonNull(field: "id")
-extend type Episode @semanticNonNull(field: "name")
-extend type Episode @semanticNonNull(field: "air_date")
-extend type Episode @semanticNonNull(field: "episode")
+extend type Episode @semanticNonNullField(name: "id")
+extend type Episode @semanticNonNullField(name: "name")
+extend type Episode @semanticNonNullField(name: "air_date")
+extend type Episode @semanticNonNullField(name: "episode")
 
-extend type Locations @semanticNonNull(field: "info")
-extend type Locations @semanticNonNull(field: "results")
+extend type Locations @semanticNonNullField(name: "info")
+extend type Locations @semanticNonNullField(name: "results", levels: [0, 1])
 
-extend type Location @semanticNonNull(field: "id")
-extend type Location @semanticNonNull(field: "name")
-extend type Location @semanticNonNull(field: "type")
-extend type Location @semanticNonNull(field: "dimension")
+extend type Location @semanticNonNullField(name: "id")
+extend type Location @semanticNonNullField(name: "name")
+extend type Location @semanticNonNullField(name: "type")
+extend type Location @semanticNonNullField(name: "dimension")
