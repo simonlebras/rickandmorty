@@ -9,7 +9,7 @@ android-tools = "31.3.1"
 androidx-activity = "1.9.0-beta01"
 androidx-appcompat = "1.7.0-alpha03"
 androidx-benchmark = "1.2.3"
-androidx-compose-bom = "2024.02.00-alpha01"
+androidx-compose-bom = "2024.03.00-alpha02"
 androidx-compose-compiler = "1.5.11"
 androidx-compose-runtimetracing = "1.0.0-beta01"
 androidx-core = "1.13.0-beta01"
@@ -86,7 +86,7 @@ androidx-compose-foundation = { group = "androidx.compose.foundation", name = "f
 androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
 androidx-compose-material-iconsextended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
-androidx-compose-material3-adaptive = { group = "androidx.compose.material3", name = "material3-adaptive" }
+androidx-compose-material3-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive" }
 androidx-compose-material3-adaptive-navigationsuite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 androidx-compose-runtime-tracing = { group = "androidx.compose.runtime", name = "runtime-tracing", version.ref = "androidx-compose-runtimetracing" }
