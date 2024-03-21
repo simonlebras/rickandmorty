@@ -10,7 +10,7 @@ androidx-activity = "1.9.0-beta01"
 androidx-appcompat = "1.7.0-alpha03"
 androidx-benchmark = "1.2.3"
 androidx-compose-bom = "2024.02.00-alpha01"
-androidx-compose-compiler = "1.5.11-dev-k2.0.0-Beta4-21f5e479a96"
+androidx-compose-compiler = "1.5.11"
 androidx-compose-runtimetracing = "1.0.0-beta01"
 androidx-core = "1.13.0-beta01"
 androidx-core-splashscreen = "1.1.0-alpha02"
@@ -47,12 +47,12 @@ haze = "0.6.2"
 hilt = "2.51"
 jdk = "17"
 junit4 = "4.13.2"
-kotlin = "2.0.0-Beta4"
+kotlin = "1.9.23"
 kotlinx-atomicfu = "0.23.2"
 kotlinx-collectionsimmutable = "0.3.7"
 kotlinx-coroutines = "1.8.0"
 kotlinx-datetime = "0.5.0"
-ksp = "2.0.0-Beta4-1.0.19"
+ksp = "1.9.23-1.0.19"
 ktlint = "1.1.1"
 leakcanary = "2.13"
 modulegraphassert = "2.5.0"
@@ -166,11 +166,9 @@ kotlin-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin",
 kotlinx-atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version.ref = "kotlinx-atomicfu" }
 
 kotlinx-collectionsimmutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collectionsimmutable" }
-
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 ksp-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
@@ -222,8 +220,9 @@ affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.re
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 android-test = { id = "com.android.test", version.ref = "android-plugin" }
+androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
+androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 cachefix = { id = "org.gradle.android.cache-fix", version.ref = "cachefix" }
 dependencyanalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyanalysis" }
 easylauncher = { id = "com.starter.easylauncher", version.ref = "easylauncher" }
@@ -237,7 +236,6 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }
 play-osslicenses = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "play-osslicenses-plugin" }
-room = { id = "androidx.room", version.ref = "androidx-room" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 wire = { id = "com.squareup.wire", version.ref = "wire" }

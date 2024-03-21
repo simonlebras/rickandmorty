@@ -19,8 +19,9 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.test) apply false
+    alias(libs.plugins.androidx.baselineprofile) apply false
+    alias(libs.plugins.androidx.room) apply false
     alias(libs.plugins.apollo) apply false
-    alias(libs.plugins.baselineprofile) apply false
     alias(libs.plugins.cachefix) apply false
     alias(libs.plugins.dependencyanalysis)
     alias(libs.plugins.easylauncher) apply false
@@ -34,7 +35,6 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.modulegraphassert) apply false
     alias(libs.plugins.play.osslicenses) apply false
-    alias(libs.plugins.room) apply false
     alias(libs.plugins.sortdependencies)
     alias(libs.plugins.spotless)
     alias(libs.plugins.wire) apply false
