@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.rickandmorty.kotlin.android)
     alias(libs.plugins.rickandmorty.osslicenses)
 
-    alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.easylauncher)
     alias(libs.plugins.modulegraphassert)
 }

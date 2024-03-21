@@ -2,8 +2,9 @@ pluginManagement {
     repositories {
         google {
             content {
-                includeGroupByRegex(".*google.*")
-                includeGroupByRegex(".*android.*")
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
             }
         }
         mavenCentral()
@@ -26,14 +27,12 @@ dependencyResolutionManagement {
     repositories {
         google {
             content {
-                includeGroupByRegex(".*google.*")
-                includeGroupByRegex(".*android.*")
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
             }
         }
         mavenCentral()
-        maven {
-            url = uri("https://androidx.dev/storage/compose-compiler/repository/")
-        }
     }
 }
 
