@@ -67,7 +67,7 @@ testparameterinjector = "1.15"
 timber = "5.0.1"
 truth = "1.4.2"
 turbine = "1.1.0"
-wire = "4.9.8"
+wire = "4.9.9"
 
 [libraries]
 affectedmoduledetector-plugin = { group = "com.dropbox.affectedmoduledetector", name = "affectedmoduledetector", version.ref = "affectedmoduledetector" }
