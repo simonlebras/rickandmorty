@@ -30,7 +30,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v2
 
       - name: Check LFS files
-        uses: actionsdesk/lfs-warning@v3.2
+        uses: actionsdesk/lfs-warning@v3.3
 
       - name: Set up JDK
         uses: actions/setup-java@v4
