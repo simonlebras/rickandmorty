@@ -42,11 +42,13 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
-gradleEnterprise {
+develocity {
     buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-        publishAlwaysIf(providers.environmentVariable("CI").orNull == "true")
+        termsOfUseUrl = "https://gradle.com/legal/terms-of-use/"
+        termsOfUseAgree = "yes"
+
+        val isCI = providers.environmentVariable("CI").orNull == "true"
+        publishing.onlyIf { isCI }
     }
 }
 
