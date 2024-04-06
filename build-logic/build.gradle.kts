@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -6,16 +7,25 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(libs.versions.jdk.get().toInt())
     explicitApi()
 }
 
+val javaTarget = libs.versions.java.target.get()
+
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        freeCompilerArgs += listOf(
+    compilerOptions {
+        jvmTarget.set(JvmTarget.fromTarget(javaTarget))
+
+        freeCompilerArgs.addAll(
             "-Xcontext-receivers",
+            "-Xjdk-release=$javaTarget",
         )
     }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    sourceCompatibility = javaTarget
+    targetCompatibility = javaTarget
 }
 
 tasks {
@@ -31,6 +41,7 @@ dependencies {
     compileOnly(libs.android.tools.common)
     compileOnly(libs.androidx.room.plugin)
     compileOnly(libs.dependencyanalysis.plugin)
+    compileOnly(libs.gradledoctor.plugin)
     compileOnly(libs.kotlin.plugin)
     compileOnly(libs.ksp.plugin)
     compileOnly(libs.spotless.plugin)
