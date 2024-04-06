@@ -21,6 +21,10 @@ internal fun BaseExtension.configureAndroid(libs: LibrariesForLibs) {
     }
 
     compileOptions {
+        val javaTarget = libs.versions.java.target.get()
+        sourceCompatibility(javaTarget)
+        targetCompatibility(javaTarget)
+
         isCoreLibraryDesugaringEnabled = true
     }
 

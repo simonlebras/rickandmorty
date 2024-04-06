@@ -45,7 +45,8 @@ googleservices = "4.4.1"
 gradledoctor = "0.9.2"
 haze = "0.6.2"
 hilt = "2.51.1"
-jdk = "17"
+java-jdk = "21"
+java-target = "17"
 junit4 = "4.13.2"
 kotlin = "1.9.23"
 kotlinx-atomicfu = "0.23.2"
@@ -150,6 +151,8 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
+
+gradledoctor-plugin = { group = "com.osacky.doctor", name = "doctor-plugin", version.ref = "gradledoctor" }
 
 haze = { group = "dev.chrisbanes.haze", name = "haze", version.ref = "haze" }
 haze-materials = { group = "dev.chrisbanes.haze", name = "haze-materials", version.ref = "haze" }

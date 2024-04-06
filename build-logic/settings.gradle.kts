@@ -9,13 +9,12 @@ dependencyResolutionManagement {
     repositories {
         google {
             content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
             }
         }
         mavenCentral()
-        gradlePluginPortal()
     }
 
     versionCatalogs {
@@ -23,10 +22,6 @@ dependencyResolutionManagement {
             from(files("../gradle/libs.versions.toml"))
         }
     }
-}
-
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
 rootProject.name = "build-logic"
