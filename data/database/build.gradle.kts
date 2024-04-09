@@ -12,6 +12,7 @@ android {
 
 dependencies {
     api(projects.data.model)
+    api(projects.data.paging)
 
     implementation(libs.androidx.room.paging)
 

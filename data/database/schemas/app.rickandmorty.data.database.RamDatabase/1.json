@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c464eb9ba16c9e139952b0e1ae41352a",
+    "identityHash": "55d557055c36d263e20ebacc326a324d",
     "entities": [
       {
         "tableName": "character",
@@ -62,13 +62,19 @@
       },
       {
         "tableName": "character_paged_entry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`page` INTEGER NOT NULL, `index` INTEGER NOT NULL, `character_id` TEXT NOT NULL, PRIMARY KEY(`page`, `index`), FOREIGN KEY(`character_id`) REFERENCES `character`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`page` INTEGER NOT NULL, `next_page` INTEGER, `index` INTEGER NOT NULL, `character_id` TEXT NOT NULL, PRIMARY KEY(`page`, `index`), FOREIGN KEY(`character_id`) REFERENCES `character`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "page",
             "columnName": "page",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "nextPage",
+            "columnName": "next_page",
+            "affinity": "INTEGER",
+            "notNull": false
           },
           {
             "fieldPath": "index",
@@ -155,13 +161,19 @@
       },
       {
         "tableName": "episode_paged_entry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`page` INTEGER NOT NULL, `index` INTEGER NOT NULL, `episode_id` TEXT NOT NULL, PRIMARY KEY(`page`, `index`), FOREIGN KEY(`episode_id`) REFERENCES `episode`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`page` INTEGER NOT NULL, `next_page` INTEGER, `index` INTEGER NOT NULL, `episode_id` TEXT NOT NULL, PRIMARY KEY(`page`, `index`), FOREIGN KEY(`episode_id`) REFERENCES `episode`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "page",
             "columnName": "page",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "nextPage",
+            "columnName": "next_page",
+            "affinity": "INTEGER",
+            "notNull": false
           },
           {
             "fieldPath": "index",
@@ -248,13 +260,19 @@
       },
       {
         "tableName": "location_paged_entry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`page` INTEGER NOT NULL, `index` INTEGER NOT NULL, `location_id` TEXT NOT NULL, PRIMARY KEY(`page`, `index`), FOREIGN KEY(`location_id`) REFERENCES `location`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`page` INTEGER NOT NULL, `next_page` INTEGER, `index` INTEGER NOT NULL, `location_id` TEXT NOT NULL, PRIMARY KEY(`page`, `index`), FOREIGN KEY(`location_id`) REFERENCES `location`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "page",
             "columnName": "page",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "nextPage",
+            "columnName": "next_page",
+            "affinity": "INTEGER",
+            "notNull": false
           },
           {
             "fieldPath": "index",
@@ -305,7 +323,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c464eb9ba16c9e139952b0e1ae41352a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '55d557055c36d263e20ebacc326a324d')"
     ]
   }
 }

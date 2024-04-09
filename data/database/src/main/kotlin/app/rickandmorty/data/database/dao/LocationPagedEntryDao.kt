@@ -11,8 +11,8 @@ public interface LocationPagedEntryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public suspend fun insertAll(pagedEntries: List<LocationPagedEntryEntity>)
 
-    @Query("SELECT page FROM location_paged_entry WHERE location_id = :locationId")
-    public suspend fun getPage(locationId: String): Int?
+    @Query("SELECT * FROM location_paged_entry WHERE location_id = :locationId")
+    public suspend fun getPagedEntry(locationId: String): LocationPagedEntryEntity?
 
     @Query("DELETE FROM location_paged_entry")
     public suspend fun deleteAll()

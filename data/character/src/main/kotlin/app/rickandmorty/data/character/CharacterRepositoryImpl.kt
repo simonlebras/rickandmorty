@@ -31,9 +31,9 @@ internal class CharacterRepositoryImpl @Inject constructor(
     @OptIn(ExperimentalPagingApi::class)
     override fun getPagedCharacters(config: PagingConfig): Flow<PagingData<Character>> {
         val remoteMediator = PageKeyedRemoteMediator<CharacterEntity>(
-            pageResolver = { character ->
+            pagedEntryResolver = { character ->
                 transactionRunner {
-                    characterPagedEntryDao.getPage(character.id)!!
+                    characterPagedEntryDao.getPagedEntry(character.id)
                 }
             },
             pageFetcher = { page ->
@@ -61,6 +61,7 @@ internal class CharacterRepositoryImpl @Inject constructor(
 
                     val pagedEntry = CharacterPagedEntryEntity(
                         page = page,
+                        nextPage = info.next,
                         index = index,
                         characterId = character.id,
                     )

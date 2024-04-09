@@ -31,9 +31,9 @@ internal class LocationRepositoryImpl @Inject constructor(
     @OptIn(ExperimentalPagingApi::class)
     override fun getPagedLocations(config: PagingConfig): Flow<PagingData<Location>> {
         val remoteMediator = PageKeyedRemoteMediator<LocationEntity>(
-            pageResolver = { location ->
+            pagedEntryResolver = { location ->
                 transactionRunner {
-                    locationPagedEntryDao.getPage(location.id)!!
+                    locationPagedEntryDao.getPagedEntry(location.id)
                 }
             },
             pageFetcher = { page ->
@@ -58,6 +58,7 @@ internal class LocationRepositoryImpl @Inject constructor(
 
                     val pagedEntry = LocationPagedEntryEntity(
                         page = page,
+                        nextPage = info.next,
                         index = index,
                         locationId = location.id,
                     )
