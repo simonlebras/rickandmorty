@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
+import app.rickandmorty.data.paging.PagedEntry
 
 @Entity(
     tableName = "location_paged_entry",
@@ -19,7 +20,8 @@ import androidx.room.Index
     ],
 )
 public data class LocationPagedEntryEntity(
-    @ColumnInfo(name = "page") val page: Int,
+    @ColumnInfo(name = "page") override val page: Int,
+    @ColumnInfo(name = "next_page") override val nextPage: Int?,
     @ColumnInfo(name = "index") val index: Int,
     @ColumnInfo(name = "location_id") val locationId: String,
-)
+) : PagedEntry

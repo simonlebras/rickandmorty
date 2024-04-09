@@ -10,7 +10,7 @@ public const val FIRST_PAGE_KEY: Int = 1
 
 @OptIn(ExperimentalPagingApi::class)
 public class PageKeyedRemoteMediator<T : Any>(
-    private val pageResolver: PageResolver<T>,
+    private val pagedEntryResolver: PagedEntryResolver<T>,
     private val pageFetcher: PageFetcher,
 ) : RemoteMediator<Int, T>() {
     override suspend fun load(
@@ -24,14 +24,11 @@ public class PageKeyedRemoteMediator<T : Any>(
             }
 
             LoadType.APPEND -> {
-                val lastItem = state.lastItemOrNull()
-                    ?: return MediatorResult.Success(
-                        endOfPaginationReached = true,
-                    )
-                pageResolver.resolve(lastItem) + 1
+                val pagedEntry = state.lastItemOrNull()?.let { item ->
+                    pagedEntryResolver.resolve(item)
+                }
+                pagedEntry?.nextPage ?: return MediatorResult.Success(endOfPaginationReached = pagedEntry != null)
             }
-
-            else -> error("Unknown LoadType: $loadType")
         }
         return try {
             val result = pageFetcher.fetch(page)
