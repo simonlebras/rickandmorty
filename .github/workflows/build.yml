@@ -27,7 +27,7 @@ jobs:
           lfs: true
 
       - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
 
       - name: Check LFS files
         uses: actionsdesk/lfs-warning@v3.3
@@ -164,7 +164,7 @@ jobs:
           fetch-depth: "500"
 
       - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
 
       - name: Set up JDK
         uses: actions/setup-java@v4
