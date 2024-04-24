@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="light_system_bars">false</bool>
-    <color name="nav_bar_scrim">@android:color/transparent</color>
 </resources>
