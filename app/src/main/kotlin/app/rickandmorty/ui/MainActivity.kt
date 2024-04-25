@@ -2,6 +2,7 @@ package app.rickandmorty.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.ComposeView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.util.Consumer
 import androidx.lifecycle.Lifecycle
@@ -19,7 +19,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.metrics.performance.JankStats
 import androidx.navigation.compose.rememberNavController
-import app.rickandmorty.core.contentview.ContentViewSetter
 import app.rickandmorty.core.designsystem.theme.RamTheme
 import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,9 +30,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
-
-    @Inject
-    lateinit var contentViewSetter: ContentViewSetter
 
     @Inject
     lateinit var jankStats: Lazy<JankStats>
@@ -59,33 +55,30 @@ class MainActivity : AppCompatActivity() {
             !uiState.isLoading
         }
 
-        val composeView = ComposeView(this).apply {
-            setContent {
-                val navController = rememberNavController()
+        setContent {
+            val navController = rememberNavController()
 
-                DisposableEffect(navController) {
-                    val listener = Consumer<Intent> {
-                        navController.handleDeepLink(it)
-                    }
-                    addOnNewIntentListener(listener)
-                    onDispose { removeOnNewIntentListener(listener) }
+            DisposableEffect(navController) {
+                val listener = Consumer<Intent> {
+                    navController.handleDeepLink(it)
                 }
+                addOnNewIntentListener(listener)
+                onDispose { removeOnNewIntentListener(listener) }
+            }
 
-                val darkTheme = isSystemInDarkTheme()
+            val darkTheme = isSystemInDarkTheme()
 
-                LaunchedEffect(darkTheme) {
-                    enableEdgeToEdge()
-                }
+            LaunchedEffect(darkTheme) {
+                enableEdgeToEdge()
+            }
 
-                RamTheme(
-                    darkTheme = darkTheme,
-                    dynamicColor = uiState.useDynamicColor,
-                ) {
-                    RamApp(navController = navController)
-                }
+            RamTheme(
+                darkTheme = darkTheme,
+                dynamicColor = uiState.useDynamicColor,
+            ) {
+                RamApp(navController = navController)
             }
         }
-        contentViewSetter.setContentView(this, composeView)
     }
 
     override fun onResume() {

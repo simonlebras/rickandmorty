@@ -91,6 +91,7 @@ baselineProfile {
 dependencies {
     baselineProfile(projects.baselineProfile)
 
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.material3.adaptive)
     implementation(libs.androidx.core.splashscreen)
@@ -99,7 +100,6 @@ dependencies {
     implementation(libs.coil)
 
     implementation(projects.core.coil)
-    implementation(projects.core.contentView)
     implementation(projects.core.coroutines)
     implementation(projects.core.designSystem)
     implementation(projects.core.l10n)
