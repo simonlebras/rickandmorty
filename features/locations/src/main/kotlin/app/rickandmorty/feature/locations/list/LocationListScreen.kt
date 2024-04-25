@@ -44,7 +44,6 @@ import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
-import app.rickandmorty.core.ui.isNotLoading
 import app.rickandmorty.data.model.Location
 
 @Composable
@@ -54,7 +53,7 @@ internal fun LocationListScreen(
 ) {
     val locations = viewModel.locations.collectAsLazyPagingItems()
 
-    ReportDrawnWhen { !locations.loadState.refresh.isLoading }
+    ReportDrawnWhen { locations.loadState.isIdle }
 
     LocationListScreen(
         locations = locations,
@@ -121,7 +120,7 @@ private fun LocationListScreen(
                     )
                 }
 
-                loadState.refresh.isNotLoading && locations.isEmpty -> {
+                loadState.isIdle && locations.isEmpty -> {
                     Empty(
                         graphic = {
                             Icon(

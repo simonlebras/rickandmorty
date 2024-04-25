@@ -44,7 +44,6 @@ import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
-import app.rickandmorty.core.ui.isNotLoading
 import app.rickandmorty.data.model.Episode
 
 @Composable
@@ -54,7 +53,7 @@ internal fun EpisodeListScreen(
 ) {
     val episodes = viewModel.episodes.collectAsLazyPagingItems()
 
-    ReportDrawnWhen { !episodes.loadState.refresh.isLoading }
+    ReportDrawnWhen { episodes.loadState.isIdle }
 
     EpisodeListScreen(
         episodes = episodes,
@@ -121,7 +120,7 @@ private fun EpisodeListScreen(
                     )
                 }
 
-                loadState.refresh.isNotLoading && episodes.isEmpty -> {
+                loadState.isIdle && episodes.isEmpty -> {
                     Empty(
                         graphic = {
                             Icon(
