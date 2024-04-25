@@ -1,4 +1,4 @@
-package app.rickandmorty
+package app.rickandmorty.ui
 
 import androidx.compose.runtime.Immutable
 import app.rickandmorty.core.resourcestate.Incomplete

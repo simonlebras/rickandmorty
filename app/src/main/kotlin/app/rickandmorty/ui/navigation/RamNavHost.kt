@@ -1,4 +1,4 @@
-package app.rickandmorty.navigation
+package app.rickandmorty.ui.navigation
 
 import android.content.Intent
 import androidx.compose.runtime.Composable
