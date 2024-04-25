@@ -26,9 +26,6 @@ jobs:
           fetch-depth: "500"
           lfs: true
 
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v3
-
       - name: Check LFS files
         uses: actionsdesk/lfs-warning@v3.3
 
@@ -43,6 +40,7 @@ jobs:
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
           gradle-home-cache-cleanup: true
+          validate-wrappers: true
 
       - name: Decrypt secrets
         uses: ./.github/actions/decrypt-secrets
@@ -163,9 +161,6 @@ jobs:
           # Fetch expanded history, which is needed for affected module detection
           fetch-depth: "500"
 
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v3
-
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -177,6 +172,7 @@ jobs:
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
           gradle-home-cache-cleanup: true
+          validate-wrappers: true
 
       - name: Accept license
         run: echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_SDK_ROOT/licenses/android-sdk-preview-license"
