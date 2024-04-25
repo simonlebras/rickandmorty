@@ -61,7 +61,6 @@ include(":baseline-profile")
 
 include(":core:base")
 include(":core:coil")
-include(":core:content-view")
 include(":core:coroutines")
 include(":core:design-system")
 include(":core:hilt-test")
