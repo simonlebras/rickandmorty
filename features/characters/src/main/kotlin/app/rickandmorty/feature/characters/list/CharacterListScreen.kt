@@ -51,7 +51,6 @@ import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
-import app.rickandmorty.core.ui.isNotLoading
 import app.rickandmorty.core.ui.label
 import app.rickandmorty.data.model.Character
 
@@ -62,7 +61,7 @@ internal fun CharacterListScreen(
 ) {
     val characters = viewModel.characters.collectAsLazyPagingItems()
 
-    ReportDrawnWhen { !characters.loadState.refresh.isLoading }
+    ReportDrawnWhen { characters.loadState.isIdle }
 
     CharacterListScreen(
         characters = characters,
@@ -130,7 +129,7 @@ private fun CharacterListScreen(
                     )
                 }
 
-                loadState.refresh.isNotLoading && characters.isEmpty -> {
+                loadState.isIdle && characters.isEmpty -> {
                     Empty(
                         graphic = {
                             Icon(
