@@ -1,4 +1,4 @@
-package app.rickandmorty
+package app.rickandmorty.ui
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -16,15 +16,15 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import app.rickandmorty.core.designsystem.component.HazeNavigationSuiteScaffold
-import app.rickandmorty.navigation.RamNavHost
-import app.rickandmorty.navigation.TopLevelDestination
+import app.rickandmorty.ui.navigation.RamNavHost
+import app.rickandmorty.ui.navigation.TopLevelDestination
 
 @OptIn(
     ExperimentalMaterial3AdaptiveApi::class,
     ExperimentalMaterial3AdaptiveNavigationSuiteApi::class,
 )
 @Composable
-fun RamContent(
+fun RamApp(
     navController: NavHostController,
     modifier: Modifier = Modifier,
 ) {

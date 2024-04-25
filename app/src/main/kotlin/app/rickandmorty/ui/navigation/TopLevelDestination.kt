@@ -1,4 +1,4 @@
-package app.rickandmorty.navigation
+package app.rickandmorty.ui.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector

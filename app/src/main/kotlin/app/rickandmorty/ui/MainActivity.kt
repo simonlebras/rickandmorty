@@ -1,4 +1,4 @@
-package app.rickandmorty
+package app.rickandmorty.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     darkTheme = darkTheme,
                     dynamicColor = uiState.useDynamicColor,
                 ) {
-                    RamContent(navController = navController)
+                    RamApp(navController = navController)
                 }
             }
         }
