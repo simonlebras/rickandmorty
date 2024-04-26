@@ -15,6 +15,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import app.rickandmorty.core.designsystem.component.HazeNavigationSuiteScaffold
 import app.rickandmorty.ui.navigation.RamNavHost
 import app.rickandmorty.ui.navigation.TopLevelDestination
@@ -24,10 +25,8 @@ import app.rickandmorty.ui.navigation.TopLevelDestination
     ExperimentalMaterial3AdaptiveNavigationSuiteApi::class,
 )
 @Composable
-fun RamApp(
-    navController: NavHostController,
-    modifier: Modifier = Modifier,
-) {
+fun RamApp(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
     val layoutType = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(
