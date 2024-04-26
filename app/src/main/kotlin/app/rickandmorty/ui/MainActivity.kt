@@ -1,24 +1,20 @@
 package app.rickandmorty.ui
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.util.Consumer
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.metrics.performance.JankStats
-import androidx.navigation.compose.rememberNavController
 import app.rickandmorty.core.designsystem.theme.RamTheme
 import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,16 +52,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContent {
-            val navController = rememberNavController()
-
-            DisposableEffect(navController) {
-                val listener = Consumer<Intent> {
-                    navController.handleDeepLink(it)
-                }
-                addOnNewIntentListener(listener)
-                onDispose { removeOnNewIntentListener(listener) }
-            }
-
             val darkTheme = isSystemInDarkTheme()
 
             LaunchedEffect(darkTheme) {
@@ -76,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 darkTheme = darkTheme,
                 dynamicColor = uiState.useDynamicColor,
             ) {
-                RamApp(navController = navController)
+                RamApp()
             }
         }
     }
