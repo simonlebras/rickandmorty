@@ -12,10 +12,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.metrics.performance.JankStats
 import app.rickandmorty.core.designsystem.theme.RamTheme
+import app.rickandmorty.core.metrics.JankMonitor
 import app.rickandmorty.core.ui.isSystemInDarkTheme
-import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
     @Inject
-    lateinit var jankStats: Lazy<JankStats>
+    lateinit var jankMonitor: JankMonitor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
@@ -35,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         super.onCreate(savedInstanceState)
+
+        lifecycle.addObserver(jankMonitor)
 
         var uiState by mutableStateOf(MainUiState())
 
@@ -59,17 +60,5 @@ class MainActivity : AppCompatActivity() {
                 RamApp()
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        jankStats.get().isTrackingEnabled = true
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-        jankStats.get().isTrackingEnabled = false
     }
 }
