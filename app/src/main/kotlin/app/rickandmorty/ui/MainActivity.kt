@@ -5,8 +5,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.metrics.performance.JankStats
 import app.rickandmorty.core.designsystem.theme.RamTheme
+import app.rickandmorty.core.ui.isSystemInDarkTheme
 import dagger.Lazy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -44,6 +43,10 @@ class MainActivity : AppCompatActivity() {
                 viewModel.uiState
                     .onEach { uiState = it }
                     .launchIn(this)
+
+                isSystemInDarkTheme()
+                    .onEach { enableEdgeToEdge() }
+                    .launchIn(this)
             }
         }
 
@@ -52,16 +55,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContent {
-            val darkTheme = isSystemInDarkTheme()
-
-            LaunchedEffect(darkTheme) {
-                enableEdgeToEdge()
-            }
-
-            RamTheme(
-                darkTheme = darkTheme,
-                dynamicColor = uiState.useDynamicColor,
-            ) {
+            RamTheme(dynamicColor = uiState.useDynamicColor) {
                 RamApp()
             }
         }

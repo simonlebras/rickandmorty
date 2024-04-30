@@ -107,6 +107,7 @@ dependencies {
     implementation(projects.core.okhttp)
     implementation(projects.core.resourceState)
     implementation(projects.core.startup)
+    implementation(projects.core.ui)
 
     implementation(projects.data.graphqlClient)
     implementation(projects.data.theme)
