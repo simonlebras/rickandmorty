@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.android.lint)
     alias(libs.plugins.spotless)
 }
 
@@ -50,6 +51,8 @@ dependencies {
 
     // Workaround for https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+
+    lintChecks(libs.androidx.lintgradle)
 }
 
 gradlePlugin {
