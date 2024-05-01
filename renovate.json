@@ -22,12 +22,6 @@
       ]
     },
     {
-      "matchPackagePatterns": [
-        "^app.rickandmorty"
-      ],
-      "enabled": false
-    },
-    {
       "description": "Automatically merge minor and patch-level updates",
       "matchUpdateTypes": [
         "minor",

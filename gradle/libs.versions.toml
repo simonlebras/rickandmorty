@@ -45,7 +45,7 @@ googleservices = "4.4.1"
 gradledoctor = "0.10.0"
 haze = "0.7.1"
 hilt = "2.51.1"
-java-jdk = "21"
+java-jdk = "22"
 java-target = "17"
 junit4 = "4.13.2"
 kotlin = "1.9.23"
@@ -197,21 +197,21 @@ wire-runtime = { group = "com.squareup.wire", name = "wire-runtime", version.ref
 
 [plugins]
 # Convention plugins
-rickandmorty-android-application = { id = "app.rickandmorty.android-application", version = "unspecified" }
-rickandmorty-android-library = { id = "app.rickandmorty.android-library", version = "unspecified" }
-rickandmorty-android-test = { id = "app.rickandmorty.android-test", version = "unspecified" }
-rickandmorty-autodagger = { id = "app.rickandmorty.autodagger", version = "unspecified" }
-rickandmorty-compose = { id = "app.rickandmorty.compose", version = "unspecified" }
-rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics", version = "unspecified" }
-rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf", version = "unspecified" }
-rickandmorty-hilt = { id = "app.rickandmorty.hilt", version = "unspecified" }
-rickandmorty-jvm-library = { id = "app.rickandmorty.jvm-library", version = "unspecified" }
-rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android", version = "unspecified" }
-rickandmorty-kotlin-jvm = { id = "app.rickandmorty.kotlin-jvm", version = "unspecified" }
-rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses", version = "unspecified" }
-rickandmorty-room = { id = "app.rickandmorty.room", version = "unspecified" }
-rickandmorty-root = { id = "app.rickandmorty.root", version = "unspecified" }
-rickandmorty-wire = { id = "app.rickandmorty.wire", version = "unspecified" }
+rickandmorty-android-application = { id = "app.rickandmorty.android-application" }
+rickandmorty-android-library = { id = "app.rickandmorty.android-library" }
+rickandmorty-android-test = { id = "app.rickandmorty.android-test" }
+rickandmorty-autodagger = { id = "app.rickandmorty.autodagger" }
+rickandmorty-compose = { id = "app.rickandmorty.compose" }
+rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
+rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
+rickandmorty-hilt = { id = "app.rickandmorty.hilt" }
+rickandmorty-jvm-library = { id = "app.rickandmorty.jvm-library" }
+rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
+rickandmorty-kotlin-jvm = { id = "app.rickandmorty.kotlin-jvm" }
+rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses" }
+rickandmorty-room = { id = "app.rickandmorty.room" }
+rickandmorty-root = { id = "app.rickandmorty.root" }
+rickandmorty-wire = { id = "app.rickandmorty.wire" }
 
 affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.ref = "affectedmoduledetector" }
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
