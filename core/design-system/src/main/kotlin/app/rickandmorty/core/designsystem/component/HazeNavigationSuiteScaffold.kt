@@ -14,9 +14,7 @@ import androidx.compose.foundation.layout.onConsumedWindowInsetsChanged
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.Surface
-import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.compose.material3.adaptive.navigationsuite.ExperimentalMaterial3AdaptiveNavigationSuiteApi
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuite
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteColors
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
@@ -48,8 +46,6 @@ import dev.chrisbanes.haze.materials.HazeMaterials
 @OptIn(
     ExperimentalHazeMaterialsApi::class,
     ExperimentalLayoutApi::class,
-    ExperimentalMaterial3AdaptiveApi::class,
-    ExperimentalMaterial3AdaptiveNavigationSuiteApi::class,
 )
 @Composable
 public fun HazeNavigationSuiteScaffold(
@@ -125,7 +121,6 @@ public fun HazeNavigationSuiteScaffold(
     }
 }
 
-@OptIn(ExperimentalMaterial3AdaptiveNavigationSuiteApi::class)
 @Composable
 private fun HazeNavigationSuiteScaffoldLayout(
     navigationSuite: @Composable () -> Unit,

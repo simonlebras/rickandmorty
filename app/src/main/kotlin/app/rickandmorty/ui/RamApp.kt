@@ -2,9 +2,7 @@ package app.rickandmorty.ui
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.compose.material3.adaptive.navigationsuite.ExperimentalMaterial3AdaptiveNavigationSuiteApi
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,10 +18,6 @@ import app.rickandmorty.core.designsystem.component.HazeNavigationSuiteScaffold
 import app.rickandmorty.ui.navigation.RamNavHost
 import app.rickandmorty.ui.navigation.TopLevelDestination
 
-@OptIn(
-    ExperimentalMaterial3AdaptiveApi::class,
-    ExperimentalMaterial3AdaptiveNavigationSuiteApi::class,
-)
 @Composable
 fun RamApp(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
