@@ -3,9 +3,7 @@ package app.rickandmorty.gradle.plugin
 import androidx.room.gradle.RoomExtension
 import app.rickandmorty.gradle.util.api
 import app.rickandmorty.gradle.util.apply
-import app.rickandmorty.gradle.util.implementation
 import app.rickandmorty.gradle.util.ksp
-import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -22,17 +20,12 @@ public class RoomPlugin : Plugin<Project> {
             libs.plugins.ksp,
         )
 
-        configure<KspExtension> {
-            arg("room.generateKotlin", "true")
-        }
-
         configure<RoomExtension> {
             schemaDirectory("$projectDir/schemas")
         }
 
         dependencies {
             api(libs.androidx.room.runtime)
-            implementation(libs.androidx.room)
             ksp(libs.androidx.room.compiler)
         }
     }

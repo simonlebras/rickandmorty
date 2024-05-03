@@ -43,7 +43,6 @@ dependencies {
     compileOnly(libs.dependencyanalysis.plugin)
     compileOnly(libs.gradledoctor.plugin)
     compileOnly(libs.kotlin.plugin)
-    compileOnly(libs.ksp.plugin)
     compileOnly(libs.spotless.plugin)
     compileOnly(libs.wire.plugin)
 
