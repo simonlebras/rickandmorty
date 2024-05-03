@@ -8,11 +8,11 @@ android-sdk-target = "34"
 android-tools = "31.4.0"
 androidx-activity = "1.9.0"
 androidx-appcompat = "1.7.0-beta01"
-androidx-benchmark = "1.2.4"
+androidx-benchmark = "1.3.0-alpha04"
 androidx-compose-bom = "2024.04.00-alpha02"
 androidx-compose-compiler = "1.5.13"
 androidx-compose-runtimetracing = "1.0.0-beta01"
-androidx-core = "1.13.1"
+androidx-core = "1.14.0-alpha01"
 androidx-core-splashscreen = "1.2.0-alpha01"
 androidx-datastore = "1.1.1"
 androidx-hilt-navigation-compose = "1.2.0"
@@ -21,7 +21,7 @@ androidx-metrics = "1.0.0-beta01"
 androidx-navigation = "2.8.0-alpha08"
 androidx-paging = "3.3.0-rc01"
 androidx-profileinstaller = "1.4.0-alpha01"
-androidx-room = "2.6.1"
+androidx-room = "2.7.0-alpha01"
 androidx-test-core = "1.6.0-alpha06"
 androidx-test-espresso = "3.6.0-alpha04"
 androidx-test-junit = "1.2.0-alpha04"
@@ -111,7 +111,6 @@ androidx-paging-common = { group = "androidx.paging", name = "paging-common", ve
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging" }
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidx-paging" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "androidx-profileinstaller" }
-androidx-room = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
 androidx-room-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidx-room" }
@@ -168,8 +167,6 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
-
-ksp-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }

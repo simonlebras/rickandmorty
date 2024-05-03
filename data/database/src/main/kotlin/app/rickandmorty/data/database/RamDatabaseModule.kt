@@ -18,7 +18,11 @@ internal object RamDatabaseModule {
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): RamDatabase {
         return Room
-            .databaseBuilder(context, RamDatabase::class.java, DATABASE_NAME)
+            .databaseBuilder<RamDatabase>(
+                context = context,
+                name = DATABASE_NAME,
+                factory = { RamDatabase::class.instantiateImpl() },
+            )
             .build()
     }
 }
