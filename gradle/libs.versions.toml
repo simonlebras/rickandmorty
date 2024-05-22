@@ -1,5 +1,6 @@
 [versions]
 affectedmoduledetector = "0.3.1"
+android-compose-screenshot = "0.0.1-alpha04"
 android-desugarjdklibs = "2.0.4"
 android-plugin = "8.6.0-rc01"
 android-sdk-compile = "35"
@@ -10,7 +11,7 @@ android-tools = "31.6.0-rc01"
 androidx-activity = "1.9.1"
 androidx-appcompat = "1.7.0"
 androidx-benchmark = "1.3.0"
-androidx-compose-bom = "2024.07.00-alpha02"
+androidx-compose-bom = "2024.08.00-alpha02"
 androidx-compose-runtimetracing = "1.0.0-beta01"
 androidx-core = "1.14.0-alpha01"
 androidx-core-splashscreen = "1.2.0-alpha01"
@@ -74,6 +75,7 @@ wire = "5.0.0"
 [libraries]
 affectedmoduledetector-plugin = { group = "com.dropbox.affectedmoduledetector", name = "affectedmoduledetector", version.ref = "affectedmoduledetector" }
 
+android-compose-screenshot-plugin = { group = "com.android.compose.screenshot", name = "com.android.compose.screenshot.gradle.plugin", version.ref = "android-compose-screenshot" }
 android-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
 android-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android-plugin" }
 android-security-lints = { group = "com.android.security.lint", name = "lint", version.ref = "android-security-lints" }
@@ -141,6 +143,7 @@ autodagger-room = { group = "se.ansman.dagger.auto", name = "androidx-room", ver
 
 coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-compose-core = { group = "io.coil-kt.coil3", name = "coil-compose-core", version.ref = "coil" }
 coil-core = { group = "io.coil-kt.coil3", name = "coil-core", version.ref = "coil" }
 coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
@@ -206,6 +209,7 @@ rickandmorty-android-test = { id = "app.rickandmorty.android-test" }
 rickandmorty-apollo = { id = "app.rickandmorty.apollo" }
 rickandmorty-autodagger = { id = "app.rickandmorty.autodagger" }
 rickandmorty-compose = { id = "app.rickandmorty.compose" }
+rickandmorty-compose-screenshot = { id = "app.rickandmorty.compose-screenshot" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
 rickandmorty-hilt = { id = "app.rickandmorty.hilt" }
@@ -219,6 +223,7 @@ rickandmorty-wire = { id = "app.rickandmorty.wire" }
 
 affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.ref = "affectedmoduledetector" }
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
+android-compose-screenshot = { id = "com.android.compose.screenshot", version.ref = "android-compose-screenshot" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 android-lint = { id = "com.android.lint", version.ref = "android-plugin" }
 android-test = { id = "com.android.test", version.ref = "android-plugin" }

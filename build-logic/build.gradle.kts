@@ -38,6 +38,7 @@ tasks {
 
 dependencies {
     compileOnly(libs.affectedmoduledetector.plugin)
+    compileOnly(libs.android.compose.screenshot.plugin)
     compileOnly(libs.android.plugin)
     compileOnly(libs.android.tools.common)
     compileOnly(libs.androidx.room.plugin)
@@ -82,6 +83,10 @@ gradlePlugin {
         register("compose") {
             id = "app.rickandmorty.compose"
             implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
+        }
+        register("composeScreenshot") {
+            id = "app.rickandmorty.compose-screenshot"
+            implementationClass = "app.rickandmorty.gradle.plugin.ComposeScreenshotPlugin"
         }
         register("firebaseCrashlytics") {
             id = "app.rickandmorty.firebase-crashlytics"

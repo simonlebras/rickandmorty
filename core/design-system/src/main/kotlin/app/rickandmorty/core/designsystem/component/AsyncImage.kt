@@ -12,11 +12,10 @@ import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.layout.ContentScale
-import coil3.SingletonImageLoader
+import androidx.compose.ui.platform.LocalInspectionMode
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
 import coil3.compose.DefaultModelEqualityDelegate
-import coil3.compose.LocalPlatformContext
 
 @Composable
 public fun AsyncImage(
@@ -35,12 +34,15 @@ public fun AsyncImage(
     AsyncImage(
         model = model,
         contentDescription = contentDescription,
-        imageLoader = SingletonImageLoader.get(LocalPlatformContext.current),
-        modifier = modifier.placeholder(
-            visible = isLoading,
-            color = PlaceholderDefaults.color(),
-            highlight = PlaceholderHighlight.shimmer(),
-        ),
+        modifier = modifier then if (!LocalInspectionMode.current) {
+            Modifier.placeholder(
+                visible = isLoading,
+                color = PlaceholderDefaults.color(),
+                highlight = PlaceholderHighlight.shimmer(),
+            )
+        } else {
+            Modifier
+        },
         transform = AsyncImagePainter.DefaultTransform,
         onState = { state ->
             isLoading = state is AsyncImagePainter.State.Loading

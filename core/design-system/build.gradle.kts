@@ -16,11 +16,3 @@ dependencies {
 
     implementation(libs.coil.compose)
 }
-
-dependencyAnalysis {
-    issues {
-        onUnusedDependencies {
-            exclude("io.coil-kt.coil3:coil-compose")
-        }
-    }
-}
