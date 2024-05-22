@@ -1,5 +1,6 @@
 [versions]
 affectedmoduledetector = "0.3.1"
+android-compose-screenshot = "0.0.1-alpha03"
 android-desugarjdklibs = "2.0.4"
 android-plugin = "8.6.0-beta02"
 android-sdk-compile = "35"
@@ -204,6 +205,7 @@ rickandmorty-android-test = { id = "app.rickandmorty.android-test" }
 rickandmorty-apollo = { id = "app.rickandmorty.apollo" }
 rickandmorty-autodagger = { id = "app.rickandmorty.autodagger" }
 rickandmorty-compose = { id = "app.rickandmorty.compose" }
+rickandmorty-compose-screenshot = { id = "app.rickandmorty.compose-screenshot" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
 rickandmorty-hilt = { id = "app.rickandmorty.hilt" }
@@ -217,6 +219,7 @@ rickandmorty-wire = { id = "app.rickandmorty.wire" }
 
 affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.ref = "affectedmoduledetector" }
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
+android-compose-screenshot = { id = "com.android.compose.screenshot", version.ref = "android-compose-screenshot"}
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 android-lint = { id = "com.android.lint", version.ref = "android-plugin" }
 android-test = { id = "com.android.test", version.ref = "android-plugin" }

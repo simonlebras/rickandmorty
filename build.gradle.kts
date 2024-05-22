@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.rickandmorty.apollo) apply false
     alias(libs.plugins.rickandmorty.autodagger) apply false
     alias(libs.plugins.rickandmorty.compose) apply false
+    alias(libs.plugins.rickandmorty.compose.screenshot) apply false
     alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
     alias(libs.plugins.rickandmorty.firebase.perf) apply false
     alias(libs.plugins.rickandmorty.hilt) apply false
@@ -18,6 +19,7 @@ plugins {
 
     alias(libs.plugins.affectedmoduledetector)
     alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.compose.screenshot) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.lint) apply false
     alias(libs.plugins.android.test) apply false
