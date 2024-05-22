@@ -75,6 +75,14 @@ private fun Project.configureAffectedModuleDetector() {
         } else {
             compareFrom = "PreviousCommit"
         }
+
+        customTasks = setOf(
+            AffectedModuleConfiguration.CustomTask(
+                "runAffectedScreenshotTests",
+                "validateDebugScreenshotTest",
+                "Runs all affected screenshot tests.",
+            ),
+        )
     }
 }
 

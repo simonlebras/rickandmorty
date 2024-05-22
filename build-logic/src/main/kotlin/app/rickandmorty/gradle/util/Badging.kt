@@ -2,7 +2,6 @@ package app.rickandmorty.gradle.util
 
 import com.android.SdkConstants
 import com.android.build.api.artifact.SingleArtifact
-import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.AppExtension
 import com.google.common.truth.Truth.assertWithMessage
 import java.io.File
@@ -23,7 +22,6 @@ import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 import org.gradle.process.ExecOperations
@@ -93,7 +91,7 @@ internal abstract class CheckBadgingTask : DefaultTask() {
 context(Project)
 @Suppress("UnstableApiUsage")
 internal fun AppExtension.configureBadgingTasks() {
-    extensions.getByType<ApplicationAndroidComponentsExtension>().onVariants { variant ->
+    androidExtension.onVariants { variant ->
         val capitalizedVariantName = variant.name.replaceFirstChar {
             if (it.isLowerCase()) {
                 it.titlecase(Locale.US)

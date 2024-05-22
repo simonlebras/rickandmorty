@@ -79,6 +79,13 @@ jobs:
           -PaffectedBaseRef=$BASE_REF \
           --no-configuration-cache
 
+      - name: Run screenshot tests
+        run: |
+          ./gradlew runAffectedScreenshotTests \
+          -Paffected_module_detector.enable \
+          -PaffectedBaseRef=$BASE_REF \
+          --no-configuration-cache
+
       - name: Upload build outputs
         if: always()
         uses: actions/upload-artifact@v4
@@ -95,6 +102,7 @@ jobs:
           path: |
             build/reports/dependency-analysis/build-health-report.txt
             **/build/reports/lint-results-*.html
+            **/build/reports/screenshotTest/*
 
       - name: Upload test results
         if: always()
