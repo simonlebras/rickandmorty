@@ -181,7 +181,7 @@ private fun CharacterListScreen(
 }
 
 @Composable
-private fun CharacterItem(character: Character) {
+internal fun CharacterItem(character: Character) {
     ListItem(
         headlineContent = {
             Text(text = character.name)
