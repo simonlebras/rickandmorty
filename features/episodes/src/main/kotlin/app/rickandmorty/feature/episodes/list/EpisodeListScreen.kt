@@ -13,6 +13,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -31,7 +32,6 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
-import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
@@ -84,7 +84,8 @@ private fun EpisodeListScreen(
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    HazeScaffold(
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             EpisodeListScreenAppBar(
                 onNavigateToSettings = onNavigateToSettings,
@@ -92,7 +93,6 @@ private fun EpisodeListScreen(
             )
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
-        blurTopBar = true,
     ) { contentPadding ->
         PullToRefresh(
             isRefreshing = loadState.refresh.isLoading,
@@ -149,7 +149,6 @@ private fun EpisodeListScreen(
 
                     LazyColumn(
                         modifier = Modifier
-                            .nestedScroll(scrollBehavior.nestedScrollConnection)
                             .fillMaxSize()
                             .consumeWindowInsets(contentPadding),
                         state = listState,
