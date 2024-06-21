@@ -2,11 +2,9 @@ package app.rickandmorty.feature.settings.main
 
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -16,6 +14,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -29,7 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.rickandmorty.core.designsystem.component.HazeScaffold
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.theme.supportsDynamicTheming
 import app.rickandmorty.core.l10n.R as L10nR
@@ -77,15 +75,14 @@ private fun MainSettingsScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    HazeScaffold(
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             MainSettingsAppBar(
                 onNavigateUp = onNavigateUp,
                 scrollBehavior = scrollBehavior,
             )
         },
-        blurTopBar = true,
-        contentWindowInsets = WindowInsets.safeDrawing,
     ) { contentPadding ->
         val listState = rememberLazyListState()
 
@@ -96,7 +93,6 @@ private fun MainSettingsScreen(
 
         LazyColumn(
             modifier = Modifier
-                .nestedScroll(scrollBehavior.nestedScrollConnection)
                 .fillMaxSize()
                 .consumeWindowInsets(contentPadding),
             state = listState,

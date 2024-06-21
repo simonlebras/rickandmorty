@@ -2,8 +2,7 @@ package app.rickandmorty.ui
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -14,7 +13,6 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import app.rickandmorty.core.designsystem.component.HazeNavigationSuiteScaffold
 import app.rickandmorty.ui.navigation.RamNavHost
 import app.rickandmorty.ui.navigation.TopLevelDestination
 
@@ -23,10 +21,7 @@ fun RamApp(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
-    val layoutType = NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(
-        currentWindowAdaptiveInfo(),
-    )
-    HazeNavigationSuiteScaffold(
+    NavigationSuiteScaffold(
         navigationSuiteItems = {
             TopLevelDestination.entries.fastForEach { destination ->
                 val selected = destination.isInHierarchy(currentDestination)
@@ -48,9 +43,8 @@ fun RamApp(modifier: Modifier = Modifier) {
                 )
             }
         },
-        layoutType = layoutType,
         modifier = modifier,
-    ) { _ ->
+    ) {
         RamNavHost(navController = navController)
     }
 }
