@@ -17,6 +17,4 @@ public fun Context.setComponentEnabled(componentName: ComponentName, enabled: Bo
     )
 }
 
-public fun Context.isComponentEnabled(componentName: ComponentName): Boolean {
-    return packageManager.getComponentEnabledSetting(componentName) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-}
+public fun Context.isComponentEnabled(componentName: ComponentName): Boolean = packageManager.getComponentEnabledSetting(componentName) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED

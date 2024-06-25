@@ -16,12 +16,10 @@ internal class ThemePreferencesSerializer @Inject constructor() : Serializer<The
             use_dynamic_color = true,
         )
 
-    override suspend fun readFrom(input: InputStream): ThemePreferences {
-        return try {
-            ThemePreferences.ADAPTER.decode(input)
-        } catch (exception: IOException) {
-            throw CorruptionException("Cannot read proto.", exception)
-        }
+    override suspend fun readFrom(input: InputStream): ThemePreferences = try {
+        ThemePreferences.ADAPTER.decode(input)
+    } catch (exception: IOException) {
+        throw CorruptionException("Cannot read proto.", exception)
     }
 
     override suspend fun writeTo(t: ThemePreferences, output: OutputStream) {

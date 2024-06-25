@@ -22,16 +22,14 @@ internal class ThemeRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<ThemePreferences>,
     @ApplicationScope private val applicationScope: CoroutineScope,
 ) : ThemeRepository {
-    override fun getTheme(): Flow<Theme> {
-        return dataStore.data
-            .map { preferences ->
-                Theme(
-                    nightMode = preferences.night_mode.toNightMode(),
-                    useDynamicColor = preferences.use_dynamic_color,
-                )
-            }
-            .distinctUntilChanged()
-    }
+    override fun getTheme(): Flow<Theme> = dataStore.data
+        .map { preferences ->
+            Theme(
+                nightMode = preferences.night_mode.toNightMode(),
+                useDynamicColor = preferences.use_dynamic_color,
+            )
+        }
+        .distinctUntilChanged()
 
     override suspend fun setNightMode(nightMode: NightMode) {
         applicationScope.launch {
@@ -49,13 +47,11 @@ internal class ThemeRepositoryImpl @Inject constructor(
         }.join()
     }
 
-    override fun getAvailableNightModes(): ImmutableList<NightMode> {
-        return persistentListOf(
-            NightMode.Light,
-            NightMode.Dark,
-            defaultNightMode,
-        )
-    }
+    override fun getAvailableNightModes(): ImmutableList<NightMode> = persistentListOf(
+        NightMode.Light,
+        NightMode.Dark,
+        defaultNightMode,
+    )
 }
 
 private val defaultNightMode = if (Build.VERSION.SDK_INT >= 29) {

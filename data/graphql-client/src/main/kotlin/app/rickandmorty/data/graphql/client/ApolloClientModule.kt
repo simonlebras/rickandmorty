@@ -33,14 +33,12 @@ internal class ApolloClientModule {
         networkMonitor: NetworkMonitor,
         okHttpClient: Lazy<OkHttpClient>,
         @IODispatcher ioDispatcher: CoroutineDispatcher,
-    ): ApolloClient {
-        return ApolloClient.Builder()
-            .serverUrl(SERVER_URL)
-            .networkMonitor(networkMonitor)
-            .failFastIfOffline(true)
-            .okHttpCallFactory { okHttpClient.get() }
-            .dispatcher(ioDispatcher)
-            .enableAutoPersistedQueries(true)
-            .build()
-    }
+    ): ApolloClient = ApolloClient.Builder()
+        .serverUrl(SERVER_URL)
+        .networkMonitor(networkMonitor)
+        .failFastIfOffline(true)
+        .okHttpCallFactory { okHttpClient.get() }
+        .dispatcher(ioDispatcher)
+        .enableAutoPersistedQueries(true)
+        .build()
 }

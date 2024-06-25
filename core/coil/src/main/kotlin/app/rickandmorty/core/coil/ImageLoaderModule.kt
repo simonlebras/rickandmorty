@@ -32,21 +32,19 @@ internal interface ImageLoaderModule {
             @ApplicationContext context: Context,
             okHttpClient: Lazy<OkHttpClient>,
             logger: Optional<Logger>,
-        ): ImageLoader {
-            return ImageLoader.Builder(context)
-                .components {
-                    add(
-                        OkHttpNetworkFetcherFactory(
-                            callFactory = { okHttpClient.get() },
-                        ),
-                    )
-                }
-                .apply {
-                    val activityManager = context.getSystemService<ActivityManager>()!!
-                    allowRgb565(activityManager.isLowRamDevice)
-                }
-                .logger(logger.getOrNull())
-                .build()
-        }
+        ): ImageLoader = ImageLoader.Builder(context)
+            .components {
+                add(
+                    OkHttpNetworkFetcherFactory(
+                        callFactory = { okHttpClient.get() },
+                    ),
+                )
+            }
+            .apply {
+                val activityManager = context.getSystemService<ActivityManager>()!!
+                allowRgb565(activityManager.isLowRamDevice)
+            }
+            .logger(logger.getOrNull())
+            .build()
     }
 }

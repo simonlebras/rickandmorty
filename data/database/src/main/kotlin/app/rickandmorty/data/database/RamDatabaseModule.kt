@@ -16,13 +16,11 @@ private const val DATABASE_NAME = "ram-database.db"
 internal object RamDatabaseModule {
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): RamDatabase {
-        return Room
-            .databaseBuilder<RamDatabase>(
-                context = context,
-                name = DATABASE_NAME,
-                factory = { RamDatabase::class.instantiateImpl() },
-            )
-            .build()
-    }
+    fun provideAppDatabase(@ApplicationContext context: Context): RamDatabase = Room
+        .databaseBuilder<RamDatabase>(
+            context = context,
+            name = DATABASE_NAME,
+            factory = { RamDatabase::class.instantiateImpl() },
+        )
+        .build()
 }

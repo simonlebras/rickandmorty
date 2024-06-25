@@ -10,7 +10,9 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class RamApplication : Application(), SingletonImageLoader.Factory {
+class RamApplication :
+    Application(),
+    SingletonImageLoader.Factory {
     @Inject
     lateinit var imageLoader: Lazy<ImageLoader>
 
@@ -25,7 +27,5 @@ class RamApplication : Application(), SingletonImageLoader.Factory {
         }
     }
 
-    override fun newImageLoader(context: PlatformContext): ImageLoader {
-        return imageLoader.get()
-    }
+    override fun newImageLoader(context: PlatformContext): ImageLoader = imageLoader.get()
 }

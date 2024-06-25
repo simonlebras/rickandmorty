@@ -16,13 +16,11 @@ public data class Loading<out T>(private val value: T? = null) :
     ResourceState<T>(complete = false, shouldLoad = false, value = value),
     Incomplete
 
-public data class Success<out T>(private val value: T) :
-    ResourceState<T>(complete = true, shouldLoad = false, value = value) {
+public data class Success<out T>(private val value: T) : ResourceState<T>(complete = true, shouldLoad = false, value = value) {
     override operator fun invoke(): T = value
 }
 
-public data class Fail<out T>(val error: Throwable, private val value: T? = null) :
-    ResourceState<T>(complete = true, shouldLoad = true, value = value) {
+public data class Fail<out T>(val error: Throwable, private val value: T? = null) : ResourceState<T>(complete = true, shouldLoad = true, value = value) {
     override fun equals(other: Any?): Boolean {
         if (other !is Fail<*>) {
             return false
