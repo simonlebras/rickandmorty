@@ -49,13 +49,11 @@ fun RamApp(modifier: Modifier = Modifier) {
     }
 }
 
-private fun TopLevelDestination.isInHierarchy(destination: NavDestination?): Boolean {
-    return destination
-        ?.hierarchy
-        ?.any {
-            it.route?.contains(route, true) ?: false
-        } ?: false
-}
+private fun TopLevelDestination.isInHierarchy(destination: NavDestination?): Boolean = destination
+    ?.hierarchy
+    ?.any {
+        it.route?.contains(route, true) ?: false
+    } ?: false
 
 private fun NavHostController.navigateToTopLevelDestination(destination: TopLevelDestination) {
     navigate(destination.route) {

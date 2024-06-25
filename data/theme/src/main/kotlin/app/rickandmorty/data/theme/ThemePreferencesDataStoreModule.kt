@@ -28,11 +28,9 @@ internal object ThemePreferencesDataStoreModule {
         @ApplicationScope applicationScope: CoroutineScope,
         @IODispatcher ioDispatcher: CoroutineDispatcher,
         themePreferencesSerializer: ThemePreferencesSerializer,
-    ): DataStore<ThemePreferences> {
-        return DataStoreFactory.create(
-            serializer = themePreferencesSerializer,
-            scope = CoroutineScope(applicationScope.coroutineContext + ioDispatcher),
-            produceFile = { context.dataStoreFile(PREFERENCES_FILE_NAME) },
-        )
-    }
+    ): DataStore<ThemePreferences> = DataStoreFactory.create(
+        serializer = themePreferencesSerializer,
+        scope = CoroutineScope(applicationScope.coroutineContext + ioDispatcher),
+        produceFile = { context.dataStoreFile(PREFERENCES_FILE_NAME) },
+    )
 }

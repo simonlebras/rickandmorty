@@ -9,7 +9,5 @@ import se.ansman.dagger.auto.AutoBind
 internal class RoomTransactionRunner @Inject constructor(
     private val database: RoomDatabase,
 ) : TransactionRunner {
-    override suspend fun <T> invoke(block: suspend () -> T): T {
-        return database.withTransaction(block)
-    }
+    override suspend fun <T> invoke(block: suspend () -> T): T = database.withTransaction(block)
 }

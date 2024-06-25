@@ -28,11 +28,9 @@ internal object LocalePreferencesDataStoreModule {
         @ApplicationScope applicationScope: CoroutineScope,
         @IODispatcher ioDispatcher: CoroutineDispatcher,
         localePreferencesSerializer: LocalePreferencesSerializer,
-    ): DataStore<LocalePreferences> {
-        return DataStoreFactory.create(
-            serializer = localePreferencesSerializer,
-            scope = CoroutineScope(applicationScope.coroutineContext + ioDispatcher),
-            produceFile = { context.dataStoreFile(PREFERENCES_FILE_NAME) },
-        )
-    }
+    ): DataStore<LocalePreferences> = DataStoreFactory.create(
+        serializer = localePreferencesSerializer,
+        scope = CoroutineScope(applicationScope.coroutineContext + ioDispatcher),
+        produceFile = { context.dataStoreFile(PREFERENCES_FILE_NAME) },
+    )
 }

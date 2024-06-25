@@ -67,16 +67,14 @@ public fun Modifier.placeholder(
     highlight: PlaceholderHighlight? = null,
     placeholderFadeAnimationSpec: AnimationSpec<Float> = spring(),
     contentFadeAnimationSpec: AnimationSpec<Float> = spring(),
-): Modifier {
-    return this then PlaceholderElement(
-        visible = visible,
-        color = color,
-        shape = shape,
-        highlight = highlight,
-        placeholderFadeAnimationSpec = placeholderFadeAnimationSpec,
-        contentFadeAnimationSpec = contentFadeAnimationSpec,
-    )
-}
+): Modifier = this then PlaceholderElement(
+    visible = visible,
+    color = color,
+    shape = shape,
+    highlight = highlight,
+    placeholderFadeAnimationSpec = placeholderFadeAnimationSpec,
+    contentFadeAnimationSpec = contentFadeAnimationSpec,
+)
 
 private data class PlaceholderElement(
     private val visible: Boolean,

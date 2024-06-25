@@ -16,11 +16,9 @@ public data class Character(
         ;
 
         public companion object {
-            public fun from(value: String): Status {
-                return entries
-                    .firstOrNull { it.name.equals(value, true) }
-                    ?: Unknown
-            }
+            public fun from(value: String): Status = entries
+                .firstOrNull { it.name.equals(value, true) }
+                ?: Unknown
         }
     }
 
@@ -32,11 +30,9 @@ public data class Character(
         ;
 
         public companion object {
-            public fun from(value: String): Species {
-                return entries
-                    .firstOrNull { it.name.equals(value, true) }
-                    ?: Other
-            }
+            public fun from(value: String): Species = entries
+                .firstOrNull { it.name.equals(value, true) }
+                ?: Other
         }
     }
 
@@ -48,11 +44,9 @@ public data class Character(
         ;
 
         public companion object {
-            public fun from(value: String): Gender {
-                return entries
-                    .firstOrNull { it.name.equals(value, true) }
-                    ?: Unknown
-            }
+            public fun from(value: String): Gender = entries
+                .firstOrNull { it.name.equals(value, true) }
+                ?: Unknown
         }
     }
 }

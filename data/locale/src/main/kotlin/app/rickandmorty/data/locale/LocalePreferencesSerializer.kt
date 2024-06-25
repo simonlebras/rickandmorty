@@ -12,12 +12,10 @@ internal class LocalePreferencesSerializer @Inject constructor() : Serializer<Lo
     override val defaultValue: LocalePreferences
         get() = LocalePreferences()
 
-    override suspend fun readFrom(input: InputStream): LocalePreferences {
-        return try {
-            LocalePreferences.ADAPTER.decode(input)
-        } catch (exception: IOException) {
-            throw CorruptionException("Cannot read proto.", exception)
-        }
+    override suspend fun readFrom(input: InputStream): LocalePreferences = try {
+        LocalePreferences.ADAPTER.decode(input)
+    } catch (exception: IOException) {
+        throw CorruptionException("Cannot read proto.", exception)
     }
 
     override suspend fun writeTo(t: LocalePreferences, output: OutputStream) {
