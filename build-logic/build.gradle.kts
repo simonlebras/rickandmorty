@@ -78,6 +78,10 @@ gradlePlugin {
             id = "app.rickandmorty.compose"
             implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
         }
+        register("composeScreenshot") {
+            id = "app.rickandmorty.compose-screenshot"
+            implementationClass = "app.rickandmorty.gradle.plugin.ComposeScreenshotPlugin"
+        }
         register("firebaseCrashlytics") {
             id = "app.rickandmorty.firebase-crashlytics"
             implementationClass = "app.rickandmorty.gradle.plugin.FirebaseCrashlyticsPlugin"
