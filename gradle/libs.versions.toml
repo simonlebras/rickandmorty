@@ -64,7 +64,7 @@ spotless = "6.25.0"
 store = "5.0.0"
 testparameterinjector = "1.16"
 timber = "5.0.1"
-truth = "1.4.3"
+truth = "1.4.4"
 turbine = "1.1.0"
 wire = "4.9.9"
 
