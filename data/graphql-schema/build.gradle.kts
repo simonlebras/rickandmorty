@@ -7,8 +7,8 @@ plugins {
 
 apollo {
     service("rickandmorty") {
-        packageName.set("app.rickandmorty.data.graphql.schema")
-        generateDataBuilders.set(true)
+        packageName = "app.rickandmorty.data.graphql.schema"
+        generateDataBuilders = true
         generateApolloMetadata = true
         schemaFiles.setFrom(
             "src/main/graphql/schema.graphqls",
@@ -16,8 +16,8 @@ apollo {
         )
 
         introspection {
-            endpointUrl.set("https://rickandmortyapi.com/graphql")
-            schemaFile.set(file("src/main/graphql/schema.graphqls"))
+            endpointUrl = "https://rickandmortyapi.com/graphql"
+            schemaFile = file("src/main/graphql/schema.graphqls")
         }
     }
 }
