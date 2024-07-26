@@ -16,7 +16,7 @@ android {
 
 apollo {
     service("rickandmorty") {
-        packageName.set("app.rickandmorty.data.character")
+        packageName = "app.rickandmorty.data.character"
         dependsOn(projects.data.graphqlSchema)
     }
 }

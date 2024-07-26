@@ -10,6 +10,7 @@ import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.the
 
@@ -103,6 +104,6 @@ private fun Project.configureDependencyAnalysis() {
 
 private fun Project.configureGradleDoctor() {
     configure<DoctorExtension> {
-        warnWhenNotUsingParallelGC.set(false)
+        warnWhenNotUsingParallelGC = false
     }
 }

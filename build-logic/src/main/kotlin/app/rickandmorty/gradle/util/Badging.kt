@@ -6,6 +6,7 @@ import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.AppExtension
 import com.google.common.truth.Truth.assertWithMessage
 import java.io.File
+import java.util.Locale
 import javax.inject.Inject
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
@@ -21,7 +22,7 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
-import org.gradle.configurationcache.extensions.capitalized
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 import org.gradle.language.base.plugins.LifecycleBasePlugin
@@ -93,25 +94,25 @@ context(Project)
 @Suppress("UnstableApiUsage")
 internal fun AppExtension.configureBadgingTasks() {
     extensions.getByType<ApplicationAndroidComponentsExtension>().onVariants { variant ->
-        val capitalizedVariantName = variant.name.capitalized()
+        val capitalizedVariantName = variant.name.replaceFirstChar {
+            if (it.isLowerCase()) {
+                it.titlecase(Locale.US)
+            } else {
+                it.toString()
+            }
+        }
 
         val generateBadgingTaskName = "generate${capitalizedVariantName}Badging"
         val generateBadging = tasks.register<GenerateBadgingTask>(generateBadgingTaskName) {
-            apk.set(
-                variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE),
+            apk = variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE)
+            aapt2Executable = File(
+                sdkDirectory,
+                "${SdkConstants.FD_BUILD_TOOLS}/" +
+                    "$buildToolsVersion/" +
+                    SdkConstants.FN_AAPT2,
             )
-            aapt2Executable.set(
-                File(
-                    sdkDirectory,
-                    "${SdkConstants.FD_BUILD_TOOLS}/" +
-                        "$buildToolsVersion/" +
-                        SdkConstants.FN_AAPT2,
-                ),
-            )
-            badging.set(
-                project.layout.buildDirectory.file(
-                    "outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt",
-                ),
+            badging = project.layout.buildDirectory.file(
+                "outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt",
             )
         }
 
@@ -123,16 +124,10 @@ internal fun AppExtension.configureBadgingTasks() {
 
         val checkBadgingTaskName = "check${capitalizedVariantName}Badging"
         tasks.register<CheckBadgingTask>(checkBadgingTaskName) {
-            goldenBadging.set(
-                project.layout.projectDirectory.file("${variant.name}-badging.txt"),
-            )
-            generatedBadging.set(
-                generateBadging.get().badging,
-            )
-            this.updateBadgingTaskName.set(updateBadgingTaskName)
-            output.set(
-                project.layout.buildDirectory.dir("intermediates/$checkBadgingTaskName"),
-            )
+            goldenBadging = project.layout.projectDirectory.file("${variant.name}-badging.txt")
+            generatedBadging = generateBadging.get().badging
+            this.updateBadgingTaskName = updateBadgingTaskName
+            output = project.layout.buildDirectory.dir("intermediates/$checkBadgingTaskName")
         }
     }
 }

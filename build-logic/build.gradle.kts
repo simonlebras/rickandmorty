@@ -15,7 +15,7 @@ val javaTarget = libs.versions.java.target.get()
 
 tasks.withType<KotlinCompile>().configureEach {
     compilerOptions {
-        jvmTarget.set(JvmTarget.fromTarget(javaTarget))
+        jvmTarget = JvmTarget.fromTarget(javaTarget)
 
         freeCompilerArgs.addAll(
             "-Xcontext-receivers",

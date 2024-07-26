@@ -9,6 +9,7 @@ import com.android.build.gradle.BaseExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.the
@@ -32,9 +33,9 @@ public class ComposePlugin : Plugin<Project> {
         }
 
         configure<ComposeCompilerGradlePluginExtension> {
-            enableIntrinsicRemember.set(true)
-            enableStrongSkippingMode.set(true)
-            enableNonSkippingGroupOptimization.set(true)
+            enableIntrinsicRemember = true
+            enableStrongSkippingMode = true
+            enableNonSkippingGroupOptimization = true
 
             val enableComposeCompilerReports = providers
                 .gradleProperty("ram.enableComposeCompilerReports")
@@ -43,8 +44,8 @@ public class ComposePlugin : Plugin<Project> {
                 val composeReportsFolder = layout.buildDirectory.map { buildDir ->
                     buildDir.dir("reports").dir("compose")
                 }
-                reportsDestination.set(composeReportsFolder)
-                metricsDestination.set(composeReportsFolder)
+                reportsDestination = composeReportsFolder
+                metricsDestination = composeReportsFolder
             }
         }
 
