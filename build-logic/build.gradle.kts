@@ -45,6 +45,7 @@ dependencies {
     compileOnly(libs.gradledoctor.plugin)
     compileOnly(libs.kotlin.compose.compiler.plugin)
     compileOnly(libs.kotlin.plugin)
+    compileOnly(libs.licensee.plugin)
     compileOnly(libs.spotless.plugin)
     compileOnly(libs.wire.plugin)
 
@@ -102,9 +103,9 @@ gradlePlugin {
             id = "app.rickandmorty.kotlin-jvm"
             implementationClass = "app.rickandmorty.gradle.plugin.KotlinJvmPlugin"
         }
-        register("ossLicenses") {
-            id = "app.rickandmorty.oss-licenses"
-            implementationClass = "app.rickandmorty.gradle.plugin.OssLicensesPlugin"
+        register("licensee") {
+            id = "app.rickandmorty.licensee"
+            implementationClass = "app.rickandmorty.gradle.plugin.LicenseePlugin"
         }
         register("room") {
             id = "app.rickandmorty.room"

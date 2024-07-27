@@ -1,10 +1,15 @@
 package app.rickandmorty.gradle.util
 
+import com.android.build.api.variant.AndroidComponentsExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import com.android.build.api.variant.LibraryAndroidComponentsExtension
+import com.android.build.api.variant.TestAndroidComponentsExtension
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.AppliedPlugin
 import org.gradle.api.plugins.PluginManager
 import org.gradle.api.provider.Provider
+import org.gradle.kotlin.dsl.findByType
 import org.gradle.plugin.use.PluginDependency
 
 internal fun DependencyHandler.api(
@@ -57,6 +62,12 @@ internal fun DependencyHandler.lintChecks(
 
 internal val Project.isRootProject: Boolean
     get() = rootProject === this
+
+internal val Project.androidComponentsExtension: AndroidComponentsExtension<*, *, *>
+    get() = extensions.findByType<LibraryAndroidComponentsExtension>()
+        ?: extensions.findByType<ApplicationAndroidComponentsExtension>()
+        ?: extensions.findByType<TestAndroidComponentsExtension>()
+        ?: throw IllegalArgumentException("Failed to find any registered Android extension")
 
 internal fun PluginManager.apply(vararg plugins: Provider<PluginDependency>) {
     plugins.forEach { plugin ->

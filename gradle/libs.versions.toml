@@ -51,17 +51,18 @@ kotlinx-atomicfu = "0.25.0"
 kotlinx-collectionsimmutable = "0.3.7"
 kotlinx-coroutines = "1.8.1"
 kotlinx-datetime = "0.6.0"
+kotlinx-serialization-json = "1.7.1"
 ksp = "2.0.0-1.0.23"
 ktlint = "1.3.1"
 leakcanary = "2.14"
+licensee = "1.11.0"
 modulegraphassert = "2.6.0"
+molecule = "2.0.0"
 okhttp = "5.0.0-alpha.14"
-play-osslicenses = "17.1.0"
-play-osslicenses-plugin = "0.10.6"
 slack-composelints = "1.3.1"
 sortdependencies = "0.7"
 spotless = "6.25.0"
-store = "5.0.0"
+store = "5.1.0-alpha04"
 testparameterinjector = "1.16"
 timber = "5.0.1"
 truth = "1.4.4"
@@ -158,21 +159,22 @@ junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 kotlin-compose-compiler-plugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
-kotlinx-atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version.ref = "kotlinx-atomicfu" }
-
 kotlinx-collectionsimmutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collectionsimmutable" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
 
+licensee-plugin = { group = "app.cash.licensee", name = "licensee-gradle-plugin", version.ref = "licensee" }
+
+molecule-runtime = { group = "app.cash.molecule", name = "molecule-runtime", version.ref = "molecule" }
+
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp-logginginterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-
-play-osslicenses = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "play-osslicenses" }
 
 slack-compose-lints = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slack-composelints" }
 
@@ -204,7 +206,7 @@ rickandmorty-hilt = { id = "app.rickandmorty.hilt" }
 rickandmorty-jvm-library = { id = "app.rickandmorty.jvm-library" }
 rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
 rickandmorty-kotlin-jvm = { id = "app.rickandmorty.kotlin-jvm" }
-rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses" }
+rickandmorty-licensee = { id = "app.rickandmorty.licensee" }
 rickandmorty-room = { id = "app.rickandmorty.room" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
 rickandmorty-wire = { id = "app.rickandmorty.wire" }
@@ -228,9 +230,10 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+licensee = { id = "app.cash.licensee", version.ref = "licensee" }
 modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }
-play-osslicenses = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "play-osslicenses-plugin" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 wire = { id = "com.squareup.wire", version.ref = "wire" }

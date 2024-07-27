@@ -24,20 +24,22 @@ public class RootPlugin : Plugin<Project> {
 
         checkRequiredJdkVersion(libs)
 
-        pluginManager.withPlugin(libs.plugins.affectedmoduledetector) {
-            configureAffectedModuleDetector()
-        }
+        with(pluginManager) {
+            withPlugin(libs.plugins.affectedmoduledetector) {
+                configureAffectedModuleDetector()
+            }
 
-        pluginManager.withPlugin(libs.plugins.dependencyanalysis) {
-            configureDependencyAnalysis()
-        }
+            withPlugin(libs.plugins.dependencyanalysis) {
+                configureDependencyAnalysis()
+            }
 
-        pluginManager.withPlugin(libs.plugins.gradledoctor) {
-            configureGradleDoctor()
-        }
+            withPlugin(libs.plugins.gradledoctor) {
+                configureGradleDoctor()
+            }
 
-        pluginManager.withPlugin(libs.plugins.spotless) {
-            configureSpotless(libs)
+            withPlugin(libs.plugins.spotless) {
+                configureSpotless(libs)
+            }
         }
     }
 }

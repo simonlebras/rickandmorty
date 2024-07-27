@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.rickandmorty.compose)
     alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
-    alias(libs.plugins.rickandmorty.osslicenses)
+    alias(libs.plugins.rickandmorty.licensee)
 
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.easylauncher)
