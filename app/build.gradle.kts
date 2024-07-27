@@ -1,3 +1,4 @@
+import app.cash.licensee.SpdxId
 import com.google.firebase.perf.plugin.FirebasePerfExtension
 
 plugins {
@@ -6,6 +7,7 @@ plugins {
   alias(libs.plugins.rickandmorty.compose)
 
   alias(libs.plugins.androidx.baselineprofile)
+  alias(libs.plugins.licensee)
   alias(libs.plugins.metro)
 }
 
@@ -91,6 +93,7 @@ dependencies {
   implementation(project(":data:character-impl"))
   implementation(project(":data:database-impl"))
   implementation(project(":data:episode-impl"))
+  implementation(project(":data:license-impl"))
   implementation(project(":data:locale-impl"))
   implementation(project(":data:location-impl"))
   implementation(project(":data:theme-impl"))
@@ -146,4 +149,18 @@ dependencyAnalysis {
       )
     }
   }
+}
+
+licensee {
+  bundleAndroidAsset = true
+  androidAssetReportPath = "licenses.json"
+
+  allow(SpdxId.Apache_20)
+  allow(SpdxId.BSD_3_Clause)
+  allow(SpdxId.MIT)
+  allowUrl("https://developer.android.com/studio/terms.html")
+  allowUrl("https://opensource.org/license/mit")
+  allowUrl(
+    "https://raw.githubusercontent.com/apollographql/apollo-kotlin-ktor-support/main/LICENSE"
+  )
 }

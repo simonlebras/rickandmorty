@@ -55,6 +55,7 @@ ksp = "2.3.6"
 ktfmt = "0.26.0"
 ktor = "3.4.2"
 leakcanary = "2.14"
+licensee = "1.14.1"
 metro = "0.12.0"
 okio = "3.17.0"
 slack-compose-lints = "1.4.2"
@@ -223,6 +224,7 @@ kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmt" }
+licensee = { id = "app.cash.licensee", version.ref = "licensee" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
 tapmoc = { id = "com.gradleup.tapmoc", version.ref = "tapmoc" }

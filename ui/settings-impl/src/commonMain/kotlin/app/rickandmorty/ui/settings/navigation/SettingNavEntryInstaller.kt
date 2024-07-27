@@ -12,6 +12,7 @@ import app.rickandmorty.core.metro.UiScope
 import app.rickandmorty.core.navigation.LocalNavigator
 import app.rickandmorty.core.navigation.NavEntryInstaller
 import app.rickandmorty.ui.settings.language.LanguageSettingsScreen
+import app.rickandmorty.ui.settings.license.LicenseSettingsScreen
 import app.rickandmorty.ui.settings.main.MainSettingsScreen
 import app.rickandmorty.ui.settings.theme.ThemeSettingsDialog
 import dev.zacsweers.metro.ContributesIntoSet
@@ -28,7 +29,7 @@ public class SettingsNavEntryInstaller : NavEntryInstaller {
         onNavigateUp = navigator::goBack,
         onNavigateToThemeSettings = { showSettingsDialog = true },
         onNavigateToLanguageSettings = { navigator.navigate(LanguageSettingsNavKey) },
-        onNavigateToOssLicenses = {},
+        onNavigateToLicenseSettings = { navigator.navigate(LicenseSettingsNavKey) },
       )
 
       if (showSettingsDialog) {
@@ -39,6 +40,11 @@ public class SettingsNavEntryInstaller : NavEntryInstaller {
     entry<LanguageSettingsNavKey> {
       val navigator = LocalNavigator.current
       LanguageSettingsScreen(onNavigateUp = navigator::goBack)
+    }
+
+    entry<LicenseSettingsNavKey> {
+      val navigator = LocalNavigator.current
+      LicenseSettingsScreen(onNavigateUp = navigator::goBack)
     }
   }
 }

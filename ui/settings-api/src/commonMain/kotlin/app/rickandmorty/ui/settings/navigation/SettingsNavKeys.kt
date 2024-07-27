@@ -8,3 +8,5 @@ import kotlinx.serialization.Serializable
 @Serializable @NavKeySerializer(UiScope::class) public data object MainSettingsNavKey : NavKey
 
 @Serializable @NavKeySerializer(UiScope::class) public data object LanguageSettingsNavKey : NavKey
+
+@Serializable @NavKeySerializer(UiScope::class) public data object LicenseSettingsNavKey : NavKey

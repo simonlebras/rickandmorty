@@ -9,7 +9,7 @@ plugins {
 kotlin {
   android { namespace = "app.rickandmorty.core.coroutines" }
 
-  dependencies { implementation(libs.kotlinx.coroutines.core) }
+  dependencies { api(libs.kotlinx.coroutines.core) }
 
   sourceSets { androidMain { dependencies { implementation(project(":core:base")) } } }
 }

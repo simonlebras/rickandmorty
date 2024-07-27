@@ -98,6 +98,8 @@ include(
   ":data:episode-api",
   ":data:episode-impl",
   ":data:graphql-schema",
+  ":data:license-api",
+  ":data:license-impl",
   ":data:locale-api",
   ":data:locale-impl",
   ":data:location-api",

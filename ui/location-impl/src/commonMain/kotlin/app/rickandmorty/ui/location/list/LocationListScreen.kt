@@ -161,7 +161,11 @@ private fun LocationListScreenAppBar(
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.location_list_title)) },
     actions = { SettingsNavButton(onClick = onNavigateToSettings) },
-    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+    colors =
+      TopAppBarDefaults.topAppBarColors(
+        containerColor = Color.Transparent,
+        scrolledContainerColor = Color.Transparent,
+      ),
     scrollBehavior = scrollBehavior,
   )
 }

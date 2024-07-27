@@ -15,6 +15,7 @@ kotlin {
     api(project(":core:navigation"))
     api(project(":core:resource-state"))
 
+    api(project(":data:license-api"))
     api(project(":data:locale-api"))
     api(project(":data:theme-api"))
 
