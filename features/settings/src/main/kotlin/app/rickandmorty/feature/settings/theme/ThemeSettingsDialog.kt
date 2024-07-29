@@ -33,7 +33,7 @@ import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.feature.settings.util.label
 
 @Composable
-internal fun ThemeSettingsDialog(
+public fun ThemeSettingsDialog(
     onDismiss: () -> Unit,
     viewModel: ThemeSettingsViewModel = hiltViewModel(),
 ) {

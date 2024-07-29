@@ -8,7 +8,7 @@ import app.rickandmorty.data.model.Locale
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable
-internal data class LanguageSettingsUiState(
+public data class LanguageSettingsUiState(
     val appLocale: ResourceState<Locale?> = Uninitialized,
     val availableAppLocales: ResourceState<ImmutableList<Locale>> = Uninitialized,
 ) {

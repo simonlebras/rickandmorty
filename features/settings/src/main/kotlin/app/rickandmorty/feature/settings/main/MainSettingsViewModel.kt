@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-internal class MainSettingsViewModel @Inject constructor(
+public class MainSettingsViewModel @Inject constructor(
     private val themeRepository: ThemeRepository,
     localeRepository: LocaleRepository,
 ) : ViewModel() {
@@ -26,7 +26,7 @@ internal class MainSettingsViewModel @Inject constructor(
         resource = localeRepository.getAppLocale(),
     )
 
-    val uiState: StateFlow<MainSettingsUiState> = combine(
+    public val uiState: StateFlow<MainSettingsUiState> = combine(
         theme.state,
         appLocale.state,
     ) { theme, appLocale ->
@@ -36,11 +36,11 @@ internal class MainSettingsViewModel @Inject constructor(
         )
     }.stateIn(
         scope = viewModelScope,
-        initialValue = MainSettingsUiState(),
         started = WhileViewSubscribed,
+        initialValue = MainSettingsUiState(),
     )
 
-    fun setUseDynamicColor(useDynamicColor: Boolean) {
+    public fun setUseDynamicColor(useDynamicColor: Boolean) {
         viewModelScope.launch {
             themeRepository.setUseDynamicColor(useDynamicColor)
         }

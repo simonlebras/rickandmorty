@@ -8,8 +8,6 @@ import app.rickandmorty.feature.characters.navigation.characterList
 import app.rickandmorty.feature.characters.navigation.characterListRoute
 import app.rickandmorty.feature.episodes.navigation.episodeList
 import app.rickandmorty.feature.locations.navigation.locationList
-import app.rickandmorty.feature.settings.navigation.navigateToMainSettings
-import app.rickandmorty.feature.settings.navigation.settings
 
 @Composable
 fun RamNavHost(
@@ -37,8 +35,6 @@ fun RamNavHost(
         settings(
             navController = navController,
             onNavigateUp = navController::navigateUp,
-            onNavigateToOssLicenses = {
-            },
         )
     }
 }

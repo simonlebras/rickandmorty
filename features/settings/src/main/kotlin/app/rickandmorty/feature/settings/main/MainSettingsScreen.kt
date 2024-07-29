@@ -41,7 +41,7 @@ import app.rickandmorty.feature.settings.util.label
 import app.rickandmorty.feature.settings.util.versionName
 
 @Composable
-internal fun MainSettingsScreen(
+public fun MainSettingsScreen(
     onNavigateUp: () -> Unit,
     onNavigateToThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,

@@ -9,6 +9,7 @@ plugins {
 
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.easylauncher)
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.modulegraphassert)
 }
 
@@ -93,6 +94,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.compose.material3.adaptive.navigation)
     implementation(libs.androidx.compose.material3.adaptive.navigationsuite)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
@@ -116,6 +118,8 @@ dependencies {
     implementation(projects.features.episodes)
     implementation(projects.features.locations)
     implementation(projects.features.settings)
+
+    implementation(projects.ui.settingsLicenses)
 
     runtimeOnly(libs.androidx.compose.runtime.tracing)
     runtimeOnly(libs.androidx.profileinstaller)

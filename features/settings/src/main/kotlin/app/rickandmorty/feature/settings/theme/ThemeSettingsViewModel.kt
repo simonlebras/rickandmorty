@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-internal class ThemeSettingsViewModel @Inject constructor(
+public class ThemeSettingsViewModel @Inject constructor(
     private val themeRepository: ThemeRepository,
 ) : ViewModel() {
     private val theme = ResourceController(
@@ -25,7 +25,7 @@ internal class ThemeSettingsViewModel @Inject constructor(
         resource = suspend { themeRepository.getAvailableNightModes() },
     )
 
-    val uiState: StateFlow<ThemeSettingsUiState> = combine(
+    public val uiState: StateFlow<ThemeSettingsUiState> = combine(
         theme.state,
         availableNightModes.state,
     ) { theme, availableNightModes ->
@@ -35,11 +35,11 @@ internal class ThemeSettingsViewModel @Inject constructor(
         )
     }.stateIn(
         scope = viewModelScope,
-        initialValue = ThemeSettingsUiState(),
         started = WhileViewSubscribed,
+        initialValue = ThemeSettingsUiState(),
     )
 
-    fun setNightMode(nightMode: NightMode) {
+    public fun setNightMode(nightMode: NightMode) {
         viewModelScope.launch {
             themeRepository.setNightMode(nightMode)
         }

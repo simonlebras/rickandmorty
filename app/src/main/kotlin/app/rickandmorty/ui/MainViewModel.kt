@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
             MainUiState(theme = theme)
         }.stateIn(
             scope = viewModelScope,
-            initialValue = MainUiState(),
             started = WhileViewSubscribed,
+            initialValue = MainUiState(),
         )
 }

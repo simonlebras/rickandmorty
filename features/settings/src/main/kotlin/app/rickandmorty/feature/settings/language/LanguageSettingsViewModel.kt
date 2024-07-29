@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-internal class LanguageSettingsViewModel @Inject constructor(
+public class LanguageSettingsViewModel @Inject constructor(
     private val localeRepository: LocaleRepository,
 ) : ViewModel() {
     private val appLocale = ResourceController(
@@ -25,7 +25,7 @@ internal class LanguageSettingsViewModel @Inject constructor(
         resource = suspend { localeRepository.getAvailableAppLocales() },
     )
 
-    val uiState: StateFlow<LanguageSettingsUiState> = combine(
+    public val uiState: StateFlow<LanguageSettingsUiState> = combine(
         appLocale.state,
         availableAppLocales.state,
     ) { appLocale, availableAppLocales ->
@@ -35,11 +35,11 @@ internal class LanguageSettingsViewModel @Inject constructor(
         )
     }.stateIn(
         scope = viewModelScope,
-        initialValue = LanguageSettingsUiState(),
         started = WhileViewSubscribed,
+        initialValue = LanguageSettingsUiState(),
     )
 
-    fun setAppLocale(locale: Locale?) {
+    public fun setAppLocale(locale: Locale?) {
         viewModelScope.launch {
             localeRepository.setAppLocale(locale)
         }

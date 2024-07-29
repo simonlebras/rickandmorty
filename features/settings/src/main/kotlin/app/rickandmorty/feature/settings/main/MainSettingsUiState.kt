@@ -8,7 +8,7 @@ import app.rickandmorty.data.model.Locale
 import app.rickandmorty.data.model.Theme
 
 @Immutable
-internal data class MainSettingsUiState(
+public data class MainSettingsUiState(
     val theme: ResourceState<Theme?> = Uninitialized,
     val appLocale: ResourceState<Locale?> = Uninitialized,
 ) {

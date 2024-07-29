@@ -9,7 +9,7 @@ import app.rickandmorty.data.model.Theme
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable
-internal data class ThemeSettingsUiState(
+public data class ThemeSettingsUiState(
     val theme: ResourceState<Theme> = Uninitialized,
     val availableNightModes: ResourceState<ImmutableList<NightMode>> = Uninitialized,
 ) {

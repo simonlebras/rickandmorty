@@ -37,7 +37,7 @@ import app.rickandmorty.feature.settings.loader
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
-internal fun LanguageSettingsScreen(
+public fun LanguageSettingsScreen(
     onNavigateUp: () -> Unit,
     viewModel: LanguageSettingsViewModel = hiltViewModel(),
 ) {
