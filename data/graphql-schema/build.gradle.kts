@@ -1,8 +1,7 @@
 plugins {
+    alias(libs.plugins.rickandmorty.apollo)
     alias(libs.plugins.rickandmorty.jvm.library)
     alias(libs.plugins.rickandmorty.kotlin.jvm)
-
-    alias(libs.plugins.apollo)
 }
 
 apollo {

@@ -127,21 +127,6 @@ dependencies {
     debugRuntimeOnly(projects.core.strictMode)
 }
 
-dependencyAnalysis {
-    issues {
-        onUnusedDependencies {
-            exclude(
-                // Submodules used by Hilt
-                // https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin/issues/791
-                ":core:coil",
-                ":core:metrics",
-                ":core:okhttp",
-                ":data:graphql-client",
-            )
-        }
-    }
-}
-
 easylauncher {
     buildTypes {
         val debug by creating {
