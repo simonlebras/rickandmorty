@@ -41,6 +41,7 @@ dependencies {
     compileOnly(libs.android.plugin)
     compileOnly(libs.android.tools.common)
     compileOnly(libs.androidx.room.plugin)
+    compileOnly(libs.apollo.plugin)
     compileOnly(libs.dependencyanalysis.plugin)
     compileOnly(libs.gradledoctor.plugin)
     compileOnly(libs.kotlin.compose.compiler.plugin)
@@ -69,6 +70,10 @@ gradlePlugin {
         register("androidTest") {
             id = "app.rickandmorty.android-test"
             implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
+        }
+        register("apollo") {
+            id = "app.rickandmorty.apollo"
+            implementationClass = "app.rickandmorty.gradle.plugin.ApolloPlugin"
         }
         register("autodagger") {
             id = "app.rickandmorty.autodagger"

@@ -28,10 +28,6 @@ public class HiltPlugin : Plugin<Project> {
                         onUnusedDependencies {
                             exclude("com.google.dagger:hilt-android")
                         }
-
-                        onIncorrectConfiguration {
-                            exclude("com.google.dagger:hilt-android")
-                        }
                     }
                 }
             }

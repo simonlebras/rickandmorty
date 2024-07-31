@@ -1,9 +1,9 @@
 extend schema @link(
-    url: "https://specs.apollo.dev/nullability/v0.3",
-    import: ["@catch", "CatchTo", "@semanticNonNull", "@semanticNonNullField"]
+    url: "https://specs.apollo.dev/nullability/v0.4",
+    import: ["@catch", "CatchTo", "@catchByDefault", "@semanticNonNull", "@semanticNonNullField"]
 )
 
-extend schema @catch(to: THROW)
+extend schema @catchByDefault(to: THROW)
 
 extend type Info @semanticNonNullField(name: "count")
 
