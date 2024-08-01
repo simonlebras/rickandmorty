@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.rickandmorty.compose)
     alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
+
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -10,6 +12,8 @@ android {
 }
 
 dependencies {
+    api(libs.kotlinx.serialization.core)
+
     api(projects.data.location)
 
     implementation(libs.androidx.activity.compose)

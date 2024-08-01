@@ -5,22 +5,22 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.composable
 import app.rickandmorty.feature.characters.list.CharacterListScreen
+import kotlinx.serialization.Serializable
 
-public const val characterListRoute: String = "characterList"
-public const val characterDetailsRoute: String = "characterDetails"
+@Serializable
+public data object CharacterList
 
 public fun NavHostController.navigateToCharacterList(builder: NavOptionsBuilder.() -> Unit = {}) {
     navigate(
-        route = characterListRoute,
+        route = CharacterList,
         builder = builder,
     )
 }
 
 public fun NavGraphBuilder.characterList(
     onNavigateToSettings: () -> Unit,
-    onNavigateToCharacterDetails: () -> Unit,
 ) {
-    composable(route = characterListRoute) {
+    composable<CharacterList> {
         CharacterListScreen(
             onNavigateToSettings = onNavigateToSettings,
         )

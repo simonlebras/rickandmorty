@@ -6,8 +6,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import app.rickandmorty.feature.characters.navigation.CharacterList
 import app.rickandmorty.feature.characters.navigation.characterList
-import app.rickandmorty.feature.characters.navigation.characterListRoute
 import app.rickandmorty.feature.episodes.navigation.episodeList
 import app.rickandmorty.feature.locations.navigation.locationList
 import app.rickandmorty.feature.settings.navigation.navigateToMainSettings
@@ -23,12 +23,11 @@ fun RamNavHost(
 
     NavHost(
         navController = navController,
-        startDestination = characterListRoute,
+        startDestination = CharacterList,
         modifier = modifier,
     ) {
         characterList(
             onNavigateToSettings = navController::navigateToMainSettings,
-            onNavigateToCharacterDetails = {},
         )
 
         episodeList(

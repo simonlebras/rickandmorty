@@ -5,13 +5,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.composable
 import app.rickandmorty.feature.locations.list.LocationListScreen
+import kotlinx.serialization.Serializable
 
-public const val locationListRoute: String = "locationList"
-private const val locationDetailsRoute = "locationDetails"
+@Serializable
+public data object LocationList
 
 public fun NavHostController.navigateToLocationList(builder: NavOptionsBuilder.() -> Unit = {}) {
     navigate(
-        route = locationListRoute,
+        route = LocationList,
         builder = builder,
     )
 }
@@ -19,7 +20,7 @@ public fun NavHostController.navigateToLocationList(builder: NavOptionsBuilder.(
 public fun NavGraphBuilder.locationList(
     onNavigateToSettings: () -> Unit,
 ) {
-    composable(route = locationListRoute) {
+    composable<LocationList> {
         LocationListScreen(
             onNavigateToSettings = onNavigateToSettings,
         )

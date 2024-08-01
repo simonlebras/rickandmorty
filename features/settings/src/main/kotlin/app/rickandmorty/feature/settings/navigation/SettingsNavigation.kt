@@ -11,20 +11,24 @@ import androidx.navigation.compose.composable
 import app.rickandmorty.feature.settings.language.LanguageSettingsScreen
 import app.rickandmorty.feature.settings.main.MainSettingsScreen
 import app.rickandmorty.feature.settings.theme.ThemeSettingsDialog
+import kotlinx.serialization.Serializable
 
-private const val mainSettingsRoute = "mainSettings"
-private const val languageSettingsRoute = "languageSettings"
+@Serializable
+private data object MainSettings
+
+@Serializable
+private data object LanguageSettings
 
 public fun NavHostController.navigateToMainSettings(builder: NavOptionsBuilder.() -> Unit = {}) {
     navigate(
-        route = mainSettingsRoute,
+        route = MainSettings,
         builder = builder,
     )
 }
 
 private fun NavHostController.navigateToLanguageSettings(builder: NavOptionsBuilder.() -> Unit = {}) {
     navigate(
-        route = languageSettingsRoute,
+        route = LanguageSettings,
         builder = builder,
     )
 }
@@ -34,7 +38,7 @@ public fun NavGraphBuilder.settings(
     onNavigateUp: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
 ) {
-    composable(route = mainSettingsRoute) {
+    composable<MainSettings> {
         var showThemeSettingsDialog by rememberSaveable {
             mutableStateOf(false)
         }
@@ -53,7 +57,7 @@ public fun NavGraphBuilder.settings(
         )
     }
 
-    composable(route = languageSettingsRoute) {
+    composable<LanguageSettings> {
         LanguageSettingsScreen(
             onNavigateUp = navController::navigateUp,
         )
