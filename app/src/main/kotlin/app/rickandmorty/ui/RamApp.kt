@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.util.fastForEach
 import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -19,8 +20,8 @@ import app.rickandmorty.ui.navigation.TopLevelDestination
 @Composable
 fun RamApp(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
-    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
-
+    val currentNavBackStackEntry = navController.currentBackStackEntryAsState().value
+    val currentDestination = currentNavBackStackEntry?.destination
     NavigationSuiteScaffold(
         navigationSuiteItems = {
             TopLevelDestination.entries.fastForEach { destination ->
@@ -52,7 +53,7 @@ fun RamApp(modifier: Modifier = Modifier) {
 private fun TopLevelDestination.isInHierarchy(destination: NavDestination?): Boolean = destination
     ?.hierarchy
     ?.any {
-        it.route?.contains(route, true) ?: false
+        it.hasRoute(route::class)
     } ?: false
 
 private fun NavHostController.navigateToTopLevelDestination(destination: TopLevelDestination) {

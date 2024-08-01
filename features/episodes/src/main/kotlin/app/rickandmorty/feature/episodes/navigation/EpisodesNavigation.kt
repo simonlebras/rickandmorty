@@ -5,13 +5,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.composable
 import app.rickandmorty.feature.episodes.list.EpisodeListScreen
+import kotlinx.serialization.Serializable
 
-public const val episodeListRoute: String = "episodeList"
-private const val episodeDetailsRoute = "episodeDetails"
+@Serializable
+public data object EpisodeList
 
 public fun NavHostController.navigateToEpisodeList(builder: NavOptionsBuilder.() -> Unit = {}) {
     navigate(
-        route = episodeListRoute,
+        route = EpisodeList,
         builder = builder,
     )
 }
@@ -19,7 +20,7 @@ public fun NavHostController.navigateToEpisodeList(builder: NavOptionsBuilder.()
 public fun NavGraphBuilder.episodeList(
     onNavigateToSettings: () -> Unit,
 ) {
-    composable(route = episodeListRoute) {
+    composable<EpisodeList> {
         EpisodeListScreen(
             onNavigateToSettings = onNavigateToSettings,
         )
