@@ -36,11 +36,9 @@ jobs:
           java-version: 22
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Decrypt secrets
         uses: ./.github/actions/decrypt-secrets
@@ -168,11 +166,9 @@ jobs:
           java-version: 22
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Accept license
         run: echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_SDK_ROOT/licenses/android-sdk-preview-license"
