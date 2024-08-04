@@ -3,6 +3,7 @@ package app.rickandmorty.feature.characters.list
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import app.rickandmorty.feature.characters.R
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -42,6 +43,14 @@ import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.l10n.R as L10nR
+import android.graphics.drawable.ColorDrawable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.CharacterStatusIndicator
 import app.rickandmorty.core.ui.Empty
@@ -53,6 +62,10 @@ import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.core.ui.label
 import app.rickandmorty.data.model.Character
+import coil3.annotation.ExperimentalCoilApi
+import coil3.asImage
+import coil3.compose.AsyncImagePreviewHandler
+import coil3.compose.LocalAsyncImagePreviewHandler
 
 @Composable
 internal fun CharacterListScreen(
@@ -181,7 +194,7 @@ private fun CharacterListScreen(
 }
 
 @Composable
-private fun CharacterItem(character: Character) {
+internal fun CharacterItem(character: Character) {
     ListItem(
         headlineContent = {
             Text(text = character.name)
@@ -233,3 +246,34 @@ private fun CharacterListScreenAppBar(
         scrollBehavior = scrollBehavior,
     )
 }
+
+@OptIn(ExperimentalCoilApi::class)
+@Preview(showBackground = true)
+@PreviewLightDark
+@Composable
+private fun CharacterItemPreview() {
+      val image =  ImageBitmap.imageResource(R.drawable.rick).asAndroidBitmap().asImage()
+    val previewHandler = AsyncImagePreviewHandler {
+        image
+    }
+
+    RamTheme {
+        CompositionLocalProvider(
+            LocalAsyncImagePreviewHandler provides previewHandler,
+        ) {
+            CharacterItem(character = charactersPreviewData[0])
+        }
+    }
+}
+
+private val charactersPreviewData = listOf(
+    Character(
+        id = "1",
+        name = "Rick Sanchez",
+        status = Character.Status.Alive,
+        species = Character.Species.Human,
+        type = "",
+        gender = Character.Gender.Male,
+        image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+    ),
+)
