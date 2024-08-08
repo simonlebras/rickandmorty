@@ -54,7 +54,7 @@ dependencies {
     // Workaround for https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 
-    lintChecks(libs.androidx.lintgradle)
+    lintChecks(libs.androidx.gradle.lints)
 }
 
 gradlePlugin {
