@@ -37,5 +37,7 @@ internal fun BaseExtension.configureAndroid(libs: LibrariesForLibs) {
 
     dependencies {
         coreLibraryDesugaring(libs.android.desugarjdklibs)
+
+        lintChecks(libs.android.security.lints)
     }
 }
