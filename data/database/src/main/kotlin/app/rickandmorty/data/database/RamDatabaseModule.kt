@@ -20,7 +20,6 @@ internal object RamDatabaseModule {
         .databaseBuilder<RamDatabase>(
             context = context,
             name = DATABASE_NAME,
-            factory = { RamDatabase::class.instantiateImpl() },
         )
         .build()
 }
