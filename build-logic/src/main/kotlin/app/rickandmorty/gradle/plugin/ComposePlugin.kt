@@ -14,6 +14,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.the
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 public class ComposePlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
@@ -33,9 +34,9 @@ public class ComposePlugin : Plugin<Project> {
         }
 
         configure<ComposeCompilerGradlePluginExtension> {
-            enableIntrinsicRemember = true
-            enableStrongSkippingMode = true
-            enableNonSkippingGroupOptimization = true
+            featureFlags = setOf(
+                ComposeFeatureFlag.OptimizeNonSkippingGroups,
+            )
 
             val enableComposeCompilerReports = providers
                 .gradleProperty("ram.enableComposeCompilerReports")
