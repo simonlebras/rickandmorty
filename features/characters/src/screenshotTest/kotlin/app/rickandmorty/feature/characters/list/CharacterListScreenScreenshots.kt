@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import app.rickandmorty.core.designsystem.theme.RamTheme
+import app.rickandmorty.core.ui.PreviewWrapper
 import app.rickandmorty.data.model.Character
 
 class CharacterListScreenScreenshots {
@@ -17,7 +17,7 @@ class CharacterListScreenScreenshots {
     fun CharacterItemPreview(
         @PreviewParameter(CharacterPreviewParameterProvider::class) character: Character,
     ) {
-        RamTheme {
+        PreviewWrapper {
             ProvideCharacterImagePreviewHandler {
                 CharacterItem(character = character)
             }

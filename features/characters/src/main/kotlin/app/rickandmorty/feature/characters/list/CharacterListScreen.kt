@@ -44,12 +44,12 @@ import app.rickandmorty.core.designsystem.component.AsyncImage
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.l10n.R as L10nR
 import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.CharacterStatusIndicator
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
+import app.rickandmorty.core.ui.PreviewWrapper
 import app.rickandmorty.core.ui.appendLoadState
 import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty
@@ -244,7 +244,7 @@ private fun CharacterListScreenAppBar(
 private fun CharacterItemPreview(
     @PreviewParameter(CharacterPreviewParameterProvider::class) character: Character,
 ) {
-    RamTheme {
+    PreviewWrapper {
         ProvideCharacterImagePreviewHandler {
             CharacterItem(character = character)
         }
