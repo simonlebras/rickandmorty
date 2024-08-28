@@ -19,6 +19,7 @@ public class AndroidApplicationPlugin : Plugin<Project> {
         pluginManager.apply(
             libs.plugins.android.application,
             libs.plugins.cachefix,
+            libs.plugins.dependencyanalysis,
             libs.plugins.sortdependencies,
         )
 

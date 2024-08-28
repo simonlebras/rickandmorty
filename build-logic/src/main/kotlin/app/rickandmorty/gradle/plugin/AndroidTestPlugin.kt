@@ -18,6 +18,7 @@ public class AndroidTestPlugin : Plugin<Project> {
         pluginManager.apply(
             libs.plugins.android.test,
             libs.plugins.cachefix,
+            libs.plugins.dependencyanalysis,
             libs.plugins.sortdependencies,
         )
 
