@@ -2,7 +2,7 @@ package app.rickandmorty.feature.settings.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.rickandmorty.core.coroutines.WhileViewSubscribed
+import app.rickandmorty.core.coroutines.WhileSubscribedOrRetained
 import app.rickandmorty.core.resourcestate.ResourceController
 import app.rickandmorty.data.locale.LocaleRepository
 import app.rickandmorty.data.theme.ThemeRepository
@@ -36,8 +36,8 @@ internal class MainSettingsViewModel @Inject constructor(
         )
     }.stateIn(
         scope = viewModelScope,
+        started = WhileSubscribedOrRetained,
         initialValue = MainSettingsUiState(),
-        started = WhileViewSubscribed,
     )
 
     fun setUseDynamicColor(useDynamicColor: Boolean) {

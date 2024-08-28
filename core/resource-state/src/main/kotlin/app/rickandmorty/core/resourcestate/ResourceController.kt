@@ -1,5 +1,6 @@
 package app.rickandmorty.core.resourcestate
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -27,6 +28,7 @@ public class ResourceController<T>(
         refreshTrigger.tryEmit(Unit)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     public val state: Flow<ResourceState<T>> = flow {
         var prevState: ResourceState<T> = Uninitialized
         emitAll(
