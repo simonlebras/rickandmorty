@@ -18,6 +18,7 @@ public class AndroidLibraryPlugin : Plugin<Project> {
         pluginManager.apply(
             libs.plugins.android.library,
             libs.plugins.cachefix,
+            libs.plugins.dependencyanalysis,
             libs.plugins.sortdependencies,
         )
 

@@ -11,7 +11,10 @@ public class JvmLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = the<LibrariesForLibs>()
 
-        pluginManager.apply(libs.plugins.sortdependencies)
+        pluginManager.apply(
+            libs.plugins.dependencyanalysis,
+            libs.plugins.sortdependencies,
+        )
 
         configureSpotless(libs)
     }
