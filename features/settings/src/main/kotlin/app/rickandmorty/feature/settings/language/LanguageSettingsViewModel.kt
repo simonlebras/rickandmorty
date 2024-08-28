@@ -2,7 +2,7 @@ package app.rickandmorty.feature.settings.language
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.rickandmorty.core.coroutines.WhileViewSubscribed
+import app.rickandmorty.core.coroutines.WhileSubscribedOrRetained
 import app.rickandmorty.core.resourcestate.ResourceController
 import app.rickandmorty.data.locale.LocaleRepository
 import app.rickandmorty.data.model.Locale
@@ -35,8 +35,8 @@ internal class LanguageSettingsViewModel @Inject constructor(
         )
     }.stateIn(
         scope = viewModelScope,
+        started = WhileSubscribedOrRetained,
         initialValue = LanguageSettingsUiState(),
-        started = WhileViewSubscribed,
     )
 
     fun setAppLocale(locale: Locale?) {

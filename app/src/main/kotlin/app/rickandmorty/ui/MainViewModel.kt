@@ -2,7 +2,7 @@ package app.rickandmorty.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.rickandmorty.core.coroutines.WhileViewSubscribed
+import app.rickandmorty.core.coroutines.WhileSubscribedOrRetained
 import app.rickandmorty.core.resourcestate.ResourceController
 import app.rickandmorty.data.theme.ThemeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
             MainUiState(theme = theme)
         }.stateIn(
             scope = viewModelScope,
+            started = WhileSubscribedOrRetained,
             initialValue = MainUiState(),
-            started = WhileViewSubscribed,
         )
 }
