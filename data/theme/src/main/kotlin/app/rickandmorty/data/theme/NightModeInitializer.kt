@@ -19,6 +19,8 @@ import app.rickandmorty.data.model.NightMode
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
@@ -30,33 +32,35 @@ import se.ansman.dagger.auto.AutoBindIntoSet
 
 @AutoBindIntoSet
 internal class NightModeInitializer @Inject constructor(
-    private val application: Application,
+    application: Application,
     private val themeRepository: ThemeRepository,
     @ApplicationScope private val applicationScope: CoroutineScope,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : Initializer {
+    private val nightModeImpl = if (Build.VERSION.SDK_INT >= 31) {
+        NightMode31Impl(application)
+    } else {
+        NightMode23Impl(application)
+    }
+
     override fun initialize() {
-        val nightModeImpl = if (Build.VERSION.SDK_INT >= 31) {
-            NightMode31Impl(application)
-        } else {
-            NightMode23Impl(application)
-        }
+        val nightModeDeferred = getNightModeDeferred()
+        nightModeImpl.initializeNightMode(nightModeDeferred)
 
-        val nightModeDeferred = applicationScope.async(context = ioDispatcher) {
-            themeRepository
-                .getTheme()
-                .first()
-                .nightMode
-        }
-        nightModeImpl.initializeNightMode {
-            allowThreadDiskReads {
-                runBlocking {
-                    nightModeDeferred.await()
-                }
-            }
-        }
+        observeNightModeUpdates()
+    }
 
-        // Update application night mode to match the theme
+    private fun getNightModeDeferred(): Deferred<NightMode> = applicationScope.async(
+        context = ioDispatcher,
+        start = CoroutineStart.LAZY,
+    ) {
+        themeRepository
+            .getTheme()
+            .first()
+            .nightMode
+    }
+
+    private fun observeNightModeUpdates() {
         themeRepository.getTheme()
             .map { theme -> theme.nightMode }
             .distinctUntilChanged()
@@ -68,7 +72,7 @@ internal class NightModeInitializer @Inject constructor(
 }
 
 private interface NightModeImpl {
-    fun initializeNightMode(nightModeProvider: () -> NightMode)
+    fun initializeNightMode(nightModeDeferred: Deferred<NightMode>)
 
     fun setApplicationNightMode(nightMode: NightMode)
 }
@@ -79,11 +83,12 @@ private class NightMode31Impl(private val application: Application) : NightModeI
         application.getSystemService<UiModeManager>()!!
     }
 
-    override fun initializeNightMode(nightModeProvider: () -> NightMode) {
+    override fun initializeNightMode(nightModeDeferred: Deferred<NightMode>) {
         val nightModeComponent = ComponentName(application, NightModeService::class.java)
         if (!application.isComponentEnabled(nightModeComponent)) {
+            nightModeDeferred.start()
             application.doOnActivityPreCreated {
-                val nightMode = nightModeProvider()
+                val nightMode = nightModeDeferred.awaitBlocking()
                 setApplicationNightMode(nightMode)
 
                 application.setComponentEnabled(nightModeComponent, true)
@@ -104,9 +109,10 @@ private class NightMode31Impl(private val application: Application) : NightModeI
 }
 
 private class NightMode23Impl(private val application: Application) : NightModeImpl {
-    override fun initializeNightMode(nightModeProvider: () -> NightMode) {
+    override fun initializeNightMode(nightModeDeferred: Deferred<NightMode>) {
+        nightModeDeferred.start()
         application.doOnActivityPreCreated {
-            val nightMode = nightModeProvider()
+            val nightMode = nightModeDeferred.awaitBlocking()
             setApplicationNightMode(nightMode)
         }
     }
@@ -121,5 +127,11 @@ private class NightMode23Impl(private val application: Application) : NightModeI
         NightMode.FollowSystem -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         NightMode.Light -> AppCompatDelegate.MODE_NIGHT_NO
         NightMode.Dark -> AppCompatDelegate.MODE_NIGHT_YES
+    }
+}
+
+private fun <T> Deferred<T>.awaitBlocking(): T = allowThreadDiskReads {
+    runBlocking {
+        await()
     }
 }
