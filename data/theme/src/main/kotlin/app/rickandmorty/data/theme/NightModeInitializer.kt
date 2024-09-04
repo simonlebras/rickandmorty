@@ -7,13 +7,13 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.getSystemService
-import app.rickandmorty.core.base.allowThreadDiskReads
 import app.rickandmorty.core.base.doOnActivityPreCreated
 import app.rickandmorty.core.base.isComponentEnabled
 import app.rickandmorty.core.base.setComponentEnabled
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.coroutines.ApplicationScope
 import app.rickandmorty.core.coroutines.IODispatcher
+import app.rickandmorty.core.coroutines.awaitBlocking
 import app.rickandmorty.core.startup.Initializer
 import app.rickandmorty.data.model.NightMode
 import javax.inject.Inject
@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.runBlocking
 import se.ansman.dagger.auto.AutoBindIntoSet
 
 @AutoBindIntoSet
@@ -40,7 +39,7 @@ internal class NightModeInitializer @Inject constructor(
     private val nightModeImpl = if (Build.VERSION.SDK_INT >= 31) {
         NightMode31Impl(application)
     } else {
-        NightMode23Impl(application)
+        NightMode24Impl(application)
     }
 
     override fun initialize() {
@@ -108,7 +107,7 @@ private class NightMode31Impl(private val application: Application) : NightModeI
     }
 }
 
-private class NightMode23Impl(private val application: Application) : NightModeImpl {
+private class NightMode24Impl(private val application: Application) : NightModeImpl {
     override fun initializeNightMode(nightModeDeferred: Deferred<NightMode>) {
         nightModeDeferred.start()
         application.doOnActivityPreCreated {
@@ -127,11 +126,5 @@ private class NightMode23Impl(private val application: Application) : NightModeI
         NightMode.FollowSystem -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         NightMode.Light -> AppCompatDelegate.MODE_NIGHT_NO
         NightMode.Dark -> AppCompatDelegate.MODE_NIGHT_YES
-    }
-}
-
-private fun <T> Deferred<T>.awaitBlocking(): T = allowThreadDiskReads {
-    runBlocking {
-        await()
     }
 }

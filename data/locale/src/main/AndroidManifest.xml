@@ -3,13 +3,9 @@
 
     <application>
         <service
-            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:name=".AppLocaleService"
             android:enabled="false"
-            android:exported="false">
-            <meta-data
-                android:name="autoStoreLocales"
-                android:value="false" />
-        </service>
+            android:exported="false" />
     </application>
 
 </manifest>

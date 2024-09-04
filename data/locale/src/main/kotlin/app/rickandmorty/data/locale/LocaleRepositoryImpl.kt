@@ -74,35 +74,31 @@ internal class LocaleRepositoryImpl @Inject constructor(
     }
 
     override suspend fun setAppLocale(locale: Locale?) {
-        if (Build.VERSION.SDK_INT >= 33) {
-            val localeManager = context.getSystemService<LocaleManager>()!!
-            localeManager.applicationLocales = locale.toLocaleList()
-        } else {
-            applicationScope.launch {
-                dataStore.updateData { preferences ->
-                    preferences.copy(app_locale = locale?.toLanguageTag())
-                }
-            }.join()
-        }
+        applicationScope.launch {
+            dataStore.updateData { preferences ->
+                preferences.copy(app_locale = locale?.toLanguageTag())
+            }
+        }.join()
     }
 
     @SuppressLint("DiscouragedApi")
-    override suspend fun getAvailableAppLocales(): ImmutableList<Locale> = withContext(ioDispatcher) {
-        val locales = mutableListOf<Locale>()
-        val resources = context.resources
-        val localeConfigFileId = resources.getIdentifier(
-            LOCALE_CONFIG_FILE,
-            "xml",
-            context.packageName,
-        )
-        resources.getXml(localeConfigFileId).use { parser ->
-            while (parser.eventType != XmlPullParser.END_DOCUMENT) {
-                if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
-                    locales += Locale(parser.getAttributeValue(0))
+    override suspend fun getAvailableAppLocales(): ImmutableList<Locale> =
+        withContext(ioDispatcher) {
+            val locales = mutableListOf<Locale>()
+            val resources = context.resources
+            val localeConfigFileId = resources.getIdentifier(
+                LOCALE_CONFIG_FILE,
+                "xml",
+                context.packageName,
+            )
+            resources.getXml(localeConfigFileId).use { parser ->
+                while (parser.eventType != XmlPullParser.END_DOCUMENT) {
+                    if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
+                        locales += Locale(parser.getAttributeValue(0))
+                    }
+                    parser.next()
                 }
-                parser.next()
             }
+            locales.toImmutableList()
         }
-        locales.toImmutableList()
-    }
 }

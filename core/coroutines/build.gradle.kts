@@ -11,5 +11,7 @@ android {
 dependencies {
     implementation(libs.kotlinx.coroutines.core)
 
+    implementation(projects.core.base)
+
     runtimeOnly(libs.kotlinx.coroutines.android)
 }
