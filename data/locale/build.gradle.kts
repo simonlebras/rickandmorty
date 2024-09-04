@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.locale"
+    namespace = "app.rickandmorty.data.locale"
 }
 
 dependencies {
@@ -18,6 +18,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.datastore)
 
+    implementation(projects.core.base)
     implementation(projects.core.coroutines)
     implementation(projects.core.startup)
 }
