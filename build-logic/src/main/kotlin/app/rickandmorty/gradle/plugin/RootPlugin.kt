@@ -62,7 +62,7 @@ private fun Project.configureAffectedModuleDetector() {
         )
 
         logFilename = "output.log"
-        val reportsFolder = rootProject.layout
+        val reportsFolder = project.layout
             .buildDirectory
             .dir("reports/affectedModuleDetector")
             .get()

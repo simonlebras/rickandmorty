@@ -68,6 +68,7 @@ internal fun DependencyHandler.screenshotTestImplementation(
     }
 }
 
+@Suppress("GradleProjectIsolation")
 internal val Project.isRootProject: Boolean
     get() = rootProject === this
 
