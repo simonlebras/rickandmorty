@@ -1,6 +1,6 @@
 [versions]
 affectedmoduledetector = "0.3.1"
-android-compose-screenshot = "0.0.1-alpha05"
+android-compose-screenshot = "0.0.1-alpha06"
 android-desugarjdklibs = "2.1.2"
 android-plugin = "8.6.0"
 android-sdk-compile = "35"
