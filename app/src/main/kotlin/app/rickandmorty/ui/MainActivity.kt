@@ -1,5 +1,6 @@
 package app.rickandmorty.ui
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
 
-        enableEdgeToEdge()
+        setupEdgeToEdge()
 
         super.onCreate(savedInstanceState)
 
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                     .launchIn(this)
 
                 isSystemInDarkTheme()
-                    .onEach { enableEdgeToEdge() }
+                    .onEach { setupEdgeToEdge() }
                     .launchIn(this)
             }
         }
@@ -59,6 +60,13 @@ class MainActivity : AppCompatActivity() {
             RamTheme(dynamicColor = uiState.useDynamicColor) {
                 RamApp()
             }
+        }
+    }
+
+    private fun setupEdgeToEdge() {
+        enableEdgeToEdge()
+        if (Build.VERSION.SDK_INT >= 29) {
+            window.isNavigationBarContrastEnforced = false
         }
     }
 }
