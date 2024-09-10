@@ -1,7 +1,10 @@
 package app.rickandmorty
 
 import android.app.Application
+import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.startup.Initializer
+import app.rickandmorty.di.AppComponent
+import app.rickandmorty.di.create
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.SingletonImageLoader
@@ -13,6 +16,10 @@ import javax.inject.Inject
 class RamApplication :
     Application(),
     SingletonImageLoader.Factory {
+    private val appComponent by unsafeLazy {
+        AppComponent.create(this)
+    }
+
     @Inject
     lateinit var imageLoader: Lazy<ImageLoader>
 
