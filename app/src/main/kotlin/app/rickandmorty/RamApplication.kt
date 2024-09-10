@@ -7,9 +7,7 @@ import app.rickandmorty.inject.create
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.SingletonImageLoader
-import dagger.Lazy
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
 
 @HiltAndroidApp
 class RamApplication :
@@ -19,9 +17,6 @@ class RamApplication :
         AppComponent.create(this)
     }
 
-    @Inject
-    lateinit var imageLoader: Lazy<ImageLoader>
-
     override fun onCreate() {
         super.onCreate()
 
@@ -30,5 +25,5 @@ class RamApplication :
         }
     }
 
-    override fun newImageLoader(context: PlatformContext): ImageLoader = imageLoader.get()
+    override fun newImageLoader(context: PlatformContext): ImageLoader = appComponent.imageLoader
 }
