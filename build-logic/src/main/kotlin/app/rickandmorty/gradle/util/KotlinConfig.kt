@@ -38,7 +38,10 @@ private fun Project.configureKotlinCommon(libs: LibrariesForLibs) {
         compilerOptions {
             jvmTarget = JvmTarget.fromTarget(javaTarget)
 
-            freeCompilerArgs.add("-Xcontext-receivers")
+            freeCompilerArgs.addAll(
+                "-Xcontext-receivers",
+                "-Xconsistent-data-class-copy-visibility",
+            )
         }
     }
 

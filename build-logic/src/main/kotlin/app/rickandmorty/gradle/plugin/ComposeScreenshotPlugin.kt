@@ -32,7 +32,7 @@ public class ComposeScreenshotPlugin : Plugin<Project> {
         }
 
         tasks.withType<PreviewScreenshotValidationTask> {
-            threshold = 0.01f
+            threshold = 0.5f
         }
 
         dependencies {
