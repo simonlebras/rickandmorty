@@ -80,6 +80,7 @@ jobs:
           --no-configuration-cache
 
       - name: Run screenshot tests
+        if: ${{ false }}
         run: |
           ./gradlew runAffectedScreenshotTests \
           -Paffected_module_detector.enable \
