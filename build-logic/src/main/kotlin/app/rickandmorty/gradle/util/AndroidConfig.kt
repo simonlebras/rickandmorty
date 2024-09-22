@@ -5,33 +5,37 @@ import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
-context(Project)
-internal fun BaseExtension.configureAndroid(libs: LibrariesForLibs) {
-    compileSdkVersion(libs.versions.android.sdk.compile.get().toInt())
+internal fun Project.configureAndroid(
+    baseExtension: BaseExtension,
+    libs: LibrariesForLibs,
+) {
+    with(baseExtension) {
+        compileSdkVersion(libs.versions.android.sdk.compile.get().toInt())
 
-    defaultConfig.apply {
-        minSdk = libs.versions.android.sdk.min.get().toInt()
-        targetSdk = libs.versions.android.sdk.target.get().toInt()
-    }
+        defaultConfig.apply {
+            minSdk = libs.versions.android.sdk.min.get().toInt()
+            targetSdk = libs.versions.android.sdk.target.get().toInt()
+        }
 
-    testOptions {
-        animationsDisabled = true
+        testOptions {
+            animationsDisabled = true
 
-        configureGradleManagedDevices()
-    }
+            configureGradleManagedDevices()
+        }
 
-    compileOptions {
-        val javaTarget = libs.versions.java.target.get()
-        sourceCompatibility(javaTarget)
-        targetCompatibility(javaTarget)
+        compileOptions {
+            val javaTarget = libs.versions.java.target.get()
+            sourceCompatibility(javaTarget)
+            targetCompatibility(javaTarget)
 
-        isCoreLibraryDesugaringEnabled = true
-    }
+            isCoreLibraryDesugaringEnabled = true
+        }
 
-    buildTypes {
-        named("debug") {
-            // For upstream Android libraries that just have a single release variant
-            matchingFallbacks += "release"
+        buildTypes {
+            named("debug") {
+                // For upstream Android libraries that just have a single release variant
+                matchingFallbacks += "release"
+            }
         }
     }
 

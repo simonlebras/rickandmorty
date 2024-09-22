@@ -22,7 +22,10 @@ public class AndroidTestPlugin : Plugin<Project> {
         configureAffectedAndroidTest()
 
         configure<TestExtension> {
-            configureAndroid(libs)
+            configureAndroid(
+                baseExtension = this,
+                libs = libs,
+            )
         }
     }
 }

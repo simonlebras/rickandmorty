@@ -23,9 +23,12 @@ public class AndroidApplicationPlugin : Plugin<Project> {
         configureAffectedAndroidTest()
 
         configure<AppExtension> {
-            configureAndroid(libs)
+            configureAndroid(
+                baseExtension = this,
+                libs = libs,
+            )
 
-            configureBadgingTasks()
+            configureBadgingTasks(this)
 
             packagingOptions {
                 resources {

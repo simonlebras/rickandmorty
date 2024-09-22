@@ -13,7 +13,6 @@ kotlin {
         jvmTarget = JvmTarget.fromTarget(javaTarget)
 
         freeCompilerArgs.addAll(
-            "-Xcontext-receivers",
             "-Xjdk-release=$javaTarget",
         )
     }

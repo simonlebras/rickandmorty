@@ -29,7 +29,10 @@ public class AndroidLibraryPlugin : Plugin<Project> {
         }
 
         configure<LibraryExtension> {
-            configureAndroid(libs)
+            configureAndroid(
+                baseExtension = this,
+                libs = libs,
+            )
         }
     }
 }
