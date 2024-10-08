@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.rickandmorty.apollo)
-    alias(libs.plugins.rickandmorty.jvm.library)
-    alias(libs.plugins.rickandmorty.kotlin.jvm)
+    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+    alias(libs.plugins.rickandmorty.spotless)
+
+    alias(libs.plugins.dependencyanalysis)
+    alias(libs.plugins.sortdependencies)
 }
 
 apollo {
@@ -21,6 +24,12 @@ apollo {
     }
 }
 
-dependencies {
-    implementation(libs.apollo.api)
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(libs.apollo.api)
+            }
+        }
+    }
 }

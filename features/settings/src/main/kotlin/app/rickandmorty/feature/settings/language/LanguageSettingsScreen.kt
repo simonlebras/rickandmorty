@@ -163,7 +163,7 @@ private fun LazyListScope.availableAppLocales(
         key = { locale -> locale.toLanguageTag() },
     ) { locale ->
         LocaleItem(
-            text = locale.getDisplayName(locale),
+            text = locale.getLocalizedName(),
             isSelected = locale == currentAppLocale,
             onClick = { onSelectLocale(locale) },
         )

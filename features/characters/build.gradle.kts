@@ -4,8 +4,11 @@ plugins {
     alias(libs.plugins.rickandmorty.compose.screenshot)
     alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
+    alias(libs.plugins.rickandmorty.spotless)
 
+    alias(libs.plugins.dependencyanalysis)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.sortdependencies)
 }
 
 android {

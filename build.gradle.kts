@@ -9,12 +9,12 @@ plugins {
     alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
     alias(libs.plugins.rickandmorty.firebase.perf) apply false
     alias(libs.plugins.rickandmorty.hilt) apply false
-    alias(libs.plugins.rickandmorty.jvm.library) apply false
     alias(libs.plugins.rickandmorty.kotlin.android) apply false
-    alias(libs.plugins.rickandmorty.kotlin.jvm) apply false
+    alias(libs.plugins.rickandmorty.kotlin.multiplatform) apply false
     alias(libs.plugins.rickandmorty.osslicenses) apply false
     alias(libs.plugins.rickandmorty.room) apply false
     alias(libs.plugins.rickandmorty.root)
+    alias(libs.plugins.rickandmorty.spotless)
     alias(libs.plugins.rickandmorty.wire) apply false
 
     alias(libs.plugins.affectedmoduledetector)
@@ -36,12 +36,12 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose.compiler) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.modulegraphassert) apply false
     alias(libs.plugins.play.osslicenses) apply false
     alias(libs.plugins.sortdependencies)
-    alias(libs.plugins.spotless)
+    alias(libs.plugins.spotless) apply false
     alias(libs.plugins.wire) apply false
 }

@@ -35,10 +35,6 @@ public class RootPlugin : Plugin<Project> {
         pluginManager.withPlugin(libs.plugins.gradledoctor) {
             configureGradleDoctor()
         }
-
-        pluginManager.withPlugin(libs.plugins.spotless) {
-            configureSpotless(libs)
-        }
     }
 }
 

@@ -121,6 +121,6 @@ private class AppLocale24Impl(private val application: Application) : AppLocaleI
 
     private fun Locale?.toLocaleListCompat(): LocaleListCompat = when (this) {
         null -> LocaleListCompat.getEmptyLocaleList()
-        else -> LocaleListCompat.create(javaLocale)
+        else -> LocaleListCompat.create(platformLocale)
     }
 }
