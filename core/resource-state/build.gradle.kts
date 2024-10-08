@@ -1,8 +1,17 @@
 plugins {
-    alias(libs.plugins.rickandmorty.jvm.library)
-    alias(libs.plugins.rickandmorty.kotlin.jvm)
+    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+    alias(libs.plugins.rickandmorty.spotless)
+
+    alias(libs.plugins.dependencyanalysis)
+    alias(libs.plugins.sortdependencies)
 }
 
-dependencies {
-    api(libs.kotlinx.coroutines.core)
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                api(libs.kotlinx.coroutines.core)
+            }
+        }
+    }
 }

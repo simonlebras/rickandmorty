@@ -219,7 +219,7 @@ private fun LazyListScope.generalSettings(
                     onClick = onNavigateToLanguageSettings,
                 ),
             supportingContent = {
-                val localeName = currentAppLocale?.getDisplayName(currentAppLocale)
+                val localeName = currentAppLocale?.getLocalizedName()
                     ?: stringResource(L10nR.string.settings_language_system_default)
                 Text(text = localeName)
             },

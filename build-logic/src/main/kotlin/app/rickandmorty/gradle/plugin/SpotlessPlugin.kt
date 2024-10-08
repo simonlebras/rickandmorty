@@ -7,14 +7,11 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.the
 
-public class JvmLibraryPlugin : Plugin<Project> {
+public class SpotlessPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = the<LibrariesForLibs>()
 
-        pluginManager.apply(
-            libs.plugins.dependencyanalysis,
-            libs.plugins.sortdependencies,
-        )
+        pluginManager.apply(libs.plugins.spotless)
 
         configureSpotless(libs)
     }

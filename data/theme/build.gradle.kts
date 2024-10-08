@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.rickandmorty.autodagger)
     alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
+    alias(libs.plugins.rickandmorty.spotless)
+
+    alias(libs.plugins.dependencyanalysis)
+    alias(libs.plugins.sortdependencies)
 }
 
 android {
