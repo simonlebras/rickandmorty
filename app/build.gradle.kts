@@ -89,8 +89,6 @@ baselineProfile {
 }
 
 dependencies {
-    baselineProfile(projects.baselineProfile)
-
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.material3.adaptive.navigationsuite)
@@ -125,6 +123,8 @@ dependencies {
     debugRuntimeOnly(libs.leakcanary)
 
     debugRuntimeOnly(projects.core.strictMode)
+
+    baselineProfile(projects.baselineProfile)
 }
 
 easylauncher {
