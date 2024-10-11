@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         splashScreen.setKeepOnScreenCondition {
-            !uiState.isLoading
+            uiState.isLoading
         }
 
         setContent {
