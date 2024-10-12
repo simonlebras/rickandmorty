@@ -3,7 +3,6 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.util.apply
 import app.rickandmorty.gradle.util.configureAffectedAndroidTest
 import app.rickandmorty.gradle.util.configureAndroid
-import app.rickandmorty.gradle.util.configureSpotless
 import com.android.build.gradle.TestExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -18,11 +17,7 @@ public class AndroidTestPlugin : Plugin<Project> {
         pluginManager.apply(
             libs.plugins.android.test,
             libs.plugins.cachefix,
-            libs.plugins.dependencyanalysis,
-            libs.plugins.sortdependencies,
         )
-
-        configureSpotless(libs)
 
         configureAffectedAndroidTest()
 

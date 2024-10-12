@@ -7,8 +7,6 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 internal fun Project.configureSpotless(libs: LibrariesForLibs) {
-    pluginManager.apply(libs.plugins.spotless)
-
     val spotlessFormatters: SpotlessExtension.() -> Unit = {
         val ktlintVersion = libs.versions.ktlint.get()
         kotlin {

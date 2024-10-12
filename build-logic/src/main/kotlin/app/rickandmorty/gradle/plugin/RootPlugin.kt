@@ -1,6 +1,5 @@
 package app.rickandmorty.gradle.plugin
 
-import app.rickandmorty.gradle.util.configureSpotless
 import app.rickandmorty.gradle.util.isRootProject
 import app.rickandmorty.gradle.util.withPlugin
 import com.autonomousapps.DependencyAnalysisExtension
@@ -34,10 +33,6 @@ public class RootPlugin : Plugin<Project> {
 
         pluginManager.withPlugin(libs.plugins.gradledoctor) {
             configureGradleDoctor()
-        }
-
-        pluginManager.withPlugin(libs.plugins.spotless) {
-            configureSpotless(libs)
         }
     }
 }

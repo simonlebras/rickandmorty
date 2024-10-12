@@ -9,7 +9,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 
-internal class ApolloPlugin : Plugin<Project> {
+public class ApolloPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = the<LibrariesForLibs>()
 

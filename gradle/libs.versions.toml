@@ -213,12 +213,12 @@ rickandmorty-compose-screenshot = { id = "app.rickandmorty.compose-screenshot" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
 rickandmorty-hilt = { id = "app.rickandmorty.hilt" }
-rickandmorty-jvm-library = { id = "app.rickandmorty.jvm-library" }
 rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
-rickandmorty-kotlin-jvm = { id = "app.rickandmorty.kotlin-jvm" }
+rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
 rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses" }
 rickandmorty-room = { id = "app.rickandmorty.room" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
+rickandmorty-spotless = { id = "app.rickandmorty.spotless" }
 rickandmorty-wire = { id = "app.rickandmorty.wire" }
 
 affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.ref = "affectedmoduledetector" }
@@ -240,7 +240,7 @@ gradledoctor = { id = "com.osacky.doctor", version.ref = "gradledoctor" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }

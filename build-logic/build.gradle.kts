@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
@@ -7,13 +6,9 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-kotlin {
-    explicitApi()
-}
-
 val javaTarget = libs.versions.java.target.get()
 
-tasks.withType<KotlinCompile>().configureEach {
+kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.fromTarget(javaTarget)
 
@@ -22,6 +17,8 @@ tasks.withType<KotlinCompile>().configureEach {
             "-Xjdk-release=$javaTarget",
         )
     }
+
+    explicitApi()
 }
 
 tasks.withType<JavaCompile>().configureEach {
@@ -60,15 +57,15 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("androidApplication") {
+        register("android-application") {
             id = "app.rickandmorty.android-application"
             implementationClass = "app.rickandmorty.gradle.plugin.AndroidApplicationPlugin"
         }
-        register("androidLibrary") {
+        register("android-library") {
             id = "app.rickandmorty.android-library"
             implementationClass = "app.rickandmorty.gradle.plugin.AndroidLibraryPlugin"
         }
-        register("androidTest") {
+        register("android-test") {
             id = "app.rickandmorty.android-test"
             implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
         }
@@ -84,15 +81,15 @@ gradlePlugin {
             id = "app.rickandmorty.compose"
             implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
         }
-        register("composeScreenshot") {
+        register("compose-screenshot") {
             id = "app.rickandmorty.compose-screenshot"
             implementationClass = "app.rickandmorty.gradle.plugin.ComposeScreenshotPlugin"
         }
-        register("firebaseCrashlytics") {
+        register("firebase-crashlytics") {
             id = "app.rickandmorty.firebase-crashlytics"
             implementationClass = "app.rickandmorty.gradle.plugin.FirebaseCrashlyticsPlugin"
         }
-        register("firebasePerf") {
+        register("firebase-perf") {
             id = "app.rickandmorty.firebase-perf"
             implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
         }
@@ -100,19 +97,19 @@ gradlePlugin {
             id = "app.rickandmorty.hilt"
             implementationClass = "app.rickandmorty.gradle.plugin.HiltPlugin"
         }
-        register("jvmLibrary") {
+        register("jvm-library") {
             id = "app.rickandmorty.jvm-library"
             implementationClass = "app.rickandmorty.gradle.plugin.JvmLibraryPlugin"
         }
-        register("kotlinAndroid") {
+        register("kotlin-android") {
             id = "app.rickandmorty.kotlin-android"
             implementationClass = "app.rickandmorty.gradle.plugin.KotlinAndroidPlugin"
         }
-        register("kotlinJvm") {
-            id = "app.rickandmorty.kotlin-jvm"
-            implementationClass = "app.rickandmorty.gradle.plugin.KotlinJvmPlugin"
+        register("kotlin-multiplatform") {
+            id = "app.rickandmorty.kotlin-multiplatform"
+            implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
         }
-        register("ossLicenses") {
+        register("oss-licenses") {
             id = "app.rickandmorty.oss-licenses"
             implementationClass = "app.rickandmorty.gradle.plugin.OssLicensesPlugin"
         }
@@ -123,6 +120,10 @@ gradlePlugin {
         register("root") {
             id = "app.rickandmorty.root"
             implementationClass = "app.rickandmorty.gradle.plugin.RootPlugin"
+        }
+        register("spotless") {
+            id = "app.rickandmorty.spotless"
+            implementationClass = "app.rickandmorty.gradle.plugin.SpotlessPlugin"
         }
         register("wire") {
             id = "app.rickandmorty.wire"
