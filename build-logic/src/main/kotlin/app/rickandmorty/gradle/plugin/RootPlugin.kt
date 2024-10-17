@@ -6,7 +6,6 @@ import com.autonomousapps.DependencyAnalysisExtension
 import com.dropbox.affectedmoduledetector.AffectedModuleConfiguration
 import com.osacky.doctor.DoctorExtension
 import org.gradle.accessors.dm.LibrariesForLibs
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.assign
@@ -21,8 +20,6 @@ public class RootPlugin : Plugin<Project> {
 
         val libs = the<LibrariesForLibs>()
 
-        checkRequiredJdkVersion(libs)
-
         pluginManager.withPlugin(libs.plugins.affectedmoduledetector) {
             configureAffectedModuleDetector()
         }
@@ -34,14 +31,6 @@ public class RootPlugin : Plugin<Project> {
         pluginManager.withPlugin(libs.plugins.gradledoctor) {
             configureGradleDoctor()
         }
-    }
-}
-
-private fun checkRequiredJdkVersion(libs: LibrariesForLibs) {
-    val jdkVersion = libs.versions.java.jdk.get()
-    val currentJvmVersion = JavaVersion.current().majorVersion
-    check(jdkVersion == currentJvmVersion) {
-        "Current Java version ($currentJvmVersion) does not match the required version ($jdkVersion)."
     }
 }
 
