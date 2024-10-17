@@ -1,5 +1,5 @@
 package: name='app.rickandmorty' versionCode='1' versionName='1.0' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
-sdkVersion:'24'
+minSdkVersion:'24'
 targetSdkVersion:'35'
 uses-permission: name='android.permission.INTERNET'
 uses-permission: name='android.permission.ACCESS_NETWORK_STATE'
