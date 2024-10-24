@@ -82,23 +82,22 @@ internal class LocaleRepositoryImpl @Inject constructor(
     }
 
     @SuppressLint("DiscouragedApi")
-    override suspend fun getAvailableAppLocales(): ImmutableList<Locale> =
-        withContext(ioDispatcher) {
-            val locales = mutableListOf<Locale>()
-            val resources = context.resources
-            val localeConfigFileId = resources.getIdentifier(
-                LOCALE_CONFIG_FILE,
-                "xml",
-                context.packageName,
-            )
-            resources.getXml(localeConfigFileId).use { parser ->
-                while (parser.eventType != XmlPullParser.END_DOCUMENT) {
-                    if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
-                        locales += Locale(parser.getAttributeValue(0))
-                    }
-                    parser.next()
+    override suspend fun getAvailableAppLocales(): ImmutableList<Locale> = withContext(ioDispatcher) {
+        val locales = mutableListOf<Locale>()
+        val resources = context.resources
+        val localeConfigFileId = resources.getIdentifier(
+            LOCALE_CONFIG_FILE,
+            "xml",
+            context.packageName,
+        )
+        resources.getXml(localeConfigFileId).use { parser ->
+            while (parser.eventType != XmlPullParser.END_DOCUMENT) {
+                if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
+                    locales += Locale(parser.getAttributeValue(0))
                 }
+                parser.next()
             }
-            locales.toImmutableList()
         }
+        locales.toImmutableList()
+    }
 }

@@ -25,8 +25,7 @@ class StartupBenchmark {
     fun startupCompilationNone() = benchmark(CompilationMode.None())
 
     @Test
-    fun startupCompilationBaselineProfile() =
-        benchmark(CompilationMode.Partial(BaselineProfileMode.Require))
+    fun startupCompilationBaselineProfile() = benchmark(CompilationMode.Partial(BaselineProfileMode.Require))
 
     @OptIn(
         ExperimentalBenchmarkConfigApi::class,
