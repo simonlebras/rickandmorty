@@ -14,7 +14,7 @@ android {
 }
 
 dependencies {
-    api(projects.core.logging)
+    implementation(libs.kermit)
 
     implementation(projects.core.startup)
 }
