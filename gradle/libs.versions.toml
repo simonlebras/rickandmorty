@@ -49,6 +49,7 @@ hilt = "2.52"
 java-jdk = "22"
 java-target = "17"
 junit4 = "4.13.2"
+kermit = "1.2.3"
 kotlin = "2.0.21"
 kotlinx-atomicfu = "0.25.0"
 kotlinx-collectionsimmutable = "0.3.8"
@@ -67,7 +68,6 @@ sortdependencies = "0.10"
 spotless = "7.0.0.BETA4"
 store = "5.0.0"
 testparameterinjector = "1.18"
-timber = "5.0.1"
 truth = "1.4.4"
 turbine = "1.2.0"
 wire = "5.1.0"
@@ -163,6 +163,8 @@ hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hi
 
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 
+kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+
 kotlin-compose-compiler-plugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
@@ -180,7 +182,6 @@ leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-sta
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
 
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
-okhttp-logginginterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
 play-osslicenses = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "play-osslicenses" }
 
@@ -191,8 +192,6 @@ spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gra
 store = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store" }
 
 testparameterinjector = { group = "com.google.testparameterinjector", name = "test-parameter-injector", version.ref = "testparameterinjector" }
-
-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
 truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 
