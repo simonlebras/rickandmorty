@@ -109,7 +109,6 @@ dependencies {
     implementation(projects.core.injectAnnotations)
     implementation(projects.core.ktor)
     implementation(projects.core.l10n)
-    implementation(projects.core.logging)
     implementation(projects.core.metrics)
     implementation(projects.core.resourceState)
     implementation(projects.core.startup)
@@ -123,7 +122,11 @@ dependencies {
     implementation(projects.features.locations)
     implementation(projects.features.settings)
 
+    releaseImplementation(projects.core.crashlytics)
+    releaseImplementation(projects.core.loggerCrashlytics)
+
     debugImplementation(projects.core.coilLogger)
+    debugImplementation(projects.core.loggerDebug)
     debugImplementation(projects.core.strictMode)
 
     runtimeOnly(libs.androidx.compose.runtime.tracing)
