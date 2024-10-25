@@ -51,7 +51,8 @@ java-target = "17"
 junit4 = "4.13.2"
 kermit = "2.0.4"
 kotlin = "2.0.21"
-kotlinx-atomicfu = "0.25.0"
+kotlininject-anvil = "0.0.5"
+kotlininject-core = "0.7.2"
 kotlinx-collectionsimmutable = "0.3.8"
 kotlinx-coroutines = "1.9.0"
 kotlinx-datetime = "0.6.1"
@@ -66,7 +67,7 @@ play-osslicenses-plugin = "0.10.6"
 slack-compose-lints = "1.4.2"
 sortdependencies = "0.10"
 spotless = "7.0.0.BETA4"
-store = "5.0.0"
+store = "5.1.0-alpha05"
 testparameterinjector = "1.18"
 truth = "1.4.4"
 turbine = "1.2.0"
@@ -168,7 +169,11 @@ kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 kotlin-compose-compiler-plugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
-kotlinx-atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version.ref = "kotlinx-atomicfu" }
+kotlininject-anvil-compiler = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "compiler", version.ref = "kotlininject-anvil" }
+kotlininject-anvil-runtime = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "runtime", version.ref = "kotlininject-anvil" }
+kotlininject-anvil-runtime-optional = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "runtime-optional", version.ref = "kotlininject-anvil" }
+kotlininject-core-compiler = { group = "me.tatarka.inject", name = "kotlin-inject-compiler-ksp", version.ref = "kotlininject-core" }
+kotlininject-core-runtime = { group = "me.tatarka.inject", name = "kotlin-inject-runtime", version.ref = "kotlininject-core" }
 
 kotlinx-collectionsimmutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collectionsimmutable" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
