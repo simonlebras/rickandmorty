@@ -4,18 +4,17 @@ import android.app.Activity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.metrics.performance.JankStats
-import app.rickandmorty.core.logging.Logger
+import co.touchlab.kermit.Logger
 import javax.inject.Inject
 
 private const val TAG = "JankStats"
 
 public class JankMonitor @Inject internal constructor(
     activity: Activity,
-    logger: Logger,
 ) : DefaultLifecycleObserver {
     private val frameListener = JankStats.OnFrameListener { frameData ->
         if (frameData.isJank) {
-            logger.tag(TAG).v(frameData.toString())
+            Logger.withTag(TAG).v { frameData.toString() }
         }
     }
 

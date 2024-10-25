@@ -18,7 +18,7 @@ dependencies {
     api(libs.androidx.compose.runtime)
     api(libs.androidx.metrics)
 
-    api(projects.core.logging)
-
     implementation(libs.androidx.compose.ui)
+
+    implementation(libs.kermit)
 }
