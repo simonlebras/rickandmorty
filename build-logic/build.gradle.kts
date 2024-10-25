@@ -97,10 +97,6 @@ gradlePlugin {
             id = "app.rickandmorty.hilt"
             implementationClass = "app.rickandmorty.gradle.plugin.HiltPlugin"
         }
-        register("jvm-library") {
-            id = "app.rickandmorty.jvm-library"
-            implementationClass = "app.rickandmorty.gradle.plugin.JvmLibraryPlugin"
-        }
         register("kotlin-android") {
             id = "app.rickandmorty.kotlin-android"
             implementationClass = "app.rickandmorty.gradle.plugin.KotlinAndroidPlugin"
