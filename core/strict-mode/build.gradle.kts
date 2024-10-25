@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.rickandmorty.android.library)
-    alias(libs.plugins.rickandmorty.autodagger)
-    alias(libs.plugins.rickandmorty.hilt)
-    alias(libs.plugins.rickandmorty.kotlin.android)
+    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+    alias(libs.plugins.rickandmorty.kotlininject.anvil)
     alias(libs.plugins.rickandmorty.spotless)
 
     alias(libs.plugins.dependencyanalysis)
@@ -13,8 +12,15 @@ android {
     namespace = "app.rickandmorty.core.strictmode"
 }
 
-dependencies {
-    implementation(libs.kermit)
+kotlin {
+    sourceSets {
+        androidMain {
+            dependencies {
+                implementation(libs.kermit)
 
-    implementation(projects.core.startup)
+                implementation(projects.core.base)
+                implementation(projects.core.startup)
+            }
+        }
+    }
 }

@@ -44,6 +44,7 @@ dependencies {
     compileOnly(libs.gradledoctor.plugin)
     compileOnly(libs.kotlin.compose.compiler.plugin)
     compileOnly(libs.kotlin.plugin)
+    compileOnly(libs.ksp.plugin)
     compileOnly(libs.spotless.plugin)
     compileOnly(libs.wire.plugin)
 
@@ -104,6 +105,14 @@ gradlePlugin {
         register("kotlin-multiplatform") {
             id = "app.rickandmorty.kotlin-multiplatform"
             implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
+        }
+        register("kotlininject-anvil") {
+            id = "app.rickandmorty.kotlininject-anvil"
+            implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectAnvilPlugin"
+        }
+        register("kotlininject-core") {
+            id = "app.rickandmorty.kotlininject-core"
+            implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectCorePlugin"
         }
         register("oss-licenses") {
             id = "app.rickandmorty.oss-licenses"

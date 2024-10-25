@@ -183,6 +183,8 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
+ksp-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
 
@@ -219,6 +221,8 @@ rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
 rickandmorty-hilt = { id = "app.rickandmorty.hilt" }
 rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
 rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
+rickandmorty-kotlininject-anvil = { id = "app.rickandmorty.kotlininject-anvil" }
+rickandmorty-kotlininject-core = { id = "app.rickandmorty.kotlininject-core" }
 rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses" }
 rickandmorty-room = { id = "app.rickandmorty.room" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
