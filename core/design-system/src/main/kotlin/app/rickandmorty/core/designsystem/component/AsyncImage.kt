@@ -15,7 +15,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
-import coil3.compose.DefaultModelEqualityDelegate
 
 @Composable
 public fun AsyncImage(
@@ -53,6 +52,5 @@ public fun AsyncImage(
         colorFilter = colorFilter,
         filterQuality = filterQuality,
         clipToBounds = clipToBounds,
-        modelEqualityDelegate = DefaultModelEqualityDelegate,
     )
 }
