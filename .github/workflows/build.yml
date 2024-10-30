@@ -35,6 +35,9 @@ jobs:
           distribution: "zulu"
           java-version: 22
 
+      - name: Set up jemalloc
+        uses: ./.github/actions/jemalloc-linux
+
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -173,6 +176,9 @@ jobs:
         with:
           distribution: "zulu"
           java-version: 22
+
+      - name: Set up jemalloc
+        uses: ./.github/actions/jemalloc-linux
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
