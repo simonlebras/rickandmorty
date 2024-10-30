@@ -2,9 +2,8 @@ package app.rickandmorty
 
 import android.app.Application
 import app.rickandmorty.core.base.unsafeLazy
-import app.rickandmorty.core.startup.Initializer
-import app.rickandmorty.di.AppComponent
-import app.rickandmorty.di.create
+import app.rickandmorty.inject.AppComponent
+import app.rickandmorty.inject.create
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.SingletonImageLoader
@@ -23,13 +22,10 @@ class RamApplication :
     @Inject
     lateinit var imageLoader: Lazy<ImageLoader>
 
-    @Inject
-    lateinit var initializers: Set<@JvmSuppressWildcards Initializer>
-
     override fun onCreate() {
         super.onCreate()
 
-        initializers.forEach { initializer ->
+        appComponent.initializers.forEach { initializer ->
             initializer.initialize()
         }
     }

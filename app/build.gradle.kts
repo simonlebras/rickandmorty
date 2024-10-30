@@ -5,13 +5,14 @@ plugins {
     alias(libs.plugins.rickandmorty.compose)
     alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
+    alias(libs.plugins.rickandmorty.kotlininject.anvil)
+    alias(libs.plugins.rickandmorty.kotlininject.core)
     alias(libs.plugins.rickandmorty.osslicenses)
     alias(libs.plugins.rickandmorty.spotless)
 
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.dependencyanalysis)
     alias(libs.plugins.easylauncher)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.modulegraphassert)
     alias(libs.plugins.sortdependencies)
 }
@@ -87,10 +88,6 @@ android {
     }
 }
 
-ksp {
-    arg("me.tatarka.inject.generateCompanionExtensions", "true")
-}
-
 baselineProfile {
     baselineProfileRulesRewrite = true
     dexLayoutOptimization = true
@@ -105,16 +102,13 @@ dependencies {
 
     implementation(libs.coil)
 
-    implementation(libs.kotlininject.anvil.runtime)
-    implementation(libs.kotlininject.anvil.runtime.optional)
-    implementation(libs.kotlininject.core.runtime)
-
     implementation(projects.core.base)
     implementation(projects.core.coil)
     implementation(projects.core.coroutines)
     implementation(projects.core.designSystem)
     implementation(projects.core.injectAnnotations)
     implementation(projects.core.l10n)
+    implementation(projects.core.logging)
     implementation(projects.core.metrics)
     implementation(projects.core.okhttp)
     implementation(projects.core.resourceState)
@@ -129,6 +123,8 @@ dependencies {
     implementation(projects.features.locations)
     implementation(projects.features.settings)
 
+    debugImplementation(projects.core.strictMode)
+
     runtimeOnly(libs.androidx.compose.runtime.tracing)
     runtimeOnly(libs.androidx.profileinstaller)
 
@@ -136,12 +132,7 @@ dependencies {
 
     debugRuntimeOnly(libs.leakcanary)
 
-    debugRuntimeOnly(projects.core.strictMode)
-
     baselineProfile(projects.baselineProfile)
-
-    ksp(libs.kotlininject.anvil.compiler)
-    ksp(libs.kotlininject.core.compiler)
 }
 
 easylauncher {

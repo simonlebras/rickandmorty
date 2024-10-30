@@ -5,19 +5,23 @@ import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.os.StrictMode.VmPolicy
 import android.os.strictmode.UntaggedSocketViolation
+import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.startup.Initializer
 import co.touchlab.kermit.Logger
-import dagger.Lazy
-import java.util.concurrent.ExecutorService
-import javax.inject.Inject
-import se.ansman.dagger.auto.AutoBind
+import java.util.concurrent.Executors
+import me.tatarka.inject.annotations.Inject
+import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 private const val TAG = "StrictMode"
 
-@AutoBind
-internal class StrictModeInitializer @Inject constructor(
-    @StrictModeExecutor private val penaltyListenerExecutor: Lazy<ExecutorService>,
-) : Initializer {
+@Inject
+@ContributesBinding(AppScope::class, multibinding = true)
+public class StrictModeInitializer : Initializer {
+    private val penaltyListenerExecutor by unsafeLazy {
+        Executors.newSingleThreadExecutor()
+    }
+
     override fun initialize() {
         val threadPolicy = ThreadPolicy.Builder()
             .detectAll()
@@ -25,7 +29,7 @@ internal class StrictModeInitializer @Inject constructor(
                 if (Build.VERSION.SDK_INT < 28) {
                     penaltyLog()
                 } else {
-                    penaltyListener(penaltyListenerExecutor.get()) { violation ->
+                    penaltyListener(penaltyListenerExecutor) { violation ->
                         Logger.withTag(TAG).w { violation.toString() }
                     }
                 }
@@ -39,7 +43,7 @@ internal class StrictModeInitializer @Inject constructor(
                 if (Build.VERSION.SDK_INT < 28) {
                     penaltyLog()
                 } else {
-                    penaltyListener(penaltyListenerExecutor.get()) { violation ->
+                    penaltyListener(penaltyListenerExecutor) { violation ->
                         when (violation) {
                             is UntaggedSocketViolation -> {
                                 // Firebase and OkHttp don't tag sockets

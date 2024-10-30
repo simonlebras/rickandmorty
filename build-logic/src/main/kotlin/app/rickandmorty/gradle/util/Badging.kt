@@ -5,7 +5,6 @@ import com.android.build.api.artifact.SingleArtifact
 import com.android.build.gradle.AppExtension
 import com.google.common.truth.Truth.assertWithMessage
 import java.io.File
-import java.util.Locale
 import javax.inject.Inject
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
@@ -92,13 +91,7 @@ context(Project)
 @Suppress("UnstableApiUsage")
 internal fun AppExtension.configureBadgingTasks() {
     androidExtension.onVariants { variant ->
-        val capitalizedVariantName = variant.name.replaceFirstChar {
-            if (it.isLowerCase()) {
-                it.titlecase(Locale.US)
-            } else {
-                it.toString()
-            }
-        }
+        val capitalizedVariantName = variant.name.capitalize()
 
         val generateBadgingTaskName = "generate${capitalizedVariantName}Badging"
         val generateBadging = tasks.register<GenerateBadgingTask>(generateBadgingTaskName) {
