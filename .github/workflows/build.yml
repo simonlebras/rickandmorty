@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: 22
+          java-version: 23
 
       - name: Set up jemalloc
         uses: kaeawc/setup-jemalloc@v0.0.2
@@ -175,7 +175,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: 22
+          java-version: 23
 
       - name: Set up jemalloc
         uses: kaeawc/setup-jemalloc@v0.0.2
