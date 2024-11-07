@@ -5,7 +5,6 @@ import app.rickandmorty.gradle.util.implementation
 import app.rickandmorty.gradle.util.ksp
 import app.rickandmorty.gradle.util.kspDependencies
 import app.rickandmorty.gradle.util.withPlugin
-import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -28,10 +27,6 @@ public class KotlinInjectCorePlugin : Plugin<Project> {
             withPlugin(libs.plugins.kotlin.multiplatform) {
                 configureKotlinInjectCoreMultiplatform(libs)
             }
-        }
-
-        configure<KspExtension> {
-            arg("me.tatarka.inject.generateCompanionExtensions", "true")
         }
     }
 
