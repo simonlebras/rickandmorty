@@ -44,7 +44,6 @@ dependencies {
     compileOnly(libs.gradledoctor.plugin)
     compileOnly(libs.kotlin.compose.compiler.plugin)
     compileOnly(libs.kotlin.plugin)
-    compileOnly(libs.ksp.plugin)
     compileOnly(libs.spotless.plugin)
     compileOnly(libs.wire.plugin)
 

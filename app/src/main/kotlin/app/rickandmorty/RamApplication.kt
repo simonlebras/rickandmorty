@@ -14,7 +14,7 @@ class RamApplication :
     Application(),
     SingletonImageLoader.Factory {
     private val appComponent by unsafeLazy {
-        AppComponent.create(this)
+        AppComponent::class.create(this)
     }
 
     override fun onCreate() {
