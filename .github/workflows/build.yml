@@ -36,7 +36,7 @@ jobs:
           java-version: 23
 
       - name: Set up jemalloc
-        uses: kaeawc/setup-jemalloc@v0.0.2
+        uses: kaeawc/setup-jemalloc@v0.0.3
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -178,7 +178,7 @@ jobs:
           java-version: 23
 
       - name: Set up jemalloc
-        uses: kaeawc/setup-jemalloc@v0.0.2
+        uses: kaeawc/setup-jemalloc@v0.0.3
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
