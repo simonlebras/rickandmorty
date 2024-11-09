@@ -9,14 +9,26 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.core.logging"
+    namespace = "app.rickandmorty.core.crashlytics"
 }
 
 kotlin {
     sourceSets {
+        androidMain {
+            dependencies {
+                implementation(libs.crashkios.crashlytics)
+            }
+        }
+
         commonMain {
             dependencies {
                 api(projects.core.startup)
+            }
+        }
+
+        nativeMain {
+            dependencies {
+                implementation(libs.crashkios.crashlytics)
             }
         }
     }
