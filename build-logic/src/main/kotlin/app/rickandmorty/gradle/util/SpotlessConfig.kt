@@ -7,13 +7,19 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 internal fun Project.configureSpotless(libs: LibrariesForLibs) {
-    val ktlintVersion = libs.versions.ktlint.get()
+    val spotlessFormatters: SpotlessExtension.() -> Unit = {
+        val ktlintVersion = libs.versions.ktlint.core.get()
 
-    configure<SpotlessExtension> {
         kotlin {
             ktlint(ktlintVersion)
+                .customRuleSets(
+                    listOf(
+                        libs.ktlint.composerules.get().toString(),
+                    ),
+                )
             target("src/**/*.kt")
         }
+
         kotlinGradle {
             ktlint(ktlintVersion)
             target("*.kts")
@@ -49,17 +55,15 @@ internal fun Project.configureSpotless(libs: LibrariesForLibs) {
             trimTrailingWhitespace()
             endWithNewline()
         }
+    }
 
+    configure<SpotlessExtension> {
+        spotlessFormatters()
         if (isRootProject) {
             predeclareDeps()
         }
     }
-
     if (isRootProject) {
-        configure<SpotlessExtensionPredeclare> {
-            kotlin { ktlint(ktlintVersion) }
-            kotlinGradle { ktlint(ktlintVersion) }
-            json { gson() }
-        }
+        configure<SpotlessExtensionPredeclare> { spotlessFormatters() }
     }
 }

@@ -132,11 +132,13 @@ gradlePlugin {
 }
 
 spotless {
-    val ktlintVersion = libs.versions.ktlint.get()
+    val ktlintVersion = libs.versions.ktlint.core.get()
+
     kotlin {
         ktlint(ktlintVersion)
         target("src/**/*.kt")
     }
+
     kotlinGradle {
         ktlint(ktlintVersion)
         target("*.kts")
