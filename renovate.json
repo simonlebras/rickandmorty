@@ -1,31 +1,31 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "packageRules": [
     {
       "groupName": "Android Tools",
       "groupSlug": "android-tools",
-      "matchPackagePrefixes": [
-        "com.android.tools:",
-        "com.android.tools.build:"
+      "matchPackageNames": [
+        "com.android.tools:{/,}**",
+        "com.android.tools.build:{/,}**"
       ]
     },
     {
       "groupName": "Kotlin",
       "groupSlug": "kotlin",
-      "matchPackagePrefixes": [
-        "org.jetbrains.kotlin:",
-        "com.google.devtools.ksp"
+      "matchPackageNames": [
+        "org.jetbrains.kotlin:{/,}**",
+        "com.google.devtools.ksp{/,}**"
       ]
     },
     {
       "description": "Libraries allowed to use non-stable releases",
-      "matchDepPatterns": [
-        "^androidx\\.([\\w-:]+)$"
-      ],
-      "ignoreUnstable": false
+      "ignoreUnstable": false,
+      "matchDepNames": [
+        "/^androidx\\.([\\w-:]+)$/"
+      ]
     },
     {
       "description": "Automatically merge minor and patch-level updates",
