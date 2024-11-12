@@ -28,7 +28,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.designsystem.theme.supportsDynamicTheming
+import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
 import app.rickandmorty.core.l10n.R as L10nR
 import app.rickandmorty.data.model.Locale
 import app.rickandmorty.data.model.Theme
@@ -69,7 +69,7 @@ private fun MainSettingsScreen(
     onNavigateToThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
-    supportsDynamicTheming: Boolean = supportsDynamicTheming(),
+    isDynamicColorAvailable: Boolean = isDynamicColorAvailable(),
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
@@ -97,7 +97,7 @@ private fun MainSettingsScreen(
                     generalSettings(
                         currentTheme = uiState.theme()!!,
                         currentAppLocale = uiState.appLocale(),
-                        supportsDynamicTheming = supportsDynamicTheming,
+                        isDynamicColorAvailable = isDynamicColorAvailable,
                         onUpdateUseDynamicColor = onUpdateUseDynamicColor,
                         onNavigateToThemeSettings = onNavigateToThemeSettings,
                         onNavigateToLanguageSettings = onNavigateToLanguageSettings,
@@ -137,7 +137,7 @@ private fun MainSettingsAppBar(
 private fun LazyListScope.generalSettings(
     currentTheme: Theme,
     currentAppLocale: Locale?,
-    supportsDynamicTheming: Boolean,
+    isDynamicColorAvailable: Boolean,
     onUpdateUseDynamicColor: (Boolean) -> Unit,
     onNavigateToThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
@@ -171,7 +171,7 @@ private fun LazyListScope.generalSettings(
         )
     }
 
-    if (supportsDynamicTheming) {
+    if (isDynamicColorAvailable) {
         item(
             key = "dynamic_color",
             contentType = SettingsContentType.LIST_ITEM,

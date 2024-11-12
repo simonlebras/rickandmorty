@@ -14,7 +14,6 @@ android {
 
 dependencies {
     api(libs.androidx.activity)
-    api(libs.androidx.compose.foundation.layout)
     api(libs.androidx.paging.compose)
     api(libs.androidx.window)
 

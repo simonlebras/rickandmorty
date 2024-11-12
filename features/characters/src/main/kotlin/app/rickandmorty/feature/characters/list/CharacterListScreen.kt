@@ -29,9 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
@@ -54,6 +51,8 @@ import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.core.ui.label
 import app.rickandmorty.data.model.Character
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Composable
 internal fun CharacterListScreen(
@@ -223,8 +222,7 @@ private fun CharacterListScreenAppBar(
     )
 }
 
-@Preview(showBackground = true)
-@PreviewLightDark
+@Preview
 @Composable
 private fun CharacterItemPreview(
     @PreviewParameter(CharacterPreviewParameterProvider::class) character: Character,

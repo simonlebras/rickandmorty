@@ -94,9 +94,10 @@ baselineProfile {
 }
 
 dependencies {
+    implementation(compose.material3AdaptiveNavigationSuite)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.compose.material3.adaptive.navigationsuite)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
 
@@ -136,6 +137,14 @@ dependencies {
     debugRuntimeOnly(libs.leakcanary)
 
     baselineProfile(projects.baselineProfile)
+}
+
+dependencyAnalysis {
+    issues {
+        onUnusedDependencies {
+            exclude(compose.dependencies.material3AdaptiveNavigationSuite)
+        }
+    }
 }
 
 easylauncher {

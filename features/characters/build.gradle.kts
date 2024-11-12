@@ -19,9 +19,9 @@ dependencies {
 
     api(projects.data.character)
 
+    implementation(compose.components.uiToolingPreview)
+
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.paging.compose)
@@ -31,6 +31,4 @@ dependencies {
     implementation(projects.core.designSystem)
     implementation(projects.core.l10n)
     implementation(projects.core.ui)
-
-    debugImplementation(libs.androidx.compose.ui.tooling)
 }

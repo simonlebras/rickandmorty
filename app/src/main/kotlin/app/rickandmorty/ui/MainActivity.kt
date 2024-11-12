@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContent {
-            RamTheme(dynamicColor = uiState.useDynamicColor) {
+            RamTheme(useDynamicColor = uiState.useDynamicColor) {
                 RamApp()
             }
         }
