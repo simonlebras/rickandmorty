@@ -3,7 +3,6 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.util.androidTestImplementation
 import app.rickandmorty.gradle.util.apply
 import app.rickandmorty.gradle.util.implementation
-import app.rickandmorty.gradle.util.lintChecks
 import app.rickandmorty.gradle.util.withPlugins
 import com.android.build.gradle.BaseExtension
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -54,8 +53,6 @@ public class ComposePlugin : Plugin<Project> {
             implementation(platform(libs.androidx.compose.bom))
 
             androidTestImplementation(platform(libs.androidx.compose.bom))
-
-            lintChecks(libs.slack.compose.lints)
         }
     }
 }
