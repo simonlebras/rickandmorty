@@ -16,7 +16,6 @@ plugins {
     alias(libs.plugins.rickandmorty.room) apply false
     alias(libs.plugins.rickandmorty.root)
     alias(libs.plugins.rickandmorty.spotless)
-    alias(libs.plugins.rickandmorty.wire) apply false
 
     alias(libs.plugins.affectedmoduledetector)
     alias(libs.plugins.android.application) apply false

@@ -207,9 +207,6 @@ truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
-wire-plugin = { group = "com.squareup.wire", name = "wire-gradle-plugin", version.ref = "wire" }
-wire-runtime = { group = "com.squareup.wire", name = "wire-runtime", version.ref = "wire" }
-
 [plugins]
 # Convention plugins
 rickandmorty-android-application = { id = "app.rickandmorty.android-application" }
@@ -229,7 +226,6 @@ rickandmorty-osslicenses = { id = "app.rickandmorty.oss-licenses" }
 rickandmorty-room = { id = "app.rickandmorty.room" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
 rickandmorty-spotless = { id = "app.rickandmorty.spotless" }
-rickandmorty-wire = { id = "app.rickandmorty.wire" }
 
 affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.ref = "affectedmoduledetector" }
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
