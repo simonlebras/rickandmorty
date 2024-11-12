@@ -44,7 +44,6 @@ dependencies {
     compileOnly(libs.kotlin.compose.compiler.plugin)
     compileOnly(libs.kotlin.plugin)
     compileOnly(libs.spotless.plugin)
-    compileOnly(libs.wire.plugin)
 
     implementation(libs.truth)
 
@@ -123,10 +122,6 @@ gradlePlugin {
         register("spotless") {
             id = "app.rickandmorty.spotless"
             implementationClass = "app.rickandmorty.gradle.plugin.SpotlessPlugin"
-        }
-        register("wire") {
-            id = "app.rickandmorty.wire"
-            implementationClass = "app.rickandmorty.gradle.plugin.WirePlugin"
         }
     }
 }
