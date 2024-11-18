@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -30,7 +29,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.l10n.R as L10nR
-import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.data.model.Locale
 import app.rickandmorty.feature.settings.SettingsContentType
 import app.rickandmorty.feature.settings.loader
@@ -75,19 +73,11 @@ private fun LanguageSettingsScreen(
             )
         },
     ) { contentPadding ->
-        val listState = rememberLazyListState()
-
-        TrackScrollJank(
-            scrollableState = listState,
-            stateName = "languageSettings:screen",
-        )
-
         LazyColumn(
             modifier = Modifier
                 .selectableGroup()
                 .fillMaxSize()
                 .consumeWindowInsets(contentPadding),
-            state = listState,
             contentPadding = contentPadding,
         ) {
             when {

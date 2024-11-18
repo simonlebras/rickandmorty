@@ -14,10 +14,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import app.rickandmorty.core.designsystem.theme.RamTheme
-import app.rickandmorty.core.metrics.JankMonitor
 import app.rickandmorty.core.ui.isSystemInDarkTheme
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -26,17 +24,12 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
-    @Inject
-    lateinit var jankMonitor: JankMonitor
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
 
         setupEdgeToEdge()
 
         super.onCreate(savedInstanceState)
-
-        lifecycle.addObserver(jankMonitor)
 
         var uiState by mutableStateOf(MainUiState())
 

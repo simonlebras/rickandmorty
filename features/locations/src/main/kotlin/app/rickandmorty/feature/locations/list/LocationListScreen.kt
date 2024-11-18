@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -35,7 +34,6 @@ import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.l10n.R as L10nR
-import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
 import app.rickandmorty.core.ui.appendLoadState
@@ -139,18 +137,10 @@ private fun LocationListScreen(
                 }
 
                 else -> {
-                    val listState = rememberLazyListState()
-
-                    TrackScrollJank(
-                        scrollableState = listState,
-                        stateName = "locationList:screen",
-                    )
-
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
                             .consumeWindowInsets(contentPadding),
-                        state = listState,
                         contentPadding = contentPadding,
                     ) {
                         items(

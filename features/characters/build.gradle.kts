@@ -30,7 +30,6 @@ dependencies {
 
     implementation(projects.core.designSystem)
     implementation(projects.core.l10n)
-    implementation(projects.core.metrics)
     implementation(projects.core.ui)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
