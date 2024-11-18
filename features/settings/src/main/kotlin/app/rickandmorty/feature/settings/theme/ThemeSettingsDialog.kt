@@ -28,7 +28,6 @@ import androidx.compose.ui.util.fastForEach
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.l10n.R as L10nR
-import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.feature.settings.util.label
 
@@ -60,17 +59,10 @@ private fun ThemeSettingsDialog(
             Text(text = stringResource(L10nR.string.settings_theme_title))
         },
         text = {
-            val scrollState = rememberScrollState()
-
-            TrackScrollJank(
-                scrollableState = scrollState,
-                stateName = "themeSettings:dialog",
-            )
-
             Column(
                 modifier = Modifier
                     .selectableGroup()
-                    .verticalScroll(scrollState),
+                    .verticalScroll(rememberScrollState()),
             ) {
                 when {
                     uiState.isLoading -> {

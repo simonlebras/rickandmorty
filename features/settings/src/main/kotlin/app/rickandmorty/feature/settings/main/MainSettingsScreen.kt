@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,7 +30,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.theme.supportsDynamicTheming
 import app.rickandmorty.core.l10n.R as L10nR
-import app.rickandmorty.core.metrics.TrackScrollJank
 import app.rickandmorty.data.model.Locale
 import app.rickandmorty.data.model.Theme
 import app.rickandmorty.feature.settings.Header
@@ -84,18 +82,10 @@ private fun MainSettingsScreen(
             )
         },
     ) { contentPadding ->
-        val listState = rememberLazyListState()
-
-        TrackScrollJank(
-            scrollableState = listState,
-            stateName = "mainSettings:screen",
-        )
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .consumeWindowInsets(contentPadding),
-            state = listState,
             contentPadding = contentPadding,
         ) {
             when {

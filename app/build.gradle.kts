@@ -109,7 +109,6 @@ dependencies {
     implementation(projects.core.injectAnnotations)
     implementation(projects.core.ktor)
     implementation(projects.core.l10n)
-    implementation(projects.core.metrics)
     implementation(projects.core.resourceState)
     implementation(projects.core.startup)
     implementation(projects.core.ui)
