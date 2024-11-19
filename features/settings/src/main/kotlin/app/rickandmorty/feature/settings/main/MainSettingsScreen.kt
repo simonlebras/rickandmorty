@@ -23,13 +23,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
-import app.rickandmorty.core.l10n.R as L10nR
+import app.rickandmorty.core.l10n.resources.Res as L10nRes
+import app.rickandmorty.core.l10n.resources.navigate_up
+import app.rickandmorty.core.l10n.resources.settings_about_title
+import app.rickandmorty.core.l10n.resources.settings_app_version_title
+import app.rickandmorty.core.l10n.resources.settings_dynamic_color_title
+import app.rickandmorty.core.l10n.resources.settings_general_title
+import app.rickandmorty.core.l10n.resources.settings_language_system_default
+import app.rickandmorty.core.l10n.resources.settings_language_tap_action
+import app.rickandmorty.core.l10n.resources.settings_language_title
+import app.rickandmorty.core.l10n.resources.settings_oss_licenses_summary
+import app.rickandmorty.core.l10n.resources.settings_oss_licenses_tap_action
+import app.rickandmorty.core.l10n.resources.settings_oss_licenses_title
+import app.rickandmorty.core.l10n.resources.settings_theme_tap_action
+import app.rickandmorty.core.l10n.resources.settings_theme_title
+import app.rickandmorty.core.l10n.resources.settings_title
 import app.rickandmorty.data.model.Locale
 import app.rickandmorty.data.model.Theme
 import app.rickandmorty.feature.settings.Header
@@ -37,6 +50,7 @@ import app.rickandmorty.feature.settings.SettingsContentType
 import app.rickandmorty.feature.settings.loader
 import app.rickandmorty.feature.settings.util.label
 import app.rickandmorty.feature.settings.util.versionName
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MainSettingsScreen(
@@ -120,13 +134,13 @@ private fun MainSettingsAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(L10nR.string.settings_title))
+            Text(text = stringResource(L10nRes.string.settings_title))
         },
         navigationIcon = {
             IconButton(onClick = onNavigateUp) {
                 Icon(
                     imageVector = RamIcons.Filled.ArrowBack,
-                    contentDescription = stringResource(L10nR.string.navigate_up),
+                    contentDescription = stringResource(L10nRes.string.navigate_up),
                 )
             }
         },
@@ -147,7 +161,7 @@ private fun LazyListScope.generalSettings(
         contentType = SettingsContentType.HEADER,
     ) {
         Header(
-            text = stringResource(L10nR.string.settings_general_title),
+            text = stringResource(L10nRes.string.settings_general_title),
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -158,11 +172,11 @@ private fun LazyListScope.generalSettings(
     ) {
         ListItem(
             headlineContent = {
-                Text(text = stringResource(L10nR.string.settings_theme_title))
+                Text(text = stringResource(L10nRes.string.settings_theme_title))
             },
             modifier = Modifier
                 .clickable(
-                    onClickLabel = stringResource(L10nR.string.settings_theme_tap_action),
+                    onClickLabel = stringResource(L10nRes.string.settings_theme_tap_action),
                     onClick = onNavigateToThemeSettings,
                 ),
             supportingContent = {
@@ -178,7 +192,7 @@ private fun LazyListScope.generalSettings(
         ) {
             ListItem(
                 headlineContent = {
-                    Text(text = stringResource(L10nR.string.settings_dynamic_color_title))
+                    Text(text = stringResource(L10nRes.string.settings_dynamic_color_title))
                 },
                 modifier = Modifier.toggleable(
                     value = currentTheme.useDynamicColor,
@@ -201,16 +215,16 @@ private fun LazyListScope.generalSettings(
     ) {
         ListItem(
             headlineContent = {
-                Text(text = stringResource(L10nR.string.settings_language_title))
+                Text(text = stringResource(L10nRes.string.settings_language_title))
             },
             modifier = Modifier
                 .clickable(
-                    onClickLabel = stringResource(L10nR.string.settings_language_tap_action),
+                    onClickLabel = stringResource(L10nRes.string.settings_language_tap_action),
                     onClick = onNavigateToLanguageSettings,
                 ),
             supportingContent = {
                 val localeName = currentAppLocale?.getLocalizedName()
-                    ?: stringResource(L10nR.string.settings_language_system_default)
+                    ?: stringResource(L10nRes.string.settings_language_system_default)
                 Text(text = localeName)
             },
         )
@@ -225,7 +239,7 @@ private fun LazyListScope.aboutSettings(
         contentType = SettingsContentType.HEADER,
     ) {
         Header(
-            text = stringResource(L10nR.string.settings_about_title),
+            text = stringResource(L10nRes.string.settings_about_title),
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -236,15 +250,15 @@ private fun LazyListScope.aboutSettings(
     ) {
         ListItem(
             headlineContent = {
-                Text(text = stringResource(L10nR.string.settings_oss_licenses_title))
+                Text(text = stringResource(L10nRes.string.settings_oss_licenses_title))
             },
             modifier = Modifier
                 .clickable(
-                    onClickLabel = stringResource(L10nR.string.settings_oss_licenses_tap_action),
+                    onClickLabel = stringResource(L10nRes.string.settings_oss_licenses_tap_action),
                     onClick = onNavigateToOssLicenses,
                 ),
             supportingContent = {
-                Text(text = stringResource(L10nR.string.settings_oss_licenses_summary))
+                Text(text = stringResource(L10nRes.string.settings_oss_licenses_summary))
             },
         )
     }
@@ -255,7 +269,7 @@ private fun LazyListScope.aboutSettings(
     ) {
         ListItem(
             headlineContent = {
-                Text(text = stringResource(L10nR.string.settings_app_version_title))
+                Text(text = stringResource(L10nRes.string.settings_app_version_title))
             },
             supportingContent = {
                 Text(text = LocalContext.current.versionName)

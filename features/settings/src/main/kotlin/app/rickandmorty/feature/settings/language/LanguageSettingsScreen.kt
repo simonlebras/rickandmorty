@@ -23,16 +23,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.l10n.R as L10nR
+import app.rickandmorty.core.l10n.resources.Res as L10nRes
+import app.rickandmorty.core.l10n.resources.navigate_up
+import app.rickandmorty.core.l10n.resources.settings_language_system_default
+import app.rickandmorty.core.l10n.resources.settings_language_title
 import app.rickandmorty.data.model.Locale
 import app.rickandmorty.feature.settings.SettingsContentType
 import app.rickandmorty.feature.settings.loader
 import kotlinx.collections.immutable.ImmutableList
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun LanguageSettingsScreen(
@@ -113,13 +116,13 @@ private fun LanguageSettingsAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(L10nR.string.settings_language_title))
+            Text(text = stringResource(L10nRes.string.settings_language_title))
         },
         navigationIcon = {
             IconButton(onClick = onNavigateUp) {
                 Icon(
                     imageVector = RamIcons.Filled.ArrowBack,
-                    contentDescription = stringResource(L10nR.string.navigate_up),
+                    contentDescription = stringResource(L10nRes.string.navigate_up),
                 )
             }
         },
@@ -136,7 +139,7 @@ private fun LazyListScope.systemDefault(
         contentType = SettingsContentType.LIST_ITEM,
     ) {
         LocaleItem(
-            text = stringResource(L10nR.string.settings_language_system_default),
+            text = stringResource(L10nRes.string.settings_language_system_default),
             isSelected = currentAppLocale == null,
             onClick = { onSelectLocale(null) },
         )

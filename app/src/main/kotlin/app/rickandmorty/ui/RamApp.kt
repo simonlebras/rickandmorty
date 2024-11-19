@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.util.fastForEach
@@ -28,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import app.rickandmorty.core.ui.LocalSharedTransitionScope
 import app.rickandmorty.ui.navigation.RamNavHost
 import app.rickandmorty.ui.navigation.TopLevelDestination
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(
     ExperimentalComposeUiApi::class,

@@ -13,6 +13,8 @@ android {
 }
 
 dependencies {
+    api(compose.components.resources)
+
     api(libs.androidx.activity)
     api(libs.androidx.paging.compose)
     api(libs.androidx.window)
