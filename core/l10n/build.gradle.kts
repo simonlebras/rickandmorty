@@ -1,8 +1,24 @@
 plugins {
-    alias(libs.plugins.rickandmorty.android.library)
+    alias(libs.plugins.rickandmorty.compose)
+    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
     alias(libs.plugins.rickandmorty.spotless)
+
+    alias(libs.plugins.dependencyanalysis)
+    alias(libs.plugins.sortdependencies)
 }
 
-android {
-    namespace = "app.rickandmorty.core.l10n"
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(compose.components.resources)
+                implementation(compose.runtime)
+            }
+        }
+    }
+}
+
+compose.resources {
+    packageOfResClass = "app.rickandmorty.core.l10n.resources"
+    publicResClass = true
 }

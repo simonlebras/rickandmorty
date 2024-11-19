@@ -23,7 +23,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
@@ -33,7 +32,10 @@ import androidx.paging.compose.itemKey
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.l10n.R as L10nR
+import app.rickandmorty.core.l10n.resources.Res as L10nRes
+import app.rickandmorty.core.l10n.resources.location_list_empty
+import app.rickandmorty.core.l10n.resources.location_list_title
+import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
 import app.rickandmorty.core.ui.appendLoadState
@@ -42,6 +44,7 @@ import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.data.model.Location
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun LocationListScreen(
@@ -127,7 +130,7 @@ private fun LocationListScreen(
                             )
                         },
                         title = {
-                            Text(text = stringResource(L10nR.string.location_list_empty))
+                            Text(text = stringResource(L10nRes.string.location_list_empty))
                         },
                         modifier = Modifier
                             .fillMaxSize()
@@ -180,13 +183,13 @@ private fun LocationListScreenAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(L10nR.string.location_list_title))
+            Text(text = stringResource(L10nRes.string.location_list_title))
         },
         actions = {
             IconButton(onClick = onNavigateToSettings) {
                 Icon(
                     imageVector = RamIcons.Filled.Settings,
-                    contentDescription = stringResource(L10nR.string.navigate_up),
+                    contentDescription = stringResource(L10nRes.string.navigate_up),
                 )
             }
         },

@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Rick and Morty</string>
-
-    <string name="shortcut_characters">Characters</string>
-    <string name="shortcut_episodes">Episodes</string>
-    <string name="shortcut_locations">Locations</string>
-
-    <string name="debug_drawer_device_info_title">Device Info</string>
-    <string name="debug_drawer_logs_title">Logs</string>
-
     <string name="navigate_up">Navigate Up</string>
     <string name="dismiss">Dismiss</string>
     <string name="retry">Retry</string>

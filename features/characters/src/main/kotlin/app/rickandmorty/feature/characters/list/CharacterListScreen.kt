@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
@@ -39,7 +38,10 @@ import app.rickandmorty.core.designsystem.component.AsyncImage
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.l10n.R as L10nR
+import app.rickandmorty.core.l10n.resources.Res as L10nRes
+import app.rickandmorty.core.l10n.resources.character_list_empty
+import app.rickandmorty.core.l10n.resources.character_list_title
+import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.ui.CharacterStatusIndicator
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
@@ -51,6 +53,7 @@ import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.core.ui.label
 import app.rickandmorty.data.model.Character
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
@@ -139,7 +142,7 @@ private fun CharacterListScreen(
                             )
                         },
                         title = {
-                            Text(text = stringResource(L10nR.string.character_list_empty))
+                            Text(text = stringResource(L10nRes.string.character_list_empty))
                         },
                         modifier = Modifier
                             .fillMaxSize()
@@ -208,13 +211,13 @@ private fun CharacterListScreenAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(L10nR.string.character_list_title))
+            Text(text = stringResource(L10nRes.string.character_list_title))
         },
         actions = {
             IconButton(onClick = onNavigateToSettings) {
                 Icon(
                     imageVector = RamIcons.Filled.Settings,
-                    contentDescription = stringResource(L10nR.string.navigate_up),
+                    contentDescription = stringResource(L10nRes.string.navigate_up),
                 )
             }
         },

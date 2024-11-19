@@ -21,15 +21,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.rickandmorty.core.l10n.R as L10nR
+import app.rickandmorty.core.l10n.resources.Res as L10nRes
+import app.rickandmorty.core.l10n.resources.dismiss
+import app.rickandmorty.core.l10n.resources.settings_theme_title
 import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.feature.settings.util.label
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ThemeSettingsDialog(
@@ -56,7 +58,7 @@ private fun ThemeSettingsDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text(text = stringResource(L10nR.string.settings_theme_title))
+            Text(text = stringResource(L10nRes.string.settings_theme_title))
         },
         text = {
             Column(
@@ -88,7 +90,7 @@ private fun ThemeSettingsDialog(
         },
         confirmButton = {
             Text(
-                text = stringResource(L10nR.string.dismiss),
+                text = stringResource(L10nRes.string.dismiss),
                 modifier = Modifier.clickable { onDismiss() },
             )
         },
