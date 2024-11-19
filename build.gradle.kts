@@ -26,6 +26,8 @@ plugins {
     alias(libs.plugins.androidx.room) apply false
     alias(libs.plugins.apollo) apply false
     alias(libs.plugins.cachefix) apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.compose.multiplatform) apply false
     alias(libs.plugins.dependencyanalysis)
     alias(libs.plugins.easylauncher) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
@@ -34,7 +36,6 @@ plugins {
     alias(libs.plugins.gradledoctor)
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.compose.compiler) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.ksp) apply false

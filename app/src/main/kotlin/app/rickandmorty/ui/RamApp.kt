@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -28,7 +29,10 @@ import app.rickandmorty.core.ui.LocalSharedTransitionScope
 import app.rickandmorty.ui.navigation.RamNavHost
 import app.rickandmorty.ui.navigation.TopLevelDestination
 
-@OptIn(ExperimentalSharedTransitionApi::class)
+@OptIn(
+    ExperimentalComposeUiApi::class,
+    ExperimentalSharedTransitionApi::class,
+)
 @Composable
 fun RamApp(modifier: Modifier = Modifier) {
     SharedTransitionLayout(

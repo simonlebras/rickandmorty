@@ -1,7 +1,9 @@
+import com.autonomousapps.tasks.CodeSourceExploderTask
+
 plugins {
     alias(libs.plugins.rickandmorty.android.library)
     alias(libs.plugins.rickandmorty.compose)
-    alias(libs.plugins.rickandmorty.kotlin.android)
+    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
     alias(libs.plugins.rickandmorty.spotless)
 
     alias(libs.plugins.dependencyanalysis)
@@ -12,11 +14,28 @@ android {
     namespace = "app.rickandmorty.core.designsystem"
 }
 
-dependencies {
-    api(libs.androidx.compose.material3)
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                api(compose.material3)
 
-    implementation(libs.androidx.compose.material.iconsextended)
-    implementation(libs.androidx.compose.ui.text.googlefonts)
+                implementation(compose.components.resources)
+                implementation(compose.materialIconsExtended)
 
-    implementation(libs.coil.compose)
+                implementation(libs.androidx.annotation)
+
+                implementation(libs.coil.compose)
+            }
+        }
+    }
+}
+
+compose.resources {
+    packageOfResClass = "app.rickandmorty.core.designsystem.resources"
+}
+
+// https://github.com/gradle/gradle/issues/25885
+tasks.withType<CodeSourceExploderTask>().configureEach {
+    dependsOn("generateActualResourceCollectorsForAndroidMain")
 }
