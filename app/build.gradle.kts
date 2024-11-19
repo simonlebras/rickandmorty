@@ -164,5 +164,6 @@ moduleGraphAssert {
         ":data:.* -> :data:.*",
         ":core:.* -> :data:model",
         ":.* -> :core:.*",
+        ":.* -> :thirdparty:.*",
     )
 }

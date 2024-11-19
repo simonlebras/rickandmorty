@@ -92,3 +92,5 @@ include(":features:characters")
 include(":features:episodes")
 include(":features:locations")
 include(":features:settings")
+
+include(":thirdparty:androidx-paging-compose")

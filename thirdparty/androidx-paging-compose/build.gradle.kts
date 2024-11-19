@@ -9,25 +9,19 @@ plugins {
 }
 
 android {
-    namespace = "app.rickandmorty.core.ui"
+    namespace = "androidx.paging.compose"
 }
 
 kotlin {
     sourceSets {
-        androidMain {
-            dependencies {
-                api(libs.androidx.activity)
-            }
-        }
-
         commonMain {
             dependencies {
-                api(projects.data.model)
+                api(compose.runtime)
 
-                api(projects.thirdparty.androidxPagingCompose)
+                api(libs.androidx.paging.common)
 
-                implementation(projects.core.designSystem)
-                implementation(projects.core.l10n)
+                implementation(compose.foundation)
+                implementation(compose.ui)
             }
         }
     }
