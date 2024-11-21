@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.dependencyanalysis)
     alias(libs.plugins.easylauncher)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.modulegraphassert)
     alias(libs.plugins.sortdependencies)
 }
@@ -103,6 +104,8 @@ dependencies {
 
     implementation(libs.coil)
 
+    implementation(libs.kotlinx.serialization.core)
+
     implementation(projects.core.base)
     implementation(projects.core.coil)
     implementation(projects.core.coroutines)
@@ -117,10 +120,10 @@ dependencies {
     implementation(projects.data.graphqlClient)
     implementation(projects.data.theme)
 
-    implementation(projects.features.characters)
-    implementation(projects.features.episodes)
-    implementation(projects.features.locations)
-    implementation(projects.features.settings)
+    implementation(projects.ui.characterList)
+    implementation(projects.ui.episodeList)
+    implementation(projects.ui.locationList)
+    implementation(projects.ui.settings)
 
     releaseImplementation(projects.core.crashlytics)
     releaseImplementation(projects.core.loggerCrashlytics)
@@ -158,9 +161,9 @@ easylauncher {
 moduleGraphAssert {
     maxHeight = 5
     allowed = arrayOf(
-        ":app -> :features:.*",
+        ":app -> :ui:.*",
         ":app -> :data:.*",
-        ":features:.* -> :data:.*",
+        ":ui:.* -> :data:.*",
         ":data:.* -> :data:.*",
         ":core:.* -> :data:model",
         ":.* -> :core:.*",

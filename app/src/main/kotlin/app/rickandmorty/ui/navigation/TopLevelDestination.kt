@@ -6,9 +6,9 @@ import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.character_list_title
 import app.rickandmorty.core.l10n.resources.episode_list_title
 import app.rickandmorty.core.l10n.resources.location_list_title
-import app.rickandmorty.feature.characters.navigation.CharacterList as CharacterListRoute
-import app.rickandmorty.feature.episodes.navigation.EpisodeList as EpisodeListRoute
-import app.rickandmorty.feature.locations.navigation.LocationList as LocationListRoute
+import app.rickandmorty.ui.navigation.CharacterList as CharacterListRoute
+import app.rickandmorty.ui.navigation.EpisodeList as EpisodeListRoute
+import app.rickandmorty.ui.navigation.LocationList as LocationListRoute
 import org.jetbrains.compose.resources.StringResource
 
 enum class TopLevelDestination(
