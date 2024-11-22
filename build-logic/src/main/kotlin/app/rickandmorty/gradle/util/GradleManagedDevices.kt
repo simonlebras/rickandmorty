@@ -26,7 +26,7 @@ private val deviceConfigs = listOf(
 
 internal fun TestOptions.configureGradleManagedDevices() {
     managedDevices {
-        devices {
+        allDevices {
             deviceConfigs.forEach { config ->
                 create<ManagedVirtualDevice>(config.taskName) {
                     device = config.device
