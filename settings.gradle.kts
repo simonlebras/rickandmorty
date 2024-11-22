@@ -88,9 +88,9 @@ include(":data:paging")
 include(":data:theme")
 include(":data:theme-proto")
 
-include(":features:characters")
-include(":features:episodes")
-include(":features:locations")
-include(":features:settings")
-
 include(":thirdparty:androidx-paging-compose")
+
+include(":ui:character-list")
+include(":ui:episode-list")
+include(":ui:location-list")
+include(":ui:settings")
