@@ -123,7 +123,9 @@ dependencies {
     implementation(projects.ui.characterList)
     implementation(projects.ui.episodeList)
     implementation(projects.ui.locationList)
-    implementation(projects.ui.settings)
+    implementation(projects.ui.settingsLanguage)
+    implementation(projects.ui.settingsMain)
+    implementation(projects.ui.settingsTheme)
 
     releaseImplementation(projects.core.crashlytics)
     releaseImplementation(projects.core.loggerCrashlytics)
@@ -163,6 +165,7 @@ moduleGraphAssert {
     allowed = arrayOf(
         ":app -> :ui:.*",
         ":app -> :data:.*",
+        ":ui:.* -> :ui:[a-zA-Z0-9:\\-]*\\-common",
         ":ui:.* -> :data:.*",
         ":data:.* -> :data:.*",
         ":core:.* -> :data:model",
