@@ -16,7 +16,6 @@ androidx-core = "1.16.0-alpha01"
 androidx-core-splashscreen = "1.2.0-alpha02"
 androidx-datastore = "1.1.1"
 androidx-gradle-lints = "1.0.0-alpha03"
-androidx-hilt-navigation-compose = "1.2.0"
 androidx-lifecycle = "2.9.0-alpha08"
 androidx-navigation = "2.9.0-alpha04"
 androidx-paging = "3.3.5"
@@ -33,7 +32,6 @@ androidx-tracing = "1.3.0-alpha02"
 androidx-window = "1.4.0-alpha05"
 apollo = "4.1.0"
 apollo-adapters = "0.0.4"
-autodagger = "1.5.0"
 cachefix = "3.0.1"
 coil = "3.0.4"
 compose-multiplatform = "1.7.1"
@@ -45,7 +43,6 @@ firebase-crashlytics-plugin = "3.0.2"
 firebase-perf-plugin = "1.4.2"
 googleservices = "4.4.2"
 gradledoctor = "0.10.0"
-hilt = "2.53.1"
 java-jdk = "22"
 java-target = "17"
 junit4 = "4.13.2"
@@ -91,7 +88,6 @@ androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "and
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-core-splashscreen" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
 androidx-gradle-lints = { group = "androidx.lint", name = "lint-gradle", version.ref = "androidx-gradle-lints" }
-androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidx-hilt-navigation-compose" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-testing = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
@@ -120,10 +116,6 @@ apollo-api = { group = "com.apollographql.apollo", name = "apollo-api", version.
 apollo-plugin = { group = "com.apollographql.apollo", name = "apollo-gradle-plugin-external", version.ref = "apollo" }
 apollo-runtime = { group = "com.apollographql.apollo", name = "apollo-runtime", version.ref = "apollo" }
 
-autodagger-compiler = { group = "se.ansman.dagger.auto", name = "compiler", version.ref = "autodagger" }
-autodagger-core = { group = "se.ansman.dagger.auto", name = "core", version.ref = "autodagger" }
-autodagger-room = { group = "se.ansman.dagger.auto", name = "androidx-room", version.ref = "autodagger" }
-
 coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-compose-core = { group = "io.coil-kt.coil3", name = "coil-compose-core", version.ref = "coil" }
@@ -140,11 +132,6 @@ firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 
 gradledoctor-plugin = { group = "com.osacky.doctor", name = "doctor-plugin", version.ref = "gradledoctor" }
-
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
-hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
-hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
 
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 
@@ -196,11 +183,9 @@ rickandmorty-android-application = { id = "app.rickandmorty.android-application"
 rickandmorty-android-library = { id = "app.rickandmorty.android-library" }
 rickandmorty-android-test = { id = "app.rickandmorty.android-test" }
 rickandmorty-apollo = { id = "app.rickandmorty.apollo" }
-rickandmorty-autodagger = { id = "app.rickandmorty.autodagger" }
 rickandmorty-compose = { id = "app.rickandmorty.compose" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
-rickandmorty-hilt = { id = "app.rickandmorty.hilt" }
 rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
 rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
 rickandmorty-kotlininject-anvil = { id = "app.rickandmorty.kotlininject-anvil" }
@@ -227,7 +212,6 @@ firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "
 firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf-plugin" }
 googleservices = { id = "com.google.gms.google-services", version.ref = "googleservices" }
 gradledoctor = { id = "com.osacky.doctor", version.ref = "gradledoctor" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

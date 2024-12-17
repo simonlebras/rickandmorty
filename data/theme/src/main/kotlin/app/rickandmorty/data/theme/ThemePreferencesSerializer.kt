@@ -7,9 +7,8 @@ import app.rickandmorty.data.theme.proto.NightMode
 import app.rickandmorty.data.theme.proto.ThemePreferences
 import java.io.InputStream
 import java.io.OutputStream
-import javax.inject.Inject
 
-internal class ThemePreferencesSerializer @Inject constructor() : Serializer<ThemePreferences> {
+internal class ThemePreferencesSerializer : Serializer<ThemePreferences> {
     override val defaultValue: ThemePreferences
         get() = ThemePreferences(
             night_mode = NightMode.UNSPECIFIED,

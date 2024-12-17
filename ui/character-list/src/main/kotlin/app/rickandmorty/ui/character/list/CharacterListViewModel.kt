@@ -7,12 +7,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import app.rickandmorty.data.character.CharacterRepository
 import app.rickandmorty.data.model.Character
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
-@HiltViewModel
-public class CharacterListViewModel @Inject constructor(
+public class CharacterListViewModel(
     characterRepository: CharacterRepository,
 ) : ViewModel() {
     public val characters: Flow<PagingData<Character>> = characterRepository

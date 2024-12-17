@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -49,7 +48,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 public fun LocationListScreen(
     onNavigateToSettings: () -> Unit,
-    viewModel: LocationListViewModel = hiltViewModel(),
+    viewModel: LocationListViewModel,
 ) {
     val locations = viewModel.locations.collectAsLazyPagingItems()
 

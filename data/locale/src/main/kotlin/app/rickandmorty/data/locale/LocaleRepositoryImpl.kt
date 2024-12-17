@@ -14,8 +14,6 @@ import app.rickandmorty.core.coroutines.ApplicationScope
 import app.rickandmorty.core.coroutines.IODispatcher
 import app.rickandmorty.data.locale.proto.LocalePreferences
 import app.rickandmorty.data.model.Locale
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.CoroutineDispatcher
@@ -28,13 +26,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.xmlpull.v1.XmlPullParser
-import se.ansman.dagger.auto.AutoBind
 
 private const val LOCALE_CONFIG_FILE = "_generated_res_locale_config"
 
-@AutoBind
-internal class LocaleRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+internal class LocaleRepositoryImpl(
+    private val context: Context,
     private val dataStore: DataStore<LocalePreferences>,
     @ApplicationScope private val applicationScope: CoroutineScope,
     @IODispatcher val ioDispatcher: CoroutineDispatcher,

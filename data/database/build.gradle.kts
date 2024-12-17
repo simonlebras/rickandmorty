@@ -1,7 +1,5 @@
 plugins {
     alias(libs.plugins.rickandmorty.android.library)
-    alias(libs.plugins.rickandmorty.autodagger)
-    alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
     alias(libs.plugins.rickandmorty.room)
     alias(libs.plugins.rickandmorty.spotless)
@@ -19,14 +17,4 @@ dependencies {
     api(projects.data.paging)
 
     implementation(libs.androidx.room.paging)
-
-    implementation(libs.autodagger.room)
-}
-
-dependencyAnalysis {
-    issues {
-        onCompileOnly {
-            exclude("se.ansman.dagger.auto:androidx-room")
-        }
-    }
 }

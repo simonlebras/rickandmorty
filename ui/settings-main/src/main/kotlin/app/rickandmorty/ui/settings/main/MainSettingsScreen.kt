@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
@@ -58,7 +57,7 @@ public fun MainSettingsScreen(
     onNavigateToThemeSettings: () -> Unit,
     onNavigateToLanguageSettings: () -> Unit,
     onNavigateToOssLicenses: () -> Unit,
-    viewModel: MainSettingsViewModel = hiltViewModel(),
+    viewModel: MainSettingsViewModel,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

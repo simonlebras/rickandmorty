@@ -16,7 +16,6 @@ import app.rickandmorty.core.coroutines.IODispatcher
 import app.rickandmorty.core.coroutines.awaitBlocking
 import app.rickandmorty.core.startup.Initializer
 import app.rickandmorty.data.model.NightMode
-import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
@@ -27,10 +26,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import se.ansman.dagger.auto.AutoBindIntoSet
 
-@AutoBindIntoSet
-internal class NightModeInitializer @Inject constructor(
+internal class NightModeInitializer(
     application: Application,
     private val themeRepository: ThemeRepository,
     @ApplicationScope private val applicationScope: CoroutineScope,

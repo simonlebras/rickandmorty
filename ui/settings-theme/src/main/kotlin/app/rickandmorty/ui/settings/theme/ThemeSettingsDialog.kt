@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.dismiss
@@ -36,7 +35,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 public fun ThemeSettingsDialog(
     onDismiss: () -> Unit,
-    viewModel: ThemeSettingsViewModel = hiltViewModel(),
+    viewModel: ThemeSettingsViewModel,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

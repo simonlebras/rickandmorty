@@ -7,7 +7,6 @@ import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.data.model.Theme
 import app.rickandmorty.data.theme.proto.NightMode as ProtoNightMode
 import app.rickandmorty.data.theme.proto.ThemePreferences
-import javax.inject.Inject
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
@@ -15,10 +14,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import se.ansman.dagger.auto.AutoBind
 
-@AutoBind
-internal class ThemeRepositoryImpl @Inject constructor(
+internal class ThemeRepositoryImpl(
     private val dataStore: DataStore<ThemePreferences>,
     @ApplicationScope private val applicationScope: CoroutineScope,
 ) : ThemeRepository {

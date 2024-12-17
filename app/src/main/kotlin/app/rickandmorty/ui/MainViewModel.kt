@@ -5,14 +5,11 @@ import androidx.lifecycle.viewModelScope
 import app.rickandmorty.core.coroutines.WhileSubscribedOrRetained
 import app.rickandmorty.core.resourcestate.ResourceController
 import app.rickandmorty.data.theme.ThemeRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-@HiltViewModel
-class MainViewModel @Inject constructor(
+class MainViewModel(
     themeRepository: ThemeRepository,
 ) : ViewModel() {
     private val theme = ResourceController(

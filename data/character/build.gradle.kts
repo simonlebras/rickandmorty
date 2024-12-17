@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.rickandmorty.android.library)
     alias(libs.plugins.rickandmorty.apollo)
-    alias(libs.plugins.rickandmorty.autodagger)
-    alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
     alias(libs.plugins.rickandmorty.spotless)
 
@@ -24,11 +22,11 @@ apollo {
 dependencies {
     api(libs.androidx.paging.common)
 
-    api(projects.data.database)
     api(projects.data.graphqlSchema)
     api(projects.data.model)
 
     implementation(libs.apollo.runtime)
 
+    implementation(projects.data.database)
     implementation(projects.data.paging)
 }
