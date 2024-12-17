@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.rickandmorty.android.library)
     alias(libs.plugins.rickandmorty.compose)
-    alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
     alias(libs.plugins.rickandmorty.spotless)
 
@@ -19,7 +18,6 @@ dependencies {
     api(projects.data.locale)
 
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
 
     implementation(libs.kotlinx.collectionsimmutable)

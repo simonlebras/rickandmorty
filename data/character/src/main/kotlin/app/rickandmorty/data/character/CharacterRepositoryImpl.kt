@@ -16,13 +16,10 @@ import app.rickandmorty.data.paging.FIRST_PAGE_KEY
 import app.rickandmorty.data.paging.PageKeyedRemoteMediator
 import app.rickandmorty.data.paging.PageResult
 import com.apollographql.apollo.ApolloClient
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import se.ansman.dagger.auto.AutoBind
 
-@AutoBind
-internal class CharacterRepositoryImpl @Inject constructor(
+internal class CharacterRepositoryImpl(
     private val apolloClient: ApolloClient,
     private val transactionRunner: TransactionRunner,
     private val characterDao: CharacterDao,

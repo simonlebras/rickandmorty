@@ -6,24 +6,14 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.annotations.ApolloExperimental
 import com.apollographql.apollo.interceptor.RetryOnErrorInterceptor
 import com.apollographql.apollo.network.NetworkMonitor
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
 
 private const val SERVER_URL = "https://rickandmortyapi.com/graphql"
 
 @OptIn(ApolloExperimental::class)
-@Module
-@InstallIn(SingletonComponent::class)
 internal class ApolloClientModule {
-    @Provides
-    @Singleton
     fun provideApolloClient(
-        @ApplicationContext context: Context,
+        context: Context,
         @IODispatcher ioDispatcher: CoroutineDispatcher,
     ): ApolloClient = ApolloClient.Builder()
         .serverUrl(SERVER_URL)

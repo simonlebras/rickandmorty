@@ -3,7 +3,6 @@ import com.google.firebase.perf.plugin.FirebasePerfExtension
 plugins {
     alias(libs.plugins.rickandmorty.android.application)
     alias(libs.plugins.rickandmorty.compose)
-    alias(libs.plugins.rickandmorty.hilt)
     alias(libs.plugins.rickandmorty.kotlin.android)
     alias(libs.plugins.rickandmorty.kotlininject.anvil)
     alias(libs.plugins.rickandmorty.kotlininject.core)
@@ -100,11 +99,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.coil)
-
-    implementation(libs.kotlinx.serialization.core)
 
     implementation(projects.core.base)
     implementation(projects.core.coil)
@@ -112,20 +108,11 @@ dependencies {
     implementation(projects.core.designSystem)
     implementation(projects.core.injectAnnotations)
     implementation(projects.core.ktor)
-    implementation(projects.core.l10n)
     implementation(projects.core.resourceState)
     implementation(projects.core.startup)
     implementation(projects.core.ui)
 
-    implementation(projects.data.graphqlClient)
     implementation(projects.data.theme)
-
-    implementation(projects.ui.characterList)
-    implementation(projects.ui.episodeList)
-    implementation(projects.ui.locationList)
-    implementation(projects.ui.settingsLanguage)
-    implementation(projects.ui.settingsMain)
-    implementation(projects.ui.settingsTheme)
 
     releaseImplementation(projects.core.crashlytics)
     releaseImplementation(projects.core.loggerCrashlytics)

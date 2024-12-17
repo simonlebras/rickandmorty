@@ -7,9 +7,7 @@ import app.rickandmorty.inject.create
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.SingletonImageLoader
-import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp
 class RamApplication :
     Application(),
     SingletonImageLoader.Factory {

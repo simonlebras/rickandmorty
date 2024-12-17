@@ -3,11 +3,9 @@ plugins {
     alias(libs.plugins.rickandmorty.android.library) apply false
     alias(libs.plugins.rickandmorty.android.test) apply false
     alias(libs.plugins.rickandmorty.apollo) apply false
-    alias(libs.plugins.rickandmorty.autodagger) apply false
     alias(libs.plugins.rickandmorty.compose) apply false
     alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
     alias(libs.plugins.rickandmorty.firebase.perf) apply false
-    alias(libs.plugins.rickandmorty.hilt) apply false
     alias(libs.plugins.rickandmorty.kotlin.android) apply false
     alias(libs.plugins.rickandmorty.kotlin.multiplatform) apply false
     alias(libs.plugins.rickandmorty.kotlininject.anvil) apply false
@@ -34,7 +32,6 @@ plugins {
     alias(libs.plugins.firebase.perf) apply false
     alias(libs.plugins.googleservices) apply false
     alias(libs.plugins.gradledoctor)
-    alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.serialization) apply false

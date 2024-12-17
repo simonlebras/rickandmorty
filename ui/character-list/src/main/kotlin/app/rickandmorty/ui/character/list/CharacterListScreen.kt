@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -60,7 +59,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 public fun CharacterListScreen(
     onNavigateToSettings: () -> Unit,
-    viewModel: CharacterListViewModel = hiltViewModel(),
+    viewModel: CharacterListViewModel,
 ) {
     val characters = viewModel.characters.collectAsLazyPagingItems()
 

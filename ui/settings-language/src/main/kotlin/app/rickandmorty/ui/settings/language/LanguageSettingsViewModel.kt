@@ -6,15 +6,12 @@ import app.rickandmorty.core.coroutines.WhileSubscribedOrRetained
 import app.rickandmorty.core.resourcestate.ResourceController
 import app.rickandmorty.data.locale.LocaleRepository
 import app.rickandmorty.data.model.Locale
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-@HiltViewModel
-public class LanguageSettingsViewModel @Inject constructor(
+public class LanguageSettingsViewModel(
     private val localeRepository: LocaleRepository,
 ) : ViewModel() {
     private val appLocale = ResourceController(

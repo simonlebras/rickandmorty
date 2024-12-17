@@ -6,9 +6,8 @@ import androidx.datastore.core.Serializer
 import app.rickandmorty.data.locale.proto.LocalePreferences
 import java.io.InputStream
 import java.io.OutputStream
-import javax.inject.Inject
 
-internal class LocalePreferencesSerializer @Inject constructor() : Serializer<LocalePreferences> {
+internal class LocalePreferencesSerializer : Serializer<LocalePreferences> {
     override val defaultValue: LocalePreferences
         get() = LocalePreferences()
 

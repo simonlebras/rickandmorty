@@ -70,10 +70,6 @@ gradlePlugin {
             id = "app.rickandmorty.apollo"
             implementationClass = "app.rickandmorty.gradle.plugin.ApolloPlugin"
         }
-        register("autodagger") {
-            id = "app.rickandmorty.autodagger"
-            implementationClass = "app.rickandmorty.gradle.plugin.AutoDaggerPlugin"
-        }
         register("compose") {
             id = "app.rickandmorty.compose"
             implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
@@ -85,10 +81,6 @@ gradlePlugin {
         register("firebase-perf") {
             id = "app.rickandmorty.firebase-perf"
             implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
-        }
-        register("hilt") {
-            id = "app.rickandmorty.hilt"
-            implementationClass = "app.rickandmorty.gradle.plugin.HiltPlugin"
         }
         register("kotlin-android") {
             id = "app.rickandmorty.kotlin-android"

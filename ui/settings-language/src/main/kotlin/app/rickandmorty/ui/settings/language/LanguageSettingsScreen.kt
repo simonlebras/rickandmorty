@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
@@ -40,7 +39,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 public fun LanguageSettingsScreen(
     onNavigateUp: () -> Unit,
-    viewModel: LanguageSettingsViewModel = hiltViewModel(),
+    viewModel: LanguageSettingsViewModel,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

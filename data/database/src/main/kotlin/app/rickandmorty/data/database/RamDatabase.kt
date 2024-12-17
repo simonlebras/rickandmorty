@@ -14,8 +14,6 @@ import app.rickandmorty.data.database.entity.EpisodeEntity
 import app.rickandmorty.data.database.entity.EpisodePagedEntryEntity
 import app.rickandmorty.data.database.entity.LocationEntity
 import app.rickandmorty.data.database.entity.LocationPagedEntryEntity
-import se.ansman.dagger.auto.AutoBind
-import se.ansman.dagger.auto.androidx.room.AutoProvideDaos
 
 @Database(
     entities = [
@@ -28,8 +26,6 @@ import se.ansman.dagger.auto.androidx.room.AutoProvideDaos
     ],
     version = 1,
 )
-@AutoBind
-@AutoProvideDaos
 internal abstract class RamDatabase : RoomDatabase() {
     abstract fun characterDao(): CharacterDao
     abstract fun characterPagedEntryDao(): CharacterPagedEntryDao
