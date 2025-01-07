@@ -33,6 +33,7 @@ androidx-window = "1.4.0-alpha05"
 apollo = "4.1.0"
 apollo-adapters = "0.0.4"
 cachefix = "3.0.1"
+circuit = "0.25.0"
 coil = "3.0.4"
 compose-multiplatform = "1.7.3"
 crashkios-crashlytics = "0.9.0"
@@ -116,6 +117,15 @@ apollo-api = { group = "com.apollographql.apollo", name = "apollo-api", version.
 apollo-plugin = { group = "com.apollographql.apollo", name = "apollo-gradle-plugin-external", version.ref = "apollo" }
 apollo-runtime = { group = "com.apollographql.apollo", name = "apollo-runtime", version.ref = "apollo" }
 
+circuit-codegen = { group = "com.slack.circuit", name = "circuit-codegen", version.ref = "circuit" }
+circuit-codegen-annotations = { group = "com.slack.circuit", name = "circuit-codegen-annotations", version.ref = "circuit" }
+circuit-foundation = { group = "com.slack.circuit", name = "circuit-foundation", version.ref = "circuit" }
+circuit-overlay = { group = "com.slack.circuit", name = "circuit-overlay", version.ref = "circuit" }
+circuit-retained = { group = "com.slack.circuit", name = "circuit-retained", version.ref = "circuit" }
+circuit-runtime = { group = "com.slack.circuit", name = "circuit-runtime", version.ref = "circuit" }
+circuitx-gesturenavigation = { group = "com.slack.circuit", name = "circuitx-gesture-navigation", version.ref = "circuit" }
+circuitx-overlays = { group = "com.slack.circuit", name = "circuitx-overlays", version.ref = "circuit" }
+
 coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-compose-core = { group = "io.coil-kt.coil3", name = "coil-compose-core", version.ref = "coil" }
@@ -155,6 +165,8 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
+ksp-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
 ktlint-composerules = { group = "io.nlopez.compose.rules", name = "ktlint", version.ref = "ktlint-composerules" }
 ktlint-core = { group = "com.pinterest.ktlint", name = "ktlint-cli", version.ref = "ktlint-core" }
 
@@ -183,6 +195,7 @@ rickandmorty-android-application = { id = "app.rickandmorty.android-application"
 rickandmorty-android-library = { id = "app.rickandmorty.android-library" }
 rickandmorty-android-test = { id = "app.rickandmorty.android-test" }
 rickandmorty-apollo = { id = "app.rickandmorty.apollo" }
+rickandmorty-circuit-codegen = { id = "app.rickandmorty.circuit-codegen" }
 rickandmorty-compose = { id = "app.rickandmorty.compose" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
@@ -214,6 +227,7 @@ googleservices = { id = "com.google.gms.google-services", version.ref = "googles
 gradledoctor = { id = "com.osacky.doctor", version.ref = "gradledoctor" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }

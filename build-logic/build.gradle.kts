@@ -42,6 +42,7 @@ dependencies {
     compileOnly(libs.gradledoctor.plugin)
     compileOnly(libs.kotlin.compose.compiler.plugin)
     compileOnly(libs.kotlin.plugin)
+    compileOnly(libs.ksp.plugin)
     compileOnly(libs.spotless.plugin)
 
     implementation(libs.truth)
@@ -69,6 +70,10 @@ gradlePlugin {
         register("apollo") {
             id = "app.rickandmorty.apollo"
             implementationClass = "app.rickandmorty.gradle.plugin.ApolloPlugin"
+        }
+        register("circuit-codegen") {
+            id = "app.rickandmorty.circuit-codegen"
+            implementationClass = "app.rickandmorty.gradle.plugin.CircuitCodegenPlugin"
         }
         register("compose") {
             id = "app.rickandmorty.compose"
