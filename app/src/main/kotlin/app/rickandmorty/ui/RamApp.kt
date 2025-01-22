@@ -11,16 +11,12 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import app.rickandmorty.core.ui.LocalSharedTransitionScope
 
-@OptIn(
-    ExperimentalComposeUiApi::class,
-    ExperimentalSharedTransitionApi::class,
-)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun RamApp(modifier: Modifier = Modifier) {
     SharedTransitionLayout(
