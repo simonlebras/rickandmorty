@@ -26,6 +26,8 @@ kotlin {
                 implementation(libs.androidx.annotation)
 
                 implementation(libs.coil.compose)
+
+                implementation(libs.compose.placeholder.material3)
             }
         }
     }
