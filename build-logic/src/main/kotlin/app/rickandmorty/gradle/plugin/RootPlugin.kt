@@ -20,82 +20,82 @@ public class RootPlugin : Plugin<Project> {
 
         val libs = the<LibrariesForLibs>()
 
-        pluginManager.withPlugin(libs.plugins.affectedmoduledetector) {
-            configureAffectedModuleDetector()
-        }
+        configureAffectedModuleDetector(libs)
 
-        pluginManager.withPlugin(libs.plugins.dependencyanalysis) {
-            configureDependencyAnalysis()
-        }
+        configureDependencyAnalysis(libs)
 
-        pluginManager.withPlugin(libs.plugins.gradledoctor) {
-            configureGradleDoctor()
+        configureGradleDoctor(libs)
+    }
+}
+
+private fun Project.configureAffectedModuleDetector(libs: LibrariesForLibs) {
+    pluginManager.withPlugin(libs.plugins.affectedmoduledetector) {
+        configure<AffectedModuleConfiguration> {
+            baseDir = "${project.rootDir}"
+            pathsAffectingAllModules = setOf(
+                "build-logic",
+                "gradle/libs.versions.toml",
+            )
+            excludedModules = setOf(
+                "baselineprofile",
+            )
+
+            logFilename = "output.log"
+            val reportsFolder = project.layout
+                .buildDirectory
+                .dir("reports/affectedModuleDetector")
+                .get()
+            logFolder = "$reportsFolder"
+
+            val baseRef = providers.gradleProperty("affectedBaseRef").orNull
+            if (!baseRef.isNullOrEmpty()) {
+                specifiedBranch = baseRef.replace("refs/heads/", "")
+                compareFrom = "SpecifiedBranchCommit"
+            } else {
+                compareFrom = "PreviousCommit"
+            }
+
+            customTasks = setOf(
+                AffectedModuleConfiguration.CustomTask(
+                    "runAffectedScreenshotTests",
+                    "validateDebugScreenshotTest",
+                    "Runs all affected screenshot tests.",
+                ),
+            )
         }
     }
 }
 
-private fun Project.configureAffectedModuleDetector() {
-    configure<AffectedModuleConfiguration> {
-        baseDir = "${project.rootDir}"
-        pathsAffectingAllModules = setOf(
-            "build-logic",
-            "gradle/libs.versions.toml",
-        )
-        excludedModules = setOf(
-            "baselineprofile",
-        )
-
-        logFilename = "output.log"
-        val reportsFolder = project.layout
-            .buildDirectory
-            .dir("reports/affectedModuleDetector")
-            .get()
-        logFolder = "$reportsFolder"
-
-        val baseRef = providers.gradleProperty("affectedBaseRef").orNull
-        if (!baseRef.isNullOrEmpty()) {
-            specifiedBranch = baseRef.replace("refs/heads/", "")
-            compareFrom = "SpecifiedBranchCommit"
-        } else {
-            compareFrom = "PreviousCommit"
-        }
-
-        customTasks = setOf(
-            AffectedModuleConfiguration.CustomTask(
-                "runAffectedScreenshotTests",
-                "validateDebugScreenshotTest",
-                "Runs all affected screenshot tests.",
-            ),
-        )
-    }
-}
-
-private fun Project.configureDependencyAnalysis() {
-    configure<DependencyAnalysisExtension> {
-        issues {
-            all {
-                onAny {
-                    severity("fail")
+private fun Project.configureDependencyAnalysis(libs: LibrariesForLibs) {
+    pluginManager.withPlugin(libs.plugins.dependencyanalysis) {
+        configure<DependencyAnalysisExtension> {
+            issues {
+                all {
+                    onAny {
+                        severity("fail")
+                    }
+                    onIncorrectConfiguration {
+                        exclude("org.jetbrains.kotlin:kotlin-stdlib")
+                    }
+                    onUsedTransitiveDependencies {
+                        severity("ignore")
+                    }
                 }
-                onIncorrectConfiguration {
-                    exclude("org.jetbrains.kotlin:kotlin-stdlib")
-                }
-                onUsedTransitiveDependencies {
-                    severity("ignore")
+            }
+
+            abi {
+                exclusions {
+                    ignoreGeneratedCode()
                 }
             }
         }
-
-        abi {
-            exclusions {
-                ignoreGeneratedCode()
-            }
-        }
     }
 }
 
-private fun Project.configureGradleDoctor() {
-    configure<DoctorExtension> {
-        warnWhenNotUsingParallelGC = false
+private fun Project.configureGradleDoctor(libs: LibrariesForLibs) {
+    pluginManager.withPlugin(libs.plugins.gradledoctor) {
+        configure<DoctorExtension> {
+            warnWhenNotUsingParallelGC = false
+        }
     }
 }
