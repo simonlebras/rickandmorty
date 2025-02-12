@@ -16,7 +16,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 private const val TAG = "StrictMode"
 
 @Inject
-@ContributesBinding(AppScope::class, multibinding = true)
+@ContributesBinding(scope = AppScope::class, multibinding = true)
 public class StrictModeInitializer : Initializer {
     private val penaltyListenerExecutor by unsafeLazy {
         Executors.newSingleThreadExecutor()

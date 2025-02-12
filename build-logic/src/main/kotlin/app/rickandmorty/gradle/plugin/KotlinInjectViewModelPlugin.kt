@@ -12,34 +12,34 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-public class KotlinInjectCorePlugin : Plugin<Project> {
+public class KotlinInjectViewModelPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         pluginManager.apply(libs.plugins.ksp)
 
-        configureKotlinInjectCoreAndroid()
+        configureKotlinInjectViewModelAndroid()
 
-        configureKotlinInjectCoreMultiplatform()
+        configureKotlinInjectViewModelMultiplatform()
     }
 
-    private fun Project.configureKotlinInjectCoreAndroid() {
+    private fun Project.configureKotlinInjectViewModelAndroid() {
         pluginManager.withPlugin(libs.plugins.kotlin.android) {
             dependencies {
-                implementation(libs.kotlininject.core.runtime)
+                implementation(libs.kotlininject.viewmodel.runtime)
 
-                ksp(libs.kotlininject.core.compiler)
+                ksp(libs.kotlininject.viewmodel.compiler)
             }
         }
     }
 
-    private fun Project.configureKotlinInjectCoreMultiplatform() {
+    private fun Project.configureKotlinInjectViewModelMultiplatform() {
         pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
             configure<KotlinMultiplatformExtension> {
                 sourceSets.commonMain.dependencies {
-                    implementation(libs.kotlininject.core.runtime)
+                    implementation(libs.kotlininject.viewmodel.runtime)
                 }
 
                 kspDependencies {
-                    ksp(libs.kotlininject.core.compiler)
+                    ksp(libs.kotlininject.viewmodel.compiler)
                 }
             }
         }

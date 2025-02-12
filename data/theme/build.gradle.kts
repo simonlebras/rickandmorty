@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.rickandmorty.android.library)
-    alias(libs.plugins.rickandmorty.kotlin.android)
+    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+    alias(libs.plugins.rickandmorty.kotlininject.anvil)
     alias(libs.plugins.rickandmorty.spotless)
 
     alias(libs.plugins.dependencyanalysis)
@@ -11,17 +12,29 @@ android {
     namespace = "app.rickandmorty.data.theme"
 }
 
-dependencies {
-    api(projects.data.model)
+kotlin {
+    sourceSets {
+        androidMain {
+            dependencies {
+                implementation(libs.androidx.appcompat)
+            }
+        }
 
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.datastore)
+        commonMain {
+            dependencies {
+                api(projects.data.model)
 
-    implementation(libs.kotlinx.collectionsimmutable)
+                implementation(libs.androidx.datastore)
 
-    implementation(projects.core.base)
-    implementation(projects.core.coroutines)
-    implementation(projects.core.startup)
+                implementation(libs.kotlinx.collectionsimmutable)
 
-    implementation(projects.data.themeProto)
+                implementation(projects.core.base)
+                implementation(projects.core.coroutines)
+                implementation(projects.core.injectAnnotations)
+                implementation(projects.core.startup)
+
+                implementation(projects.data.themeProto)
+            }
+        }
+    }
 }

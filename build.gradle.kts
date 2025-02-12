@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.rickandmorty.kotlin.multiplatform) apply false
     alias(libs.plugins.rickandmorty.kotlininject.anvil) apply false
     alias(libs.plugins.rickandmorty.kotlininject.core) apply false
+    alias(libs.plugins.rickandmorty.kotlininject.viewmodel) apply false
     alias(libs.plugins.rickandmorty.room) apply false
     alias(libs.plugins.rickandmorty.root)
     alias(libs.plugins.rickandmorty.spotless) apply false

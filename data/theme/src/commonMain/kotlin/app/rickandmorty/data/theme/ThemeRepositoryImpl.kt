@@ -1,12 +1,9 @@
 package app.rickandmorty.data.theme
 
-import android.os.Build
-import androidx.datastore.core.DataStore
 import app.rickandmorty.core.coroutines.inject.ApplicationScope
 import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.data.model.Theme
 import app.rickandmorty.data.theme.proto.NightMode as ProtoNightMode
-import app.rickandmorty.data.theme.proto.ThemePreferences
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.CoroutineScope
@@ -14,11 +11,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import me.tatarka.inject.annotations.Inject
+import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
-internal class ThemeRepositoryImpl(
-    private val dataStore: DataStore<ThemePreferences>,
+@Inject
+@ContributesBinding(AppScope::class)
+public class ThemeRepositoryImpl(
+    themeDataStore: ThemeDataStore,
     @ApplicationScope private val applicationScope: CoroutineScope,
 ) : ThemeRepository {
+    private val dataStore = themeDataStore.value
+
     override fun getTheme(): Flow<Theme> = dataStore.data
         .map { preferences ->
             Theme(
@@ -49,12 +53,6 @@ internal class ThemeRepositoryImpl(
         NightMode.Dark,
         defaultNightMode,
     )
-}
-
-private val defaultNightMode = if (Build.VERSION.SDK_INT >= 29) {
-    NightMode.FollowSystem
-} else {
-    NightMode.AutoBattery
 }
 
 private fun NightMode.toProtoNightMode() = when (this) {

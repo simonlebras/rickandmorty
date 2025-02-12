@@ -11,7 +11,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @OptIn(ExperimentalKermitApi::class)
 @Inject
-@ContributesBinding(AppScope::class, multibinding = true)
+@ContributesBinding(scope = AppScope::class, multibinding = true)
 public class CrashlyticsLoggerInitializer : Initializer {
     override fun initialize() {
         with(Logger) {

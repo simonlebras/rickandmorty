@@ -49,6 +49,7 @@ kermit = "2.0.5"
 kotlin = "2.1.20"
 kotlininject-anvil = "0.1.2"
 kotlininject-core = "0.7.2"
+kotlininject-viewmodel = "0.1.2"
 kotlinx-collectionsimmutable = "0.3.8"
 kotlinx-coroutines = "1.10.1"
 kotlinx-datetime = "0.6.2"
@@ -145,6 +146,9 @@ kotlininject-anvil-runtime = { group = "software.amazon.lastmile.kotlin.inject.a
 kotlininject-anvil-runtime-optional = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "runtime-optional", version.ref = "kotlininject-anvil" }
 kotlininject-core-compiler = { group = "me.tatarka.inject", name = "kotlin-inject-compiler-ksp", version.ref = "kotlininject-core" }
 kotlininject-core-runtime = { group = "me.tatarka.inject", name = "kotlin-inject-runtime", version.ref = "kotlininject-core" }
+kotlininject-viewmodel-compiler = { group = "com.teobaranga.kotlin.inject.viewmodel", name = "compiler", version.ref = "kotlininject-viewmodel" }
+kotlininject-viewmodel-runtime = { group = "com.teobaranga.kotlin.inject.viewmodel", name = "runtime", version.ref = "kotlininject-viewmodel" }
+kotlininject-viewmodel-runtime-compose = { group = "com.teobaranga.kotlin.inject.viewmodel", name = "runtime-compose", version.ref = "kotlininject-viewmodel" }
 
 kotlinx-collectionsimmutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collectionsimmutable" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
@@ -188,6 +192,7 @@ rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
 rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
 rickandmorty-kotlininject-anvil = { id = "app.rickandmorty.kotlininject-anvil" }
 rickandmorty-kotlininject-core = { id = "app.rickandmorty.kotlininject-core" }
+rickandmorty-kotlininject-viewmodel = { id = "app.rickandmorty.kotlininject-viewmodel" }
 rickandmorty-room = { id = "app.rickandmorty.room" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
 rickandmorty-spotless = { id = "app.rickandmorty.spotless" }
