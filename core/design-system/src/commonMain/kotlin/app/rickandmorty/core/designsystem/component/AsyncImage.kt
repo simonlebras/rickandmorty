@@ -15,6 +15,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
+import com.eygraber.compose.placeholder.PlaceholderDefaults
+import com.eygraber.compose.placeholder.PlaceholderHighlight
+import com.eygraber.compose.placeholder.material3.color
+import com.eygraber.compose.placeholder.material3.shimmer
+import com.eygraber.compose.placeholder.placeholder
 
 @Composable
 public fun AsyncImage(
