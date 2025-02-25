@@ -112,6 +112,7 @@ dependencies {
     implementation(projects.core.startup)
     implementation(projects.core.ui)
 
+    implementation(projects.data.filesystem)
     implementation(projects.data.theme)
 
     releaseImplementation(projects.core.crashlytics)
