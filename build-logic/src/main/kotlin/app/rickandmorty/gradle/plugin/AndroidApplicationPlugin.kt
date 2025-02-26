@@ -29,6 +29,9 @@ public class AndroidApplicationPlugin : Plugin<Project> {
             )
 
             configureBadgingTasks(this)
+            tasks.named("check").configure {
+                dependsOn("checkReleaseBadging")
+            }
 
             packagingOptions {
                 resources {
