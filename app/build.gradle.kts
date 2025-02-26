@@ -108,6 +108,7 @@ dependencies {
     implementation(projects.core.designSystem)
     implementation(projects.core.injectAnnotations)
     implementation(projects.core.ktor)
+    implementation(projects.core.processLifecycle)
     implementation(projects.core.resourceState)
     implementation(projects.core.startup)
     implementation(projects.core.ui)
