@@ -10,8 +10,8 @@ import android.content.IntentFilter
 import android.os.Build
 import androidx.core.content.getSystemService
 import androidx.datastore.core.DataStore
-import app.rickandmorty.core.coroutines.ApplicationScope
-import app.rickandmorty.core.coroutines.IODispatcher
+import app.rickandmorty.core.coroutines.inject.ApplicationScope
+import app.rickandmorty.core.coroutines.inject.IODispatcher
 import app.rickandmorty.data.locale.proto.LocalePreferences
 import app.rickandmorty.data.model.Locale
 import kotlinx.collections.immutable.ImmutableList

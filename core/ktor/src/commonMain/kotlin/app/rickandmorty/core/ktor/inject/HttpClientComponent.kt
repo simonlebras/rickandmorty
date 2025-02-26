@@ -1,4 +1,4 @@
-package app.rickandmorty.core.ktor
+package app.rickandmorty.core.ktor.inject
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngineConfig

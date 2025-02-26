@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.rickandmorty.android.library)
-    alias(libs.plugins.rickandmorty.kotlin.android)
+    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+    alias(libs.plugins.rickandmorty.kotlininject.anvil)
     alias(libs.plugins.rickandmorty.spotless)
 
     alias(libs.plugins.dependencyanalysis)
@@ -11,10 +12,20 @@ android {
     namespace = "app.rickandmorty.core.coroutines"
 }
 
-dependencies {
-    implementation(libs.kotlinx.coroutines.core)
+kotlin {
+    sourceSets {
+        androidMain {
+            dependencies {
+                implementation(projects.core.base)
 
-    implementation(projects.core.base)
+                runtimeOnly(libs.kotlinx.coroutines.android)
+            }
+        }
 
-    runtimeOnly(libs.kotlinx.coroutines.android)
+        commonMain {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.core)
+            }
+        }
+    }
 }

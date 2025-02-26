@@ -1,4 +1,4 @@
-package app.rickandmorty.core.processlifecycle.inject
+package app.rickandmorty.core.coroutines.inject
 
 import me.tatarka.inject.annotations.Qualifier
 
@@ -9,4 +9,4 @@ import me.tatarka.inject.annotations.Qualifier
     AnnotationTarget.PROPERTY_GETTER,
     AnnotationTarget.TYPE,
 )
-public annotation class ProcessLifecycleOwner
+public annotation class ApplicationScope

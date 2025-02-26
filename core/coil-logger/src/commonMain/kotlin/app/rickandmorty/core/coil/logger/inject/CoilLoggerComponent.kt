@@ -1,4 +1,4 @@
-package app.rickandmorty.core.coil.logger
+package app.rickandmorty.core.coil.logger.inject
 
 import co.touchlab.kermit.Logger as KermitLogger
 import co.touchlab.kermit.Severity
