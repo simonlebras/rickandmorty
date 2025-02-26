@@ -1,38 +1,37 @@
 #!/bin/bash
+set -e
 
 decrypt() {
-    PASSPHRASE=$1
-    INPUT=$2
-    OUTPUT=$3
-    gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output "$OUTPUT" "$INPUT"
+  local passphrase="$1"
+  local input_file="$2"
+  local output_file="$3"
+  gpg --quiet --batch --yes --decrypt --passphrase="$passphrase" --output "$output_file" "$input_file"
 }
 
 key=""
-ARGS=()
+args=()
 
-while [ $# -gt 0 ]; do
-    while getopts k: name; do
-        case $name in
-        k) key=$OPTARG ;;
-        *) exit 1 ;;
-        esac
-    done
-    [ $OPTIND -gt $# ] && break
-
-    shift $((OPTIND - 1))
-    OPTIND=1
-    ARGS[${#ARGS[*]}]=$1
-    shift
+while [[ $# -gt 0 ]]; do
+  while getopts "k:" opt; do
+    case "$opt" in
+      k) key="$OPTARG" ;;
+      *) echo "Invalid option" >&2; exit 1 ;;
+    esac
+  done
+  shift "$((OPTIND - 1))"
+  OPTIND=1
+  args+=("$1")
+  shift
 done
 
-if [[ -z $key ]]; then
-    echo 'Missing decrypt key'
-    exit 1
+if [[ -z "$key" ]]; then
+  echo "Missing decrypt key" >&2
+  exit 1
 fi
 
-if [ ${#ARGS[@]} -ne 2 ]; then
-    echo 'Incorrect number of arguments'
-    exit 1
+if [[ ${#args[@]} -ne 2 ]]; then
+  echo "Incorrect number of arguments" >&2
+  exit 1
 fi
 
-decrypt "$key" "${ARGS[0]}" "${ARGS[1]}"
+decrypt "$key" "${args[0]}" "${args[1]}"
