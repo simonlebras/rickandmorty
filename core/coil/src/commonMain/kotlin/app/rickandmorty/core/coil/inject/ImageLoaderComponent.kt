@@ -1,4 +1,4 @@
-package app.rickandmorty.core.coil
+package app.rickandmorty.core.coil.inject
 
 import coil3.ImageLoader
 import coil3.PlatformContext

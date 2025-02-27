@@ -2,7 +2,7 @@ package app.rickandmorty.data.theme
 
 import android.os.Build
 import androidx.datastore.core.DataStore
-import app.rickandmorty.core.coroutines.ApplicationScope
+import app.rickandmorty.core.coroutines.inject.ApplicationScope
 import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.data.model.Theme
 import app.rickandmorty.data.theme.proto.NightMode as ProtoNightMode

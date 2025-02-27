@@ -1,7 +1,7 @@
 package app.rickandmorty.data.graphql.client
 
 import android.content.Context
-import app.rickandmorty.core.coroutines.IODispatcher
+import app.rickandmorty.core.coroutines.inject.IODispatcher
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.annotations.ApolloExperimental
 import com.apollographql.apollo.interceptor.RetryOnErrorInterceptor

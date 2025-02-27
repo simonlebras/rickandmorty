@@ -1,4 +1,4 @@
-package app.rickandmorty.core.coil
+package app.rickandmorty.core.coil.inject
 
 import android.content.Context
 import app.rickandmorty.core.injectannotations.AppContext

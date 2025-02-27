@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
-import app.rickandmorty.core.coroutines.ApplicationScope
-import app.rickandmorty.core.coroutines.IODispatcher
+import app.rickandmorty.core.coroutines.inject.ApplicationScope
+import app.rickandmorty.core.coroutines.inject.IODispatcher
 import app.rickandmorty.data.locale.proto.LocalePreferences
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope

@@ -11,9 +11,9 @@ import app.rickandmorty.core.base.doOnActivityPreCreated
 import app.rickandmorty.core.base.isComponentEnabled
 import app.rickandmorty.core.base.setComponentEnabled
 import app.rickandmorty.core.base.unsafeLazy
-import app.rickandmorty.core.coroutines.ApplicationScope
-import app.rickandmorty.core.coroutines.IODispatcher
 import app.rickandmorty.core.coroutines.awaitBlocking
+import app.rickandmorty.core.coroutines.inject.ApplicationScope
+import app.rickandmorty.core.coroutines.inject.IODispatcher
 import app.rickandmorty.core.startup.Initializer
 import app.rickandmorty.data.model.NightMode
 import kotlinx.coroutines.CoroutineDispatcher

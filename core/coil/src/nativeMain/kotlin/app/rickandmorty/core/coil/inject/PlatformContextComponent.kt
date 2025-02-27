@@ -1,13 +1,12 @@
-package app.rickandmorty.data.filesystem
+package app.rickandmorty.core.coil.inject
 
+import coil3.PlatformContext
 import me.tatarka.inject.annotations.Provides
-import okio.FileSystem
-import okio.SYSTEM
 import software.amazon.lastmile.kotlin.inject.anvil.AppScope
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 
 @ContributesTo(AppScope::class)
-public interface FileSystemComponent {
+public interface PlatformContextComponent {
     @Provides
-    public fun provideFileSystem(): FileSystem = FileSystem.SYSTEM
+    public fun providePlatformContext(): PlatformContext = PlatformContext.Companion.INSTANCE
 }
