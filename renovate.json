@@ -26,17 +26,6 @@
       "matchDepNames": [
         "/^androidx\\.([\\w-:]+)$/"
       ]
-    },
-    {
-      "description": "Automatically merge minor and patch-level updates",
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "digest"
-      ],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true
     }
   ]
 }
