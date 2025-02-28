@@ -77,6 +77,9 @@ private fun Project.configureDependencyAnalysis(libs: LibrariesForLibs) {
                     onIncorrectConfiguration {
                         exclude("org.jetbrains.kotlin:kotlin-stdlib")
                     }
+                    onModuleStructure {
+                        exclude("android")
+                    }
                     onUsedTransitiveDependencies {
                         severity("ignore")
                     }
