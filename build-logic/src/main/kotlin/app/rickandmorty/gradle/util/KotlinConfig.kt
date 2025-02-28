@@ -14,6 +14,9 @@ internal fun Project.configureKotlin(libs: LibrariesForLibs) {
     tasks.withType<KotlinJvmCompile>().configureEach {
         compilerOptions {
             jvmTarget = JvmTarget.fromTarget(javaTarget)
+
+            allWarningsAsErrors = true
+
             freeCompilerArgs.addAll(
                 "-Xconsistent-data-class-copy-visibility",
                 "-Xjvm-default=all",

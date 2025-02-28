@@ -23,9 +23,11 @@ public class AndroidTestPlugin : Plugin<Project> {
 
         configure<TestExtension> {
             configureAndroid(
-                baseExtension = this,
+                commonExtension = this,
                 libs = libs,
             )
+
+            defaultConfig.targetSdk = libs.versions.android.sdk.target.get().toInt()
         }
     }
 }
