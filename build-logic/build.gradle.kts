@@ -12,6 +12,8 @@ kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.fromTarget(javaTarget)
 
+        allWarningsAsErrors = true
+
         freeCompilerArgs.addAll(
             "-Xjdk-release=$javaTarget",
         )

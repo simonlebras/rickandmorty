@@ -30,9 +30,13 @@ public class AndroidLibraryPlugin : Plugin<Project> {
 
         configure<LibraryExtension> {
             configureAndroid(
-                baseExtension = this,
+                commonExtension = this,
                 libs = libs,
             )
+
+            val targetSdk = libs.versions.android.sdk.target.get().toInt()
+            lint.targetSdk = targetSdk
+            testOptions.targetSdk = targetSdk
         }
     }
 }
