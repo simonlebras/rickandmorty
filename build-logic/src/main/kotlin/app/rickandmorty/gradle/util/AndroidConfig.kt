@@ -33,13 +33,6 @@ internal fun Project.configureAndroid(
 
             isCoreLibraryDesugaringEnabled = true
         }
-
-        buildTypes {
-            named("debug") {
-                // For upstream Android libraries that just have a single release variant
-                matchingFallbacks += "release"
-            }
-        }
     }
 
     dependencies {

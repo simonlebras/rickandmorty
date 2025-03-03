@@ -60,6 +60,25 @@ jobs:
       - name: Detect unused and misused dependencies
         run: ./gradlew buildHealth
 
+      - name: Check Dependency Guard
+        id: dependencyguard-verify
+        continue-on-error: true
+        run: ./gradlew dependencyGuard
+
+      - name: Update dependency guard baseline
+        id: dependencyguard_baseline
+        if: ${{ !cancelled() && steps.dependencyguard-verify.outcome == 'failure' && github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request' }}
+        run: ./gradlew dependencyGuardBaseline
+
+      - name: Auto-commit dependency guard baseline changes
+        if: ${{ !cancelled() && steps.dependencyguard-verify.outcome == 'failure' && github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request' }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto update dependency guard baseline"
+          disable_globbing: true
+          file_pattern: "**/dependencies/*.txt"
+          push_options: --force-with-lease
+
       - name: Check module graph
         run: ./gradlew assertModuleGraph
 
@@ -82,16 +101,8 @@ jobs:
           -PaffectedBaseRef=$BASE_REF \
           --no-configuration-cache
 
-      - name: Run screenshot tests
-        if: ${{ false }}
-        run: |
-          ./gradlew runAffectedScreenshotTests \
-          -Paffected_module_detector.enable \
-          -PaffectedBaseRef=$BASE_REF \
-          --no-configuration-cache
-
       - name: Upload build outputs
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: build-outputs
@@ -99,17 +110,16 @@ jobs:
             app/build/outputs
 
       - name: Upload reports
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: reports
           path: |
             build/reports/dependency-analysis/build-health-report.txt
             **/build/reports/lint-results-*.html
-            **/build/reports/screenshotTest/*
 
       - name: Upload test results
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: test-results
@@ -215,14 +225,14 @@ jobs:
           -Dorg.gradle.workers.max=1
 
       - name: Upload logs
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: logs-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
           path: logcat.txt
 
       - name: Upload test results
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}

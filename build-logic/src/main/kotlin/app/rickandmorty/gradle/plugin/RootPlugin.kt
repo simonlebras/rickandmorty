@@ -1,7 +1,7 @@
 package app.rickandmorty.gradle.plugin
 
+import app.rickandmorty.gradle.util.apply
 import app.rickandmorty.gradle.util.isRootProject
-import app.rickandmorty.gradle.util.withPlugin
 import com.autonomousapps.DependencyAnalysisExtension
 import com.dropbox.affectedmoduledetector.AffectedModuleConfiguration
 import com.osacky.doctor.DoctorExtension
@@ -20,85 +20,78 @@ public class RootPlugin : Plugin<Project> {
 
         val libs = the<LibrariesForLibs>()
 
-        configureAffectedModuleDetector(libs)
+        pluginManager.apply(
+            libs.plugins.rickandmorty.spotless,
 
-        configureDependencyAnalysis(libs)
+            libs.plugins.affectedmoduledetector,
+            libs.plugins.dependencyanalysis,
+            libs.plugins.gradledoctor,
+        )
 
-        configureGradleDoctor(libs)
+        configureAffectedModuleDetector()
+
+        configureDependencyAnalysis()
+
+        configureGradleDoctor()
     }
 }
 
-private fun Project.configureAffectedModuleDetector(libs: LibrariesForLibs) {
-    pluginManager.withPlugin(libs.plugins.affectedmoduledetector) {
-        configure<AffectedModuleConfiguration> {
-            baseDir = "${project.rootDir}"
-            pathsAffectingAllModules = setOf(
-                "build-logic",
-                "gradle/libs.versions.toml",
-            )
-            excludedModules = setOf(
-                "baselineprofile",
-            )
+private fun Project.configureAffectedModuleDetector() {
+    configure<AffectedModuleConfiguration> {
+        baseDir = "${project.rootDir}"
+        pathsAffectingAllModules = setOf(
+            "build-logic",
+            "gradle/libs.versions.toml",
+        )
+        excludedModules = setOf(
+            "baselineprofile",
+        )
+        logFilename = "output.log"
+        val reportsFolder = project.layout
+            .buildDirectory
+            .dir("reports/affectedModuleDetector")
+            .get()
+        logFolder = "$reportsFolder"
 
-            logFilename = "output.log"
-            val reportsFolder = project.layout
-                .buildDirectory
-                .dir("reports/affectedModuleDetector")
-                .get()
-            logFolder = "$reportsFolder"
-
-            val baseRef = providers.gradleProperty("affectedBaseRef").orNull
-            if (!baseRef.isNullOrEmpty()) {
-                specifiedBranch = baseRef.replace("refs/heads/", "")
-                compareFrom = "SpecifiedBranchCommit"
-            } else {
-                compareFrom = "PreviousCommit"
-            }
-
-            customTasks = setOf(
-                AffectedModuleConfiguration.CustomTask(
-                    "runAffectedScreenshotTests",
-                    "validateDebugScreenshotTest",
-                    "Runs all affected screenshot tests.",
-                ),
-            )
+        val baseRef = providers.gradleProperty("affectedBaseRef").orNull
+        if (!baseRef.isNullOrEmpty()) {
+            specifiedBranch = baseRef.replace("refs/heads/", "")
+            compareFrom = "SpecifiedBranchCommit"
+        } else {
+            compareFrom = "PreviousCommit"
         }
     }
 }
 
-private fun Project.configureDependencyAnalysis(libs: LibrariesForLibs) {
-    pluginManager.withPlugin(libs.plugins.dependencyanalysis) {
-        configure<DependencyAnalysisExtension> {
-            issues {
-                all {
-                    onAny {
-                        severity("fail")
-                    }
-                    onIncorrectConfiguration {
-                        exclude("org.jetbrains.kotlin:kotlin-stdlib")
-                    }
-                    onModuleStructure {
-                        exclude("android")
-                    }
-                    onUsedTransitiveDependencies {
-                        severity("ignore")
-                    }
+private fun Project.configureDependencyAnalysis() {
+    configure<DependencyAnalysisExtension> {
+        issues {
+            all {
+                onAny {
+                    severity("fail")
                 }
-            }
-
-            abi {
-                exclusions {
-                    ignoreGeneratedCode()
+                onIncorrectConfiguration {
+                    exclude("org.jetbrains.kotlin:kotlin-stdlib")
+                }
+                onModuleStructure {
+                    exclude("android")
+                }
+                onUsedTransitiveDependencies {
+                    severity("ignore")
                 }
             }
         }
+
+        abi {
+            exclusions {
+                ignoreGeneratedCode()
+            }
+        }
     }
 }
 
-private fun Project.configureGradleDoctor(libs: LibrariesForLibs) {
-    pluginManager.withPlugin(libs.plugins.gradledoctor) {
-        configure<DoctorExtension> {
-            warnWhenNotUsingParallelGC = false
-        }
+private fun Project.configureGradleDoctor() {
+    configure<DoctorExtension> {
+        warnWhenNotUsingParallelGC = false
     }
 }
