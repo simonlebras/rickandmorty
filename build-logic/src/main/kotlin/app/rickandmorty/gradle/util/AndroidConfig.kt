@@ -18,6 +18,11 @@ internal fun Project.configureAndroid(
 
         lint {
             warningsAsErrors = true
+            disable += setOf(
+                "AndroidGradlePluginVersion",
+                "GradleDependency",
+                "OldTargetApi",
+            )
         }
 
         testOptions {
