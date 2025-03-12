@@ -1,14 +1,11 @@
 package app.rickandmorty.gradle.util
 
 import com.android.build.api.dsl.CommonExtension
-import org.gradle.accessors.dm.LibrariesForLibs
+import libs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
-internal fun Project.configureAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
-    libs: LibrariesForLibs,
-) {
+internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
     with(commonExtension) {
         compileSdk = libs.versions.android.sdk.compile.get().toInt()
 

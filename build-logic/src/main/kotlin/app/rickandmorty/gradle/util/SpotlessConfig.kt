@@ -2,11 +2,11 @@ package app.rickandmorty.gradle.util
 
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessExtensionPredeclare
-import org.gradle.accessors.dm.LibrariesForLibs
+import libs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-internal fun Project.configureSpotless(libs: LibrariesForLibs) {
+internal fun Project.configureSpotless() {
     val spotlessFormatters: SpotlessExtension.() -> Unit = {
         val ktlintVersion = libs.versions.ktlint.core.get()
 
