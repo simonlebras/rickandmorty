@@ -2,6 +2,7 @@ package app.rickandmorty.gradle.util
 
 import com.android.SdkConstants
 import com.android.build.api.artifact.SingleArtifact
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.gradle.AppExtension
 import com.google.common.truth.Truth.assertWithMessage
 import java.io.File
@@ -88,8 +89,11 @@ internal abstract class CheckBadgingTask : DefaultTask() {
 }
 
 @Suppress("UnstableApiUsage")
-internal fun Project.configureBadgingTasks(appExtension: AppExtension) {
-    androidExtension.onVariants { variant ->
+internal fun Project.configureBadgingTasks(
+    appExtension: AppExtension,
+    componentsExtension: ApplicationAndroidComponentsExtension,
+) {
+    componentsExtension.onVariants { variant ->
         val capitalizedVariantName = variant.name.capitalize()
 
         val generateBadgingTaskName = "generate${capitalizedVariantName}Badging"
