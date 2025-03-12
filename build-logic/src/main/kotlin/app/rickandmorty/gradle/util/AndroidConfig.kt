@@ -14,6 +14,7 @@ internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, 
         }
 
         lint {
+            checkReleaseBuilds = false
             warningsAsErrors = true
             disable += setOf(
                 "AndroidGradlePluginVersion",
