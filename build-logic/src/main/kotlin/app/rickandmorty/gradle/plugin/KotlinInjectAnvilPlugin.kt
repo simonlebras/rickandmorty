@@ -5,32 +5,29 @@ import app.rickandmorty.gradle.util.implementation
 import app.rickandmorty.gradle.util.ksp
 import app.rickandmorty.gradle.util.kspDependencies
 import app.rickandmorty.gradle.util.withPlugin
-import org.gradle.accessors.dm.LibrariesForLibs
+import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.the
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 public class KotlinInjectAnvilPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
-        val libs = the<LibrariesForLibs>()
-
         with(pluginManager) {
             apply(libs.plugins.ksp)
 
             withPlugin(libs.plugins.kotlin.android) {
-                configureKotlinInjectAnvilAndroid(libs)
+                configureKotlinInjectAnvilAndroid()
             }
 
             withPlugin(libs.plugins.kotlin.multiplatform) {
-                configureKotlinInjectAnvilMultiplatform(libs)
+                configureKotlinInjectAnvilMultiplatform()
             }
         }
     }
 
-    private fun Project.configureKotlinInjectAnvilAndroid(libs: LibrariesForLibs) {
+    private fun Project.configureKotlinInjectAnvilAndroid() {
         dependencies {
             implementation(libs.kotlininject.anvil.runtime)
             implementation(libs.kotlininject.anvil.runtime.optional)
@@ -40,7 +37,7 @@ public class KotlinInjectAnvilPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.configureKotlinInjectAnvilMultiplatform(libs: LibrariesForLibs) {
+    private fun Project.configureKotlinInjectAnvilMultiplatform() {
         configure<KotlinMultiplatformExtension> {
             sourceSets.commonMain.dependencies {
                 implementation(libs.kotlininject.anvil.runtime)

@@ -5,16 +5,13 @@ import app.rickandmorty.gradle.util.configureAffectedAndroidTest
 import app.rickandmorty.gradle.util.configureAndroid
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
-import org.gradle.accessors.dm.LibrariesForLibs
+import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.the
 
 public class AndroidLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
-        val libs = the<LibrariesForLibs>()
-
         pluginManager.apply(
             libs.plugins.android.library,
             libs.plugins.cachefix,
@@ -29,10 +26,7 @@ public class AndroidLibraryPlugin : Plugin<Project> {
         }
 
         configure<LibraryExtension> {
-            configureAndroid(
-                commonExtension = this,
-                libs = libs,
-            )
+            configureAndroid(this)
 
             val targetSdk = libs.versions.android.sdk.target.get().toInt()
             lint.targetSdk = targetSdk

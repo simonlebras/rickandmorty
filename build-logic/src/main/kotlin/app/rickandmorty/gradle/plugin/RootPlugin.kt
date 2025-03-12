@@ -5,12 +5,11 @@ import app.rickandmorty.gradle.util.withPlugin
 import com.autonomousapps.DependencyAnalysisExtension
 import com.dropbox.affectedmoduledetector.AffectedModuleConfiguration
 import com.osacky.doctor.DoctorExtension
-import org.gradle.accessors.dm.LibrariesForLibs
+import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.the
 
 public class RootPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
@@ -18,17 +17,15 @@ public class RootPlugin : Plugin<Project> {
             "Root plugin should only be applied on the root project."
         }
 
-        val libs = the<LibrariesForLibs>()
+        configureAffectedModuleDetector()
 
-        configureAffectedModuleDetector(libs)
+        configureDependencyAnalysis()
 
-        configureDependencyAnalysis(libs)
-
-        configureGradleDoctor(libs)
+        configureGradleDoctor()
     }
 }
 
-private fun Project.configureAffectedModuleDetector(libs: LibrariesForLibs) {
+private fun Project.configureAffectedModuleDetector() {
     pluginManager.withPlugin(libs.plugins.affectedmoduledetector) {
         configure<AffectedModuleConfiguration> {
             baseDir = "${project.rootDir}"
@@ -66,7 +63,7 @@ private fun Project.configureAffectedModuleDetector(libs: LibrariesForLibs) {
     }
 }
 
-private fun Project.configureDependencyAnalysis(libs: LibrariesForLibs) {
+private fun Project.configureDependencyAnalysis() {
     pluginManager.withPlugin(libs.plugins.dependencyanalysis) {
         configure<DependencyAnalysisExtension> {
             issues {
@@ -95,7 +92,7 @@ private fun Project.configureDependencyAnalysis(libs: LibrariesForLibs) {
     }
 }
 
-private fun Project.configureGradleDoctor(libs: LibrariesForLibs) {
+private fun Project.configureGradleDoctor() {
     pluginManager.withPlugin(libs.plugins.gradledoctor) {
         configure<DoctorExtension> {
             warnWhenNotUsingParallelGC = false

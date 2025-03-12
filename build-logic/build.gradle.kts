@@ -34,6 +34,13 @@ tasks {
     }
 }
 
+lint {
+    warningsAsErrors = true
+    disable += setOf(
+        "InternalGradleApiUsage",
+    )
+}
+
 dependencies {
     compileOnly(libs.affectedmoduledetector.plugin)
     compileOnly(libs.android.plugin)
@@ -47,9 +54,6 @@ dependencies {
     compileOnly(libs.spotless.plugin)
 
     implementation(libs.truth)
-
-    // Workaround for https://github.com/gradle/gradle/issues/15383
-    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 
     lintChecks(libs.androidx.gradle.lints)
 }

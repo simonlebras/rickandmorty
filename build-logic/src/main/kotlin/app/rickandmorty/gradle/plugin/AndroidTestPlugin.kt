@@ -4,16 +4,13 @@ import app.rickandmorty.gradle.util.apply
 import app.rickandmorty.gradle.util.configureAffectedAndroidTest
 import app.rickandmorty.gradle.util.configureAndroid
 import com.android.build.gradle.TestExtension
-import org.gradle.accessors.dm.LibrariesForLibs
+import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.the
 
 public class AndroidTestPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
-        val libs = the<LibrariesForLibs>()
-
         pluginManager.apply(
             libs.plugins.android.test,
             libs.plugins.cachefix,
@@ -22,10 +19,7 @@ public class AndroidTestPlugin : Plugin<Project> {
         configureAffectedAndroidTest()
 
         configure<TestExtension> {
-            configureAndroid(
-                commonExtension = this,
-                libs = libs,
-            )
+            configureAndroid(this)
 
             defaultConfig.targetSdk = libs.versions.android.sdk.target.get().toInt()
         }
