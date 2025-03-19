@@ -189,7 +189,6 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 rickandmorty-android-application = { id = "app.rickandmorty.android-application" }
 rickandmorty-android-library = { id = "app.rickandmorty.android-library" }
 rickandmorty-android-test = { id = "app.rickandmorty.android-test" }
-rickandmorty-apollo = { id = "app.rickandmorty.apollo" }
 rickandmorty-compose = { id = "app.rickandmorty.compose" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
