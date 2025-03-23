@@ -36,13 +36,6 @@ internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, 
 
             isCoreLibraryDesugaringEnabled = true
         }
-
-        buildTypes {
-            named("debug") {
-                // For upstream Android libraries that just have a single release variant
-                matchingFallbacks += "release"
-            }
-        }
     }
 
     dependencies {

@@ -1,7 +1,6 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.util.apply
-import app.rickandmorty.gradle.util.configureAffectedAndroidTest
 import app.rickandmorty.gradle.util.configureAndroid
 import com.android.build.gradle.TestExtension
 import libs
@@ -16,12 +15,16 @@ public class AndroidTestPlugin : Plugin<Project> {
             libs.plugins.cachefix,
         )
 
-        configureAffectedAndroidTest()
-
         configure<TestExtension> {
             configureAndroid(this)
 
             defaultConfig.targetSdk = libs.versions.android.sdk.target.get().toInt()
+
+            buildTypes {
+                debug {
+                    matchingFallbacks += "release"
+                }
+            }
         }
     }
 }

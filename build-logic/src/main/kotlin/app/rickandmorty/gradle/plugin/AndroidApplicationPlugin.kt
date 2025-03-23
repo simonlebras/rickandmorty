@@ -1,7 +1,6 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.util.apply
-import app.rickandmorty.gradle.util.configureAffectedAndroidTest
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureBadgingTasks
 import com.android.build.api.dsl.ApplicationExtension
@@ -19,8 +18,6 @@ public class AndroidApplicationPlugin : Plugin<Project> {
             libs.plugins.android.application,
             libs.plugins.cachefix,
         )
-
-        configureAffectedAndroidTest()
 
         configure<ApplicationExtension> {
             configureAndroid(this)
@@ -40,12 +37,23 @@ public class AndroidApplicationPlugin : Plugin<Project> {
                 "META-INF/NOTICE",
                 "META-INF/NOTICE.txt",
             )
+
+            buildTypes {
+                debug {
+                    matchingFallbacks += "release"
+                    isDefault = true
+                }
+            }
         }
 
         configureBadgingTasks(
             appExtension = extensions.getByType<AppExtension>(),
             componentsExtension = extensions.getByType<ApplicationAndroidComponentsExtension>(),
         )
+
+        tasks.named("check").configure {
+            dependsOn("checkReleaseBadging")
+        }
 
         configure<ApplicationAndroidComponentsExtension> {
             onVariants(selector().withBuildType("release")) { variant ->

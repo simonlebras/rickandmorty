@@ -1,5 +1,4 @@
 [versions]
-affectedmoduledetector = "0.3.1"
 android-desugarjdklibs = "2.1.5"
 android-plugin = "8.10.0-alpha07"
 android-sdk-compile = "36"
@@ -73,8 +72,6 @@ turbine = "1.2.0"
 wire = "5.3.1"
 
 [libraries]
-affectedmoduledetector-plugin = { group = "com.dropbox.affectedmoduledetector", name = "affectedmoduledetector", version.ref = "affectedmoduledetector" }
-
 android-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
 android-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android-plugin" }
 android-security-lints = { group = "com.android.security.lint", name = "lint", version.ref = "android-security-lints" }
@@ -201,7 +198,6 @@ rickandmorty-room = { id = "app.rickandmorty.room" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
 rickandmorty-spotless = { id = "app.rickandmorty.spotless" }
 
-affectedmoduledetector = { id = "com.dropbox.affectedmoduledetector", version.ref = "affectedmoduledetector" }
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 android-lint = { id = "com.android.lint", version.ref = "android-plugin" }

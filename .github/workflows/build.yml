@@ -22,8 +22,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # Fetch expanded history, which is needed for affected module detection
-          fetch-depth: "500"
           lfs: true
 
       - name: Check LFS files
@@ -48,26 +46,11 @@ jobs:
         with:
           key: ${{ secrets.DECRYPT_KEY }}
 
-      - name: Check code style
-        run: ./gradlew spotlessCheck
-
-      - name: Check lint
-        run: ./gradlew lint
-
-      - name: Check dependencies order
-        run: ./gradlew checkSortDependencies
+      - name: Run checks
+        run: ./gradlew check
 
       - name: Detect unused and misused dependencies
         run: ./gradlew buildHealth
-
-      - name: Check module graph
-        run: ./gradlew assertModuleGraph
-
-      - name: Check badging
-        run: ./gradlew :app:checkReleaseBadging
-
-      - name: Run build-logic checks
-        run: ./gradlew :build-logic:check
 
       - name: Build all build type and flavor permutations
         run: |
@@ -75,23 +58,8 @@ jobs:
           -x :baseline-profile:pixel6Api31AospSetup \
           -Pandroidx.baselineprofile.skipgeneration
 
-      - name: Run unit tests
-        run: |
-          ./gradlew runAffectedUnitTests \
-          -Paffected_module_detector.enable \
-          -PaffectedBaseRef=$BASE_REF \
-          --no-configuration-cache
-
-      - name: Run screenshot tests
-        if: ${{ false }}
-        run: |
-          ./gradlew runAffectedScreenshotTests \
-          -Paffected_module_detector.enable \
-          -PaffectedBaseRef=$BASE_REF \
-          --no-configuration-cache
-
       - name: Upload build outputs
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: build-outputs
@@ -99,7 +67,7 @@ jobs:
             app/build/outputs
 
       - name: Upload reports
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: reports
@@ -109,7 +77,7 @@ jobs:
             **/build/reports/screenshotTest/*
 
       - name: Upload test results
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: test-results
@@ -167,9 +135,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          # Fetch expanded history, which is needed for affected module detection
-          fetch-depth: "500"
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -195,34 +160,15 @@ jobs:
             ~/.android/avd/*
           key: ${{ runner.os }}-gmd-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
 
-      - name: Build instrumentation tests
-        run: |
-          ./gradlew assembleAffectedAndroidTests \
-          -Paffected_module_detector.enable \
-          -PaffectedBaseRef=$BASE_REF \
-          --no-configuration-cache
-
       - name: Run instrumentation tests
         run: |
-          adb logcat > logcat.txt &
-          ./gradlew runAffectedAndroidTests \
-          -Paffected_module_detector.enable \
-          -PaffectedBaseRef=$BASE_REF \
-          -PaffectedGradleManagedDevice=${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.system-image-source }} \
+          ./gradlew ${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.system-image-source }}DebugAndroidTest \
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
-          --no-configuration-cache \
           --no-parallel \
           -Dorg.gradle.workers.max=1
 
-      - name: Upload logs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: logs-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
-          path: logcat.txt
-
       - name: Upload test results
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}

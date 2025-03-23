@@ -23,7 +23,7 @@ if (useFirebase) {
     apply(plugin = "app.rickandmorty.firebase-perf")
 }
 
-val useReleaseKeystore = rootProject.file("keystore/release.jks").exists()
+val useReleaseKeystore = layout.settingsDirectory.file("keystore/release.jks").asFile.exists()
 
 android {
     namespace = "app.rickandmorty"
@@ -40,7 +40,7 @@ android {
 
     signingConfigs {
         getByName("debug") {
-            storeFile = rootProject.file("keystore/debug.jks")
+            storeFile = layout.settingsDirectory.file("keystore/debug.jks").asFile
             storePassword = "rickandmorty"
             keyAlias = "debug"
             keyPassword = "rickandmorty"
@@ -48,7 +48,7 @@ android {
 
         create("release") {
             if (useReleaseKeystore) {
-                storeFile = rootProject.file("keystore/release.jks")
+                storeFile = layout.settingsDirectory.file("keystore/release.jks").asFile
                 storePassword = providers.gradleProperty("RAM_RELEASE_KEYSTORE_PWD").getOrElse("")
                 keyAlias = "release"
                 keyPassword = providers.gradleProperty("RAM_RELEASE_KEY_PWD").getOrElse("")

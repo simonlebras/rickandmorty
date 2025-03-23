@@ -12,9 +12,8 @@ plugins {
     alias(libs.plugins.rickandmorty.osslicenses) apply false
     alias(libs.plugins.rickandmorty.room) apply false
     alias(libs.plugins.rickandmorty.root)
-    alias(libs.plugins.rickandmorty.spotless)
+    alias(libs.plugins.rickandmorty.spotless) apply false
 
-    alias(libs.plugins.affectedmoduledetector)
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.lint) apply false
@@ -25,19 +24,27 @@ plugins {
     alias(libs.plugins.cachefix) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.compose.multiplatform) apply false
-    alias(libs.plugins.dependencyanalysis)
+    alias(libs.plugins.dependencyanalysis) apply false
     alias(libs.plugins.easylauncher) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
     alias(libs.plugins.firebase.perf) apply false
     alias(libs.plugins.googleservices) apply false
-    alias(libs.plugins.gradledoctor)
+    alias(libs.plugins.gradledoctor) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.modulegraphassert) apply false
     alias(libs.plugins.play.osslicenses) apply false
-    alias(libs.plugins.sortdependencies)
+    alias(libs.plugins.sortdependencies) apply false
     alias(libs.plugins.spotless) apply false
     alias(libs.plugins.wire) apply false
+}
+
+tasks.named("check") {
+    dependsOn(
+        gradle.includedBuilds.map { build ->
+            build.task(":check")
+        },
+    )
 }
