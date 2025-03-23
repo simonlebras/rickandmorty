@@ -72,10 +72,6 @@ gradlePlugin {
             id = "app.rickandmorty.android-test"
             implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
         }
-        register("apollo") {
-            id = "app.rickandmorty.apollo"
-            implementationClass = "app.rickandmorty.gradle.plugin.ApolloPlugin"
-        }
         register("compose") {
             id = "app.rickandmorty.compose"
             implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
