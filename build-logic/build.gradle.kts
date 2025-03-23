@@ -99,10 +99,6 @@ gradlePlugin {
             id = "app.rickandmorty.kotlininject-core"
             implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectCorePlugin"
         }
-        register("oss-licenses") {
-            id = "app.rickandmorty.oss-licenses"
-            implementationClass = "app.rickandmorty.gradle.plugin.OssLicensesPlugin"
-        }
         register("room") {
             id = "app.rickandmorty.room"
             implementationClass = "app.rickandmorty.gradle.plugin.RoomPlugin"
