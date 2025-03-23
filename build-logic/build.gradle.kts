@@ -42,7 +42,6 @@ lint {
 }
 
 dependencies {
-    compileOnly(libs.affectedmoduledetector.plugin)
     compileOnly(libs.android.plugin)
     compileOnly(libs.android.tools.common)
     compileOnly(libs.androidx.room.plugin)
