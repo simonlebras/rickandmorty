@@ -9,7 +9,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.AppScope
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
-@ContributesBinding(AppScope::class, multibinding = true)
+@ContributesBinding(scope = AppScope::class, multibinding = true)
 public class DebugLoggerInitializer : Initializer {
     override fun initialize() {
         with(Logger) {

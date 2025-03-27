@@ -16,7 +16,7 @@ import app.rickandmorty.core.coroutines.inject.ApplicationScope
 import app.rickandmorty.core.coroutines.inject.IODispatcher
 import app.rickandmorty.core.startup.Initializer
 import app.rickandmorty.data.model.NightMode
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred
@@ -26,12 +26,17 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import me.tatarka.inject.annotations.Inject
+import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
-internal class NightModeInitializer(
+@Inject
+@ContributesBinding(scope = AppScope::class, multibinding = true)
+public class NightModeInitializer(
     application: Application,
     private val themeRepository: ThemeRepository,
     @ApplicationScope private val applicationScope: CoroutineScope,
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
+    @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : Initializer {
     private val nightModeImpl = if (Build.VERSION.SDK_INT >= 31) {
         NightMode31Impl(application)

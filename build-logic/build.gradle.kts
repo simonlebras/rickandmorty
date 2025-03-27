@@ -99,6 +99,10 @@ gradlePlugin {
             id = "app.rickandmorty.kotlininject-core"
             implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectCorePlugin"
         }
+        register("kotlininject-viewmodel") {
+            id = "app.rickandmorty.kotlininject-viewmodel"
+            implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectViewModelPlugin"
+        }
         register("room") {
             id = "app.rickandmorty.room"
             implementationClass = "app.rickandmorty.gradle.plugin.RoomPlugin"

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.rickandmorty.kotlin.android)
     alias(libs.plugins.rickandmorty.kotlininject.anvil)
     alias(libs.plugins.rickandmorty.kotlininject.core)
+    alias(libs.plugins.rickandmorty.kotlininject.viewmodel)
     alias(libs.plugins.rickandmorty.spotless)
 
     alias(libs.plugins.androidx.baselineprofile)

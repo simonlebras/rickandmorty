@@ -14,39 +14,37 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 public class KotlinInjectAnvilPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
-        with(pluginManager) {
-            apply(libs.plugins.ksp)
+        pluginManager.apply(libs.plugins.ksp)
 
-            withPlugin(libs.plugins.kotlin.android) {
-                configureKotlinInjectAnvilAndroid()
-            }
+        configureKotlinInjectAnvilAndroid()
 
-            withPlugin(libs.plugins.kotlin.multiplatform) {
-                configureKotlinInjectAnvilMultiplatform()
-            }
-        }
+        configureKotlinInjectAnvilMultiplatform()
     }
 
     private fun Project.configureKotlinInjectAnvilAndroid() {
-        dependencies {
-            implementation(libs.kotlininject.anvil.runtime)
-            implementation(libs.kotlininject.anvil.runtime.optional)
-            implementation(libs.kotlininject.core.runtime)
+        pluginManager.withPlugin(libs.plugins.kotlin.android) {
+            dependencies {
+                implementation(libs.kotlininject.anvil.runtime)
+                implementation(libs.kotlininject.anvil.runtime.optional)
+                implementation(libs.kotlininject.core.runtime)
 
-            ksp(libs.kotlininject.anvil.compiler)
+                ksp(libs.kotlininject.anvil.compiler)
+            }
         }
     }
 
     private fun Project.configureKotlinInjectAnvilMultiplatform() {
-        configure<KotlinMultiplatformExtension> {
-            sourceSets.commonMain.dependencies {
-                implementation(libs.kotlininject.anvil.runtime)
-                implementation(libs.kotlininject.anvil.runtime.optional)
-                implementation(libs.kotlininject.core.runtime)
-            }
+        pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
+            configure<KotlinMultiplatformExtension> {
+                sourceSets.commonMain.dependencies {
+                    implementation(libs.kotlininject.anvil.runtime)
+                    implementation(libs.kotlininject.anvil.runtime.optional)
+                    implementation(libs.kotlininject.core.runtime)
+                }
 
-            kspDependencies {
-                ksp(libs.kotlininject.anvil.compiler)
+                kspDependencies {
+                    ksp(libs.kotlininject.anvil.compiler)
+                }
             }
         }
     }
