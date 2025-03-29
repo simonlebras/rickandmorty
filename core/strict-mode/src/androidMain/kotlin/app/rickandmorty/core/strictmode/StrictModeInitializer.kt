@@ -30,7 +30,7 @@ public class StrictModeInitializer : Initializer {
                     penaltyLog()
                 } else {
                     penaltyListener(penaltyListenerExecutor) { violation ->
-                        Logger.withTag(TAG).w { violation.toString() }
+                        Logger.withTag(TAG).w(violation) { "StrictMode ThreadPolicy violation" }
                     }
                 }
             }
@@ -51,7 +51,7 @@ public class StrictModeInitializer : Initializer {
                             }
                         }
 
-                        Logger.withTag(TAG).w { violation.toString() }
+                        Logger.withTag(TAG).w(violation) { "StrictMode VmPolicy violation" }
                     }
                 }
             }
