@@ -1,9 +1,7 @@
 package app.rickandmorty.gradle.util
 
-import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.api.dsl.TestOptions
 import org.gradle.api.GradleException
-import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.invoke
 
 private val deviceConfigs = listOf(
@@ -25,14 +23,12 @@ private val deviceConfigs = listOf(
 )
 
 internal fun TestOptions.configureGradleManagedDevices() {
-    managedDevices {
-        allDevices {
-            deviceConfigs.forEach { config ->
-                create<ManagedVirtualDevice>(config.taskName) {
-                    device = config.device
-                    apiLevel = config.apiLevel
-                    systemImageSource = config.systemImageSource
-                }
+    managedDevices.localDevices {
+        deviceConfigs.forEach { config ->
+            create(config.taskName) {
+                device = config.device
+                apiLevel = config.apiLevel
+                systemImageSource = config.systemImageSource
             }
         }
     }
