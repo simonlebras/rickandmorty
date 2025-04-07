@@ -2,6 +2,7 @@ package app.rickandmorty.ui
 
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -23,6 +24,15 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    init {
+        // https://issuetracker.google.com/issues/139738913
+        if (Build.VERSION.SDK_INT == 29 && isTaskRoot) {
+            onBackPressedDispatcher.addCallback {
+                finishAfterTransition()
+            }
+        }
+    }
+
     private val activityComponent by unsafeLazy {
         ActivityComponent.create(this)
     }
