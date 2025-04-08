@@ -43,8 +43,8 @@ lint {
 
 dependencies {
     compileOnly(libs.android.tools.common)
+    compileOnly(libs.android.tools.gradleapi)
     compileOnly(libs.spotless.plugin)
-    compileOnly(libs.plugins.android.application.asDependency())
     compileOnly(libs.plugins.androidx.room.asDependency())
     compileOnly(libs.plugins.apollo.asDependency())
     compileOnly(libs.plugins.compose.compiler.asDependency())

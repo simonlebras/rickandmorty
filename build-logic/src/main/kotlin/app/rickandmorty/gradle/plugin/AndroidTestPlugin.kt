@@ -2,7 +2,7 @@ package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.util.apply
 import app.rickandmorty.gradle.util.configureAndroid
-import com.android.build.gradle.TestExtension
+import com.android.build.api.dsl.TestExtension
 import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project

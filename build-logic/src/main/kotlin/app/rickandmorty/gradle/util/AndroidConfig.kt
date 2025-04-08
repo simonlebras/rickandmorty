@@ -39,8 +39,8 @@ internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, 
     }
 
     dependencies {
-        coreLibraryDesugaring(libs.android.desugarjdklibs)
+        coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
 
-        lintChecks(libs.android.security.lints)
+        lintChecks(libs.android.tools.security.lints)
     }
 }

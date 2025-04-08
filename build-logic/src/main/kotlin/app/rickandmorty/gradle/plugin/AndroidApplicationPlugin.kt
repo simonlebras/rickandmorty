@@ -5,12 +5,10 @@ import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureBadgingTasks
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.android.build.gradle.AppExtension
 import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.getByType
 
 public class AndroidApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
@@ -46,16 +44,9 @@ public class AndroidApplicationPlugin : Plugin<Project> {
             }
         }
 
-        configureBadgingTasks(
-            appExtension = extensions.getByType<AppExtension>(),
-            componentsExtension = extensions.getByType<ApplicationAndroidComponentsExtension>(),
-        )
-
-        tasks.named("check").configure {
-            dependsOn("checkReleaseBadging")
-        }
-
         configure<ApplicationAndroidComponentsExtension> {
+            configureBadgingTasks(this)
+
             onVariants(selector().withBuildType("release")) { variant ->
                 variant.packaging.resources.excludes.addAll(
                     "**/*.kotlin_metadata",
@@ -66,6 +57,10 @@ public class AndroidApplicationPlugin : Plugin<Project> {
                     "META-INF/androidx.*",
                 )
             }
+        }
+
+        tasks.named("check").configure {
+            dependsOn("checkReleaseBadging")
         }
     }
 }
