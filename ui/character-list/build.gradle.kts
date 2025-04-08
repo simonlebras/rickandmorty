@@ -10,6 +10,10 @@ plugins {
 
 android {
     namespace = "app.rickandmorty.ui.character.list"
+
+    buildFeatures {
+        androidResources = true
+    }
 }
 
 dependencies {
