@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: 24
+          java-version-file: .github/.java-version
 
       - name: Set up jemalloc
         uses: kaeawc/setup-jemalloc@v0.0.3
@@ -140,7 +140,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: "zulu"
-          java-version: 24
+          java-version-file: .github/.java-version
 
       - name: Set up jemalloc
         uses: kaeawc/setup-jemalloc@v0.0.3
