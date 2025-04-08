@@ -42,15 +42,15 @@ lint {
 }
 
 dependencies {
-    compileOnly(libs.android.plugin)
     compileOnly(libs.android.tools.common)
-    compileOnly(libs.androidx.room.plugin)
-    compileOnly(libs.apollo.plugin)
-    compileOnly(libs.dependencyanalysis.plugin)
-    compileOnly(libs.gradledoctor.plugin)
-    compileOnly(libs.kotlin.compose.compiler.plugin)
-    compileOnly(libs.kotlin.plugin)
     compileOnly(libs.spotless.plugin)
+    compileOnly(libs.plugins.android.application.asDependency())
+    compileOnly(libs.plugins.androidx.room.asDependency())
+    compileOnly(libs.plugins.apollo.asDependency())
+    compileOnly(libs.plugins.compose.compiler.asDependency())
+    compileOnly(libs.plugins.dependencyanalysis.asDependency())
+    compileOnly(libs.plugins.gradledoctor.asDependency())
+    compileOnly(libs.plugins.kotlin.multiplatform.asDependency())
 
     implementation(libs.truth)
 
@@ -130,4 +130,8 @@ spotless {
         ktlint(ktlintVersion)
         target("*.kts")
     }
+}
+
+private fun Provider<PluginDependency>.asDependency(): Provider<String> = map {
+    "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
 }

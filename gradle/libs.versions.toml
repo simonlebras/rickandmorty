@@ -71,7 +71,6 @@ wire = "5.3.1"
 
 [libraries]
 android-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
-android-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android-plugin" }
 android-security-lints = { group = "com.android.security.lint", name = "lint", version.ref = "android-security-lints" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools" }
 
@@ -96,7 +95,6 @@ androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", 
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "androidx-profileinstaller" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
-androidx-room-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidx-room" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "androidx-room" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidx-test-core" }
@@ -111,7 +109,6 @@ androidx-window = { group = "androidx.window", name = "window", version.ref = "a
 
 apollo-adapters-kotlinx-datetime = { group = "com.apollographql.adapters", name = "apollo-adapters-kotlinx-datetime", version.ref = "apollo-adapters" }
 apollo-api = { group = "com.apollographql.apollo", name = "apollo-api", version.ref = "apollo" }
-apollo-plugin = { group = "com.apollographql.apollo", name = "apollo-gradle-plugin-external", version.ref = "apollo" }
 apollo-runtime = { group = "com.apollographql.apollo", name = "apollo-runtime", version.ref = "apollo" }
 
 coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
@@ -124,22 +121,15 @@ compose-placeholder-material3 = { group = "com.eygraber", name = "compose-placeh
 
 crashkios-crashlytics = { group = "co.touchlab.crashkios", name = "crashlytics", version.ref = "crashkios-crashlytics" }
 
-dependencyanalysis-plugin = { group = "com.autonomousapps", name = "dependency-analysis-gradle-plugin", version.ref = "dependencyanalysis" }
-
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 
-gradledoctor-plugin = { group = "com.osacky.doctor", name = "doctor-plugin", version.ref = "gradledoctor" }
-
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 
 kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 kermit-crashlytics = { group = "co.touchlab", name = "kermit-crashlytics", version.ref = "kermit" }
-
-kotlin-compose-compiler-plugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
-kotlin-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 kotlininject-anvil-compiler = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "compiler", version.ref = "kotlininject-anvil" }
 kotlininject-anvil-runtime = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "runtime", version.ref = "kotlininject-anvil" }
@@ -151,7 +141,6 @@ kotlininject-viewmodel-runtime = { group = "com.teobaranga.kotlin.inject.viewmod
 kotlininject-viewmodel-runtime-compose = { group = "com.teobaranga.kotlin.inject.viewmodel", name = "runtime-compose", version.ref = "kotlininject-viewmodel" }
 
 kotlinx-collectionsimmutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collectionsimmutable" }
-kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
