@@ -1,7 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "java-version",
+      "depNameTemplate": "java",
+      "extractVersionTemplate": "^(?<version>\\d+)",
+      "fileMatch": [
+        "\\.java-version$"
+      ],
+      "matchStrings": [
+        "(?<currentValue>.*)\\n"
+      ]
+    }
+  ],
   "extends": [
     "config:recommended"
+  ],
+  "ignorePresets": [
+    "workarounds:javaLTSVersions"
   ],
   "packageRules": [
     {
@@ -28,14 +45,14 @@
       ]
     },
     {
+      "automerge": true,
+      "automergeType": "pr",
       "description": "Automatically merge minor and patch-level updates",
       "matchUpdateTypes": [
         "minor",
         "patch",
         "digest"
       ],
-      "automerge": true,
-      "automergeType": "pr",
       "platformAutomerge": true
     }
   ]
