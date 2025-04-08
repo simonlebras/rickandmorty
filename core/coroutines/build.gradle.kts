@@ -17,8 +17,6 @@ kotlin {
         androidMain {
             dependencies {
                 implementation(projects.core.base)
-
-                runtimeOnly(libs.kotlinx.coroutines.android)
             }
         }
 
