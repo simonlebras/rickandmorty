@@ -2,8 +2,8 @@ package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.util.apply
 import app.rickandmorty.gradle.util.configureAndroid
+import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
-import com.android.build.gradle.LibraryExtension
 import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project

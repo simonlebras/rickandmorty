@@ -1,11 +1,8 @@
 package app.rickandmorty.gradle.util
 
-import com.android.SdkConstants
 import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.android.build.gradle.AppExtension
 import com.google.common.truth.Truth.assertWithMessage
-import java.io.File
 import javax.inject.Inject
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
@@ -90,7 +87,6 @@ internal abstract class CheckBadgingTask : DefaultTask() {
 
 @Suppress("UnstableApiUsage")
 internal fun Project.configureBadgingTasks(
-    appExtension: AppExtension,
     componentsExtension: ApplicationAndroidComponentsExtension,
 ) {
     componentsExtension.onVariants { variant ->
@@ -99,14 +95,7 @@ internal fun Project.configureBadgingTasks(
         val generateBadgingTaskName = "generate${capitalizedVariantName}Badging"
         val generateBadging = tasks.register<GenerateBadgingTask>(generateBadgingTaskName) {
             apk = variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE)
-            aapt2Executable = with(appExtension) {
-                File(
-                    sdkDirectory,
-                    "${SdkConstants.FD_BUILD_TOOLS}/" +
-                        "$buildToolsVersion/" +
-                        SdkConstants.FN_AAPT2,
-                )
-            }
+            aapt2Executable = componentsExtension.sdkComponents.aapt2.flatMap { it.executable }
             badging = project.layout.buildDirectory.file(
                 "outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt",
             )

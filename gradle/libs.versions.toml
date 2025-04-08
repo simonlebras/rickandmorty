@@ -70,9 +70,10 @@ turbine = "1.2.0"
 wire = "5.3.1"
 
 [libraries]
-android-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
-android-security-lints = { group = "com.android.security.lint", name = "lint", version.ref = "android-security-lints" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools" }
+android-tools-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
+android-tools-gradleapi = { group = "com.android.tools.build", name = "gradle-api", version.ref = "android-plugin" }
+android-tools-security-lints = { group = "com.android.security.lint", name = "lint", version.ref = "android-security-lints" }
 
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidx-activity" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
