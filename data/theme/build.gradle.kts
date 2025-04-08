@@ -17,6 +17,8 @@ kotlin {
         androidMain {
             dependencies {
                 implementation(libs.androidx.appcompat)
+
+                implementation(projects.core.processLifecycle)
             }
         }
 

@@ -7,13 +7,17 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.getSystemService
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import app.rickandmorty.core.base.doOnActivityPreCreated
 import app.rickandmorty.core.base.isComponentEnabled
 import app.rickandmorty.core.base.setComponentEnabled
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.coroutines.awaitBlocking
-import app.rickandmorty.core.coroutines.inject.ApplicationScope
 import app.rickandmorty.core.coroutines.inject.IODispatcher
+import app.rickandmorty.core.processlifecycle.inject.ProcessLifecycleOwner
 import app.rickandmorty.core.startup.Initializer
 import app.rickandmorty.data.model.NightMode
 import kotlin.coroutines.CoroutineContext
@@ -35,7 +39,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 public class NightModeInitializer(
     application: Application,
     private val themeRepository: ThemeRepository,
-    @ApplicationScope private val applicationScope: CoroutineScope,
+    @ProcessLifecycleOwner private val processLifecycleOwner: LifecycleOwner,
     @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : Initializer {
     private val nightModeImpl = if (Build.VERSION.SDK_INT >= 31) {
@@ -44,6 +48,9 @@ public class NightModeInitializer(
         NightMode24Impl(application)
     }
 
+    private val processLifecycleScope: CoroutineScope
+        get() = processLifecycleOwner.lifecycleScope
+
     override fun initialize() {
         val nightModeDeferred = getNightModeDeferred()
         nightModeImpl.initializeNightMode(nightModeDeferred)
@@ -51,7 +58,7 @@ public class NightModeInitializer(
         observeNightModeUpdates()
     }
 
-    private fun getNightModeDeferred(): Deferred<NightMode> = applicationScope.async(
+    private fun getNightModeDeferred(): Deferred<NightMode> = processLifecycleScope.async(
         context = ioDispatcher,
         start = CoroutineStart.LAZY,
     ) {
@@ -68,7 +75,11 @@ public class NightModeInitializer(
             .onEach { nightMode ->
                 nightModeImpl.setApplicationNightMode(nightMode)
             }
-            .launchIn(applicationScope)
+            .flowWithLifecycle(
+                lifecycle = processLifecycleOwner.lifecycle,
+                minActiveState = Lifecycle.State.STARTED,
+            )
+            .launchIn(processLifecycleScope)
     }
 }
 
