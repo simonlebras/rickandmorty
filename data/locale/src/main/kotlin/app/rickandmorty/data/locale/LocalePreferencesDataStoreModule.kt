@@ -13,14 +13,15 @@ import kotlinx.coroutines.CoroutineScope
 private const val PREFERENCES_FILE_NAME = "locale_preferences.pb"
 
 internal object LocalePreferencesDataStoreModule {
-    fun provideLocalePreferencesDataStore(
-        context: Context,
-        @ApplicationScope applicationScope: CoroutineScope,
-        @IODispatcher ioDispatcher: CoroutineDispatcher,
-        localePreferencesSerializer: LocalePreferencesSerializer,
-    ): DataStore<LocalePreferences> = DataStoreFactory.create(
-        serializer = localePreferencesSerializer,
-        scope = CoroutineScope(applicationScope.coroutineContext + ioDispatcher),
-        produceFile = { context.dataStoreFile(PREFERENCES_FILE_NAME) },
+  fun provideLocalePreferencesDataStore(
+    context: Context,
+    @ApplicationScope applicationScope: CoroutineScope,
+    @IODispatcher ioDispatcher: CoroutineDispatcher,
+    localePreferencesSerializer: LocalePreferencesSerializer,
+  ): DataStore<LocalePreferences> =
+    DataStoreFactory.create(
+      serializer = localePreferencesSerializer,
+      scope = CoroutineScope(applicationScope.coroutineContext + ioDispatcher),
+      produceFile = { context.dataStoreFile(PREFERENCES_FILE_NAME) },
     )
 }

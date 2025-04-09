@@ -6,5 +6,5 @@ import app.rickandmorty.data.model.Character
 import kotlinx.coroutines.flow.Flow
 
 public interface CharacterRepository {
-    public fun getPagedCharacters(config: PagingConfig): Flow<PagingData<Character>>
+  public fun getPagedCharacters(config: PagingConfig): Flow<PagingData<Character>>
 }

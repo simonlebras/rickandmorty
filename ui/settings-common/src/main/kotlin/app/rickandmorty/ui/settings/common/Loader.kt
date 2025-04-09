@@ -7,15 +7,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 public fun LazyListScope.loader() {
-    item(
-        key = "loader",
-        contentType = SettingsContentType.LOADER,
-    ) {
-        Box(
-            modifier = Modifier.fillParentMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
-            CircularProgressIndicator()
-        }
+  item(key = "loader", contentType = SettingsContentType.LOADER) {
+    Box(modifier = Modifier.fillParentMaxSize(), contentAlignment = Alignment.Center) {
+      CircularProgressIndicator()
     }
+  }
 }

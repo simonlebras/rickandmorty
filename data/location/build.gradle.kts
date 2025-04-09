@@ -1,32 +1,30 @@
 plugins {
-    alias(libs.plugins.rickandmorty.android.library)
-    alias(libs.plugins.rickandmorty.kotlin.android)
-    alias(libs.plugins.rickandmorty.spotless)
+  alias(libs.plugins.rickandmorty.android.library)
+  alias(libs.plugins.rickandmorty.kotlin.android)
+  alias(libs.plugins.rickandmorty.spotless)
 
-    alias(libs.plugins.apollo)
-    alias(libs.plugins.dependencyanalysis)
-    alias(libs.plugins.sortdependencies)
+  alias(libs.plugins.apollo)
+  alias(libs.plugins.dependencyanalysis)
+  alias(libs.plugins.sortdependencies)
 }
 
-android {
-    namespace = "app.rickandmorty.data.location"
-}
+android { namespace = "app.rickandmorty.data.location" }
 
 apollo {
-    service("rickandmorty") {
-        packageName = "app.rickandmorty.data.location"
-        dependsOn(projects.data.graphqlSchema)
-    }
+  service("rickandmorty") {
+    packageName = "app.rickandmorty.data.location"
+    dependsOn(projects.data.graphqlSchema)
+  }
 }
 
 dependencies {
-    api(libs.androidx.paging.common)
+  api(libs.androidx.paging.common)
 
-    api(projects.data.graphqlSchema)
-    api(projects.data.model)
+  api(projects.data.graphqlSchema)
+  api(projects.data.model)
 
-    implementation(libs.apollo.runtime)
+  implementation(libs.apollo.runtime)
 
-    implementation(projects.data.database)
-    implementation(projects.data.paging)
+  implementation(projects.data.database)
+  implementation(projects.data.paging)
 }

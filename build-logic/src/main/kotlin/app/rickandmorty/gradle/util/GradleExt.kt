@@ -12,92 +12,61 @@ import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.plugin.use.PluginDependency
 
-internal fun DependencyHandler.api(
-    vararg dependencyNotations: Any,
-) {
-    dependencyNotations.forEach {
-        add("api", it)
-    }
+internal fun DependencyHandler.api(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("api", it) }
 }
 
-internal fun DependencyHandler.implementation(
-    vararg dependencyNotations: Any,
-) {
-    dependencyNotations.forEach {
-        add("implementation", it)
-    }
+internal fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("implementation", it) }
 }
 
-internal fun DependencyHandler.androidTestImplementation(
-    vararg dependencyNotations: Any,
-) {
-    dependencyNotations.forEach {
-        add("androidTestImplementation", it)
-    }
+internal fun DependencyHandler.androidTestImplementation(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("androidTestImplementation", it) }
 }
 
-internal fun DependencyHandler.ksp(
-    vararg dependencyNotations: Any,
-) {
-    dependencyNotations.forEach {
-        add("ksp", it)
-    }
+internal fun DependencyHandler.ksp(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("ksp", it) }
 }
 
-internal fun DependencyHandler.coreLibraryDesugaring(
-    vararg dependencyNotations: Any,
-) {
-    dependencyNotations.forEach {
-        add("coreLibraryDesugaring", it)
-    }
+internal fun DependencyHandler.coreLibraryDesugaring(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("coreLibraryDesugaring", it) }
 }
 
-internal fun DependencyHandler.lintChecks(
-    vararg dependencyNotations: Any,
-) {
-    dependencyNotations.forEach {
-        add("lintChecks", it)
-    }
+internal fun DependencyHandler.lintChecks(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("lintChecks", it) }
 }
 
-internal fun DependencyHandler.screenshotTestImplementation(
-    vararg dependencyNotations: Any,
-) {
-    dependencyNotations.forEach {
-        add("screenshotTestImplementation", it)
-    }
+internal fun DependencyHandler.screenshotTestImplementation(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("screenshotTestImplementation", it) }
 }
 
 @Suppress("GradleProjectIsolation")
 internal val Project.isRootProject: Boolean
-    get() = rootProject === this
+  get() = rootProject === this
 
 internal val Project.androidExtension: AndroidComponentsExtension<*, *, *>
-    get() = extensions.findByType<LibraryAndroidComponentsExtension>()
-        ?: extensions.findByType<ApplicationAndroidComponentsExtension>()
-        ?: extensions.findByType<TestAndroidComponentsExtension>()
-        ?: throw IllegalArgumentException("Failed to find any registered Android extension")
+  get() =
+    extensions.findByType<LibraryAndroidComponentsExtension>()
+      ?: extensions.findByType<ApplicationAndroidComponentsExtension>()
+      ?: extensions.findByType<TestAndroidComponentsExtension>()
+      ?: throw IllegalArgumentException("Failed to find any registered Android extension")
 
 internal fun PluginManager.apply(vararg plugins: Provider<PluginDependency>) {
-    plugins.forEach { plugin ->
-        apply(plugin.get().pluginId)
-    }
+  plugins.forEach { plugin -> apply(plugin.get().pluginId) }
 }
 
 internal fun PluginManager.withPlugin(
-    plugin: Provider<PluginDependency>,
-    action: AppliedPlugin.() -> Unit,
+  plugin: Provider<PluginDependency>,
+  action: AppliedPlugin.() -> Unit,
 ) {
-    withPlugin(plugin.get().pluginId, action)
+  withPlugin(plugin.get().pluginId, action)
 }
 
 internal fun PluginManager.withPlugins(
-    first: Provider<PluginDependency>,
-    vararg others: Provider<PluginDependency>,
-    action: (AppliedPlugin) -> Unit,
+  first: Provider<PluginDependency>,
+  vararg others: Provider<PluginDependency>,
+  action: (AppliedPlugin) -> Unit,
 ) {
-    withPlugin(first, action)
-    others.forEach { plugin ->
-        withPlugin(plugin, action)
-    }
+  withPlugin(first, action)
+  others.forEach { plugin -> withPlugin(plugin, action) }
 }

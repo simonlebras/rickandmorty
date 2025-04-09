@@ -12,14 +12,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @SdkSuppress(minSdkVersion = 29)
 class StartupProfileGenerator {
-    @get:Rule
-    val baselineProfileRule = BaselineProfileRule()
+  @get:Rule val baselineProfileRule = BaselineProfileRule()
 
-    @Test
-    fun generateStartupProfile() = baselineProfileRule.collect(
-        packageName = PACKAGE_NAME,
-        includeInStartupProfile = true,
-    ) {
-        startActivityAndWait()
+  @Test
+  fun generateStartupProfile() =
+    baselineProfileRule.collect(packageName = PACKAGE_NAME, includeInStartupProfile = true) {
+      startActivityAndWait()
     }
 }

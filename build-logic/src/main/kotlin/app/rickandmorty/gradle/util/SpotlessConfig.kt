@@ -7,63 +7,46 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 internal fun Project.configureSpotless() {
-    val spotlessFormatters: SpotlessExtension.() -> Unit = {
-        val ktlintVersion = libs.versions.ktlint.core.get()
+  val spotlessFormatters: SpotlessExtension.() -> Unit = {
+    val ktfmtVersion = libs.versions.ktfmt.get()
 
-        kotlin {
-            ktlint(ktlintVersion)
-                .customRuleSets(
-                    listOf(
-                        libs.ktlint.composerules.get().toString(),
-                    ),
-                )
-            target("src/**/*.kt")
-        }
-
-        kotlinGradle {
-            ktlint(ktlintVersion)
-            target("*.kts")
-        }
-
-        json {
-            gson().indentWithSpaces(2)
-            target(
-                "assets/**/*.json",
-                "src/**/*.json",
-                "*.json",
-            )
-        }
-
-        format("misc") {
-            target(
-                ".editorconfig",
-                ".gitattributes",
-                ".gitignore",
-                "*.md",
-                "*.pro",
-                "*.properties",
-            )
-            trimTrailingWhitespace()
-            endWithNewline()
-        }
-
-        format("xml") {
-            target(
-                "src/**/*.xml",
-                "*.xml",
-            )
-            trimTrailingWhitespace()
-            endWithNewline()
-        }
+    kotlin {
+      ktfmt(ktfmtVersion).googleStyle()
+      target("src/**/*.kt")
     }
 
-    configure<SpotlessExtension> {
-        spotlessFormatters()
-        if (isRootProject) {
-            predeclareDeps()
-        }
+    kotlinGradle {
+      ktfmt(ktfmtVersion).googleStyle()
+      target("*.kts")
     }
+
+    json {
+      gson().indentWithSpaces(2)
+      target("assets/**/*.json", "src/**/*.json", "*.json")
+    }
+
+    format("misc") {
+      target(".gitattributes", ".gitignore", "*.md", "*.pro", "*.properties")
+      leadingTabsToSpaces(2)
+      trimTrailingWhitespace()
+      endWithNewline()
+    }
+
+    format("xml") {
+      target("src/**/*.xml", "*.xml")
+      leadingTabsToSpaces(2)
+      trimTrailingWhitespace()
+      endWithNewline()
+    }
+  }
+
+  configure<SpotlessExtension> {
+    spotlessFormatters()
     if (isRootProject) {
-        configure<SpotlessExtensionPredeclare> { spotlessFormatters() }
+      predeclareDeps()
     }
+  }
+  if (isRootProject) {
+    configure<SpotlessExtensionPredeclare> { spotlessFormatters() }
+  }
 }

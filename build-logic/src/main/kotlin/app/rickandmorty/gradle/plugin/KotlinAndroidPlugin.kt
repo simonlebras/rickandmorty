@@ -10,15 +10,14 @@ import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 
 public class KotlinAndroidPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(libs.plugins.kotlin.android)
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.kotlin.android)
 
-        configureKotlin()
+      configureKotlin()
 
-        pluginManager.withPlugin(libs.plugins.android.library) {
-            configure<KotlinProjectExtension> {
-                explicitApi()
-            }
-        }
+      pluginManager.withPlugin(libs.plugins.android.library) {
+        configure<KotlinProjectExtension> { explicitApi() }
+      }
     }
 }

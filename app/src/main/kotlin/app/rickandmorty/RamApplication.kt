@@ -10,25 +10,17 @@ import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.SingletonImageLoader
 
-class RamApplication :
-    Application(),
-    ActivityComponentFactoryOwner,
-    SingletonImageLoader.Factory {
-    private val appComponent by unsafeLazy {
-        AppComponent::class.create(this)
-    }
+class RamApplication : Application(), ActivityComponentFactoryOwner, SingletonImageLoader.Factory {
+  private val appComponent by unsafeLazy { AppComponent::class.create(this) }
 
-    override fun onCreate() {
-        super.onCreate()
+  override fun onCreate() {
+    super.onCreate()
 
-        appComponent.initializers.forEach { initializer ->
-            initializer.initialize()
-        }
-    }
+    appComponent.initializers.forEach { initializer -> initializer.initialize() }
+  }
 
-    override fun activityComponentFactory(): ActivityComponent.Factory = appComponent.activityComponentFactory
+  override fun activityComponentFactory(): ActivityComponent.Factory =
+    appComponent.activityComponentFactory
 
-    override fun newImageLoader(
-        context: PlatformContext,
-    ): ImageLoader = appComponent.imageLoader
+  override fun newImageLoader(context: PlatformContext): ImageLoader = appComponent.imageLoader
 }

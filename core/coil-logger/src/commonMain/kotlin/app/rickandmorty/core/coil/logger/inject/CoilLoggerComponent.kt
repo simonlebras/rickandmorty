@@ -12,22 +12,23 @@ private const val TAG = "Coil"
 
 @ContributesTo(AppScope::class)
 public interface CoilLoggerComponent {
-    @Provides
-    public fun provideLogger(): CoilLogger = KermitLogger.asCoilLogger()
+  @Provides public fun provideLogger(): CoilLogger = KermitLogger.asCoilLogger()
 }
 
-private fun KermitLogger.asCoilLogger(): CoilLogger = object : CoilLogger {
+private fun KermitLogger.asCoilLogger(): CoilLogger =
+  object : CoilLogger {
     override var minLevel: Level = Level.Debug
 
     override fun log(tag: String, level: Level, message: String?, throwable: Throwable?) {
-        this@asCoilLogger.log(level.toSeverity(), TAG, throwable, message.orEmpty())
+      this@asCoilLogger.log(level.toSeverity(), TAG, throwable, message.orEmpty())
     }
-}
+  }
 
-private fun Level.toSeverity(): Severity = when (this) {
+private fun Level.toSeverity(): Severity =
+  when (this) {
     Level.Verbose -> Severity.Verbose
     Level.Debug -> Severity.Debug
     Level.Info -> Severity.Info
     Level.Warn -> Severity.Warn
     Level.Error -> Severity.Error
-}
+  }

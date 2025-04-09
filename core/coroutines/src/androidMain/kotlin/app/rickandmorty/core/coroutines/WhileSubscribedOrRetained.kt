@@ -16,28 +16,23 @@ import kotlinx.coroutines.flow.dropWhile
 import kotlinx.coroutines.flow.transformLatest
 
 public data object WhileSubscribedOrRetained : SharingStarted {
-    private val handler = Handler(Looper.getMainLooper())
+  private val handler = Handler(Looper.getMainLooper())
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    override fun command(
-        subscriptionCount: StateFlow<Int>,
-    ): Flow<SharingCommand> = subscriptionCount
-        .transformLatest { count ->
-            if (count > 0) {
-                emit(START)
-            } else {
-                val posted = CompletableDeferred<Unit>()
-                Choreographer.getInstance().postFrameCallback {
-                    handler.postAtFrontOfQueue {
-                        handler.post {
-                            posted.complete(Unit)
-                        }
-                    }
-                }
-                posted.await()
-                emit(STOP)
-            }
+  @OptIn(ExperimentalCoroutinesApi::class)
+  override fun command(subscriptionCount: StateFlow<Int>): Flow<SharingCommand> =
+    subscriptionCount
+      .transformLatest { count ->
+        if (count > 0) {
+          emit(START)
+        } else {
+          val posted = CompletableDeferred<Unit>()
+          Choreographer.getInstance().postFrameCallback {
+            handler.postAtFrontOfQueue { handler.post { posted.complete(Unit) } }
+          }
+          posted.await()
+          emit(STOP)
         }
-        .dropWhile { it != START }
-        .distinctUntilChanged()
+      }
+      .dropWhile { it != START }
+      .distinctUntilChanged()
 }

@@ -24,60 +24,46 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    init {
-        // https://issuetracker.google.com/issues/139738913
-        if (Build.VERSION.SDK_INT == 29 && isTaskRoot) {
-            onBackPressedDispatcher.addCallback {
-                finishAfterTransition()
-            }
-        }
+  init {
+    // https://issuetracker.google.com/issues/139738913
+    if (Build.VERSION.SDK_INT == 29 && isTaskRoot) {
+      onBackPressedDispatcher.addCallback { finishAfterTransition() }
+    }
+  }
+
+  private val activityComponent by unsafeLazy { ActivityComponent.create(this) }
+
+  private val viewModel: MainViewModel by viewModels()
+
+  override val defaultViewModelProviderFactory: ViewModelProvider.Factory
+    get() = activityComponent.viewModelFactory
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    val splashScreen = installSplashScreen()
+
+    setupEdgeToEdge()
+
+    super.onCreate(savedInstanceState)
+
+    var uiState by mutableStateOf(MainUiState())
+
+    lifecycleScope.launch {
+      lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        viewModel.uiState.onEach { uiState = it }.launchIn(this)
+
+        isSystemInDarkTheme().onEach { setupEdgeToEdge() }.launchIn(this)
+      }
     }
 
-    private val activityComponent by unsafeLazy {
-        ActivityComponent.create(this)
+    splashScreen.setKeepOnScreenCondition { uiState.isLoading }
+
+    setContent { RamTheme(useDynamicColor = uiState.useDynamicColor) { RamApp() } }
+  }
+
+  private fun setupEdgeToEdge() {
+    enableEdgeToEdge()
+    if (Build.VERSION.SDK_INT >= 29) {
+      window.isNavigationBarContrastEnforced = false
     }
-
-    private val viewModel: MainViewModel by viewModels()
-
-    override val defaultViewModelProviderFactory: ViewModelProvider.Factory
-        get() = activityComponent.viewModelFactory
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
-
-        setupEdgeToEdge()
-
-        super.onCreate(savedInstanceState)
-
-        var uiState by mutableStateOf(MainUiState())
-
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState
-                    .onEach { uiState = it }
-                    .launchIn(this)
-
-                isSystemInDarkTheme()
-                    .onEach { setupEdgeToEdge() }
-                    .launchIn(this)
-            }
-        }
-
-        splashScreen.setKeepOnScreenCondition {
-            uiState.isLoading
-        }
-
-        setContent {
-            RamTheme(useDynamicColor = uiState.useDynamicColor) {
-                RamApp()
-            }
-        }
-    }
-
-    private fun setupEdgeToEdge() {
-        enableEdgeToEdge()
-        if (Build.VERSION.SDK_INT >= 29) {
-            window.isNavigationBarContrastEnforced = false
-        }
-    }
+  }
 }

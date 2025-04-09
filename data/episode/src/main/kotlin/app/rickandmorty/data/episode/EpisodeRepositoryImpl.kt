@@ -20,71 +20,62 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 internal class EpisodeRepositoryImpl(
-    private val apolloClient: ApolloClient,
-    private val transactionRunner: TransactionRunner,
-    private val episodeDao: EpisodeDao,
-    private val episodePagedEntryDao: EpisodePagedEntryDao,
+  private val apolloClient: ApolloClient,
+  private val transactionRunner: TransactionRunner,
+  private val episodeDao: EpisodeDao,
+  private val episodePagedEntryDao: EpisodePagedEntryDao,
 ) : EpisodeRepository {
-    @OptIn(ExperimentalPagingApi::class)
-    override fun getPagedEpisodes(config: PagingConfig): Flow<PagingData<Episode>> {
-        val remoteMediator = PageKeyedRemoteMediator<EpisodeEntity>(
-            pagedEntryResolver = { episode ->
-                transactionRunner {
-                    episodePagedEntryDao.getPagedEntry(episode.id)
-                }
-            },
-            pageFetcher = { page ->
-                val data = apolloClient
-                    .query(GetEpisodesQuery(page = page))
-                    .execute()
-                    .dataAssertNoErrors
+  @OptIn(ExperimentalPagingApi::class)
+  override fun getPagedEpisodes(config: PagingConfig): Flow<PagingData<Episode>> {
+    val remoteMediator =
+      PageKeyedRemoteMediator<EpisodeEntity>(
+        pagedEntryResolver = { episode ->
+          transactionRunner { episodePagedEntryDao.getPagedEntry(episode.id) }
+        },
+        pageFetcher = { page ->
+          val data = apolloClient.query(GetEpisodesQuery(page = page)).execute().dataAssertNoErrors
 
-                val (info, results) = data.episodes!!
+          val (info, results) = data.episodes!!
 
-                val resultSize = results.size
-                val episodes = ArrayList<EpisodeEntity>(resultSize)
-                val pagedEntries = ArrayList<EpisodePagedEntryEntity>(resultSize)
-                results.forEachIndexed { index, remoteEpisode ->
-                    val episode = EpisodeEntity(
-                        id = remoteEpisode.id,
-                        name = remoteEpisode.name,
-                        airDate = remoteEpisode.air_date,
-                        episode = remoteEpisode.episode,
-                    )
-                    episodes.add(episode)
+          val resultSize = results.size
+          val episodes = ArrayList<EpisodeEntity>(resultSize)
+          val pagedEntries = ArrayList<EpisodePagedEntryEntity>(resultSize)
+          results.forEachIndexed { index, remoteEpisode ->
+            val episode =
+              EpisodeEntity(
+                id = remoteEpisode.id,
+                name = remoteEpisode.name,
+                airDate = remoteEpisode.air_date,
+                episode = remoteEpisode.episode,
+              )
+            episodes.add(episode)
 
-                    val pagedEntry = EpisodePagedEntryEntity(
-                        page = page,
-                        nextPage = info.next,
-                        index = index,
-                        episodeId = episode.id,
-                    )
-                    pagedEntries.add(pagedEntry)
-                }
-                transactionRunner {
-                    if (page == FIRST_PAGE_KEY) {
-                        episodePagedEntryDao.deleteAll()
-                    }
-                    episodeDao.insertAll(episodes)
-                    episodePagedEntryDao.insertAll(pagedEntries)
-                }
-
-                return@PageKeyedRemoteMediator PageResult(
-                    count = info.count,
-                    nextPage = info.next,
-                )
-            },
-        )
-        return Pager(
-            config = config,
-            remoteMediator = remoteMediator,
-            pagingSourceFactory = { episodeDao.getPagedEpisodes() },
-        )
-            .flow
-            .map { pagingData ->
-                pagingData.map { episode ->
-                    episode.toEpisode()
-                }
+            val pagedEntry =
+              EpisodePagedEntryEntity(
+                page = page,
+                nextPage = info.next,
+                index = index,
+                episodeId = episode.id,
+              )
+            pagedEntries.add(pagedEntry)
+          }
+          transactionRunner {
+            if (page == FIRST_PAGE_KEY) {
+              episodePagedEntryDao.deleteAll()
             }
-    }
+            episodeDao.insertAll(episodes)
+            episodePagedEntryDao.insertAll(pagedEntries)
+          }
+
+          return@PageKeyedRemoteMediator PageResult(count = info.count, nextPage = info.next)
+        },
+      )
+    return Pager(
+        config = config,
+        remoteMediator = remoteMediator,
+        pagingSourceFactory = { episodeDao.getPagedEpisodes() },
+      )
+      .flow
+      .map { pagingData -> pagingData.map { episode -> episode.toEpisode() } }
+  }
 }

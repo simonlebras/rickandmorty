@@ -13,19 +13,9 @@ import app.rickandmorty.core.ui.LocalSharedTransitionScope
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun RamApp(modifier: Modifier = Modifier) {
-    SharedTransitionLayout(
-        modifier = modifier.semantics {
-            testTagsAsResourceId = true
-        },
-    ) {
-        CompositionLocalProvider(
-            LocalSharedTransitionScope provides this,
-        ) {
-            NavigationSuiteScaffold(
-                navigationSuiteItems = {
-                },
-            ) {
-            }
-        }
+  SharedTransitionLayout(modifier = modifier.semantics { testTagsAsResourceId = true }) {
+    CompositionLocalProvider(LocalSharedTransitionScope provides this) {
+      NavigationSuiteScaffold(navigationSuiteItems = {}) {}
     }
+  }
 }

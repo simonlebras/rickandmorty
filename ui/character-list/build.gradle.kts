@@ -1,33 +1,31 @@
 plugins {
-    alias(libs.plugins.rickandmorty.android.library)
-    alias(libs.plugins.rickandmorty.compose)
-    alias(libs.plugins.rickandmorty.kotlin.android)
-    alias(libs.plugins.rickandmorty.spotless)
+  alias(libs.plugins.rickandmorty.android.library)
+  alias(libs.plugins.rickandmorty.compose)
+  alias(libs.plugins.rickandmorty.kotlin.android)
+  alias(libs.plugins.rickandmorty.spotless)
 
-    alias(libs.plugins.dependencyanalysis)
-    alias(libs.plugins.sortdependencies)
+  alias(libs.plugins.dependencyanalysis)
+  alias(libs.plugins.sortdependencies)
 }
 
 android {
-    namespace = "app.rickandmorty.ui.character.list"
+  namespace = "app.rickandmorty.ui.character.list"
 
-    buildFeatures {
-        androidResources = true
-    }
+  buildFeatures { androidResources = true }
 }
 
 dependencies {
-    api(projects.data.character)
+  api(projects.data.character)
 
-    implementation(compose.components.uiToolingPreview)
+  implementation(compose.components.uiToolingPreview)
 
-    implementation(libs.androidx.activity.compose)
+  implementation(libs.androidx.activity.compose)
 
-    implementation(libs.coil.compose.core)
+  implementation(libs.coil.compose.core)
 
-    implementation(projects.core.designSystem)
-    implementation(projects.core.l10n)
-    implementation(projects.core.ui)
+  implementation(projects.core.designSystem)
+  implementation(projects.core.l10n)
+  implementation(projects.core.ui)
 
-    implementation(projects.thirdparty.androidxPagingCompose)
+  implementation(projects.thirdparty.androidxPagingCompose)
 }

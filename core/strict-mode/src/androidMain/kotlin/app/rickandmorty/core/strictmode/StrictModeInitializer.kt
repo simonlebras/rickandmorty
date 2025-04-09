@@ -18,44 +18,44 @@ private const val TAG = "StrictMode"
 @Inject
 @ContributesBinding(scope = AppScope::class, multibinding = true)
 public class StrictModeInitializer : Initializer {
-    private val penaltyListenerExecutor by unsafeLazy {
-        Executors.newSingleThreadExecutor()
-    }
+  private val penaltyListenerExecutor by unsafeLazy { Executors.newSingleThreadExecutor() }
 
-    override fun initialize() {
-        val threadPolicy = ThreadPolicy.Builder()
-            .detectAll()
-            .apply {
-                if (Build.VERSION.SDK_INT < 28) {
-                    penaltyLog()
-                } else {
-                    penaltyListener(penaltyListenerExecutor) { violation ->
-                        Logger.withTag(TAG).w(violation) { "StrictMode ThreadPolicy violation" }
-                    }
-                }
+  override fun initialize() {
+    val threadPolicy =
+      ThreadPolicy.Builder()
+        .detectAll()
+        .apply {
+          if (Build.VERSION.SDK_INT < 28) {
+            penaltyLog()
+          } else {
+            penaltyListener(penaltyListenerExecutor) { violation ->
+              Logger.withTag(TAG).w(violation) { "StrictMode ThreadPolicy violation" }
             }
-            .build()
-        StrictMode.setThreadPolicy(threadPolicy)
+          }
+        }
+        .build()
+    StrictMode.setThreadPolicy(threadPolicy)
 
-        val vmPolicy = VmPolicy.Builder()
-            .detectAll()
-            .apply {
-                if (Build.VERSION.SDK_INT < 28) {
-                    penaltyLog()
-                } else {
-                    penaltyListener(penaltyListenerExecutor) { violation ->
-                        when (violation) {
-                            is UntaggedSocketViolation -> {
-                                // Firebase and OkHttp don't tag sockets
-                                return@penaltyListener
-                            }
-                        }
-
-                        Logger.withTag(TAG).w(violation) { "StrictMode VmPolicy violation" }
-                    }
+    val vmPolicy =
+      VmPolicy.Builder()
+        .detectAll()
+        .apply {
+          if (Build.VERSION.SDK_INT < 28) {
+            penaltyLog()
+          } else {
+            penaltyListener(penaltyListenerExecutor) { violation ->
+              when (violation) {
+                is UntaggedSocketViolation -> {
+                  // Firebase and OkHttp don't tag sockets
+                  return@penaltyListener
                 }
+              }
+
+              Logger.withTag(TAG).w(violation) { "StrictMode VmPolicy violation" }
             }
-            .build()
-        StrictMode.setVmPolicy(vmPolicy)
-    }
+          }
+        }
+        .build()
+    StrictMode.setVmPolicy(vmPolicy)
+  }
 }

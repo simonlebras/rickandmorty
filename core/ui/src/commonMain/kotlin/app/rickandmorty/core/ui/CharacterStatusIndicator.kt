@@ -9,16 +9,14 @@ import androidx.compose.ui.unit.dp
 import app.rickandmorty.data.model.Character.Status
 
 @Composable
-public fun CharacterStatusIndicator(
-    status: Status,
-    modifier: Modifier = Modifier,
-) {
-    Canvas(modifier = modifier.size(16.dp)) {
-        val color = when (status) {
-            Status.Alive -> Color.Green
-            Status.Dead -> Color.Red
-            else -> Color.Gray
-        }
-        drawCircle(color)
-    }
+public fun CharacterStatusIndicator(status: Status, modifier: Modifier = Modifier) {
+  Canvas(modifier = modifier.size(16.dp)) {
+    val color =
+      when (status) {
+        Status.Alive -> Color.Green
+        Status.Dead -> Color.Red
+        else -> Color.Gray
+      }
+    drawCircle(color)
+  }
 }

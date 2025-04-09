@@ -12,16 +12,15 @@ import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
 @ContributesTo(AppScope::class)
 public interface ImageLoaderComponent {
-    @Provides
-    @SingleIn(AppScope::class)
-    public fun provideImageLoader(
-        context: PlatformContext,
-        httpClient: () -> HttpClient,
-        logger: Logger? = null,
-    ): ImageLoader = ImageLoader.Builder(context)
-        .components {
-            add(KtorNetworkFetcherFactory(httpClient))
-        }
-        .logger(logger)
-        .build()
+  @Provides
+  @SingleIn(AppScope::class)
+  public fun provideImageLoader(
+    context: PlatformContext,
+    httpClient: () -> HttpClient,
+    logger: Logger? = null,
+  ): ImageLoader =
+    ImageLoader.Builder(context)
+      .components { add(KtorNetworkFetcherFactory(httpClient)) }
+      .logger(logger)
+      .build()
 }

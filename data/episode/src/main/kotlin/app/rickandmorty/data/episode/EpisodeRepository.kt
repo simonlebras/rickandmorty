@@ -6,5 +6,5 @@ import app.rickandmorty.data.model.Episode
 import kotlinx.coroutines.flow.Flow
 
 public interface EpisodeRepository {
-    public fun getPagedEpisodes(config: PagingConfig): Flow<PagingData<Episode>>
+  public fun getPagedEpisodes(config: PagingConfig): Flow<PagingData<Episode>>
 }

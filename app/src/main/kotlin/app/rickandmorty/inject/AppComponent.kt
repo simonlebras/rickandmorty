@@ -14,18 +14,15 @@ import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
 @MergeComponent(AppScope::class)
 @SingleIn(AppScope::class)
-abstract class AppComponent(
-    @get:Provides val application: Application,
-) {
-    abstract val imageLoader: ImageLoader
+abstract class AppComponent(@get:Provides val application: Application) {
+  abstract val imageLoader: ImageLoader
 
-    abstract val initializers: Set<Initializer>
+  abstract val initializers: Set<Initializer>
 
-    @ForScope(AppScope::class)
-    abstract val viewModelFactory: ViewModelProvider.Factory
+  @ForScope(AppScope::class) abstract val viewModelFactory: ViewModelProvider.Factory
 
-    abstract val activityComponentFactory: ActivityComponent.Factory
+  abstract val activityComponentFactory: ActivityComponent.Factory
 
-    val Application.bind: @AppContext Context
-        @Provides get() = this
+  val Application.bind: @AppContext Context
+    @Provides get() = this
 }

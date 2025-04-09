@@ -14,19 +14,15 @@ import software.amazon.lastmile.kotlin.inject.anvil.AppScope
 
 @Inject
 @ContributesViewModel(AppScope::class)
-class MainViewModel(
-    themeRepository: ThemeRepository,
-) : ViewModel() {
-    private val theme = ResourceController(
-        resource = themeRepository.getTheme(),
-    )
+class MainViewModel(themeRepository: ThemeRepository) : ViewModel() {
+  private val theme = ResourceController(resource = themeRepository.getTheme())
 
-    val uiState: StateFlow<MainUiState> = theme.state
-        .map { theme ->
-            MainUiState(theme = theme)
-        }.stateIn(
-            scope = viewModelScope,
-            started = WhileSubscribedOrRetained,
-            initialValue = MainUiState(),
-        )
+  val uiState: StateFlow<MainUiState> =
+    theme.state
+      .map { theme -> MainUiState(theme = theme) }
+      .stateIn(
+        scope = viewModelScope,
+        started = WhileSubscribedOrRetained,
+        initialValue = MainUiState(),
+      )
 }

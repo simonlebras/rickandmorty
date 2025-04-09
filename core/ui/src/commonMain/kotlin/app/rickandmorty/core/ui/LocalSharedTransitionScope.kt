@@ -7,4 +7,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 public val LocalSharedTransitionScope: ProvidableCompositionLocal<SharedTransitionScope> =
-    staticCompositionLocalOf { error("SharedTransitionScope not provided") }
+  staticCompositionLocalOf {
+    error("SharedTransitionScope not provided")
+  }

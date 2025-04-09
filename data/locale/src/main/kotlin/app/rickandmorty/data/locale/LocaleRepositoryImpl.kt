@@ -30,70 +30,67 @@ import org.xmlpull.v1.XmlPullParser
 private const val LOCALE_CONFIG_FILE = "_generated_res_locale_config"
 
 internal class LocaleRepositoryImpl(
-    private val context: Context,
-    private val dataStore: DataStore<LocalePreferences>,
-    @ApplicationScope private val applicationScope: CoroutineScope,
-    @IODispatcher val ioDispatcher: CoroutineDispatcher,
+  private val context: Context,
+  private val dataStore: DataStore<LocalePreferences>,
+  @ApplicationScope private val applicationScope: CoroutineScope,
+  @IODispatcher val ioDispatcher: CoroutineDispatcher,
 ) : LocaleRepository {
-    override fun getAppLocale(): Flow<Locale?> {
-        val localeFlow = if (Build.VERSION.SDK_INT >= 33) {
-            callbackFlow {
-                val localeManager = context.getSystemService<LocaleManager>()!!
+  override fun getAppLocale(): Flow<Locale?> {
+    val localeFlow =
+      if (Build.VERSION.SDK_INT >= 33) {
+        callbackFlow {
+          val localeManager = context.getSystemService<LocaleManager>()!!
 
+          trySend(localeManager.appLocale)
+
+          val receiver =
+            object : BroadcastReceiver() {
+              override fun onReceive(context: Context, intent: Intent) {
                 trySend(localeManager.appLocale)
-
-                val receiver = object : BroadcastReceiver() {
-                    override fun onReceive(context: Context, intent: Intent) {
-                        trySend(localeManager.appLocale)
-                    }
-                }
-                context.registerReceiver(
-                    receiver,
-                    IntentFilter(Intent.ACTION_LOCALE_CHANGED),
-                    RECEIVER_NOT_EXPORTED,
-                )
-
-                awaitClose {
-                    context.unregisterReceiver(receiver)
-                }
+              }
             }
-        } else {
-            dataStore.data
-                .map { preferences ->
-                    preferences.app_locale?.let { locale ->
-                        Locale(languageTag = locale)
-                    }
-                }
+          context.registerReceiver(
+            receiver,
+            IntentFilter(Intent.ACTION_LOCALE_CHANGED),
+            RECEIVER_NOT_EXPORTED,
+          )
+
+          awaitClose { context.unregisterReceiver(receiver) }
         }
-
-        return localeFlow.distinctUntilChanged()
-    }
-
-    override suspend fun setAppLocale(locale: Locale?) {
-        applicationScope.launch {
-            dataStore.updateData { preferences ->
-                preferences.copy(app_locale = locale?.toLanguageTag())
-            }
-        }.join()
-    }
-
-    @SuppressLint("DiscouragedApi")
-    override suspend fun getAvailableAppLocales(): ImmutableList<Locale> = withContext(ioDispatcher) {
-        val locales = mutableListOf<Locale>()
-        val resources = context.resources
-        val localeConfigFileId = resources.getIdentifier(
-            LOCALE_CONFIG_FILE,
-            "xml",
-            context.packageName,
-        )
-        resources.getXml(localeConfigFileId).use { parser ->
-            while (parser.eventType != XmlPullParser.END_DOCUMENT) {
-                if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
-                    locales += Locale(parser.getAttributeValue(0))
-                }
-                parser.next()
-            }
+      } else {
+        dataStore.data.map { preferences ->
+          preferences.app_locale?.let { locale -> Locale(languageTag = locale) }
         }
-        locales.toImmutableList()
+      }
+
+    return localeFlow.distinctUntilChanged()
+  }
+
+  override suspend fun setAppLocale(locale: Locale?) {
+    applicationScope
+      .launch {
+        dataStore.updateData { preferences ->
+          preferences.copy(app_locale = locale?.toLanguageTag())
+        }
+      }
+      .join()
+  }
+
+  @SuppressLint("DiscouragedApi")
+  override suspend fun getAvailableAppLocales(): ImmutableList<Locale> =
+    withContext(ioDispatcher) {
+      val locales = mutableListOf<Locale>()
+      val resources = context.resources
+      val localeConfigFileId =
+        resources.getIdentifier(LOCALE_CONFIG_FILE, "xml", context.packageName)
+      resources.getXml(localeConfigFileId).use { parser ->
+        while (parser.eventType != XmlPullParser.END_DOCUMENT) {
+          if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
+            locales += Locale(parser.getAttributeValue(0))
+          }
+          parser.next()
+        }
+      }
+      locales.toImmutableList()
     }
 }

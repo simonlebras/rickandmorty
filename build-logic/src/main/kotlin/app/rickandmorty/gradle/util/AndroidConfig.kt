@@ -6,41 +6,35 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
 internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
-    with(commonExtension) {
-        compileSdk = libs.versions.android.sdk.compile.get().toInt()
+  with(commonExtension) {
+    compileSdk = libs.versions.android.sdk.compile.get().toInt()
 
-        defaultConfig.apply {
-            minSdk = libs.versions.android.sdk.min.get().toInt()
-        }
+    defaultConfig.apply { minSdk = libs.versions.android.sdk.min.get().toInt() }
 
-        lint {
-            checkReleaseBuilds = false
-            warningsAsErrors = true
-            disable += setOf(
-                "AndroidGradlePluginVersion",
-                "GradleDependency",
-                "OldTargetApi",
-            )
-        }
-
-        testOptions {
-            animationsDisabled = true
-
-            configureGradleManagedDevices()
-        }
-
-        compileOptions {
-            val javaTarget = libs.versions.java.target.get()
-            sourceCompatibility(javaTarget)
-            targetCompatibility(javaTarget)
-
-            isCoreLibraryDesugaringEnabled = true
-        }
+    lint {
+      checkReleaseBuilds = false
+      warningsAsErrors = true
+      disable += setOf("AndroidGradlePluginVersion", "GradleDependency", "OldTargetApi")
     }
 
-    dependencies {
-        coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
+    testOptions {
+      animationsDisabled = true
 
-        lintChecks(libs.android.tools.security.lints)
+      configureGradleManagedDevices()
     }
+
+    compileOptions {
+      val javaTarget = libs.versions.java.target.get()
+      sourceCompatibility(javaTarget)
+      targetCompatibility(javaTarget)
+
+      isCoreLibraryDesugaringEnabled = true
+    }
+  }
+
+  dependencies {
+    coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
+
+    lintChecks(libs.android.tools.security.lints)
+  }
 }

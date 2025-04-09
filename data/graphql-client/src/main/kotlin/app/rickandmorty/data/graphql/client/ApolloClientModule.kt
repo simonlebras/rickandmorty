@@ -12,15 +12,16 @@ private const val SERVER_URL = "https://rickandmortyapi.com/graphql"
 
 @OptIn(ApolloExperimental::class)
 internal class ApolloClientModule {
-    fun provideApolloClient(
-        context: Context,
-        @IODispatcher ioDispatcher: CoroutineDispatcher,
-    ): ApolloClient = ApolloClient.Builder()
-        .serverUrl(SERVER_URL)
-        .retryOnErrorInterceptor(RetryOnErrorInterceptor(NetworkMonitor(context)))
-        .failFastIfOffline(true)
-        .failFastIfOffline(true)
-        .dispatcher(ioDispatcher)
-        .enableAutoPersistedQueries(true)
-        .build()
+  fun provideApolloClient(
+    context: Context,
+    @IODispatcher ioDispatcher: CoroutineDispatcher,
+  ): ApolloClient =
+    ApolloClient.Builder()
+      .serverUrl(SERVER_URL)
+      .retryOnErrorInterceptor(RetryOnErrorInterceptor(NetworkMonitor(context)))
+      .failFastIfOffline(true)
+      .failFastIfOffline(true)
+      .dispatcher(ioDispatcher)
+      .enableAutoPersistedQueries(true)
+      .build()
 }

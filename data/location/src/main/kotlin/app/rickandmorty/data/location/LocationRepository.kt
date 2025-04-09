@@ -6,5 +6,5 @@ import app.rickandmorty.data.model.Location
 import kotlinx.coroutines.flow.Flow
 
 public interface LocationRepository {
-    public fun getPagedLocations(config: PagingConfig): Flow<PagingData<Location>>
+  public fun getPagedLocations(config: PagingConfig): Flow<PagingData<Location>>
 }

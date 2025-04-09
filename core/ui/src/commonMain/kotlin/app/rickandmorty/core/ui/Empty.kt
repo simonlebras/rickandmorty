@@ -11,19 +11,17 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 public fun Empty(
-    graphic: @Composable () -> Unit,
-    title: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
+  graphic: @Composable () -> Unit,
+  title: @Composable () -> Unit,
+  modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        graphic()
+  Column(
+    modifier = modifier,
+    verticalArrangement = Arrangement.spacedBy(16.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
+  ) {
+    graphic()
 
-        ProvideTextStyle(MaterialTheme.typography.headlineMedium) {
-            title()
-        }
-    }
+    ProvideTextStyle(MaterialTheme.typography.headlineMedium) { title() }
+  }
 }

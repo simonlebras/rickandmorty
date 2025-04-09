@@ -13,35 +13,32 @@ import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 public class KotlinInjectViewModelPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(libs.plugins.ksp)
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.ksp)
 
-        configureKotlinInjectViewModelAndroid()
+      configureKotlinInjectViewModelAndroid()
 
-        configureKotlinInjectViewModelMultiplatform()
+      configureKotlinInjectViewModelMultiplatform()
     }
 
-    private fun Project.configureKotlinInjectViewModelAndroid() {
-        pluginManager.withPlugin(libs.plugins.kotlin.android) {
-            dependencies {
-                implementation(libs.kotlininject.viewmodel.runtime)
+  private fun Project.configureKotlinInjectViewModelAndroid() {
+    pluginManager.withPlugin(libs.plugins.kotlin.android) {
+      dependencies {
+        implementation(libs.kotlininject.viewmodel.runtime)
 
-                ksp(libs.kotlininject.viewmodel.compiler)
-            }
-        }
+        ksp(libs.kotlininject.viewmodel.compiler)
+      }
     }
+  }
 
-    private fun Project.configureKotlinInjectViewModelMultiplatform() {
-        pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
-            configure<KotlinMultiplatformExtension> {
-                sourceSets.commonMain.dependencies {
-                    implementation(libs.kotlininject.viewmodel.runtime)
-                }
+  private fun Project.configureKotlinInjectViewModelMultiplatform() {
+    pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
+      configure<KotlinMultiplatformExtension> {
+        sourceSets.commonMain.dependencies { implementation(libs.kotlininject.viewmodel.runtime) }
 
-                kspDependencies {
-                    ksp(libs.kotlininject.viewmodel.compiler)
-                }
-            }
-        }
+        kspDependencies { ksp(libs.kotlininject.viewmodel.compiler) }
+      }
     }
+  }
 }

@@ -10,8 +10,8 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 @ContributesBinding(scope = AppScope::class, multibinding = true)
 public class CrashlyticsInitializer : Initializer {
-    override fun initialize() {
-        enableCrashlytics()
-        setCrashlyticsUnhandledExceptionHook()
-    }
+  override fun initialize() {
+    enableCrashlytics()
+    setCrashlyticsUnhandledExceptionHook()
+  }
 }

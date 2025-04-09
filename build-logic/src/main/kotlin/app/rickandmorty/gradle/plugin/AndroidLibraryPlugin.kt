@@ -10,31 +10,23 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 public class AndroidLibraryPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(
-            libs.plugins.android.library,
-            libs.plugins.cachefix,
-        )
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.android.library, libs.plugins.cachefix)
 
-        configure<LibraryExtension> {
-            configureAndroid(this)
+      configure<LibraryExtension> {
+        configureAndroid(this)
 
-            val targetSdk = libs.versions.android.sdk.target.get().toInt()
-            lint.targetSdk = targetSdk
-            testOptions.targetSdk = targetSdk
+        val targetSdk = libs.versions.android.sdk.target.get().toInt()
+        lint.targetSdk = targetSdk
+        testOptions.targetSdk = targetSdk
 
-            buildTypes {
-                release {
-                    isDefault = true
-                }
-            }
-            testBuildType = "release"
-        }
+        buildTypes { release { isDefault = true } }
+        testBuildType = "release"
+      }
 
-        configure<LibraryAndroidComponentsExtension> {
-            beforeVariants(selector().withBuildType("debug")) { builder ->
-                builder.enable = false
-            }
-        }
+      configure<LibraryAndroidComponentsExtension> {
+        beforeVariants(selector().withBuildType("debug")) { builder -> builder.enable = false }
+      }
     }
 }

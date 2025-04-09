@@ -1,20 +1,20 @@
 plugins {
-    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
-    alias(libs.plugins.rickandmorty.kotlininject.anvil)
-    alias(libs.plugins.rickandmorty.spotless)
+  alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+  alias(libs.plugins.rickandmorty.kotlininject.anvil)
+  alias(libs.plugins.rickandmorty.spotless)
 
-    alias(libs.plugins.dependencyanalysis)
-    alias(libs.plugins.sortdependencies)
+  alias(libs.plugins.dependencyanalysis)
+  alias(libs.plugins.sortdependencies)
 }
 
 kotlin {
-    sourceSets {
-        commonMain {
-            dependencies {
-                implementation(libs.coil.core)
+  sourceSets {
+    commonMain {
+      dependencies {
+        implementation(libs.coil.core)
 
-                implementation(libs.kermit)
-            }
-        }
+        implementation(libs.kermit)
+      }
     }
+  }
 }

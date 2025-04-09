@@ -12,49 +12,42 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 
 public class KotlinMultiplatformPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(libs.plugins.kotlin.multiplatform)
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.kotlin.multiplatform)
 
-        configureKotlin()
+      configureKotlin()
 
-        extensions.configure<KotlinMultiplatformExtension> {
-            applyDefaultHierarchyTemplate()
+      extensions.configure<KotlinMultiplatformExtension> {
+        applyDefaultHierarchyTemplate()
 
-            pluginManager.withPlugin(libs.plugins.android.library) {
-                androidTarget()
+        pluginManager.withPlugin(libs.plugins.android.library) { androidTarget() }
+
+        jvm()
+
+        iosArm64()
+        iosSimulatorArm64()
+
+        targets.withType<KotlinJvmTarget> {
+          compilations.configureEach {
+            compileTaskProvider.configure {
+              compilerOptions {
+                val javaTarget = libs.versions.java.target.get()
+                freeCompilerArgs.addAll("-Xjdk-release=$javaTarget")
+              }
             }
-
-            jvm()
-
-            iosArm64()
-            iosSimulatorArm64()
-
-            targets.withType<KotlinJvmTarget> {
-                compilations.configureEach {
-                    compileTaskProvider.configure {
-                        compilerOptions {
-                            val javaTarget = libs.versions.java.target.get()
-                            freeCompilerArgs.addAll(
-                                "-Xjdk-release=$javaTarget",
-                            )
-                        }
-                    }
-                }
-            }
-
-            targets.configureEach {
-                compilations.configureEach {
-                    compileTaskProvider.configure {
-                        compilerOptions {
-                            freeCompilerArgs.addAll(
-                                "-Xexpect-actual-classes",
-                            )
-                        }
-                    }
-                }
-            }
-
-            explicitApi()
+          }
         }
+
+        targets.configureEach {
+          compilations.configureEach {
+            compileTaskProvider.configure {
+              compilerOptions { freeCompilerArgs.addAll("-Xexpect-actual-classes") }
+            }
+          }
+        }
+
+        explicitApi()
+      }
     }
 }

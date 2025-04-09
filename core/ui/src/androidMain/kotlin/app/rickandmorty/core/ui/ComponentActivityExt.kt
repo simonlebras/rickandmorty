@@ -9,19 +9,18 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-public fun ComponentActivity.isSystemInDarkTheme(): Flow<Boolean> = callbackFlow {
-    trySend(resources.configuration.isSystemInDarkTheme)
+public fun ComponentActivity.isSystemInDarkTheme(): Flow<Boolean> =
+  callbackFlow {
+      trySend(resources.configuration.isSystemInDarkTheme)
 
-    val listener = Consumer<Configuration> { config ->
-        trySend(config.isSystemInDarkTheme)
+      val listener = Consumer<Configuration> { config -> trySend(config.isSystemInDarkTheme) }
+
+      addOnConfigurationChangedListener(listener)
+
+      awaitClose { removeOnConfigurationChangedListener(listener) }
     }
-
-    addOnConfigurationChangedListener(listener)
-
-    awaitClose { removeOnConfigurationChangedListener(listener) }
-}
     .distinctUntilChanged()
     .conflate()
 
 private val Configuration.isSystemInDarkTheme
-    get() = (uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+  get() = (uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES

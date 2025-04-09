@@ -5,5 +5,5 @@ import android.content.Intent
 import android.os.IBinder
 
 internal class AppLocaleService : Service() {
-    override fun onBind(intent: Intent): IBinder = throw UnsupportedOperationException()
+  override fun onBind(intent: Intent): IBinder = throw UnsupportedOperationException()
 }

@@ -55,8 +55,7 @@ kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.6.2"
 kotlinx-serialization = "1.8.1"
 ksp = "2.1.20-2.0.0"
-ktlint-composerules = "0.4.22"
-ktlint-core = "1.5.0"
+ktfmt = "0.54"
 ktor = "3.1.2"
 leakcanary = "2.14"
 modulegraphassert = "2.8.0"
@@ -148,8 +147,7 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
-ktlint-composerules = { group = "io.nlopez.compose.rules", name = "ktlint", version.ref = "ktlint-composerules" }
-ktlint-core = { group = "com.pinterest.ktlint", name = "ktlint-cli", version.ref = "ktlint-core" }
+ktfmt = { group = "com.facebook", name = "ktfmt", version.ref = "ktfmt" }
 
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }

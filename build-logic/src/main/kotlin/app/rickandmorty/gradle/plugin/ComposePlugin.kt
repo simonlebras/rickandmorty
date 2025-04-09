@@ -10,27 +10,21 @@ import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginE
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 public class ComposePlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(
-            libs.plugins.compose.compiler,
-            libs.plugins.compose.multiplatform,
-        )
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.compose.compiler, libs.plugins.compose.multiplatform)
 
-        configure<ComposeCompilerGradlePluginExtension> {
-            featureFlags = setOf(
-                ComposeFeatureFlag.OptimizeNonSkippingGroups,
-            )
+      configure<ComposeCompilerGradlePluginExtension> {
+        featureFlags = setOf(ComposeFeatureFlag.OptimizeNonSkippingGroups)
 
-            val enableComposeCompilerReports = providers
-                .gradleProperty("ram.enableComposeCompilerReports")
-                .orNull == "true"
-            if (enableComposeCompilerReports) {
-                val composeReportsFolder = layout.buildDirectory.map { buildDir ->
-                    buildDir.dir("reports").dir("compose")
-                }
-                reportsDestination = composeReportsFolder
-                metricsDestination = composeReportsFolder
-            }
+        val enableComposeCompilerReports =
+          providers.gradleProperty("ram.enableComposeCompilerReports").orNull == "true"
+        if (enableComposeCompilerReports) {
+          val composeReportsFolder =
+            layout.buildDirectory.map { buildDir -> buildDir.dir("reports").dir("compose") }
+          reportsDestination = composeReportsFolder
+          metricsDestination = composeReportsFolder
         }
+      }
     }
 }

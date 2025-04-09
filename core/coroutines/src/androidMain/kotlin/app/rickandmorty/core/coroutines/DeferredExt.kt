@@ -4,8 +4,4 @@ import app.rickandmorty.core.base.allowThreadDiskReads
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.runBlocking
 
-public fun <T> Deferred<T>.awaitBlocking(): T = allowThreadDiskReads {
-    runBlocking {
-        await()
-    }
-}
+public fun <T> Deferred<T>.awaitBlocking(): T = allowThreadDiskReads { runBlocking { await() } }

@@ -33,93 +33,71 @@ import app.rickandmorty.ui.settings.common.util.label
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun ThemeSettingsDialog(
-    onDismiss: () -> Unit,
-    viewModel: ThemeSettingsViewModel,
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+public fun ThemeSettingsDialog(onDismiss: () -> Unit, viewModel: ThemeSettingsViewModel) {
+  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    ReportDrawnWhen { !uiState.isLoading }
+  ReportDrawnWhen { !uiState.isLoading }
 
-    ThemeSettingsDialog(
-        uiState = uiState,
-        onDismiss = onDismiss,
-        onSelectNightMode = viewModel::setNightMode,
-    )
+  ThemeSettingsDialog(
+    uiState = uiState,
+    onDismiss = onDismiss,
+    onSelectNightMode = viewModel::setNightMode,
+  )
 }
 
 @Composable
 private fun ThemeSettingsDialog(
-    uiState: ThemeSettingsUiState,
-    onDismiss: () -> Unit,
-    onSelectNightMode: (NightMode) -> Unit,
+  uiState: ThemeSettingsUiState,
+  onDismiss: () -> Unit,
+  onSelectNightMode: (NightMode) -> Unit,
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = {
-            Text(text = stringResource(L10nRes.string.settings_theme_title))
-        },
-        text = {
-            Column(
-                modifier = Modifier
-                    .selectableGroup()
-                    .verticalScroll(rememberScrollState()),
-            ) {
-                when {
-                    uiState.isLoading -> {
-                        CircularProgressIndicator(
-                            modifier = Modifier.padding(vertical = 16.dp),
-                        )
-                    }
+  AlertDialog(
+    onDismissRequest = onDismiss,
+    title = { Text(text = stringResource(L10nRes.string.settings_theme_title)) },
+    text = {
+      Column(modifier = Modifier.selectableGroup().verticalScroll(rememberScrollState())) {
+        when {
+          uiState.isLoading -> {
+            CircularProgressIndicator(modifier = Modifier.padding(vertical = 16.dp))
+          }
 
-                    else -> {
-                        val currentNightMode = uiState.theme()!!.nightMode
-                        uiState.availableNightModes()!!.fastForEach { nightMode ->
-                            key(nightMode) {
-                                ThemeItem(
-                                    text = stringResource(nightMode.label),
-                                    selected = nightMode == currentNightMode,
-                                    onClick = { onSelectNightMode(nightMode) },
-                                )
-                            }
-                        }
-                    }
-                }
+          else -> {
+            val currentNightMode = uiState.theme()!!.nightMode
+            uiState.availableNightModes()!!.fastForEach { nightMode ->
+              key(nightMode) {
+                ThemeItem(
+                  text = stringResource(nightMode.label),
+                  selected = nightMode == currentNightMode,
+                  onClick = { onSelectNightMode(nightMode) },
+                )
+              }
             }
-        },
-        confirmButton = {
-            Text(
-                text = stringResource(L10nRes.string.dismiss),
-                modifier = Modifier.clickable { onDismiss() },
-            )
-        },
-    )
+          }
+        }
+      }
+    },
+    confirmButton = {
+      Text(
+        text = stringResource(L10nRes.string.dismiss),
+        modifier = Modifier.clickable { onDismiss() },
+      )
+    },
+  )
 }
 
 @Composable
-private fun ThemeItem(
-    text: String,
-    selected: Boolean,
-    onClick: () -> Unit,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .selectable(
-                selected = selected,
-                role = Role.RadioButton,
-                onClick = onClick,
-            )
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        RadioButton(
-            selected = selected,
-            onClick = null,
-        )
+private fun ThemeItem(text: String, selected: Boolean, onClick: () -> Unit) {
+  Row(
+    modifier =
+      Modifier.fillMaxWidth()
+        .selectable(selected = selected, role = Role.RadioButton, onClick = onClick)
+        .padding(12.dp),
+    verticalAlignment = Alignment.CenterVertically,
+  ) {
+    RadioButton(selected = selected, onClick = null)
 
-        Spacer(modifier = Modifier.width(8.dp))
+    Spacer(modifier = Modifier.width(8.dp))
 
-        Text(text)
-    }
+    Text(text)
+  }
 }

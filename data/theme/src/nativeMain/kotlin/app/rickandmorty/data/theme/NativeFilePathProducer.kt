@@ -13,15 +13,16 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 @ContributesBinding(AppScope::class)
 public class NativeFilePathProducer : FilePathProducer {
-    @OptIn(ExperimentalForeignApi::class)
-    override fun produceFilePath(fileName: String): Path {
-        val documentDirectory = NSFileManager.defaultManager.URLForDirectory(
-            directory = NSDocumentDirectory,
-            inDomain = NSUserDomainMask,
-            appropriateForURL = null,
-            create = false,
-            error = null,
-        )
-        return "${documentDirectory!!.path}/$fileName".toPath()
-    }
+  @OptIn(ExperimentalForeignApi::class)
+  override fun produceFilePath(fileName: String): Path {
+    val documentDirectory =
+      NSFileManager.defaultManager.URLForDirectory(
+        directory = NSDocumentDirectory,
+        inDomain = NSUserDomainMask,
+        appropriateForURL = null,
+        create = false,
+        error = null,
+      )
+    return "${documentDirectory!!.path}/$fileName".toPath()
+  }
 }

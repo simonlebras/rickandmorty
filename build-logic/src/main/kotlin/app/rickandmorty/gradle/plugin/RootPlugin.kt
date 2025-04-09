@@ -11,53 +11,37 @@ import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 
 public class RootPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        require(isRootProject) {
-            "Root plugin should only be applied on the root project."
-        }
+  override fun apply(target: Project): Unit =
+    with(target) {
+      require(isRootProject) { "Root plugin should only be applied on the root project." }
 
-        pluginManager.apply(
-            libs.plugins.rickandmorty.spotless,
+      pluginManager.apply(
+        libs.plugins.rickandmorty.spotless,
+        libs.plugins.dependencyanalysis,
+        libs.plugins.gradledoctor,
+        libs.plugins.sortdependencies,
+      )
+      configureDependencyAnalysis()
 
-            libs.plugins.dependencyanalysis,
-            libs.plugins.gradledoctor,
-            libs.plugins.sortdependencies,
-        )
-        configureDependencyAnalysis()
-
-        configureGradleDoctor()
+      configureGradleDoctor()
     }
 }
 
 private fun Project.configureDependencyAnalysis() {
-    configure<DependencyAnalysisExtension> {
-        issues {
-            all {
-                onAny {
-                    severity("fail")
-                }
-                onIncorrectConfiguration {
-                    exclude("org.jetbrains.kotlin:kotlin-stdlib")
-                }
-                onModuleStructure {
-                    exclude("android")
-                }
-                onUsedTransitiveDependencies {
-                    severity("ignore")
-                }
-            }
-        }
-
-        abi {
-            exclusions {
-                ignoreGeneratedCode()
-            }
-        }
+  configure<DependencyAnalysisExtension> {
+    issues {
+      all {
+        onAny { severity("fail") }
+        onIncorrectConfiguration { exclude("org.jetbrains.kotlin:kotlin-stdlib") }
+        onModuleStructure { exclude("android") }
+        onUsedTransitiveDependencies { severity("ignore") }
+      }
     }
+
+    abi { exclusions { ignoreGeneratedCode() } }
+  }
 }
 
 private fun Project.configureGradleDoctor() {
-    configure<DoctorExtension> {
-        warnWhenNotUsingParallelGC = false
-    }
+  configure<DoctorExtension> { warnWhenNotUsingParallelGC = false }
 }
