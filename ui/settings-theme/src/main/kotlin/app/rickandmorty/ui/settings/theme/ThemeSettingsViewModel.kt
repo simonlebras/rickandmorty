@@ -11,34 +11,23 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-public class ThemeSettingsViewModel(
-    private val themeRepository: ThemeRepository,
-) : ViewModel() {
-    private val theme = ResourceController(
-        resource = themeRepository.getTheme(),
-    )
+public class ThemeSettingsViewModel(private val themeRepository: ThemeRepository) : ViewModel() {
+  private val theme = ResourceController(resource = themeRepository.getTheme())
 
-    private val availableNightModes = ResourceController(
-        resource = suspend { themeRepository.getAvailableNightModes() },
-    )
+  private val availableNightModes =
+    ResourceController(resource = suspend { themeRepository.getAvailableNightModes() })
 
-    public val uiState: StateFlow<ThemeSettingsUiState> = combine(
-        theme.state,
-        availableNightModes.state,
-    ) { theme, availableNightModes ->
-        ThemeSettingsUiState(
-            theme = theme,
-            availableNightModes = availableNightModes,
-        )
-    }.stateIn(
+  public val uiState: StateFlow<ThemeSettingsUiState> =
+    combine(theme.state, availableNightModes.state) { theme, availableNightModes ->
+        ThemeSettingsUiState(theme = theme, availableNightModes = availableNightModes)
+      }
+      .stateIn(
         scope = viewModelScope,
         started = WhileSubscribedOrRetained,
         initialValue = ThemeSettingsUiState(),
-    )
+      )
 
-    public fun setNightMode(nightMode: NightMode) {
-        viewModelScope.launch {
-            themeRepository.setNightMode(nightMode)
-        }
-    }
+  public fun setNightMode(nightMode: NightMode) {
+    viewModelScope.launch { themeRepository.setNightMode(nightMode) }
+  }
 }

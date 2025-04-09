@@ -46,152 +46,121 @@ import app.rickandmorty.data.model.Episode
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun EpisodeListScreen(
-    onNavigateToSettings: () -> Unit,
-    viewModel: EpisodeListViewModel,
-) {
-    val episodes = viewModel.episodes.collectAsLazyPagingItems()
+public fun EpisodeListScreen(onNavigateToSettings: () -> Unit, viewModel: EpisodeListViewModel) {
+  val episodes = viewModel.episodes.collectAsLazyPagingItems()
 
-    ReportDrawnWhen { episodes.loadState.isIdle }
+  ReportDrawnWhen { episodes.loadState.isIdle }
 
-    EpisodeListScreen(
-        episodes = episodes,
-        onNavigateToSettings = onNavigateToSettings,
-    )
+  EpisodeListScreen(episodes = episodes, onNavigateToSettings = onNavigateToSettings)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EpisodeListScreen(
-    episodes: LazyPagingItems<Episode>,
-    onNavigateToSettings: () -> Unit,
+  episodes: LazyPagingItems<Episode>,
+  onNavigateToSettings: () -> Unit,
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
+  val snackbarHostState = remember { SnackbarHostState() }
 
-    val loadState = episodes.loadState
+  val loadState = episodes.loadState
 
-    loadState.refresh.errorOrNull?.let { error ->
-        LaunchedEffect(snackbarHostState, error) {
-            snackbarHostState.showSnackbar("Error")
+  loadState.refresh.errorOrNull?.let { error ->
+    LaunchedEffect(snackbarHostState, error) { snackbarHostState.showSnackbar("Error") }
+  }
+  loadState.append.errorOrNull?.let { error ->
+    LaunchedEffect(snackbarHostState, error) { snackbarHostState.showSnackbar("Error") }
+  }
+
+  val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
+  Scaffold(
+    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    topBar = {
+      EpisodeListScreenAppBar(
+        onNavigateToSettings = onNavigateToSettings,
+        scrollBehavior = scrollBehavior,
+      )
+    },
+    snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+  ) { contentPadding ->
+    PullToRefresh(
+      isRefreshing = loadState.refresh.isLoading,
+      onRefresh = episodes::refresh,
+      indicatorPadding = contentPadding,
+    ) {
+      when {
+        loadState.refresh.isLoading && episodes.isEmpty -> {
+          Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
         }
-    }
-    loadState.append.errorOrNull?.let { error ->
-        LaunchedEffect(snackbarHostState, error) {
-            snackbarHostState.showSnackbar("Error")
+
+        loadState.refresh.isError && episodes.isEmpty -> {
+          Error(
+            text = "Error",
+            onRetry = episodes::retry,
+            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+          )
         }
-    }
 
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+        loadState.isIdle && episodes.isEmpty -> {
+          Empty(
+            graphic = {
+              Icon(
+                imageVector = RamIcons.Outlined.Tv,
+                contentDescription = null,
+                modifier = Modifier.size(64.dp),
+              )
+            },
+            title = { Text(text = stringResource(L10nRes.string.episode_list_empty)) },
+            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+          )
+        }
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            EpisodeListScreenAppBar(
-                onNavigateToSettings = onNavigateToSettings,
-                scrollBehavior = scrollBehavior,
-            )
-        },
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
-    ) { contentPadding ->
-        PullToRefresh(
-            isRefreshing = loadState.refresh.isLoading,
-            onRefresh = episodes::refresh,
-            indicatorPadding = contentPadding,
-        ) {
-            when {
-                loadState.refresh.isLoading && episodes.isEmpty -> {
-                    Loader(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                loadState.refresh.isError && episodes.isEmpty -> {
-                    Error(
-                        text = "Error",
-                        onRetry = episodes::retry,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                loadState.isIdle && episodes.isEmpty -> {
-                    Empty(
-                        graphic = {
-                            Icon(
-                                imageVector = RamIcons.Outlined.Tv,
-                                contentDescription = null,
-                                modifier = Modifier.size(64.dp),
-                            )
-                        },
-                        title = {
-                            Text(text = stringResource(L10nRes.string.episode_list_empty))
-                        },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                else -> {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .consumeWindowInsets(contentPadding),
-                        contentPadding = contentPadding,
-                    ) {
-                        items(
-                            count = episodes.itemCount,
-                            key = episodes.itemKey { it.id },
-                            contentType = episodes.itemContentType { "episode" },
-                        ) { index ->
-                            val item = episodes[index]!!
-                            EpisodeItem(item)
-                        }
-
-                        appendLoadState(items = episodes)
-                    }
-                }
+        else -> {
+          LazyColumn(
+            modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+            contentPadding = contentPadding,
+          ) {
+            items(
+              count = episodes.itemCount,
+              key = episodes.itemKey { it.id },
+              contentType = episodes.itemContentType { "episode" },
+            ) { index ->
+              val item = episodes[index]!!
+              EpisodeItem(item)
             }
+
+            appendLoadState(items = episodes)
+          }
         }
+      }
     }
+  }
 }
 
 @Composable
 private fun EpisodeItem(episode: Episode) {
-    ListItem(
-        headlineContent = {
-            Text(text = episode.name)
-        },
-        supportingContent = {
-            Text(text = episode.episode)
-        },
-    )
+  ListItem(
+    headlineContent = { Text(text = episode.name) },
+    supportingContent = { Text(text = episode.episode) },
+  )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EpisodeListScreenAppBar(
-    onNavigateToSettings: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
+  onNavigateToSettings: () -> Unit,
+  scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    CenterAlignedTopAppBar(
-        title = {
-            Text(text = stringResource(L10nRes.string.episode_list_title))
-        },
-        actions = {
-            IconButton(onClick = onNavigateToSettings) {
-                Icon(
-                    imageVector = RamIcons.Filled.Settings,
-                    contentDescription = stringResource(L10nRes.string.navigate_up),
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior,
-    )
+  CenterAlignedTopAppBar(
+    title = { Text(text = stringResource(L10nRes.string.episode_list_title)) },
+    actions = {
+      IconButton(onClick = onNavigateToSettings) {
+        Icon(
+          imageVector = RamIcons.Filled.Settings,
+          contentDescription = stringResource(L10nRes.string.navigate_up),
+        )
+      }
+    },
+    scrollBehavior = scrollBehavior,
+  )
 }

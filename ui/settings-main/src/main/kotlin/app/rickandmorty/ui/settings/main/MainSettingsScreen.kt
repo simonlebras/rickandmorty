@@ -53,226 +53,174 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 public fun MainSettingsScreen(
-    onNavigateUp: () -> Unit,
-    onNavigateToThemeSettings: () -> Unit,
-    onNavigateToLanguageSettings: () -> Unit,
-    onNavigateToOssLicenses: () -> Unit,
-    viewModel: MainSettingsViewModel,
+  onNavigateUp: () -> Unit,
+  onNavigateToThemeSettings: () -> Unit,
+  onNavigateToLanguageSettings: () -> Unit,
+  onNavigateToOssLicenses: () -> Unit,
+  viewModel: MainSettingsViewModel,
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    ReportDrawnWhen { !uiState.isLoading }
+  ReportDrawnWhen { !uiState.isLoading }
 
-    MainSettingsScreen(
-        uiState = uiState,
-        onNavigateUp = onNavigateUp,
-        onUpdateUseDynamicColor = viewModel::setUseDynamicColor,
-        onNavigateToThemeSettings = onNavigateToThemeSettings,
-        onNavigateToLanguageSettings = onNavigateToLanguageSettings,
-        onNavigateToOssLicenses = onNavigateToOssLicenses,
-    )
+  MainSettingsScreen(
+    uiState = uiState,
+    onNavigateUp = onNavigateUp,
+    onUpdateUseDynamicColor = viewModel::setUseDynamicColor,
+    onNavigateToThemeSettings = onNavigateToThemeSettings,
+    onNavigateToLanguageSettings = onNavigateToLanguageSettings,
+    onNavigateToOssLicenses = onNavigateToOssLicenses,
+  )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainSettingsScreen(
-    uiState: MainSettingsUiState,
-    onNavigateUp: () -> Unit,
-    onUpdateUseDynamicColor: (Boolean) -> Unit,
-    onNavigateToThemeSettings: () -> Unit,
-    onNavigateToLanguageSettings: () -> Unit,
-    onNavigateToOssLicenses: () -> Unit,
-    isDynamicColorAvailable: Boolean = isDynamicColorAvailable(),
+  uiState: MainSettingsUiState,
+  onNavigateUp: () -> Unit,
+  onUpdateUseDynamicColor: (Boolean) -> Unit,
+  onNavigateToThemeSettings: () -> Unit,
+  onNavigateToLanguageSettings: () -> Unit,
+  onNavigateToOssLicenses: () -> Unit,
+  isDynamicColorAvailable: Boolean = isDynamicColorAvailable(),
 ) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+  val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            MainSettingsAppBar(
-                onNavigateUp = onNavigateUp,
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { contentPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .consumeWindowInsets(contentPadding),
-            contentPadding = contentPadding,
-        ) {
-            when {
-                uiState.isLoading -> {
-                    loader()
-                }
-
-                else -> {
-                    generalSettings(
-                        currentTheme = uiState.theme()!!,
-                        currentAppLocale = uiState.appLocale(),
-                        isDynamicColorAvailable = isDynamicColorAvailable,
-                        onUpdateUseDynamicColor = onUpdateUseDynamicColor,
-                        onNavigateToThemeSettings = onNavigateToThemeSettings,
-                        onNavigateToLanguageSettings = onNavigateToLanguageSettings,
-                    )
-
-                    aboutSettings(
-                        onNavigateToOssLicenses = onNavigateToOssLicenses,
-                    )
-                }
-            }
+  Scaffold(
+    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    topBar = { MainSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior) },
+  ) { contentPadding ->
+    LazyColumn(
+      modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+      contentPadding = contentPadding,
+    ) {
+      when {
+        uiState.isLoading -> {
+          loader()
         }
+
+        else -> {
+          generalSettings(
+            currentTheme = uiState.theme()!!,
+            currentAppLocale = uiState.appLocale(),
+            isDynamicColorAvailable = isDynamicColorAvailable,
+            onUpdateUseDynamicColor = onUpdateUseDynamicColor,
+            onNavigateToThemeSettings = onNavigateToThemeSettings,
+            onNavigateToLanguageSettings = onNavigateToLanguageSettings,
+          )
+
+          aboutSettings(onNavigateToOssLicenses = onNavigateToOssLicenses)
+        }
+      }
     }
+  }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MainSettingsAppBar(
-    onNavigateUp: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
-) {
-    CenterAlignedTopAppBar(
-        title = {
-            Text(text = stringResource(L10nRes.string.settings_title))
-        },
-        navigationIcon = {
-            IconButton(onClick = onNavigateUp) {
-                Icon(
-                    imageVector = RamIcons.Filled.ArrowBack,
-                    contentDescription = stringResource(L10nRes.string.navigate_up),
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior,
-    )
+private fun MainSettingsAppBar(onNavigateUp: () -> Unit, scrollBehavior: TopAppBarScrollBehavior) {
+  CenterAlignedTopAppBar(
+    title = { Text(text = stringResource(L10nRes.string.settings_title)) },
+    navigationIcon = {
+      IconButton(onClick = onNavigateUp) {
+        Icon(
+          imageVector = RamIcons.Filled.ArrowBack,
+          contentDescription = stringResource(L10nRes.string.navigate_up),
+        )
+      }
+    },
+    scrollBehavior = scrollBehavior,
+  )
 }
 
 private fun LazyListScope.generalSettings(
-    currentTheme: Theme,
-    currentAppLocale: Locale?,
-    isDynamicColorAvailable: Boolean,
-    onUpdateUseDynamicColor: (Boolean) -> Unit,
-    onNavigateToThemeSettings: () -> Unit,
-    onNavigateToLanguageSettings: () -> Unit,
+  currentTheme: Theme,
+  currentAppLocale: Locale?,
+  isDynamicColorAvailable: Boolean,
+  onUpdateUseDynamicColor: (Boolean) -> Unit,
+  onNavigateToThemeSettings: () -> Unit,
+  onNavigateToLanguageSettings: () -> Unit,
 ) {
-    item(
-        key = "general",
-        contentType = SettingsContentType.HEADER,
-    ) {
-        Header(
-            text = stringResource(L10nRes.string.settings_general_title),
-            modifier = Modifier.fillMaxWidth(),
-        )
-    }
+  item(key = "general", contentType = SettingsContentType.HEADER) {
+    Header(
+      text = stringResource(L10nRes.string.settings_general_title),
+      modifier = Modifier.fillMaxWidth(),
+    )
+  }
 
-    item(
-        key = "theme",
-        contentType = SettingsContentType.LIST_ITEM,
-    ) {
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(L10nRes.string.settings_theme_title))
-            },
-            modifier = Modifier
-                .clickable(
-                    onClickLabel = stringResource(L10nRes.string.settings_theme_tap_action),
-                    onClick = onNavigateToThemeSettings,
-                ),
-            supportingContent = {
-                Text(text = stringResource(currentTheme.nightMode.label))
-            },
-        )
-    }
+  item(key = "theme", contentType = SettingsContentType.LIST_ITEM) {
+    ListItem(
+      headlineContent = { Text(text = stringResource(L10nRes.string.settings_theme_title)) },
+      modifier =
+        Modifier.clickable(
+          onClickLabel = stringResource(L10nRes.string.settings_theme_tap_action),
+          onClick = onNavigateToThemeSettings,
+        ),
+      supportingContent = { Text(text = stringResource(currentTheme.nightMode.label)) },
+    )
+  }
 
-    if (isDynamicColorAvailable) {
-        item(
-            key = "dynamic_color",
-            contentType = SettingsContentType.LIST_ITEM,
-        ) {
-            ListItem(
-                headlineContent = {
-                    Text(text = stringResource(L10nRes.string.settings_dynamic_color_title))
-                },
-                modifier = Modifier.toggleable(
-                    value = currentTheme.useDynamicColor,
-                    role = Role.RadioButton,
-                    onValueChange = onUpdateUseDynamicColor,
-                ),
-                trailingContent = {
-                    Switch(
-                        checked = currentTheme.useDynamicColor,
-                        onCheckedChange = null,
-                    )
-                },
-            )
-        }
+  if (isDynamicColorAvailable) {
+    item(key = "dynamic_color", contentType = SettingsContentType.LIST_ITEM) {
+      ListItem(
+        headlineContent = {
+          Text(text = stringResource(L10nRes.string.settings_dynamic_color_title))
+        },
+        modifier =
+          Modifier.toggleable(
+            value = currentTheme.useDynamicColor,
+            role = Role.RadioButton,
+            onValueChange = onUpdateUseDynamicColor,
+          ),
+        trailingContent = { Switch(checked = currentTheme.useDynamicColor, onCheckedChange = null) },
+      )
     }
+  }
 
-    item(
-        key = "language",
-        contentType = SettingsContentType.LIST_ITEM,
-    ) {
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(L10nRes.string.settings_language_title))
-            },
-            modifier = Modifier
-                .clickable(
-                    onClickLabel = stringResource(L10nRes.string.settings_language_tap_action),
-                    onClick = onNavigateToLanguageSettings,
-                ),
-            supportingContent = {
-                val localeName = currentAppLocale?.getLocalizedName()
-                    ?: stringResource(L10nRes.string.settings_language_system_default)
-                Text(text = localeName)
-            },
-        )
-    }
+  item(key = "language", contentType = SettingsContentType.LIST_ITEM) {
+    ListItem(
+      headlineContent = { Text(text = stringResource(L10nRes.string.settings_language_title)) },
+      modifier =
+        Modifier.clickable(
+          onClickLabel = stringResource(L10nRes.string.settings_language_tap_action),
+          onClick = onNavigateToLanguageSettings,
+        ),
+      supportingContent = {
+        val localeName =
+          currentAppLocale?.getLocalizedName()
+            ?: stringResource(L10nRes.string.settings_language_system_default)
+        Text(text = localeName)
+      },
+    )
+  }
 }
 
-private fun LazyListScope.aboutSettings(
-    onNavigateToOssLicenses: () -> Unit,
-) {
-    item(
-        key = "about",
-        contentType = SettingsContentType.HEADER,
-    ) {
-        Header(
-            text = stringResource(L10nRes.string.settings_about_title),
-            modifier = Modifier.fillMaxWidth(),
-        )
-    }
+private fun LazyListScope.aboutSettings(onNavigateToOssLicenses: () -> Unit) {
+  item(key = "about", contentType = SettingsContentType.HEADER) {
+    Header(
+      text = stringResource(L10nRes.string.settings_about_title),
+      modifier = Modifier.fillMaxWidth(),
+    )
+  }
 
-    item(
-        key = "oss_licenses",
-        contentType = SettingsContentType.LIST_ITEM,
-    ) {
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(L10nRes.string.settings_oss_licenses_title))
-            },
-            modifier = Modifier
-                .clickable(
-                    onClickLabel = stringResource(L10nRes.string.settings_oss_licenses_tap_action),
-                    onClick = onNavigateToOssLicenses,
-                ),
-            supportingContent = {
-                Text(text = stringResource(L10nRes.string.settings_oss_licenses_summary))
-            },
-        )
-    }
+  item(key = "oss_licenses", contentType = SettingsContentType.LIST_ITEM) {
+    ListItem(
+      headlineContent = { Text(text = stringResource(L10nRes.string.settings_oss_licenses_title)) },
+      modifier =
+        Modifier.clickable(
+          onClickLabel = stringResource(L10nRes.string.settings_oss_licenses_tap_action),
+          onClick = onNavigateToOssLicenses,
+        ),
+      supportingContent = {
+        Text(text = stringResource(L10nRes.string.settings_oss_licenses_summary))
+      },
+    )
+  }
 
-    item(
-        key = "app_version",
-        contentType = SettingsContentType.LIST_ITEM,
-    ) {
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(L10nRes.string.settings_app_version_title))
-            },
-            supportingContent = {
-                Text(text = LocalContext.current.versionName)
-            },
-        )
-    }
+  item(key = "app_version", contentType = SettingsContentType.LIST_ITEM) {
+    ListItem(
+      headlineContent = { Text(text = stringResource(L10nRes.string.settings_app_version_title)) },
+      supportingContent = { Text(text = LocalContext.current.versionName) },
+    )
+  }
 }

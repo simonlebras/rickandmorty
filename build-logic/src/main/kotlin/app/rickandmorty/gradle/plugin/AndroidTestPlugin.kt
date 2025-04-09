@@ -9,22 +9,16 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 public class AndroidTestPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(
-            libs.plugins.android.test,
-            libs.plugins.cachefix,
-        )
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.android.test, libs.plugins.cachefix)
 
-        configure<TestExtension> {
-            configureAndroid(this)
+      configure<TestExtension> {
+        configureAndroid(this)
 
-            defaultConfig.targetSdk = libs.versions.android.sdk.target.get().toInt()
+        defaultConfig.targetSdk = libs.versions.android.sdk.target.get().toInt()
 
-            buildTypes {
-                debug {
-                    matchingFallbacks += "release"
-                }
-            }
-        }
+        buildTypes { debug { matchingFallbacks += "release" } }
+      }
     }
 }

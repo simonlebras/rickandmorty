@@ -8,6 +8,7 @@ internal actual fun PlatformLocale.getLocalizedName(): String = getDisplayName(t
 
 internal actual fun PlatformLocale.getLanguageTag(): String = toLanguageTag()
 
-internal actual fun createPlatformLocaleDelegate(): PlatformLocaleDelegate = PlatformLocaleDelegate { languageTag ->
+internal actual fun createPlatformLocaleDelegate(): PlatformLocaleDelegate =
+  PlatformLocaleDelegate { languageTag ->
     JavaLocale.forLanguageTag(languageTag)
-}
+  }

@@ -12,19 +12,21 @@ private const val PREFERENCES_FILE_NAME = "theme_preferences.pb"
 
 @ContributesTo(AppScope::class)
 public interface ThemePreferencesDataStoreComponent {
-    @Provides
-    @SingleIn(AppScope::class)
-    public fun provideThemePreferencesDataStore(
-        fileSystem: FileSystem,
-        filePathProducer: FilePathProducer,
-        serializer: ThemePreferencesSerializer,
-    ): ThemeDataStore = ThemeDataStore(
-        DataStoreFactory.create(
-            storage = OkioStorage(
-                fileSystem = fileSystem,
-                producePath = { filePathProducer.produceFilePath(PREFERENCES_FILE_NAME) },
-                serializer = serializer,
-            ),
-        ),
+  @Provides
+  @SingleIn(AppScope::class)
+  public fun provideThemePreferencesDataStore(
+    fileSystem: FileSystem,
+    filePathProducer: FilePathProducer,
+    serializer: ThemePreferencesSerializer,
+  ): ThemeDataStore =
+    ThemeDataStore(
+      DataStoreFactory.create(
+        storage =
+          OkioStorage(
+            fileSystem = fileSystem,
+            producePath = { filePathProducer.produceFilePath(PREFERENCES_FILE_NAME) },
+            serializer = serializer,
+          )
+      )
     )
 }

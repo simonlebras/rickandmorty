@@ -9,10 +9,9 @@ import app.rickandmorty.data.model.Theme
 
 @Immutable
 public data class MainSettingsUiState(
-    val theme: ResourceState<Theme?> = Uninitialized,
-    val appLocale: ResourceState<Locale?> = Uninitialized,
+  val theme: ResourceState<Theme?> = Uninitialized,
+  val appLocale: ResourceState<Locale?> = Uninitialized,
 ) {
-    val isLoading: Boolean
-        get() = theme is Incomplete ||
-            appLocale is Incomplete
+  val isLoading: Boolean
+    get() = theme is Incomplete || appLocale is Incomplete
 }

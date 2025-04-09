@@ -11,10 +11,10 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 @ContributesBinding(scope = AppScope::class, multibinding = true)
 public class DebugLoggerInitializer : Initializer {
-    override fun initialize() {
-        with(Logger) {
-            setMinSeverity(Severity.Debug)
-            addLogWriter(platformLogWriter())
-        }
+  override fun initialize() {
+    with(Logger) {
+      setMinSeverity(Severity.Debug)
+      addLogWriter(platformLogWriter())
     }
+  }
 }

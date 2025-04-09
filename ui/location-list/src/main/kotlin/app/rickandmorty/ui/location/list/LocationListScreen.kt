@@ -46,152 +46,121 @@ import app.rickandmorty.data.model.Location
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun LocationListScreen(
-    onNavigateToSettings: () -> Unit,
-    viewModel: LocationListViewModel,
-) {
-    val locations = viewModel.locations.collectAsLazyPagingItems()
+public fun LocationListScreen(onNavigateToSettings: () -> Unit, viewModel: LocationListViewModel) {
+  val locations = viewModel.locations.collectAsLazyPagingItems()
 
-    ReportDrawnWhen { locations.loadState.isIdle }
+  ReportDrawnWhen { locations.loadState.isIdle }
 
-    LocationListScreen(
-        locations = locations,
-        onNavigateToSettings = onNavigateToSettings,
-    )
+  LocationListScreen(locations = locations, onNavigateToSettings = onNavigateToSettings)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LocationListScreen(
-    locations: LazyPagingItems<Location>,
-    onNavigateToSettings: () -> Unit,
+  locations: LazyPagingItems<Location>,
+  onNavigateToSettings: () -> Unit,
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
+  val snackbarHostState = remember { SnackbarHostState() }
 
-    val loadState = locations.loadState
+  val loadState = locations.loadState
 
-    loadState.refresh.errorOrNull?.let { error ->
-        LaunchedEffect(snackbarHostState, error) {
-            snackbarHostState.showSnackbar("Error")
+  loadState.refresh.errorOrNull?.let { error ->
+    LaunchedEffect(snackbarHostState, error) { snackbarHostState.showSnackbar("Error") }
+  }
+  loadState.append.errorOrNull?.let { error ->
+    LaunchedEffect(snackbarHostState, error) { snackbarHostState.showSnackbar("Error") }
+  }
+
+  val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
+  Scaffold(
+    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    topBar = {
+      LocationListScreenAppBar(
+        onNavigateToSettings = onNavigateToSettings,
+        scrollBehavior = scrollBehavior,
+      )
+    },
+    snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+  ) { contentPadding ->
+    PullToRefresh(
+      isRefreshing = loadState.refresh.isLoading,
+      onRefresh = locations::refresh,
+      indicatorPadding = contentPadding,
+    ) {
+      when {
+        loadState.refresh.isLoading && locations.isEmpty -> {
+          Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
         }
-    }
-    loadState.append.errorOrNull?.let { error ->
-        LaunchedEffect(snackbarHostState, error) {
-            snackbarHostState.showSnackbar("Error")
+
+        loadState.refresh.isError && locations.isEmpty -> {
+          Error(
+            text = "Error",
+            onRetry = locations::retry,
+            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+          )
         }
-    }
 
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+        loadState.isIdle && locations.isEmpty -> {
+          Empty(
+            graphic = {
+              Icon(
+                imageVector = RamIcons.Outlined.Map,
+                contentDescription = null,
+                modifier = Modifier.size(64.dp),
+              )
+            },
+            title = { Text(text = stringResource(L10nRes.string.location_list_empty)) },
+            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+          )
+        }
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LocationListScreenAppBar(
-                onNavigateToSettings = onNavigateToSettings,
-                scrollBehavior = scrollBehavior,
-            )
-        },
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
-    ) { contentPadding ->
-        PullToRefresh(
-            isRefreshing = loadState.refresh.isLoading,
-            onRefresh = locations::refresh,
-            indicatorPadding = contentPadding,
-        ) {
-            when {
-                loadState.refresh.isLoading && locations.isEmpty -> {
-                    Loader(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                loadState.refresh.isError && locations.isEmpty -> {
-                    Error(
-                        text = "Error",
-                        onRetry = locations::retry,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                loadState.isIdle && locations.isEmpty -> {
-                    Empty(
-                        graphic = {
-                            Icon(
-                                imageVector = RamIcons.Outlined.Map,
-                                contentDescription = null,
-                                modifier = Modifier.size(64.dp),
-                            )
-                        },
-                        title = {
-                            Text(text = stringResource(L10nRes.string.location_list_empty))
-                        },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                else -> {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .consumeWindowInsets(contentPadding),
-                        contentPadding = contentPadding,
-                    ) {
-                        items(
-                            count = locations.itemCount,
-                            key = locations.itemKey { it.id },
-                            contentType = locations.itemContentType { "location" },
-                        ) { index ->
-                            val item = locations[index]!!
-                            LocationItem(item)
-                        }
-
-                        appendLoadState(items = locations)
-                    }
-                }
+        else -> {
+          LazyColumn(
+            modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+            contentPadding = contentPadding,
+          ) {
+            items(
+              count = locations.itemCount,
+              key = locations.itemKey { it.id },
+              contentType = locations.itemContentType { "location" },
+            ) { index ->
+              val item = locations[index]!!
+              LocationItem(item)
             }
+
+            appendLoadState(items = locations)
+          }
         }
+      }
     }
+  }
 }
 
 @Composable
 private fun LocationItem(location: Location) {
-    ListItem(
-        headlineContent = {
-            Text(text = location.name)
-        },
-        supportingContent = {
-            Text(text = location.dimension)
-        },
-    )
+  ListItem(
+    headlineContent = { Text(text = location.name) },
+    supportingContent = { Text(text = location.dimension) },
+  )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LocationListScreenAppBar(
-    onNavigateToSettings: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
+  onNavigateToSettings: () -> Unit,
+  scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    CenterAlignedTopAppBar(
-        title = {
-            Text(text = stringResource(L10nRes.string.location_list_title))
-        },
-        actions = {
-            IconButton(onClick = onNavigateToSettings) {
-                Icon(
-                    imageVector = RamIcons.Filled.Settings,
-                    contentDescription = stringResource(L10nRes.string.navigate_up),
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior,
-    )
+  CenterAlignedTopAppBar(
+    title = { Text(text = stringResource(L10nRes.string.location_list_title)) },
+    actions = {
+      IconButton(onClick = onNavigateToSettings) {
+        Icon(
+          imageVector = RamIcons.Filled.Settings,
+          contentDescription = stringResource(L10nRes.string.navigate_up),
+        )
+      }
+    },
+    scrollBehavior = scrollBehavior,
+  )
 }

@@ -9,5 +9,6 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 @ContributesBinding(AppScope::class)
 public class JvmFilePathProducer : FilePathProducer {
-    override fun produceFilePath(fileName: String): Path = FileSystem.SYSTEM_TEMPORARY_DIRECTORY.resolve(fileName)
+  override fun produceFilePath(fileName: String): Path =
+    FileSystem.SYSTEM_TEMPORARY_DIRECTORY.resolve(fileName)
 }

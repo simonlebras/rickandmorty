@@ -58,180 +58,148 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Composable
 public fun CharacterListScreen(
-    onNavigateToSettings: () -> Unit,
-    viewModel: CharacterListViewModel,
+  onNavigateToSettings: () -> Unit,
+  viewModel: CharacterListViewModel,
 ) {
-    val characters = viewModel.characters.collectAsLazyPagingItems()
+  val characters = viewModel.characters.collectAsLazyPagingItems()
 
-    ReportDrawnWhen { characters.loadState.isIdle }
+  ReportDrawnWhen { characters.loadState.isIdle }
 
-    CharacterListScreen(
-        characters = characters,
-        onNavigateToSettings = onNavigateToSettings,
-    )
+  CharacterListScreen(characters = characters, onNavigateToSettings = onNavigateToSettings)
 }
 
 // Todo localize errors
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CharacterListScreen(
-    characters: LazyPagingItems<Character>,
-    onNavigateToSettings: () -> Unit,
+  characters: LazyPagingItems<Character>,
+  onNavigateToSettings: () -> Unit,
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
+  val snackbarHostState = remember { SnackbarHostState() }
 
-    val loadState = characters.loadState
+  val loadState = characters.loadState
 
-    loadState.refresh.errorOrNull?.let { error ->
-        LaunchedEffect(snackbarHostState, error) {
-            snackbarHostState.showSnackbar("Error")
+  loadState.refresh.errorOrNull?.let { error ->
+    LaunchedEffect(snackbarHostState, error) { snackbarHostState.showSnackbar("Error") }
+  }
+  loadState.append.errorOrNull?.let { error ->
+    LaunchedEffect(snackbarHostState, error) { snackbarHostState.showSnackbar("Error") }
+  }
+
+  val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
+  Scaffold(
+    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    topBar = {
+      CharacterListScreenAppBar(
+        onNavigateToSettings = onNavigateToSettings,
+        scrollBehavior = scrollBehavior,
+      )
+    },
+    snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+  ) { contentPadding ->
+    PullToRefresh(
+      isRefreshing = loadState.refresh.isLoading,
+      onRefresh = characters::refresh,
+      indicatorPadding = contentPadding,
+    ) {
+      when {
+        loadState.refresh.isLoading && characters.isEmpty -> {
+          Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
         }
-    }
-    loadState.append.errorOrNull?.let { error ->
-        LaunchedEffect(snackbarHostState, error) {
-            snackbarHostState.showSnackbar("Error")
+
+        loadState.refresh.isError && characters.isEmpty -> {
+          Error(
+            text = "Error",
+            onRetry = characters::retry,
+            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+          )
         }
-    }
 
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+        loadState.isIdle && characters.isEmpty -> {
+          Empty(
+            graphic = {
+              Icon(
+                imageVector = RamIcons.Outlined.Face,
+                contentDescription = null,
+                modifier = Modifier.size(64.dp),
+              )
+            },
+            title = { Text(text = stringResource(L10nRes.string.character_list_empty)) },
+            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+          )
+        }
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CharacterListScreenAppBar(
-                onNavigateToSettings = onNavigateToSettings,
-                scrollBehavior = scrollBehavior,
-            )
-        },
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
-    ) { contentPadding ->
-        PullToRefresh(
-            isRefreshing = loadState.refresh.isLoading,
-            onRefresh = characters::refresh,
-            indicatorPadding = contentPadding,
-        ) {
-            when {
-                loadState.refresh.isLoading && characters.isEmpty -> {
-                    Loader(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                loadState.refresh.isError && characters.isEmpty -> {
-                    Error(
-                        text = "Error",
-                        onRetry = characters::retry,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                loadState.isIdle && characters.isEmpty -> {
-                    Empty(
-                        graphic = {
-                            Icon(
-                                imageVector = RamIcons.Outlined.Face,
-                                contentDescription = null,
-                                modifier = Modifier.size(64.dp),
-                            )
-                        },
-                        title = {
-                            Text(text = stringResource(L10nRes.string.character_list_empty))
-                        },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .wrapContentSize()
-                            .padding(contentPadding),
-                    )
-                }
-
-                else -> {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .consumeWindowInsets(contentPadding),
-                        contentPadding = contentPadding,
-                    ) {
-                        items(
-                            count = characters.itemCount,
-                            key = characters.itemKey { it.id },
-                            contentType = characters.itemContentType { "character" },
-                        ) { index ->
-                            val item = characters[index]!!
-                            CharacterItem(item)
-                        }
-
-                        appendLoadState(items = characters)
-                    }
-                }
+        else -> {
+          LazyColumn(
+            modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+            contentPadding = contentPadding,
+          ) {
+            items(
+              count = characters.itemCount,
+              key = characters.itemKey { it.id },
+              contentType = characters.itemContentType { "character" },
+            ) { index ->
+              val item = characters[index]!!
+              CharacterItem(item)
             }
+
+            appendLoadState(items = characters)
+          }
         }
+      }
     }
+  }
 }
 
 @Composable
 private fun CharacterItem(character: Character) {
-    ListItem(
-        headlineContent = {
-            Text(text = character.name)
-        },
-        supportingContent = {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                CharacterStatusIndicator(status = character.status)
+  ListItem(
+    headlineContent = { Text(text = character.name) },
+    supportingContent = {
+      Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        CharacterStatusIndicator(status = character.status)
 
-                Text(text = stringResource(character.status.label))
-            }
-        },
-        leadingContent = {
-            AsyncImage(
-                model = character.image,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(64.dp)
-                    .clip(MaterialTheme.shapes.small),
-            )
-        },
-    )
+        Text(text = stringResource(character.status.label))
+      }
+    },
+    leadingContent = {
+      AsyncImage(
+        model = character.image,
+        contentDescription = null,
+        modifier = Modifier.size(64.dp).clip(MaterialTheme.shapes.small),
+      )
+    },
+  )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CharacterListScreenAppBar(
-    onNavigateToSettings: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
+  onNavigateToSettings: () -> Unit,
+  scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    CenterAlignedTopAppBar(
-        title = {
-            Text(text = stringResource(L10nRes.string.character_list_title))
-        },
-        actions = {
-            IconButton(onClick = onNavigateToSettings) {
-                Icon(
-                    imageVector = RamIcons.Filled.Settings,
-                    contentDescription = stringResource(L10nRes.string.navigate_up),
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior,
-    )
+  CenterAlignedTopAppBar(
+    title = { Text(text = stringResource(L10nRes.string.character_list_title)) },
+    actions = {
+      IconButton(onClick = onNavigateToSettings) {
+        Icon(
+          imageVector = RamIcons.Filled.Settings,
+          contentDescription = stringResource(L10nRes.string.navigate_up),
+        )
+      }
+    },
+    scrollBehavior = scrollBehavior,
+  )
 }
 
 @Preview
 @Composable
 private fun CharacterItemPreview(
-    @PreviewParameter(CharacterPreviewParameterProvider::class) character: Character,
+  @PreviewParameter(CharacterPreviewParameterProvider::class) character: Character
 ) {
-    PreviewWrapper {
-        ProvideCharacterImagePreviewHandler {
-            CharacterItem(character = character)
-        }
-    }
+  PreviewWrapper { ProvideCharacterImagePreviewHandler { CharacterItem(character = character) } }
 }

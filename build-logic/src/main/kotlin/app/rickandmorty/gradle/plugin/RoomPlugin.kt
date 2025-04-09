@@ -11,19 +11,15 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 
 public class RoomPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(
-            libs.plugins.androidx.room,
-            libs.plugins.ksp,
-        )
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.androidx.room, libs.plugins.ksp)
 
-        configure<RoomExtension> {
-            schemaDirectory("$projectDir/schemas")
-        }
+      configure<RoomExtension> { schemaDirectory("$projectDir/schemas") }
 
-        dependencies {
-            api(libs.androidx.room.runtime)
-            ksp(libs.androidx.room.compiler)
-        }
+      dependencies {
+        api(libs.androidx.room.runtime)
+        ksp(libs.androidx.room.compiler)
+      }
     }
 }

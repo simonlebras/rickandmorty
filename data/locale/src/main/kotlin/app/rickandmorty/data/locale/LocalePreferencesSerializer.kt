@@ -8,16 +8,17 @@ import java.io.InputStream
 import java.io.OutputStream
 
 internal class LocalePreferencesSerializer : Serializer<LocalePreferences> {
-    override val defaultValue: LocalePreferences
-        get() = LocalePreferences()
+  override val defaultValue: LocalePreferences
+    get() = LocalePreferences()
 
-    override suspend fun readFrom(input: InputStream): LocalePreferences = try {
-        LocalePreferences.ADAPTER.decode(input)
+  override suspend fun readFrom(input: InputStream): LocalePreferences =
+    try {
+      LocalePreferences.ADAPTER.decode(input)
     } catch (exception: IOException) {
-        throw CorruptionException("Cannot read proto.", exception)
+      throw CorruptionException("Cannot read proto.", exception)
     }
 
-    override suspend fun writeTo(t: LocalePreferences, output: OutputStream) {
-        LocalePreferences.ADAPTER.encode(output, t)
-    }
+  override suspend fun writeTo(t: LocalePreferences, output: OutputStream) {
+    LocalePreferences.ADAPTER.encode(output, t)
+  }
 }

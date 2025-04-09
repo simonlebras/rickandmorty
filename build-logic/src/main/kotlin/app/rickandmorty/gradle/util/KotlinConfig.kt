@@ -9,23 +9,20 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 internal fun Project.configureKotlin() {
-    val javaTarget = libs.versions.java.target.get()
+  val javaTarget = libs.versions.java.target.get()
 
-    tasks.withType<KotlinJvmCompile>().configureEach {
-        compilerOptions {
-            jvmTarget = JvmTarget.fromTarget(javaTarget)
+  tasks.withType<KotlinJvmCompile>().configureEach {
+    compilerOptions {
+      jvmTarget = JvmTarget.fromTarget(javaTarget)
 
-            allWarningsAsErrors = true
+      allWarningsAsErrors = true
 
-            freeCompilerArgs.addAll(
-                "-Xconsistent-data-class-copy-visibility",
-                "-Xjvm-default=all",
-            )
-        }
+      freeCompilerArgs.addAll("-Xconsistent-data-class-copy-visibility", "-Xjvm-default=all")
     }
+  }
 
-    tasks.withType<JavaCompile>().configureEach {
-        sourceCompatibility = javaTarget
-        targetCompatibility = javaTarget
-    }
+  tasks.withType<JavaCompile>().configureEach {
+    sourceCompatibility = javaTarget
+    targetCompatibility = javaTarget
+  }
 }

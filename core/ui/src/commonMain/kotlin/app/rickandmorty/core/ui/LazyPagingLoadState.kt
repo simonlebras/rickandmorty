@@ -10,32 +10,26 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import app.rickandmorty.core.designsystem.component.Loader
 
-public fun <T : Any> LazyListScope.appendLoadState(
-    items: LazyPagingItems<T>,
-) {
-    val loadState = items.loadState
+public fun <T : Any> LazyListScope.appendLoadState(items: LazyPagingItems<T>) {
+  val loadState = items.loadState
 
-    if (loadState.append.isLoading) {
-        item {
-            Loader(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentWidth(Alignment.CenterHorizontally)
-                    .padding(16.dp),
-            )
-        }
+  if (loadState.append.isLoading) {
+    item {
+      Loader(
+        modifier =
+          Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally).padding(16.dp)
+      )
     }
+  }
 
-    loadState.append.errorOrNull?.let { error ->
-        item {
-            Error(
-                text = "Error",
-                onRetry = items::retry,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentWidth(Alignment.CenterHorizontally)
-                    .padding(16.dp),
-            )
-        }
+  loadState.append.errorOrNull?.let { error ->
+    item {
+      Error(
+        text = "Error",
+        onRetry = items::retry,
+        modifier =
+          Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally).padding(16.dp),
+      )
     }
+  }
 }

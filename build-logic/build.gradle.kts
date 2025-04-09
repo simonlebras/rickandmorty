@@ -1,137 +1,133 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    `kotlin-dsl`
-    alias(libs.plugins.android.lint)
-    alias(libs.plugins.spotless)
+  `kotlin-dsl`
+  alias(libs.plugins.android.lint)
+  alias(libs.plugins.spotless)
 }
 
 val javaTarget = libs.versions.java.target.get()
 
 kotlin {
-    compilerOptions {
-        jvmTarget = JvmTarget.fromTarget(javaTarget)
+  compilerOptions {
+    jvmTarget = JvmTarget.fromTarget(javaTarget)
 
-        allWarningsAsErrors = true
+    allWarningsAsErrors = true
 
-        freeCompilerArgs.addAll(
-            "-Xjdk-release=$javaTarget",
-        )
-    }
+    freeCompilerArgs.addAll("-Xjdk-release=$javaTarget")
+  }
 
-    explicitApi()
+  explicitApi()
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    sourceCompatibility = javaTarget
-    targetCompatibility = javaTarget
+  sourceCompatibility = javaTarget
+  targetCompatibility = javaTarget
 }
 
 tasks {
-    validatePlugins {
-        enableStricterValidation = true
-        failOnWarning = true
-    }
+  validatePlugins {
+    enableStricterValidation = true
+    failOnWarning = true
+  }
 }
 
 lint {
-    warningsAsErrors = true
-    disable += setOf(
-        "InternalGradleApiUsage",
-    )
+  warningsAsErrors = true
+  disable += setOf("InternalGradleApiUsage")
 }
 
 dependencies {
-    compileOnly(libs.android.tools.common)
-    compileOnly(libs.android.tools.gradleapi)
-    compileOnly(libs.spotless.plugin)
-    compileOnly(libs.plugins.androidx.room.asDependency())
-    compileOnly(libs.plugins.apollo.asDependency())
-    compileOnly(libs.plugins.compose.compiler.asDependency())
-    compileOnly(libs.plugins.dependencyanalysis.asDependency())
-    compileOnly(libs.plugins.gradledoctor.asDependency())
-    compileOnly(libs.plugins.kotlin.multiplatform.asDependency())
+  compileOnly(libs.android.tools.common)
+  compileOnly(libs.android.tools.gradleapi)
+  compileOnly(libs.spotless.plugin)
+  compileOnly(libs.plugins.androidx.room.asDependency())
+  compileOnly(libs.plugins.apollo.asDependency())
+  compileOnly(libs.plugins.compose.compiler.asDependency())
+  compileOnly(libs.plugins.dependencyanalysis.asDependency())
+  compileOnly(libs.plugins.gradledoctor.asDependency())
+  compileOnly(libs.plugins.kotlin.multiplatform.asDependency())
 
-    implementation(libs.truth)
+  implementation(libs.truth)
 
-    lintChecks(libs.androidx.gradle.lints)
+  lintChecks(libs.androidx.gradle.lints)
 }
 
 gradlePlugin {
-    plugins {
-        register("android-application") {
-            id = "app.rickandmorty.android-application"
-            implementationClass = "app.rickandmorty.gradle.plugin.AndroidApplicationPlugin"
-        }
-        register("android-library") {
-            id = "app.rickandmorty.android-library"
-            implementationClass = "app.rickandmorty.gradle.plugin.AndroidLibraryPlugin"
-        }
-        register("android-test") {
-            id = "app.rickandmorty.android-test"
-            implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
-        }
-        register("compose") {
-            id = "app.rickandmorty.compose"
-            implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
-        }
-        register("firebase-crashlytics") {
-            id = "app.rickandmorty.firebase-crashlytics"
-            implementationClass = "app.rickandmorty.gradle.plugin.FirebaseCrashlyticsPlugin"
-        }
-        register("firebase-perf") {
-            id = "app.rickandmorty.firebase-perf"
-            implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
-        }
-        register("kotlin-android") {
-            id = "app.rickandmorty.kotlin-android"
-            implementationClass = "app.rickandmorty.gradle.plugin.KotlinAndroidPlugin"
-        }
-        register("kotlin-multiplatform") {
-            id = "app.rickandmorty.kotlin-multiplatform"
-            implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
-        }
-        register("kotlininject-anvil") {
-            id = "app.rickandmorty.kotlininject-anvil"
-            implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectAnvilPlugin"
-        }
-        register("kotlininject-core") {
-            id = "app.rickandmorty.kotlininject-core"
-            implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectCorePlugin"
-        }
-        register("kotlininject-viewmodel") {
-            id = "app.rickandmorty.kotlininject-viewmodel"
-            implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectViewModelPlugin"
-        }
-        register("room") {
-            id = "app.rickandmorty.room"
-            implementationClass = "app.rickandmorty.gradle.plugin.RoomPlugin"
-        }
-        register("root") {
-            id = "app.rickandmorty.root"
-            implementationClass = "app.rickandmorty.gradle.plugin.RootPlugin"
-        }
-        register("spotless") {
-            id = "app.rickandmorty.spotless"
-            implementationClass = "app.rickandmorty.gradle.plugin.SpotlessPlugin"
-        }
+  plugins {
+    register("android-application") {
+      id = "app.rickandmorty.android-application"
+      implementationClass = "app.rickandmorty.gradle.plugin.AndroidApplicationPlugin"
     }
+    register("android-library") {
+      id = "app.rickandmorty.android-library"
+      implementationClass = "app.rickandmorty.gradle.plugin.AndroidLibraryPlugin"
+    }
+    register("android-test") {
+      id = "app.rickandmorty.android-test"
+      implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
+    }
+    register("compose") {
+      id = "app.rickandmorty.compose"
+      implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
+    }
+    register("firebase-crashlytics") {
+      id = "app.rickandmorty.firebase-crashlytics"
+      implementationClass = "app.rickandmorty.gradle.plugin.FirebaseCrashlyticsPlugin"
+    }
+    register("firebase-perf") {
+      id = "app.rickandmorty.firebase-perf"
+      implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
+    }
+    register("kotlin-android") {
+      id = "app.rickandmorty.kotlin-android"
+      implementationClass = "app.rickandmorty.gradle.plugin.KotlinAndroidPlugin"
+    }
+    register("kotlin-multiplatform") {
+      id = "app.rickandmorty.kotlin-multiplatform"
+      implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
+    }
+    register("kotlininject-anvil") {
+      id = "app.rickandmorty.kotlininject-anvil"
+      implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectAnvilPlugin"
+    }
+    register("kotlininject-core") {
+      id = "app.rickandmorty.kotlininject-core"
+      implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectCorePlugin"
+    }
+    register("kotlininject-viewmodel") {
+      id = "app.rickandmorty.kotlininject-viewmodel"
+      implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectViewModelPlugin"
+    }
+    register("room") {
+      id = "app.rickandmorty.room"
+      implementationClass = "app.rickandmorty.gradle.plugin.RoomPlugin"
+    }
+    register("root") {
+      id = "app.rickandmorty.root"
+      implementationClass = "app.rickandmorty.gradle.plugin.RootPlugin"
+    }
+    register("spotless") {
+      id = "app.rickandmorty.spotless"
+      implementationClass = "app.rickandmorty.gradle.plugin.SpotlessPlugin"
+    }
+  }
 }
 
 spotless {
-    val ktlintVersion = libs.versions.ktlint.core.get()
+  val ktfmtVersion = libs.versions.ktfmt.get()
 
-    kotlin {
-        ktlint(ktlintVersion)
-        target("src/**/*.kt")
-    }
+  kotlin {
+    ktfmt(ktfmtVersion).googleStyle()
+    target("src/**/*.kt")
+  }
 
-    kotlinGradle {
-        ktlint(ktlintVersion)
-        target("*.kts")
-    }
+  kotlinGradle {
+    ktfmt(ktfmtVersion).googleStyle()
+    target("*.kts")
+  }
 }
 
 private fun Provider<PluginDependency>.asDependency(): Provider<String> = map {
-    "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
+  "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
 }

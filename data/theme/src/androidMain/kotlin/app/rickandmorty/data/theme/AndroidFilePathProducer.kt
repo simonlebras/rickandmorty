@@ -10,11 +10,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 @Inject
 @ContributesBinding(AppScope::class)
-public class AndroidFilePathProducer(
-    @AppContext private val context: Context,
-) : FilePathProducer {
-    override fun produceFilePath(fileName: String): Path = context.filesDir
-        .resolve(fileName)
-        .absolutePath
-        .toPath()
+public class AndroidFilePathProducer(@AppContext private val context: Context) : FilePathProducer {
+  override fun produceFilePath(fileName: String): Path =
+    context.filesDir.resolve(fileName).absolutePath.toPath()
 }

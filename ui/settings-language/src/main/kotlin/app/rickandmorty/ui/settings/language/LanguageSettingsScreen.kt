@@ -37,153 +37,123 @@ import kotlinx.collections.immutable.ImmutableList
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun LanguageSettingsScreen(
-    onNavigateUp: () -> Unit,
-    viewModel: LanguageSettingsViewModel,
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+public fun LanguageSettingsScreen(onNavigateUp: () -> Unit, viewModel: LanguageSettingsViewModel) {
+  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    ReportDrawnWhen { !uiState.isLoading }
+  ReportDrawnWhen { !uiState.isLoading }
 
-    LanguageSettingsScreen(
-        uiState = uiState,
-        onNavigateUp = onNavigateUp,
-        onSelectLocale = remember(viewModel, onNavigateUp) {
-            { locale ->
-                viewModel.setAppLocale(locale)
-                onNavigateUp()
-            }
-        },
-    )
+  LanguageSettingsScreen(
+    uiState = uiState,
+    onNavigateUp = onNavigateUp,
+    onSelectLocale =
+      remember(viewModel, onNavigateUp) {
+        { locale ->
+          viewModel.setAppLocale(locale)
+          onNavigateUp()
+        }
+      },
+  )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LanguageSettingsScreen(
-    uiState: LanguageSettingsUiState,
-    onNavigateUp: () -> Unit,
-    onSelectLocale: (Locale?) -> Unit,
+  uiState: LanguageSettingsUiState,
+  onNavigateUp: () -> Unit,
+  onSelectLocale: (Locale?) -> Unit,
 ) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+  val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LanguageSettingsAppBar(
-                onNavigateUp = onNavigateUp,
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { contentPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .selectableGroup()
-                .fillMaxSize()
-                .consumeWindowInsets(contentPadding),
-            contentPadding = contentPadding,
-        ) {
-            when {
-                uiState.isLoading -> {
-                    loader()
-                }
-
-                else -> {
-                    val currentAppLocale = uiState.appLocale()
-
-                    systemDefault(
-                        currentAppLocale = currentAppLocale,
-                        onSelectLocale = onSelectLocale,
-                    )
-
-                    val availableAppLocales = uiState.availableAppLocales()!!
-                    availableAppLocales(
-                        currentAppLocale = currentAppLocale,
-                        availableAppLocales = availableAppLocales,
-                        onSelectLocale = onSelectLocale,
-                    )
-                }
-            }
+  Scaffold(
+    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    topBar = {
+      LanguageSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior)
+    },
+  ) { contentPadding ->
+    LazyColumn(
+      modifier = Modifier.selectableGroup().fillMaxSize().consumeWindowInsets(contentPadding),
+      contentPadding = contentPadding,
+    ) {
+      when {
+        uiState.isLoading -> {
+          loader()
         }
+
+        else -> {
+          val currentAppLocale = uiState.appLocale()
+
+          systemDefault(currentAppLocale = currentAppLocale, onSelectLocale = onSelectLocale)
+
+          val availableAppLocales = uiState.availableAppLocales()!!
+          availableAppLocales(
+            currentAppLocale = currentAppLocale,
+            availableAppLocales = availableAppLocales,
+            onSelectLocale = onSelectLocale,
+          )
+        }
+      }
     }
+  }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LanguageSettingsAppBar(
-    onNavigateUp: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior,
+  onNavigateUp: () -> Unit,
+  scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    CenterAlignedTopAppBar(
-        title = {
-            Text(text = stringResource(L10nRes.string.settings_language_title))
-        },
-        navigationIcon = {
-            IconButton(onClick = onNavigateUp) {
-                Icon(
-                    imageVector = RamIcons.Filled.ArrowBack,
-                    contentDescription = stringResource(L10nRes.string.navigate_up),
-                )
-            }
-        },
-        scrollBehavior = scrollBehavior,
-    )
+  CenterAlignedTopAppBar(
+    title = { Text(text = stringResource(L10nRes.string.settings_language_title)) },
+    navigationIcon = {
+      IconButton(onClick = onNavigateUp) {
+        Icon(
+          imageVector = RamIcons.Filled.ArrowBack,
+          contentDescription = stringResource(L10nRes.string.navigate_up),
+        )
+      }
+    },
+    scrollBehavior = scrollBehavior,
+  )
 }
 
 private fun LazyListScope.systemDefault(
-    currentAppLocale: Locale?,
-    onSelectLocale: (Locale?) -> Unit,
+  currentAppLocale: Locale?,
+  onSelectLocale: (Locale?) -> Unit,
 ) {
-    item(
-        key = "system_default",
-        contentType = SettingsContentType.LIST_ITEM,
-    ) {
-        LocaleItem(
-            text = stringResource(L10nRes.string.settings_language_system_default),
-            isSelected = currentAppLocale == null,
-            onClick = { onSelectLocale(null) },
-        )
-    }
+  item(key = "system_default", contentType = SettingsContentType.LIST_ITEM) {
+    LocaleItem(
+      text = stringResource(L10nRes.string.settings_language_system_default),
+      isSelected = currentAppLocale == null,
+      onClick = { onSelectLocale(null) },
+    )
+  }
 }
 
 private fun LazyListScope.availableAppLocales(
-    currentAppLocale: Locale?,
-    availableAppLocales: ImmutableList<Locale>,
-    onSelectLocale: (Locale?) -> Unit,
+  currentAppLocale: Locale?,
+  availableAppLocales: ImmutableList<Locale>,
+  onSelectLocale: (Locale?) -> Unit,
 ) {
-    items(
-        items = availableAppLocales,
-        key = { locale -> locale.toLanguageTag() },
-    ) { locale ->
-        LocaleItem(
-            text = locale.getLocalizedName(),
-            isSelected = locale == currentAppLocale,
-            onClick = { onSelectLocale(locale) },
-        )
-    }
+  items(items = availableAppLocales, key = { locale -> locale.toLanguageTag() }) { locale ->
+    LocaleItem(
+      text = locale.getLocalizedName(),
+      isSelected = locale == currentAppLocale,
+      onClick = { onSelectLocale(locale) },
+    )
+  }
 }
 
 @Composable
-private fun LocaleItem(
-    text: String,
-    isSelected: Boolean,
-    onClick: () -> Unit,
-) {
-    ListItem(
-        headlineContent = { Text(text = text) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .selectable(
-                selected = isSelected,
-                role = Role.RadioButton,
-                onClick = onClick,
-            ),
-        trailingContent = {
-            if (isSelected) {
-                Icon(
-                    imageVector = RamIcons.Filled.Check,
-                    contentDescription = null,
-                )
-            }
-        },
-    )
+private fun LocaleItem(text: String, isSelected: Boolean, onClick: () -> Unit) {
+  ListItem(
+    headlineContent = { Text(text = text) },
+    modifier =
+      Modifier.fillMaxWidth()
+        .selectable(selected = isSelected, role = Role.RadioButton, onClick = onClick),
+    trailingContent = {
+      if (isSelected) {
+        Icon(imageVector = RamIcons.Filled.Check, contentDescription = null)
+      }
+    },
+  )
 }

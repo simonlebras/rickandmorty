@@ -13,10 +13,10 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 @Inject
 @ContributesBinding(scope = AppScope::class, multibinding = true)
 public class CrashlyticsLoggerInitializer : Initializer {
-    override fun initialize() {
-        with(Logger) {
-            setMinSeverity(Severity.Error)
-            addLogWriter(CrashlyticsLogWriter())
-        }
+  override fun initialize() {
+    with(Logger) {
+      setMinSeverity(Severity.Error)
+      addLogWriter(CrashlyticsLogWriter())
     }
+  }
 }

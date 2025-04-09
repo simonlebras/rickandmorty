@@ -17,28 +17,23 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun PullToRefresh(
-    isRefreshing: Boolean,
-    onRefresh: () -> Unit,
-    modifier: Modifier = Modifier,
-    state: PullToRefreshState = rememberPullToRefreshState(),
-    indicatorPadding: PaddingValues = PaddingValues(0.dp),
-    content: @Composable BoxScope.() -> Unit,
+  isRefreshing: Boolean,
+  onRefresh: () -> Unit,
+  modifier: Modifier = Modifier,
+  state: PullToRefreshState = rememberPullToRefreshState(),
+  indicatorPadding: PaddingValues = PaddingValues(0.dp),
+  content: @Composable BoxScope.() -> Unit,
 ) {
-    Box(
-        modifier = modifier.pullToRefresh(
-            state = state,
-            isRefreshing = isRefreshing,
-            onRefresh = onRefresh,
-        ),
-    ) {
-        content()
+  Box(
+    modifier =
+      modifier.pullToRefresh(state = state, isRefreshing = isRefreshing, onRefresh = onRefresh)
+  ) {
+    content()
 
-        Indicator(
-            state = state,
-            isRefreshing = isRefreshing,
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(indicatorPadding),
-        )
-    }
+    Indicator(
+      state = state,
+      isRefreshing = isRefreshing,
+      modifier = Modifier.align(Alignment.TopCenter).padding(indicatorPadding),
+    )
+  }
 }

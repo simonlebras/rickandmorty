@@ -18,34 +18,27 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class StartupBenchmark {
-    @get:Rule
-    val rule = MacrobenchmarkRule()
+  @get:Rule val rule = MacrobenchmarkRule()
 
-    @Test
-    fun startupCompilationNone() = benchmark(CompilationMode.None())
+  @Test fun startupCompilationNone() = benchmark(CompilationMode.None())
 
-    @Test
-    fun startupCompilationBaselineProfile() = benchmark(CompilationMode.Partial(BaselineProfileMode.Require))
+  @Test
+  fun startupCompilationBaselineProfile() =
+    benchmark(CompilationMode.Partial(BaselineProfileMode.Require))
 
-    @OptIn(
-        ExperimentalBenchmarkConfigApi::class,
-        ExperimentalPerfettoCaptureApi::class,
-    )
-    private fun benchmark(compilationMode: CompilationMode) {
-        rule.measureRepeated(
-            packageName = PACKAGE_NAME,
-            metrics = listOf(StartupTimingMetric()),
-            iterations = 10,
-            experimentalConfig = ExperimentalConfig(
-                startupInsightsConfig = StartupInsightsConfig(isEnabled = true),
-            ),
-            compilationMode = compilationMode,
-            startupMode = StartupMode.COLD,
-            setupBlock = {
-                pressHome()
-            },
-        ) {
-            startActivityAndWait()
-        }
+  @OptIn(ExperimentalBenchmarkConfigApi::class, ExperimentalPerfettoCaptureApi::class)
+  private fun benchmark(compilationMode: CompilationMode) {
+    rule.measureRepeated(
+      packageName = PACKAGE_NAME,
+      metrics = listOf(StartupTimingMetric()),
+      iterations = 10,
+      experimentalConfig =
+        ExperimentalConfig(startupInsightsConfig = StartupInsightsConfig(isEnabled = true)),
+      compilationMode = compilationMode,
+      startupMode = StartupMode.COLD,
+      setupBlock = { pressHome() },
+    ) {
+      startActivityAndWait()
     }
+  }
 }

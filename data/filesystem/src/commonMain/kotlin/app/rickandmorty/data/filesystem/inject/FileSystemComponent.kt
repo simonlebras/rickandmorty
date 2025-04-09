@@ -8,6 +8,5 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 
 @ContributesTo(AppScope::class)
 public interface FileSystemComponent {
-    @Provides
-    public fun provideFileSystem(): FileSystem = FileSystem.SYSTEM
+  @Provides public fun provideFileSystem(): FileSystem = FileSystem.SYSTEM
 }

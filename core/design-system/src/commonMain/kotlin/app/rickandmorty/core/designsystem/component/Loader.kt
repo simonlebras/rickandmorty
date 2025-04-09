@@ -6,5 +6,5 @@ import androidx.compose.ui.Modifier
 
 @Composable
 public fun Loader(modifier: Modifier = Modifier) {
-    CircularProgressIndicator(modifier = modifier)
+  CircularProgressIndicator(modifier = modifier)
 }

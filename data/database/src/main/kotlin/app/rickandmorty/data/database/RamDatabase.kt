@@ -16,21 +16,27 @@ import app.rickandmorty.data.database.entity.LocationEntity
 import app.rickandmorty.data.database.entity.LocationPagedEntryEntity
 
 @Database(
-    entities = [
-        CharacterEntity::class,
-        CharacterPagedEntryEntity::class,
-        EpisodeEntity::class,
-        EpisodePagedEntryEntity::class,
-        LocationEntity::class,
-        LocationPagedEntryEntity::class,
+  entities =
+    [
+      CharacterEntity::class,
+      CharacterPagedEntryEntity::class,
+      EpisodeEntity::class,
+      EpisodePagedEntryEntity::class,
+      LocationEntity::class,
+      LocationPagedEntryEntity::class,
     ],
-    version = 1,
+  version = 1,
 )
 internal abstract class RamDatabase : RoomDatabase() {
-    abstract fun characterDao(): CharacterDao
-    abstract fun characterPagedEntryDao(): CharacterPagedEntryDao
-    abstract fun episodeDao(): EpisodeDao
-    abstract fun episodePagedEntryDao(): EpisodePagedEntryDao
-    abstract fun locationDao(): LocationDao
-    abstract fun locationPagedEntryDao(): LocationPagedEntryDao
+  abstract fun characterDao(): CharacterDao
+
+  abstract fun characterPagedEntryDao(): CharacterPagedEntryDao
+
+  abstract fun episodeDao(): EpisodeDao
+
+  abstract fun episodePagedEntryDao(): EpisodePagedEntryDao
+
+  abstract fun locationDao(): LocationDao
+
+  abstract fun locationPagedEntryDao(): LocationPagedEntryDao
 }

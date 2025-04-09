@@ -12,12 +12,12 @@ import org.junit.runner.RunWith
 @LargeTest
 @SdkSuppress(minSdkVersion = 29)
 class BaselineProfileGenerator {
-    @get:Rule
-    val rule = BaselineProfileRule()
+  @get:Rule val rule = BaselineProfileRule()
 
-    @Test
-    fun generateBaselineProfile() = rule.collect(packageName = PACKAGE_NAME) {
-        pressHome()
-        startActivityAndWait()
+  @Test
+  fun generateBaselineProfile() =
+    rule.collect(packageName = PACKAGE_NAME) {
+      pressHome()
+      startActivityAndWait()
     }
 }

@@ -12,24 +12,12 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 
 @Composable
-public fun Header(
-    text: String,
-    modifier: Modifier = Modifier,
-) {
-    Surface(
-        modifier = modifier
-            .semantics { heading() }
-            .defaultMinSize(minHeight = 32.dp),
-    ) {
-        Text(
-            text = text,
-            modifier = Modifier.padding(
-                start = 16.dp,
-                top = 8.dp,
-                end = 24.dp,
-                bottom = 8.dp,
-            ),
-            style = MaterialTheme.typography.titleSmall,
-        )
-    }
+public fun Header(text: String, modifier: Modifier = Modifier) {
+  Surface(modifier = modifier.semantics { heading() }.defaultMinSize(minHeight = 32.dp)) {
+    Text(
+      text = text,
+      modifier = Modifier.padding(start = 16.dp, top = 8.dp, end = 24.dp, bottom = 8.dp),
+      style = MaterialTheme.typography.titleSmall,
+    )
+  }
 }

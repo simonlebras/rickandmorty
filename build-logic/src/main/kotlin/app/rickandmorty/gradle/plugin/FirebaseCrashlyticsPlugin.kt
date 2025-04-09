@@ -8,15 +8,13 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
 public class FirebaseCrashlyticsPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(
-            libs.plugins.googleservices,
-            libs.plugins.firebase.crashlytics,
-        )
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.googleservices, libs.plugins.firebase.crashlytics)
 
-        dependencies {
-            implementation(platform(libs.firebase.bom))
-            implementation(libs.firebase.crashlytics)
-        }
+      dependencies {
+        implementation(platform(libs.firebase.bom))
+        implementation(libs.firebase.crashlytics)
+      }
     }
 }

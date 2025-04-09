@@ -9,21 +9,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-internal actual fun colorScheme(
-    useDarkTheme: Boolean,
-    useDynamicColor: Boolean,
-): ColorScheme = when {
+internal actual fun colorScheme(useDarkTheme: Boolean, useDynamicColor: Boolean): ColorScheme =
+  when {
     Build.VERSION.SDK_INT >= 31 && useDynamicColor && useDarkTheme -> {
-        dynamicDarkColorScheme(LocalContext.current)
+      dynamicDarkColorScheme(LocalContext.current)
     }
 
     Build.VERSION.SDK_INT >= 31 && useDynamicColor && !useDarkTheme -> {
-        dynamicLightColorScheme(LocalContext.current)
+      dynamicLightColorScheme(LocalContext.current)
     }
 
     useDarkTheme -> RamDarkColorScheme
     else -> RamLightColorScheme
-}
+  }
 
 @ChecksSdkIntAtLeast(api = 31)
 public actual fun isDynamicColorAvailable(): Boolean = Build.VERSION.SDK_INT >= 31

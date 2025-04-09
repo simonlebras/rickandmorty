@@ -1,35 +1,21 @@
 plugins {
-    alias(libs.plugins.rickandmorty.android.library)
-    alias(libs.plugins.rickandmorty.kotlin.multiplatform)
-    alias(libs.plugins.rickandmorty.kotlininject.anvil)
-    alias(libs.plugins.rickandmorty.spotless)
+  alias(libs.plugins.rickandmorty.android.library)
+  alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+  alias(libs.plugins.rickandmorty.kotlininject.anvil)
+  alias(libs.plugins.rickandmorty.spotless)
 
-    alias(libs.plugins.dependencyanalysis)
-    alias(libs.plugins.sortdependencies)
+  alias(libs.plugins.dependencyanalysis)
+  alias(libs.plugins.sortdependencies)
 }
 
-android {
-    namespace = "app.rickandmorty.core.crashlytics"
-}
+android { namespace = "app.rickandmorty.core.crashlytics" }
 
 kotlin {
-    sourceSets {
-        androidMain {
-            dependencies {
-                implementation(libs.crashkios.crashlytics)
-            }
-        }
+  sourceSets {
+    androidMain { dependencies { implementation(libs.crashkios.crashlytics) } }
 
-        commonMain {
-            dependencies {
-                api(projects.core.startup)
-            }
-        }
+    commonMain { dependencies { api(projects.core.startup) } }
 
-        nativeMain {
-            dependencies {
-                implementation(libs.crashkios.crashlytics)
-            }
-        }
-    }
+    nativeMain { dependencies { implementation(libs.crashkios.crashlytics) } }
+  }
 }

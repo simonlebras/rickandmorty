@@ -23,39 +23,39 @@ import com.eygraber.compose.placeholder.placeholder
 
 @Composable
 public fun AsyncImage(
-    model: Any?,
-    contentDescription: String?,
-    modifier: Modifier = Modifier,
-    alignment: Alignment = Alignment.Center,
-    contentScale: ContentScale = ContentScale.Fit,
-    alpha: Float = DefaultAlpha,
-    colorFilter: ColorFilter? = null,
-    filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
-    clipToBounds: Boolean = true,
+  model: Any?,
+  contentDescription: String?,
+  modifier: Modifier = Modifier,
+  alignment: Alignment = Alignment.Center,
+  contentScale: ContentScale = ContentScale.Fit,
+  alpha: Float = DefaultAlpha,
+  colorFilter: ColorFilter? = null,
+  filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
+  clipToBounds: Boolean = true,
 ) {
-    var isLoading by remember { mutableStateOf(true) }
+  var isLoading by remember { mutableStateOf(true) }
 
-    AsyncImage(
-        model = model,
-        contentDescription = contentDescription,
-        modifier = modifier then if (!LocalInspectionMode.current) {
-            Modifier.placeholder(
-                visible = isLoading,
-                color = PlaceholderDefaults.color(),
-                highlight = PlaceholderHighlight.shimmer(),
-            )
+  AsyncImage(
+    model = model,
+    contentDescription = contentDescription,
+    modifier =
+      modifier then
+        if (!LocalInspectionMode.current) {
+          Modifier.placeholder(
+            visible = isLoading,
+            color = PlaceholderDefaults.color(),
+            highlight = PlaceholderHighlight.shimmer(),
+          )
         } else {
-            Modifier
+          Modifier
         },
-        transform = AsyncImagePainter.DefaultTransform,
-        onState = { state ->
-            isLoading = state is AsyncImagePainter.State.Loading
-        },
-        alignment = alignment,
-        contentScale = contentScale,
-        alpha = alpha,
-        colorFilter = colorFilter,
-        filterQuality = filterQuality,
-        clipToBounds = clipToBounds,
-    )
+    transform = AsyncImagePainter.DefaultTransform,
+    onState = { state -> isLoading = state is AsyncImagePainter.State.Loading },
+    alignment = alignment,
+    contentScale = contentScale,
+    alpha = alpha,
+    colorFilter = colorFilter,
+    filterQuality = filterQuality,
+    clipToBounds = clipToBounds,
+  )
 }

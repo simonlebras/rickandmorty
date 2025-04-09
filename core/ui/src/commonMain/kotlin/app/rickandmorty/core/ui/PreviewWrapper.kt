@@ -9,18 +9,16 @@ import app.rickandmorty.core.designsystem.theme.RamTheme
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-public fun PreviewWrapper(
-    content: @Composable () -> Unit,
-) {
-    RamTheme {
-        SharedTransitionLayout {
-            AnimatedVisibility(visible = true) {
-                CompositionLocalProvider(
-                    LocalSharedTransitionScope provides this@SharedTransitionLayout,
-                    LocalNavAnimatedVisibilityScope provides this,
-                    content = content,
-                )
-            }
-        }
+public fun PreviewWrapper(content: @Composable () -> Unit) {
+  RamTheme {
+    SharedTransitionLayout {
+      AnimatedVisibility(visible = true) {
+        CompositionLocalProvider(
+          LocalSharedTransitionScope provides this@SharedTransitionLayout,
+          LocalNavAnimatedVisibilityScope provides this,
+          content = content,
+        )
+      }
     }
+  }
 }

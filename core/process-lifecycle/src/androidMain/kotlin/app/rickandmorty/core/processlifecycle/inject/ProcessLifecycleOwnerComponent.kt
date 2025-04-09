@@ -8,6 +8,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 
 @ContributesTo(AppScope::class)
 public interface ProcessLifecycleOwnerComponent {
-    @Provides
-    public fun provideProcessLifecycleOwner(): @ProcessLifecycleOwner LifecycleOwner = AndroidxProcessLifecycleOwner.get()
+  @Provides
+  public fun provideProcessLifecycleOwner(): @ProcessLifecycleOwner LifecycleOwner =
+    AndroidxProcessLifecycleOwner.get()
 }

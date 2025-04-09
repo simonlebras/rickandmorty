@@ -11,34 +11,24 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-public class LanguageSettingsViewModel(
-    private val localeRepository: LocaleRepository,
-) : ViewModel() {
-    private val appLocale = ResourceController(
-        resource = localeRepository.getAppLocale(),
-    )
+public class LanguageSettingsViewModel(private val localeRepository: LocaleRepository) :
+  ViewModel() {
+  private val appLocale = ResourceController(resource = localeRepository.getAppLocale())
 
-    private val availableAppLocales = ResourceController(
-        resource = suspend { localeRepository.getAvailableAppLocales() },
-    )
+  private val availableAppLocales =
+    ResourceController(resource = suspend { localeRepository.getAvailableAppLocales() })
 
-    public val uiState: StateFlow<LanguageSettingsUiState> = combine(
-        appLocale.state,
-        availableAppLocales.state,
-    ) { appLocale, availableAppLocales ->
-        LanguageSettingsUiState(
-            appLocale = appLocale,
-            availableAppLocales = availableAppLocales,
-        )
-    }.stateIn(
+  public val uiState: StateFlow<LanguageSettingsUiState> =
+    combine(appLocale.state, availableAppLocales.state) { appLocale, availableAppLocales ->
+        LanguageSettingsUiState(appLocale = appLocale, availableAppLocales = availableAppLocales)
+      }
+      .stateIn(
         scope = viewModelScope,
         started = WhileSubscribedOrRetained,
         initialValue = LanguageSettingsUiState(),
-    )
+      )
 
-    public fun setAppLocale(locale: Locale?) {
-        viewModelScope.launch {
-            localeRepository.setAppLocale(locale)
-        }
-    }
+  public fun setAppLocale(locale: Locale?) {
+    viewModelScope.launch { localeRepository.setAppLocale(locale) }
+  }
 }

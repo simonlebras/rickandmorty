@@ -13,35 +13,32 @@ import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 public class KotlinInjectCorePlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit = with(target) {
-        pluginManager.apply(libs.plugins.ksp)
+  override fun apply(target: Project): Unit =
+    with(target) {
+      pluginManager.apply(libs.plugins.ksp)
 
-        configureKotlinInjectCoreAndroid()
+      configureKotlinInjectCoreAndroid()
 
-        configureKotlinInjectCoreMultiplatform()
+      configureKotlinInjectCoreMultiplatform()
     }
 
-    private fun Project.configureKotlinInjectCoreAndroid() {
-        pluginManager.withPlugin(libs.plugins.kotlin.android) {
-            dependencies {
-                implementation(libs.kotlininject.core.runtime)
+  private fun Project.configureKotlinInjectCoreAndroid() {
+    pluginManager.withPlugin(libs.plugins.kotlin.android) {
+      dependencies {
+        implementation(libs.kotlininject.core.runtime)
 
-                ksp(libs.kotlininject.core.compiler)
-            }
-        }
+        ksp(libs.kotlininject.core.compiler)
+      }
     }
+  }
 
-    private fun Project.configureKotlinInjectCoreMultiplatform() {
-        pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
-            configure<KotlinMultiplatformExtension> {
-                sourceSets.commonMain.dependencies {
-                    implementation(libs.kotlininject.core.runtime)
-                }
+  private fun Project.configureKotlinInjectCoreMultiplatform() {
+    pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
+      configure<KotlinMultiplatformExtension> {
+        sourceSets.commonMain.dependencies { implementation(libs.kotlininject.core.runtime) }
 
-                kspDependencies {
-                    ksp(libs.kotlininject.core.compiler)
-                }
-            }
-        }
+        kspDependencies { ksp(libs.kotlininject.core.compiler) }
+      }
     }
+  }
 }

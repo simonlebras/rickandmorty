@@ -9,6 +9,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 
 @ContributesTo(AppScope::class)
 public interface HttpClientEngineFactoryComponent {
-    @Provides
-    public fun provideHttpClientEngineFactory(): HttpClientEngineFactory<HttpClientEngineConfig> = Darwin
+  @Provides
+  public fun provideHttpClientEngineFactory(): HttpClientEngineFactory<HttpClientEngineConfig> =
+    Darwin
 }

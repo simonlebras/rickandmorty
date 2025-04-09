@@ -10,9 +10,9 @@ import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
 @ContributesTo(AppScope::class)
 public interface CoroutineScopesComponent {
-    @Provides
-    @SingleIn(AppScope::class)
-    public fun provideApplicationScope(
-        @MainDispatcher mainDispatcher: CoroutineContext,
-    ): @ApplicationScope CoroutineScope = CoroutineScope(SupervisorJob() + mainDispatcher)
+  @Provides
+  @SingleIn(AppScope::class)
+  public fun provideApplicationScope(
+    @MainDispatcher mainDispatcher: CoroutineContext
+  ): @ApplicationScope CoroutineScope = CoroutineScope(SupervisorJob() + mainDispatcher)
 }

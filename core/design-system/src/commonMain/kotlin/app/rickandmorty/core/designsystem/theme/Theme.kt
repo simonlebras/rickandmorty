@@ -6,7 +6,8 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-internal val RamLightColorScheme = lightColorScheme(
+internal val RamLightColorScheme =
+  lightColorScheme(
     primary = LightPrimary,
     onPrimary = LightOnPrimary,
     primaryContainer = LightPrimaryContainer,
@@ -36,9 +37,10 @@ internal val RamLightColorScheme = lightColorScheme(
     onSurface = LightOnSurface,
     surfaceVariant = LightSurfaceVariant,
     onSurfaceVariant = LightOnSurfaceVariant,
-)
+  )
 
-internal val RamDarkColorScheme = darkColorScheme(
+internal val RamDarkColorScheme =
+  darkColorScheme(
     primary = DarkPrimary,
     onPrimary = DarkOnPrimary,
     primaryContainer = DarkPrimaryContainer,
@@ -68,23 +70,20 @@ internal val RamDarkColorScheme = darkColorScheme(
     onSurface = DarkOnSurface,
     surfaceVariant = DarkSurfaceVariant,
     onSurfaceVariant = DarkOnSurfaceVariant,
-)
+  )
 
 @Composable
 public fun RamTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
-    useDynamicColor: Boolean = true,
-    content: @Composable () -> Unit,
+  useDarkTheme: Boolean = isSystemInDarkTheme(),
+  useDynamicColor: Boolean = true,
+  content: @Composable () -> Unit,
 ) {
-    val colorScheme = colorScheme(
-        useDarkTheme = useDarkTheme,
-        useDynamicColor = useDynamicColor,
-    )
+  val colorScheme = colorScheme(useDarkTheme = useDarkTheme, useDynamicColor = useDynamicColor)
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        shapes = RamShapes,
-        typography = RamTypography,
-        content = content,
-    )
+  MaterialTheme(
+    colorScheme = colorScheme,
+    shapes = RamShapes,
+    typography = RamTypography,
+    content = content,
+  )
 }

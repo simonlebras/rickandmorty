@@ -10,13 +10,9 @@ import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
 @ContributesTo(AppScope::class)
 public interface HttpClientComponent {
-    @Provides
-    @SingleIn(AppScope::class)
-    public fun provideHttpClient(
-        httpClientEngineFactory: HttpClientEngineFactory<HttpClientEngineConfig>,
-    ): HttpClient = HttpClient(httpClientEngineFactory) {
-        engine {
-            pipelining = true
-        }
-    }
+  @Provides
+  @SingleIn(AppScope::class)
+  public fun provideHttpClient(
+    httpClientEngineFactory: HttpClientEngineFactory<HttpClientEngineConfig>
+  ): HttpClient = HttpClient(httpClientEngineFactory) { engine { pipelining = true } }
 }
