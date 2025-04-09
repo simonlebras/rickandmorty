@@ -172,6 +172,7 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 # Convention plugins
 rickandmorty-android-application = { id = "app.rickandmorty.android-application" }
 rickandmorty-android-library = { id = "app.rickandmorty.android-library" }
+rickandmorty-android-multiplatformlibrary = { id = "app.rickandmorty.android-multiplatformlibrary" }
 rickandmorty-android-test = { id = "app.rickandmorty.android-test" }
 rickandmorty-compose = { id = "app.rickandmorty.compose" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
@@ -188,6 +189,7 @@ rickandmorty-spotless = { id = "app.rickandmorty.spotless" }
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 android-lint = { id = "com.android.lint", version.ref = "android-plugin" }
+android-multiplatformlibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "android-plugin" }
 android-test = { id = "com.android.test", version.ref = "android-plugin" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 androidx-room = { id = "androidx.room", version.ref = "androidx-room" }

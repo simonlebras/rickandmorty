@@ -1,5 +1,7 @@
 package app.rickandmorty.gradle.util
 
+import com.android.build.api.dsl.KotlinMultiplatformAndroidDeviceTest
+import com.android.build.api.dsl.ManagedDevices
 import com.android.build.api.dsl.TestOptions
 import org.gradle.api.GradleException
 import org.gradle.kotlin.dsl.invoke
@@ -12,7 +14,15 @@ private val deviceConfigs =
   )
 
 internal fun TestOptions.configureGradleManagedDevices() {
-  managedDevices.localDevices {
+  managedDevices.configureGradleManagedDevices()
+}
+
+internal fun KotlinMultiplatformAndroidDeviceTest.configureGradleManagedDevices() {
+  managedDevices.configureGradleManagedDevices()
+}
+
+private fun ManagedDevices.configureGradleManagedDevices() {
+  localDevices {
     deviceConfigs.forEach { config ->
       create(config.taskName) {
         device = config.device

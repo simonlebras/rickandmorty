@@ -1,5 +1,6 @@
 package app.rickandmorty.gradle.util
 
+import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
@@ -44,6 +45,8 @@ internal fun DependencyHandler.screenshotTestImplementation(vararg dependencyNot
 internal val Project.isRootProject: Boolean
   get() = rootProject === this
 
+internal typealias AndroidCommonExtension = CommonExtension<*, *, *, *, *, *>
+
 internal val Project.androidExtension: AndroidComponentsExtension<*, *, *>
   get() =
     extensions.findByType<LibraryAndroidComponentsExtension>()
@@ -60,13 +63,4 @@ internal fun PluginManager.withPlugin(
   action: AppliedPlugin.() -> Unit,
 ) {
   withPlugin(plugin.get().pluginId, action)
-}
-
-internal fun PluginManager.withPlugins(
-  first: Provider<PluginDependency>,
-  vararg others: Provider<PluginDependency>,
-  action: (AppliedPlugin) -> Unit,
-) {
-  withPlugin(first, action)
-  others.forEach { plugin -> withPlugin(plugin, action) }
 }

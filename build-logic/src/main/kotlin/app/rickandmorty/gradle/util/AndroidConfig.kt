@@ -1,21 +1,16 @@
 package app.rickandmorty.gradle.util
 
-import com.android.build.api.dsl.CommonExtension
 import libs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
-internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
+internal fun Project.configureAndroid(commonExtension: AndroidCommonExtension) {
   with(commonExtension) {
     compileSdk = libs.versions.android.sdk.compile.get().toInt()
 
     defaultConfig.apply { minSdk = libs.versions.android.sdk.min.get().toInt() }
 
-    lint {
-      checkReleaseBuilds = false
-      warningsAsErrors = true
-      disable += setOf("AndroidGradlePluginVersion", "GradleDependency", "OldTargetApi")
-    }
+    lint.configureLint()
 
     testOptions {
       animationsDisabled = true

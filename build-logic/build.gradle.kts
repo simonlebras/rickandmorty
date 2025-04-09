@@ -63,6 +63,10 @@ gradlePlugin {
       id = "app.rickandmorty.android-library"
       implementationClass = "app.rickandmorty.gradle.plugin.AndroidLibraryPlugin"
     }
+    register("android-multiplatformlibrary") {
+      id = "app.rickandmorty.android-multiplatformlibrary"
+      implementationClass = "app.rickandmorty.gradle.plugin.AndroidMultiplatformLibraryPlugin"
+    }
     register("android-test") {
       id = "app.rickandmorty.android-test"
       implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"

@@ -21,6 +21,11 @@ public class RootPlugin : Plugin<Project> {
         libs.plugins.gradledoctor,
         libs.plugins.sortdependencies,
       )
+
+      tasks.named("check") {
+        dependsOn(gradle.includedBuilds.map { build -> build.task(":check") })
+      }
+
       configureDependencyAnalysis()
 
       configureGradleDoctor()
