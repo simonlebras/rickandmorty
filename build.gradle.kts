@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.rickandmorty.android.application) apply false
   alias(libs.plugins.rickandmorty.android.library) apply false
+  alias(libs.plugins.rickandmorty.android.multiplatformlibrary) apply false
   alias(libs.plugins.rickandmorty.android.test) apply false
   alias(libs.plugins.rickandmorty.compose) apply false
   alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
@@ -17,6 +18,7 @@ plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.android.lint) apply false
+  alias(libs.plugins.android.multiplatformlibrary) apply false
   alias(libs.plugins.android.test) apply false
   alias(libs.plugins.androidx.baselineprofile) apply false
   alias(libs.plugins.androidx.room) apply false
@@ -39,5 +41,3 @@ plugins {
   alias(libs.plugins.spotless) apply false
   alias(libs.plugins.wire) apply false
 }
-
-tasks.named("check") { dependsOn(gradle.includedBuilds.map { build -> build.task(":check") }) }

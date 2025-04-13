@@ -1,7 +1,7 @@
 import com.autonomousapps.tasks.CodeSourceExploderTask
 
 plugins {
-  alias(libs.plugins.rickandmorty.android.library)
+  alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.spotless)
@@ -10,9 +10,9 @@ plugins {
   alias(libs.plugins.sortdependencies)
 }
 
-android { namespace = "app.rickandmorty.core.designsystem" }
-
 kotlin {
+  androidLibrary { namespace = "app.rickandmorty.core.designsystem" }
+
   sourceSets {
     commonMain {
       dependencies {

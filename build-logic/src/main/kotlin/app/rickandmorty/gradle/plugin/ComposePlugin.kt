@@ -15,7 +15,11 @@ public class ComposePlugin : Plugin<Project> {
       pluginManager.apply(libs.plugins.compose.compiler, libs.plugins.compose.multiplatform)
 
       configure<ComposeCompilerGradlePluginExtension> {
-        featureFlags = setOf(ComposeFeatureFlag.OptimizeNonSkippingGroups)
+        featureFlags =
+          setOf(
+            ComposeFeatureFlag.OptimizeNonSkippingGroups,
+            ComposeFeatureFlag.PausableComposition,
+          )
 
         val enableComposeCompilerReports =
           providers.gradleProperty("ram.enableComposeCompilerReports").orNull == "true"

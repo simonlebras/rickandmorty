@@ -18,7 +18,7 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
 
       configureKotlin()
 
-      extensions.configure<KotlinMultiplatformExtension> {
+      configure<KotlinMultiplatformExtension> {
         applyDefaultHierarchyTemplate()
 
         pluginManager.withPlugin(libs.plugins.android.library) { androidTarget() }
