@@ -37,6 +37,8 @@ import app.rickandmorty.core.designsystem.component.AsyncImage
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.designsystem.icon.filled.Settings
+import app.rickandmorty.core.designsystem.icon.outlined.Face
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.character_list_empty
 import app.rickandmorty.core.l10n.resources.character_list_title

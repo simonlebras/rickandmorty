@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.designsystem.icon.filled.ArrowBack
 import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.navigate_up
