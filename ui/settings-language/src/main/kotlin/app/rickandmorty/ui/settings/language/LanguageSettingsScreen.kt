@@ -26,6 +26,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.designsystem.icon.filled.ArrowBack
+import app.rickandmorty.core.designsystem.icon.filled.Check
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.l10n.resources.settings_language_system_default
