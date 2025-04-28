@@ -1,9 +1,9 @@
 package app.rickandmorty.core.designsystem.icon.outlined
 
-import androidx.compose.material.icons.materialIcon
-import androidx.compose.material.icons.materialPath
 import androidx.compose.ui.graphics.vector.ImageVector
 import app.rickandmorty.core.designsystem.icon.RamIcons
+import app.rickandmorty.core.designsystem.icon.materialIcon
+import app.rickandmorty.core.designsystem.icon.materialPath
 
 @Suppress("UnusedReceiverParameter")
 public val RamIcons.Outlined.Map: ImageVector
