@@ -1,5 +1,5 @@
 plugins {
-  alias(libs.plugins.rickandmorty.android.library)
+  alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.kotlininject.anvil)
   alias(libs.plugins.rickandmorty.spotless)
@@ -8,6 +8,8 @@ plugins {
   alias(libs.plugins.sortdependencies)
 }
 
-android { namespace = "app.rickandmorty.core.processlifecycle" }
+kotlin {
+  androidLibrary { namespace = "app.rickandmorty.core.processlifecycle" }
 
-kotlin { sourceSets { androidMain { dependencies { api(libs.androidx.lifecycle.process) } } } }
+  sourceSets { androidMain { dependencies { api(libs.androidx.lifecycle.process) } } }
+}
