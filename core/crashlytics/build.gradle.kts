@@ -1,5 +1,5 @@
 plugins {
-  alias(libs.plugins.rickandmorty.android.library)
+  alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.kotlininject.anvil)
   alias(libs.plugins.rickandmorty.spotless)
@@ -8,9 +8,9 @@ plugins {
   alias(libs.plugins.sortdependencies)
 }
 
-android { namespace = "app.rickandmorty.core.crashlytics" }
-
 kotlin {
+  androidLibrary { namespace = "app.rickandmorty.core.crashlytics" }
+
   sourceSets {
     androidMain { dependencies { implementation(libs.crashkios.crashlytics) } }
 

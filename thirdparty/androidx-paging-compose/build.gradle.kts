@@ -1,5 +1,5 @@
 plugins {
-  alias(libs.plugins.rickandmorty.android.library)
+  alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.spotless)
@@ -8,9 +8,9 @@ plugins {
   alias(libs.plugins.sortdependencies)
 }
 
-android { namespace = "androidx.paging.compose" }
-
 kotlin {
+  androidLibrary { namespace = "androidx.paging.compose" }
+
   sourceSets {
     commonMain {
       dependencies {
