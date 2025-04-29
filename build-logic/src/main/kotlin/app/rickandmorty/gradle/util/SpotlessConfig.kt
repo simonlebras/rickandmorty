@@ -11,12 +11,12 @@ internal fun Project.configureSpotless() {
     val ktfmtVersion = libs.versions.ktfmt.get()
 
     kotlin {
-      ktfmt(ktfmtVersion).googleStyle()
+      ktfmt(ktfmtVersion).googleStyle().configure { it.setRemoveUnusedImports(true) }
       target("src/**/*.kt")
     }
 
     kotlinGradle {
-      ktfmt(ktfmtVersion).googleStyle()
+      ktfmt(ktfmtVersion).googleStyle().configure { it.setRemoveUnusedImports(true) }
       target("*.kts")
     }
 
