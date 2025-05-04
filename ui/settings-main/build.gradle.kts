@@ -17,7 +17,6 @@ dependencies {
   api(projects.data.theme)
 
   implementation(libs.androidx.activity.compose)
-  implementation(libs.androidx.lifecycle.runtime.compose)
 
   implementation(projects.core.coroutines)
   implementation(projects.core.designSystem)

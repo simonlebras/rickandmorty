@@ -1,10 +1,10 @@
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
-  alias(libs.plugins.rickandmorty.kotlininject.anvil)
   alias(libs.plugins.rickandmorty.spotless)
 
   alias(libs.plugins.dependencyanalysis)
+  alias(libs.plugins.metro)
   alias(libs.plugins.sortdependencies)
 }
 
@@ -30,7 +30,7 @@ kotlin {
 
         implementation(projects.core.base)
         implementation(projects.core.coroutines)
-        implementation(projects.core.injectAnnotations)
+        implementation(projects.core.metro)
         implementation(projects.core.startup)
 
         implementation(projects.data.themeProto)

@@ -4,12 +4,12 @@ import app.rickandmorty.core.startup.Initializer
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
 import co.touchlab.kermit.platformLogWriter
-import me.tatarka.inject.annotations.Inject
-import software.amazon.lastmile.kotlin.inject.anvil.AppScope
-import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 
 @Inject
-@ContributesBinding(scope = AppScope::class, multibinding = true)
+@ContributesIntoSet(AppScope::class)
 public class DebugLoggerInitializer : Initializer {
   override fun initialize() {
     with(Logger) {

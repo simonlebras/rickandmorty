@@ -5,7 +5,7 @@ import androidx.datastore.core.IOException
 import androidx.datastore.core.okio.OkioSerializer
 import app.rickandmorty.data.theme.proto.NightMode
 import app.rickandmorty.data.theme.proto.ThemePreferences
-import me.tatarka.inject.annotations.Inject
+import dev.zacsweers.metro.Inject
 import okio.BufferedSink
 import okio.BufferedSource
 

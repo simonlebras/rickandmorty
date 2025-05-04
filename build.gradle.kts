@@ -8,9 +8,6 @@ plugins {
   alias(libs.plugins.rickandmorty.firebase.perf) apply false
   alias(libs.plugins.rickandmorty.kotlin.android) apply false
   alias(libs.plugins.rickandmorty.kotlin.multiplatform) apply false
-  alias(libs.plugins.rickandmorty.kotlininject.anvil) apply false
-  alias(libs.plugins.rickandmorty.kotlininject.core) apply false
-  alias(libs.plugins.rickandmorty.kotlininject.viewmodel) apply false
   alias(libs.plugins.rickandmorty.room) apply false
   alias(libs.plugins.rickandmorty.root)
   alias(libs.plugins.rickandmorty.spotless) apply false
@@ -34,6 +31,7 @@ plugins {
   alias(libs.plugins.kotlin.multiplatform) apply false
   alias(libs.plugins.kotlin.serialization) apply false
   alias(libs.plugins.ksp) apply false
+  alias(libs.plugins.metro) apply false
   alias(libs.plugins.modulegraphassert) apply false
   alias(libs.plugins.sortdependencies) apply false
   alias(libs.plugins.spotless) apply false
