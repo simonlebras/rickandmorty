@@ -2,7 +2,7 @@
 android-desugarjdklibs = "2.1.5"
 android-plugin = "8.11.0-alpha09"
 android-sdk-compile = "36"
-android-sdk-min = "24"
+android-sdk-min = "28"
 android-sdk-target = "36"
 android-security-lints = "1.0.3"
 android-tools = "31.11.0-alpha09"
@@ -36,7 +36,6 @@ compose-multiplatform = "1.8.0"
 compose-placeholder = "1.0.10"
 crashkios-crashlytics = "0.9.0"
 dependencyanalysis = "2.17.0"
-easylauncher = "6.4.0"
 firebase-bom = "33.13.0"
 firebase-crashlytics-plugin = "3.0.3"
 firebase-perf-plugin = "1.4.2"
@@ -196,7 +195,6 @@ apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 dependencyanalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyanalysis" }
-easylauncher = { id = "com.starter.easylauncher", version.ref = "easylauncher" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf-plugin" }
 googleservices = { id = "com.google.gms.google-services", version.ref = "googleservices" }
