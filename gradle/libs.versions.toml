@@ -31,7 +31,6 @@ androidx-tracing = "1.3.0"
 androidx-window = "1.5.0-alpha01"
 apollo = "4.2.0"
 apollo-adapters = "0.0.6"
-cachefix = "3.0.1"
 coil = "3.1.0"
 compose-multiplatform = "1.8.0-rc01"
 compose-placeholder = "1.0.10"
@@ -194,7 +193,6 @@ android-test = { id = "com.android.test", version.ref = "android-plugin" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
-cachefix = { id = "org.gradle.android.cache-fix", version.ref = "cachefix" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 dependencyanalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyanalysis" }
