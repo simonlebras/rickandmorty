@@ -11,7 +11,7 @@ import org.gradle.kotlin.dsl.configure
 public class AndroidTestPlugin : Plugin<Project> {
   override fun apply(target: Project): Unit =
     with(target) {
-      pluginManager.apply(libs.plugins.android.test, libs.plugins.cachefix)
+      pluginManager.apply(libs.plugins.android.test)
 
       configure<TestExtension> {
         configureAndroid(this)

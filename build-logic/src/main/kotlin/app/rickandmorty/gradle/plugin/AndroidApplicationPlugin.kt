@@ -13,7 +13,7 @@ import org.gradle.kotlin.dsl.configure
 public class AndroidApplicationPlugin : Plugin<Project> {
   override fun apply(target: Project): Unit =
     with(target) {
-      pluginManager.apply(libs.plugins.android.application, libs.plugins.cachefix)
+      pluginManager.apply(libs.plugins.android.application)
 
       configure<ApplicationExtension> {
         configureAndroid(this)
