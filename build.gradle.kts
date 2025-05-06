@@ -26,7 +26,6 @@ plugins {
   alias(libs.plugins.compose.compiler) apply false
   alias(libs.plugins.compose.multiplatform) apply false
   alias(libs.plugins.dependencyanalysis) apply false
-  alias(libs.plugins.easylauncher) apply false
   alias(libs.plugins.firebase.crashlytics) apply false
   alias(libs.plugins.firebase.perf) apply false
   alias(libs.plugins.googleservices) apply false

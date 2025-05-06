@@ -1,13 +1,11 @@
 <?xml version ="1.0" encoding ="utf-8"?>
-<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
 
     <shortcut
         android:enabled="true"
         android:icon="@drawable/ic_shortcut_characters"
         android:shortcutId="characters"
-        android:shortcutShortLabel="@string/shortcut_characters"
-        tools:targetApi="25">
+        android:shortcutShortLabel="@string/shortcut_characters">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="app://rickandmorty/characters"
@@ -19,8 +17,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_shortcut_episodes"
         android:shortcutId="episodes"
-        android:shortcutShortLabel="@string/shortcut_episodes"
-        tools:targetApi="25">
+        android:shortcutShortLabel="@string/shortcut_episodes">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="app://rickandmorty/episodes"
@@ -32,8 +29,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_shortcut_locations"
         android:shortcutId="locations"
-        android:shortcutShortLabel="@string/shortcut_locations"
-        tools:targetApi="25">
+        android:shortcutShortLabel="@string/shortcut_locations">
         <intent
             android:action="android.intent.action.VIEW"
             android:data="app://rickandmorty/locations"

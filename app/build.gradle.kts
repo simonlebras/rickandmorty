@@ -11,7 +11,6 @@ plugins {
 
   alias(libs.plugins.androidx.baselineprofile)
   alias(libs.plugins.dependencyanalysis)
-  alias(libs.plugins.easylauncher)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.modulegraphassert)
   alias(libs.plugins.sortdependencies)
@@ -123,12 +122,6 @@ dependencies {
 
 dependencyAnalysis {
   issues { onUnusedDependencies { exclude(compose.dependencies.material3AdaptiveNavigationSuite) } }
-}
-
-easylauncher {
-  buildTypes {
-    val debug by creating { filters(chromeLike()) }
-  }
 }
 
 moduleGraphAssert {

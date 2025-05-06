@@ -1,6 +1,5 @@
 package app.rickandmorty.core.strictmode
 
-import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.os.StrictMode.VmPolicy
@@ -25,12 +24,8 @@ public class StrictModeInitializer : Initializer {
       ThreadPolicy.Builder()
         .detectAll()
         .apply {
-          if (Build.VERSION.SDK_INT < 28) {
-            penaltyLog()
-          } else {
-            penaltyListener(penaltyListenerExecutor) { violation ->
-              Logger.withTag(TAG).w(violation) { "StrictMode ThreadPolicy violation" }
-            }
+          penaltyListener(penaltyListenerExecutor) { violation ->
+            Logger.withTag(TAG).w(violation) { "StrictMode ThreadPolicy violation" }
           }
         }
         .build()
@@ -40,19 +35,15 @@ public class StrictModeInitializer : Initializer {
       VmPolicy.Builder()
         .detectAll()
         .apply {
-          if (Build.VERSION.SDK_INT < 28) {
-            penaltyLog()
-          } else {
-            penaltyListener(penaltyListenerExecutor) { violation ->
-              when (violation) {
-                is UntaggedSocketViolation -> {
-                  // Firebase and OkHttp don't tag sockets
-                  return@penaltyListener
-                }
+          penaltyListener(penaltyListenerExecutor) { violation ->
+            when (violation) {
+              is UntaggedSocketViolation -> {
+                // Firebase and OkHttp don't tag sockets
+                return@penaltyListener
               }
-
-              Logger.withTag(TAG).w(violation) { "StrictMode VmPolicy violation" }
             }
+
+            Logger.withTag(TAG).w(violation) { "StrictMode VmPolicy violation" }
           }
         }
         .build()
