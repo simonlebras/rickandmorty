@@ -10,8 +10,6 @@ pluginManagement {
     mavenCentral()
     gradlePluginPortal()
   }
-
-  includeBuild("build-logic")
 }
 
 dependencyResolutionManagement {
@@ -46,6 +44,8 @@ develocity {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "rickandmorty"
+
+includeBuild("build-logic")
 
 include(":app")
 
