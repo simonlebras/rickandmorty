@@ -34,7 +34,7 @@ tasks {
 
 lint {
   warningsAsErrors = true
-  disable += setOf("InternalGradleApiUsage")
+  disable += setOf("InternalGradleApiUsage", "NewerVersionAvailable")
 }
 
 dependencies {
