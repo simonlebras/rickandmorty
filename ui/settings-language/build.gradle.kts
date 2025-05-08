@@ -16,7 +16,6 @@ dependencies {
   api(projects.data.locale)
 
   implementation(libs.androidx.activity.compose)
-  implementation(libs.androidx.lifecycle.runtime.compose)
 
   implementation(libs.kotlinx.collectionsimmutable)
 

@@ -7,15 +7,15 @@ import android.os.strictmode.UntaggedSocketViolation
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.startup.Initializer
 import co.touchlab.kermit.Logger
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoSet
+import dev.zacsweers.metro.Inject
 import java.util.concurrent.Executors
-import me.tatarka.inject.annotations.Inject
-import software.amazon.lastmile.kotlin.inject.anvil.AppScope
-import software.amazon.lastmile.kotlin.inject.anvil.ContributesBinding
 
 private const val TAG = "StrictMode"
 
 @Inject
-@ContributesBinding(scope = AppScope::class, multibinding = true)
+@ContributesIntoSet(AppScope::class)
 public class StrictModeInitializer : Initializer {
   private val penaltyListenerExecutor by unsafeLazy { Executors.newSingleThreadExecutor() }
 

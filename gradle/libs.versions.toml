@@ -42,12 +42,10 @@ firebase-perf-plugin = "1.4.2"
 googleservices = "4.4.2"
 gradledoctor = "0.10.0"
 java-target = "17"
+jetbrains-lifecycle = "2.9.0-alpha07"
 junit4 = "4.13.2"
 kermit = "2.0.5"
 kotlin = "2.1.20"
-kotlininject-anvil = "0.1.4"
-kotlininject-core = "0.8.0"
-kotlininject-viewmodel = "0.1.3"
 kotlinx-collectionsimmutable = "0.3.8"
 kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.6.2"
@@ -56,6 +54,7 @@ ksp = "2.1.20-2.0.1"
 ktfmt = "0.54"
 ktor = "3.1.3"
 leakcanary = "2.14"
+metro = "0.3.0"
 modulegraphassert = "2.8.0"
 okio = "3.11.0"
 sortdependencies = "0.14"
@@ -83,9 +82,6 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
 androidx-gradle-lints = { group = "androidx.lint", name = "lint-gradle", version.ref = "androidx-gradle-lints" }
 androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-runtime-testing = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
 androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidx-navigation" }
 androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "androidx-paging" }
@@ -124,19 +120,15 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 
+jetbrains-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "jetbrains-lifecycle" }
+jetbrains-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "jetbrains-lifecycle" }
+jetbrains-lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "jetbrains-lifecycle" }
+jetbrains-lifecycle-viewmodel-savedstate = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "jetbrains-lifecycle" }
+
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 
 kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 kermit-crashlytics = { group = "co.touchlab", name = "kermit-crashlytics", version.ref = "kermit" }
-
-kotlininject-anvil-compiler = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "compiler", version.ref = "kotlininject-anvil" }
-kotlininject-anvil-runtime = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "runtime", version.ref = "kotlininject-anvil" }
-kotlininject-anvil-runtime-optional = { group = "software.amazon.lastmile.kotlin.inject.anvil", name = "runtime-optional", version.ref = "kotlininject-anvil" }
-kotlininject-core-compiler = { group = "me.tatarka.inject", name = "kotlin-inject-compiler-ksp", version.ref = "kotlininject-core" }
-kotlininject-core-runtime = { group = "me.tatarka.inject", name = "kotlin-inject-runtime", version.ref = "kotlininject-core" }
-kotlininject-viewmodel-compiler = { group = "com.teobaranga.kotlin.inject.viewmodel", name = "compiler", version.ref = "kotlininject-viewmodel" }
-kotlininject-viewmodel-runtime = { group = "com.teobaranga.kotlin.inject.viewmodel", name = "runtime", version.ref = "kotlininject-viewmodel" }
-kotlininject-viewmodel-runtime-compose = { group = "com.teobaranga.kotlin.inject.viewmodel", name = "runtime-compose", version.ref = "kotlininject-viewmodel" }
 
 kotlinx-collectionsimmutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collectionsimmutable" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
@@ -153,6 +145,8 @@ ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.r
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
+
+metro = { group = "dev.zacsweers.metro", name = "runtime", version.ref = "metro" }
 
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
 
@@ -177,9 +171,6 @@ rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytic
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
 rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
 rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
-rickandmorty-kotlininject-anvil = { id = "app.rickandmorty.kotlininject-anvil" }
-rickandmorty-kotlininject-core = { id = "app.rickandmorty.kotlininject-core" }
-rickandmorty-kotlininject-viewmodel = { id = "app.rickandmorty.kotlininject-viewmodel" }
 rickandmorty-room = { id = "app.rickandmorty.room" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
 rickandmorty-spotless = { id = "app.rickandmorty.spotless" }
@@ -203,6 +194,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

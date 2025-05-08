@@ -91,18 +91,6 @@ gradlePlugin {
       id = "app.rickandmorty.kotlin-multiplatform"
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
     }
-    register("kotlininject-anvil") {
-      id = "app.rickandmorty.kotlininject-anvil"
-      implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectAnvilPlugin"
-    }
-    register("kotlininject-core") {
-      id = "app.rickandmorty.kotlininject-core"
-      implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectCorePlugin"
-    }
-    register("kotlininject-viewmodel") {
-      id = "app.rickandmorty.kotlininject-viewmodel"
-      implementationClass = "app.rickandmorty.gradle.plugin.KotlinInjectViewModelPlugin"
-    }
     register("room") {
       id = "app.rickandmorty.room"
       implementationClass = "app.rickandmorty.gradle.plugin.RoomPlugin"

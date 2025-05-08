@@ -1,5 +1,6 @@
 package app.rickandmorty.ui
 
+import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.addCallback
@@ -15,15 +16,21 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.designsystem.theme.RamTheme
+import app.rickandmorty.core.metro.ActivityKey
 import app.rickandmorty.core.ui.isSystemInDarkTheme
-import app.rickandmorty.inject.ActivityComponent
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.binding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+@Inject
+@ContributesIntoMap(AppScope::class, binding<Activity>())
+@ActivityKey(MainActivity::class)
+class MainActivity(private val viewModelFactory: ViewModelProvider.Factory) : AppCompatActivity() {
   init {
     // https://issuetracker.google.com/issues/139738913
     if (Build.VERSION.SDK_INT == 29 && isTaskRoot) {
@@ -31,12 +38,10 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  private val activityComponent by unsafeLazy { ActivityComponent.create(this) }
-
   private val viewModel: MainViewModel by viewModels()
 
   override val defaultViewModelProviderFactory: ViewModelProvider.Factory
-    get() = activityComponent.viewModelFactory
+    get() = viewModelFactory
 
   override fun onCreate(savedInstanceState: Bundle?) {
     val splashScreen = installSplashScreen()

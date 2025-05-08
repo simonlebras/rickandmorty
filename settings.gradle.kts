@@ -63,8 +63,6 @@ include(":core:crashlytics")
 
 include(":core:design-system")
 
-include(":core:inject-annotations")
-
 include(":core:ktor")
 
 include(":core:l10n")
@@ -72,6 +70,8 @@ include(":core:l10n")
 include(":core:logger-crashlytics")
 
 include(":core:logger-debug")
+
+include(":core:metro")
 
 include(":core:process-lifecycle")
 
