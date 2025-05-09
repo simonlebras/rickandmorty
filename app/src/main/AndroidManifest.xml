@@ -15,7 +15,10 @@
         android:theme="@style/Theme.Ram.Splash"
         tools:replace="android:appComponentFactory"
         tools:targetApi="33">
-        <profileable android:shell="true" />
+
+        <profileable
+            android:shell="true"
+            tools:targetApi="29" />
 
         <meta-data
             android:name="google_analytics_automatic_screen_reporting_enabled"
@@ -47,6 +50,11 @@
                     android:scheme="app" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="androidx.compose.ui.tooling.PreviewActivity"
+            tools:ignore="MissingClass"
+            tools:node="remove" />
 
     </application>
 

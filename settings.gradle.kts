@@ -77,11 +77,15 @@ include(":core:process-lifecycle")
 
 include(":core:resource-state")
 
+include(":core:resources-app")
+
 include(":core:startup")
 
 include(":core:strict-mode")
 
 include(":core:ui")
+
+include(":core:ui-tooling-preview")
 
 include(":data:character")
 
