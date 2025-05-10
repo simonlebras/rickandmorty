@@ -11,13 +11,11 @@ plugins {
 android {
   namespace = "app.rickandmorty.ui.character.list"
 
-  buildFeatures { androidResources = true }
+  androidResources.enable = true
 }
 
 dependencies {
   api(projects.data.character)
-
-  implementation(compose.components.uiToolingPreview)
 
   implementation(libs.androidx.activity.compose)
 
@@ -26,6 +24,9 @@ dependencies {
   implementation(projects.core.designSystem)
   implementation(projects.core.l10n)
   implementation(projects.core.ui)
+  implementation(projects.core.uiToolingPreview)
 
   implementation(projects.thirdparty.androidxPagingCompose)
 }
+
+dependencyAnalysis { issues { onAny { exclude(":core:ui-tooling-preview") } } }

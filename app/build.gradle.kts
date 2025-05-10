@@ -95,6 +95,7 @@ dependencies {
   implementation(projects.core.metro)
   implementation(projects.core.processLifecycle)
   implementation(projects.core.resourceState)
+  implementation(projects.core.resourcesApp)
   implementation(projects.core.startup)
   implementation(projects.core.ui)
 
