@@ -6,8 +6,8 @@
       "datasourceTemplate": "java-version",
       "depNameTemplate": "java",
       "extractVersionTemplate": "^(?<version>\\d+)",
-      "fileMatch": [
-        "\\.java-version$"
+      "managerFilePatterns": [
+        "/\\.java-version$/"
       ],
       "matchStrings": [
         "(?<currentValue>.*)\\n"
