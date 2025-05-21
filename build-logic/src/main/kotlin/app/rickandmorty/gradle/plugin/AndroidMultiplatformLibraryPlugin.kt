@@ -37,7 +37,7 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
               configureGradleManagedDevices()
             }
 
-            dependencyVariantSelection { buildTypes = listOf("release") }
+            localDependencySelection { selectBuildTypeFrom = listOf("release") }
 
             compilations.configureEach {
               @Suppress("DEPRECATION")
