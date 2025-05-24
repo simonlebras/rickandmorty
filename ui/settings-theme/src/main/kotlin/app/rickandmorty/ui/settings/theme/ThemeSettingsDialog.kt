@@ -28,7 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.dismiss
 import app.rickandmorty.core.l10n.resources.settings_theme_title
-import app.rickandmorty.data.model.NightMode
+import app.rickandmorty.data.theme.NightMode
 import app.rickandmorty.ui.settings.common.util.label
 import org.jetbrains.compose.resources.stringResource
 

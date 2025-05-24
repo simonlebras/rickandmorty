@@ -100,7 +100,7 @@ dependencies {
   implementation(projects.core.ui)
 
   implementation(projects.data.filesystem)
-  implementation(projects.data.theme)
+  implementation(projects.data.themeImpl)
 
   releaseImplementation(projects.core.crashlytics)
   releaseImplementation(projects.core.loggerCrashlytics)

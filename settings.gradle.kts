@@ -109,9 +109,9 @@ include(":data:model")
 
 include(":data:paging")
 
-include(":data:theme")
+include(":data:theme-api")
 
-include(":data:theme-proto")
+include(":data:theme-impl")
 
 include(":thirdparty:androidx-paging-compose")
 
