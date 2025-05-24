@@ -14,7 +14,7 @@ dependencies {
   api(projects.core.resourceState)
 
   api(projects.data.locale)
-  api(projects.data.theme)
+  api(projects.data.themeApi)
 
   implementation(libs.androidx.activity.compose)
 
