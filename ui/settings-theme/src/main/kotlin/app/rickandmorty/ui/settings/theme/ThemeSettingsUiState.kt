@@ -4,8 +4,6 @@ import androidx.compose.runtime.Immutable
 import app.rickandmorty.core.resourcestate.Incomplete
 import app.rickandmorty.core.resourcestate.ResourceState
 import app.rickandmorty.core.resourcestate.Uninitialized
-import app.rickandmorty.data.model.NightMode
-import app.rickandmorty.data.model.Theme
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable

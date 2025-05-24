@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.rickandmorty.core.coroutines.WhileSubscribedOrRetained
 import app.rickandmorty.core.resourcestate.ResourceController
-import app.rickandmorty.data.model.NightMode
 import app.rickandmorty.data.theme.ThemeRepository
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine

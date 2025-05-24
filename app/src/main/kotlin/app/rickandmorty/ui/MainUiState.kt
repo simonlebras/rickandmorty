@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 import app.rickandmorty.core.resourcestate.Incomplete
 import app.rickandmorty.core.resourcestate.ResourceState
 import app.rickandmorty.core.resourcestate.Uninitialized
-import app.rickandmorty.data.model.Theme
+import app.rickandmorty.data.theme.Theme
 
 @Immutable
 data class MainUiState(val theme: ResourceState<Theme> = Uninitialized) {

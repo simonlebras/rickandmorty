@@ -13,7 +13,7 @@ android { namespace = "app.rickandmorty.ui.settings.theme" }
 dependencies {
   api(projects.core.resourceState)
 
-  api(projects.data.theme)
+  api(projects.data.themeApi)
 
   implementation(compose.material3)
 
