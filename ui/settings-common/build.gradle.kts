@@ -11,7 +11,7 @@ plugins {
 android { namespace = "app.rickandmorty.ui.settings.common" }
 
 dependencies {
-  api(projects.data.model)
+  api(projects.data.themeApi)
 
   implementation(compose.material3)
 

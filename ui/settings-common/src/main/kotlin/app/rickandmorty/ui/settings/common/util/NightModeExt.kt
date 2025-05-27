@@ -5,7 +5,7 @@ import app.rickandmorty.core.l10n.resources.settings_theme_auto_battery
 import app.rickandmorty.core.l10n.resources.settings_theme_dark
 import app.rickandmorty.core.l10n.resources.settings_theme_follow_system
 import app.rickandmorty.core.l10n.resources.settings_theme_light
-import app.rickandmorty.data.model.NightMode
+import app.rickandmorty.data.theme.NightMode
 import org.jetbrains.compose.resources.StringResource
 
 public val NightMode.label: StringResource

@@ -44,7 +44,7 @@ import app.rickandmorty.core.l10n.resources.settings_theme_tap_action
 import app.rickandmorty.core.l10n.resources.settings_theme_title
 import app.rickandmorty.core.l10n.resources.settings_title
 import app.rickandmorty.data.model.Locale
-import app.rickandmorty.data.model.Theme
+import app.rickandmorty.data.theme.Theme
 import app.rickandmorty.ui.settings.common.Header
 import app.rickandmorty.ui.settings.common.SettingsContentType
 import app.rickandmorty.ui.settings.common.loader
