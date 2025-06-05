@@ -48,5 +48,8 @@ private fun Project.configureDependencyAnalysis() {
 }
 
 private fun Project.configureGradleDoctor() {
-  configure<DoctorExtension> { warnWhenNotUsingParallelGC = false }
+  configure<DoctorExtension> {
+    @Suppress("DEPRECATION")
+    warnWhenNotUsingParallelGC = false
+  }
 }
