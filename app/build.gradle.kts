@@ -4,13 +4,13 @@ plugins {
   alias(libs.plugins.rickandmorty.android.application)
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.android)
+  alias(libs.plugins.rickandmorty.modulegraphassert)
   alias(libs.plugins.rickandmorty.spotless)
 
   alias(libs.plugins.androidx.baselineprofile)
   alias(libs.plugins.dependencyanalysis)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.metro)
-  alias(libs.plugins.modulegraphassert)
   alias(libs.plugins.sortdependencies)
 }
 
@@ -121,19 +121,4 @@ dependencies {
 
 dependencyAnalysis {
   issues { onUnusedDependencies { exclude(compose.dependencies.material3AdaptiveNavigationSuite) } }
-}
-
-moduleGraphAssert {
-  maxHeight = 5
-  allowed =
-    arrayOf(
-      ":app -> :ui:.*",
-      ":app -> :data:.*",
-      ":ui:.* -> :ui:[a-zA-Z0-9:\\-]*\\-common",
-      ":ui:.* -> :data:.*",
-      ":data:.* -> :data:.*",
-      ":core:.* -> :data:model",
-      ":.* -> :core:.*",
-      ":.* -> :thirdparty:.*",
-    )
 }

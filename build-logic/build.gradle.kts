@@ -46,6 +46,7 @@ dependencies {
   compileOnly(libs.plugins.dependencyanalysis.asDependency())
   compileOnly(libs.plugins.gradledoctor.asDependency())
   compileOnly(libs.plugins.kotlin.multiplatform.asDependency())
+  compileOnly(libs.plugins.modulegraphassert.asDependency())
 
   implementation(libs.truth)
 
@@ -89,6 +90,10 @@ gradlePlugin {
     register("kotlin-multiplatform") {
       id = "app.rickandmorty.kotlin-multiplatform"
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
+    }
+    register("modulegraphassert") {
+      id = "app.rickandmorty.modulegraphassert"
+      implementationClass = "app.rickandmorty.gradle.plugin.ModuleGraphAssertPlugin"
     }
     register("root") {
       id = "app.rickandmorty.root"

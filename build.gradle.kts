@@ -8,6 +8,7 @@ plugins {
   alias(libs.plugins.rickandmorty.firebase.perf) apply false
   alias(libs.plugins.rickandmorty.kotlin.android) apply false
   alias(libs.plugins.rickandmorty.kotlin.multiplatform) apply false
+  alias(libs.plugins.rickandmorty.modulegraphassert) apply false
   alias(libs.plugins.rickandmorty.root)
   alias(libs.plugins.rickandmorty.spotless) apply false
 
