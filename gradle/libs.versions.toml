@@ -165,6 +165,7 @@ rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytic
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
 rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
 rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
+rickandmorty-modulegraphassert = { id = "app.rickandmorty.modulegraphassert" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
 rickandmorty-spotless = { id = "app.rickandmorty.spotless" }
 
