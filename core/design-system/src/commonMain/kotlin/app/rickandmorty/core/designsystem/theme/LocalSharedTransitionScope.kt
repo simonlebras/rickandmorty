@@ -1,4 +1,4 @@
-package app.rickandmorty.core.ui
+package app.rickandmorty.core.designsystem.theme
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope

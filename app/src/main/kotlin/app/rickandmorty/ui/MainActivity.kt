@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -62,7 +65,11 @@ class MainActivity(private val viewModelFactory: ViewModelProvider.Factory) : Ap
 
     splashScreen.setKeepOnScreenCondition { uiState.isLoading }
 
-    setContent { RamTheme(useDynamicColor = uiState.useDynamicColor) { RamApp() } }
+    setContent {
+      RamTheme(useDynamicColor = uiState.useDynamicColor) {
+        RamApp(modifier = Modifier.semantics { testTagsAsResourceId = true })
+      }
+    }
   }
 
   private fun setupEdgeToEdge() {
