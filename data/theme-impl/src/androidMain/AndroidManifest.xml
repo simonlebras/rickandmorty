@@ -3,7 +3,7 @@
 
     <application>
         <service
-            android:name=".NightModeService"
+            android:name="app.rickandmorty.data.theme.NightModeService"
             android:enabled="false"
             android:exported="false" />
     </application>

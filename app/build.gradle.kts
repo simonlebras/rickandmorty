@@ -79,7 +79,9 @@ baselineProfile {
 }
 
 dependencies {
-  implementation(compose.material3AdaptiveNavigationSuite)
+  implementation(compose.material3AdaptiveNavigationSuite) {
+    exclude(group = "org.jetbrains.androidx.window")
+  }
 
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.appcompat)
