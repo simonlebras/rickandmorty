@@ -108,6 +108,7 @@ dependencies {
   releaseImplementation(projects.core.loggerCrashlytics)
 
   debugImplementation(projects.core.coilLogger)
+  debugImplementation(projects.core.composeDebug)
   debugImplementation(projects.core.loggerDebug)
   debugImplementation(projects.core.strictMode)
 
