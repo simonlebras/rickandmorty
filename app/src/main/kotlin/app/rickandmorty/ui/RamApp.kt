@@ -8,5 +8,5 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun RamApp(modifier: Modifier = Modifier) {
-  NavigationSuiteScaffold(modifier = modifier, navigationSuiteItems = {}) {}
+  NavigationSuiteScaffold(navigationItems = {}, modifier = modifier) {}
 }
