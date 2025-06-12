@@ -57,6 +57,8 @@ include(":core:coil")
 
 include(":core:coil-logger")
 
+include(":core:compose-debug")
+
 include(":core:coroutines")
 
 include(":core:crashlytics")
