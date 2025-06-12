@@ -17,7 +17,11 @@ internal fun Project.configureKotlin() {
 
       allWarningsAsErrors = true
 
-      freeCompilerArgs.addAll("-Xconsistent-data-class-copy-visibility", "-Xjvm-default=all")
+      freeCompilerArgs.addAll(
+        "-Xannotation-default-target=param-property",
+        "-Xconsistent-data-class-copy-visibility",
+        "-Xjvm-default=all",
+      )
     }
   }
 
