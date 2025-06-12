@@ -39,6 +39,7 @@ import app.rickandmorty.core.designsystem.component.PullToRefresh
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.icon.filled.Settings
 import app.rickandmorty.core.designsystem.icon.outlined.Face
+import app.rickandmorty.core.designsystem.theme.SharedElementContextPreview
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.character_list_empty
 import app.rickandmorty.core.l10n.resources.character_list_title
@@ -46,7 +47,6 @@ import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.ui.CharacterStatusIndicator
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
-import app.rickandmorty.core.ui.PreviewWrapper
 import app.rickandmorty.core.ui.appendLoadState
 import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty
@@ -203,5 +203,7 @@ private fun CharacterListScreenAppBar(
 private fun CharacterItemPreview(
   @PreviewParameter(CharacterPreviewParameterProvider::class) character: Character
 ) {
-  PreviewWrapper { ProvideCharacterImagePreviewHandler { CharacterItem(character = character) } }
+  SharedElementContextPreview {
+    ProvideCharacterImagePreviewHandler { CharacterItem(character = character) }
+  }
 }

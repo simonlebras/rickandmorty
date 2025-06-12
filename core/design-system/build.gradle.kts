@@ -14,6 +14,8 @@ kotlin {
   androidLibrary { namespace = "app.rickandmorty.core.designsystem" }
 
   sourceSets {
+    androidMain { dependencies { implementation(libs.androidx.navigation3.ui) } }
+
     commonMain {
       dependencies {
         api(compose.material3)
