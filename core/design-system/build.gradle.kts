@@ -1,5 +1,3 @@
-import com.autonomousapps.tasks.CodeSourceExploderTask
-
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.compose)
@@ -33,8 +31,3 @@ kotlin {
 }
 
 compose.resources { packageOfResClass = "app.rickandmorty.core.designsystem.resources" }
-
-// https://github.com/gradle/gradle/issues/25885
-tasks.withType<CodeSourceExploderTask>().configureEach {
-  dependsOn("generateActualResourceCollectorsForAndroidMain")
-}
