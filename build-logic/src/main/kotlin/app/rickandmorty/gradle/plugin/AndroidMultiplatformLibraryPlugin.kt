@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
   override fun apply(target: Project): Unit =
     with(target) {
-      pluginManager.apply(libs.plugins.android.multiplatformlibrary)
+      pluginManager.apply(libs.plugins.android.multiplatformlibrary, libs.plugins.android.lint)
 
       pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
         configure<KotlinMultiplatformExtension> {
