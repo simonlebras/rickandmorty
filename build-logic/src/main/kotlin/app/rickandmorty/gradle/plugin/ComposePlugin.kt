@@ -1,11 +1,13 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.util.apply
+import app.rickandmorty.gradle.util.withPlugin
 import libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.get
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
@@ -29,6 +31,10 @@ public class ComposePlugin : Plugin<Project> {
           reportsDestination = composeReportsFolder
           metricsDestination = composeReportsFolder
         }
+      }
+
+      pluginManager.withPlugin(libs.plugins.android.lint) {
+        configurations["lintChecks"].dependencies.add(libs.slack.compose.lints.get())
       }
     }
 }

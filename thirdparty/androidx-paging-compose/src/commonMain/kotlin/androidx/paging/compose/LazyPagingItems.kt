@@ -179,6 +179,7 @@ private val InitialLoadStates =
  * @param context the [CoroutineContext] to perform the collection of [PagingData] and
  *   [CombinedLoadStates].
  */
+@Suppress("ComposeUnstableReceiver")
 @Composable
 public fun <T : Any> Flow<PagingData<T>>.collectAsLazyPagingItems(
   context: CoroutineContext = EmptyCoroutineContext
