@@ -37,8 +37,6 @@ private fun Project.configureDependencyAnalysis() {
     issues {
       all {
         onAny { severity("fail") }
-        onIncorrectConfiguration { exclude("org.jetbrains.kotlin:kotlin-stdlib") }
-        onModuleStructure { exclude("android") }
         onUsedTransitiveDependencies { severity("ignore") }
       }
     }
