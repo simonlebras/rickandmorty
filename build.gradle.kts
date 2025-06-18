@@ -3,6 +3,7 @@ plugins {
   alias(libs.plugins.rickandmorty.android.library) apply false
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary) apply false
   alias(libs.plugins.rickandmorty.android.test) apply false
+  alias(libs.plugins.rickandmorty.codehealth) apply false
   alias(libs.plugins.rickandmorty.compose) apply false
   alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
   alias(libs.plugins.rickandmorty.firebase.perf) apply false
@@ -10,7 +11,6 @@ plugins {
   alias(libs.plugins.rickandmorty.kotlin.multiplatform) apply false
   alias(libs.plugins.rickandmorty.modulegraphassert) apply false
   alias(libs.plugins.rickandmorty.root)
-  alias(libs.plugins.rickandmorty.spotless) apply false
 
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false

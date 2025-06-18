@@ -1,13 +1,27 @@
-package app.rickandmorty.gradle.util
+package app.rickandmorty.gradle.plugin
 
+import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
+import app.rickandmorty.gradle.util.isRootProject
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessExtensionPredeclare
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-internal fun Project.configureSpotless() {
+public class CodeHealthPlugin : Plugin<Project> {
+  override fun apply(target: Project): Unit =
+    with(target) {
+      val libs = the<LibrariesForLibs>()
+
+      apply(libs.plugins.dependencyanalysis, libs.plugins.sortdependencies, libs.plugins.spotless)
+
+      configureSpotless()
+    }
+}
+
+private fun Project.configureSpotless() {
   val spotlessFormatters: SpotlessExtension.() -> Unit = {
     val libs = the<LibrariesForLibs>()
     val ktfmtVersion = libs.versions.ktfmt.get()

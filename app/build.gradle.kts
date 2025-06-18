@@ -2,16 +2,14 @@ import com.google.firebase.perf.plugin.FirebasePerfExtension
 
 plugins {
   alias(libs.plugins.rickandmorty.android.application)
+  alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.android)
   alias(libs.plugins.rickandmorty.modulegraphassert)
-  alias(libs.plugins.rickandmorty.spotless)
 
   alias(libs.plugins.androidx.baselineprofile)
-  alias(libs.plugins.dependencyanalysis)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.metro)
-  alias(libs.plugins.sortdependencies)
 }
 
 val useFirebase = file("google-services.json").exists()
