@@ -95,6 +95,8 @@ dependencies {
   implementation(project(":data:graphql-client"))
   implementation(project(":data:theme-impl"))
 
+  implementation(project(":ui:character-list"))
+
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.core.splashscreen)

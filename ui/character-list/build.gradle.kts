@@ -1,26 +1,28 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
-  alias(libs.plugins.rickandmorty.android.library)
+  alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
+  alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+  alias(libs.plugins.rickandmorty.metro)
 }
 
-android {
-  namespace = "app.rickandmorty.ui.character.list"
+kotlin {
+  android { namespace = "app.rickandmorty.ui.character.list" }
 
-  androidResources.enable = true
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    api(project(":data:character-api"))
+
+    implementation(project(":core:design-system"))
+    implementation(project(":core:l10n"))
+    implementation(project(":core:metro"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:ui-tooling-preview"))
+
+    implementation(libs.androidx.paging.compose)
+
+    implementation(libs.jetbrains.lifecycle.viewmodel.compose)
+  }
 }
-
-dependencies {
-  api(project(":data:character-api"))
-
-  implementation(project(":core:design-system"))
-  implementation(project(":core:l10n"))
-  implementation(project(":core:ui"))
-  implementation(project(":core:ui-tooling-preview"))
-
-  implementation(libs.androidx.paging.compose)
-
-  implementation(libs.coil.compose.core)
-}
-
-dependencyAnalysis { issues { onAny { exclude(":core:ui-tooling-preview") } } }

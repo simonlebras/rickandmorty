@@ -29,6 +29,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -39,7 +40,7 @@ import app.rickandmorty.core.designsystem.component.PullToRefreshBox
 import app.rickandmorty.core.designsystem.component.SettingsNavButton
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.icon.outlined.Face
-import app.rickandmorty.core.designsystem.theme.SharedElementContextPreview
+import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.character_list_empty
 import app.rickandmorty.core.l10n.resources.character_list_title
@@ -53,13 +54,14 @@ import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.core.ui.label
+import app.rickandmorty.core.ui.tooling.preview.ProvideColorImagePreviewHandler
 import app.rickandmorty.data.character.Character
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 public fun CharacterListScreen(
   onNavigateToSettings: () -> Unit,
-  viewModel: CharacterListViewModel,
+  viewModel: CharacterListViewModel = viewModel(),
 ) {
   val characters = viewModel.characters.collectAsLazyPagingItems()
 
@@ -89,7 +91,6 @@ private fun CharacterListScreen(
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
   Scaffold(
-    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       CharacterListScreenAppBar(
         onNavigateToSettings = onNavigateToSettings,
@@ -98,41 +99,44 @@ private fun CharacterListScreen(
     },
     snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
   ) { contentPadding ->
-    PullToRefreshBox(
-      isRefreshing = loadState.refresh.isLoading,
-      onRefresh = characters::refresh,
-      indicatorPadding = contentPadding,
-    ) {
-      when {
-        loadState.refresh.isLoading && characters.isEmpty -> {
-          Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
-        }
+    when {
+      loadState.refresh.isLoading && characters.isEmpty -> {
+        Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
+      }
 
-        loadState.refresh.isError && characters.isEmpty -> {
-          Error(
-            text = "Error",
-            onRetry = characters::retry,
-            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
-          )
-        }
+      loadState.refresh.isError && characters.isEmpty -> {
+        Error(
+          text = "Error",
+          onRetry = characters::retry,
+          modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+        )
+      }
 
-        loadState.isIdle && characters.isEmpty -> {
-          Empty(
-            graphic = {
-              Icon(
-                imageVector = RamIcons.Outlined.Face,
-                contentDescription = null,
-                modifier = Modifier.size(64.dp),
-              )
-            },
-            title = { Text(text = stringResource(L10nRes.string.character_list_empty)) },
-            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
-          )
-        }
+      loadState.isIdle && characters.isEmpty -> {
+        Empty(
+          graphic = {
+            Icon(
+              imageVector = RamIcons.Outlined.Face,
+              contentDescription = null,
+              modifier = Modifier.size(64.dp),
+            )
+          },
+          title = { Text(text = stringResource(L10nRes.string.character_list_empty)) },
+          modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+        )
+      }
 
-        else -> {
+      else -> {
+        PullToRefreshBox(
+          isRefreshing = loadState.refresh.isLoading,
+          onRefresh = characters::refresh,
+          indicatorPadding = contentPadding,
+        ) {
           LazyColumn(
-            modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+            modifier =
+              Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+                .fillMaxSize()
+                .consumeWindowInsets(contentPadding),
             contentPadding = contentPadding,
           ) {
             items(
@@ -194,7 +198,5 @@ private fun CharacterListScreenAppBar(
 private fun CharacterItemPreview(
   @PreviewParameter(CharacterPreviewParameterProvider::class) character: Character
 ) {
-  SharedElementContextPreview {
-    ProvideCharacterImagePreviewHandler { CharacterItem(character = character) }
-  }
+  RamTheme { ProvideColorImagePreviewHandler { CharacterItem(character = character) } }
 }
