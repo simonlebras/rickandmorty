@@ -6,7 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import app.rickandmorty.data.character.CharacterRepository
-import app.rickandmorty.data.model.Character
+import app.rickandmorty.data.character.Character
 import kotlinx.coroutines.flow.Flow
 
 public class CharacterListViewModel(characterRepository: CharacterRepository) : ViewModel() {

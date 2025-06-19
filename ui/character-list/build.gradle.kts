@@ -11,7 +11,7 @@ android {
 }
 
 dependencies {
-  api(project(":data:character"))
+  api(project(":data:character-api"))
 
   implementation(project(":core:design-system"))
   implementation(project(":core:l10n"))

@@ -19,7 +19,7 @@ kotlin {
 
     commonMain {
       dependencies {
-        api(project(":data:model"))
+        api(project(":data:character-api"))
 
         api(libs.androidx.paging.compose)
 

@@ -1,4 +1,6 @@
-package app.rickandmorty.data.model
+package app.rickandmorty.data.character
+
+import app.rickandmorty.core.base.findByNameOrElse
 
 public data class Character(
   val id: String,
@@ -16,7 +18,7 @@ public data class Character(
 
     public companion object {
       public fun from(value: String): Status =
-        entries.firstOrNull { it.name.equals(value, true) } ?: Unknown
+        entries.findByNameOrElse(name = value, defaultValue = Unknown)
     }
   }
 
@@ -28,7 +30,7 @@ public data class Character(
 
     public companion object {
       public fun from(value: String): Species =
-        entries.firstOrNull { it.name.equals(value, true) } ?: Other
+        entries.findByNameOrElse(name = value, defaultValue = Other)
     }
   }
 
@@ -40,7 +42,7 @@ public data class Character(
 
     public companion object {
       public fun from(value: String): Gender =
-        entries.firstOrNull { it.name.equals(value, true) } ?: Unknown
+        entries.findByNameOrElse(name = value, defaultValue = Unknown)
     }
   }
 }
