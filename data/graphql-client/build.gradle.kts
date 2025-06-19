@@ -1,16 +1,24 @@
 plugins {
-  alias(libs.plugins.rickandmorty.android.library)
-  alias(libs.plugins.rickandmorty.kotlin.android)
+  alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
+  alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.spotless)
 
   alias(libs.plugins.dependencyanalysis)
+  alias(libs.plugins.metro)
   alias(libs.plugins.sortdependencies)
 }
 
-android { namespace = "app.rickandmorty.data.graphql.client" }
+kotlin {
+  androidLibrary { namespace = "app.rickandmorty.data.graphql.client" }
 
-dependencies {
-  implementation(libs.apollo.runtime)
+  sourceSets {
+    commonMain {
+      dependencies {
+        api(libs.apollo.runtime)
 
-  implementation(projects.core.coroutines)
+        implementation(projects.core.coroutines)
+        implementation(projects.core.metro)
+      }
+    }
+  }
 }
