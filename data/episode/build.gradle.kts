@@ -13,18 +13,18 @@ android { namespace = "app.rickandmorty.data.episode" }
 apollo {
   service("rickandmorty") {
     packageName = "app.rickandmorty.data.episode"
-    dependsOn(projects.data.graphqlSchema)
+    dependsOn(project(":data:graphql-schema"))
   }
 }
 
 dependencies {
+  api(project(":data:graphql-schema"))
+  api(project(":data:model"))
+
   api(libs.androidx.paging.common)
 
-  api(projects.data.graphqlSchema)
-  api(projects.data.model)
+  implementation(project(":data:database"))
+  implementation(project(":data:paging"))
 
   implementation(libs.apollo.runtime)
-
-  implementation(projects.data.database)
-  implementation(projects.data.paging)
 }

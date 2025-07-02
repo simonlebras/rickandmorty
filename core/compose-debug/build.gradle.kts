@@ -12,9 +12,9 @@ kotlin {
   sourceSets {
     commonMain {
       dependencies {
-        implementation(compose.runtime)
+        implementation(project(":core:startup"))
 
-        implementation(projects.core.startup)
+        implementation(compose.runtime)
       }
     }
   }

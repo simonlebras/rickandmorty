@@ -14,10 +14,10 @@ kotlin {
   sourceSets {
     commonMain {
       dependencies {
+        implementation(project(":core:metro"))
+
         implementation(libs.coil.core)
         implementation(libs.coil.network.ktor3)
-
-        implementation(projects.core.metro)
       }
     }
   }

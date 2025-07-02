@@ -12,5 +12,5 @@ dependencies {
 
     implementation(compose.uiTooling)
 
-    implementation(projects.core.resourcesApp)
+    implementation(project(":core:resources-app"))
 }

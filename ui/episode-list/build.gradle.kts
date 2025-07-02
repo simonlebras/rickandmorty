@@ -11,13 +11,13 @@ plugins {
 android { namespace = "app.rickandmorty.ui.episode.list" }
 
 dependencies {
-  api(projects.data.episode)
+  api(project(":data:episode"))
+
+  implementation(project(":core:design-system"))
+  implementation(project(":core:l10n"))
+  implementation(project(":core:ui"))
+
+  implementation(project(":thirdparty:androidx-paging-compose"))
 
   implementation(libs.androidx.activity.compose)
-
-  implementation(projects.core.designSystem)
-  implementation(projects.core.l10n)
-  implementation(projects.core.ui)
-
-  implementation(projects.thirdparty.androidxPagingCompose)
 }

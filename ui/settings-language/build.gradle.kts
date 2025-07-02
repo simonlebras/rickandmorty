@@ -11,17 +11,17 @@ plugins {
 android { namespace = "app.rickandmorty.ui.settings.language" }
 
 dependencies {
-  api(projects.core.resourceState)
+  api(project(":core:resource-state"))
 
-  api(projects.data.locale)
+  api(project(":data:locale"))
+
+  implementation(project(":core:coroutines"))
+  implementation(project(":core:design-system"))
+  implementation(project(":core:l10n"))
+
+  implementation(project(":ui:settings-common"))
 
   implementation(libs.androidx.activity.compose)
 
   implementation(libs.kotlinx.collectionsimmutable)
-
-  implementation(projects.core.coroutines)
-  implementation(projects.core.designSystem)
-  implementation(projects.core.l10n)
-
-  implementation(projects.ui.settingsCommon)
 }

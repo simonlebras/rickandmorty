@@ -11,20 +11,20 @@ plugins {
 android { namespace = "app.rickandmorty.ui.settings.theme" }
 
 dependencies {
-  api(projects.core.resourceState)
+  api(project(":core:resource-state"))
 
-  api(projects.data.themeApi)
+  api(project(":data:theme-api"))
+
+  implementation(project(":core:coroutines"))
+  implementation(project(":core:l10n"))
+
+  implementation(project(":ui:settings-common"))
 
   implementation(compose.material3)
 
   implementation(libs.androidx.activity.compose)
 
   implementation(libs.kotlinx.collectionsimmutable)
-
-  implementation(projects.core.coroutines)
-  implementation(projects.core.l10n)
-
-  implementation(projects.ui.settingsCommon)
 }
 
 dependencyAnalysis { issues { onUnusedDependencies { exclude(compose.dependencies.material3) } } }

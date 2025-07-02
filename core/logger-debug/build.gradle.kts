@@ -11,7 +11,7 @@ kotlin {
   sourceSets {
     commonMain {
       dependencies {
-        api(projects.core.startup)
+        api(project(":core:startup"))
 
         implementation(libs.kermit)
       }

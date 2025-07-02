@@ -78,6 +78,22 @@ baselineProfile {
 }
 
 dependencies {
+  implementation(project(":core:base"))
+  implementation(project(":core:coil"))
+  implementation(project(":core:coroutines"))
+  implementation(project(":core:design-system"))
+  implementation(project(":core:ktor"))
+  implementation(project(":core:metro"))
+  implementation(project(":core:process-lifecycle"))
+  implementation(project(":core:resource-state"))
+  implementation(project(":core:resources-app"))
+  implementation(project(":core:startup"))
+  implementation(project(":core:ui"))
+
+  implementation(project(":data:filesystem"))
+  implementation(project(":data:graphql-client"))
+  implementation(project(":data:theme-impl"))
+
   implementation(compose.material3AdaptiveNavigationSuite) {
     exclude(group = "org.jetbrains.androidx.window")
   }
@@ -88,29 +104,13 @@ dependencies {
 
   implementation(libs.coil)
 
-  implementation(projects.core.base)
-  implementation(projects.core.coil)
-  implementation(projects.core.coroutines)
-  implementation(projects.core.designSystem)
-  implementation(projects.core.ktor)
-  implementation(projects.core.metro)
-  implementation(projects.core.processLifecycle)
-  implementation(projects.core.resourceState)
-  implementation(projects.core.resourcesApp)
-  implementation(projects.core.startup)
-  implementation(projects.core.ui)
+  releaseImplementation(project(":core:crashlytics"))
+  releaseImplementation(project(":core:logger-crashlytics"))
 
-  implementation(projects.data.filesystem)
-  implementation(projects.data.graphqlClient)
-  implementation(projects.data.themeImpl)
-
-  releaseImplementation(projects.core.crashlytics)
-  releaseImplementation(projects.core.loggerCrashlytics)
-
-  debugImplementation(projects.core.coilLogger)
-  debugImplementation(projects.core.composeDebug)
-  debugImplementation(projects.core.loggerDebug)
-  debugImplementation(projects.core.strictMode)
+  debugImplementation(project(":core:coil-logger"))
+  debugImplementation(project(":core:compose-debug"))
+  debugImplementation(project(":core:logger-debug"))
+  debugImplementation(project(":core:strict-mode"))
 
   runtimeOnly(libs.androidx.compose.runtime.tracing)
   runtimeOnly(libs.androidx.profileinstaller)
@@ -119,7 +119,7 @@ dependencies {
 
   debugRuntimeOnly(libs.leakcanary)
 
-  baselineProfile(projects.baselineProfile)
+  baselineProfile(project(":baseline-profile"))
 }
 
 dependencyAnalysis {

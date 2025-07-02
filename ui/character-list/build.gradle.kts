@@ -15,18 +15,18 @@ android {
 }
 
 dependencies {
-  api(projects.data.character)
+  api(project(":data:character"))
+
+  implementation(project(":core:design-system"))
+  implementation(project(":core:l10n"))
+  implementation(project(":core:ui"))
+  implementation(project(":core:ui-tooling-preview"))
+
+  implementation(project(":thirdparty:androidx-paging-compose"))
 
   implementation(libs.androidx.activity.compose)
 
   implementation(libs.coil.compose.core)
-
-  implementation(projects.core.designSystem)
-  implementation(projects.core.l10n)
-  implementation(projects.core.ui)
-  implementation(projects.core.uiToolingPreview)
-
-  implementation(projects.thirdparty.androidxPagingCompose)
 }
 
 dependencyAnalysis { issues { onAny { exclude(":core:ui-tooling-preview") } } }

@@ -13,7 +13,7 @@ kotlin {
       dependencies {
         api(libs.ktor.client.core)
 
-        implementation(projects.core.metro)
+        implementation(project(":core:metro"))
       }
     }
 

@@ -10,6 +10,6 @@ plugins {
 android { namespace = "app.rickandmorty.data.database" }
 
 dependencies {
-  api(projects.data.model)
-  api(projects.data.paging)
+  api(project(":data:model"))
+  api(project(":data:paging"))
 }

@@ -11,16 +11,16 @@ plugins {
 android { namespace = "app.rickandmorty.ui.settings.main" }
 
 dependencies {
-  api(projects.core.resourceState)
+  api(project(":core:resource-state"))
 
-  api(projects.data.locale)
-  api(projects.data.themeApi)
+  api(project(":data:locale"))
+  api(project(":data:theme-api"))
+
+  implementation(project(":core:coroutines"))
+  implementation(project(":core:design-system"))
+  implementation(project(":core:l10n"))
+
+  implementation(project(":ui:settings-common"))
 
   implementation(libs.androidx.activity.compose)
-
-  implementation(projects.core.coroutines)
-  implementation(projects.core.designSystem)
-  implementation(projects.core.l10n)
-
-  implementation(projects.ui.settingsCommon)
 }
