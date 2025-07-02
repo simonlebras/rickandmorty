@@ -16,8 +16,8 @@ kotlin {
       dependencies {
         api(libs.apollo.runtime)
 
-        implementation(projects.core.coroutines)
-        implementation(projects.core.metro)
+        implementation(project(":core:coroutines"))
+        implementation(project(":core:metro"))
       }
     }
   }

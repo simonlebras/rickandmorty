@@ -12,7 +12,7 @@ kotlin {
   androidLibrary { namespace = "app.rickandmorty.core.coroutines" }
 
   sourceSets {
-    androidMain { dependencies { implementation(projects.core.base) } }
+    androidMain { dependencies { implementation(project(":core:base")) } }
 
     commonMain { dependencies { implementation(libs.kotlinx.coroutines.core) } }
   }

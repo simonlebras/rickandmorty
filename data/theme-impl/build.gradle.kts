@@ -15,24 +15,24 @@ kotlin {
   sourceSets {
     androidMain {
       dependencies {
-        implementation(libs.androidx.appcompat)
+        implementation(project(":core:process-lifecycle"))
 
-        implementation(projects.core.processLifecycle)
+        implementation(libs.androidx.appcompat)
       }
     }
 
     commonMain {
       dependencies {
-        api(projects.data.themeApi)
+        api(project(":data:theme-api"))
+
+        implementation(project(":core:base"))
+        implementation(project(":core:coroutines"))
+        implementation(project(":core:metro"))
+        implementation(project(":core:startup"))
 
         implementation(libs.androidx.datastore)
 
         implementation(libs.kotlinx.collectionsimmutable)
-
-        implementation(projects.core.base)
-        implementation(projects.core.coroutines)
-        implementation(projects.core.metro)
-        implementation(projects.core.startup)
       }
     }
   }

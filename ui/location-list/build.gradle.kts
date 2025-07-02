@@ -11,13 +11,13 @@ plugins {
 android { namespace = "app.rickandmorty.ui.location.list" }
 
 dependencies {
-  api(projects.data.location)
+  api(project(":data:location"))
+
+  implementation(project(":core:design-system"))
+  implementation(project(":core:l10n"))
+  implementation(project(":core:ui"))
+
+  implementation(project(":thirdparty:androidx-paging-compose"))
 
   implementation(libs.androidx.activity.compose)
-
-  implementation(projects.core.designSystem)
-  implementation(projects.core.l10n)
-  implementation(projects.core.ui)
-
-  implementation(projects.thirdparty.androidxPagingCompose)
 }

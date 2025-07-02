@@ -10,16 +10,16 @@ plugins {
 android { namespace = "app.rickandmorty.data.locale" }
 
 dependencies {
+  api(project(":data:model"))
+
   api(libs.kotlinx.collectionsimmutable)
 
-  api(projects.data.model)
+  implementation(project(":core:base"))
+  implementation(project(":core:coroutines"))
+  implementation(project(":core:startup"))
+
+  implementation(project(":data:locale-proto"))
 
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.datastore)
-
-  implementation(projects.core.base)
-  implementation(projects.core.coroutines)
-  implementation(projects.core.startup)
-
-  implementation(projects.data.localeProto)
 }

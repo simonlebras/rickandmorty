@@ -16,12 +16,12 @@ kotlin {
 
     commonMain {
       dependencies {
-        api(projects.data.model)
+        api(project(":data:model"))
 
-        api(projects.thirdparty.androidxPagingCompose)
+        api(project(":thirdparty:androidx-paging-compose"))
 
-        implementation(projects.core.designSystem)
-        implementation(projects.core.l10n)
+        implementation(project(":core:design-system"))
+        implementation(project(":core:l10n"))
       }
     }
   }

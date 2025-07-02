@@ -11,11 +11,11 @@ plugins {
 android { namespace = "app.rickandmorty.ui.settings.common" }
 
 dependencies {
-  api(projects.data.themeApi)
+  api(project(":data:theme-api"))
+
+  implementation(project(":core:l10n"))
 
   implementation(compose.material3)
-
-  implementation(projects.core.l10n)
 }
 
 dependencyAnalysis { issues { onUnusedDependencies { exclude(compose.dependencies.material3) } } }

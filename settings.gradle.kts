@@ -41,92 +41,51 @@ develocity {
   }
 }
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 rootProject.name = "rickandmorty"
 
 includeBuild("build-logic")
 
-include(":app")
-
-include(":baseline-profile")
-
-include(":core:base")
-
-include(":core:coil")
-
-include(":core:coil-logger")
-
-include(":core:compose-debug")
-
-include(":core:coroutines")
-
-include(":core:crashlytics")
-
-include(":core:design-system")
-
-include(":core:ktor")
-
-include(":core:l10n")
-
-include(":core:logger-crashlytics")
-
-include(":core:logger-debug")
-
-include(":core:metro")
-
-include(":core:process-lifecycle")
-
-include(":core:resource-state")
-
-include(":core:resources-app")
-
-include(":core:startup")
-
-include(":core:strict-mode")
-
-include(":core:ui")
-
-include(":core:ui-tooling-preview")
-
-include(":data:character")
-
-include(":data:database")
-
-include(":data:episode")
-
-include(":data:filesystem")
-
-include(":data:graphql-client")
-
-include(":data:graphql-schema")
-
-include(":data:locale")
-
-include(":data:locale-proto")
-
-include(":data:location")
-
-include(":data:model")
-
-include(":data:paging")
-
-include(":data:theme-api")
-
-include(":data:theme-impl")
-
-include(":thirdparty:androidx-paging-compose")
-
-include(":ui:character-list")
-
-include(":ui:episode-list")
-
-include(":ui:location-list")
-
-include(":ui:settings-common")
-
-include(":ui:settings-language")
-
-include(":ui:settings-main")
-
-include(":ui:settings-theme")
+include(
+  ":app",
+  ":baseline-profile",
+  ":core:base",
+  ":core:coil",
+  ":core:coil-logger",
+  ":core:compose-debug",
+  ":core:coroutines",
+  ":core:crashlytics",
+  ":core:design-system",
+  ":core:ktor",
+  ":core:l10n",
+  ":core:logger-crashlytics",
+  ":core:logger-debug",
+  ":core:metro",
+  ":core:process-lifecycle",
+  ":core:resource-state",
+  ":core:resources-app",
+  ":core:startup",
+  ":core:strict-mode",
+  ":core:ui",
+  ":core:ui-tooling-preview",
+  ":data:character",
+  ":data:database",
+  ":data:episode",
+  ":data:filesystem",
+  ":data:graphql-client",
+  ":data:graphql-schema",
+  ":data:locale",
+  ":data:locale-proto",
+  ":data:location",
+  ":data:model",
+  ":data:paging",
+  ":data:theme-api",
+  ":data:theme-impl",
+  ":thirdparty:androidx-paging-compose",
+  ":ui:character-list",
+  ":ui:episode-list",
+  ":ui:location-list",
+  ":ui:settings-common",
+  ":ui:settings-language",
+  ":ui:settings-main",
+  ":ui:settings-theme",
+)

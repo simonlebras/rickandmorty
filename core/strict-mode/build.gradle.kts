@@ -14,10 +14,10 @@ kotlin {
   sourceSets {
     androidMain {
       dependencies {
-        implementation(libs.kermit)
+        implementation(project(":core:base"))
+        implementation(project(":core:startup"))
 
-        implementation(projects.core.base)
-        implementation(projects.core.startup)
+        implementation(libs.kermit)
       }
     }
   }
