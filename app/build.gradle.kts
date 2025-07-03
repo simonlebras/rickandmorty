@@ -1,3 +1,5 @@
+import com.google.firebase.perf.plugin.FirebasePerfExtension
+
 plugins {
   alias(libs.plugins.rickandmorty.android.application)
   alias(libs.plugins.rickandmorty.compose)
@@ -16,8 +18,7 @@ val useFirebase = file("google-services.json").exists()
 
 if (useFirebase) {
   apply(plugin = "app.rickandmorty.firebase-crashlytics")
-  // TODO Fix Firebase perf plugin
-  // apply(plugin = "app.rickandmorty.firebase-perf")
+  apply(plugin = "app.rickandmorty.firebase-perf")
 }
 
 val useReleaseKeystore = layout.settingsDirectory.file("keystore/release.jks").asFile.exists()
@@ -58,9 +59,9 @@ android {
       versionNameSuffix = "-debug"
       isPseudoLocalesEnabled = true
 
-      //      if (useFirebase) {
-      //        configure<FirebasePerfExtension> { setInstrumentationEnabled(false) }
-      //      }
+      if (useFirebase) {
+        configure<FirebasePerfExtension> { setInstrumentationEnabled(false) }
+      }
     }
 
     val release by getting {
