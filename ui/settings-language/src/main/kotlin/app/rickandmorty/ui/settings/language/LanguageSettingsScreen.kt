@@ -1,6 +1,5 @@
 package app.rickandmorty.ui.settings.language
 
-import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,6 +31,7 @@ import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.l10n.resources.settings_language_system_default
 import app.rickandmorty.core.l10n.resources.settings_language_title
+import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.model.Locale
 import app.rickandmorty.ui.settings.common.SettingsContentType
 import app.rickandmorty.ui.settings.common.loader

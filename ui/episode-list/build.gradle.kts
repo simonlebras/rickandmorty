@@ -18,6 +18,4 @@ dependencies {
   implementation(project(":core:ui"))
 
   implementation(project(":thirdparty:androidx-paging-compose"))
-
-  implementation(libs.androidx.activity.compose)
 }

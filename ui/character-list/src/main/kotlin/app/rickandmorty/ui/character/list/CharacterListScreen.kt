@@ -1,6 +1,5 @@
 package app.rickandmorty.ui.character.list
 
-import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -47,6 +46,7 @@ import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.ui.CharacterStatusIndicator
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
+import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.core.ui.appendLoadState
 import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty

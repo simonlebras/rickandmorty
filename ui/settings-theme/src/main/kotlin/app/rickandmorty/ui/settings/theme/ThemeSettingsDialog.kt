@@ -1,6 +1,5 @@
 package app.rickandmorty.ui.settings.theme
 
-import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.dismiss
 import app.rickandmorty.core.l10n.resources.settings_theme_title
+import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.theme.NightMode
 import app.rickandmorty.ui.settings.common.util.label
 import org.jetbrains.compose.resources.stringResource
