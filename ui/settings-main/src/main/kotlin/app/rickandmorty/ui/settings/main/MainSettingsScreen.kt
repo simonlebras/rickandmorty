@@ -1,6 +1,5 @@
 package app.rickandmorty.ui.settings.main
 
-import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,6 +42,7 @@ import app.rickandmorty.core.l10n.resources.settings_oss_licenses_title
 import app.rickandmorty.core.l10n.resources.settings_theme_tap_action
 import app.rickandmorty.core.l10n.resources.settings_theme_title
 import app.rickandmorty.core.l10n.resources.settings_title
+import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.model.Locale
 import app.rickandmorty.data.theme.Theme
 import app.rickandmorty.ui.settings.common.Header

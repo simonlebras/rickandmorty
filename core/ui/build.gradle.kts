@@ -12,7 +12,13 @@ kotlin {
   androidLibrary { namespace = "app.rickandmorty.core.ui" }
 
   sourceSets {
-    androidMain { dependencies { api(libs.androidx.activity) } }
+    androidMain {
+      dependencies {
+        api(libs.androidx.activity)
+
+        implementation(libs.androidx.activity.compose)
+      }
+    }
 
     commonMain {
       dependencies {

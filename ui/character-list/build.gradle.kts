@@ -24,8 +24,6 @@ dependencies {
 
   implementation(project(":thirdparty:androidx-paging-compose"))
 
-  implementation(libs.androidx.activity.compose)
-
   implementation(libs.coil.compose.core)
 }
 

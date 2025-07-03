@@ -18,10 +18,9 @@ dependencies {
   implementation(project(":core:coroutines"))
   implementation(project(":core:design-system"))
   implementation(project(":core:l10n"))
+  implementation(project(":core:ui"))
 
   implementation(project(":ui:settings-common"))
-
-  implementation(libs.androidx.activity.compose)
 
   implementation(libs.kotlinx.collectionsimmutable)
 }

@@ -1,6 +1,5 @@
 package app.rickandmorty.ui.episode.list
 
-import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -39,6 +38,7 @@ import app.rickandmorty.core.l10n.resources.episode_list_title
 import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
+import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.core.ui.appendLoadState
 import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty

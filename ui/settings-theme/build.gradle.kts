@@ -17,12 +17,11 @@ dependencies {
 
   implementation(project(":core:coroutines"))
   implementation(project(":core:l10n"))
+  implementation(project(":core:ui"))
 
   implementation(project(":ui:settings-common"))
 
   implementation(compose.material3)
-
-  implementation(libs.androidx.activity.compose)
 
   implementation(libs.kotlinx.collectionsimmutable)
 }
