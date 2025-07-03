@@ -95,9 +95,7 @@ dependencies {
   implementation(project(":data:graphql-client"))
   implementation(project(":data:theme-impl"))
 
-  implementation(compose.material3AdaptiveNavigationSuite) {
-    exclude(group = "org.jetbrains.androidx.window")
-  }
+  implementation(compose.material3AdaptiveNavigationSuite)
 
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.appcompat)
