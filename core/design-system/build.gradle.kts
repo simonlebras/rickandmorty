@@ -16,7 +16,7 @@ kotlin {
 
     commonMain {
       dependencies {
-        api(compose.material3)
+        api(libs.jetbrains.compose.material3)
 
         implementation(compose.components.resources)
 
