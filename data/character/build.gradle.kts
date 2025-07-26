@@ -18,12 +18,12 @@ apollo {
 }
 
 dependencies {
-  api(project(":data:graphql-schema"))
   api(project(":data:model"))
 
   api(libs.androidx.paging.common)
 
   implementation(project(":data:database"))
+  implementation(project(":data:graphql-schema"))
   implementation(project(":data:paging"))
 
   implementation(libs.apollo.runtime)
