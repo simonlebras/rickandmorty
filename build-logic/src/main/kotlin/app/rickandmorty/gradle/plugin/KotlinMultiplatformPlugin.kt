@@ -36,13 +36,7 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
           }
         }
 
-        targets.configureEach {
-          compilations.configureEach {
-            compileTaskProvider.configure {
-              compilerOptions { freeCompilerArgs.addAll("-Xexpect-actual-classes") }
-            }
-          }
-        }
+        compilerOptions { freeCompilerArgs.addAll("-Xexpect-actual-classes") }
 
         explicitApi()
       }
