@@ -13,8 +13,6 @@ kotlin {
     jvmTarget = JvmTarget.fromTarget(javaTarget)
 
     allWarningsAsErrors = true
-
-    freeCompilerArgs.addAll("-Xjdk-release=$javaTarget")
   }
 
   explicitApi()
