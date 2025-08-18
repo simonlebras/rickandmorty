@@ -15,7 +15,7 @@ public class AndroidLibraryPlugin : Plugin<Project> {
       pluginManager.apply(libs.plugins.android.library)
 
       configure<LibraryExtension> {
-        configureAndroid(this)
+        configureAndroid()
 
         val targetSdk = libs.versions.android.sdk.target.get().toInt()
         lint.targetSdk = targetSdk

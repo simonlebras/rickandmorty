@@ -70,7 +70,6 @@ wire = "5.3.11"
 [libraries]
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools" }
 android-tools-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
-android-tools-gradleapi = { group = "com.android.tools.build", name = "gradle-api", version.ref = "android-plugin" }
 android-tools-security-lints = { group = "com.android.security.lint", name = "lint", version.ref = "android-security-lints" }
 
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidx-activity" }
@@ -155,8 +154,6 @@ metro = { group = "dev.zacsweers.metro", name = "runtime", version.ref = "metro"
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
 
 slack-compose-lints = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slack-compose-lints" }
-
-spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 
 store = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store" }
 

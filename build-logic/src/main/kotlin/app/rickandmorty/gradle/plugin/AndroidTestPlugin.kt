@@ -14,7 +14,7 @@ public class AndroidTestPlugin : Plugin<Project> {
       pluginManager.apply(libs.plugins.android.test)
 
       configure<TestExtension> {
-        configureAndroid(this)
+        configureAndroid()
 
         defaultConfig.targetSdk = libs.versions.android.sdk.target.get().toInt()
 

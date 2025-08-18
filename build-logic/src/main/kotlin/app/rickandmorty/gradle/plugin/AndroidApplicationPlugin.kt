@@ -16,7 +16,7 @@ public class AndroidApplicationPlugin : Plugin<Project> {
       pluginManager.apply(libs.plugins.android.application)
 
       configure<ApplicationExtension> {
-        configureAndroid(this)
+        configureAndroid()
 
         defaultConfig.targetSdk = libs.versions.android.sdk.target.get().toInt()
 
@@ -44,7 +44,7 @@ public class AndroidApplicationPlugin : Plugin<Project> {
       }
 
       configure<ApplicationAndroidComponentsExtension> {
-        configureBadgingTasks(this)
+        configureBadgingTasks()
 
         onVariants(selector().withBuildType("release")) { variant ->
           variant.packaging.resources.excludes.addAll(

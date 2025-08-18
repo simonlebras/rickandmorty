@@ -4,7 +4,8 @@ import libs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
-internal fun Project.configureAndroid(commonExtension: AndroidCommonExtension) {
+context(commonExtension: AndroidCommonExtension)
+internal fun Project.configureAndroid() {
   with(commonExtension) {
     compileSdk = libs.versions.android.sdk.compile.get().toInt()
 
@@ -15,7 +16,7 @@ internal fun Project.configureAndroid(commonExtension: AndroidCommonExtension) {
     testOptions {
       animationsDisabled = true
 
-      configureGradleManagedDevices()
+      managedDevices { configureGradleManagedDevices() }
     }
 
     compileOptions {
