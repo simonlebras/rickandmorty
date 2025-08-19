@@ -1,10 +1,11 @@
 package app.rickandmorty.gradle.util
 
-import libs
+import app.rickandmorty.gradle.dsl.assign
+import app.rickandmorty.gradle.dsl.the
+import app.rickandmorty.gradle.dsl.withType
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.gradle.api.tasks.compile.JavaCompile
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
@@ -19,6 +20,7 @@ internal fun Project.configureKotlin() {
     )
   }
 
+  val libs = the<LibrariesForLibs>()
   val javaTarget = libs.versions.java.target.get()
 
   tasks.withType<KotlinJvmCompile>().configureEach {

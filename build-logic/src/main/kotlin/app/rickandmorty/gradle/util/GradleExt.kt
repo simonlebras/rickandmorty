@@ -1,5 +1,7 @@
 package app.rickandmorty.gradle.util
 
+import app.rickandmorty.gradle.dsl.named
+import app.rickandmorty.gradle.dsl.register
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -8,8 +10,6 @@ import org.gradle.api.plugins.AppliedPlugin
 import org.gradle.api.plugins.PluginManager
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskProvider
-import org.gradle.kotlin.dsl.named
-import org.gradle.kotlin.dsl.register
 import org.gradle.plugin.use.PluginDependency
 
 internal fun DependencyHandler.api(vararg dependencyNotations: Any) {
@@ -34,10 +34,6 @@ internal val Project.isRootProject: Boolean
 
 internal typealias AndroidCommonExtension = CommonExtension<*, *, *, *, *, *>
 
-internal fun PluginManager.apply(vararg plugins: Provider<PluginDependency>) {
-  plugins.forEach { plugin -> apply(plugin.get().pluginId) }
-}
-
 internal fun PluginManager.withPlugin(
   plugin: Provider<PluginDependency>,
   action: AppliedPlugin.() -> Unit,
@@ -47,11 +43,11 @@ internal fun PluginManager.withPlugin(
 
 internal inline fun <reified T : Task> Project.getOrCreateTask(
   name: String,
-  noinline block: T.() -> Unit,
+  noinline configuration: T.() -> Unit,
 ): TaskProvider<T> {
   return if (tasks.names.contains(name)) {
-    tasks.named<T>(name).apply { configure(block) }
+    tasks.named<T>(name).apply { configure(configuration) }
   } else {
-    tasks.register<T>(name, block)
+    tasks.register<T>(name, configuration)
   }
 }

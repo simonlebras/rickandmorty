@@ -1,18 +1,21 @@
 package app.rickandmorty.gradle.plugin
 
-import app.rickandmorty.gradle.util.apply
+import app.rickandmorty.gradle.dsl.apply
+import app.rickandmorty.gradle.dsl.configure
+import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.configureKotlin
 import app.rickandmorty.gradle.util.withPlugin
-import libs
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 
 public class KotlinAndroidPlugin : Plugin<Project> {
   override fun apply(target: Project): Unit =
     with(target) {
-      pluginManager.apply(libs.plugins.kotlin.android)
+      val libs = the<LibrariesForLibs>()
+
+      apply(libs.plugins.kotlin.android)
 
       configureKotlin()
 
