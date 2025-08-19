@@ -1,8 +1,11 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-  `kotlin-dsl`
+  `java-gradle-plugin`
   alias(libs.plugins.android.lint)
+  alias(libs.plugins.kotlin.assignment)
+  alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.kotlin.sam)
   alias(libs.plugins.spotless)
 }
 
@@ -19,6 +22,10 @@ kotlin {
 
   explicitApi()
 }
+
+assignment { annotation(SupportsKotlinAssignmentOverloading::class.qualifiedName!!) }
+
+samWithReceiver { annotation(HasImplicitReceiver::class.qualifiedName!!) }
 
 tasks.withType<JavaCompile>().configureEach {
   sourceCompatibility = javaTarget
@@ -48,6 +55,9 @@ dependencies {
   compileOnly(plugin(libs.plugins.spotless))
 
   implementation(libs.truth)
+
+  // Workaround for https://github.com/gradle/gradle/issues/15383
+  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 
   lintChecks(libs.androidx.gradle.lints)
 }

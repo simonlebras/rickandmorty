@@ -24,8 +24,8 @@ dependencyResolutionManagement {
     mavenCentral()
     gradlePluginPortal()
   }
-}
 
-plugins { id("dev.panuszewski.typesafe-conventions") version "0.7.4" }
+  versionCatalogs { create("libs") { from(files("../gradle/libs.versions.toml")) } }
+}
 
 rootProject.name = "build-logic"

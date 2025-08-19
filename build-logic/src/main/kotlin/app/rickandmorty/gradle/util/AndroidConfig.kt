@@ -1,11 +1,14 @@
 package app.rickandmorty.gradle.util
 
-import libs
+import app.rickandmorty.gradle.dsl.dependencies
+import app.rickandmorty.gradle.dsl.the
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.dependencies
 
 context(commonExtension: AndroidCommonExtension)
 internal fun Project.configureAndroid() {
+  val libs = the<LibrariesForLibs>()
+
   with(commonExtension) {
     compileSdk = libs.versions.android.sdk.compile.get().toInt()
 

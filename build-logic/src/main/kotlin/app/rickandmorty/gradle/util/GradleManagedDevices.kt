@@ -2,6 +2,9 @@
 
 package app.rickandmorty.gradle.util
 
+import app.rickandmorty.gradle.dsl.assign
+import app.rickandmorty.gradle.dsl.register
+import app.rickandmorty.gradle.dsl.withType
 import com.android.build.api.dsl.ManagedDevices
 import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestSetupTask
 import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestTask
@@ -17,10 +20,6 @@ import org.gradle.api.services.BuildServiceParameters
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import org.gradle.internal.os.OperatingSystem
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.invoke
-import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.withType
 import org.gradle.process.ExecOperations
 import org.gradle.work.DisableCachingByDefault
 
@@ -33,7 +32,7 @@ private val deviceConfigs =
 
 context(managedDevices: ManagedDevices)
 internal fun Project.configureGradleManagedDevices() {
-  managedDevices.localDevices {
+  managedDevices.localDevices.apply {
     deviceConfigs.forEach { config ->
       create(config.taskName) {
         device = config.device

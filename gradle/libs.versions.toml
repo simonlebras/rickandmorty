@@ -193,7 +193,10 @@ firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "fireb
 googleservices = { id = "com.google.gms.google-services", version.ref = "googleservices" }
 gradledoctor = { id = "com.osacky.doctor", version.ref = "gradledoctor" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-assignment = { id = "org.jetbrains.kotlin.plugin.assignment", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }

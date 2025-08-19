@@ -1,5 +1,7 @@
 package app.rickandmorty.gradle.util
 
+import app.rickandmorty.gradle.dsl.assign
+import app.rickandmorty.gradle.dsl.register
 import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.google.common.truth.Truth.assertWithMessage
@@ -18,8 +20,6 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
-import org.gradle.kotlin.dsl.assign
-import org.gradle.kotlin.dsl.register
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 import org.gradle.process.ExecOperations
 
