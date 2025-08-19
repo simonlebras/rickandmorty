@@ -34,7 +34,7 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
             withDeviceTest {
               animationsDisabled = true
 
-              configureGradleManagedDevices()
+              managedDevices { configureGradleManagedDevices() }
             }
 
             localDependencySelection { selectBuildTypeFrom = listOf("release") }

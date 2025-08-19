@@ -13,6 +13,8 @@ kotlin {
     jvmTarget = JvmTarget.fromTarget(javaTarget)
 
     allWarningsAsErrors = true
+
+    freeCompilerArgs.addAll("-Xcontext-parameters")
   }
 
   explicitApi()
@@ -37,14 +39,13 @@ lint {
 
 dependencies {
   compileOnly(libs.android.tools.common)
-  compileOnly(libs.android.tools.gradleapi)
-  compileOnly(libs.spotless.plugin)
-  compileOnly(libs.plugins.apollo.asDependency())
-  compileOnly(libs.plugins.compose.compiler.asDependency())
-  compileOnly(libs.plugins.dependencyanalysis.asDependency())
-  compileOnly(libs.plugins.gradledoctor.asDependency())
-  compileOnly(libs.plugins.kotlin.multiplatform.asDependency())
-  compileOnly(libs.plugins.modulegraphassert.asDependency())
+  compileOnly(plugin(libs.plugins.android.application))
+  compileOnly(plugin(libs.plugins.compose.compiler))
+  compileOnly(plugin(libs.plugins.dependencyanalysis))
+  compileOnly(plugin(libs.plugins.gradledoctor))
+  compileOnly(plugin(libs.plugins.kotlin.multiplatform))
+  compileOnly(plugin(libs.plugins.modulegraphassert))
+  compileOnly(plugin(libs.plugins.spotless))
 
   implementation(libs.truth)
 
@@ -118,6 +119,5 @@ spotless {
   }
 }
 
-private fun Provider<PluginDependency>.asDependency(): Provider<String> = map {
-  "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
-}
+private fun plugin(plugin: Provider<PluginDependency>) =
+  plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}" }

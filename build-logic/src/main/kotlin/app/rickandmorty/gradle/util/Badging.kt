@@ -80,9 +80,8 @@ internal abstract class CheckBadgingTask : DefaultTask() {
 }
 
 @Suppress("UnstableApiUsage")
-internal fun Project.configureBadgingTasks(
-  componentsExtension: ApplicationAndroidComponentsExtension
-) {
+context(componentsExtension: ApplicationAndroidComponentsExtension)
+internal fun Project.configureBadgingTasks() {
   componentsExtension.onVariants { variant ->
     val capitalizedVariantName = variant.name.capitalize()
 
@@ -92,7 +91,7 @@ internal fun Project.configureBadgingTasks(
         apk = variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE)
         aapt2Executable = componentsExtension.sdkComponents.aapt2.flatMap { it.executable }
         badging =
-          project.layout.buildDirectory.file(
+          layout.buildDirectory.file(
             "outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt"
           )
       }
@@ -100,15 +99,15 @@ internal fun Project.configureBadgingTasks(
     val updateBadgingTaskName = "update${capitalizedVariantName}Badging"
     tasks.register<Copy>(updateBadgingTaskName) {
       from(generateBadging.map { it.badging })
-      into(project.layout.projectDirectory)
+      into(layout.projectDirectory)
     }
 
     val checkBadgingTaskName = "check${capitalizedVariantName}Badging"
     tasks.register<CheckBadgingTask>(checkBadgingTaskName) {
-      goldenBadging = project.layout.projectDirectory.file("${variant.name}-badging.txt")
+      goldenBadging = layout.projectDirectory.file("${variant.name}-badging.txt")
       generatedBadging = generateBadging.flatMap { it.badging }
       this.updateBadgingTaskName = updateBadgingTaskName
-      output = project.layout.buildDirectory.dir("intermediates/$checkBadgingTaskName")
+      output = layout.buildDirectory.dir("intermediates/$checkBadgingTaskName")
     }
   }
 }
