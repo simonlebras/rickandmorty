@@ -28,7 +28,7 @@ jobs:
         uses: actionsdesk/lfs-warning@v3.3
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version-file: .github/.java-version
@@ -137,7 +137,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version-file: .github/.java-version
