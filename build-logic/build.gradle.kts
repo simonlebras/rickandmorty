@@ -49,7 +49,6 @@ dependencies {
   compileOnly(plugin(libs.plugins.android.application))
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
-  compileOnly(plugin(libs.plugins.gradledoctor))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
   compileOnly(plugin(libs.plugins.modulegraphassert))
   compileOnly(plugin(libs.plugins.spotless))
