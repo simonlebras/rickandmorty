@@ -7,7 +7,6 @@ import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.getOrCreateTask
 import app.rickandmorty.gradle.util.isRootProject
 import com.autonomousapps.DependencyAnalysisExtension
-import com.osacky.doctor.DoctorExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -32,8 +31,6 @@ public class RootPlugin : Plugin<Project> {
       }
 
       configureDependencyAnalysis()
-
-      configureGradleDoctor()
     }
 }
 
@@ -47,12 +44,5 @@ private fun Project.configureDependencyAnalysis() {
     }
 
     abi { exclusions { ignoreGeneratedCode() } }
-  }
-}
-
-private fun Project.configureGradleDoctor() {
-  configure<DoctorExtension> {
-    @Suppress("DEPRECATION")
-    warnWhenNotUsingParallelGC = false
   }
 }
