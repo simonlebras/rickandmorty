@@ -14,7 +14,6 @@ internal fun Project.configureKotlin() {
   tasks.withType<KotlinCompile>().configureEach {
     compilerOptions.freeCompilerArgs.addAll(
       "-Xannotation-default-target=param-property",
-      "-Xconsistent-data-class-copy-visibility",
       "-Xcontext-sensitive-resolution",
       "-Xmulti-dollar-interpolation",
     )
