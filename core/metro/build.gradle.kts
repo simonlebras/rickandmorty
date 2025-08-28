@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.rickandmorty.spotless)
 
   alias(libs.plugins.dependencyanalysis)
+  alias(libs.plugins.metro)
   alias(libs.plugins.sortdependencies)
 }
 
@@ -14,8 +15,7 @@ kotlin {
     commonMain {
       dependencies {
         implementation(libs.jetbrains.lifecycle.viewmodel)
-
-        implementation(libs.metro)
+        implementation(libs.jetbrains.lifecycle.viewmodel.savedstate)
       }
     }
   }
