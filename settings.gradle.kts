@@ -80,7 +80,6 @@ include(
   ":data:paging",
   ":data:theme-api",
   ":data:theme-impl",
-  ":thirdparty:androidx-paging-compose",
   ":ui:character-list",
   ":ui:episode-list",
   ":ui:location-list",
