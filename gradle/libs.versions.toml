@@ -55,7 +55,7 @@ kotlinx-serialization = "1.9.0"
 ktfmt = "0.56"
 ktor = "3.2.3"
 leakcanary = "2.14"
-metro = "0.6.0-2.2.20-Beta2-alpha03"
+metro = "0.7.0-2.2.20-RC-alpha04"
 modulegraphassert = "2.9.0"
 okio = "3.16.0"
 slack-compose-lints = "1.4.2"
@@ -149,8 +149,6 @@ ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.r
 
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
-
-metro = { group = "dev.zacsweers.metro", name = "runtime", version.ref = "metro" }
 
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
 
