@@ -1,11 +1,9 @@
 plugins {
   alias(libs.plugins.rickandmorty.android.test)
+  alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.android)
-  alias(libs.plugins.rickandmorty.spotless)
 
   alias(libs.plugins.androidx.baselineprofile)
-  alias(libs.plugins.dependencyanalysis)
-  alias(libs.plugins.sortdependencies)
 }
 
 android {

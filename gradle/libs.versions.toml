@@ -168,6 +168,7 @@ rickandmorty-android-application = { id = "app.rickandmorty.android-application"
 rickandmorty-android-library = { id = "app.rickandmorty.android-library" }
 rickandmorty-android-multiplatformlibrary = { id = "app.rickandmorty.android-multiplatformlibrary" }
 rickandmorty-android-test = { id = "app.rickandmorty.android-test" }
+rickandmorty-codehealth = { id = "app.rickandmorty.codehealth" }
 rickandmorty-compose = { id = "app.rickandmorty.compose" }
 rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytics" }
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
@@ -175,7 +176,6 @@ rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
 rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
 rickandmorty-modulegraphassert = { id = "app.rickandmorty.modulegraphassert" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
-rickandmorty-spotless = { id = "app.rickandmorty.spotless" }
 
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }

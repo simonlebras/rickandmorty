@@ -1,15 +1,14 @@
 plugins {
+  alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
-  alias(libs.plugins.rickandmorty.spotless)
 
   alias(libs.plugins.apollo)
-  alias(libs.plugins.dependencyanalysis)
-  alias(libs.plugins.sortdependencies)
 }
 
 apollo {
   service("rickandmorty") {
     packageName = "app.rickandmorty.data.graphql.schema"
+    @Suppress("OPT_IN_USAGE")
     generateDataBuilders = true
     generateApolloMetadata = true
     schemaFiles.setFrom("src/main/graphql/schema.graphqls", "src/main/graphql/extra.graphqls")

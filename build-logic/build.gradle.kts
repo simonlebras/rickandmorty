@@ -79,6 +79,10 @@ gradlePlugin {
       id = "app.rickandmorty.android-test"
       implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
     }
+    register("codehealth") {
+      id = "app.rickandmorty.codehealth"
+      implementationClass = "app.rickandmorty.gradle.plugin.CodeHealthPlugin"
+    }
     register("compose") {
       id = "app.rickandmorty.compose"
       implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
@@ -106,10 +110,6 @@ gradlePlugin {
     register("root") {
       id = "app.rickandmorty.root"
       implementationClass = "app.rickandmorty.gradle.plugin.RootPlugin"
-    }
-    register("spotless") {
-      id = "app.rickandmorty.spotless"
-      implementationClass = "app.rickandmorty.gradle.plugin.SpotlessPlugin"
     }
   }
 }

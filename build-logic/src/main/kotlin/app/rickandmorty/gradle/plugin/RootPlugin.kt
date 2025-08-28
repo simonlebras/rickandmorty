@@ -1,7 +1,6 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.dsl.apply
-import app.rickandmorty.gradle.dsl.assign
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.getOrCreateTask
@@ -19,12 +18,7 @@ public class RootPlugin : Plugin<Project> {
 
       val libs = the<LibrariesForLibs>()
 
-      apply(
-        libs.plugins.rickandmorty.spotless,
-        libs.plugins.dependencyanalysis,
-        libs.plugins.gradledoctor,
-        libs.plugins.sortdependencies,
-      )
+      apply(libs.plugins.rickandmorty.codehealth, libs.plugins.gradledoctor)
 
       getOrCreateTask<Task>("check") {
         dependsOn(gradle.includedBuilds.map { build -> build.task(":check") })
