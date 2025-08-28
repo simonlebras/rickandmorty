@@ -22,7 +22,7 @@ dependencies {
   implementation(project(":core:ui"))
   implementation(project(":core:ui-tooling-preview"))
 
-  implementation(project(":thirdparty:androidx-paging-compose"))
+  implementation(libs.androidx.paging.compose)
 
   implementation(libs.coil.compose.core)
 }

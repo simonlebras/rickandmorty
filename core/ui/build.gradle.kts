@@ -24,7 +24,7 @@ kotlin {
       dependencies {
         api(project(":data:model"))
 
-        api(project(":thirdparty:androidx-paging-compose"))
+        api(libs.androidx.paging.compose)
 
         implementation(project(":core:design-system"))
         implementation(project(":core:l10n"))

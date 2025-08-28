@@ -17,5 +17,5 @@ dependencies {
   implementation(project(":core:l10n"))
   implementation(project(":core:ui"))
 
-  implementation(project(":thirdparty:androidx-paging-compose"))
+  implementation(libs.androidx.paging.compose)
 }
