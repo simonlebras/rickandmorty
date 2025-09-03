@@ -23,4 +23,4 @@ dependencies {
   implementation(libs.kotlinx.collectionsimmutable)
 }
 
-dependencyAnalysis { issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3) } } }
+dependencyAnalysis { issues { onUnusedDependencies { exclude(compose.dependencies.material3) } } }

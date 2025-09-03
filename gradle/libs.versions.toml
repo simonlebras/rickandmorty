@@ -33,7 +33,7 @@ androidx-window = "1.5.0-rc01"
 apollo = "5.0.0-alpha.2"
 apollo-adapters = "0.7.0"
 coil = "3.3.0"
-compose-multiplatform = "1.9.0-rc01"
+compose-multiplatform = "1.10.0-alpha01"
 compose-placeholder = "1.0.11"
 crashkios-crashlytics = "0.9.0"
 dependencyanalysis = "3.0.1"
@@ -43,7 +43,6 @@ firebase-perf-plugin = "2.0.1"
 googleservices = "4.4.3"
 gradledoctor = "0.12.1"
 java-target = "17"
-jetbrains-compose-material3 = "1.9.0-alpha04"
 jetbrains-lifecycle = "2.9.3"
 junit4 = "4.13.2"
 kermit = "2.0.8"
@@ -120,7 +119,6 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf" }
 
-jetbrains-compose-material3 = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "jetbrains-compose-material3" }
 jetbrains-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "jetbrains-lifecycle" }
 jetbrains-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "jetbrains-lifecycle" }
 jetbrains-lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "jetbrains-lifecycle" }
