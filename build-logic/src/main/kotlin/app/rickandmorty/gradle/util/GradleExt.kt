@@ -2,7 +2,6 @@ package app.rickandmorty.gradle.util
 
 import app.rickandmorty.gradle.dsl.named
 import app.rickandmorty.gradle.dsl.register
-import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.artifacts.dsl.DependencyHandler
@@ -31,8 +30,6 @@ internal fun DependencyHandler.lintChecks(vararg dependencyNotations: Any) {
 @Suppress("GradleProjectIsolation")
 internal val Project.isRootProject: Boolean
   get() = rootProject === this
-
-internal typealias AndroidCommonExtension = CommonExtension<*, *, *, *, *, *>
 
 internal fun PluginManager.withPlugin(
   plugin: Provider<PluginDependency>,
