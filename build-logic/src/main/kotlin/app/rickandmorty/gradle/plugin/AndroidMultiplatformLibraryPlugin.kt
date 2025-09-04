@@ -34,10 +34,18 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
               configureLint()
             }
 
-            withDeviceTest {
-              animationsDisabled = true
+            if (providers.gradleProperty("ram.android.enableUnitTest").orNull == "true") {
+              withHostTest { isIncludeAndroidResources = true }
+            }
 
-              managedDevices { configureGradleManagedDevices() }
+            if (providers.gradleProperty("ram.android.enableDeviceTest").orNull == "true") {
+              withDeviceTestBuilder { sourceSetTreeName = "test" }
+                .configure {
+                  animationsDisabled = true
+                  instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+                  managedDevices { configureGradleManagedDevices() }
+                }
             }
 
             localDependencySelection { selectBuildTypeFrom = listOf("release") }
@@ -52,10 +60,16 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
             enableCoreLibraryDesugaring = true
           }
 
-          sourceSets.androidMain {
-            dependencies.apply {
-              coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
-              lintChecks(libs.android.tools.security.lints)
+          sourceSets.apply {
+            androidMain {
+              dependencies.apply {
+                coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
+                lintChecks(libs.android.tools.security.lints)
+              }
+            }
+
+            findByName("androidDeviceTest")?.apply {
+              dependencies { runtimeOnly(libs.androidx.test.runner) }
             }
           }
         }

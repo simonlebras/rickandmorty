@@ -7,7 +7,6 @@ plugins {
   alias(libs.plugins.rickandmorty.compose) apply false
   alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
   alias(libs.plugins.rickandmorty.firebase.perf) apply false
-  alias(libs.plugins.rickandmorty.kotlin.android) apply false
   alias(libs.plugins.rickandmorty.kotlin.multiplatform) apply false
   alias(libs.plugins.rickandmorty.root)
 
@@ -25,7 +24,6 @@ plugins {
   alias(libs.plugins.firebase.perf) apply false
   alias(libs.plugins.googleservices) apply false
   alias(libs.plugins.gradledoctor) apply false
-  alias(libs.plugins.kotlin.android) apply false
   alias(libs.plugins.kotlin.multiplatform) apply false
   alias(libs.plugins.kotlin.serialization) apply false
   alias(libs.plugins.ktfmt) apply false

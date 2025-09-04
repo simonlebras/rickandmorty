@@ -2,7 +2,6 @@ package app.rickandmorty.gradle.util
 
 import app.rickandmorty.gradle.dsl.named
 import app.rickandmorty.gradle.dsl.register
-import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.artifacts.dsl.DependencyHandler
@@ -11,6 +10,10 @@ import org.gradle.api.plugins.PluginManager
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.plugin.use.PluginDependency
+
+internal fun DependencyHandler.androidTestRuntimeOnly(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("androidTestRuntimeOnly", it) }
+}
 
 internal fun DependencyHandler.api(vararg dependencyNotations: Any) {
   dependencyNotations.forEach { add("api", it) }
@@ -31,8 +34,6 @@ internal fun DependencyHandler.lintChecks(vararg dependencyNotations: Any) {
 @Suppress("GradleProjectIsolation")
 internal val Project.isRootProject: Boolean
   get() = rootProject === this
-
-internal typealias AndroidCommonExtension = CommonExtension<*, *, *, *, *, *>
 
 internal fun PluginManager.withPlugin(
   plugin: Provider<PluginDependency>,

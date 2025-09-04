@@ -27,8 +27,6 @@ internal fun Project.configureKotlin() {
       jvmTarget = JvmTarget.fromTarget(javaTarget)
 
       allWarningsAsErrors = true
-
-      freeCompilerArgs.addAll("-Xjvm-default=all")
     }
   }
 
