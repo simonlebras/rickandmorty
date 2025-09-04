@@ -5,6 +5,7 @@ import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureBadgingTasks
+import app.rickandmorty.gradle.util.configureKotlin
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -17,6 +18,8 @@ public class AndroidApplicationPlugin : Plugin<Project> {
       val libs = the<LibrariesForLibs>()
 
       apply(libs.plugins.android.application)
+
+      configureKotlin()
 
       configure<ApplicationExtension> {
         configureAndroid()
