@@ -2,10 +2,11 @@ package app.rickandmorty.gradle.util
 
 import app.rickandmorty.gradle.dsl.dependencies
 import app.rickandmorty.gradle.dsl.the
+import com.android.build.api.dsl.CommonExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 
-context(commonExtension: AndroidCommonExtension)
+context(commonExtension: CommonExtension)
 internal fun Project.configureAndroid() {
   val libs = the<LibrariesForLibs>()
 

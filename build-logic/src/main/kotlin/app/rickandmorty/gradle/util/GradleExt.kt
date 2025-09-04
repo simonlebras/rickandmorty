@@ -32,8 +32,6 @@ internal fun DependencyHandler.lintChecks(vararg dependencyNotations: Any) {
 internal val Project.isRootProject: Boolean
   get() = rootProject === this
 
-internal typealias AndroidCommonExtension = CommonExtension<*, *, *, *, *, *>
-
 internal fun PluginManager.withPlugin(
   plugin: Provider<PluginDependency>,
   action: AppliedPlugin.() -> Unit,

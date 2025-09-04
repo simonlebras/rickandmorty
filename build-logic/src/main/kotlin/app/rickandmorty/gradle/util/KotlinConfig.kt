@@ -11,29 +11,29 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 internal fun Project.configureKotlin() {
-  tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions.freeCompilerArgs.addAll(
-      "-Xannotation-default-target=param-property",
-      "-Xcontext-sensitive-resolution",
-      "-Xmulti-dollar-interpolation",
-    )
-  }
-
-  val libs = the<LibrariesForLibs>()
-  val javaTarget = libs.versions.java.target.get()
-
-  tasks.withType<KotlinJvmCompile>().configureEach {
-    compilerOptions {
-      jvmTarget = JvmTarget.fromTarget(javaTarget)
-
-      allWarningsAsErrors = true
-
-      freeCompilerArgs.addAll("-Xjvm-default=all")
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions.freeCompilerArgs.addAll(
+            "-Xannotation-default-target=param-property",
+            "-Xcontext-sensitive-resolution",
+            "-Xmulti-dollar-interpolation",
+        )
     }
-  }
 
-  tasks.withType<JavaCompile>().configureEach {
-    sourceCompatibility = javaTarget
-    targetCompatibility = javaTarget
-  }
+    val libs = the<LibrariesForLibs>()
+    val javaTarget = libs.versions.java.target.get()
+
+    tasks.withType<KotlinJvmCompile>().configureEach {
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget(javaTarget)
+
+            allWarningsAsErrors = true
+
+            freeCompilerArgs.addAll("-Xjvm-default=all")
+        }
+    }
+
+    tasks.withType<JavaCompile>().configureEach {
+        sourceCompatibility = javaTarget
+        targetCompatibility = javaTarget
+    }
 }

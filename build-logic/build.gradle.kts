@@ -95,10 +95,6 @@ gradlePlugin {
       id = "app.rickandmorty.firebase-perf"
       implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
     }
-    register("kotlin-android") {
-      id = "app.rickandmorty.kotlin-android"
-      implementationClass = "app.rickandmorty.gradle.plugin.KotlinAndroidPlugin"
-    }
     register("kotlin-multiplatform") {
       id = "app.rickandmorty.kotlin-multiplatform"
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"

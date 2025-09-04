@@ -4,7 +4,6 @@ plugins {
   alias(libs.plugins.rickandmorty.android.application)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
-  alias(libs.plugins.rickandmorty.kotlin.android)
   alias(libs.plugins.rickandmorty.modulegraphassert)
 
   alias(libs.plugins.androidx.baselineprofile)
