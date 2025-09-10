@@ -19,7 +19,7 @@ dependencies {
 
   api(libs.androidx.paging.common)
 
-  implementation(project(":data:database"))
+  implementation(project(":data:database-api"))
   implementation(project(":data:graphql-schema"))
   implementation(project(":data:paging"))
 

@@ -30,7 +30,7 @@ internal class CharacterRepositoryImpl(
     val remoteMediator =
       PageKeyedRemoteMediator<CharacterEntity>(
         pagedEntryResolver = { character ->
-          transactionRunner { characterPagedEntryDao.getPagedEntry(character.id) }
+          transactionRunner.readTransaction { characterPagedEntryDao.getPagedEntry(character.id) }
         },
         pageFetcher = { page ->
           val data =
@@ -63,7 +63,7 @@ internal class CharacterRepositoryImpl(
               )
             pagedEntries.add(pagedEntry)
           }
-          transactionRunner {
+          transactionRunner.writeTransaction {
             if (page == FIRST_PAGE_KEY) {
               characterPagedEntryDao.deleteAll()
             }
