@@ -30,7 +30,7 @@ internal class EpisodeRepositoryImpl(
     val remoteMediator =
       PageKeyedRemoteMediator<EpisodeEntity>(
         pagedEntryResolver = { episode ->
-          transactionRunner { episodePagedEntryDao.getPagedEntry(episode.id) }
+          transactionRunner.readTransaction { episodePagedEntryDao.getPagedEntry(episode.id) }
         },
         pageFetcher = { page ->
           val data = apolloClient.query(GetEpisodesQuery(page = page)).execute().dataAssertNoErrors
@@ -59,7 +59,7 @@ internal class EpisodeRepositoryImpl(
               )
             pagedEntries.add(pagedEntry)
           }
-          transactionRunner {
+          transactionRunner.writeTransaction {
             if (page == FIRST_PAGE_KEY) {
               episodePagedEntryDao.deleteAll()
             }

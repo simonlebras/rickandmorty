@@ -89,6 +89,7 @@ dependencies {
   implementation(project(":core:startup"))
   implementation(project(":core:ui"))
 
+  implementation(project(":data:database-impl"))
   implementation(project(":data:filesystem"))
   implementation(project(":data:graphql-client"))
   implementation(project(":data:theme-impl"))

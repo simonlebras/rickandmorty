@@ -17,6 +17,6 @@ kotlin {
 
     jvmMain { dependencies { implementation(libs.ktor.client.okhttp) } }
 
-    nativeMain { dependencies { implementation(libs.ktor.client.darwin) } }
+    // nativeMain { dependencies { implementation(libs.ktor.client.darwin) } }
   }
 }
