@@ -47,6 +47,7 @@ lint {
 dependencies {
   compileOnly(libs.android.tools.common)
   compileOnly(plugin(libs.plugins.android.application))
+  compileOnly(plugin(libs.plugins.androidx.room))
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
@@ -106,6 +107,10 @@ gradlePlugin {
     register("modulegraphassert") {
       id = "app.rickandmorty.modulegraphassert"
       implementationClass = "app.rickandmorty.gradle.plugin.ModuleGraphAssertPlugin"
+    }
+    register("room") {
+      id = "app.rickandmorty.room"
+      implementationClass = "app.rickandmorty.gradle.plugin.RoomPlugin"
     }
     register("root") {
       id = "app.rickandmorty.root"
