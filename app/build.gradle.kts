@@ -1,10 +1,11 @@
-import com.google.firebase.perf.plugin.FirebasePerfExtension
+// TODO Firebase does not work with AGP 9
+// https://github.com/firebase/firebase-android-sdk/issues/7293
+// import com.google.firebase.perf.plugin.FirebasePerfExtension
 
 plugins {
   alias(libs.plugins.rickandmorty.android.application)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
-  alias(libs.plugins.rickandmorty.kotlin.android)
 
   alias(libs.plugins.androidx.baselineprofile)
   alias(libs.plugins.kotlin.serialization)
@@ -15,7 +16,7 @@ val useFirebase = file("google-services.json").exists()
 
 if (useFirebase) {
   apply(plugin = "app.rickandmorty.firebase-crashlytics")
-  apply(plugin = "app.rickandmorty.firebase-perf")
+  // apply(plugin = "app.rickandmorty.firebase-perf")
 }
 
 val useReleaseKeystore = layout.settingsDirectory.file("keystore/release.jks").asFile.exists()
@@ -57,7 +58,7 @@ android {
       isPseudoLocalesEnabled = true
 
       if (useFirebase) {
-        configure<FirebasePerfExtension> { setInstrumentationEnabled(false) }
+        // configure<FirebasePerfExtension> { setInstrumentationEnabled(false) }
       }
     }
 

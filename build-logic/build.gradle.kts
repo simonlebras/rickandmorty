@@ -46,7 +46,7 @@ lint {
 
 dependencies {
   compileOnly(libs.android.tools.common)
-  compileOnly(plugin(libs.plugins.android.application))
+  compileOnly(libs.android.tools.gradleapi)
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
@@ -93,10 +93,6 @@ gradlePlugin {
     register("firebase-perf") {
       id = "app.rickandmorty.firebase-perf"
       implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
-    }
-    register("kotlin-android") {
-      id = "app.rickandmorty.kotlin-android"
-      implementationClass = "app.rickandmorty.gradle.plugin.KotlinAndroidPlugin"
     }
     register("kotlin-multiplatform") {
       id = "app.rickandmorty.kotlin-multiplatform"
