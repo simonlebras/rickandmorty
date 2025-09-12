@@ -6,7 +6,7 @@ plugins {
   alias(libs.plugins.kotlin.assignment)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.sam)
-  alias(libs.plugins.spotless)
+  alias(libs.plugins.ktfmt)
 }
 
 val javaTarget = libs.versions.java.target.get()
@@ -50,8 +50,7 @@ dependencies {
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
-  compileOnly(plugin(libs.plugins.modulegraphassert))
-  compileOnly(plugin(libs.plugins.spotless))
+  compileOnly(plugin(libs.plugins.ktfmt))
 
   implementation(libs.truth)
 
@@ -103,10 +102,6 @@ gradlePlugin {
       id = "app.rickandmorty.kotlin-multiplatform"
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
     }
-    register("modulegraphassert") {
-      id = "app.rickandmorty.modulegraphassert"
-      implementationClass = "app.rickandmorty.gradle.plugin.ModuleGraphAssertPlugin"
-    }
     register("root") {
       id = "app.rickandmorty.root"
       implementationClass = "app.rickandmorty.gradle.plugin.RootPlugin"
@@ -114,19 +109,7 @@ gradlePlugin {
   }
 }
 
-spotless {
-  val ktfmtVersion = libs.versions.ktfmt.get()
-
-  kotlin {
-    ktfmt(ktfmtVersion).googleStyle().configure { it.setRemoveUnusedImports(true) }
-    target("src/**/*.kt")
-  }
-
-  kotlinGradle {
-    ktfmt(ktfmtVersion).googleStyle().configure { it.setRemoveUnusedImports(true) }
-    target("*.kts")
-  }
-}
+ktfmt { googleStyle() }
 
 private fun plugin(plugin: Provider<PluginDependency>) =
   plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}" }

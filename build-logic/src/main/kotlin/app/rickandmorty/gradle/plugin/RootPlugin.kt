@@ -18,7 +18,7 @@ public class RootPlugin : Plugin<Project> {
 
       val libs = the<LibrariesForLibs>()
 
-      apply(libs.plugins.rickandmorty.codehealth, libs.plugins.gradledoctor)
+      apply(libs.plugins.rickandmorty.codehealth)
 
       getOrCreateTask<Task>("check") {
         dependsOn(gradle.includedBuilds.map { build -> build.task(":check") })
