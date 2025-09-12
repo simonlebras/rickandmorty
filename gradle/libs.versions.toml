@@ -51,15 +51,13 @@ kotlinx-collectionsimmutable = "0.4.0"
 kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.7.1-0.6.x-compat"
 kotlinx-serialization = "1.9.0"
-ktfmt = "0.56"
+ktfmt = "0.24.0"
 ktor = "3.3.0"
 leakcanary = "2.14"
 metro = "0.7.0-2.2.20-RC2-alpha06"
-modulegraphassert = "2.9.0"
 okio = "3.16.0"
 slack-compose-lints = "1.4.2"
 sortdependencies = "0.15"
-spotless = "7.2.1"
 store = "5.1.0-alpha06"
 testparameterinjector = "1.19"
 truth = "1.4.5"
@@ -139,8 +137,6 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
-ktfmt = { group = "com.facebook", name = "ktfmt", version.ref = "ktfmt" }
-
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
 ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
@@ -172,7 +168,6 @@ rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytic
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
 rickandmorty-kotlin-android = { id = "app.rickandmorty.kotlin-android" }
 rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
-rickandmorty-modulegraphassert = { id = "app.rickandmorty.modulegraphassert" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
 
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
@@ -195,8 +190,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmt" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
-modulegraphassert = { id = "com.jraska.module.graph.assertion", version.ref = "modulegraphassert" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 wire = { id = "com.squareup.wire", version.ref = "wire" }
