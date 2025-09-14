@@ -30,7 +30,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
+          distribution: 'zulu'
           java-version-file: .github/.java-version
 
       - name: Set up jemalloc
@@ -139,7 +139,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          distribution: "zulu"
+          distribution: 'zulu'
           java-version-file: .github/.java-version
 
       - name: Set up jemalloc
@@ -150,19 +150,24 @@ jobs:
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
-      - name: Accept license
-        run: echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_SDK_ROOT/licenses/android-sdk-preview-license"
+      - name: Set ANDROID_USER_HOME
+        run: echo "ANDROID_USER_HOME=$HOME/.android" >> $GITHUB_ENV
+
+      - name: Accept licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
 
       - name: Cache AVD
+        if: ${{ (github.ref == 'refs/heads/main') }}
         uses: actions/cache@v4
         with:
           path: |
-            ~/.android/avd/*
+            ${{ env.ANDROID_USER_HOME }}/avd/gradle-managed/*
+            ${{ env.ANDROID_USER_HOME }}/adb*
           key: ${{ runner.os }}-gmd-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
 
       - name: Run instrumentation tests
         run: |
-          ./gradlew ${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.system-image-source }}DebugAndroidTest \
+          ./gradlew ${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.system-image-source }}Check \
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
           --no-parallel \
           -Dorg.gradle.workers.max=1

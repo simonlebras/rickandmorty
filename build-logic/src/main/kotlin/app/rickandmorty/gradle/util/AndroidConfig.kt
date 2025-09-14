@@ -5,33 +5,31 @@ import app.rickandmorty.gradle.dsl.the
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 
-context(commonExtension: AndroidCommonExtension)
-internal fun Project.configureAndroid() {
-  val libs = the<LibrariesForLibs>()
+context(project: Project)
+internal fun AndroidCommonExtension.configureAndroid() {
+  val libs = project.the<LibrariesForLibs>()
 
-  with(commonExtension) {
-    compileSdk = libs.versions.android.sdk.compile.get().toInt()
+  compileSdk = libs.versions.android.sdk.compile.get().toInt()
 
-    defaultConfig.apply { minSdk = libs.versions.android.sdk.min.get().toInt() }
+  defaultConfig.apply { minSdk = libs.versions.android.sdk.min.get().toInt() }
 
-    lint.configureLint()
+  lint.configureLint()
 
-    testOptions {
-      animationsDisabled = true
+  testOptions {
+    animationsDisabled = true
 
-      managedDevices { configureGradleManagedDevices() }
-    }
-
-    compileOptions {
-      val javaTarget = libs.versions.java.target.get()
-      sourceCompatibility(javaTarget)
-      targetCompatibility(javaTarget)
-
-      isCoreLibraryDesugaringEnabled = true
-    }
+    managedDevices { configureGradleManagedDevices() }
   }
 
-  dependencies {
+  compileOptions {
+    val javaTarget = libs.versions.java.target.get()
+    sourceCompatibility(javaTarget)
+    targetCompatibility(javaTarget)
+
+    isCoreLibraryDesugaringEnabled = true
+  }
+
+  project.dependencies {
     coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
 
     lintChecks(libs.android.tools.security.lints)
