@@ -80,34 +80,34 @@ internal abstract class CheckBadgingTask : DefaultTask() {
 }
 
 @Suppress("UnstableApiUsage")
-context(componentsExtension: ApplicationAndroidComponentsExtension)
-internal fun Project.configureBadgingTasks() {
-  componentsExtension.onVariants { variant ->
+context(project: Project)
+internal fun ApplicationAndroidComponentsExtension.configureBadgingTasks() {
+  onVariants { variant ->
     val capitalizedVariantName = variant.name.capitalize()
 
     val generateBadgingTaskName = "generate${capitalizedVariantName}Badging"
     val generateBadging =
-      tasks.register<GenerateBadgingTask>(generateBadgingTaskName) {
+      project.tasks.register<GenerateBadgingTask>(generateBadgingTaskName) {
         apk = variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE)
-        aapt2Executable = componentsExtension.sdkComponents.aapt2.flatMap { it.executable }
+        aapt2Executable = sdkComponents.aapt2.flatMap { it.executable }
         badging =
-          layout.buildDirectory.file(
+          project.layout.buildDirectory.file(
             "outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt"
           )
       }
 
     val updateBadgingTaskName = "update${capitalizedVariantName}Badging"
-    tasks.register<Copy>(updateBadgingTaskName) {
+    project.tasks.register<Copy>(updateBadgingTaskName) {
       from(generateBadging.map { it.badging })
-      into(layout.projectDirectory)
+      into(project.layout.projectDirectory)
     }
 
     val checkBadgingTaskName = "check${capitalizedVariantName}Badging"
-    tasks.register<CheckBadgingTask>(checkBadgingTaskName) {
-      goldenBadging = layout.projectDirectory.file("${variant.name}-badging.txt")
+    project.tasks.register<CheckBadgingTask>(checkBadgingTaskName) {
+      goldenBadging = project.layout.projectDirectory.file("${variant.name}-badging.txt")
       generatedBadging = generateBadging.flatMap { it.badging }
       this.updateBadgingTaskName = updateBadgingTaskName
-      output = layout.buildDirectory.dir("intermediates/$checkBadgingTaskName")
+      output = project.layout.buildDirectory.dir("intermediates/$checkBadgingTaskName")
     }
   }
 }

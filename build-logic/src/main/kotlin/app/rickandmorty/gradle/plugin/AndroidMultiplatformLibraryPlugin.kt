@@ -4,7 +4,6 @@ import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.assign
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
-import app.rickandmorty.gradle.util.configureGradleManagedDevices
 import app.rickandmorty.gradle.util.configureLint
 import app.rickandmorty.gradle.util.coreLibraryDesugaring
 import app.rickandmorty.gradle.util.lintChecks
@@ -25,6 +24,7 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
 
       pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
         configure<KotlinMultiplatformExtension> {
+          @Suppress("UnstableApiUsage")
           androidLibrary {
             compileSdk = libs.versions.android.sdk.compile.get().toInt()
             minSdk = libs.versions.android.sdk.min.get().toInt()
@@ -32,12 +32,6 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
             lint {
               targetSdk = libs.versions.android.sdk.target.get().toInt()
               configureLint()
-            }
-
-            withDeviceTest {
-              animationsDisabled = true
-
-              managedDevices { configureGradleManagedDevices() }
             }
 
             localDependencySelection { selectBuildTypeFrom = listOf("release") }

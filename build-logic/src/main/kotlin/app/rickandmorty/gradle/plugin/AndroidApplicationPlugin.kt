@@ -7,6 +7,7 @@ import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureBadgingTasks
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import com.android.build.api.variant.HasUnitTestBuilder
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -48,6 +49,10 @@ public class AndroidApplicationPlugin : Plugin<Project> {
 
       configure<ApplicationAndroidComponentsExtension> {
         configureBadgingTasks()
+
+        beforeVariants(selector().withBuildType("release")) { builder ->
+          (builder as HasUnitTestBuilder).enableUnitTest = false
+        }
 
         onVariants(selector().withBuildType("release")) { variant ->
           variant.packaging.resources.excludes.addAll(
