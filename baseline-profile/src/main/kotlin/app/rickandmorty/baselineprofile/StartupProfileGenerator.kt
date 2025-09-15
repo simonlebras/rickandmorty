@@ -8,8 +8,8 @@ import kotlin.test.Test
 import org.junit.Rule
 import org.junit.runner.RunWith
 
-@LargeTest
 @RunWith(AndroidJUnit4::class)
+@LargeTest
 @SdkSuppress(minSdkVersion = 29)
 class StartupProfileGenerator {
   @get:Rule val baselineProfileRule = BaselineProfileRule()

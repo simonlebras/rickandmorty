@@ -1,5 +1,3 @@
-@file:Suppress("InternalAgpApiUsage", "InternalGradleApiUsage")
-
 package app.rickandmorty.gradle.util
 
 import com.android.build.api.dsl.ManagedDevices

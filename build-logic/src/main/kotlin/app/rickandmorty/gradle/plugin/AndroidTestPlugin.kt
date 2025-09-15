@@ -4,6 +4,7 @@ import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.configureAndroid
+import app.rickandmorty.gradle.util.configureKotlin
 import com.android.build.api.dsl.TestExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -15,6 +16,8 @@ public class AndroidTestPlugin : Plugin<Project> {
       val libs = the<LibrariesForLibs>()
 
       apply(libs.plugins.android.test)
+
+      configureKotlin()
 
       configure<TestExtension> {
         configureAndroid()
