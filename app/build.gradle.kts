@@ -116,6 +116,8 @@ dependencies {
 
   debugRuntimeOnly(libs.leakcanary)
 
+  androidTestRuntimeOnly(libs.androidx.test.runner)
+
   baselineProfile(project(":baseline-profile"))
 }
 
