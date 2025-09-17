@@ -20,6 +20,6 @@ kotlin {
       }
     }
 
-    nativeMain { dependencies { implementation(libs.kermit.crashlytics) } }
+    // nativeMain { dependencies { implementation(libs.kermit.crashlytics) } }
   }
 }

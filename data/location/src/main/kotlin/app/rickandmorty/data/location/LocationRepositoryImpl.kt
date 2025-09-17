@@ -30,7 +30,7 @@ internal class LocationRepositoryImpl(
     val remoteMediator =
       PageKeyedRemoteMediator<LocationEntity>(
         pagedEntryResolver = { location ->
-          transactionRunner { locationPagedEntryDao.getPagedEntry(location.id) }
+          transactionRunner.readTransaction { locationPagedEntryDao.getPagedEntry(location.id) }
         },
         pageFetcher = { page ->
           val data = apolloClient.query(GetLocationsQuery(page = page)).execute().dataAssertNoErrors
@@ -59,7 +59,7 @@ internal class LocationRepositoryImpl(
               )
             pagedEntries.add(pagedEntry)
           }
-          transactionRunner {
+          transactionRunner.writeTransaction {
             if (page == FIRST_PAGE_KEY) {
               locationPagedEntryDao.deleteAll()
             }

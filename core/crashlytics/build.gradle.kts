@@ -14,6 +14,6 @@ kotlin {
 
     commonMain { dependencies { api(project(":core:startup")) } }
 
-    nativeMain { dependencies { implementation(libs.crashkios.crashlytics) } }
+    // nativeMain { dependencies { implementation(libs.crashkios.crashlytics) } }
   }
 }

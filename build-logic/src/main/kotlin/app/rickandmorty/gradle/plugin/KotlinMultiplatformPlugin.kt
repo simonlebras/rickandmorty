@@ -25,8 +25,8 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
 
         jvm()
 
-        iosArm64()
-        iosSimulatorArm64()
+        //        iosArm64()
+        //        iosSimulatorArm64()
 
         targets.withType<KotlinJvmTarget>().configureEach {
           compilations.configureEach {
