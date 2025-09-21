@@ -4,6 +4,7 @@ import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.assign
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
+import app.rickandmorty.gradle.util.getBooleanProperty
 import app.rickandmorty.gradle.util.withPlugin
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -19,10 +20,7 @@ public class ComposePlugin : Plugin<Project> {
 
       configure<ComposeCompilerGradlePluginExtension> {
         val enableComposeCompilerReports =
-          providers
-            .gradleProperty("ram.enableComposeCompilerReports")
-            .map(String::toBooleanStrict)
-            .getOrElse(false)
+          providers.getBooleanProperty(name = "ram.enableComposeCompilerReports", default = false)
         if (enableComposeCompilerReports) {
           val composeReportsFolder =
             layout.buildDirectory.map { buildDir -> buildDir.dir("reports").dir("compose") }
