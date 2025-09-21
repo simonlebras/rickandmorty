@@ -19,7 +19,10 @@ public class ComposePlugin : Plugin<Project> {
 
       configure<ComposeCompilerGradlePluginExtension> {
         val enableComposeCompilerReports =
-          providers.gradleProperty("ram.enableComposeCompilerReports").orNull == "true"
+          providers
+            .gradleProperty("ram.enableComposeCompilerReports")
+            .map(String::toBooleanStrict)
+            .getOrElse(false)
         if (enableComposeCompilerReports) {
           val composeReportsFolder =
             layout.buildDirectory.map { buildDir -> buildDir.dir("reports").dir("compose") }
