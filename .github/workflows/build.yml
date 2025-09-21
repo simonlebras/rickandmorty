@@ -169,6 +169,7 @@ jobs:
         run: |
           ./gradlew ${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.system-image-source }}Check \
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
+          -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=none \
           --no-parallel \
           -Dorg.gradle.workers.max=1
 
