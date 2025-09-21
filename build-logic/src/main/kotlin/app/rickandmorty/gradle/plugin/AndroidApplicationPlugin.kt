@@ -7,6 +7,7 @@ import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureBadgingTasks
 import app.rickandmorty.gradle.util.configureKotlin
 import app.rickandmorty.gradle.util.getOrCreateTask
+import app.rickandmorty.gradle.util.isAndroidTestEnabled
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.HasUnitTestBuilder
@@ -55,8 +56,12 @@ public class AndroidApplicationPlugin : Plugin<Project> {
       configure<ApplicationAndroidComponentsExtension> {
         configureBadgingTasks()
 
-        beforeVariants(selector().withBuildType("release")) { builder ->
-          (builder as HasUnitTestBuilder).enableUnitTest = false
+        beforeVariants { builder ->
+          if (builder.buildType == "release") {
+            (builder as HasUnitTestBuilder).enableUnitTest = false
+          }
+
+          builder.androidTest.enable = isAndroidTestEnabled
         }
 
         onVariants(selector().withBuildType("release")) { variant ->

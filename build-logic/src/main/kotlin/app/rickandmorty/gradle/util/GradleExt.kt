@@ -8,6 +8,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.AppliedPlugin
 import org.gradle.api.plugins.PluginManager
 import org.gradle.api.provider.Provider
+import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.plugin.use.PluginDependency
 
@@ -48,3 +49,9 @@ internal inline fun <reified T : Task> Project.getOrCreateTask(
     tasks.register<T>(name, configuration)
   }
 }
+
+internal fun ProviderFactory.getBooleanProperty(name: String, default: Boolean): Boolean =
+  gradleProperty(name).orNull?.toBooleanStrict() ?: default
+
+internal val Project.isAndroidTestEnabled
+  get() = providers.getBooleanProperty(name = "ram.enableAndroidTest", default = false)

@@ -5,6 +5,7 @@ import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureKotlin
+import app.rickandmorty.gradle.util.isAndroidTestEnabled
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -34,7 +35,13 @@ public class AndroidLibraryPlugin : Plugin<Project> {
       }
 
       configure<LibraryAndroidComponentsExtension> {
-        beforeVariants(selector().withBuildType("debug")) { builder -> builder.enable = false }
+        beforeVariants { builder ->
+          if (builder.buildType == "debug") {
+            builder.enable = false
+          }
+
+          builder.androidTest.enable = isAndroidTestEnabled
+        }
       }
     }
 }
