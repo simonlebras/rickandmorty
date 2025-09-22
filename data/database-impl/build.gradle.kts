@@ -31,3 +31,5 @@ kotlin {
     jvmMain { dependencies { implementation(libs.okio) } }
   }
 }
+
+lint { disable += "RestrictedApi" }
