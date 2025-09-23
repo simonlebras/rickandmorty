@@ -34,7 +34,8 @@
       "groupSlug": "kotlin",
       "matchPackageNames": [
         "org.jetbrains.kotlin:{/,}**",
-        "com.google.devtools.ksp{/,}**"
+        "com.google.devtools.ksp:{/,}**",
+        "dev.zacsweers.metro:{/,}**"
       ]
     },
     {
