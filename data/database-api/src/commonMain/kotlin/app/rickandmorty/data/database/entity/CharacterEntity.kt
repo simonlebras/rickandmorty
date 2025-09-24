@@ -3,7 +3,6 @@ package app.rickandmorty.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import app.rickandmorty.data.model.Character
 
 @Entity(tableName = "character")
 public data class CharacterEntity(
@@ -15,14 +14,3 @@ public data class CharacterEntity(
   @ColumnInfo(name = "gender") val gender: String,
   @ColumnInfo(name = "image") val image: String,
 )
-
-public fun CharacterEntity.toCharacter(): Character =
-  Character(
-    id = id,
-    name = name,
-    status = Character.Status.from(status),
-    species = Character.Species.from(species),
-    type = type,
-    gender = Character.Gender.from(gender),
-    image = image,
-  )

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import app.rickandmorty.data.model.Character.Status
+import app.rickandmorty.data.character.Character.Status
 
 @Composable
 public fun CharacterStatusIndicator(status: Status, modifier: Modifier = Modifier) {
