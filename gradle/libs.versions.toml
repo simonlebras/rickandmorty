@@ -1,6 +1,6 @@
 [versions]
 android-desugarjdklibs = "2.1.5"
-android-plugin = "9.0.0-alpha08"
+android-plugin = "9.0.0-alpha09"
 android-sdk-compile = "36"
 android-sdk-min = "28"
 android-sdk-target = "36"
