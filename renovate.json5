@@ -7,18 +7,18 @@
       "depNameTemplate": "java",
       "extractVersionTemplate": "^(?<version>\\d+)",
       "managerFilePatterns": [
-        "/\\.java-version$/"
+        "/\\.java-version$/",
       ],
       "matchStrings": [
-        "(?<currentValue>.*)\\n"
-      ]
-    }
+        "(?<currentValue>.*)\\n",
+      ],
+    },
   ],
   "extends": [
-    "config:recommended"
+    "config:recommended",
   ],
   "ignorePresets": [
-    "workarounds:javaLTSVersions"
+    "workarounds:javaLTSVersions",
   ],
   "packageRules": [
     {
@@ -26,8 +26,8 @@
       "groupSlug": "android-tools",
       "matchPackageNames": [
         "com.android.tools:{/,}**",
-        "com.android.tools.build:{/,}**"
-      ]
+        "com.android.tools.build:{/,}**",
+      ],
     },
     {
       "groupName": "Kotlin",
@@ -35,15 +35,15 @@
       "matchPackageNames": [
         "org.jetbrains.kotlin:{/,}**",
         "com.google.devtools.ksp:{/,}**",
-        "dev.zacsweers.metro:{/,}**"
-      ]
+        "dev.zacsweers.metro:{/,}**",
+      ],
     },
     {
       "description": "Libraries allowed to use non-stable releases",
       "ignoreUnstable": false,
       "matchDepNames": [
-        "/^androidx\\.([\\w-:]+)$/"
-      ]
+        "/^androidx\\.([\\w-:]+)$/",
+      ],
     },
     {
       "automerge": true,
@@ -52,9 +52,9 @@
       "matchUpdateTypes": [
         "minor",
         "patch",
-        "digest"
+        "digest",
       ],
-      "platformAutomerge": true
-    }
-  ]
+      "platformAutomerge": true,
+    },
+  ],
 }
