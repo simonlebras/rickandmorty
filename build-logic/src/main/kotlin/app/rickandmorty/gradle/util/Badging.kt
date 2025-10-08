@@ -50,7 +50,7 @@ private abstract class GenerateBadgingTask : DefaultTask() {
 }
 
 @CacheableTask
-internal abstract class CheckBadgingTask : DefaultTask() {
+private abstract class CheckBadgingTask : DefaultTask() {
   // In order for the task to be up-to-date when the inputs have not changed,
   // the task must declare an output, even if it's not used. Tasks with no
   // output are always run regardless of whether the inputs changed
