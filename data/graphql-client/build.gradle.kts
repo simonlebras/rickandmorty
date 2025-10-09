@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
@@ -9,14 +11,11 @@ plugins {
 kotlin {
   androidLibrary { namespace = "app.rickandmorty.data.graphql.client" }
 
-  sourceSets {
-    commonMain {
-      dependencies {
-        api(libs.apollo.runtime)
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    api(libs.apollo.runtime)
 
-        implementation(project(":core:coroutines"))
-        implementation(project(":core:metro"))
-      }
-    }
+    implementation(project(":core:coroutines"))
+    implementation(project(":core:metro"))
   }
 }

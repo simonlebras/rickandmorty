@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
@@ -7,20 +9,17 @@ plugins {
 }
 
 kotlin {
-  sourceSets {
-    commonMain {
-      dependencies {
-        api(project(":data:character-api"))
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    api(project(":data:character-api"))
 
-        api(libs.androidx.paging.common)
+    api(libs.androidx.paging.common)
 
-        implementation(project(":data:database-api"))
-        implementation(project(":data:graphql-schema"))
-        implementation(project(":data:paging"))
+    implementation(project(":data:database-api"))
+    implementation(project(":data:graphql-schema"))
+    implementation(project(":data:paging"))
 
-        implementation(libs.apollo.runtime)
-      }
-    }
+    implementation(libs.apollo.runtime)
   }
 }
 

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
@@ -8,23 +10,20 @@ plugins {
 kotlin {
   androidLibrary { namespace = "app.rickandmorty.core.designsystem" }
 
-  sourceSets {
-    androidMain { dependencies { implementation(libs.androidx.navigation3.ui) } }
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    api(libs.jetbrains.compose.material3)
 
-    commonMain {
-      dependencies {
-        api(libs.jetbrains.compose.material3)
+    implementation(libs.androidx.annotation)
 
-        implementation(libs.androidx.annotation)
+    implementation(libs.coil.compose)
 
-        implementation(libs.coil.compose)
+    implementation(libs.compose.placeholder.material3)
 
-        implementation(libs.compose.placeholder.material3)
-
-        implementation(libs.jetbrains.compose.resources)
-      }
-    }
+    implementation(libs.jetbrains.compose.resources)
   }
+
+  sourceSets { androidMain { dependencies { implementation(libs.androidx.navigation3.ui) } } }
 }
 
 compose.resources { packageOfResClass = "app.rickandmorty.core.designsystem.resources" }

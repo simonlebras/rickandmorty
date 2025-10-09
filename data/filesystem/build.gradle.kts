@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
@@ -5,4 +7,4 @@ plugins {
   alias(libs.plugins.metro)
 }
 
-kotlin { sourceSets { commonMain { dependencies { api(libs.okio) } } } }
+kotlin { @OptIn(ExperimentalKotlinGradlePluginApi::class) dependencies { api(libs.okio) } }

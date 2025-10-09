@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
@@ -17,23 +19,20 @@ kotlin {
     lint { disable += "RestrictedApi" }
   }
 
-  sourceSets {
-    commonMain {
-      dependencies {
-        api(project(":data:database-api"))
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    api(project(":data:database-api"))
 
-        api(libs.androidx.room.runtime)
-        api(libs.androidx.sqlite.bundled)
+    api(libs.androidx.room.runtime)
+    api(libs.androidx.sqlite.bundled)
 
-        implementation(project(":core:coroutines"))
-        implementation(project(":core:metro"))
+    implementation(project(":core:coroutines"))
+    implementation(project(":core:metro"))
 
-        implementation(libs.androidx.room.paging)
-      }
-    }
-
-    jvmMain { dependencies { implementation(libs.okio) } }
+    implementation(libs.androidx.room.paging)
   }
+
+  sourceSets { jvmMain { dependencies { implementation(libs.okio) } } }
 }
 
 lint { disable += "RestrictedApi" }
