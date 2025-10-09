@@ -1,6 +1,5 @@
 plugins {
   alias(libs.plugins.rickandmorty.android.library)
-  alias(libs.plugins.rickandmorty.compose)
 }
 
 android {
@@ -8,9 +7,9 @@ android {
 }
 
 dependencies {
-    api(compose.components.uiToolingPreview)
-
-    implementation(compose.uiTooling)
+    api(libs.jetbrains.compose.ui.tooling.preview)
 
     implementation(project(":core:resources-app"))
+
+    implementation(libs.jetbrains.compose.ui.tooling)
 }

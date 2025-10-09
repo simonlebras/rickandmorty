@@ -8,9 +8,9 @@ kotlin {
   sourceSets {
     commonMain {
       dependencies {
-        api(compose.components.resources)
+        api(libs.jetbrains.compose.resources)
 
-        implementation(compose.runtime)
+        implementation(libs.jetbrains.compose.runtime)
       }
     }
   }

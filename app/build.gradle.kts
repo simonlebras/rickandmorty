@@ -95,13 +95,13 @@ dependencies {
   implementation(project(":data:graphql-client"))
   implementation(project(":data:theme-impl"))
 
-  implementation(compose.material3AdaptiveNavigationSuite)
-
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.core.splashscreen)
 
   implementation(libs.coil)
+
+  implementation(libs.jetbrains.compose.material3.adaptive.navigationsuite)
 
   releaseImplementation(project(":core:crashlytics"))
   releaseImplementation(project(":core:logger-crashlytics"))
@@ -124,5 +124,5 @@ dependencies {
 }
 
 dependencyAnalysis {
-  issues { onUnusedDependencies { exclude(compose.dependencies.material3AdaptiveNavigationSuite) } }
+  issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptive.navigationsuite) } }
 }
