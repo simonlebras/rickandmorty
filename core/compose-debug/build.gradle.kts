@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
@@ -6,13 +8,10 @@ plugins {
 }
 
 kotlin {
-  sourceSets {
-    commonMain {
-      dependencies {
-        implementation(project(":core:startup"))
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    implementation(project(":core:startup"))
 
-        implementation(libs.jetbrains.compose.runtime)
-      }
-    }
+    implementation(libs.jetbrains.compose.runtime)
   }
 }

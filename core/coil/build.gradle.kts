@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
@@ -9,14 +11,11 @@ plugins {
 kotlin {
   androidLibrary { namespace = "app.rickandmorty.core.coil" }
 
-  sourceSets {
-    commonMain {
-      dependencies {
-        implementation(project(":core:metro"))
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    implementation(project(":core:metro"))
 
-        implementation(libs.coil.core)
-        implementation(libs.coil.network.ktor3)
-      }
-    }
+    implementation(libs.coil.core)
+    implementation(libs.coil.network.ktor3)
   }
 }

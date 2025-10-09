@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
@@ -9,12 +11,9 @@ plugins {
 kotlin {
   androidLibrary { namespace = "app.rickandmorty.core.metro" }
 
-  sourceSets {
-    commonMain {
-      dependencies {
-        implementation(libs.jetbrains.lifecycle.viewmodel)
-        implementation(libs.jetbrains.lifecycle.viewmodel.savedstate)
-      }
-    }
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    implementation(libs.jetbrains.lifecycle.viewmodel)
+    implementation(libs.jetbrains.lifecycle.viewmodel.savedstate)
   }
 }

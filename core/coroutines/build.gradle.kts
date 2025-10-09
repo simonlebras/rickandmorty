@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
@@ -9,9 +11,8 @@ plugins {
 kotlin {
   androidLibrary { namespace = "app.rickandmorty.core.coroutines" }
 
-  sourceSets {
-    androidMain { dependencies { implementation(project(":core:base")) } }
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies { implementation(libs.kotlinx.coroutines.core) }
 
-    commonMain { dependencies { implementation(libs.kotlinx.coroutines.core) } }
-  }
+  sourceSets { androidMain { dependencies { implementation(project(":core:base")) } } }
 }
