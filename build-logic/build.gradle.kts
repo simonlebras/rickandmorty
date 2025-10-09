@@ -47,7 +47,6 @@ lint {
 dependencies {
   compileOnly(libs.android.tools.common)
   compileOnly(libs.android.tools.gradleapi)
-  compileOnly(plugin(libs.plugins.androidx.room))
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
@@ -98,10 +97,6 @@ gradlePlugin {
     register("kotlin-multiplatform") {
       id = "app.rickandmorty.kotlin-multiplatform"
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
-    }
-    register("room") {
-      id = "app.rickandmorty.room"
-      implementationClass = "app.rickandmorty.gradle.plugin.RoomPlugin"
     }
     register("root") {
       id = "app.rickandmorty.root"

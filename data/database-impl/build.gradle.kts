@@ -2,8 +2,9 @@ plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
-  alias(libs.plugins.rickandmorty.room)
 
+  alias(libs.plugins.androidx.room)
+  alias(libs.plugins.ksp)
   alias(libs.plugins.metro)
 }
 
@@ -21,6 +22,9 @@ kotlin {
       dependencies {
         api(project(":data:database-api"))
 
+        api(libs.androidx.room.runtime)
+        api(libs.androidx.sqlite.bundled)
+
         implementation(project(":core:coroutines"))
         implementation(project(":core:metro"))
 
@@ -33,3 +37,12 @@ kotlin {
 }
 
 lint { disable += "RestrictedApi" }
+
+room { schemaDirectory("$projectDir/schemas") }
+
+dependencies {
+  add("kspAndroid", libs.androidx.room.compiler)
+  add("kspIosArm64", libs.androidx.room.compiler)
+  add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+  add("kspJvm", libs.androidx.room.compiler)
+}
