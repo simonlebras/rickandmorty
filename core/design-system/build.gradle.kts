@@ -13,15 +13,15 @@ kotlin {
 
     commonMain {
       dependencies {
-        api(compose.material3)
-
-        implementation(compose.components.resources)
+        api(libs.jetbrains.compose.material3)
 
         implementation(libs.androidx.annotation)
 
         implementation(libs.coil.compose)
 
         implementation(libs.compose.placeholder.material3)
+
+        implementation(libs.jetbrains.compose.resources)
       }
     }
   }

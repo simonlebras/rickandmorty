@@ -17,9 +17,9 @@ dependencies {
 
   implementation(project(":ui:settings-common"))
 
-  implementation(compose.material3)
+  implementation(libs.jetbrains.compose.material3)
 
   implementation(libs.kotlinx.collectionsimmutable)
 }
 
-dependencyAnalysis { issues { onUnusedDependencies { exclude(compose.dependencies.material3) } } }
+dependencyAnalysis { issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3) } } }

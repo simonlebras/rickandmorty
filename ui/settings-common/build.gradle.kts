@@ -11,7 +11,7 @@ dependencies {
 
   implementation(project(":core:l10n"))
 
-  implementation(compose.material3)
+  implementation(libs.jetbrains.compose.material3)
 }
 
-dependencyAnalysis { issues { onUnusedDependencies { exclude(compose.dependencies.material3) } } }
+dependencyAnalysis { issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3) } } }
