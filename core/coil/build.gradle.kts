@@ -9,7 +9,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary { namespace = "app.rickandmorty.core.coil" }
+  android { namespace = "app.rickandmorty.core.coil" }
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {

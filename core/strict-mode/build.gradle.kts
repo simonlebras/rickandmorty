@@ -7,7 +7,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary { namespace = "app.rickandmorty.core.strictmode" }
+  android { namespace = "app.rickandmorty.core.strictmode" }
 
   sourceSets {
     androidMain {

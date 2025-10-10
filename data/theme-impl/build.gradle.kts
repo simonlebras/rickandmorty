@@ -10,7 +10,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary { namespace = "app.rickandmorty.data.theme.impl" }
+  android { namespace = "app.rickandmorty.data.theme.impl" }
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {

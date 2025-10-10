@@ -9,7 +9,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary { namespace = "app.rickandmorty.data.graphql.client" }
+  android { namespace = "app.rickandmorty.data.graphql.client" }
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
