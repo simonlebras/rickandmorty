@@ -9,7 +9,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary { namespace = "app.rickandmorty.core.metro" }
+  android { namespace = "app.rickandmorty.core.metro" }
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {

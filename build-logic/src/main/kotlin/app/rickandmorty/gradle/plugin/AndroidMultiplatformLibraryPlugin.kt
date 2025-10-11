@@ -4,11 +4,12 @@ import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.assign
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
+import app.rickandmorty.gradle.dsl.withType
 import app.rickandmorty.gradle.util.configureLint
 import app.rickandmorty.gradle.util.coreLibraryDesugaring
 import app.rickandmorty.gradle.util.lintChecks
 import app.rickandmorty.gradle.util.withPlugin
-import com.android.build.api.dsl.androidLibrary
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -24,10 +25,10 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
 
       pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
         configure<KotlinMultiplatformExtension> {
-          @Suppress("UnstableApiUsage")
-          androidLibrary {
-            compileSdk = libs.versions.android.sdk.compile.get().toInt()
-            minSdk = libs.versions.android.sdk.min.get().toInt()
+          targets.withType<KotlinMultiplatformAndroidLibraryTarget>().configureEach {
+            compileSdk { version = release(libs.versions.android.sdk.compile.get().toInt()) }
+
+            minSdk { version = release(libs.versions.android.sdk.min.get().toInt()) }
 
             lint {
               targetSdk = libs.versions.android.sdk.target.get().toInt()

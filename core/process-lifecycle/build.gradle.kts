@@ -7,7 +7,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary { namespace = "app.rickandmorty.core.processlifecycle" }
+  android { namespace = "app.rickandmorty.core.processlifecycle" }
 
   sourceSets { androidMain { dependencies { api(libs.androidx.lifecycle.process) } } }
 }

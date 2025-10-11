@@ -9,7 +9,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary { namespace = "app.rickandmorty.core.logger.crashlytics" }
+  android { namespace = "app.rickandmorty.core.logger.crashlytics" }
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {

@@ -11,7 +11,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary {
+  android {
     namespace = "app.rickandmorty.data.database.impl"
 
     @Suppress("UnstableApiUsage") optimization { consumerKeepRules.files("consumer-rules.pro") }
