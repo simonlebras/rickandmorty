@@ -35,6 +35,7 @@ androidx-window = "1.5.0"
 apollo = "5.0.0-alpha.2"
 apollo-adapters = "0.7.0"
 coil = "3.3.0"
+compatpatrouille = "0.1.0"
 compose-placeholder = "1.0.12"
 crashkios-crashlytics = "0.9.0"
 dependencyanalysis = "3.1.0"
@@ -43,7 +44,6 @@ firebase-crashlytics-plugin = "3.0.6"
 firebase-perf-plugin = "2.0.1"
 googleservices = "4.4.4"
 gradledoctor = "0.12.1"
-java-target = "17"
 jetbrains-compose = "1.10.0-alpha02"
 jetbrains-lifecycle = "2.10.0-alpha02"
 junit4 = "4.13.2"
@@ -196,6 +196,7 @@ android-test = { id = "com.android.test", version.ref = "android-plugin" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
+compatpatrouille = { id = "com.gradleup.compat.patrouille", version.ref = "compatpatrouille" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose" }
 dependencyanalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyanalysis" }

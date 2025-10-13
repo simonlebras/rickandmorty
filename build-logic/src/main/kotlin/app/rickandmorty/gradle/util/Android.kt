@@ -26,13 +26,7 @@ internal fun CommonExtension.configureAndroid() {
     managedDevices { configureGradleManagedDevices() }
   }
 
-  compileOptions {
-    val javaTarget = libs.versions.java.target.get()
-    sourceCompatibility(javaTarget)
-    targetCompatibility(javaTarget)
-
-    isCoreLibraryDesugaringEnabled = true
-  }
+  compileOptions { isCoreLibraryDesugaringEnabled = true }
 
   project.dependencies {
     coreLibraryDesugaring(libs.android.tools.desugarjdklibs)

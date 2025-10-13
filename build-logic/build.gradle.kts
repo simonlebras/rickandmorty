@@ -9,15 +9,13 @@ plugins {
   alias(libs.plugins.ktfmt)
 }
 
-val javaTarget = libs.versions.java.target.get()
-
 kotlin {
   compilerOptions {
-    jvmTarget = JvmTarget.fromTarget(javaTarget)
+    jvmTarget = JvmTarget.JVM_17
+
+    freeCompilerArgs.addAll("-Xcontext-parameters", "-Xjdk-release=17")
 
     allWarningsAsErrors = true
-
-    freeCompilerArgs.addAll("-Xcontext-parameters")
   }
 
   explicitApi()
@@ -27,10 +25,7 @@ assignment { annotation(SupportsKotlinAssignmentOverloading::class.qualifiedName
 
 samWithReceiver { annotation(HasImplicitReceiver::class.qualifiedName!!) }
 
-tasks.withType<JavaCompile>().configureEach {
-  sourceCompatibility = javaTarget
-  targetCompatibility = javaTarget
-}
+tasks.withType<JavaCompile>().configureEach { options.release = 17 }
 
 tasks {
   validatePlugins {
@@ -47,6 +42,7 @@ lint {
 dependencies {
   compileOnly(libs.android.tools.common)
   compileOnly(libs.android.tools.gradleapi)
+  compileOnly(plugin(libs.plugins.compatpatrouille))
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
