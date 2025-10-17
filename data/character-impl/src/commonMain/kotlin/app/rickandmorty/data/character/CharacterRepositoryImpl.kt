@@ -16,11 +16,9 @@ import app.rickandmorty.data.paging.PageResult
 import com.apollographql.apollo.ApolloClient
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-@Inject
 @ContributesBinding(AppScope::class)
 public class CharacterRepositoryImpl(
   private val apolloClient: ApolloClient,

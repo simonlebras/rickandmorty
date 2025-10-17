@@ -24,13 +24,11 @@ import app.rickandmorty.core.metro.ActivityKey
 import app.rickandmorty.core.ui.isSystemInDarkTheme
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
-import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.binding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-@Inject
 @ContributesIntoMap(AppScope::class, binding<Activity>())
 @ActivityKey(MainActivity::class)
 class MainActivity(private val viewModelFactory: ViewModelProvider.Factory) : AppCompatActivity() {

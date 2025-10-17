@@ -5,11 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.Inject
 import kotlin.reflect.KClass
 import kotlin.reflect.cast
 
-@Inject
 @ContributesBinding(AppScope::class)
 public class MetroViewModelFactory(private val viewModelGraphFactory: ViewModelGraph.Factory) :
   ViewModelProvider.Factory {

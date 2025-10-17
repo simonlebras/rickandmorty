@@ -51,6 +51,7 @@ dependencies {
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
   compileOnly(plugin(libs.plugins.ktfmt))
+  compileOnly(plugin(libs.plugins.metro))
 
   implementation(libs.truth)
 
@@ -97,6 +98,10 @@ gradlePlugin {
     register("kotlin-multiplatform") {
       id = "app.rickandmorty.kotlin-multiplatform"
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
+    }
+    register("metro") {
+      id = "app.rickandmorty.metro"
+      implementationClass = "app.rickandmorty.gradle.plugin.MetroPlugin"
     }
     register("root") {
       id = "app.rickandmorty.root"

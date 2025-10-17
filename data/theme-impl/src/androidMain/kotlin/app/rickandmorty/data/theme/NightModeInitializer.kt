@@ -21,7 +21,6 @@ import app.rickandmorty.core.processlifecycle.inject.ProcessLifecycleOwner
 import app.rickandmorty.core.startup.Initializer
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
@@ -33,7 +32,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
-@Inject
 @ContributesIntoSet(AppScope::class)
 public class NightModeInitializer(
   application: Application,
