@@ -13,7 +13,6 @@ import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
@@ -36,13 +35,6 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
             }
 
             localDependencySelection { selectBuildTypeFrom = listOf("release") }
-
-            compilations.configureEach {
-              @Suppress("DEPRECATION")
-              compilerOptions.configure {
-                jvmTarget = JvmTarget.fromTarget(libs.versions.java.target.get())
-              }
-            }
 
             enableCoreLibraryDesugaring = true
           }
