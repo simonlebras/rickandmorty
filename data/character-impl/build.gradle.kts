@@ -3,9 +3,9 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 plugins {
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+  alias(libs.plugins.rickandmorty.metro)
 
   alias(libs.plugins.apollo)
-  alias(libs.plugins.metro)
 }
 
 kotlin {

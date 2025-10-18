@@ -6,9 +6,7 @@ import co.touchlab.kermit.Severity
 import co.touchlab.kermit.platformLogWriter
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 
-@Inject
 @ContributesIntoSet(AppScope::class)
 public class DebugLoggerInitializer : Initializer {
   override fun initialize() {

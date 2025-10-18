@@ -9,12 +9,10 @@ import app.rickandmorty.core.startup.Initializer
 import co.touchlab.kermit.Logger
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
-import dev.zacsweers.metro.Inject
 import java.util.concurrent.Executors
 
 private const val TAG = "StrictMode"
 
-@Inject
 @ContributesIntoSet(AppScope::class)
 public class StrictModeInitializer : Initializer {
   private val penaltyListenerExecutor by unsafeLazy { Executors.newSingleThreadExecutor() }

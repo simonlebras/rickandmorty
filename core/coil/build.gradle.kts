@@ -4,8 +4,7 @@ plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
-
-  alias(libs.plugins.metro)
+  alias(libs.plugins.rickandmorty.metro)
 }
 
 kotlin {
