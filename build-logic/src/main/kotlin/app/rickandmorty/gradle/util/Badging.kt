@@ -1,6 +1,5 @@
 package app.rickandmorty.gradle.util
 
-import app.rickandmorty.gradle.dsl.assign
 import app.rickandmorty.gradle.dsl.register
 import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
@@ -88,12 +87,13 @@ internal fun ApplicationAndroidComponentsExtension.configureBadgingTasks() {
     val generateBadgingTaskName = "generate${capitalizedVariantName}Badging"
     val generateBadging =
       project.tasks.register<GenerateBadgingTask>(generateBadgingTaskName) {
-        apk = variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE)
-        aapt2Executable = sdkComponents.aapt2.flatMap { it.executable }
-        badging =
+        apk.set(variant.artifacts.get(SingleArtifact.APK_FROM_BUNDLE))
+        aapt2Executable.set(sdkComponents.aapt2.flatMap { it.executable })
+        badging.set(
           project.layout.buildDirectory.file(
             "outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt"
           )
+        )
       }
 
     val updateBadgingTaskName = "update${capitalizedVariantName}Badging"
@@ -104,10 +104,10 @@ internal fun ApplicationAndroidComponentsExtension.configureBadgingTasks() {
 
     val checkBadgingTaskName = "check${capitalizedVariantName}Badging"
     project.tasks.register<CheckBadgingTask>(checkBadgingTaskName) {
-      goldenBadging = project.layout.projectDirectory.file("${variant.name}-badging.txt")
-      generatedBadging = generateBadging.flatMap { it.badging }
-      this.updateBadgingTaskName = updateBadgingTaskName
-      output = project.layout.buildDirectory.dir("intermediates/$checkBadgingTaskName")
+      goldenBadging.set(project.layout.projectDirectory.file("${variant.name}-badging.txt"))
+      generatedBadging.set(generateBadging.flatMap { it.badging })
+      this.updateBadgingTaskName.set(updateBadgingTaskName)
+      output.set(project.layout.buildDirectory.dir("intermediates/$checkBadgingTaskName"))
     }
   }
 }

@@ -1,7 +1,6 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.dsl.apply
-import app.rickandmorty.gradle.dsl.assign
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.getBooleanProperty
@@ -24,8 +23,8 @@ public class ComposePlugin : Plugin<Project> {
         if (enableComposeCompilerReports) {
           val composeReportsFolder =
             layout.buildDirectory.map { buildDir -> buildDir.dir("reports").dir("compose") }
-          reportsDestination = composeReportsFolder
-          metricsDestination = composeReportsFolder
+          reportsDestination.set(composeReportsFolder)
+          metricsDestination.set(composeReportsFolder)
         }
       }
 

@@ -3,13 +3,12 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
-import app.rickandmorty.gradle.util.getOrCreateTask
 import app.rickandmorty.gradle.util.isRootProject
 import com.autonomousapps.DependencyAnalysisExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.Task
+import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 public class RootPlugin : Plugin<Project> {
   override fun apply(target: Project): Unit =
@@ -19,12 +18,19 @@ public class RootPlugin : Plugin<Project> {
       val libs = the<LibrariesForLibs>()
 
       apply(libs.plugins.rickandmorty.codehealth)
-
-      getOrCreateTask<Task>("check") {
-        dependsOn(gradle.includedBuilds.map { build -> build.task(":check") })
-      }
+      apply("base")
 
       configureDependencyAnalysis()
+
+      tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME).configure {
+        dependsOn(
+          provider {
+            gradle.includedBuilds.map { build ->
+              build.task(":${LifecycleBasePlugin.CHECK_TASK_NAME}")
+            }
+          }
+        )
+      }
     }
 }
 

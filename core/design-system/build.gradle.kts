@@ -14,8 +14,6 @@ kotlin {
   dependencies {
     api(libs.jetbrains.compose.material3)
 
-    implementation(libs.androidx.annotation)
-
     implementation(libs.coil.compose)
 
     implementation(libs.compose.placeholder.material3)

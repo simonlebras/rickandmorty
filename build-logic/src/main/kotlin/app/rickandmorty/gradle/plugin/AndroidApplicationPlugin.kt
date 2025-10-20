@@ -3,18 +3,19 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
+import app.rickandmorty.gradle.util.AndroidSdkVersions
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureBadgingTasks
-import app.rickandmorty.gradle.util.configureKotlin
-import app.rickandmorty.gradle.util.getOrCreateTask
+import app.rickandmorty.gradle.util.configureJvmCompatibility
+import app.rickandmorty.gradle.util.configureKotlinCompilerOptions
 import app.rickandmorty.gradle.util.isAndroidTestEnabled
+import app.rickandmorty.gradle.util.kotlin
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.HasUnitTestBuilder
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.Task
 
 public class AndroidApplicationPlugin : Plugin<Project> {
   override fun apply(target: Project): Unit =
@@ -23,12 +24,14 @@ public class AndroidApplicationPlugin : Plugin<Project> {
 
       apply(libs.plugins.android.application)
 
-      configureKotlin()
+      kotlin { configureKotlinCompilerOptions() }
+
+      configureJvmCompatibility()
 
       configure<ApplicationExtension> {
         configureAndroid()
 
-        defaultConfig.targetSdk = libs.versions.android.sdk.target.get().toInt()
+        defaultConfig.targetSdk { release(AndroidSdkVersions.TARGET_SDK) }
 
         packaging.resources.excludes +=
           setOf(
@@ -76,6 +79,6 @@ public class AndroidApplicationPlugin : Plugin<Project> {
         }
       }
 
-      getOrCreateTask<Task>("check") { dependsOn("checkReleaseBadging") }
+      tasks.named("check").configure { dependsOn("checkReleaseBadging") }
     }
 }

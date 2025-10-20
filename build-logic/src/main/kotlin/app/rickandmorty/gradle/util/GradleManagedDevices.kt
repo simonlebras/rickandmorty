@@ -1,6 +1,8 @@
 package app.rickandmorty.gradle.util
 
+import com.android.build.api.dsl.KotlinMultiplatformAndroidDeviceTest
 import com.android.build.api.dsl.ManagedDevices
+import com.android.build.api.dsl.TestOptions
 import org.gradle.api.GradleException
 
 private val deviceConfigs =
@@ -10,7 +12,15 @@ private val deviceConfigs =
     DeviceConfig(device = "Pixel C", apiLevel = 30, systemImageSource = "aosp-atd"),
   )
 
-internal fun ManagedDevices.configureGradleManagedDevices() {
+public fun TestOptions.configureGradleManagedDevices() {
+  @Suppress("UnstableApiUsage") managedDevices.configureGradleManagedDevices()
+}
+
+public fun KotlinMultiplatformAndroidDeviceTest.configureGradleManagedDevices() {
+  managedDevices.configureGradleManagedDevices()
+}
+
+private fun ManagedDevices.configureGradleManagedDevices() {
   @Suppress("UnstableApiUsage")
   localDevices.apply {
     deviceConfigs.forEach { config ->
@@ -39,7 +49,7 @@ private data class DeviceConfig(
         "google-atd" -> "googleatd"
         "google_apis_playstore" -> "googleplaystore"
         "android-desktop" -> "desktop"
-        else -> throw GradleException("Unknown system image source!")
+        else -> throw GradleException("Unknown system image source: $systemImageSource")
       }
     )
   }

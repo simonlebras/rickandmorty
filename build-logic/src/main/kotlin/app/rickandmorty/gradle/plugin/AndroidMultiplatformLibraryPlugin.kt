@@ -1,10 +1,10 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.dsl.apply
-import app.rickandmorty.gradle.dsl.assign
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.dsl.withType
+import app.rickandmorty.gradle.util.AndroidSdkVersions
 import app.rickandmorty.gradle.util.configureLint
 import app.rickandmorty.gradle.util.coreLibraryDesugaring
 import app.rickandmorty.gradle.util.lintChecks
@@ -25,16 +25,16 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
       pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
         configure<KotlinMultiplatformExtension> {
           targets.withType<KotlinMultiplatformAndroidLibraryTarget>().configureEach {
-            compileSdk { version = release(libs.versions.android.sdk.compile.get().toInt()) }
+            compileSdk { version = release(AndroidSdkVersions.COMPILE_SDK) }
 
-            minSdk { version = release(libs.versions.android.sdk.min.get().toInt()) }
+            minSdk { version = release(AndroidSdkVersions.MIN_SDK) }
 
             lint {
-              targetSdk = libs.versions.android.sdk.target.get().toInt()
+              targetSdk = AndroidSdkVersions.TARGET_SDK
               configureLint()
             }
 
-            localDependencySelection { selectBuildTypeFrom = listOf("release") }
+            localDependencySelection { selectBuildTypeFrom.set(listOf("release")) }
 
             enableCoreLibraryDesugaring = true
           }
