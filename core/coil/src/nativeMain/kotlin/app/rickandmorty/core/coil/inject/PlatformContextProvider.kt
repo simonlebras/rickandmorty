@@ -8,7 +8,6 @@ import dev.zacsweers.metro.Provides
 @ContributesTo(AppScope::class)
 public interface PlatformContextProvider {
   public companion object {
-    @Provides
-    public fun providePlatformContext(): PlatformContext = PlatformContext.Companion.INSTANCE
+    @Provides public fun providePlatformContext(): PlatformContext = PlatformContext.INSTANCE
   }
 }
