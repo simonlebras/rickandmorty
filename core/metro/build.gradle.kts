@@ -11,8 +11,5 @@ kotlin {
   android { namespace = "app.rickandmorty.core.metro" }
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
-  dependencies {
-    implementation(libs.jetbrains.lifecycle.viewmodel)
-    implementation(libs.jetbrains.lifecycle.viewmodel.savedstate)
-  }
+  dependencies { implementation(libs.androidx.lifecycle.viewmodel.savedstate) }
 }

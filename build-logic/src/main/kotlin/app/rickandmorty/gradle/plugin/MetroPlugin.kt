@@ -1,7 +1,6 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.dsl.apply
-import app.rickandmorty.gradle.dsl.assign
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import dev.zacsweers.metro.gradle.MetroPluginExtension
@@ -16,6 +15,6 @@ public class MetroPlugin : Plugin<Project> {
 
       apply(libs.plugins.metro)
 
-      configure<MetroPluginExtension> { contributesAsInject = true }
+      configure<MetroPluginExtension> { contributesAsInject.set(true) }
     }
 }

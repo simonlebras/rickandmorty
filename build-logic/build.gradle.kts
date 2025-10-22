@@ -1,9 +1,9 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import compat.patrouille.configureJavaCompatibility
 
 plugins {
   `java-gradle-plugin`
   alias(libs.plugins.android.lint)
-  alias(libs.plugins.kotlin.assignment)
+  alias(libs.plugins.compatpatrouille)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.sam)
   alias(libs.plugins.ktfmt)
@@ -11,32 +11,29 @@ plugins {
 
 kotlin {
   compilerOptions {
-    jvmTarget = JvmTarget.JVM_17
-
-    freeCompilerArgs.addAll("-Xcontext-parameters", "-Xjdk-release=17")
-
+    freeCompilerArgs.addAll("-Xcontext-parameters")
     allWarningsAsErrors = true
   }
 
   explicitApi()
 }
 
-assignment { annotation(SupportsKotlinAssignmentOverloading::class.qualifiedName!!) }
+configureJavaCompatibility(17)
 
 samWithReceiver { annotation(HasImplicitReceiver::class.qualifiedName!!) }
 
-tasks.withType<JavaCompile>().configureEach { options.release = 17 }
+ktfmt { googleStyle() }
+
+lint {
+  warningsAsErrors = true
+  disable += setOf("InternalGradleApiUsage", "NewerVersionAvailable")
+}
 
 tasks {
   validatePlugins {
     enableStricterValidation = true
     failOnWarning = true
   }
-}
-
-lint {
-  warningsAsErrors = true
-  disable += setOf("InternalGradleApiUsage", "NewerVersionAvailable")
 }
 
 dependencies {
@@ -105,8 +102,6 @@ gradlePlugin {
     }
   }
 }
-
-ktfmt { googleStyle() }
 
 private fun plugin(plugin: Provider<PluginDependency>) =
   plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}" }

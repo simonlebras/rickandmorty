@@ -1,3 +1,5 @@
+import app.rickandmorty.gradle.util.configureGradleManagedDevices
+
 plugins {
   alias(libs.plugins.rickandmorty.android.test)
   alias(libs.plugins.rickandmorty.codehealth)
@@ -9,6 +11,8 @@ android {
   namespace = "app.rickandmorty.baselineprofile"
 
   targetProjectPath = ":app"
+
+  testOptions { configureGradleManagedDevices() }
 }
 
 baselineProfile {
