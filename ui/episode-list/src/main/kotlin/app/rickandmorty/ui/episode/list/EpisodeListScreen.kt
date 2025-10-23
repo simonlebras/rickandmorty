@@ -28,7 +28,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import app.rickandmorty.core.designsystem.component.Loader
-import app.rickandmorty.core.designsystem.component.PullToRefresh
+import app.rickandmorty.core.designsystem.component.PullToRefreshBox
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.icon.filled.Settings
 import app.rickandmorty.core.designsystem.icon.outlined.Tv
@@ -85,7 +85,7 @@ private fun EpisodeListScreen(
     },
     snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
   ) { contentPadding ->
-    PullToRefresh(
+    PullToRefreshBox(
       isRefreshing = loadState.refresh.isLoading,
       onRefresh = episodes::refresh,
       indicatorPadding = contentPadding,

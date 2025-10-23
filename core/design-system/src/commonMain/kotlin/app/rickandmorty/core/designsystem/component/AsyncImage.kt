@@ -15,6 +15,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
+import coil3.compose.AsyncImagePainter.Companion.DefaultTransform
+import coil3.compose.AsyncImagePainter.State
 import com.eygraber.compose.placeholder.PlaceholderDefaults
 import com.eygraber.compose.placeholder.PlaceholderHighlight
 import com.eygraber.compose.placeholder.material3.color
@@ -26,6 +28,8 @@ public fun AsyncImage(
   model: Any?,
   contentDescription: String?,
   modifier: Modifier = Modifier,
+  transform: (State) -> State = DefaultTransform,
+  onState: ((State) -> Unit)? = null,
   alignment: Alignment = Alignment.Center,
   contentScale: ContentScale = ContentScale.Fit,
   alpha: Float = DefaultAlpha,
@@ -49,8 +53,11 @@ public fun AsyncImage(
         } else {
           Modifier
         },
-    transform = AsyncImagePainter.DefaultTransform,
-    onState = { state -> isLoading = state is AsyncImagePainter.State.Loading },
+    transform = transform,
+    onState = { state ->
+      isLoading = state is AsyncImagePainter.State.Loading
+      onState?.invoke(state)
+    },
     alignment = alignment,
     contentScale = contentScale,
     alpha = alpha,
