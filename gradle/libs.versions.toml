@@ -10,7 +10,9 @@ androidx-compose-material3-adaptive-navigation3 = "1.0.0-alpha03"
 androidx-compose-runtimetracing = "1.9.4"
 androidx-core = "1.17.0"
 androidx-core-splashscreen = "1.2.0-rc01"
+androidx-customview-poolingcontainer = "1.1.0"
 androidx-datastore = "1.2.0-beta01"
+androidx-emoji2 = "1.6.0"
 androidx-gradle-lints = "1.0.0-alpha05"
 androidx-lifecycle = "2.10.0-beta01"
 androidx-paging = "3.4.0-alpha04"
@@ -76,7 +78,9 @@ androidx-compose-material3-adaptive-navigation3 = { group = "androidx.compose.ma
 androidx-compose-runtime-tracing = { group = "androidx.compose.runtime", name = "runtime-tracing", version.ref = "androidx-compose-runtimetracing" }
 androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-core-splashscreen" }
+androidx-customview-poolingcontainer = { group = "androidx.customview", name = "customview-poolingcontainer", version.ref = "androidx-customview-poolingcontainer" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
+androidx-emoji2 = { group = "androidx.emoji2", name = "emoji2", version.ref = "androidx-emoji2" }
 androidx-gradle-lints = { group = "androidx.lint", name = "lint-gradle", version.ref = "androidx-gradle-lints" }
 androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "androidx-lifecycle" }
 androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "androidx-paging" }
