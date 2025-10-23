@@ -9,8 +9,6 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
@@ -24,11 +22,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.designsystem.icon.filled.ArrowBack
+import app.rickandmorty.core.designsystem.component.BackNavButton
 import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
-import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.l10n.resources.settings_about_title
 import app.rickandmorty.core.l10n.resources.settings_app_version_title
 import app.rickandmorty.core.l10n.resources.settings_dynamic_color_title
@@ -122,14 +118,7 @@ private fun MainSettingsScreen(
 private fun MainSettingsAppBar(onNavigateUp: () -> Unit, scrollBehavior: TopAppBarScrollBehavior) {
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.settings_title)) },
-    navigationIcon = {
-      IconButton(onClick = onNavigateUp) {
-        Icon(
-          imageVector = RamIcons.Filled.ArrowBack,
-          contentDescription = stringResource(L10nRes.string.navigate_up),
-        )
-      }
-    },
+    navigationIcon = { BackNavButton(onClick = onNavigateUp) },
     scrollBehavior = scrollBehavior,
   )
 }
