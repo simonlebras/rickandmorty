@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -29,13 +28,12 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefreshBox
+import app.rickandmorty.core.designsystem.component.SettingsNavButton
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.designsystem.icon.filled.Settings
 import app.rickandmorty.core.designsystem.icon.outlined.Tv
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.episode_list_empty
 import app.rickandmorty.core.l10n.resources.episode_list_title
-import app.rickandmorty.core.l10n.resources.navigate_up
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
 import app.rickandmorty.core.ui.ReportDrawnWhen
@@ -155,14 +153,7 @@ private fun EpisodeListScreenAppBar(
 ) {
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.episode_list_title)) },
-    actions = {
-      IconButton(onClick = onNavigateToSettings) {
-        Icon(
-          imageVector = RamIcons.Filled.Settings,
-          contentDescription = stringResource(L10nRes.string.navigate_up),
-        )
-      }
-    },
+    actions = { SettingsNavButton(onClick = onNavigateToSettings) },
     scrollBehavior = scrollBehavior,
   )
 }
