@@ -12,9 +12,9 @@ kotlin {
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
-    api(libs.jetbrains.compose.material3)
+    api(libs.coil.compose)
 
-    implementation(libs.coil.compose)
+    api(libs.jetbrains.compose.material3)
 
     implementation(libs.compose.placeholder.material3)
 
