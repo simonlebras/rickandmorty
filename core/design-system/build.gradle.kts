@@ -19,9 +19,8 @@ kotlin {
     implementation(libs.compose.placeholder.material3)
 
     implementation(libs.jetbrains.compose.resources)
+    implementation(libs.jetbrains.navigation3.ui)
   }
-
-  sourceSets { androidMain { dependencies { implementation(libs.androidx.navigation3.ui) } } }
 }
 
 compose.resources { packageOfResClass = "app.rickandmorty.core.designsystem.resources" }
