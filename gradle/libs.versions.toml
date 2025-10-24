@@ -62,7 +62,7 @@ store = "5.1.0-alpha07"
 testparameterinjector = "1.19"
 truth = "1.4.5"
 turbine = "1.2.1"
-wire = "5.4.0"
+wire = "6.0.0-alpha01"
 
 [libraries]
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools" }
