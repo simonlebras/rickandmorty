@@ -7,7 +7,7 @@ plugins {
 android { namespace = "app.rickandmorty.ui.location.list" }
 
 dependencies {
-  api(project(":data:location"))
+  api(project(":data:location-api"))
 
   implementation(project(":core:design-system"))
   implementation(project(":core:l10n"))

@@ -94,6 +94,7 @@ dependencies {
   implementation(project(":data:episode-impl"))
   implementation(project(":data:filesystem"))
   implementation(project(":data:graphql-client"))
+  implementation(project(":data:location-impl"))
   implementation(project(":data:theme-impl"))
 
   implementation(project(":ui:character-list"))
