@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -46,7 +47,10 @@ import app.rickandmorty.data.episode.Episode
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun EpisodeListScreen(onNavigateToSettings: () -> Unit, viewModel: EpisodeListViewModel) {
+public fun EpisodeListScreen(
+  onNavigateToSettings: () -> Unit,
+  viewModel: EpisodeListViewModel = viewModel(),
+) {
   val episodes = viewModel.episodes.collectAsLazyPagingItems()
 
   ReportDrawnWhen { episodes.loadState.isIdle }
@@ -74,7 +78,6 @@ private fun EpisodeListScreen(
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
   Scaffold(
-    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       EpisodeListScreenAppBar(
         onNavigateToSettings = onNavigateToSettings,
@@ -83,41 +86,44 @@ private fun EpisodeListScreen(
     },
     snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
   ) { contentPadding ->
-    PullToRefreshBox(
-      isRefreshing = loadState.refresh.isLoading,
-      onRefresh = episodes::refresh,
-      indicatorPadding = contentPadding,
-    ) {
-      when {
-        loadState.refresh.isLoading && episodes.isEmpty -> {
-          Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
-        }
+    when {
+      loadState.refresh.isLoading && episodes.isEmpty -> {
+        Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
+      }
 
-        loadState.refresh.isError && episodes.isEmpty -> {
-          Error(
-            text = "Error",
-            onRetry = episodes::retry,
-            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
-          )
-        }
+      loadState.refresh.isError && episodes.isEmpty -> {
+        Error(
+          text = "Error",
+          onRetry = episodes::retry,
+          modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+        )
+      }
 
-        loadState.isIdle && episodes.isEmpty -> {
-          Empty(
-            graphic = {
-              Icon(
-                imageVector = RamIcons.Outlined.Tv,
-                contentDescription = null,
-                modifier = Modifier.size(64.dp),
-              )
-            },
-            title = { Text(text = stringResource(L10nRes.string.episode_list_empty)) },
-            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
-          )
-        }
+      loadState.isIdle && episodes.isEmpty -> {
+        Empty(
+          graphic = {
+            Icon(
+              imageVector = RamIcons.Outlined.Tv,
+              contentDescription = null,
+              modifier = Modifier.size(64.dp),
+            )
+          },
+          title = { Text(text = stringResource(L10nRes.string.episode_list_empty)) },
+          modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+        )
+      }
 
-        else -> {
+      else -> {
+        PullToRefreshBox(
+          isRefreshing = loadState.refresh.isLoading,
+          onRefresh = episodes::refresh,
+          indicatorPadding = contentPadding,
+        ) {
           LazyColumn(
-            modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+            modifier =
+              Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+                .fillMaxSize()
+                .consumeWindowInsets(contentPadding),
             contentPadding = contentPadding,
           ) {
             items(
