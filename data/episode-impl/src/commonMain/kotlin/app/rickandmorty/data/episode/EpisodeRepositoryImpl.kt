@@ -81,5 +81,5 @@ public class EpisodeRepositoryImpl(
   }
 }
 
-public fun EpisodeEntity.toEpisode(): Episode =
+private fun EpisodeEntity.toEpisode() =
   Episode(id = id, name = name, airDate = airDate, episode = episode)

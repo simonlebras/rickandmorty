@@ -6,10 +6,5 @@ plugins {
 }
 
 kotlin {
-  @OptIn(ExperimentalKotlinGradlePluginApi::class)
-  dependencies {
-    api(project(":data:paging"))
-
-    api(libs.androidx.room.common)
-  }
+  @OptIn(ExperimentalKotlinGradlePluginApi::class) dependencies { api(libs.androidx.paging.common) }
 }

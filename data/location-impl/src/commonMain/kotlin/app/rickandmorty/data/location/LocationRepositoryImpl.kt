@@ -10,16 +10,17 @@ import app.rickandmorty.data.database.dao.LocationDao
 import app.rickandmorty.data.database.dao.LocationPagedEntryDao
 import app.rickandmorty.data.database.entity.LocationEntity
 import app.rickandmorty.data.database.entity.LocationPagedEntryEntity
-import app.rickandmorty.data.database.entity.toLocation
-import app.rickandmorty.data.model.Location
 import app.rickandmorty.data.paging.FIRST_PAGE_KEY
 import app.rickandmorty.data.paging.PageKeyedRemoteMediator
 import app.rickandmorty.data.paging.PageResult
 import com.apollographql.apollo.ApolloClient
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-internal class LocationRepositoryImpl(
+@ContributesBinding(AppScope::class)
+public class LocationRepositoryImpl(
   private val apolloClient: ApolloClient,
   private val transactionRunner: TransactionRunner,
   private val locationDao: LocationDao,
@@ -79,3 +80,6 @@ internal class LocationRepositoryImpl(
       .map { pagingData -> pagingData.map { location -> location.toLocation() } }
   }
 }
+
+private fun LocationEntity.toLocation() =
+  Location(id = id, name = name, type = type, dimension = dimension)

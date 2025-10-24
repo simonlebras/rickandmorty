@@ -1,4 +1,4 @@
-package app.rickandmorty.data.model
+package app.rickandmorty.data.location
 
 public data class Location(
   val id: String,
