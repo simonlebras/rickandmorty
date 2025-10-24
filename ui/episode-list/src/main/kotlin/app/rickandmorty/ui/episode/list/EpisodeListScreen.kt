@@ -42,7 +42,7 @@ import app.rickandmorty.core.ui.errorOrNull
 import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
-import app.rickandmorty.data.model.Episode
+import app.rickandmorty.data.episode.Episode
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

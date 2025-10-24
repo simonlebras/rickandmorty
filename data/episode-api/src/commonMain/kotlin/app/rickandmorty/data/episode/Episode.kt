@@ -1,4 +1,4 @@
-package app.rickandmorty.data.model
+package app.rickandmorty.data.episode
 
 public data class Episode(
   val id: String,

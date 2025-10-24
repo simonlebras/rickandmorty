@@ -10,16 +10,17 @@ import app.rickandmorty.data.database.dao.EpisodeDao
 import app.rickandmorty.data.database.dao.EpisodePagedEntryDao
 import app.rickandmorty.data.database.entity.EpisodeEntity
 import app.rickandmorty.data.database.entity.EpisodePagedEntryEntity
-import app.rickandmorty.data.database.entity.toEpisode
-import app.rickandmorty.data.model.Episode
 import app.rickandmorty.data.paging.FIRST_PAGE_KEY
 import app.rickandmorty.data.paging.PageKeyedRemoteMediator
 import app.rickandmorty.data.paging.PageResult
 import com.apollographql.apollo.ApolloClient
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-internal class EpisodeRepositoryImpl(
+@ContributesBinding(AppScope::class)
+public class EpisodeRepositoryImpl(
   private val apolloClient: ApolloClient,
   private val transactionRunner: TransactionRunner,
   private val episodeDao: EpisodeDao,
@@ -79,3 +80,6 @@ internal class EpisodeRepositoryImpl(
       .map { pagingData -> pagingData.map { episode -> episode.toEpisode() } }
   }
 }
+
+public fun EpisodeEntity.toEpisode(): Episode =
+  Episode(id = id, name = name, airDate = airDate, episode = episode)
