@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -46,7 +47,10 @@ import app.rickandmorty.data.location.Location
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun LocationListScreen(onNavigateToSettings: () -> Unit, viewModel: LocationListViewModel) {
+public fun LocationListScreen(
+  onNavigateToSettings: () -> Unit,
+  viewModel: LocationListViewModel = viewModel(),
+) {
   val locations = viewModel.locations.collectAsLazyPagingItems()
 
   ReportDrawnWhen { locations.loadState.isIdle }
@@ -74,7 +78,6 @@ private fun LocationListScreen(
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
   Scaffold(
-    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       LocationListScreenAppBar(
         onNavigateToSettings = onNavigateToSettings,
@@ -83,41 +86,44 @@ private fun LocationListScreen(
     },
     snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
   ) { contentPadding ->
-    PullToRefreshBox(
-      isRefreshing = loadState.refresh.isLoading,
-      onRefresh = locations::refresh,
-      indicatorPadding = contentPadding,
-    ) {
-      when {
-        loadState.refresh.isLoading && locations.isEmpty -> {
-          Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
-        }
+    when {
+      loadState.refresh.isLoading && locations.isEmpty -> {
+        Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
+      }
 
-        loadState.refresh.isError && locations.isEmpty -> {
-          Error(
-            text = "Error",
-            onRetry = locations::retry,
-            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
-          )
-        }
+      loadState.refresh.isError && locations.isEmpty -> {
+        Error(
+          text = "Error",
+          onRetry = locations::retry,
+          modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+        )
+      }
 
-        loadState.isIdle && locations.isEmpty -> {
-          Empty(
-            graphic = {
-              Icon(
-                imageVector = RamIcons.Outlined.Map,
-                contentDescription = null,
-                modifier = Modifier.size(64.dp),
-              )
-            },
-            title = { Text(text = stringResource(L10nRes.string.location_list_empty)) },
-            modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
-          )
-        }
+      loadState.isIdle && locations.isEmpty -> {
+        Empty(
+          graphic = {
+            Icon(
+              imageVector = RamIcons.Outlined.Map,
+              contentDescription = null,
+              modifier = Modifier.size(64.dp),
+            )
+          },
+          title = { Text(text = stringResource(L10nRes.string.location_list_empty)) },
+          modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
+        )
+      }
 
-        else -> {
+      else -> {
+        PullToRefreshBox(
+          isRefreshing = loadState.refresh.isLoading,
+          onRefresh = locations::refresh,
+          indicatorPadding = contentPadding,
+        ) {
           LazyColumn(
-            modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+            modifier =
+              Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+                .fillMaxSize()
+                .consumeWindowInsets(contentPadding),
             contentPadding = contentPadding,
           ) {
             items(
