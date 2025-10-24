@@ -7,7 +7,7 @@ plugins {
 android { namespace = "app.rickandmorty.ui.episode.list" }
 
 dependencies {
-  api(project(":data:episode"))
+  api(project(":data:episode-api"))
 
   implementation(project(":core:design-system"))
   implementation(project(":core:l10n"))
