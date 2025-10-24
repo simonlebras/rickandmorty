@@ -2,6 +2,7 @@ package app.rickandmorty.gradle.util
 
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinNativeCompilerOptions
@@ -10,8 +11,13 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 internal fun KotlinProjectExtension.configureKotlinCompilerOptions() {
   configureCompilerOptions {
     freeCompilerArgs.addAll(
-      "-Xannotation-default-target=param-property",
-      "-Xcontext-sensitive-resolution",
+      buildList {
+        add("-Xannotation-default-target=param-property")
+        add("-Xcontext-sensitive-resolution")
+        if (this@configureCompilerOptions is KotlinJvmCompilerOptions) {
+          add("-jvm-default=no-compatibility")
+        }
+      }
     )
     allWarningsAsErrors.set(this !is KotlinNativeCompilerOptions)
     progressiveMode.set(true)
