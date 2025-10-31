@@ -12,7 +12,7 @@ import dev.zacsweers.metro.Provides
 
 @DependencyGraph(AppScope::class)
 interface AppGraph {
-  @Multibinds val activityProviders: ActivityProviders
+  @Multibinds(allowEmpty = true) val activityProviders: ActivityProviders
 
   fun inject(application: RamApplication)
 
