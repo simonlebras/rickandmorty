@@ -11,7 +11,7 @@ kotlin {
   dependencies {
     api(libs.ktor.client.core)
 
-    implementation(project(":core:metro"))
+    implementation(project(":core:metro-common"))
   }
 
   sourceSets {

@@ -17,7 +17,7 @@ kotlin {
 
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
-    implementation(project(":core:metro"))
+    implementation(project(":core:metro-common"))
     implementation(project(":core:ui"))
     implementation(project(":core:ui-tooling-preview"))
 

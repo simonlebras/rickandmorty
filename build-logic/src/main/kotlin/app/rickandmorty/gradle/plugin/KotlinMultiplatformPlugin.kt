@@ -22,10 +22,10 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
       configure<KotlinMultiplatformExtension> {
         applyDefaultHierarchyTemplate()
 
-        jvm()
-
         iosArm64()
         iosSimulatorArm64()
+
+        jvm()
 
         sourceSets.configureEach {
           languageSettings { enableLanguageFeature("ExpectActualClasses") }

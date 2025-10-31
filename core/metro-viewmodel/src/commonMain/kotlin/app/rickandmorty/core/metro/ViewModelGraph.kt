@@ -12,9 +12,11 @@ import dev.zacsweers.metro.Provider
 import dev.zacsweers.metro.Provides
 import kotlin.reflect.KClass
 
+public typealias ViewModelProviders = Map<KClass<out ViewModel>, Provider<ViewModel>>
+
 @GraphExtension(ViewModelScope::class)
 public interface ViewModelGraph {
-  @Multibinds public val viewModelProviders: Map<KClass<out ViewModel>, Provider<ViewModel>>
+  @Multibinds(allowEmpty = true) public val viewModelProviders: ViewModelProviders
 
   @Provides
   public fun provideSavedStateHandle(creationExtras: CreationExtras): SavedStateHandle =

@@ -27,7 +27,7 @@ kotlin {
     api(libs.androidx.sqlite.bundled)
 
     implementation(project(":core:coroutines"))
-    implementation(project(":core:metro"))
+    implementation(project(":core:metro-common"))
 
     implementation(libs.androidx.room.paging)
   }

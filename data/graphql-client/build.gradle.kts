@@ -15,6 +15,6 @@ kotlin {
     api(libs.apollo.runtime)
 
     implementation(project(":core:coroutines"))
-    implementation(project(":core:metro"))
+    implementation(project(":core:metro-common"))
   }
 }

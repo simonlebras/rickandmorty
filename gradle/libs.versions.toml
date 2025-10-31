@@ -160,6 +160,8 @@ ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.r
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-startup", version.ref = "leakcanary" }
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
 
+metro-runtime = { group = "dev.zacsweers.metro", name = "runtime", version.ref = "metro" }
+
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
 
 slack-compose-lints = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slack-compose-lints" }

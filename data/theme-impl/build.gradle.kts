@@ -18,7 +18,7 @@ kotlin {
 
     implementation(project(":core:base"))
     implementation(project(":core:coroutines"))
-    implementation(project(":core:metro"))
+    implementation(project(":core:metro-common"))
     implementation(project(":core:startup"))
 
     implementation(libs.androidx.datastore)
