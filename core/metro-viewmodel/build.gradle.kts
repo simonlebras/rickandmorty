@@ -11,6 +11,6 @@ kotlin {
   dependencies {
     api(project(":core:metro-common"))
 
-    implementation(libs.jetbrains.lifecycle.viewmodel.savedstate)
+    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
   }
 }
