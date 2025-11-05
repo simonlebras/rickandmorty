@@ -11,7 +11,7 @@ kotlin {
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
-    implementation(libs.jetbrains.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel)
 
     implementation(libs.metro.runtime)
   }

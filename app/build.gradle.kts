@@ -104,7 +104,7 @@ dependencies {
 
   implementation(libs.coil)
 
-  implementation(libs.jetbrains.compose.material3.adaptive.navigationsuite)
+  implementation(libs.jetbrains.compose.material3.adaptivenavigationsuite)
 
   releaseImplementation(project(":core:crashlytics"))
   releaseImplementation(project(":core:logger-crashlytics"))
@@ -127,5 +127,5 @@ dependencies {
 }
 
 dependencyAnalysis {
-  issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptive.navigationsuite) } }
+  issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptivenavigationsuite) } }
 }
