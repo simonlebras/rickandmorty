@@ -30,15 +30,6 @@
       ],
     },
     {
-      "groupName": "Kotlin",
-      "groupSlug": "kotlin",
-      "matchPackageNames": [
-        "org.jetbrains.kotlin:{/,}**",
-        "com.google.devtools.ksp:{/,}**",
-        "dev.zacsweers.metro:{/,}**",
-      ],
-    },
-    {
       "description": "Libraries allowed to use non-stable releases",
       "ignoreUnstable": false,
       "matchDepNames": [
