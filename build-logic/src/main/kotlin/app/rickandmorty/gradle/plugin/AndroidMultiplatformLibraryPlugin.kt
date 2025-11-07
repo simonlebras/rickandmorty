@@ -26,7 +26,6 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
         configure<KotlinMultiplatformExtension> {
           targets.withType<KotlinMultiplatformAndroidLibraryTarget>().configureEach {
             compileSdk { version = release(AndroidSdkVersions.COMPILE_SDK) }
-
             minSdk { version = release(AndroidSdkVersions.MIN_SDK) }
 
             lint {
@@ -42,6 +41,7 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
           sourceSets.androidMain {
             dependencies.apply {
               coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
+
               lintChecks(libs.android.tools.security.lints)
             }
           }
