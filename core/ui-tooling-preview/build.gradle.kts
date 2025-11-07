@@ -23,10 +23,6 @@ kotlin {
       dependencies {
         api(libs.jetbrains.compose.ui.tooling)
 
-        api(libs.androidx.activity.compose)
-        api(libs.androidx.customview.poolingcontainer)
-        api(libs.androidx.emoji2)
-
         implementation(project(":core:resources-app"))
       }
     }
