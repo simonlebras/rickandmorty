@@ -3,7 +3,6 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
-import app.rickandmorty.gradle.util.AndroidSdkVersions
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureJvmCompatibility
 import app.rickandmorty.gradle.util.configureKotlinCompilerOptions
@@ -32,9 +31,6 @@ public class AndroidLibraryPlugin : Plugin<Project> {
 
       configure<LibraryExtension> {
         configureAndroid()
-
-        lint.targetSdk = AndroidSdkVersions.TARGET_SDK
-        testOptions.targetSdk = AndroidSdkVersions.TARGET_SDK
 
         buildTypes { release { isDefault = true } }
         testBuildType = "release"

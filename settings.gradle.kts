@@ -27,8 +27,16 @@ dependencyResolutionManagement {
 }
 
 plugins {
+  id("com.android.settings") version "9.0.0-beta01"
+
   id("com.gradle.develocity") version "4.2.2"
   id("com.gradle.common-custom-user-data-gradle-plugin") version "2.4.0"
+}
+
+android {
+  compileSdk { version = release(36) }
+  minSdk { version = release(28) }
+  targetSdk { version = release(36) }
 }
 
 develocity {

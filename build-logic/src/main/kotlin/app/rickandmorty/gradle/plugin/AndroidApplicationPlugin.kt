@@ -3,7 +3,6 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
-import app.rickandmorty.gradle.util.AndroidSdkVersions
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureBadgingTasks
 import app.rickandmorty.gradle.util.configureJvmCompatibility
@@ -30,8 +29,6 @@ public class AndroidApplicationPlugin : Plugin<Project> {
 
       configure<ApplicationExtension> {
         configureAndroid()
-
-        defaultConfig.targetSdk { release(AndroidSdkVersions.TARGET_SDK) }
 
         packaging.resources.excludes +=
           setOf(

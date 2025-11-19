@@ -3,7 +3,6 @@ package app.rickandmorty.gradle.plugin
 import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
-import app.rickandmorty.gradle.util.AndroidSdkVersions
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureJvmCompatibility
 import app.rickandmorty.gradle.util.configureKotlinCompilerOptions
@@ -26,8 +25,6 @@ public class AndroidTestPlugin : Plugin<Project> {
 
       configure<TestExtension> {
         configureAndroid()
-
-        defaultConfig.targetSdk = AndroidSdkVersions.TARGET_SDK
 
         buildTypes { debug { matchingFallbacks += "release" } }
       }
