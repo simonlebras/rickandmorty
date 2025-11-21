@@ -27,7 +27,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-  id("com.android.settings") version "9.0.0-beta01"
+  id("com.android.settings") version "9.0.0-beta02"
 
   id("com.gradle.develocity") version "4.2.2"
   id("com.gradle.common-custom-user-data-gradle-plugin") version "2.4.0"
