@@ -27,7 +27,15 @@ dependencyResolutionManagement {
 }
 
 plugins {
-  id("com.android.settings") version "9.0.0-beta02"
+  val agpVersion =
+    File("gradle/libs.versions.toml").useLines { lines ->
+      lines
+        .first { it.trim().startsWith("android-plugin") }
+        .substringAfter("=")
+        .trim()
+        .removeSurrounding("\"")
+    }
+  id("com.android.settings") version agpVersion
 
   id("com.gradle.develocity") version "4.2.2"
   id("com.gradle.common-custom-user-data-gradle-plugin") version "2.4.0"
