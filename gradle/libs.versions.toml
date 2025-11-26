@@ -1,6 +1,6 @@
 [versions]
 android-desugarjdklibs = "2.1.5"
-android-plugin = "9.0.0-beta02"
+android-plugin = "9.0.0-beta03"
 android-security-lints = "1.0.3"
 android-tools = "32.0.0-beta02"
 androidx-activity = "1.12.0"
