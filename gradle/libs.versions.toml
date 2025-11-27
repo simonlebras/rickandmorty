@@ -30,7 +30,6 @@ androidx-window = "1.6.0-alpha01"
 apollo = "5.0.0-alpha.3"
 apollo-adapters = "0.7.0"
 coil = "3.3.0"
-compatpatrouille = "0.1.0"
 compose-placeholder = "1.0.12"
 crashkios-crashlytics = "0.9.0"
 dependencyanalysis = "3.5.1"
@@ -60,6 +59,7 @@ okio = "3.16.4"
 slack-compose-lints = "1.4.2"
 sortdependencies = "0.15"
 store = "5.1.0-alpha07"
+tapmoc = "0.2.0"
 testparameterinjector = "1.20"
 truth = "1.4.5"
 turbine = "1.2.1"
@@ -196,7 +196,6 @@ android-test = { id = "com.android.test", version.ref = "android-plugin" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
-compatpatrouille = { id = "com.gradleup.compat.patrouille", version.ref = "compatpatrouille" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose" }
 dependencyanalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyanalysis" }
@@ -212,4 +211,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmt" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
+tapmoc = { id = "com.gradleup.tapmoc", version.ref = "tapmoc" }
 wire = { id = "com.squareup.wire", version.ref = "wire" }

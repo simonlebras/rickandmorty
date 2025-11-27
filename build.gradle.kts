@@ -19,7 +19,6 @@ plugins {
   alias(libs.plugins.androidx.baselineprofile) apply false
   alias(libs.plugins.androidx.room) apply false
   alias(libs.plugins.apollo) apply false
-  alias(libs.plugins.compatpatrouille) apply false
   alias(libs.plugins.compose.compiler) apply false
   alias(libs.plugins.compose.multiplatform) apply false
   alias(libs.plugins.dependencyanalysis) apply false
@@ -33,5 +32,6 @@ plugins {
   alias(libs.plugins.ktfmt) apply false
   alias(libs.plugins.metro) apply false
   alias(libs.plugins.sortdependencies) apply false
+  alias(libs.plugins.tapmoc) apply false
   alias(libs.plugins.wire) apply false
 }

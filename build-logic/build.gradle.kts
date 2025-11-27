@@ -1,12 +1,12 @@
-import compat.patrouille.configureJavaCompatibility
+import tapmoc.configureJavaCompatibility
 
 plugins {
   `java-gradle-plugin`
   alias(libs.plugins.android.lint)
-  alias(libs.plugins.compatpatrouille)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.sam)
   alias(libs.plugins.ktfmt)
+  alias(libs.plugins.tapmoc)
 }
 
 kotlin {
@@ -39,12 +39,12 @@ tasks {
 dependencies {
   compileOnly(libs.android.tools.common)
   compileOnly(libs.android.tools.gradleapi)
-  compileOnly(plugin(libs.plugins.compatpatrouille))
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
   compileOnly(plugin(libs.plugins.ktfmt))
   compileOnly(plugin(libs.plugins.metro))
+  compileOnly(plugin(libs.plugins.tapmoc))
 
   implementation(libs.truth)
 
