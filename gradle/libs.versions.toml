@@ -161,6 +161,7 @@ leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android-sta
 leakcanary-plumber = { group = "com.squareup.leakcanary", name = "plumber-android-startup", version.ref = "leakcanary" }
 
 metro-runtime = { group = "dev.zacsweers.metro", name = "runtime", version.ref = "metro" }
+metrox-android = { group = "dev.zacsweers.metro", name = "metrox-android", version.ref = "metro" }
 
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
 

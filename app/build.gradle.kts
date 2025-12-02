@@ -106,6 +106,8 @@ dependencies {
 
   implementation(libs.jetbrains.compose.material3.adaptivenavigationsuite)
 
+  implementation(libs.metrox.android)
+
   releaseImplementation(project(":core:crashlytics"))
   releaseImplementation(project(":core:logger-crashlytics"))
 

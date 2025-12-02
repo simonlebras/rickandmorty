@@ -3,22 +3,22 @@ package app.rickandmorty
 import android.app.Application
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.startup.Initializer
-import app.rickandmorty.inject.ActivityProviders
-import app.rickandmorty.inject.ActivityProvidersOwner
 import app.rickandmorty.inject.AppGraph
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.SingletonImageLoader
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.createGraphFactory
+import dev.zacsweers.metrox.android.MetroAppComponentProviders
+import dev.zacsweers.metrox.android.MetroApplication
 
-class RamApplication : Application(), ActivityProvidersOwner, SingletonImageLoader.Factory {
+class RamApplication : Application(), MetroApplication, SingletonImageLoader.Factory {
   private val appGraph by unsafeLazy { createGraphFactory<AppGraph.Factory>().create(this) }
 
   @Inject lateinit var imageLoader: ImageLoader
 
-  override val activityProviders: ActivityProviders
-    get() = appGraph.activityProviders
+  override val appComponentProviders: MetroAppComponentProviders
+    get() = appGraph
 
   override fun onCreate() {
     super.onCreate()
