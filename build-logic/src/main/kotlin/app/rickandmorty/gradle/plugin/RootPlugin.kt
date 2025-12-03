@@ -8,7 +8,6 @@ import com.autonomousapps.DependencyAnalysisExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 public class RootPlugin : Plugin<Project> {
   override fun apply(target: Project): Unit =
@@ -18,19 +17,8 @@ public class RootPlugin : Plugin<Project> {
       val libs = the<LibrariesForLibs>()
 
       apply(libs.plugins.rickandmorty.codehealth)
-      apply("base")
 
       configureDependencyAnalysis()
-
-      tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME).configure {
-        dependsOn(
-          provider {
-            gradle.includedBuilds.map { build ->
-              build.task(":${LifecycleBasePlugin.CHECK_TASK_NAME}")
-            }
-          }
-        )
-      }
     }
 }
 

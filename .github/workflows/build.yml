@@ -47,10 +47,14 @@ jobs:
           key: ${{ secrets.DECRYPT_KEY }}
 
       - name: Run checks
-        run: ./gradlew check
-
-      - name: Detect unused and misused dependencies
-        run: ./gradlew buildHealth
+        run: |
+          ./gradlew :build-logic:check \
+          buildHealth \
+          checkSortDependencies \
+          ktfmtCheck \
+          test \
+          :app:checkReleaseBadging \
+          :app:lintRelease
 
       - name: Build all build type and flavor permutations
         run: |
