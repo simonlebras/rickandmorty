@@ -20,11 +20,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import app.rickandmorty.core.designsystem.theme.RamTheme
-import app.rickandmorty.core.metro.ActivityKey
 import app.rickandmorty.core.ui.isSystemInDarkTheme
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.binding
+import dev.zacsweers.metrox.android.ActivityKey
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
