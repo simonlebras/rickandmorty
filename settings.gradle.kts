@@ -9,7 +9,9 @@ pluginManagement {
     }
     mavenCentral()
     gradlePluginPortal()
-    maven("https://central.sonatype.com/repository/maven-snapshots/")
+    maven("https://central.sonatype.com/repository/maven-snapshots/") {
+      content { includeGroupAndSubgroups("com.google.devtools.ksp") }
+    }
   }
 }
 
@@ -24,7 +26,9 @@ dependencyResolutionManagement {
       }
     }
     mavenCentral()
-    maven("https://central.sonatype.com/repository/maven-snapshots/")
+    maven("https://central.sonatype.com/repository/maven-snapshots/") {
+      content { includeGroupAndSubgroups("com.google.devtools.ksp") }
+    }
   }
 }
 
