@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -25,13 +26,15 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.android.ActivityKey
+import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
+import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @ContributesIntoMap(AppScope::class, binding<Activity>())
 @ActivityKey(MainActivity::class)
-class MainActivity(private val viewModelFactory: ViewModelProvider.Factory) : AppCompatActivity() {
+class MainActivity(private val viewModelFactory: MetroViewModelFactory) : AppCompatActivity() {
   init {
     // https://issuetracker.google.com/issues/139738913
     if (Build.VERSION.SDK_INT == 29 && isTaskRoot) {
@@ -64,8 +67,10 @@ class MainActivity(private val viewModelFactory: ViewModelProvider.Factory) : Ap
     splashScreen.setKeepOnScreenCondition { uiState.isLoading }
 
     setContent {
-      RamTheme(useDynamicColor = uiState.useDynamicColor) {
-        RamApp(modifier = Modifier.semantics { testTagsAsResourceId = true })
+      CompositionLocalProvider(LocalMetroViewModelFactory provides viewModelFactory) {
+        RamTheme(useDynamicColor = uiState.useDynamicColor) {
+          RamApp(modifier = Modifier.semantics { testTagsAsResourceId = true })
+        }
       }
     }
   }

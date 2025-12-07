@@ -29,7 +29,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -56,12 +55,13 @@ import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.core.ui.label
 import app.rickandmorty.core.ui.tooling.preview.ProvideColorImagePreviewHandler
 import app.rickandmorty.data.character.Character
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 public fun CharacterListScreen(
   onNavigateToSettings: () -> Unit,
-  viewModel: CharacterListViewModel = viewModel(),
+  viewModel: CharacterListViewModel = metroViewModel(),
 ) {
   val characters = viewModel.characters.collectAsLazyPagingItems()
 

@@ -1,4 +1,4 @@
- import com.google.firebase.perf.plugin.FirebasePerfExtension
+import com.google.firebase.perf.plugin.FirebasePerfExtension
 
 plugins {
   alias(libs.plugins.rickandmorty.android.application)
@@ -80,8 +80,6 @@ dependencies {
   implementation(project(":core:coroutines"))
   implementation(project(":core:design-system"))
   implementation(project(":core:ktor"))
-  implementation(project(":core:metro-common"))
-  implementation(project(":core:metro-viewmodel"))
   implementation(project(":core:process-lifecycle"))
   implementation(project(":core:resource-state"))
   implementation(project(":core:resources-app"))
@@ -107,6 +105,7 @@ dependencies {
   implementation(libs.jetbrains.compose.material3.adaptivenavigationsuite)
 
   implementation(libs.metrox.android)
+  implementation(libs.metrox.viewmodel.compose)
 
   releaseImplementation(project(":core:crashlytics"))
   releaseImplementation(project(":core:logger-crashlytics"))
@@ -115,6 +114,8 @@ dependencies {
   debugImplementation(project(":core:compose-debug"))
   debugImplementation(project(":core:logger-debug"))
   debugImplementation(project(":core:strict-mode"))
+
+  compileOnly(project(":core:metro-common"))
 
   runtimeOnly(libs.androidx.compose.runtime.tracing)
   runtimeOnly(libs.androidx.profileinstaller)
@@ -129,5 +130,7 @@ dependencies {
 }
 
 dependencyAnalysis {
-  issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptivenavigationsuite) } }
+  issues {
+    onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptivenavigationsuite) }
+  }
 }

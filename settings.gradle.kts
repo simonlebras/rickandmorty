@@ -82,7 +82,6 @@ include(
   ":core:logger-crashlytics",
   ":core:logger-debug",
   ":core:metro-common",
-  ":core:metro-viewmodel",
   ":core:process-lifecycle",
   ":core:resource-state",
   ":core:resources-app",

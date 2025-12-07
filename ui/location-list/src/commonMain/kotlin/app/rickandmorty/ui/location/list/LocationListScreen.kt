@@ -22,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -44,12 +43,13 @@ import app.rickandmorty.core.ui.isEmpty
 import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.data.location.Location
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 public fun LocationListScreen(
   onNavigateToSettings: () -> Unit,
-  viewModel: LocationListViewModel = viewModel(),
+  viewModel: LocationListViewModel = metroViewModel(),
 ) {
   val locations = viewModel.locations.collectAsLazyPagingItems()
 

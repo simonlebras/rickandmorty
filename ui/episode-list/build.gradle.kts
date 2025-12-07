@@ -17,11 +17,10 @@ kotlin {
 
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
-    implementation(project(":core:metro-common"))
     implementation(project(":core:ui"))
 
     implementation(libs.androidx.paging.compose)
 
-    implementation(libs.jetbrains.lifecycle.viewmodel.compose)
+    implementation(libs.metrox.viewmodel.compose)
   }
 }

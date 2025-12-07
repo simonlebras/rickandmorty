@@ -9,9 +9,10 @@ import dev.zacsweers.metro.Binds
 import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provides
 import dev.zacsweers.metrox.android.MetroAppComponentProviders
+import dev.zacsweers.metrox.viewmodel.ViewModelGraph
 
 @DependencyGraph(AppScope::class)
-interface AppGraph : MetroAppComponentProviders {
+interface AppGraph : MetroAppComponentProviders, ViewModelGraph {
   fun inject(application: RamApplication)
 
   @Binds @AppContext fun bindApplication(application: Application): Context
