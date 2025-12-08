@@ -2,7 +2,7 @@
 android-desugarjdklibs = "2.1.5"
 android-plugin = "9.0.0-beta04"
 android-security-lints = "1.0.3"
-android-tools = "32.0.0-beta03"
+android-tools = "32.0.0-beta04"
 androidx-activity = "1.12.1"
 androidx-appcompat = "1.7.1"
 androidx-benchmark = "1.4.1"
