@@ -102,7 +102,10 @@ dependencies {
 
   implementation(libs.coil)
 
+  implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
   implementation(libs.jetbrains.compose.material3.adaptivenavigationsuite)
+  implementation(libs.jetbrains.lifecycle.viewmodel.navigation3)
+  implementation(libs.jetbrains.navigation3.ui)
 
   implementation(libs.metrox.android)
   implementation(libs.metrox.viewmodel.compose)
@@ -131,6 +134,13 @@ dependencies {
 
 dependencyAnalysis {
   issues {
-    onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptivenavigationsuite) }
+    onUnusedDependencies {
+      exclude(
+        libs.jetbrains.compose.material3.adaptive.navigation3,
+        libs.jetbrains.compose.material3.adaptivenavigationsuite,
+        libs.jetbrains.lifecycle.viewmodel.navigation3,
+        libs.jetbrains.navigation3.ui,
+      )
+    }
   }
 }

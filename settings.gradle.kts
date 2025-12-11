@@ -76,6 +76,7 @@ include(
   ":core:logger-crashlytics",
   ":core:logger-debug",
   ":core:metro-common",
+  ":core:navigation",
   ":core:process-lifecycle",
   ":core:resource-state",
   ":core:resources-app",
