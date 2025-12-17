@@ -93,7 +93,6 @@ include(
   ":data:graphql-client",
   ":data:graphql-schema",
   ":data:locale",
-  ":data:locale-proto",
   ":data:location-api",
   ":data:location-impl",
   ":data:model",

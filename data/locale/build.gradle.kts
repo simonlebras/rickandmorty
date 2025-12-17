@@ -14,8 +14,5 @@ dependencies {
   implementation(project(":core:coroutines"))
   implementation(project(":core:startup"))
 
-  implementation(project(":data:locale-proto"))
-
   implementation(libs.androidx.appcompat)
-  implementation(libs.androidx.datastore)
 }

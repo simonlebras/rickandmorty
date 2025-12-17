@@ -63,7 +63,6 @@ tapmoc = "0.3.2"
 testparameterinjector = "1.20"
 truth = "1.4.5"
 turbine = "1.2.1"
-wire = "6.0.0-alpha01"
 
 [libraries]
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools" }
@@ -151,6 +150,7 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-protobuf = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-protobuf", version.ref = "kotlinx-serialization" }
 
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
@@ -214,4 +214,3 @@ ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmt" }
 metro = { id = "dev.zacsweers.metro", version.ref = "metro" }
 sortdependencies = { id = "com.squareup.sort-dependencies", version.ref = "sortdependencies" }
 tapmoc = { id = "com.gradleup.tapmoc", version.ref = "tapmoc" }
-wire = { id = "com.squareup.wire", version.ref = "wire" }
