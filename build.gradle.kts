@@ -33,5 +33,4 @@ plugins {
   alias(libs.plugins.metro) apply false
   alias(libs.plugins.sortdependencies) apply false
   alias(libs.plugins.tapmoc) apply false
-  alias(libs.plugins.wire) apply false
 }

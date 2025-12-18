@@ -1,7 +1,7 @@
 package app.rickandmorty.data.theme
 
+import androidx.datastore.core.DataStore
 import app.rickandmorty.core.coroutines.inject.ApplicationScope
-import app.rickandmorty.data.theme.proto.NightMode as ProtoNightMode
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import kotlinx.collections.immutable.ImmutableList
@@ -14,38 +14,28 @@ import kotlinx.coroutines.launch
 
 @ContributesBinding(AppScope::class)
 public class ThemeRepositoryImpl(
-  themeDataStore: ThemeDataStore,
+  private val dataStore: DataStore<ThemeProto>,
   @ApplicationScope private val applicationScope: CoroutineScope,
 ) : ThemeRepository {
-  private val dataStore = themeDataStore.value
 
   override fun getTheme(): Flow<Theme> =
     dataStore.data
-      .map { preferences ->
-        Theme(
-          nightMode = preferences.night_mode.toNightMode(),
-          useDynamicColor = preferences.use_dynamic_color,
-        )
+      .map { theme ->
+        Theme(nightMode = theme.nightMode.toNightMode(), useDynamicColor = theme.useDynamicColor)
       }
       .distinctUntilChanged()
 
   override suspend fun setNightMode(nightMode: NightMode) {
     applicationScope
       .launch {
-        dataStore.updateData { preferences ->
-          preferences.copy(night_mode = nightMode.toProtoNightMode())
-        }
+        dataStore.updateData { theme -> theme.copy(nightMode = nightMode.toNightModeProto()) }
       }
       .join()
   }
 
   override suspend fun setUseDynamicColor(useDynamicColor: Boolean) {
     applicationScope
-      .launch {
-        dataStore.updateData { preferences ->
-          preferences.copy(use_dynamic_color = useDynamicColor)
-        }
-      }
+      .launch { dataStore.updateData { theme -> theme.copy(useDynamicColor = useDynamicColor) } }
       .join()
   }
 
@@ -53,20 +43,20 @@ public class ThemeRepositoryImpl(
     persistentListOf(NightMode.Light, NightMode.Dark, defaultNightMode)
 }
 
-private fun NightMode.toProtoNightMode() =
+private fun NightMode.toNightModeProto() =
   when (this) {
-    NightMode.AutoBattery -> ProtoNightMode.AUTO_BATTERY
-    NightMode.FollowSystem -> ProtoNightMode.FOLLOW_SYSTEM
-    NightMode.Light -> ProtoNightMode.LIGHT
-    NightMode.Dark -> ProtoNightMode.DARK
+    NightMode.AutoBattery -> NightModeProto.AUTO_BATTERY
+    NightMode.FollowSystem -> NightModeProto.FOLLOW_SYSTEM
+    NightMode.Light -> NightModeProto.LIGHT
+    NightMode.Dark -> NightModeProto.DARK
   }
 
-private fun ProtoNightMode.toNightMode() =
+private fun NightModeProto.toNightMode() =
   when (this) {
-    ProtoNightMode.UNSPECIFIED,
-    ProtoNightMode.AUTO_BATTERY,
-    ProtoNightMode.FOLLOW_SYSTEM -> defaultNightMode
+    NightModeProto.UNSPECIFIED,
+    NightModeProto.AUTO_BATTERY,
+    NightModeProto.FOLLOW_SYSTEM -> defaultNightMode
 
-    ProtoNightMode.LIGHT -> NightMode.Light
-    ProtoNightMode.DARK -> NightMode.Dark
+    NightModeProto.LIGHT -> NightMode.Light
+    NightModeProto.DARK -> NightMode.Dark
   }

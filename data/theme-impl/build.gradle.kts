@@ -6,7 +6,7 @@ plugins {
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.metro)
 
-  alias(libs.plugins.wire)
+  alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -16,12 +16,14 @@ kotlin {
   dependencies {
     api(project(":data:theme-api"))
 
+    api(libs.androidx.datastore)
+
+    api(libs.kotlinx.serialization.protobuf)
+
     implementation(project(":core:base"))
     implementation(project(":core:coroutines"))
     implementation(project(":core:metro-common"))
     implementation(project(":core:startup"))
-
-    implementation(libs.androidx.datastore)
 
     implementation(libs.kotlinx.collectionsimmutable)
   }
@@ -36,5 +38,3 @@ kotlin {
     }
   }
 }
-
-wire { kotlin {} }
