@@ -94,6 +94,8 @@ dependencies {
   implementation(project(":data:location-impl"))
   implementation(project(":data:theme-impl"))
 
+  implementation(project(":ui:character-impl"))
+  implementation(project(":ui:episode-impl"))
   implementation(project(":ui:location-impl"))
 
   implementation(libs.androidx.activity.compose)
