@@ -17,24 +17,24 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.ui.isSystemInDarkTheme
+import app.rickandmorty.inject.UiGraph
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.android.ActivityKey
 import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
-import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @ContributesIntoMap(AppScope::class, binding<Activity>())
 @ActivityKey(MainActivity::class)
-class MainActivity(private val viewModelFactory: MetroViewModelFactory) : AppCompatActivity() {
+class MainActivity(private val uiGraphFactory: UiGraph.Factory) : AppCompatActivity() {
   init {
     // https://issuetracker.google.com/issues/139738913
     if (Build.VERSION.SDK_INT == 29 && isTaskRoot) {
@@ -42,10 +42,10 @@ class MainActivity(private val viewModelFactory: MetroViewModelFactory) : AppCom
     }
   }
 
-  private val viewModel: MainViewModel by viewModels()
+  private val uiGraph by unsafeLazy { uiGraphFactory.create(this) }
 
-  override val defaultViewModelProviderFactory: ViewModelProvider.Factory
-    get() = viewModelFactory
+  private val viewModelFactory by unsafeLazy { uiGraph.viewModelFactory }
+  private val viewModel by viewModels<MainViewModel>(factoryProducer = { viewModelFactory })
 
   override fun onCreate(savedInstanceState: Bundle?) {
     val splashScreen = installSplashScreen()
@@ -69,7 +69,10 @@ class MainActivity(private val viewModelFactory: MetroViewModelFactory) : AppCom
     setContent {
       CompositionLocalProvider(LocalMetroViewModelFactory provides viewModelFactory) {
         RamTheme(useDynamicColor = uiState.useDynamicColor) {
-          RamApp(modifier = Modifier.semantics { testTagsAsResourceId = true })
+          RamApp(
+            navEntryInstallers = uiGraph.navEntryInstallers,
+            modifier = Modifier.semantics { testTagsAsResourceId = true },
+          )
         }
       }
     }

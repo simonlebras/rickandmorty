@@ -6,6 +6,8 @@ plugins {
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.metro)
+
+  alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -13,13 +15,18 @@ kotlin {
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
+    api(project(":core:navigation"))
+
     api(project(":data:location-api"))
 
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
+    implementation(project(":core:metro-common"))
     implementation(project(":core:ui"))
 
     implementation(libs.androidx.paging.compose)
+
+    implementation(libs.kotlinx.serialization.core)
 
     implementation(libs.metrox.viewmodel.compose)
   }
