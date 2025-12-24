@@ -14,14 +14,14 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
 import app.rickandmorty.core.navigation.NavEntryInstaller
-import app.rickandmorty.ui.location.list.LocationList
+import app.rickandmorty.ui.location.LocationListNavKey
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun RamApp(navEntryInstallers: Set<NavEntryInstaller>, modifier: Modifier = Modifier) {
   NavigationSuiteScaffold(navigationItems = {}, modifier = modifier) {
     val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>()
-    val backStack = rememberNavBackStack(LocationList)
+    val backStack = rememberNavBackStack(LocationListNavKey)
     NavDisplay(
       entries =
         rememberDecoratedNavEntries(
