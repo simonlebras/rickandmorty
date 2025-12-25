@@ -7,8 +7,10 @@ plugins {
   alias(libs.plugins.rickandmorty.compose) apply false
   alias(libs.plugins.rickandmorty.firebase.crashlytics) apply false
   alias(libs.plugins.rickandmorty.firebase.perf) apply false
+  alias(libs.plugins.rickandmorty.jvm.library) apply false
   alias(libs.plugins.rickandmorty.kotlin.multiplatform) apply false
   alias(libs.plugins.rickandmorty.metro) apply false
+  alias(libs.plugins.rickandmorty.navigation.serialization) apply false
   alias(libs.plugins.rickandmorty.root)
 
   alias(libs.plugins.android.application) apply false

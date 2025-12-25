@@ -66,13 +66,19 @@ class MainActivity(private val uiGraphFactory: UiGraph.Factory) : AppCompatActiv
 
     splashScreen.setKeepOnScreenCondition { uiState.isLoading }
 
+    val entryProvider = uiGraph.entryProvider
+    val savedStateConfiguration = uiGraph.savedStateConfiguration
+
     setContent {
       CompositionLocalProvider(LocalMetroViewModelFactory provides viewModelFactory) {
         RamTheme(useDynamicColor = uiState.useDynamicColor) {
-          RamApp(
-            navEntryInstallers = uiGraph.navEntryInstallers,
-            modifier = Modifier.semantics { testTagsAsResourceId = true },
-          )
+          val appState =
+            rememberRamAppState(
+              entryProvider = entryProvider,
+              savedStateConfiguration = savedStateConfiguration,
+            )
+
+          RamApp(appState = appState, modifier = Modifier.semantics { testTagsAsResourceId = true })
         }
       }
     }

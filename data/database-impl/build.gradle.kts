@@ -1,3 +1,4 @@
+import app.rickandmorty.gradle.dsl.kspDependenciesForAllTargets
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
@@ -33,15 +34,10 @@ kotlin {
   }
 
   sourceSets { jvmMain { dependencies { implementation(libs.okio) } } }
+
+  kspDependenciesForAllTargets { ksp(libs.androidx.room.compiler) }
 }
 
 lint { disable += "RestrictedApi" }
 
 room { schemaDirectory("$projectDir/schemas") }
-
-dependencies {
-  add("kspAndroid", libs.androidx.room.compiler)
-  add("kspIosArm64", libs.androidx.room.compiler)
-  add("kspIosSimulatorArm64", libs.androidx.room.compiler)
-  add("kspJvm", libs.androidx.room.compiler)
-}

@@ -1,6 +1,8 @@
 package app.rickandmorty.ui.location
 
 import androidx.navigation3.runtime.NavKey
+import app.rickandmorty.core.metro.UiScope
+import app.rickandmorty.core.navigation.serialization.NavKeySerializer
 import kotlinx.serialization.Serializable
 
-@Serializable public data object LocationListNavKey : NavKey
+@Serializable @NavKeySerializer(UiScope::class) public data object LocationListNavKey : NavKey

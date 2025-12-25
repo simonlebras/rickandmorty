@@ -1,44 +1,53 @@
 package app.rickandmorty.ui
 
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItem
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
-import androidx.navigation3.runtime.NavKey
-import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberDecoratedNavEntries
-import androidx.navigation3.runtime.rememberNavBackStack
-import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.compose.ui.util.fastForEach
 import androidx.navigation3.ui.NavDisplay
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
-import app.rickandmorty.core.navigation.NavEntryInstaller
-import app.rickandmorty.ui.location.LocationListNavKey
+import app.rickandmorty.core.navigation.LocalNavigator
+import app.rickandmorty.core.navigation.Navigator
+import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-fun RamApp(navEntryInstallers: Set<NavEntryInstaller>, modifier: Modifier = Modifier) {
-  NavigationSuiteScaffold(navigationItems = {}, modifier = modifier) {
-    val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>()
-    val backStack = rememberNavBackStack(LocationListNavKey)
-    NavDisplay(
-      entries =
-        rememberDecoratedNavEntries(
-          backStack = backStack,
-          entryDecorators =
-            listOf(
-              rememberSaveableStateHolderNavEntryDecorator(),
-              rememberViewModelStoreNavEntryDecorator(),
-            ),
-          entryProvider =
-            entryProvider {
-              navEntryInstallers.forEach { entryInstaller -> with(entryInstaller) { install() } }
+fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
+  val navigator = remember(appState.navigationState) { Navigator(appState.navigationState) }
+
+  CompositionLocalProvider(LocalNavigator provides navigator) {
+    NavigationSuiteScaffold(
+      navigationItems = {
+        appState.topLevelDestinations.fastForEach { item ->
+          val isSelected = appState.topLevelRoute == item.route
+          NavigationSuiteItem(
+            selected = isSelected,
+            onClick = { navigator.navigate(item.route) },
+            icon = {
+              Icon(
+                imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
+                contentDescription = null,
+              )
             },
-        ),
-      sceneStrategy = listDetailStrategy,
-      sharedTransitionScope = LocalSharedTransitionScope.current,
-      onBack = {},
-    )
+            label = { Text(stringResource(item.label)) },
+          )
+        }
+      },
+      modifier = modifier,
+    ) {
+      NavDisplay(
+        entries = appState.currentEntries,
+        sceneStrategy = rememberListDetailSceneStrategy(),
+        sharedTransitionScope = LocalSharedTransitionScope.current,
+        onBack = navigator::goBack,
+      )
+    }
   }
 }

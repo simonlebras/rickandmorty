@@ -7,7 +7,6 @@ plugins {
   alias(libs.plugins.rickandmorty.metro)
 
   alias(libs.plugins.androidx.baselineprofile)
-  alias(libs.plugins.kotlin.serialization)
 }
 
 val useFirebase = file("google-services.json").exists()
@@ -80,6 +79,7 @@ dependencies {
   implementation(project(":core:coroutines"))
   implementation(project(":core:design-system"))
   implementation(project(":core:ktor"))
+  implementation(project(":core:l10n"))
   implementation(project(":core:process-lifecycle"))
   implementation(project(":core:resource-state"))
   implementation(project(":core:resources-app"))
@@ -106,8 +106,11 @@ dependencies {
 
   implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
   implementation(libs.jetbrains.compose.material3.adaptivenavigationsuite)
-  implementation(libs.jetbrains.lifecycle.viewmodel.navigation3)
+  implementation(libs.jetbrains.compose.resources)
+  implementation(libs.jetbrains.compose.ui.util)
   implementation(libs.jetbrains.navigation3.ui)
+
+  implementation(libs.kotlinx.collectionsimmutable)
 
   implementation(libs.metrox.android)
   implementation(libs.metrox.viewmodel.compose)
@@ -140,6 +143,7 @@ dependencyAnalysis {
       exclude(
         libs.jetbrains.compose.material3.adaptive.navigation3,
         libs.jetbrains.compose.material3.adaptivenavigationsuite,
+        libs.jetbrains.compose.ui.util,
         libs.jetbrains.lifecycle.viewmodel.navigation3,
         libs.jetbrains.navigation3.ui,
       )

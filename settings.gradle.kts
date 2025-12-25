@@ -77,6 +77,8 @@ include(
   ":core:logger-debug",
   ":core:metro-common",
   ":core:navigation",
+  ":core:navigation-serialization-processor",
+  ":core:navigation-serialization-runtime",
   ":core:process-lifecycle",
   ":core:resource-state",
   ":core:resources-app",

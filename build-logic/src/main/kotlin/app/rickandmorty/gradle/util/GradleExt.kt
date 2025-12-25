@@ -21,6 +21,10 @@ internal fun DependencyHandler.coreLibraryDesugaring(vararg dependencyNotations:
   dependencyNotations.forEach { add("coreLibraryDesugaring", it) }
 }
 
+internal fun DependencyHandler.ksp(vararg dependencyNotations: Any) {
+  dependencyNotations.forEach { add("ksp", it) }
+}
+
 internal fun DependencyHandler.lintChecks(vararg dependencyNotations: Any) {
   dependencyNotations.forEach { add("lintChecks", it) }
 }
