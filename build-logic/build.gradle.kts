@@ -88,6 +88,10 @@ gradlePlugin {
       id = "app.rickandmorty.firebase-perf"
       implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
     }
+    register("jvm-library") {
+      id = "app.rickandmorty.jvm-library"
+      implementationClass = "app.rickandmorty.gradle.plugin.JvmLibraryPlugin"
+    }
     register("kotlin-multiplatform") {
       id = "app.rickandmorty.kotlin-multiplatform"
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
@@ -95,6 +99,10 @@ gradlePlugin {
     register("metro") {
       id = "app.rickandmorty.metro"
       implementationClass = "app.rickandmorty.gradle.plugin.MetroPlugin"
+    }
+    register("navigation-serialization") {
+      id = "app.rickandmorty.navigation-serialization"
+      implementationClass = "app.rickandmorty.gradle.plugin.NavigationSerializationPlugin"
     }
     register("root") {
       id = "app.rickandmorty.root"
