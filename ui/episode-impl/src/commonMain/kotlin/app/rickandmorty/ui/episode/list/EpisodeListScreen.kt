@@ -47,12 +47,15 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun EpisodeListScreen(viewModel: EpisodeListViewModel = metroViewModel()) {
+public fun EpisodeListScreen(
+  onNavigateToSettings: () -> Unit,
+  viewModel: EpisodeListViewModel = metroViewModel(),
+) {
   val episodes = viewModel.episodes.collectAsLazyPagingItems()
 
   ReportDrawnWhen { episodes.loadState.isIdle }
 
-  EpisodeListScreen(episodes = episodes, onNavigateToSettings = {})
+  EpisodeListScreen(episodes = episodes, onNavigateToSettings = onNavigateToSettings)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -59,12 +59,15 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun CharacterListScreen(viewModel: CharacterListViewModel = metroViewModel()) {
+public fun CharacterListScreen(
+  onNavigateToSettings: () -> Unit,
+  viewModel: CharacterListViewModel = metroViewModel(),
+) {
   val characters = viewModel.characters.collectAsLazyPagingItems()
 
   ReportDrawnWhen { characters.loadState.isIdle }
 
-  CharacterListScreen(characters = characters, onNavigateToSettings = {})
+  CharacterListScreen(characters = characters, onNavigateToSettings = onNavigateToSettings)
 }
 
 // Todo localize errors

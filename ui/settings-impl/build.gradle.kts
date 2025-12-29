@@ -1,0 +1,36 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
+plugins {
+  alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
+  alias(libs.plugins.rickandmorty.codehealth)
+  alias(libs.plugins.rickandmorty.compose)
+  alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+  alias(libs.plugins.rickandmorty.metro)
+}
+
+kotlin {
+  android { namespace = "app.rickandmorty.ui.settings" }
+
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  dependencies {
+    api(project(":core:app-info"))
+    api(project(":core:navigation"))
+    api(project(":core:resource-state"))
+
+    api(project(":data:locale-api"))
+    api(project(":data:theme-api"))
+
+    api(project(":ui:settings-api"))
+
+    implementation(project(":core:coroutines"))
+    implementation(project(":core:design-system"))
+    implementation(project(":core:l10n"))
+    implementation(project(":core:metro-common"))
+    implementation(project(":core:ui"))
+
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.paging.compose)
+
+    implementation(libs.metrox.viewmodel.compose)
+  }
+}
