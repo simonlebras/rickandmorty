@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
-import app.rickandmorty.data.paging.PagedEntry
+import app.rickandmorty.core.paging.PagedEntry
 
 @Entity(
   tableName = "episode_paged_entry",

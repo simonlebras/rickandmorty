@@ -8,7 +8,7 @@ plugins {
 kotlin {
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
-    api(project(":data:paging"))
+    api(project(":core:paging"))
 
     api(libs.androidx.room.common)
   }
