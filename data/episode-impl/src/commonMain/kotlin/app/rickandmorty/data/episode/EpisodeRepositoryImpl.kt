@@ -5,14 +5,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import app.rickandmorty.core.paging.FIRST_PAGE_KEY
+import app.rickandmorty.core.paging.PageKeyedRemoteMediator
+import app.rickandmorty.core.paging.PageResult
 import app.rickandmorty.data.database.TransactionRunner
 import app.rickandmorty.data.database.dao.EpisodeDao
 import app.rickandmorty.data.database.dao.EpisodePagedEntryDao
 import app.rickandmorty.data.database.entity.EpisodeEntity
 import app.rickandmorty.data.database.entity.EpisodePagedEntryEntity
-import app.rickandmorty.data.paging.FIRST_PAGE_KEY
-import app.rickandmorty.data.paging.PageKeyedRemoteMediator
-import app.rickandmorty.data.paging.PageResult
 import com.apollographql.apollo.ApolloClient
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding

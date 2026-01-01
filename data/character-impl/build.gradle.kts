@@ -15,9 +15,10 @@ kotlin {
 
     api(libs.androidx.paging.common)
 
+    implementation(project(":core:paging"))
+
     implementation(project(":data:database-api"))
     implementation(project(":data:graphql-schema"))
-    implementation(project(":data:paging"))
 
     implementation(libs.apollo.runtime)
   }

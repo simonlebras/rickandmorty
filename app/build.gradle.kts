@@ -78,6 +78,8 @@ dependencies {
   implementation(project(":core:coil"))
   implementation(project(":core:coroutines"))
   implementation(project(":core:design-system"))
+  implementation(project(":core:filesystem"))
+  implementation(project(":core:graphql-client"))
   implementation(project(":core:ktor"))
   implementation(project(":core:l10n"))
   implementation(project(":core:process-lifecycle"))
@@ -89,8 +91,6 @@ dependencies {
   implementation(project(":data:character-impl"))
   implementation(project(":data:database-impl"))
   implementation(project(":data:episode-impl"))
-  implementation(project(":data:filesystem"))
-  implementation(project(":data:graphql-client"))
   implementation(project(":data:location-impl"))
   implementation(project(":data:theme-impl"))
 
