@@ -1,8 +1,8 @@
 package app.rickandmorty.data.theme
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.core.DataStoreFactory
-import androidx.datastore.core.okio.OkioStorage
+import app.rickandmorty.core.datastore.FilePathProducer
+import app.rickandmorty.core.datastore.RamDataStoreFactory
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
@@ -21,13 +21,11 @@ public interface ThemeDataStoreProvider {
       filePathProducer: FilePathProducer,
       serializer: ThemeSerializer,
     ): DataStore<ThemeProto> =
-      DataStoreFactory.create(
-        storage =
-          OkioStorage(
-            fileSystem = fileSystem,
-            producePath = { filePathProducer.produceFilePath(THEME_DATASTORE_FILE_NAME) },
-            serializer = serializer,
-          )
+      RamDataStoreFactory.create(
+        fileSystem = fileSystem,
+        filePathProducer = filePathProducer,
+        fileName = THEME_DATASTORE_FILE_NAME,
+        serializer = serializer,
       )
   }
 }

@@ -70,6 +70,7 @@ include(
   ":core:compose-debug",
   ":core:coroutines",
   ":core:crashlytics",
+  ":core:datastore",
   ":core:design-system",
   ":core:filesystem",
   ":core:graphql-client",

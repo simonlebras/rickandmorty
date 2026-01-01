@@ -14,6 +14,8 @@ kotlin {
 
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
+    api(project(":core:datastore"))
+
     api(project(":data:theme-api"))
 
     api(libs.androidx.datastore)
