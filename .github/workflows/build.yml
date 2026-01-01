@@ -33,9 +33,6 @@ jobs:
           distribution: 'zulu'
           java-version-file: .github/.java-version
 
-      - name: Set up jemalloc
-        uses: kaeawc/setup-jemalloc@v0.0.3
-
       - name: Set up Konan Cache
         uses: ./.github/actions/setup-konan
 
@@ -148,9 +145,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version-file: .github/.java-version
-
-      - name: Set up jemalloc
-        uses: kaeawc/setup-jemalloc@v0.0.3
 
       - name: Set up Konan Cache
         uses: ./.github/actions/setup-konan
