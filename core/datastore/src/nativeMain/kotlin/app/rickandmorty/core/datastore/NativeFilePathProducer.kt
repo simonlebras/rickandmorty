@@ -1,4 +1,4 @@
-package app.rickandmorty.data.theme
+package app.rickandmorty.core.datastore
 
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
@@ -12,7 +12,7 @@ import platform.Foundation.NSUserDomainMask
 @ContributesBinding(AppScope::class)
 public class NativeFilePathProducer : FilePathProducer {
   @OptIn(ExperimentalForeignApi::class)
-  override fun produceFilePath(fileName: String): Path {
+  override fun invoke(fileName: String): Path {
     val documentDirectory =
       NSFileManager.defaultManager.URLForDirectory(
         directory = NSDocumentDirectory,

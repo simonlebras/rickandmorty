@@ -1,4 +1,4 @@
-package app.rickandmorty.data.theme
+package app.rickandmorty.core.datastore
 
 import android.content.Context
 import app.rickandmorty.core.metro.AppContext
@@ -9,6 +9,7 @@ import okio.Path.Companion.toPath
 
 @ContributesBinding(AppScope::class)
 public class AndroidFilePathProducer(@AppContext private val context: Context) : FilePathProducer {
-  override fun produceFilePath(fileName: String): Path =
-    context.filesDir.resolve(fileName).absolutePath.toPath()
+  override fun invoke(fileName: String): Path {
+    return context.filesDir.resolve(fileName).absolutePath.toPath()
+  }
 }
