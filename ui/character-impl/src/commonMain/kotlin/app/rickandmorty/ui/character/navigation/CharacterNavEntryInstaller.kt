@@ -5,9 +5,8 @@ import androidx.navigation3.runtime.NavKey
 import app.rickandmorty.core.metro.UiScope
 import app.rickandmorty.core.navigation.LocalNavigator
 import app.rickandmorty.core.navigation.NavEntryInstaller
-import app.rickandmorty.ui.character.CharacterListNavKey
 import app.rickandmorty.ui.character.list.CharacterListScreen
-import app.rickandmorty.ui.settings.MainSettingsNavKey
+import app.rickandmorty.ui.settings.navigation.MainSettingsNavKey
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(UiScope::class)

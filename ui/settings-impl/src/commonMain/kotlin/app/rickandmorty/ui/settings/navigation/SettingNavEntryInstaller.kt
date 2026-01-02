@@ -9,8 +9,6 @@ import androidx.navigation3.runtime.NavKey
 import app.rickandmorty.core.metro.UiScope
 import app.rickandmorty.core.navigation.LocalNavigator
 import app.rickandmorty.core.navigation.NavEntryInstaller
-import app.rickandmorty.ui.settings.LanguageSettingsNavKey
-import app.rickandmorty.ui.settings.MainSettingsNavKey
 import app.rickandmorty.ui.settings.language.LanguageSettingsScreen
 import app.rickandmorty.ui.settings.main.MainSettingsScreen
 import app.rickandmorty.ui.settings.theme.ThemeSettingsDialog
