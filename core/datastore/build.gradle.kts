@@ -15,6 +15,8 @@ kotlin {
     api(libs.androidx.datastore)
 
     api(libs.okio)
+
+    implementation(libs.kotlinx.serialization.protobuf)
   }
 
   sourceSets { androidMain { dependencies { implementation(project(":core:metro-common")) } } }
