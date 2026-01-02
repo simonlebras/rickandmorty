@@ -47,12 +47,15 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun LocationListScreen(viewModel: LocationListViewModel = metroViewModel()) {
+public fun LocationListScreen(
+  onNavigateToSettings: () -> Unit,
+  viewModel: LocationListViewModel = metroViewModel(),
+) {
   val locations = viewModel.locations.collectAsLazyPagingItems()
 
   ReportDrawnWhen { locations.loadState.isIdle }
 
-  LocationListScreen(locations = locations, onNavigateToSettings = {})
+  LocationListScreen(locations = locations, onNavigateToSettings = onNavigateToSettings)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

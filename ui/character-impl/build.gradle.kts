@@ -25,6 +25,8 @@ kotlin {
     implementation(project(":core:ui"))
     implementation(project(":core:ui-tooling-preview"))
 
+    implementation(project(":ui:settings-api"))
+
     implementation(libs.androidx.paging.compose)
 
     implementation(libs.metrox.viewmodel.compose)

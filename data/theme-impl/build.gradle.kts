@@ -18,22 +18,18 @@ kotlin {
 
     api(project(":data:theme-api"))
 
-    api(libs.androidx.datastore)
-
     api(libs.kotlinx.serialization.protobuf)
 
-    implementation(project(":core:base"))
     implementation(project(":core:coroutines"))
-    implementation(project(":core:metro-common"))
-    implementation(project(":core:startup"))
-
-    implementation(libs.kotlinx.collectionsimmutable)
   }
 
   sourceSets {
     androidMain {
       dependencies {
+        implementation(project(":core:base"))
+        implementation(project(":core:metro-common"))
         implementation(project(":core:process-lifecycle"))
+        implementation(project(":core:startup"))
 
         implementation(libs.androidx.appcompat)
       }

@@ -24,6 +24,8 @@ kotlin {
     implementation(project(":core:metro-common"))
     implementation(project(":core:ui"))
 
+    implementation(project(":ui:settings-api"))
+
     implementation(libs.androidx.paging.compose)
 
     implementation(libs.metrox.viewmodel.compose)
