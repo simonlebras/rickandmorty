@@ -13,9 +13,9 @@ import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.character_list_title
 import app.rickandmorty.core.l10n.resources.episode_list_title
 import app.rickandmorty.core.l10n.resources.location_list_title
-import app.rickandmorty.ui.character.CharacterListNavKey
-import app.rickandmorty.ui.episode.EpisodeListNavKey
-import app.rickandmorty.ui.location.LocationListNavKey
+import app.rickandmorty.ui.character.navigation.CharacterListNavKey
+import app.rickandmorty.ui.episode.navigation.EpisodeListNavKey
+import app.rickandmorty.ui.location.navigation.LocationListNavKey
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentSet
 import org.jetbrains.compose.resources.StringResource

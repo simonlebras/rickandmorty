@@ -1,4 +1,4 @@
-package app.rickandmorty.ui.settings
+package app.rickandmorty.ui.settings.navigation
 
 import androidx.navigation3.runtime.NavKey
 import app.rickandmorty.core.metro.UiScope
