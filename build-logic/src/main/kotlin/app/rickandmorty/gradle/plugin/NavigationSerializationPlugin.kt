@@ -1,9 +1,9 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.dsl.apply
-import app.rickandmorty.gradle.dsl.commonMainKspDependencies
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.dependencies
+import app.rickandmorty.gradle.dsl.kspDependenciesForAllTargets
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.api
 import app.rickandmorty.gradle.util.ksp
@@ -33,7 +33,7 @@ public class NavigationSerializationPlugin : Plugin<Project> {
         dependencies { api(project(":core:navigation-serialization-runtime")) }
       }
 
-      commonMainKspDependencies { ksp(project(":core:navigation-serialization-processor")) }
+      kspDependenciesForAllTargets { ksp(project(":core:navigation-serialization-processor")) }
     }
   }
 
