@@ -68,7 +68,7 @@ include(
   ":core:base",
   ":core:coil",
   ":core:coil-logger",
-  ":core:compose-debug",
+  ":core:compose-diagnostic",
   ":core:coroutines",
   ":core:crashlytics",
   ":core:datastore",

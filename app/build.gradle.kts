@@ -117,11 +117,11 @@ dependencies {
   implementation(libs.metrox.android)
   implementation(libs.metrox.viewmodel.compose)
 
+  releaseImplementation(project(":core:compose-diagnostic"))
   releaseImplementation(project(":core:crashlytics"))
   releaseImplementation(project(":core:logger-crashlytics"))
 
   debugImplementation(project(":core:coil-logger"))
-  debugImplementation(project(":core:compose-debug"))
   debugImplementation(project(":core:logger-debug"))
   debugImplementation(project(":core:strict-mode"))
 
