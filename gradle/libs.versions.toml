@@ -37,7 +37,6 @@ firebase-bom = "34.7.0"
 firebase-crashlytics-plugin = "3.0.6"
 firebase-perf-plugin = "2.0.2"
 googleservices = "4.4.4"
-gradledoctor = "0.12.1"
 jetbrains-compose = "1.11.0-alpha01"
 jetbrains-compose-material3 = "1.11.0-alpha01"
 jetbrains-compose-material3-adaptive = "1.3.0-alpha03"
@@ -213,7 +212,6 @@ dependencyanalysis = { id = "com.autonomousapps.dependency-analysis", version.re
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 firebase-perf = { id = "com.google.firebase.firebase-perf", version.ref = "firebase-perf-plugin" }
 googleservices = { id = "com.google.gms.google-services", version.ref = "googleservices" }
-gradledoctor = { id = "com.osacky.doctor", version.ref = "gradledoctor" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-sam = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kotlin" }
