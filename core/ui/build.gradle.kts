@@ -20,13 +20,5 @@ kotlin {
     implementation(project(":core:l10n"))
   }
 
-  sourceSets {
-    androidMain {
-      dependencies {
-        api(libs.androidx.activity)
-
-        implementation(libs.androidx.activity.compose)
-      }
-    }
-  }
+  sourceSets { androidMain { dependencies { implementation(libs.androidx.activity.compose) } } }
 }
