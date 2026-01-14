@@ -18,7 +18,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.savedstate.compose.serialization.serializers.MutableStateSerializer
 import androidx.savedstate.serialization.SavedStateConfiguration
-import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
@@ -69,7 +69,7 @@ public class NavigationState(
   }
 
   @Composable
-  public fun toDecoratedEntries(entryProvider: EntryProvider): PersistentList<NavEntry<NavKey>> {
+  public fun toDecoratedEntries(entryProvider: EntryProvider): ImmutableList<NavEntry<NavKey>> {
     val decorators = listOf(rememberSaveableStateHolderNavEntryDecorator<NavKey>())
 
     val decoratedEntries = backStacks.mapValues { (_, stack) ->

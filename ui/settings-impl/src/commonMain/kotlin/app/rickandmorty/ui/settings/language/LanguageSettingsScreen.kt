@@ -12,7 +12,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -29,6 +28,7 @@ import app.rickandmorty.core.designsystem.icon.filled.Check
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.settings_language_system_default
 import app.rickandmorty.core.l10n.resources.settings_language_title
+import app.rickandmorty.core.ui.NestedScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.locale.Locale
 import app.rickandmorty.ui.settings.common.SettingsContentType
@@ -68,7 +68,7 @@ private fun LanguageSettingsScreen(
 ) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-  Scaffold(
+  NestedScaffold(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       LanguageSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior)
