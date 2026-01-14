@@ -86,6 +86,7 @@ dependencies {
   implementation(project(":core:resource-state"))
   implementation(project(":core:resources-app"))
   implementation(project(":core:startup"))
+  implementation(project(":core:ui"))
 
   implementation(project(":data:character-impl"))
   implementation(project(":data:database-impl"))
@@ -102,6 +103,7 @@ dependencies {
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.core.splashscreen)
+  implementation(libs.androidx.navigation3.ui)
 
   implementation(libs.coil)
 
