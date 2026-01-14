@@ -21,7 +21,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.designsystem.theme.RamTheme
-import app.rickandmorty.core.ui.isSystemInDarkTheme
 import app.rickandmorty.inject.UiGraph
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
@@ -59,8 +58,6 @@ class MainActivity(private val uiGraphFactory: UiGraph.Factory) : AppCompatActiv
     lifecycleScope.launch {
       lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
         viewModel.uiState.onEach { uiState = it }.launchIn(this)
-
-        isSystemInDarkTheme().onEach { setupEdgeToEdge() }.launchIn(this)
       }
     }
 

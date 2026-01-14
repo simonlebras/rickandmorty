@@ -86,7 +86,6 @@ dependencies {
   implementation(project(":core:resource-state"))
   implementation(project(":core:resources-app"))
   implementation(project(":core:startup"))
-  implementation(project(":core:ui"))
 
   implementation(project(":data:character-impl"))
   implementation(project(":data:database-impl"))
