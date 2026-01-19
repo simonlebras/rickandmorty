@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-
 plugins {
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
@@ -7,7 +5,6 @@ plugins {
 }
 
 kotlin {
-  @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
     api(libs.jetbrains.compose.resources)
 

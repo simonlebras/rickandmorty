@@ -194,7 +194,6 @@ rickandmorty-firebase-crashlytics = { id = "app.rickandmorty.firebase-crashlytic
 rickandmorty-firebase-perf = { id = "app.rickandmorty.firebase-perf" }
 rickandmorty-jvm-library = { id = "app.rickandmorty.jvm-library" }
 rickandmorty-kotlin-multiplatform = { id = "app.rickandmorty.kotlin-multiplatform" }
-rickandmorty-metro = { id = "app.rickandmorty.metro" }
 rickandmorty-navigation-serialization = { id = "app.rickandmorty.navigation-serialization" }
 rickandmorty-root = { id = "app.rickandmorty.root" }
 
