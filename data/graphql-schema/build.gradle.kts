@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-
 plugins {
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
@@ -22,6 +20,4 @@ apollo {
   }
 }
 
-kotlin {
-  @OptIn(ExperimentalKotlinGradlePluginApi::class) dependencies { implementation(libs.apollo.api) }
-}
+kotlin { dependencies { implementation(libs.apollo.api) } }

@@ -1,14 +1,13 @@
 import app.rickandmorty.gradle.dsl.kspDependenciesForAllTargets
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
-  alias(libs.plugins.rickandmorty.metro)
 
   alias(libs.plugins.androidx.room)
   alias(libs.plugins.ksp)
+  alias(libs.plugins.metro)
 }
 
 kotlin {
@@ -20,7 +19,6 @@ kotlin {
     lint { disable += "RestrictedApi" }
   }
 
-  @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
     api(project(":data:database-api"))
 

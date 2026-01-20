@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-
 plugins {
   alias(libs.plugins.rickandmorty.android.multiplatformlibrary)
   alias(libs.plugins.rickandmorty.compose)
@@ -9,7 +7,6 @@ plugins {
 kotlin {
   android { namespace = "app.rickandmorty.core.ui.tooling.preview" }
 
-  @OptIn(ExperimentalKotlinGradlePluginApi::class)
   dependencies {
     api(libs.jetbrains.compose.ui.tooling.preview)
 
