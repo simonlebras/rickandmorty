@@ -60,7 +60,7 @@ slack-compose-lints = "1.4.2"
 sortdependencies = "0.16"
 store = "5.1.0-alpha08"
 tapmoc = "0.4.0"
-testparameterinjector = "1.20"
+testparameterinjector = "1.21"
 truth = "1.4.5"
 turbine = "1.2.1"
 
