@@ -1,18 +1,17 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.dsl.apply
-import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.dsl.withType
 import app.rickandmorty.gradle.util.configureLint
 import app.rickandmorty.gradle.util.coreLibraryDesugaring
+import app.rickandmorty.gradle.util.kotlinMultiplatform
 import app.rickandmorty.gradle.util.lintChecks
 import app.rickandmorty.gradle.util.withPlugin
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
   override fun apply(target: Project): Unit =
@@ -22,7 +21,7 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
       apply(libs.plugins.android.multiplatformlibrary, libs.plugins.android.lint)
 
       pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
-        configure<KotlinMultiplatformExtension> {
+        kotlinMultiplatform {
           targets.withType<KotlinMultiplatformAndroidLibraryTarget>().configureEach {
             lint { configureLint() }
 

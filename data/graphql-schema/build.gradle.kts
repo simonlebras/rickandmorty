@@ -8,8 +8,6 @@ plugins {
 apollo {
   service("rickandmorty") {
     packageName = "app.rickandmorty.data.graphql.schema"
-    @Suppress("OPT_IN_USAGE")
-    generateDataBuilders = true
     generateApolloMetadata = true
     schemaFiles.setFrom("src/main/graphql/schema.graphqls", "src/main/graphql/extra.graphqls")
 
