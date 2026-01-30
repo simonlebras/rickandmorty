@@ -1,17 +1,16 @@
 package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.dsl.apply
-import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.dependencies
 import app.rickandmorty.gradle.dsl.kspDependenciesForAllTargets
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.api
+import app.rickandmorty.gradle.util.kotlinMultiplatform
 import app.rickandmorty.gradle.util.ksp
 import app.rickandmorty.gradle.util.withPlugin
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 public class NavigationSerializationPlugin : Plugin<Project> {
   override fun apply(target: Project) {
@@ -28,7 +27,7 @@ public class NavigationSerializationPlugin : Plugin<Project> {
   }
 
   private fun Project.configureKotlinMultiplatform() {
-    configure<KotlinMultiplatformExtension> {
+    kotlinMultiplatform {
       sourceSets.commonMain {
         dependencies { api(project(":core:navigation-serialization-runtime")) }
       }

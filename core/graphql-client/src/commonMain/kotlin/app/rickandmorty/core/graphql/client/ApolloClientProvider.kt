@@ -13,7 +13,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 
 private const val SERVER_URL = "https://rickandmortyapi.com/graphql"
 
-@OptIn(ApolloExperimental::class)
+@OptIn(ApolloExperimental::class, ExperimentalStdlibApi::class)
 @ContributesTo(AppScope::class)
 public interface ApolloClientProvider {
   public companion object {
