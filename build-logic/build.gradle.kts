@@ -55,52 +55,40 @@ dependencies {
 
 gradlePlugin {
   plugins {
-    register("android-application") {
-      id = "app.rickandmorty.android-application"
+    register("app.rickandmorty.android-application") {
       implementationClass = "app.rickandmorty.gradle.plugin.AndroidApplicationPlugin"
     }
-    register("android-library") {
-      id = "app.rickandmorty.android-library"
+    register("app.rickandmorty.android-library") {
       implementationClass = "app.rickandmorty.gradle.plugin.AndroidLibraryPlugin"
     }
-    register("android-multiplatformlibrary") {
-      id = "app.rickandmorty.android-multiplatformlibrary"
+    register("app.rickandmorty.android-multiplatformlibrary") {
       implementationClass = "app.rickandmorty.gradle.plugin.AndroidMultiplatformLibraryPlugin"
     }
-    register("android-test") {
-      id = "app.rickandmorty.android-test"
+    register("app.rickandmorty.android-test") {
       implementationClass = "app.rickandmorty.gradle.plugin.AndroidTestPlugin"
     }
-    register("codehealth") {
-      id = "app.rickandmorty.codehealth"
+    register("app.rickandmorty.codehealth") {
       implementationClass = "app.rickandmorty.gradle.plugin.CodeHealthPlugin"
     }
-    register("compose") {
-      id = "app.rickandmorty.compose"
+    register("app.rickandmorty.compose") {
       implementationClass = "app.rickandmorty.gradle.plugin.ComposePlugin"
     }
-    register("firebase-crashlytics") {
-      id = "app.rickandmorty.firebase-crashlytics"
+    register("app.rickandmorty.firebase-crashlytics") {
       implementationClass = "app.rickandmorty.gradle.plugin.FirebaseCrashlyticsPlugin"
     }
-    register("firebase-perf") {
-      id = "app.rickandmorty.firebase-perf"
+    register("app.rickandmorty.firebase-perf") {
       implementationClass = "app.rickandmorty.gradle.plugin.FirebasePerfPlugin"
     }
-    register("jvm-library") {
-      id = "app.rickandmorty.jvm-library"
+    register("app.rickandmorty.jvm-library") {
       implementationClass = "app.rickandmorty.gradle.plugin.JvmLibraryPlugin"
     }
-    register("kotlin-multiplatform") {
-      id = "app.rickandmorty.kotlin-multiplatform"
+    register("app.rickandmorty.kotlin-multiplatform") {
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
     }
-    register("navigation-serialization") {
-      id = "app.rickandmorty.navigation-serialization"
+    register("app.rickandmorty.navigation-serialization") {
       implementationClass = "app.rickandmorty.gradle.plugin.NavigationSerializationPlugin"
     }
-    register("root") {
-      id = "app.rickandmorty.root"
+    register("app.rickandmorty.root") {
       implementationClass = "app.rickandmorty.gradle.plugin.RootPlugin"
     }
   }
