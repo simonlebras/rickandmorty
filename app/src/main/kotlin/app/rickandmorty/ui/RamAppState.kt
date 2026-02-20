@@ -1,8 +1,11 @@
 package app.rickandmorty.ui
 
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import androidx.savedstate.serialization.SavedStateConfiguration
@@ -21,6 +24,12 @@ class RamAppState(val navigationState: NavigationState, val entryProvider: Entry
 
   val topLevelRoute: NavKey
     get() = navigationState.topLevelRoute
+
+   val movableNavSuite = movableContentOf< Modifier> {  modifier ->
+    NavSuite(
+      modifier = modifier,
+    )
+  }
 }
 
 @Composable

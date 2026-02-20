@@ -12,6 +12,7 @@ kotlin {
     api(libs.coil.compose)
 
     api(libs.jetbrains.compose.material3)
+    api(libs.jetbrains.compose.material3.adaptivenavigationsuite)
 
     implementation(project(":core:l10n"))
 
