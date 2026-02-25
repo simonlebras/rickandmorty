@@ -2,6 +2,8 @@ package app.rickandmorty.core.coil.inject
 
 import coil3.ImageLoader
 import coil3.PlatformContext
+import coil3.annotation.ExperimentalCoilApi
+import coil3.network.DeDupeConcurrentRequestStrategy
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.util.Logger
 import dev.zacsweers.metro.AppScope
@@ -13,6 +15,7 @@ import io.ktor.client.HttpClient
 @ContributesTo(AppScope::class)
 public interface ImageLoaderProvider {
   public companion object {
+    @OptIn(ExperimentalCoilApi::class)
     @Provides
     @SingleIn(AppScope::class)
     public fun provideImageLoader(
@@ -21,7 +24,14 @@ public interface ImageLoaderProvider {
       logger: Logger? = null,
     ): ImageLoader =
       ImageLoader.Builder(context)
-        .components { add(KtorNetworkFetcherFactory(httpClient.value)) }
+        .components {
+          add(
+            KtorNetworkFetcherFactory(
+              httpClient = { httpClient.value },
+              concurrentRequestStrategy = { DeDupeConcurrentRequestStrategy() },
+            )
+          )
+        }
         .logger(logger)
         .build()
   }
