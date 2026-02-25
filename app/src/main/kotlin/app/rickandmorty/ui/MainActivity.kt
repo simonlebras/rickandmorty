@@ -41,7 +41,7 @@ class MainActivity(private val uiGraphFactory: UiGraph.Factory) : AppCompatActiv
     }
   }
 
-  private val uiGraph by unsafeLazy { uiGraphFactory.create(this) }
+  private val uiGraph by unsafeLazy { uiGraphFactory.create() }
 
   private val viewModelFactory by unsafeLazy { uiGraph.viewModelFactory }
   private val viewModel by viewModels<MainViewModel>(factoryProducer = { viewModelFactory })
