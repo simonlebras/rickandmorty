@@ -44,7 +44,7 @@ fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
     ) {
       NavDisplay(
         entries = appState.currentEntries,
-        sceneStrategy = rememberListDetailSceneStrategy(),
+        sceneStrategies = listOf(rememberListDetailSceneStrategy()),
         sharedTransitionScope = LocalSharedTransitionScope.current,
         onBack = navigator::goBack,
       )
