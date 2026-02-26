@@ -29,6 +29,7 @@ androidx-tracing = "2.0.0-alpha02"
 androidx-window = "1.6.0-alpha01"
 apollo = "5.0.0-alpha.5"
 apollo-adapters = "0.7.0"
+apollo-ktor = "0.1.1"
 coil = "3.4.0"
 compose-placeholder = "1.0.12"
 crashkios-crashlytics = "0.9.0"
@@ -107,6 +108,7 @@ androidx-window = { group = "androidx.window", name = "window", version.ref = "a
 
 apollo-adapters-kotlinx-datetime = { group = "com.apollographql.adapters", name = "apollo-adapters-kotlinx-datetime", version.ref = "apollo-adapters" }
 apollo-api = { group = "com.apollographql.apollo", name = "apollo-api", version.ref = "apollo" }
+apollo-ktor = { group = "com.apollographql.ktor", name = "apollo-engine-ktor", version.ref = "apollo-ktor" }
 apollo-runtime = { group = "com.apollographql.apollo", name = "apollo-runtime", version.ref = "apollo" }
 
 coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
