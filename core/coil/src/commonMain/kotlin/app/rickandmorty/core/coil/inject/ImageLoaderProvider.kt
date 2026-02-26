@@ -20,15 +20,15 @@ public interface ImageLoaderProvider {
     @SingleIn(AppScope::class)
     public fun provideImageLoader(
       context: PlatformContext,
-      httpClient: Lazy<HttpClient>,
+      httpClient: HttpClient,
       logger: Logger? = null,
     ): ImageLoader =
       ImageLoader.Builder(context)
         .components {
           add(
             KtorNetworkFetcherFactory(
-              httpClient = { httpClient.value },
-              concurrentRequestStrategy = { DeDupeConcurrentRequestStrategy() },
+              httpClient = httpClient,
+              concurrentRequestStrategy = DeDupeConcurrentRequestStrategy(),
             )
           )
         }

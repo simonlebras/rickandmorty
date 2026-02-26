@@ -5,9 +5,11 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.annotations.ApolloExperimental
 import com.apollographql.apollo.interceptor.RetryOnErrorInterceptor
 import com.apollographql.apollo.network.NetworkMonitor
+import com.apollographql.ktor.http.KtorHttpEngine
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
+import io.ktor.client.HttpClient
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineDispatcher
 
@@ -19,11 +21,13 @@ public interface ApolloClientProvider {
   public companion object {
     @Provides
     public fun provideApolloClient(
+      httpClient: HttpClient,
       @IODispatcher ioDispatcher: CoroutineContext,
       networkMonitor: NetworkMonitor? = null,
     ): ApolloClient =
       ApolloClient.Builder()
         .serverUrl(SERVER_URL)
+        .httpEngine(KtorHttpEngine(client = httpClient))
         .apply {
           networkMonitor?.let { monitor ->
             retryOnErrorInterceptor(RetryOnErrorInterceptor(monitor))

@@ -14,5 +14,7 @@ kotlin {
 
     implementation(project(":core:coroutines"))
     implementation(project(":core:metro-common"))
+
+    implementation(libs.apollo.ktor)
   }
 }
