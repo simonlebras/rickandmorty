@@ -1,5 +1,5 @@
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
 import app.rickandmorty.data.database.DATABASE_NAME
 import app.rickandmorty.data.database.RamDatabase
 import dev.zacsweers.metro.AppScope

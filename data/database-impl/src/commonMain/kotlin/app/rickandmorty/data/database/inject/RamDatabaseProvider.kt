@@ -1,6 +1,6 @@
 package app.rickandmorty.data.database.inject
 
-import androidx.room.RoomDatabase
+import androidx.room3.RoomDatabase
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import app.rickandmorty.core.coroutines.inject.IODispatcher
 import app.rickandmorty.data.database.RamDatabase

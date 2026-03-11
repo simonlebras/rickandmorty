@@ -1,9 +1,9 @@
 package app.rickandmorty.data.database
 
-import androidx.room.deferredTransaction
-import androidx.room.immediateTransaction
-import androidx.room.useReaderConnection
-import androidx.room.useWriterConnection
+import androidx.room3.deferredTransaction
+import androidx.room3.immediateTransaction
+import androidx.room3.useReaderConnection
+import androidx.room3.useWriterConnection
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 

@@ -1,6 +1,6 @@
 import android.content.Context
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
 import app.rickandmorty.core.metro.AppContext
 import app.rickandmorty.data.database.DATABASE_NAME
 import app.rickandmorty.data.database.RamDatabase

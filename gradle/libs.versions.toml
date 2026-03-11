@@ -16,7 +16,7 @@ androidx-lifecycle = "2.11.0-alpha02"
 androidx-navigation3 = "1.1.0-beta01"
 androidx-paging = "3.5.0-alpha01"
 androidx-profileinstaller = "1.4.1"
-androidx-room = "2.8.4"
+androidx-room = "3.0.0-alpha01"
 androidx-sqlite = "2.7.0-alpha01"
 androidx-test-core = "1.7.0"
 androidx-test-espresso = "3.7.0"
@@ -90,11 +90,11 @@ androidx-paging-common = { group = "androidx.paging", name = "paging-common", ve
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging" }
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidx-paging" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "androidx-profileinstaller" }
-androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "androidx-room" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
-androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidx-room" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
-androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "androidx-room" }
+androidx-room-common = { group = "androidx.room3", name = "room3-common", version.ref = "androidx-room" }
+androidx-room-compiler = { group = "androidx.room3", name = "room3-compiler", version.ref = "androidx-room" }
+androidx-room-paging = { group = "androidx.room3", name = "room3-paging", version.ref = "androidx-room" }
+androidx-room-runtime = { group = "androidx.room3", name = "room3-runtime", version.ref = "androidx-room" }
+androidx-room-testing = { group = "androidx.room3", name = "room3-testing", version.ref = "androidx-room" }
 androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqlite" }
 androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidx-test-core" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }
@@ -205,7 +205,7 @@ android-lint = { id = "com.android.lint", version.ref = "android-plugin" }
 android-multiplatformlibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "android-plugin" }
 android-test = { id = "com.android.test", version.ref = "android-plugin" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
-androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
+androidx-room = { id = "androidx.room3", version.ref = "androidx-room" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose" }

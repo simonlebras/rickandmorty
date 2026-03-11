@@ -27,8 +27,6 @@ kotlin {
 
     implementation(project(":core:coroutines"))
     implementation(project(":core:metro-common"))
-
-    implementation(libs.androidx.room.paging)
   }
 
   sourceSets { jvmMain { dependencies { implementation(libs.okio) } } }
@@ -36,6 +34,4 @@ kotlin {
   kspDependenciesForAllTargets { ksp(libs.androidx.room.compiler) }
 }
 
-lint { disable += "RestrictedApi" }
-
-room { schemaDirectory("$projectDir/schemas") }
+room3 { schemaDirectory("$projectDir/schemas") }
