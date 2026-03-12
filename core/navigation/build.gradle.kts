@@ -14,7 +14,8 @@ kotlin {
 
     implementation(project(":core:metro-common"))
 
+    implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+
     implementation(libs.jetbrains.compose.ui.util)
-    implementation(libs.jetbrains.lifecycle.viewmodel.navigation3)
   }
 }
