@@ -143,7 +143,6 @@ dependencyAnalysis {
         libs.jetbrains.compose.material3.adaptive.navigation3,
         libs.jetbrains.compose.material3.adaptivenavigationsuite,
         libs.jetbrains.compose.ui.util,
-        libs.jetbrains.lifecycle.viewmodel.navigation3,
         libs.jetbrains.navigation3.ui,
       )
     }
