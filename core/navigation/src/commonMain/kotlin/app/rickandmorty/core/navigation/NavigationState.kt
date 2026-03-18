@@ -72,14 +72,13 @@ public class NavigationState(
   public fun toDecoratedEntries(entryProvider: EntryProvider): PersistentList<NavEntry<NavKey>> {
     val decorators = listOf(rememberSaveableStateHolderNavEntryDecorator<NavKey>())
 
-    val decoratedEntries =
-      backStacks.mapValues { (_, stack) ->
-        rememberDecoratedNavEntries(
-          backStack = stack,
-          entryDecorators = decorators,
-          entryProvider = entryProvider,
-        )
-      }
+    val decoratedEntries = backStacks.mapValues { (_, stack) ->
+      rememberDecoratedNavEntries(
+        backStack = stack,
+        entryDecorators = decorators,
+        entryProvider = entryProvider,
+      )
+    }
 
     return remember(topLevelRoutesInUse, decoratedEntries) {
       topLevelRoutesInUse.fastFlatMap { decoratedEntries[it].orEmpty() }.toPersistentList()
