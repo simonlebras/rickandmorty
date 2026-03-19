@@ -1,5 +1,7 @@
 package app.rickandmorty.ui.settings.navigation
 
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -16,8 +18,9 @@ import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(UiScope::class)
 public class SettingsNavEntryInstaller : NavEntryInstaller {
+  @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun EntryProviderScope<NavKey>.install() {
-    entry<MainSettingsNavKey> {
+    entry<MainSettingsNavKey>(metadata = ListDetailSceneStrategy.listPane()) {
       var showSettingsDialog by rememberSaveable { mutableStateOf(false) }
 
       val navigator = LocalNavigator.current
