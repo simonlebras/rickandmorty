@@ -10,15 +10,19 @@ import androidx.navigation3.ui.NavDisplay
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
 import app.rickandmorty.core.navigation.LocalNavigator
 import app.rickandmorty.core.navigation.Navigator
+import app.rickandmorty.core.ui.LocalHazeState
 import app.rickandmorty.core.ui.rememberNavSuiteSceneStrategy
+import dev.chrisbanes.haze.rememberHazeState
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
+  val hazeState = rememberHazeState(blurEnabled = true)
+
   val navigationState = appState.navigationState
   val navigator = remember(navigationState) { Navigator(navigationState) }
 
-  CompositionLocalProvider(LocalNavigator provides navigator) {
+  CompositionLocalProvider(LocalHazeState provides hazeState, LocalNavigator provides navigator) {
     NavDisplay(
       entries = appState.currentEntries,
       modifier = modifier,

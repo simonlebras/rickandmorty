@@ -10,6 +10,9 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import dev.chrisbanes.haze.LocalHazeStyle
+import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
+import dev.chrisbanes.haze.materials.HazeMaterials
 
 internal val RamLightColorScheme =
   lightColorScheme(
@@ -77,7 +80,11 @@ internal val RamDarkColorScheme =
     onSurfaceVariant = DarkOnSurfaceVariant,
   )
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalSharedTransitionApi::class)
+@OptIn(
+  ExperimentalHazeMaterialsApi::class,
+  ExperimentalMaterial3ExpressiveApi::class,
+  ExperimentalSharedTransitionApi::class,
+)
 @Composable
 public fun RamTheme(
   useDarkTheme: Boolean = isSystemInDarkTheme(),
@@ -93,7 +100,12 @@ public fun RamTheme(
     typography = RamTypography,
   ) {
     SharedTransitionLayout {
-      CompositionLocalProvider(LocalSharedTransitionScope provides this) { content() }
+      CompositionLocalProvider(
+        LocalHazeStyle provides HazeMaterials.ultraThin(),
+        LocalSharedTransitionScope provides this,
+      ) {
+        content()
+      }
     }
   }
 }

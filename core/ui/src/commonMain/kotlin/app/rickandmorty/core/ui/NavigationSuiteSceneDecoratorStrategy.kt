@@ -6,6 +6,7 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation3.runtime.get
 import androidx.navigation3.scene.Scene
 import androidx.navigation3.scene.SceneDecoratorStrategy
@@ -44,6 +45,7 @@ private class NavigationSuiteSceneDecorator<T : Any>(
         }
       },
       navigationSuiteType = navigationSuiteType,
+      containerColor = Color.Transparent,
     ) {
       scene.content()
     }

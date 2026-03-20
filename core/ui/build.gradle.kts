@@ -14,6 +14,8 @@ kotlin {
     api(libs.androidx.navigation3.runtime)
     api(libs.androidx.paging.compose)
 
+    api(libs.haze)
+
     api(libs.jetbrains.compose.material3.adaptivenavigationsuite)
     api(libs.jetbrains.navigation3.ui)
 

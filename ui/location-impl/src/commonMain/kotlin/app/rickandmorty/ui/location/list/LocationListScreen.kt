@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
@@ -35,7 +36,7 @@ import app.rickandmorty.core.l10n.resources.location_list_empty
 import app.rickandmorty.core.l10n.resources.location_list_title
 import app.rickandmorty.core.ui.Empty
 import app.rickandmorty.core.ui.Error
-import app.rickandmorty.core.ui.NestedScaffold
+import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.core.ui.appendLoadState
 import app.rickandmorty.core.ui.errorOrNull
@@ -77,7 +78,7 @@ private fun LocationListScreen(
 
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-  NestedScaffold(
+  HazeScaffold(
     topBar = {
       LocationListScreenAppBar(
         onNavigateToSettings = onNavigateToSettings,
@@ -160,6 +161,7 @@ private fun LocationListScreenAppBar(
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.location_list_title)) },
     actions = { SettingsNavButton(onClick = onNavigateToSettings) },
+    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
     scrollBehavior = scrollBehavior,
   )
 }
