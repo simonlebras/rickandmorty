@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @ContributesIntoMap(UiScope::class)
-@ViewModelKey(LanguageSettingsViewModel::class)
+@ViewModelKey
 public class LanguageSettingsViewModel(private val localeRepository: LocaleRepository) :
   ViewModel() {
   private val appLocale = ResourceController(resource = localeRepository.getAppLocale())

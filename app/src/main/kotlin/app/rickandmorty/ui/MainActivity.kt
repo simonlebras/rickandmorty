@@ -32,7 +32,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @ContributesIntoMap(AppScope::class, binding<Activity>())
-@ActivityKey(MainActivity::class)
+@ActivityKey
 class MainActivity(private val uiGraphFactory: UiGraph.Factory) : AppCompatActivity() {
   init {
     // https://issuetracker.google.com/issues/139738913

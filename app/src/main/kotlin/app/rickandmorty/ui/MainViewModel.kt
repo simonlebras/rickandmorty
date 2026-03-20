@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 @ContributesIntoMap(UiScope::class)
-@ViewModelKey(MainViewModel::class)
+@ViewModelKey
 class MainViewModel(themeRepository: ThemeRepository) : ViewModel() {
   private val theme = ResourceController(resource = themeRepository.getTheme())
 

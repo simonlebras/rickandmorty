@@ -13,7 +13,7 @@ import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import kotlinx.coroutines.flow.Flow
 
 @ContributesIntoMap(UiScope::class)
-@ViewModelKey(EpisodeListViewModel::class)
+@ViewModelKey
 public class EpisodeListViewModel(episodeRepository: EpisodeRepository) : ViewModel() {
   public val episodes: Flow<PagingData<Episode>> =
     episodeRepository
