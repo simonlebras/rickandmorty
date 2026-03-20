@@ -17,6 +17,8 @@ kotlin {
 
     implementation(libs.compose.placeholder.material3)
 
+    implementation(libs.haze.materials)
+
     implementation(libs.jetbrains.compose.resources)
     implementation(libs.jetbrains.navigation3.ui)
   }

@@ -17,6 +17,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -36,7 +37,7 @@ import app.rickandmorty.core.l10n.resources.settings_oss_licenses_title
 import app.rickandmorty.core.l10n.resources.settings_theme_tap_action
 import app.rickandmorty.core.l10n.resources.settings_theme_title
 import app.rickandmorty.core.l10n.resources.settings_title
-import app.rickandmorty.core.ui.NestedScaffold
+import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.locale.Locale
 import app.rickandmorty.data.theme.Theme
@@ -82,7 +83,7 @@ private fun MainSettingsScreen(
 ) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-  NestedScaffold(
+  HazeScaffold(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = { MainSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior) },
   ) { contentPadding ->
@@ -121,6 +122,7 @@ private fun MainSettingsAppBar(onNavigateUp: () -> Unit, scrollBehavior: TopAppB
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.settings_title)) },
     navigationIcon = { BackNavButton(onClick = onNavigateUp) },
+    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
     scrollBehavior = scrollBehavior,
   )
 }

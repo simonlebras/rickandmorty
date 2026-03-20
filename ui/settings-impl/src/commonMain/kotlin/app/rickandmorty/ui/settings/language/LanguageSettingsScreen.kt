@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -28,7 +29,7 @@ import app.rickandmorty.core.designsystem.icon.filled.Check
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.settings_language_system_default
 import app.rickandmorty.core.l10n.resources.settings_language_title
-import app.rickandmorty.core.ui.NestedScaffold
+import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.locale.Locale
 import app.rickandmorty.ui.settings.common.SettingsContentType
@@ -68,7 +69,7 @@ private fun LanguageSettingsScreen(
 ) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-  NestedScaffold(
+  HazeScaffold(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       LanguageSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior)
@@ -109,6 +110,7 @@ private fun LanguageSettingsAppBar(
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.settings_language_title)) },
     navigationIcon = { BackNavButton(onClick = onNavigateUp) },
+    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
     scrollBehavior = scrollBehavior,
   )
 }

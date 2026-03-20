@@ -10,17 +10,21 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.WideNavigationRailDefaults
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuite
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItem
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.util.fastForEach
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
 import app.rickandmorty.core.navigation.LocalNavigator
+import dev.chrisbanes.haze.hazeEffect
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -29,8 +33,27 @@ public fun NavigationSuiteState.NavigationSuite(
   navigationSuiteType: NavigationSuiteType =
     NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfo()),
 ) {
-  Box(modifier = modifier.navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType)) {
-    NavigationSuite(navigationSuiteType = navigationSuiteType) {
+  Box(
+    modifier =
+      modifier
+        .navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType)
+        .hazeEffect(state = LocalHazeState.current)
+  ) {
+    NavigationSuite(
+      navigationSuiteType = navigationSuiteType,
+      colors =
+        NavigationSuiteDefaults.colors(
+          shortNavigationBarContainerColor = Color.Transparent,
+          wideNavigationRailColors =
+            WideNavigationRailDefaults.colors(
+              containerColor = Color.Transparent,
+              modalContainerColor = Color.Transparent,
+            ),
+          navigationBarContainerColor = Color.Transparent,
+          navigationRailContainerColor = Color.Transparent,
+          navigationDrawerContainerColor = Color.Transparent,
+        ),
+    ) {
       val navigator = LocalNavigator.current
 
       topLevelDestinations.fastForEach { item ->
@@ -51,6 +74,7 @@ public fun NavigationSuiteState.NavigationSuite(
   }
 }
 
+@Suppress("ComposeUnstableReceiver")
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun Modifier.navigationSuiteSharedElement(
