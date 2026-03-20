@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.fastForEach
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.dismiss
@@ -67,7 +66,7 @@ private fun ThemeSettingsDialog(
 
           else -> {
             val currentNightMode = uiState.theme()!!.nightMode
-            uiState.availableNightModes()!!.fastForEach { nightMode ->
+            uiState.availableNightModes()!!.forEach { nightMode ->
               key(nightMode) {
                 ThemeItem(
                   text = stringResource(nightMode.label),

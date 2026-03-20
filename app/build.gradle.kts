@@ -109,7 +109,6 @@ dependencies {
   implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
   implementation(libs.jetbrains.compose.material3.adaptivenavigationsuite)
   implementation(libs.jetbrains.compose.resources)
-  implementation(libs.jetbrains.compose.ui.util)
   implementation(libs.jetbrains.navigation3.ui)
 
   implementation(libs.kotlinx.collectionsimmutable)
@@ -143,7 +142,6 @@ dependencyAnalysis {
       exclude(
         libs.jetbrains.compose.material3.adaptive.navigation3,
         libs.jetbrains.compose.material3.adaptivenavigationsuite,
-        libs.jetbrains.compose.ui.util,
         libs.jetbrains.navigation3.ui,
       )
     }
