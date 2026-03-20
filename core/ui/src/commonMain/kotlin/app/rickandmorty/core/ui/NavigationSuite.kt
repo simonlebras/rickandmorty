@@ -20,7 +20,6 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.util.fastForEach
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
 import app.rickandmorty.core.navigation.LocalNavigator
@@ -56,7 +55,7 @@ public fun NavigationSuiteState.NavigationSuite(
     ) {
       val navigator = LocalNavigator.current
 
-      topLevelDestinations.fastForEach { item ->
+      topLevelDestinations.forEach { item ->
         val isSelected = topLevelRoute == item.route
         NavigationSuiteItem(
           selected = isSelected,

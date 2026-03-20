@@ -9,7 +9,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.util.fastFlatMap
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
@@ -81,7 +80,7 @@ public class NavigationState(
     }
 
     return remember(topLevelRoutesInUse, decoratedEntries) {
-      topLevelRoutesInUse.fastFlatMap { decoratedEntries[it].orEmpty() }.toPersistentList()
+      topLevelRoutesInUse.flatMap { decoratedEntries[it].orEmpty() }.toPersistentList()
     }
   }
 }
