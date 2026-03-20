@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @ContributesIntoMap(UiScope::class)
-@ViewModelKey(ThemeSettingsViewModel::class)
+@ViewModelKey
 public class ThemeSettingsViewModel(private val themeRepository: ThemeRepository) : ViewModel() {
   private val theme = ResourceController(resource = themeRepository.getTheme())
 

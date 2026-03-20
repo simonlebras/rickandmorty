@@ -13,7 +13,7 @@ import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import kotlinx.coroutines.flow.Flow
 
 @ContributesIntoMap(UiScope::class)
-@ViewModelKey(LocationListViewModel::class)
+@ViewModelKey
 public class LocationListViewModel(locationRepository: LocationRepository) : ViewModel() {
   public val locations: Flow<PagingData<Location>> =
     locationRepository

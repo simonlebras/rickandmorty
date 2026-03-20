@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @ContributesIntoMap(UiScope::class)
-@ViewModelKey(MainSettingsViewModel::class)
+@ViewModelKey
 public class MainSettingsViewModel(
   private val themeRepository: ThemeRepository,
   localeRepository: LocaleRepository,

@@ -13,7 +13,7 @@ import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import kotlinx.coroutines.flow.Flow
 
 @ContributesIntoMap(UiScope::class)
-@ViewModelKey(CharacterListViewModel::class)
+@ViewModelKey
 public class CharacterListViewModel(characterRepository: CharacterRepository) : ViewModel() {
   public val characters: Flow<PagingData<Character>> =
     characterRepository
