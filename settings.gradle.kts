@@ -42,9 +42,9 @@ plugins {
 }
 
 android {
-  compileSdk { version = release(36) }
+  compileSdk { version = preview("CinnamonBun") }
   minSdk { version = release(28) }
-  targetSdk { version = release(36) }
+  targetSdk { version = preview("CinnamonBun") }
 }
 
 develocity {
