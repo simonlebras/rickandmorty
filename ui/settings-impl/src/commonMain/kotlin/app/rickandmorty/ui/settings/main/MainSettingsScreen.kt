@@ -31,9 +31,9 @@ import app.rickandmorty.core.l10n.resources.settings_general_title
 import app.rickandmorty.core.l10n.resources.settings_language_system_default
 import app.rickandmorty.core.l10n.resources.settings_language_tap_action
 import app.rickandmorty.core.l10n.resources.settings_language_title
-import app.rickandmorty.core.l10n.resources.settings_oss_licenses_summary
-import app.rickandmorty.core.l10n.resources.settings_oss_licenses_tap_action
-import app.rickandmorty.core.l10n.resources.settings_oss_licenses_title
+import app.rickandmorty.core.l10n.resources.settings_license_summary
+import app.rickandmorty.core.l10n.resources.settings_license_tap_action
+import app.rickandmorty.core.l10n.resources.settings_license_title
 import app.rickandmorty.core.l10n.resources.settings_theme_tap_action
 import app.rickandmorty.core.l10n.resources.settings_theme_title
 import app.rickandmorty.core.l10n.resources.settings_title
@@ -53,7 +53,7 @@ public fun MainSettingsScreen(
   onNavigateUp: () -> Unit,
   onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
-  onNavigateToOssLicenses: () -> Unit,
+  onNavigateToLicenseSettings: () -> Unit,
   viewModel: MainSettingsViewModel = metroViewModel(),
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -66,7 +66,7 @@ public fun MainSettingsScreen(
     onUpdateUseDynamicColor = viewModel::setUseDynamicColor,
     onNavigateToThemeSettings = onNavigateToThemeSettings,
     onNavigateToLanguageSettings = onNavigateToLanguageSettings,
-    onNavigateToOssLicenses = onNavigateToOssLicenses,
+    onNavigateToLicenseSettings = onNavigateToLicenseSettings,
   )
 }
 
@@ -78,7 +78,7 @@ private fun MainSettingsScreen(
   onUpdateUseDynamicColor: (Boolean) -> Unit,
   onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
-  onNavigateToOssLicenses: () -> Unit,
+  onNavigateToLicenseSettings: () -> Unit,
   isDynamicColorAvailable: Boolean = isDynamicColorAvailable(),
 ) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -108,7 +108,7 @@ private fun MainSettingsScreen(
 
           aboutSettings(
             versionName = uiState.versionName,
-            onNavigateToOssLicenses = onNavigateToOssLicenses,
+            onNavigateToLicenseSettings = onNavigateToLicenseSettings,
           )
         }
       }
@@ -122,7 +122,11 @@ private fun MainSettingsAppBar(onNavigateUp: () -> Unit, scrollBehavior: TopAppB
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.settings_title)) },
     navigationIcon = { BackNavButton(onClick = onNavigateUp) },
-    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+    colors =
+      TopAppBarDefaults.topAppBarColors(
+        containerColor = Color.Transparent,
+        scrolledContainerColor = Color.Transparent,
+      ),
     scrollBehavior = scrollBehavior,
   )
 }
@@ -189,7 +193,10 @@ private fun LazyListScope.generalSettings(
   }
 }
 
-private fun LazyListScope.aboutSettings(versionName: String, onNavigateToOssLicenses: () -> Unit) {
+private fun LazyListScope.aboutSettings(
+  versionName: String,
+  onNavigateToLicenseSettings: () -> Unit,
+) {
   item(key = "about", contentType = SettingsContentType.HEADER) {
     Header(
       text = stringResource(L10nRes.string.settings_about_title),
@@ -197,17 +204,15 @@ private fun LazyListScope.aboutSettings(versionName: String, onNavigateToOssLice
     )
   }
 
-  item(key = "oss_licenses", contentType = SettingsContentType.LIST_ITEM) {
+  item(key = "licenses", contentType = SettingsContentType.LIST_ITEM) {
     ListItem(
-      headlineContent = { Text(text = stringResource(L10nRes.string.settings_oss_licenses_title)) },
+      headlineContent = { Text(text = stringResource(L10nRes.string.settings_license_title)) },
       modifier =
         Modifier.clickable(
-          onClickLabel = stringResource(L10nRes.string.settings_oss_licenses_tap_action),
-          onClick = onNavigateToOssLicenses,
+          onClickLabel = stringResource(L10nRes.string.settings_license_tap_action),
+          onClick = onNavigateToLicenseSettings,
         ),
-      supportingContent = {
-        Text(text = stringResource(L10nRes.string.settings_oss_licenses_summary))
-      },
+      supportingContent = { Text(text = stringResource(L10nRes.string.settings_license_summary)) },
     )
   }
 

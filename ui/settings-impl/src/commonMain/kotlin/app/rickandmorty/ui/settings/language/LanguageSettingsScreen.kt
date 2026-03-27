@@ -110,7 +110,11 @@ private fun LanguageSettingsAppBar(
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.settings_language_title)) },
     navigationIcon = { BackNavButton(onClick = onNavigateUp) },
-    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+    colors =
+      TopAppBarDefaults.topAppBarColors(
+        containerColor = Color.Transparent,
+        scrolledContainerColor = Color.Transparent,
+      ),
     scrollBehavior = scrollBehavior,
   )
 }

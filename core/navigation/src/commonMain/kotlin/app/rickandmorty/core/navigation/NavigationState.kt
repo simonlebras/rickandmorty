@@ -20,7 +20,7 @@ import androidx.savedstate.serialization.SavedStateConfiguration
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toPersistentList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentMap
 import kotlinx.serialization.PolymorphicSerializer
 
@@ -80,7 +80,7 @@ public class NavigationState(
     }
 
     return remember(topLevelRoutesInUse, decoratedEntries) {
-      topLevelRoutesInUse.flatMap { decoratedEntries[it].orEmpty() }.toPersistentList()
+      topLevelRoutesInUse.flatMap { decoratedEntries[it].orEmpty() }.toImmutableList()
     }
   }
 }
