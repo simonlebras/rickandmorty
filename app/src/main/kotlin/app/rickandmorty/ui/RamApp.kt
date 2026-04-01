@@ -21,7 +21,7 @@ import dev.chrisbanes.haze.rememberHazeState
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
-  val hazeState = rememberHazeState(blurEnabled = true)
+  val hazeState = rememberHazeState()
 
   val navigationState = appState.navigationState
   val navigator = remember(navigationState) { Navigator(navigationState) }
