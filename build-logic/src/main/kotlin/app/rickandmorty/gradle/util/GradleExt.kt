@@ -36,6 +36,9 @@ internal fun DependencyHandler.lintChecks(vararg dependencyNotations: Any) {
 internal val Project.isRootProject: Boolean
   get() = rootProject === this
 
+internal val Project.isFirebaseEnabled: Boolean
+  get() = layout.projectDirectory.file("google-services.json").asFile.exists()
+
 internal fun Project.kotlinAndroid(configuration: KotlinAndroidProjectExtension.() -> Unit) {
   configure(configuration = configuration)
 }
