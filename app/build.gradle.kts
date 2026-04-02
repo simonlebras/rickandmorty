@@ -1,24 +1,16 @@
 import app.cash.licensee.SpdxId
-import com.google.firebase.perf.plugin.FirebasePerfExtension
 
 plugins {
   alias(libs.plugins.rickandmorty.android.application)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
+  alias(libs.plugins.rickandmorty.firebase.crashlytics)
+  alias(libs.plugins.rickandmorty.firebase.perf)
 
   alias(libs.plugins.androidx.baselineprofile)
   alias(libs.plugins.licensee)
   alias(libs.plugins.metro)
 }
-
-val useFirebase = file("google-services.json").exists()
-
-if (useFirebase) {
-  apply(plugin = "app.rickandmorty.firebase-crashlytics")
-  apply(plugin = "app.rickandmorty.firebase-perf")
-}
-
-val useReleaseKeystore = layout.settingsDirectory.file("keystore/release.jks").asFile.exists()
 
 android {
   namespace = "app.rickandmorty"
@@ -30,6 +22,8 @@ android {
   }
 
   androidResources { generateLocaleConfig = true }
+
+  val useReleaseKeystore = layout.settingsDirectory.file("keystore/release.jks").asFile.exists()
 
   signingConfigs {
     getByName("debug") {
@@ -55,10 +49,6 @@ android {
       applicationIdSuffix = ".debug"
       versionNameSuffix = "-debug"
       isPseudoLocalesEnabled = true
-
-      if (useFirebase) {
-        configure<FirebasePerfExtension> { setInstrumentationEnabled(false) }
-      }
     }
 
     val release by getting {
