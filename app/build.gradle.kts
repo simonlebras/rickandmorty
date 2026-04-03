@@ -72,6 +72,7 @@ dependencies {
   implementation(project(":core:design-system"))
   implementation(project(":core:filesystem"))
   implementation(project(":core:graphql-client"))
+  implementation(project(":core:json"))
   implementation(project(":core:ktor"))
   implementation(project(":core:l10n"))
   implementation(project(":core:process-lifecycle"))
