@@ -17,11 +17,15 @@ import app.rickandmorty.ui.settings.main.MainSettingsScreen
 import app.rickandmorty.ui.settings.theme.ThemeSettingsDialog
 import dev.zacsweers.metro.ContributesIntoSet
 
+private const val SettingsSceneKey = "settings"
+
 @ContributesIntoSet(UiScope::class)
 internal class SettingsNavEntryInstaller : NavEntryInstaller {
   @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun EntryProviderScope<NavKey>.install() {
-    entry<MainSettingsNavKey>(metadata = ListDetailSceneStrategy.listPane()) {
+    entry<MainSettingsNavKey>(
+      metadata = ListDetailSceneStrategy.listPane(sceneKey = SettingsSceneKey)
+    ) {
       var showSettingsDialog by rememberSaveable { mutableStateOf(false) }
 
       val navigator = LocalNavigator.current
@@ -37,12 +41,16 @@ internal class SettingsNavEntryInstaller : NavEntryInstaller {
       }
     }
 
-    entry<LanguageSettingsNavKey> {
+    entry<LanguageSettingsNavKey>(
+      metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey)
+    ) {
       val navigator = LocalNavigator.current
       LanguageSettingsScreen(onNavigateUp = navigator::goBack)
     }
 
-    entry<LicenseSettingsNavKey> {
+    entry<LicenseSettingsNavKey>(
+      metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey)
+    ) {
       val navigator = LocalNavigator.current
       LicenseSettingsScreen(onNavigateUp = navigator::goBack)
     }
