@@ -41,6 +41,7 @@ dependencies {
   compileOnly(libs.android.tools.gradleapi)
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
+  compileOnly(plugin(libs.plugins.firebase.perf))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
   compileOnly(plugin(libs.plugins.ktfmt))
   compileOnly(plugin(libs.plugins.tapmoc))
