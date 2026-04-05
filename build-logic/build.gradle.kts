@@ -10,10 +10,7 @@ plugins {
 }
 
 kotlin {
-  compilerOptions {
-    freeCompilerArgs.addAll("-Xcontext-parameters")
-    allWarningsAsErrors = true
-  }
+  compilerOptions { allWarningsAsErrors = true }
 
   explicitApi()
 }
