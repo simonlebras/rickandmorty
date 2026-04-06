@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 @ContributesBinding(AppScope::class)
-public class EpisodeRepositoryImpl(
+internal class EpisodeRepositoryImpl(
   private val apolloClient: ApolloClient,
   private val transactionRunner: TransactionRunner,
   private val episodeDao: EpisodeDao,

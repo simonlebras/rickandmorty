@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @ContributesBinding(AppScope::class)
-public class ThemeRepositoryImpl(
+internal class ThemeRepositoryImpl(
   private val dataStore: DataStore<ThemeProto>,
   @ApplicationScope private val applicationScope: CoroutineScope,
 ) : ThemeRepository {

@@ -6,7 +6,7 @@ import kotlin.experimental.ExperimentalNativeApi
 import platform.Foundation.NSBundle
 
 @ContributesBinding(AppScope::class)
-public class NativeAppInfo : AppInfo {
+internal class NativeAppInfo : AppInfo {
   override val versionName: String =
     NSBundle.mainBundle.infoDictionary?.get("CFBundleShortVersionString") as? String ?: "unknown"
 

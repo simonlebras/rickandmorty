@@ -14,7 +14,7 @@ import app.rickandmorty.ui.settings.navigation.MainSettingsNavKey
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(UiScope::class)
-public class EpisodeNavEntryInstaller : NavEntryInstaller {
+internal class EpisodeNavEntryInstaller : NavEntryInstaller {
   @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun EntryProviderScope<NavKey>.install() {
     entry<EpisodeListNavKey>(

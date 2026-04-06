@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 @ContributesBinding(AppScope::class)
-public class LocaleRepositoryImpl(
+internal class LocaleRepositoryImpl(
   private val platformLocaleManager: PlatformLocaleManager,
   @ApplicationScope private val applicationScope: CoroutineScope,
 ) : LocaleRepository {

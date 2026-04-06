@@ -33,7 +33,7 @@ private const val LOCALE_CONFIG_FILE = "_generated_res_locale_config"
 
 @ContributesBinding(AppScope::class)
 @SingleIn(AppScope::class)
-public class AndroidPlatformLocaleManager(
+internal class AndroidPlatformLocaleManager(
   @AppContext private val context: Context,
   @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : PlatformLocaleManager {

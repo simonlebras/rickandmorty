@@ -16,14 +16,14 @@ import kotlinx.coroutines.launch
 
 @ContributesIntoMap(UiScope::class)
 @ViewModelKey
-public class LanguageSettingsViewModel(private val localeRepository: LocaleRepository) :
+internal class LanguageSettingsViewModel(private val localeRepository: LocaleRepository) :
   ViewModel() {
   private val appLocale = ResourceController(resource = localeRepository.getAppLocale())
 
   private val availableAppLocales =
     ResourceController(resource = suspend { localeRepository.getAvailableAppLocales() })
 
-  public val uiState: StateFlow<LanguageSettingsUiState> =
+  val uiState: StateFlow<LanguageSettingsUiState> =
     combine(appLocale.state, availableAppLocales.state) { appLocale, availableAppLocales ->
         LanguageSettingsUiState(appLocale = appLocale, availableAppLocales = availableAppLocales)
       }
@@ -33,7 +33,7 @@ public class LanguageSettingsViewModel(private val localeRepository: LocaleRepos
         initialValue = LanguageSettingsUiState(),
       )
 
-  public fun setAppLocale(locale: Locale?) {
+  fun setAppLocale(locale: Locale?) {
     viewModelScope.launch { localeRepository.setAppLocale(locale) }
   }
 }

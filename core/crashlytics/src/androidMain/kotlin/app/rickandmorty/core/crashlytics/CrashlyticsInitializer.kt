@@ -6,7 +6,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
-public class CrashlyticsInitializer : Initializer {
+internal class CrashlyticsInitializer : Initializer {
   override fun initialize() {
     enableCrashlytics()
   }

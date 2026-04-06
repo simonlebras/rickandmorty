@@ -8,7 +8,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 
 @ContributesBinding(AppScope::class)
-public class AndroidAppInfo(@AppContext context: Context) : AppInfo {
+internal class AndroidAppInfo(@AppContext context: Context) : AppInfo {
   private val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
 
   override val versionName: String = packageInfo.versionName ?: "unknown"

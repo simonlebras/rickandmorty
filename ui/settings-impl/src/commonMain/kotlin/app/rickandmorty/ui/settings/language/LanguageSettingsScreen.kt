@@ -39,7 +39,7 @@ import kotlinx.collections.immutable.ImmutableList
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun LanguageSettingsScreen(
+internal fun LanguageSettingsScreen(
   onNavigateUp: () -> Unit,
   viewModel: LanguageSettingsViewModel = metroViewModel(),
 ) {

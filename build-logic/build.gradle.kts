@@ -18,7 +18,7 @@ kotlin {
   explicitApi()
 }
 
-configureJavaCompatibility(17)
+configureJavaCompatibility(21)
 
 samWithReceiver { annotation(HasImplicitReceiver::class.qualifiedName!!) }
 
@@ -43,6 +43,7 @@ dependencies {
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
   compileOnly(plugin(libs.plugins.ktfmt))
+  compileOnly(plugin(libs.plugins.metro))
   compileOnly(plugin(libs.plugins.tapmoc))
 
   implementation(libs.truth)
@@ -84,6 +85,9 @@ gradlePlugin {
     }
     register("app.rickandmorty.kotlin-multiplatform") {
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
+    }
+    register("app.rickandmorty.metro") {
+      implementationClass = "app.rickandmorty.gradle.plugin.MetroPlugin"
     }
     register("app.rickandmorty.navigation-serialization") {
       implementationClass = "app.rickandmorty.gradle.plugin.NavigationSerializationPlugin"

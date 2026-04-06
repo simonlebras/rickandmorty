@@ -16,13 +16,13 @@ import kotlinx.coroutines.launch
 
 @ContributesIntoMap(UiScope::class)
 @ViewModelKey
-public class ThemeSettingsViewModel(private val themeRepository: ThemeRepository) : ViewModel() {
+internal class ThemeSettingsViewModel(private val themeRepository: ThemeRepository) : ViewModel() {
   private val theme = ResourceController(resource = themeRepository.getTheme())
 
   private val availableNightModes =
     ResourceController(resource = suspend { themeRepository.getAvailableNightModes() })
 
-  public val uiState: StateFlow<ThemeSettingsUiState> =
+  val uiState: StateFlow<ThemeSettingsUiState> =
     combine(theme.state, availableNightModes.state) { theme, availableNightModes ->
         ThemeSettingsUiState(theme = theme, availableNightModes = availableNightModes)
       }
@@ -32,7 +32,7 @@ public class ThemeSettingsViewModel(private val themeRepository: ThemeRepository
         initialValue = ThemeSettingsUiState(),
       )
 
-  public fun setNightMode(nightMode: NightMode) {
+  fun setNightMode(nightMode: NightMode) {
     viewModelScope.launch { themeRepository.setNightMode(nightMode) }
   }
 }

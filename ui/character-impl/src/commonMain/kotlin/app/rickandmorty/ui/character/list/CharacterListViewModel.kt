@@ -14,8 +14,8 @@ import kotlinx.coroutines.flow.Flow
 
 @ContributesIntoMap(UiScope::class)
 @ViewModelKey
-public class CharacterListViewModel(characterRepository: CharacterRepository) : ViewModel() {
-  public val characters: Flow<PagingData<Character>> =
+internal class CharacterListViewModel(characterRepository: CharacterRepository) : ViewModel() {
+  val characters: Flow<PagingData<Character>> =
     characterRepository
       .getPagedCharacters(config = PagingConfig(pageSize = 24))
       .cachedIn(viewModelScope)

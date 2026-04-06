@@ -14,8 +14,8 @@ import kotlinx.coroutines.flow.Flow
 
 @ContributesIntoMap(UiScope::class)
 @ViewModelKey
-public class LocationListViewModel(locationRepository: LocationRepository) : ViewModel() {
-  public val locations: Flow<PagingData<Location>> =
+internal class LocationListViewModel(locationRepository: LocationRepository) : ViewModel() {
+  val locations: Flow<PagingData<Location>> =
     locationRepository
       .getPagedLocations(config = PagingConfig(pageSize = 24))
       .cachedIn(viewModelScope)

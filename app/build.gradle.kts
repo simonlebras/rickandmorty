@@ -5,10 +5,10 @@ plugins {
   alias(libs.plugins.rickandmorty.android.application)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
+  alias(libs.plugins.rickandmorty.metro)
 
   alias(libs.plugins.androidx.baselineprofile)
   alias(libs.plugins.licensee)
-  alias(libs.plugins.metro)
 }
 
 val useFirebase = file("google-services.json").exists()

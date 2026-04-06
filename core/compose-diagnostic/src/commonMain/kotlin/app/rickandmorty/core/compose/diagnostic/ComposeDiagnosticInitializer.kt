@@ -7,7 +7,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
-public class ComposeDiagnosticInitializer : Initializer {
+internal class ComposeDiagnosticInitializer : Initializer {
   override fun initialize() {
     Composer.setDiagnosticStackTraceMode(ComposeStackTraceMode.Auto)
   }

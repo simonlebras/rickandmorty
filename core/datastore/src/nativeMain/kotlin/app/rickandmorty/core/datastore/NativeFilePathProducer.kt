@@ -10,7 +10,7 @@ import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
 @ContributesBinding(AppScope::class)
-public class NativeFilePathProducer : FilePathProducer {
+internal class NativeFilePathProducer : FilePathProducer {
   @OptIn(ExperimentalForeignApi::class)
   override fun invoke(fileName: String): Path {
     val documentDirectory =

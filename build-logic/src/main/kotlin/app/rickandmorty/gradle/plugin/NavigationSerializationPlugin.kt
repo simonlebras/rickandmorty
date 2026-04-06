@@ -17,7 +17,7 @@ public class NavigationSerializationPlugin : Plugin<Project> {
     with(target) {
       val libs = the<LibrariesForLibs>()
 
-      apply(libs.plugins.kotlin.serialization, libs.plugins.ksp, libs.plugins.metro)
+      apply(libs.plugins.rickandmorty.metro, libs.plugins.kotlin.serialization, libs.plugins.ksp)
 
       pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) { configureKotlinMultiplatform() }
 

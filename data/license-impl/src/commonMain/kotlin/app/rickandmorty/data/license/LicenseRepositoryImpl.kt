@@ -9,7 +9,7 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.withContext
 
 @ContributesBinding(AppScope::class)
-public class LicenseRepositoryImpl(
+internal class LicenseRepositoryImpl(
   private val platformLicenseManager: PlatformLicenseManager,
   @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : LicenseRepository {

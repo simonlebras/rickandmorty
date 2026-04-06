@@ -18,7 +18,7 @@ import app.rickandmorty.ui.settings.theme.ThemeSettingsDialog
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(UiScope::class)
-public class SettingsNavEntryInstaller : NavEntryInstaller {
+internal class SettingsNavEntryInstaller : NavEntryInstaller {
   @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun EntryProviderScope<NavKey>.install() {
     entry<MainSettingsNavKey>(metadata = ListDetailSceneStrategy.listPane()) {

@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 @ContributesIntoSet(AppScope::class)
-public class NightModeInitializer(
+internal class NightModeInitializer(
   application: Application,
   private val themeRepository: ThemeRepository,
   @ProcessLifecycleOwner private val processLifecycleOwner: LifecycleOwner,

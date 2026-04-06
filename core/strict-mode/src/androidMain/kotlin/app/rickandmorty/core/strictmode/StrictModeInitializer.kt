@@ -14,7 +14,7 @@ import java.util.concurrent.Executors
 private const val TAG = "StrictMode"
 
 @ContributesIntoSet(AppScope::class)
-public class StrictModeInitializer : Initializer {
+internal class StrictModeInitializer : Initializer {
   private val penaltyListenerExecutor by unsafeLazy { Executors.newSingleThreadExecutor() }
 
   override fun initialize() {
