@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 @ContributesIntoMap(UiScope::class)
 @ViewModelKey
-public class MainSettingsViewModel(
+internal class MainSettingsViewModel(
   private val themeRepository: ThemeRepository,
   localeRepository: LocaleRepository,
   appInfo: AppInfo,
@@ -26,7 +26,7 @@ public class MainSettingsViewModel(
 
   private val appLocale = ResourceController(resource = localeRepository.getAppLocale())
 
-  public val uiState: StateFlow<MainSettingsUiState> =
+  val uiState: StateFlow<MainSettingsUiState> =
     combine(theme.state, appLocale.state) { theme, appLocale ->
         MainSettingsUiState(theme = theme, appLocale = appLocale, versionName = appInfo.versionName)
       }
@@ -36,7 +36,7 @@ public class MainSettingsViewModel(
         initialValue = MainSettingsUiState(),
       )
 
-  public fun setUseDynamicColor(useDynamicColor: Boolean) {
+  fun setUseDynamicColor(useDynamicColor: Boolean) {
     viewModelScope.launch { themeRepository.setUseDynamicColor(useDynamicColor) }
   }
 }

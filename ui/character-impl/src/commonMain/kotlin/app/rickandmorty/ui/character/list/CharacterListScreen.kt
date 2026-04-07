@@ -60,7 +60,7 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun CharacterListScreen(
+internal fun CharacterListScreen(
   onNavigateToSettings: () -> Unit,
   viewModel: CharacterListViewModel = metroViewModel(),
 ) {

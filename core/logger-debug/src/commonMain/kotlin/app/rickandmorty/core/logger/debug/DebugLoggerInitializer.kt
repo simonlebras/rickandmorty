@@ -8,7 +8,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
 
 @ContributesIntoSet(AppScope::class)
-public class DebugLoggerInitializer : Initializer {
+internal class DebugLoggerInitializer : Initializer {
   override fun initialize() {
     with(Logger) {
       setMinSeverity(Severity.Debug)

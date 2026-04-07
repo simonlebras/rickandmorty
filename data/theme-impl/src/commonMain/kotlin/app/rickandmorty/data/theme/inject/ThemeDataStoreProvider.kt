@@ -24,12 +24,11 @@ public interface ThemeDataStoreProvider {
     public fun provideThemeDataStore(
       fileSystem: FileSystem,
       filePathProducer: FilePathProducer,
-      serializer: ThemeSerializer,
       @IODispatcher ioDispatcher: CoroutineContext,
     ): DataStore<ThemeProto> =
       RamDataStoreFactory.create(
         fileSystem = fileSystem,
-        serializer = serializer,
+        serializer = ThemeSerializer(),
         filePathProducer = filePathProducer,
         fileName = THEME_DATASTORE_FILE_NAME,
         context = ioDispatcher + SupervisorJob(),

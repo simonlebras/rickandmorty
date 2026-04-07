@@ -26,7 +26,7 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun LicenseSettingsScreen(
+internal fun LicenseSettingsScreen(
   onNavigateUp: () -> Unit,
   viewModel: LicenseSettingsViewModel = metroViewModel(),
 ) {

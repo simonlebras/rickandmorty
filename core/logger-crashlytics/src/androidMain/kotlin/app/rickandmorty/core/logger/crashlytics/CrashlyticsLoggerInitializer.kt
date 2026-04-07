@@ -10,7 +10,7 @@ import dev.zacsweers.metro.ContributesIntoSet
 
 @OptIn(ExperimentalKermitApi::class)
 @ContributesIntoSet(AppScope::class)
-public class CrashlyticsLoggerInitializer : Initializer {
+internal class CrashlyticsLoggerInitializer : Initializer {
   override fun initialize() {
     with(Logger) {
       setMinSeverity(Severity.Error)

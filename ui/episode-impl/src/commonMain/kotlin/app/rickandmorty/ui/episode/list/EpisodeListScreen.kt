@@ -48,7 +48,7 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun EpisodeListScreen(
+internal fun EpisodeListScreen(
   onNavigateToSettings: () -> Unit,
   viewModel: EpisodeListViewModel = metroViewModel(),
 ) {

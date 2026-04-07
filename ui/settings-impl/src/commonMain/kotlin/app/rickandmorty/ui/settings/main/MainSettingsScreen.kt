@@ -49,7 +49,7 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun MainSettingsScreen(
+internal fun MainSettingsScreen(
   onNavigateUp: () -> Unit,
   onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,

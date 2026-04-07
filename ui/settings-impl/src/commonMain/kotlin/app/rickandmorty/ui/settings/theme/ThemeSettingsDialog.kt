@@ -33,7 +33,7 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun ThemeSettingsDialog(
+internal fun ThemeSettingsDialog(
   onDismiss: () -> Unit,
   viewModel: ThemeSettingsViewModel = metroViewModel(),
 ) {

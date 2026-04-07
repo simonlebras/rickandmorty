@@ -48,7 +48,7 @@ import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun LocationListScreen(
+internal fun LocationListScreen(
   onNavigateToSettings: () -> Unit,
   viewModel: LocationListViewModel = metroViewModel(),
 ) {

@@ -14,8 +14,8 @@ import kotlinx.coroutines.flow.Flow
 
 @ContributesIntoMap(UiScope::class)
 @ViewModelKey
-public class EpisodeListViewModel(episodeRepository: EpisodeRepository) : ViewModel() {
-  public val episodes: Flow<PagingData<Episode>> =
+internal class EpisodeListViewModel(episodeRepository: EpisodeRepository) : ViewModel() {
+  val episodes: Flow<PagingData<Episode>> =
     episodeRepository
       .getPagedEpisodes(config = PagingConfig(pageSize = 24))
       .cachedIn(viewModelScope)

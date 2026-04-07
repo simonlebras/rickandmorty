@@ -8,7 +8,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 
 @ContributesBinding(AppScope::class)
-public class RoomTransactionRunner(private val database: RamDatabase) : TransactionRunner {
+internal class RoomTransactionRunner(private val database: RamDatabase) : TransactionRunner {
   override suspend fun <T> readTransaction(block: suspend () -> T): T {
     return database.useReaderConnection { transactor -> transactor.deferredTransaction { block() } }
   }

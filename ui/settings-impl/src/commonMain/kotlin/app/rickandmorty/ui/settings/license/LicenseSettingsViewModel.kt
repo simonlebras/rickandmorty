@@ -14,11 +14,11 @@ import kotlinx.coroutines.flow.stateIn
 
 @ContributesIntoMap(UiScope::class)
 @ViewModelKey
-public class LicenseSettingsViewModel(private val licenseRepository: LicenseRepository) :
+internal class LicenseSettingsViewModel(private val licenseRepository: LicenseRepository) :
   ViewModel() {
   private val licenses = ResourceController(resource = suspend { licenseRepository.getLicenses() })
 
-  public val uiState: StateFlow<LicenseSettingsUiState> =
+  val uiState: StateFlow<LicenseSettingsUiState> =
     licenses.state
       .map { licenses -> LicenseSettingsUiState(licenses = licenses) }
       .stateIn(
