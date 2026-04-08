@@ -11,11 +11,14 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 
 @ContributesBinding(AppScope::class)
-internal class AndroidPlatformLicenseManager(@AppContext private val context: Context) :
-  PlatformLicenseManager {
+internal class AndroidPlatformLicenseManager(
+  @AppContext private val context: Context,
+  private val json: Json,
+) : PlatformLicenseManager {
   @OptIn(ExperimentalSerializationApi::class)
   override fun getLicenses(): ImmutableList<LicenseJson> {
-    return Json.decodeFromStream<List<LicenseJson>>(context.assets.open("licenses.json"))
+    return json
+      .decodeFromStream<List<LicenseJson>>(context.assets.open("licenses.json"))
       .toImmutableList()
   }
 }

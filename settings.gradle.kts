@@ -75,6 +75,7 @@ include(
   ":core:design-system",
   ":core:filesystem",
   ":core:graphql-client",
+  ":core:json",
   ":core:ktor",
   ":core:l10n",
   ":core:logger-crashlytics",
