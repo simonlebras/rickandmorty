@@ -20,7 +20,7 @@ internal fun Project.apply(vararg plugins: String) {
   plugins.forEach(pluginManager::apply)
 }
 
-internal inline fun <reified T : Any> Project.configure(
+internal inline fun <reified T : Any> ExtensionAware.configure(
   noinline configuration: T.() -> Unit
 ): Unit = extensions.configure(typeOf<T>(), configuration)
 
