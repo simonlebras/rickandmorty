@@ -11,22 +11,21 @@ kotlin {
   android { namespace = "app.rickandmorty.data.theme.impl" }
 
   dependencies {
+    api(project(":core:coroutines"))
     api(project(":core:datastore"))
 
     api(project(":data:theme-api"))
 
     api(libs.kotlinx.serialization.protobuf)
-
-    implementation(project(":core:coroutines"))
   }
 
   sourceSets {
     androidMain {
       dependencies {
+        api(project(":core:process-lifecycle"))
+        api(project(":core:startup"))
+
         implementation(project(":core:base"))
-        implementation(project(":core:metro-common"))
-        implementation(project(":core:process-lifecycle"))
-        implementation(project(":core:startup"))
 
         implementation(libs.androidx.appcompat)
       }

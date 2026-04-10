@@ -9,10 +9,10 @@ kotlin {
   android { namespace = "app.rickandmorty.core.graphql.client" }
 
   dependencies {
-    api(libs.apollo.runtime)
+    api(project(":core:coroutines"))
+    api(project(":core:metro-common"))
 
-    implementation(project(":core:coroutines"))
-    implementation(project(":core:metro-common"))
+    api(libs.apollo.runtime)
 
     implementation(libs.apollo.ktor)
   }

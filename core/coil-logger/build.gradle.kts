@@ -6,7 +6,7 @@ plugins {
 
 kotlin {
   dependencies {
-    implementation(libs.coil.core)
+    api(libs.coil.core)
 
     implementation(libs.kermit)
   }

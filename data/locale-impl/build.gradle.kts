@@ -9,15 +9,15 @@ kotlin {
   android { namespace = "app.rickandmorty.data.locale" }
 
   dependencies {
-    api(project(":data:locale-api"))
+    api(project(":core:coroutines"))
 
-    implementation(project(":core:coroutines"))
+    api(project(":data:locale-api"))
   }
 
   sourceSets {
     androidMain {
       dependencies {
-        implementation(project(":core:metro-common"))
+        api(project(":core:metro-common"))
 
         implementation(libs.androidx.appcompat)
       }

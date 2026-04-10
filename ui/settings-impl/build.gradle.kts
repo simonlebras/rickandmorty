@@ -11,6 +11,7 @@ kotlin {
 
   dependencies {
     api(project(":core:app-info"))
+    api(project(":core:metro-common"))
     api(project(":core:navigation"))
     api(project(":core:resource-state"))
 
@@ -20,17 +21,18 @@ kotlin {
 
     api(project(":ui:settings-api"))
 
-    implementation(project(":core:coroutines"))
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
-    implementation(project(":core:metro-common"))
     implementation(project(":core:ui"))
 
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.paging.compose)
 
     implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
 
     implementation(libs.metrox.viewmodel.compose)
   }
+}
+
+dependencyAnalysis {
+  issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptive.navigation3) } }
 }

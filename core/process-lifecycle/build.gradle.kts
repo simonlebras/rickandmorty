@@ -8,5 +8,13 @@ plugins {
 kotlin {
   android { namespace = "app.rickandmorty.core.processlifecycle" }
 
-  sourceSets { androidMain { dependencies { api(libs.androidx.lifecycle.process) } } }
+  sourceSets {
+    androidMain {
+      dependencies {
+        api(libs.androidx.lifecycle.common)
+
+        implementation(libs.androidx.lifecycle.process)
+      }
+    }
+  }
 }

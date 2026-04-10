@@ -33,7 +33,7 @@ apollo-ktor = "0.1.1"
 coil = "3.4.0"
 compose-placeholder = "1.0.12"
 crashkios-crashlytics = "0.9.0"
-dependencyanalysis = "3.5.1"
+dependencyanalysis = "3.7.0"
 firebase-bom = "34.12.0"
 firebase-crashlytics-plugin = "3.0.7"
 firebase-perf-plugin = "2.0.2"
@@ -82,6 +82,7 @@ androidx-core = { group = "androidx.core", name = "core", version.ref = "android
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-core-splashscreen" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
 androidx-gradle-lints = { group = "androidx.lint", name = "lint-gradle", version.ref = "androidx-gradle-lints" }
+androidx-lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }

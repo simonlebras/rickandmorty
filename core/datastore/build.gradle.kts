@@ -16,5 +16,7 @@ kotlin {
     implementation(libs.kotlinx.serialization.protobuf)
   }
 
-  sourceSets { androidMain { dependencies { implementation(project(":core:metro-common")) } } }
+  sourceSets { androidMain { dependencies { api(project(":core:metro-common")) } } }
 }
+
+dependencyAnalysis { issues { onUnusedDependencies { exclude(libs.androidx.datastore) } } }

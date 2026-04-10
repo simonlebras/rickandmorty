@@ -4,10 +4,4 @@ plugins {
   alias(libs.plugins.rickandmorty.navigation.serialization)
 }
 
-kotlin {
-  dependencies {
-    api(libs.androidx.navigation3.runtime)
-
-    implementation(project(":core:metro-common"))
-  }
-}
+kotlin { dependencies { api(project(":core:metro-common")) } }

@@ -11,7 +11,7 @@ kotlin {
   sourceSets {
     androidMain {
       dependencies {
-        implementation(project(":core:metro-common"))
+        api(project(":core:metro-common"))
 
         implementation(libs.androidx.core)
       }

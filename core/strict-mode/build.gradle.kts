@@ -11,8 +11,9 @@ kotlin {
   sourceSets {
     androidMain {
       dependencies {
+        api(project(":core:startup"))
+
         implementation(project(":core:base"))
-        implementation(project(":core:startup"))
 
         implementation(libs.kermit)
       }

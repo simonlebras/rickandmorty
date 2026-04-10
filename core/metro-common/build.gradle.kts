@@ -7,9 +7,5 @@ plugins {
 kotlin {
   android { namespace = "app.rickandmorty.core.metro.common" }
 
-  dependencies {
-    implementation(libs.androidx.lifecycle.viewmodel)
-
-    implementation(libs.metro.runtime)
-  }
+  dependencies { api(libs.metro.runtime) }
 }

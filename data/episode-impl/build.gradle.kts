@@ -8,16 +8,14 @@ plugins {
 
 kotlin {
   dependencies {
+    api(project(":data:database-api"))
     api(project(":data:episode-api"))
 
-    api(libs.androidx.paging.common)
+    api(libs.apollo.runtime)
 
     implementation(project(":core:paging"))
 
-    implementation(project(":data:database-api"))
     implementation(project(":data:graphql-schema"))
-
-    implementation(libs.apollo.runtime)
   }
 }
 

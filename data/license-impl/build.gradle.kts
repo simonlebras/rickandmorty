@@ -15,8 +15,8 @@ kotlin {
 
     api(project(":data:license-api"))
 
-    implementation(libs.kotlinx.serialization.json)
+    api(libs.kotlinx.serialization.json)
   }
 
-  sourceSets { androidMain { dependencies { implementation(project(":core:metro-common")) } } }
+  sourceSets { androidMain { dependencies { api(project(":core:metro-common")) } } }
 }
