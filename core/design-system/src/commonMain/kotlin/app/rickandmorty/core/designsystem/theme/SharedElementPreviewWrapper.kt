@@ -3,10 +3,10 @@ package app.rickandmorty.core.designsystem.theme
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.tooling.preview.PreviewWrapper
+import androidx.compose.ui.tooling.preview.PreviewWrapperProvider
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 
-public class SharedElementPreviewWrapper : PreviewWrapper {
+public class SharedElementPreviewWrapper : PreviewWrapperProvider {
   @Suppress("ComposeUnstableReceiver")
   @Composable
   override fun Wrap(content: @Composable () -> Unit) {
