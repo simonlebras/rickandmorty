@@ -5,11 +5,7 @@ plugins {
 }
 
 kotlin {
-  dependencies {
-    api(libs.ktor.client.core)
-
-    implementation(project(":core:metro-common"))
-  }
+  dependencies { api(libs.ktor.client.core) }
 
   sourceSets {
     jvmMain { dependencies { implementation(libs.ktor.client.okhttp) } }

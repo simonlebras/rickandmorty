@@ -16,3 +16,11 @@ compose.resources {
   packageOfResClass = "app.rickandmorty.core.l10n.resources"
   publicResClass = true
 }
+
+dependencyAnalysis {
+  issues {
+    onUnusedDependencies {
+      exclude(libs.jetbrains.compose.resources, libs.jetbrains.compose.runtime)
+    }
+  }
+}

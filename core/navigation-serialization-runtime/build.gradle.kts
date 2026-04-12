@@ -7,8 +7,10 @@ kotlin {
   dependencies {
     api(libs.androidx.navigation3.runtime)
 
-    api(libs.kotlinx.serialization.core)
-
-    implementation(libs.metro.runtime)
+    api(libs.metro.runtime)
   }
+}
+
+dependencyAnalysis {
+  issues { onUnusedDependencies { exclude(libs.androidx.navigation3.runtime) } }
 }

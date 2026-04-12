@@ -20,13 +20,13 @@ kotlin {
   }
 
   dependencies {
+    api(project(":core:coroutines"))
+    api(project(":core:metro-common"))
+
     api(project(":data:database-api"))
 
     api(libs.androidx.room.runtime)
     api(libs.androidx.sqlite.bundled)
-
-    implementation(project(":core:coroutines"))
-    implementation(project(":core:metro-common"))
   }
 
   sourceSets { jvmMain { dependencies { implementation(libs.okio) } } }

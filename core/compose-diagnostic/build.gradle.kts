@@ -6,8 +6,10 @@ plugins {
 
 kotlin {
   dependencies {
-    implementation(project(":core:startup"))
+    api(project(":core:startup"))
 
     implementation(libs.jetbrains.compose.runtime)
   }
 }
+
+dependencyAnalysis { issues { onUnusedDependencies { exclude(libs.jetbrains.compose.runtime) } } }

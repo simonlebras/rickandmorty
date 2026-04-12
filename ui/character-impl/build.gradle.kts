@@ -10,6 +10,7 @@ kotlin {
   android { namespace = "app.rickandmorty.ui.character" }
 
   dependencies {
+    api(project(":core:metro-common"))
     api(project(":core:navigation"))
 
     api(project(":data:character-api"))
@@ -18,7 +19,6 @@ kotlin {
 
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
-    implementation(project(":core:metro-common"))
     implementation(project(":core:ui"))
     implementation(project(":core:ui-tooling-preview"))
 
@@ -30,4 +30,8 @@ kotlin {
 
     implementation(libs.metrox.viewmodel.compose)
   }
+}
+
+dependencyAnalysis {
+  issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptive.navigation3) } }
 }

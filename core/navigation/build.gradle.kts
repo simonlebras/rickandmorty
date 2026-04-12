@@ -7,12 +7,20 @@ plugins {
 
 kotlin {
   dependencies {
+    api(project(":core:metro-common"))
+
     api(libs.androidx.navigation3.runtime)
 
     api(libs.kotlinx.collectionsimmutable)
 
-    implementation(project(":core:metro-common"))
-
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+  }
+}
+
+dependencyAnalysis {
+  issues {
+    onUnusedDependencies {
+      exclude(libs.androidx.lifecycle.viewmodel.navigation3, libs.androidx.navigation3.runtime)
+    }
   }
 }
