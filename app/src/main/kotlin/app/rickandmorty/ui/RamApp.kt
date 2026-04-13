@@ -1,17 +1,21 @@
 package app.rickandmorty.ui
 
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.layout.calculatePaneScaffoldDirective
 import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
 import app.rickandmorty.core.navigation.LocalNavigator
 import app.rickandmorty.core.navigation.Navigator
 import app.rickandmorty.core.ui.LocalHazeState
-import app.rickandmorty.core.ui.rememberNavSuiteSceneStrategy
+import app.rickandmorty.core.ui.rememberNavigationSuiteSceneStrategy
 import dev.chrisbanes.haze.rememberHazeState
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
@@ -22,12 +26,21 @@ fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
   val navigationState = appState.navigationState
   val navigator = remember(navigationState) { Navigator(navigationState) }
 
+  val windowAdaptiveInfo = currentWindowAdaptiveInfo()
+  val directive = remember(windowAdaptiveInfo) {
+    calculatePaneScaffoldDirective(windowAdaptiveInfo)
+      .copy(horizontalPartitionSpacerSize = 0.dp)
+  }
+  val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>(directive = directive)
+
+  val navigationSuiteStrategy = rememberNavigationSuiteSceneStrategy<NavKey>(appState)
+
   CompositionLocalProvider(LocalHazeState provides hazeState, LocalNavigator provides navigator) {
     NavDisplay(
       entries = appState.currentEntries,
       modifier = modifier,
-      sceneStrategies = listOf(rememberListDetailSceneStrategy()),
-      sceneDecoratorStrategies = listOf(rememberNavSuiteSceneStrategy(appState)),
+      sceneStrategies = listOf(listDetailStrategy),
+      sceneDecoratorStrategies = listOf(navigationSuiteStrategy),
       sharedTransitionScope = LocalSharedTransitionScope.current,
       onBack = navigator::goBack,
     )

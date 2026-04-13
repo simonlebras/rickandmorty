@@ -13,7 +13,7 @@ import androidx.navigation3.scene.SceneDecoratorStrategy
 import androidx.navigation3.scene.SceneDecoratorStrategyScope
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 
-private class NavigationSuiteSceneDecoratorStrategy<T : Any>(
+private class NavigationSuiteSceneStrategy<T : Any>(
   private val navigationSuiteState: NavigationSuiteState
 ) : SceneDecoratorStrategy<T> {
   override fun SceneDecoratorStrategyScope<T>.decorateScene(scene: Scene<T>): Scene<T> {
@@ -36,9 +36,9 @@ private class NavigationSuiteSceneDecorator<T : Any>(
       NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfo())
     NestedNavigationSuiteScaffold(
       navigationSuite = {
-        val canUseMoveableNavSuite =
+        val canUseMoveableNavigationSuite =
           LocalNavAnimatedContentScope.current.transition.targetState == EnterExitState.Visible
-        if (canUseMoveableNavSuite) {
+        if (canUseMoveableNavigationSuite) {
           navigationSuiteState.movableNavigationSuite(Modifier, navigationSuiteType)
         } else {
           navigationSuiteState.NavigationSuite(navigationSuiteType = navigationSuiteType)
@@ -53,10 +53,8 @@ private class NavigationSuiteSceneDecorator<T : Any>(
 }
 
 @Composable
-public fun <T : Any> rememberNavSuiteSceneStrategy(
+public fun <T : Any> rememberNavigationSuiteSceneStrategy(
   navigationSuiteState: NavigationSuiteState
 ): SceneDecoratorStrategy<T> {
-  return remember(navigationSuiteState) {
-    NavigationSuiteSceneDecoratorStrategy(navigationSuiteState)
-  }
+  return remember(navigationSuiteState) { NavigationSuiteSceneStrategy(navigationSuiteState) }
 }
