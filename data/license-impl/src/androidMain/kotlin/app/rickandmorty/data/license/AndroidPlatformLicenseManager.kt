@@ -13,8 +13,8 @@ import kotlinx.serialization.json.decodeFromStream
 
 @ContributesBinding(AppScope::class)
 internal class AndroidPlatformLicenseManager(
-  @AppContext private val context: Context,
-  @LicensesAssetPath private val licensesAssetPath: String,
+  @param:AppContext private val context: Context,
+  @param:LicensesAssetPath private val licensesAssetPath: String,
   private val json: Json,
 ) : PlatformLicenseManager {
   @OptIn(ExperimentalSerializationApi::class)
