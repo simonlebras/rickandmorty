@@ -8,7 +8,7 @@ import okio.Path
 import okio.Path.Companion.toPath
 
 @ContributesBinding(AppScope::class)
-internal class AndroidFilePathProducer(@AppContext private val context: Context) :
+internal class AndroidFilePathProducer(@param:AppContext private val context: Context) :
   FilePathProducer {
   override fun invoke(fileName: String): Path {
     return context.filesDir.resolve(fileName).absolutePath.toPath()

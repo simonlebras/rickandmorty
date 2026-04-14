@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 @ContributesBinding(AppScope::class)
 internal class LicenseRepositoryImpl(
   private val platformLicenseManager: PlatformLicenseManager,
-  @IODispatcher private val ioDispatcher: CoroutineContext,
+  @param:IODispatcher private val ioDispatcher: CoroutineContext,
 ) : LicenseRepository {
   override suspend fun getLicenses(): ImmutableList<License> {
     return withContext(ioDispatcher) {

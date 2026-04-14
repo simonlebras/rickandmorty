@@ -36,8 +36,8 @@ import kotlinx.coroutines.flow.onEach
 internal class NightModeInitializer(
   application: Application,
   private val themeRepository: ThemeRepository,
-  @ProcessLifecycleOwner private val processLifecycleOwner: LifecycleOwner,
-  @IODispatcher private val ioDispatcher: CoroutineContext,
+  @param:ProcessLifecycleOwner private val processLifecycleOwner: LifecycleOwner,
+  @param:IODispatcher private val ioDispatcher: CoroutineContext,
 ) : Initializer {
   private val nightModeImpl =
     if (Build.VERSION.SDK_INT >= 31) {
