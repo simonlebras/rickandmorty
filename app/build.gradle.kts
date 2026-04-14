@@ -12,6 +12,8 @@ plugins {
   alias(libs.plugins.licensee)
 }
 
+val licensesAssetPath = "licenses.json"
+
 android {
   namespace = "app.rickandmorty"
 
@@ -19,7 +21,11 @@ android {
     applicationId = "app.rickandmorty"
     versionCode = 1
     versionName = "1.0"
+
+    buildConfigField("String", "LICENSES_ASSET_PATH", "\"$licensesAssetPath\"")
   }
+
+  buildFeatures { buildConfig = true }
 
   androidResources { generateLocaleConfig = true }
 
@@ -144,7 +150,7 @@ dependencyAnalysis {
 
 licensee {
   bundleAndroidAsset = true
-  androidAssetReportPath = "licenses.json"
+  androidAssetReportPath = licensesAssetPath
 
   allow(SpdxId.Apache_20)
   allow(SpdxId.BSD_3_Clause)

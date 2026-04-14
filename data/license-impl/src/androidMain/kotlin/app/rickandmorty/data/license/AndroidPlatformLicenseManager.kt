@@ -2,6 +2,7 @@ package app.rickandmorty.data.license
 
 import android.content.Context
 import app.rickandmorty.core.metro.AppContext
+import app.rickandmorty.data.license.inject.LicensesAssetPath
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import kotlinx.collections.immutable.ImmutableList
@@ -13,12 +14,13 @@ import kotlinx.serialization.json.decodeFromStream
 @ContributesBinding(AppScope::class)
 internal class AndroidPlatformLicenseManager(
   @AppContext private val context: Context,
+  @LicensesAssetPath private val licensesAssetPath: String,
   private val json: Json,
 ) : PlatformLicenseManager {
   @OptIn(ExperimentalSerializationApi::class)
   override fun getLicenses(): ImmutableList<LicenseJson> {
     return json
-      .decodeFromStream<List<LicenseJson>>(context.assets.open("licenses.json"))
+      .decodeFromStream<List<LicenseJson>>(context.assets.open(licensesAssetPath))
       .toImmutableList()
   }
 }
