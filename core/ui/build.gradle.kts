@@ -22,6 +22,8 @@ kotlin {
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
     implementation(project(":core:navigation"))
+
+    implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
   }
 
   sourceSets { androidMain { dependencies { implementation(libs.androidx.activity.compose) } } }
@@ -31,6 +33,7 @@ dependencyAnalysis {
   issues {
     onUnusedDependencies {
       exclude(
+        libs.jetbrains.compose.material3.adaptive.navigation3,
         libs.jetbrains.compose.material3.adaptivenavigationsuite,
         libs.jetbrains.navigation3.ui,
       )

@@ -1,6 +1,5 @@
 package app.rickandmorty.core.designsystem.theme
 
-import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -80,11 +79,7 @@ internal val RamDarkColorScheme =
     onSurfaceVariant = DarkOnSurfaceVariant,
   )
 
-@OptIn(
-  ExperimentalHazeMaterialsApi::class,
-  ExperimentalMaterial3ExpressiveApi::class,
-  ExperimentalSharedTransitionApi::class,
-)
+@OptIn(ExperimentalHazeMaterialsApi::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 public fun RamTheme(
   useDarkTheme: Boolean = isSystemInDarkTheme(),

@@ -30,16 +30,18 @@ public fun HazeScaffold(
 ) {
   NestedScaffold(
     modifier = modifier,
-    topBar = {
+    topBar =
       if (topBar != null) {
-        Box(Modifier.hazeEffect(state = hazeState)) { topBar() }
-      }
-    },
-    bottomBar = {
+        { Box(Modifier.hazeEffect(state = hazeState)) { topBar() } }
+      } else {
+        null
+      },
+    bottomBar =
       if (bottomBar != null) {
-        Box(Modifier.hazeEffect(state = hazeState)) { bottomBar() }
-      }
-    },
+        { Box(Modifier.hazeEffect(state = hazeState)) { bottomBar() } }
+      } else {
+        null
+      },
     snackbarHost = snackbarHost,
     floatingActionButton = floatingActionButton,
     floatingActionButtonPosition = floatingActionButtonPosition,
