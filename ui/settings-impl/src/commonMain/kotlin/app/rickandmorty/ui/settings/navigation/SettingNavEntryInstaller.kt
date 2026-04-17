@@ -2,6 +2,7 @@ package app.rickandmorty.ui.settings.navigation
 
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
+import androidx.compose.material3.adaptive.navigation3.LocalListDetailSceneScope
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,9 +27,10 @@ internal class SettingsNavEntryInstaller : NavEntryInstaller {
     entry<MainSettingsNavKey>(
       metadata = ListDetailSceneStrategy.listPane(sceneKey = SettingsSceneKey)
     ) {
+      val navigator = LocalNavigator.current
+
       var showSettingsDialog by rememberSaveable { mutableStateOf(false) }
 
-      val navigator = LocalNavigator.current
       MainSettingsScreen(
         onNavigateUp = navigator::goBack,
         onNavigateToThemeSettings = { showSettingsDialog = true },
@@ -45,14 +47,20 @@ internal class SettingsNavEntryInstaller : NavEntryInstaller {
       metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey)
     ) {
       val navigator = LocalNavigator.current
-      LanguageSettingsScreen(onNavigateUp = navigator::goBack)
+
+      val showBackButton = LocalListDetailSceneScope.current == null
+
+      LanguageSettingsScreen(onNavigateUp = navigator::goBack, showBackButton = showBackButton)
     }
 
     entry<LicenseSettingsNavKey>(
       metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey)
     ) {
       val navigator = LocalNavigator.current
-      LicenseSettingsScreen(onNavigateUp = navigator::goBack)
+
+      val showBackButton = LocalListDetailSceneScope.current == null
+
+      LicenseSettingsScreen(onNavigateUp = navigator::goBack, showBackButton = showBackButton)
     }
   }
 }
