@@ -29,22 +29,37 @@ import org.jetbrains.compose.resources.stringResource
 internal fun LicenseSettingsScreen(
   onNavigateUp: () -> Unit,
   viewModel: LicenseSettingsViewModel = metroViewModel(),
+  showBackButton: Boolean = true,
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
   ReportDrawnWhen { !uiState.isLoading }
 
-  LicenseSettingsScreen(uiState = uiState, onNavigateUp = onNavigateUp)
+  LicenseSettingsScreen(
+    uiState = uiState,
+    onNavigateUp = onNavigateUp,
+    showBackButton = showBackButton,
+  )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun LicenseSettingsScreen(uiState: LicenseSettingsUiState, onNavigateUp: () -> Unit) {
+private fun LicenseSettingsScreen(
+  uiState: LicenseSettingsUiState,
+  onNavigateUp: () -> Unit,
+  showBackButton: Boolean,
+) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
   HazeScaffold(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-    topBar = { LicenseSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior) },
+    topBar = {
+      LicenseSettingsAppBar(
+        onNavigateUp = onNavigateUp,
+        showBackButton = showBackButton,
+        scrollBehavior = scrollBehavior,
+      )
+    },
   ) { contentPadding ->
     LazyColumn(
       modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
@@ -80,11 +95,16 @@ private fun LicenseItem(license: License) {
 @Composable
 private fun LicenseSettingsAppBar(
   onNavigateUp: () -> Unit,
+  showBackButton: Boolean,
   scrollBehavior: TopAppBarScrollBehavior,
 ) {
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.settings_license_title)) },
-    navigationIcon = { BackNavButton(onClick = onNavigateUp) },
+    navigationIcon = {
+      if (showBackButton) {
+        BackNavButton(onClick = onNavigateUp)
+      }
+    },
     colors =
       TopAppBarDefaults.topAppBarColors(
         containerColor = Color.Transparent,

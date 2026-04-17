@@ -42,6 +42,7 @@ import org.jetbrains.compose.resources.stringResource
 internal fun LanguageSettingsScreen(
   onNavigateUp: () -> Unit,
   viewModel: LanguageSettingsViewModel = metroViewModel(),
+  showBackButton: Boolean = true,
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -50,6 +51,7 @@ internal fun LanguageSettingsScreen(
   LanguageSettingsScreen(
     uiState = uiState,
     onNavigateUp = onNavigateUp,
+    showBackButton = showBackButton,
     onSelectLocale =
       remember(viewModel, onNavigateUp) {
         { locale ->
@@ -65,6 +67,7 @@ internal fun LanguageSettingsScreen(
 private fun LanguageSettingsScreen(
   uiState: LanguageSettingsUiState,
   onNavigateUp: () -> Unit,
+  showBackButton: Boolean,
   onSelectLocale: (Locale?) -> Unit,
 ) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -72,7 +75,11 @@ private fun LanguageSettingsScreen(
   HazeScaffold(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
-      LanguageSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior)
+      LanguageSettingsAppBar(
+        onNavigateUp = onNavigateUp,
+        showBackButton = showBackButton,
+        scrollBehavior = scrollBehavior,
+      )
     },
   ) { contentPadding ->
     LazyColumn(
@@ -105,11 +112,16 @@ private fun LanguageSettingsScreen(
 @Composable
 private fun LanguageSettingsAppBar(
   onNavigateUp: () -> Unit,
+  showBackButton: Boolean,
   scrollBehavior: TopAppBarScrollBehavior,
 ) {
   CenterAlignedTopAppBar(
     title = { Text(text = stringResource(L10nRes.string.settings_language_title)) },
-    navigationIcon = { BackNavButton(onClick = onNavigateUp) },
+    navigationIcon = {
+      if (showBackButton) {
+        BackNavButton(onClick = onNavigateUp)
+      }
+    },
     colors =
       TopAppBarDefaults.topAppBarColors(
         containerColor = Color.Transparent,
