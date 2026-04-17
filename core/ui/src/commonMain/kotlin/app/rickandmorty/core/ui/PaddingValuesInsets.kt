@@ -2,11 +2,11 @@ package app.rickandmorty.core.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
-@Immutable
+@Stable
 internal data class PaddingValuesInsets(private val padding: PaddingValues) : WindowInsets {
   override fun getLeft(density: Density, layoutDirection: LayoutDirection): Int =
     with(density) { padding.calculateLeftPadding(layoutDirection).roundToPx() }

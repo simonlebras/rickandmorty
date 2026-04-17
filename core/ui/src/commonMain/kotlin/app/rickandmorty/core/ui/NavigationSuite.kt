@@ -1,10 +1,10 @@
 package app.rickandmorty.core.ui
 
-import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -52,6 +52,7 @@ public fun NavigationSuiteState.NavigationSuite(
           navigationRailContainerColor = Color.Transparent,
           navigationDrawerContainerColor = Color.Transparent,
         ),
+      verticalArrangement = Arrangement.Center,
     ) {
       val navigator = LocalNavigator.current
 
@@ -74,7 +75,6 @@ public fun NavigationSuiteState.NavigationSuite(
 }
 
 @Suppress("ComposeUnstableReceiver")
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun Modifier.navigationSuiteSharedElement(
   navigationSuiteType: NavigationSuiteType
