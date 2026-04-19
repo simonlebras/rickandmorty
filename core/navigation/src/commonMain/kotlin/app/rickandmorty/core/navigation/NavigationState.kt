@@ -60,6 +60,9 @@ public class NavigationState(
   public var topLevelRoute: NavKey by topLevelRoute
     internal set
 
+  public val currentRoute: NavKey?
+    get() = backStacks[topLevelRoute]?.lastOrNull()
+
   private val topLevelRoutesInUse by derivedStateOf {
     if (this@NavigationState.topLevelRoute == startRoute) {
       persistentListOf(startRoute)

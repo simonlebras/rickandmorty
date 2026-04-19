@@ -5,6 +5,9 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.navigation3.runtime.NavKey
 
 public class Navigator(private val state: NavigationState) {
+  public val currentRoute: NavKey?
+    get() = state.currentRoute
+
   public fun navigate(route: NavKey) {
     if (route in state.backStacks.keys) {
       state.topLevelRoute = route

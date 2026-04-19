@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package app.rickandmorty.ui.settings.main
 
 import androidx.compose.foundation.clickable
@@ -9,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -20,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.semantics
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.BackNavButton
 import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
@@ -50,6 +55,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun MainSettingsScreen(
+  selectedItem: MainSettingsItem?,
   onNavigateUp: () -> Unit,
   onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
@@ -62,6 +68,7 @@ internal fun MainSettingsScreen(
 
   MainSettingsScreen(
     uiState = uiState,
+    selectedItem = selectedItem,
     onNavigateUp = onNavigateUp,
     onUpdateUseDynamicColor = viewModel::setUseDynamicColor,
     onNavigateToThemeSettings = onNavigateToThemeSettings,
@@ -74,6 +81,7 @@ internal fun MainSettingsScreen(
 @Composable
 private fun MainSettingsScreen(
   uiState: MainSettingsUiState,
+  selectedItem: MainSettingsItem?,
   onNavigateUp: () -> Unit,
   onUpdateUseDynamicColor: (Boolean) -> Unit,
   onNavigateToThemeSettings: () -> Unit,
@@ -98,6 +106,7 @@ private fun MainSettingsScreen(
 
         else -> {
           generalSettings(
+            selectedItem = selectedItem,
             currentTheme = uiState.theme()!!,
             currentAppLocale = uiState.appLocale(),
             isDynamicColorAvailable = isDynamicColorAvailable,
@@ -107,6 +116,7 @@ private fun MainSettingsScreen(
           )
 
           aboutSettings(
+            selectedItem = selectedItem,
             versionName = uiState.versionName,
             onNavigateToLicenseSettings = onNavigateToLicenseSettings,
           )
@@ -132,6 +142,7 @@ private fun MainSettingsAppBar(onNavigateUp: () -> Unit, scrollBehavior: TopAppB
 }
 
 private fun LazyListScope.generalSettings(
+  selectedItem: MainSettingsItem?,
   currentTheme: Theme,
   currentAppLocale: Locale?,
   isDynamicColorAvailable: Boolean,
@@ -139,14 +150,14 @@ private fun LazyListScope.generalSettings(
   onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
 ) {
-  item(key = "general", contentType = SettingsContentType.HEADER) {
+  item(key = MainSettingsItem.GeneralHeader, contentType = SettingsContentType.HEADER) {
     Header(
       text = stringResource(L10nRes.string.settings_general_title),
       modifier = Modifier.fillMaxWidth(),
     )
   }
 
-  item(key = "theme", contentType = SettingsContentType.LIST_ITEM) {
+  item(key = MainSettingsItem.Theme, contentType = SettingsContentType.LIST_ITEM) {
     ListItem(
       headlineContent = { Text(text = stringResource(L10nRes.string.settings_theme_title)) },
       modifier =
@@ -159,7 +170,7 @@ private fun LazyListScope.generalSettings(
   }
 
   if (isDynamicColorAvailable) {
-    item(key = "dynamic_color", contentType = SettingsContentType.LIST_ITEM) {
+    item(key = MainSettingsItem.DynamicColor, contentType = SettingsContentType.LIST_ITEM) {
       ListItem(
         headlineContent = {
           Text(text = stringResource(L10nRes.string.settings_dynamic_color_title))
@@ -175,48 +186,61 @@ private fun LazyListScope.generalSettings(
     }
   }
 
-  item(key = "language", contentType = SettingsContentType.LIST_ITEM) {
+  item(key = MainSettingsItem.Language, contentType = SettingsContentType.LIST_ITEM) {
+    val clickLabel = stringResource(L10nRes.string.settings_language_tap_action)
     ListItem(
-      headlineContent = { Text(text = stringResource(L10nRes.string.settings_language_title)) },
+      selected = selectedItem == MainSettingsItem.Language,
+      onClick = onNavigateToLanguageSettings,
       modifier =
-        Modifier.clickable(
-          onClickLabel = stringResource(L10nRes.string.settings_language_tap_action),
-          onClick = onNavigateToLanguageSettings,
-        ),
+        Modifier.semantics {
+          onClick(label = clickLabel) {
+            onNavigateToLanguageSettings()
+            true
+          }
+        },
       supportingContent = {
         val localeName =
           currentAppLocale?.getLocalizedName()
             ?: stringResource(L10nRes.string.settings_language_system_default)
         Text(text = localeName)
       },
-    )
+    ) {
+      Text(text = stringResource(L10nRes.string.settings_language_title))
+    }
   }
 }
 
 private fun LazyListScope.aboutSettings(
+  selectedItem: MainSettingsItem?,
   versionName: String,
   onNavigateToLicenseSettings: () -> Unit,
 ) {
-  item(key = "about", contentType = SettingsContentType.HEADER) {
+  item(key = MainSettingsItem.AboutHeader, contentType = SettingsContentType.HEADER) {
     Header(
       text = stringResource(L10nRes.string.settings_about_title),
       modifier = Modifier.fillMaxWidth(),
     )
   }
 
-  item(key = "licenses", contentType = SettingsContentType.LIST_ITEM) {
+  item(key = MainSettingsItem.Licenses, contentType = SettingsContentType.LIST_ITEM) {
+    val clickLabel = stringResource(L10nRes.string.settings_license_tap_action)
     ListItem(
-      headlineContent = { Text(text = stringResource(L10nRes.string.settings_license_title)) },
+      selected = selectedItem == MainSettingsItem.Licenses,
+      onClick = onNavigateToLicenseSettings,
       modifier =
-        Modifier.clickable(
-          onClickLabel = stringResource(L10nRes.string.settings_license_tap_action),
-          onClick = onNavigateToLicenseSettings,
-        ),
+        Modifier.semantics {
+          onClick(label = clickLabel) {
+            onNavigateToLicenseSettings()
+            true
+          }
+        },
       supportingContent = { Text(text = stringResource(L10nRes.string.settings_license_summary)) },
-    )
+    ) {
+      Text(text = stringResource(L10nRes.string.settings_license_title))
+    }
   }
 
-  item(key = "app_version", contentType = SettingsContentType.LIST_ITEM) {
+  item(key = MainSettingsItem.AppVersion, contentType = SettingsContentType.LIST_ITEM) {
     ListItem(
       headlineContent = { Text(text = stringResource(L10nRes.string.settings_app_version_title)) },
       supportingContent = { Text(text = versionName) },
