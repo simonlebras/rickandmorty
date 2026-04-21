@@ -1,7 +1,7 @@
 package app.rickandmorty.ui
 
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.material3.adaptive.layout.calculatePaneScaffoldDirective
 import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
 import androidx.compose.runtime.Composable
@@ -26,7 +26,7 @@ fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
   val navigationState = appState.navigationState
   val navigator = remember(navigationState) { Navigator(navigationState) }
 
-  val windowAdaptiveInfo = currentWindowAdaptiveInfo()
+  val windowAdaptiveInfo = currentWindowAdaptiveInfoV2()
   val directive = remember(windowAdaptiveInfo) {
     calculatePaneScaffoldDirective(windowAdaptiveInfo)
       .copy(horizontalPartitionSpacerSize = 0.dp)

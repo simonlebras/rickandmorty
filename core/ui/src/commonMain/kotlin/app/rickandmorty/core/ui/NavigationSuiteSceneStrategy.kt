@@ -1,7 +1,7 @@
 package app.rickandmorty.core.ui
 
 import androidx.compose.animation.EnterExitState
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -33,7 +33,7 @@ private class NavigationSuiteSceneDecorator<T : Any>(
 ) : Scene<T> by scene {
   override val content: @Composable () -> Unit = {
     val navigationSuiteType =
-      NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfo())
+      NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfoV2())
     NestedNavigationSuiteScaffold(
       navigationSuite = {
         val canUseMoveableNavigationSuite =
