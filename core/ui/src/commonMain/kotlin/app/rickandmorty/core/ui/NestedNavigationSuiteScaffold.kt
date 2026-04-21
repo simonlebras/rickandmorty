@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.MutableWindowInsets
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.add
 import androidx.compose.material3.Surface
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
@@ -24,7 +24,7 @@ public fun NestedNavigationSuiteScaffold(
   navigationSuite: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   navigationSuiteType: NavigationSuiteType =
-    NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfo()),
+    NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfoV2()),
   containerColor: Color = NavigationSuiteScaffoldDefaults.containerColor,
   contentColor: Color = NavigationSuiteScaffoldDefaults.contentColor,
   content: @Composable () -> Unit,
