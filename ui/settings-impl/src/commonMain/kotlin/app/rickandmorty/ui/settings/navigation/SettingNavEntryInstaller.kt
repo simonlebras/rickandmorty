@@ -14,6 +14,7 @@ import app.rickandmorty.core.navigation.LocalNavigator
 import app.rickandmorty.core.navigation.NavEntryInstaller
 import app.rickandmorty.ui.settings.language.LanguageSettingsScreen
 import app.rickandmorty.ui.settings.license.LicenseSettingsScreen
+import app.rickandmorty.ui.settings.main.MainSettingsItem
 import app.rickandmorty.ui.settings.main.MainSettingsScreen
 import app.rickandmorty.ui.settings.theme.ThemeSettingsDialog
 import dev.zacsweers.metro.ContributesIntoSet
@@ -29,9 +30,19 @@ internal class SettingsNavEntryInstaller : NavEntryInstaller {
     ) {
       val navigator = LocalNavigator.current
 
+      val selectedItem =
+        LocalListDetailSceneScope.current?.let {
+          when (navigator.currentRoute) {
+            is LanguageSettingsNavKey -> MainSettingsItem.Language
+            is LicenseSettingsNavKey -> MainSettingsItem.Licenses
+            else -> null
+          }
+        }
+
       var showSettingsDialog by rememberSaveable { mutableStateOf(false) }
 
       MainSettingsScreen(
+        selectedItem = selectedItem,
         onNavigateUp = navigator::goBack,
         onNavigateToThemeSettings = { showSettingsDialog = true },
         onNavigateToLanguageSettings = { navigator.navigate(LanguageSettingsNavKey) },
