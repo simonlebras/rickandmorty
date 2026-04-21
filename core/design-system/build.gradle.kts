@@ -6,12 +6,17 @@ plugins {
 }
 
 kotlin {
-  android { namespace = "app.rickandmorty.core.designsystem" }
+  android {
+    namespace = "app.rickandmorty.core.designsystem"
+
+    androidResources.enable = true
+  }
 
   dependencies {
     api(libs.coil.compose)
 
     api(libs.jetbrains.compose.material3)
+    api(libs.jetbrains.compose.resources)
     api(libs.jetbrains.compose.ui.tooling.preview)
 
     implementation(project(":core:l10n"))
@@ -20,7 +25,6 @@ kotlin {
 
     implementation(libs.haze.materials)
 
-    implementation(libs.jetbrains.compose.resources)
     implementation(libs.jetbrains.navigation3.ui)
   }
 }
