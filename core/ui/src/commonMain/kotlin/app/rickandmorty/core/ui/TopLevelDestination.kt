@@ -1,12 +1,12 @@
 package app.rickandmorty.core.ui
 
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation3.runtime.NavKey
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
 public data class TopLevelDestination(
   val route: NavKey,
-  val selectedIcon: ImageVector,
-  val unselectedIcon: ImageVector,
+  val selectedIcon: DrawableResource,
+  val unselectedIcon: DrawableResource,
   val label: StringResource,
 )

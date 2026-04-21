@@ -10,12 +10,6 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import androidx.savedstate.serialization.SavedStateConfiguration
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.designsystem.icon.filled.Face
-import app.rickandmorty.core.designsystem.icon.filled.Map
-import app.rickandmorty.core.designsystem.icon.filled.Tv
-import app.rickandmorty.core.designsystem.icon.outlined.Face
-import app.rickandmorty.core.designsystem.icon.outlined.Map
-import app.rickandmorty.core.designsystem.icon.outlined.Tv
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.character_list_title
 import app.rickandmorty.core.l10n.resources.episode_list_title

@@ -38,7 +38,6 @@ import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefreshBox
 import app.rickandmorty.core.designsystem.component.SettingsNavButton
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.designsystem.icon.outlined.Face
 import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.character_list_empty
@@ -57,6 +56,7 @@ import app.rickandmorty.core.ui.label
 import app.rickandmorty.core.ui.tooling.preview.ProvideColorImagePreviewHandler
 import app.rickandmorty.data.character.Character
 import dev.zacsweers.metrox.viewmodel.metroViewModel
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -117,7 +117,7 @@ private fun CharacterListScreen(
         Empty(
           graphic = {
             Icon(
-              imageVector = RamIcons.Outlined.Face,
+              painter = painterResource(RamIcons.Outlined.Face),
               contentDescription = null,
               modifier = Modifier.size(64.dp),
             )

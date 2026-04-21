@@ -24,6 +24,7 @@ import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
 import app.rickandmorty.core.navigation.LocalNavigator
 import dev.chrisbanes.haze.hazeEffect
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -63,7 +64,7 @@ public fun NavigationSuiteState.NavigationSuite(
           onClick = { navigator.navigate(item.route) },
           icon = {
             Icon(
-              imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
+              painter = painterResource(if (isSelected) item.selectedIcon else item.unselectedIcon),
               contentDescription = null,
             )
           },

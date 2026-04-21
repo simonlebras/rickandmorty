@@ -30,7 +30,6 @@ import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.PullToRefreshBox
 import app.rickandmorty.core.designsystem.component.SettingsNavButton
 import app.rickandmorty.core.designsystem.icon.RamIcons
-import app.rickandmorty.core.designsystem.icon.outlined.Map
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.location_list_empty
 import app.rickandmorty.core.l10n.resources.location_list_title
@@ -45,6 +44,7 @@ import app.rickandmorty.core.ui.isError
 import app.rickandmorty.core.ui.isLoading
 import app.rickandmorty.data.location.Location
 import dev.zacsweers.metrox.viewmodel.metroViewModel
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -104,7 +104,7 @@ private fun LocationListScreen(
         Empty(
           graphic = {
             Icon(
-              imageVector = RamIcons.Outlined.Map,
+              painter = painterResource(RamIcons.Outlined.Map),
               contentDescription = null,
               modifier = Modifier.size(64.dp),
             )
