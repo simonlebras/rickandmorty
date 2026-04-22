@@ -2,6 +2,7 @@ package app.rickandmorty.core.designsystem.icon
 
 import app.rickandmorty.core.designsystem.resources.Res
 import app.rickandmorty.core.designsystem.resources.arrow_back_filled
+import app.rickandmorty.core.designsystem.resources.content_copy
 import app.rickandmorty.core.designsystem.resources.face
 import app.rickandmorty.core.designsystem.resources.face_filled
 import app.rickandmorty.core.designsystem.resources.map
@@ -21,6 +22,7 @@ public object RamIcons {
   }
 
   public object Outlined {
+    public val ContentCopy: DrawableResource = Res.drawable.content_copy
     public val Face: DrawableResource = Res.drawable.face
     public val Map: DrawableResource = Res.drawable.map
     public val Tv: DrawableResource = Res.drawable.tv
