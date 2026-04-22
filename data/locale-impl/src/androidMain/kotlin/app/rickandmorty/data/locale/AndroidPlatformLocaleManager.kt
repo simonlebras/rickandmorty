@@ -34,8 +34,8 @@ private const val LOCALE_CONFIG_FILE = "_generated_res_locale_config"
 @ContributesBinding(AppScope::class)
 @SingleIn(AppScope::class)
 internal class AndroidPlatformLocaleManager(
-  @param:AppContext private val context: Context,
-  @param:IODispatcher private val ioDispatcher: CoroutineContext,
+  @AppContext private val context: Context,
+  @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : PlatformLocaleManager {
   private val mutex = Mutex()
   private val compatLocaleUpdates = MutableSharedFlow<Locale?>(replay = 1)
