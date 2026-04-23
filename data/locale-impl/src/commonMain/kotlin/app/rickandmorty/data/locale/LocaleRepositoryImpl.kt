@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 @ContributesBinding(AppScope::class)
 internal class LocaleRepositoryImpl(
   private val platformLocaleManager: PlatformLocaleManager,
-  @param:ApplicationScope private val applicationScope: CoroutineScope,
+  @ApplicationScope private val applicationScope: CoroutineScope,
 ) : LocaleRepository {
   override fun getAppLocale(): Flow<Locale?> {
     return platformLocaleManager.getAppLocale()

@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 @ContributesBinding(AppScope::class)
 internal class ThemeRepositoryImpl(
   private val dataStore: DataStore<ThemeProto>,
-  @param:ApplicationScope private val applicationScope: CoroutineScope,
+  @ApplicationScope private val applicationScope: CoroutineScope,
 ) : ThemeRepository {
 
   override fun getTheme(): Flow<Theme> =

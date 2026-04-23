@@ -29,10 +29,7 @@ internal fun KotlinMultiplatformExtension.configureCompilerOptions() {
 }
 
 private fun KotlinCommonCompilerOptions.configureCommonCompilerOptions() {
-  freeCompilerArgs.addAll(
-    "-Xannotation-default-target=param-property",
-    "-Xcontext-sensitive-resolution",
-  )
+  freeCompilerArgs.addAll("-Xcontext-sensitive-resolution")
   progressiveMode.set(true)
 }
 
