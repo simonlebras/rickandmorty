@@ -23,6 +23,8 @@ kotlin {
     implementation(project(":core:l10n"))
     implementation(project(":core:navigation"))
 
+    implementation(libs.haze.blur)
+
     implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
   }
 

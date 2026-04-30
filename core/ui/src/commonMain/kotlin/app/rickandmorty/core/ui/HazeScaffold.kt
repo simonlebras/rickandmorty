@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.blur.blurEffect
 import dev.chrisbanes.haze.hazeEffect
 import dev.chrisbanes.haze.hazeSource
 
@@ -32,13 +33,21 @@ public fun HazeScaffold(
     modifier = modifier,
     topBar =
       if (topBar != null) {
-        { Box(Modifier.hazeEffect(state = hazeState)) { topBar() } }
+        {
+          Box(Modifier.hazeEffect(state = hazeState) { blurEffect { blurEnabled = true } }) {
+            topBar()
+          }
+        }
       } else {
         null
       },
     bottomBar =
       if (bottomBar != null) {
-        { Box(Modifier.hazeEffect(state = hazeState)) { bottomBar() } }
+        {
+          Box(Modifier.hazeEffect(state = hazeState) { blurEffect { blurEnabled = true } }) {
+            bottomBar()
+          }
+        }
       } else {
         null
       },

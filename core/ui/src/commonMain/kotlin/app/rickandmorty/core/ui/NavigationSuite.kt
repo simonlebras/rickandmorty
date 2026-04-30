@@ -23,6 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
 import app.rickandmorty.core.navigation.LocalNavigator
+import dev.chrisbanes.haze.blur.HazeBlurDefaults.blurEnabled
+import dev.chrisbanes.haze.blur.blurEffect
 import dev.chrisbanes.haze.hazeEffect
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -35,9 +37,11 @@ public fun NavigationSuiteState.NavigationSuite(
 ) {
   Box(
     modifier =
-      modifier
-        .navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType)
-        .hazeEffect(state = LocalHazeState.current)
+      modifier.navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType).hazeEffect(
+        state = LocalHazeState.current
+      ) {
+        blurEffect { blurEnabled = true }
+      }
   ) {
     NavigationSuite(
       navigationSuiteType = navigationSuiteType,
