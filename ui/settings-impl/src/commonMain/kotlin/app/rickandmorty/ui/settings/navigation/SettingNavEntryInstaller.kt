@@ -45,8 +45,12 @@ internal class SettingsNavEntryInstaller : NavEntryInstaller {
         selectedItem = selectedItem,
         onNavigateUp = navigator::goBack,
         onNavigateToThemeSettings = { showSettingsDialog = true },
-        onNavigateToLanguageSettings = { navigator.navigate(LanguageSettingsNavKey) },
-        onNavigateToLicenseSettings = { navigator.navigate(LicenseSettingsNavKey) },
+        onNavigateToLanguageSettings = {
+          navigator.navigate(route = LanguageSettingsNavKey, popUpTo = MainSettingsNavKey)
+        },
+        onNavigateToLicenseSettings = {
+          navigator.navigate(route = LicenseSettingsNavKey, popUpTo = MainSettingsNavKey)
+        },
       )
 
       if (showSettingsDialog) {

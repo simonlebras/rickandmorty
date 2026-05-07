@@ -8,12 +8,25 @@ public class Navigator(private val state: NavigationState) {
   public val currentRoute: NavKey?
     get() = state.currentRoute
 
-  public fun navigate(route: NavKey) {
+  public fun navigate(route: NavKey, popUpTo: NavKey? = null, inclusive: Boolean = false) {
     if (route in state.backStacks.keys) {
       state.topLevelRoute = route
-    } else {
-      state.backStacks[state.topLevelRoute]?.add(route)
+      return
     }
+
+    val currentStack =
+      checkNotNull(state.backStacks[state.topLevelRoute]) {
+        "Stack for ${state.topLevelRoute} not found"
+      }
+    if (popUpTo != null && popUpTo in currentStack) {
+      while (currentStack.last() != popUpTo) {
+        currentStack.removeLastOrNull()
+      }
+      if (inclusive) {
+        currentStack.removeLastOrNull()
+      }
+    }
+    currentStack.add(route)
   }
 
   public fun goBack() {
