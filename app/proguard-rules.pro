@@ -15,3 +15,8 @@
    void traceEventStart(int,java.lang.String);
    void traceEventEnd();
 }
+
+# Enable the new Compose SlotTable
+-assumevalues public class androidx.compose.runtime.ComposeRuntimeFlags {
+    static boolean isLinkBufferComposerEnabled return true;
+}
