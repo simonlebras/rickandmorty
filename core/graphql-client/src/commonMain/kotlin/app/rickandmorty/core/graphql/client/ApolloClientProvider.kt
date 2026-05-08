@@ -10,6 +10,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
 import io.ktor.client.HttpClient
+import kotlin.coroutines.ContinuationInterceptor
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineDispatcher
 
@@ -34,7 +35,7 @@ public interface ApolloClientProvider {
           }
         }
         .failFastIfOffline(true)
-        .dispatcher(ioDispatcher[CoroutineDispatcher])
+        .dispatcher(ioDispatcher[ContinuationInterceptor] as CoroutineDispatcher)
         .enableAutoPersistedQueries(true)
         .build()
   }
