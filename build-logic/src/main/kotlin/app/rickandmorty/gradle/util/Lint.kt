@@ -6,6 +6,7 @@ internal fun Lint.configureLint() {
   checkDependencies = false
   checkReleaseBuilds = false
   warningsAsErrors = true
-  disable +=
-    setOf("AndroidGradlePluginVersion", "GradleDependency", "Instantiatable", "OldTargetApi")
+  disable.addAll(
+    ["AndroidGradlePluginVersion", "GradleDependency", "Instantiatable", "OldTargetApi"]
+  )
 }

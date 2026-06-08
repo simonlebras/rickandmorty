@@ -29,7 +29,7 @@ internal fun KotlinMultiplatformExtension.configureCompilerOptions() {
 }
 
 private fun KotlinCommonCompilerOptions.configureCommonCompilerOptions() {
-  freeCompilerArgs.addAll("-Xcontext-sensitive-resolution")
+  freeCompilerArgs.addAll("-Xcollection-literals", "-Xcontext-sensitive-resolution")
   progressiveMode.set(true)
 }
 

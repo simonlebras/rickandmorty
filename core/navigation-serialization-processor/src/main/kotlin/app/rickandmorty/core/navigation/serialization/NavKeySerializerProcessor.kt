@@ -92,7 +92,7 @@ internal class NavKeySerializerProcessor(
   }
 
   private fun isSupportedKind(clazz: KSClassDeclaration): Boolean {
-    val supportedKinds = setOf(ClassKind.CLASS, ClassKind.OBJECT, ClassKind.ENUM_CLASS)
+    val supportedKinds = [ClassKind.CLASS, ClassKind.OBJECT, ClassKind.ENUM_CLASS]
 
     if (clazz.classKind !in supportedKinds) {
       logger.error(

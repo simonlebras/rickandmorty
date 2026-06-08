@@ -74,10 +74,10 @@ public class NavigationState(
   @Composable
   public fun toDecoratedEntries(entryProvider: EntryProvider): ImmutableList<NavEntry<NavKey>> {
     val decorators =
-      listOf(
+      [
         rememberSaveableStateHolderNavEntryDecorator<NavKey>(),
         rememberViewModelStoreNavEntryDecorator(),
-      )
+      ]
 
     val decoratedEntries = backStacks.mapValues { (_, stack) ->
       rememberDecoratedNavEntries(

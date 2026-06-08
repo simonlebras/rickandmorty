@@ -6,11 +6,11 @@ import com.android.build.api.dsl.TestOptions
 import org.gradle.api.GradleException
 
 private val deviceConfigs =
-  listOf(
+  [
     DeviceConfig(device = "Pixel 4", apiLevel = 30, systemImageSource = "aosp-atd"),
     DeviceConfig(device = "Pixel 6", apiLevel = 31, systemImageSource = "aosp"),
     DeviceConfig(device = "Pixel C", apiLevel = 30, systemImageSource = "aosp-atd"),
-  )
+  ]
 
 public fun TestOptions.configureGradleManagedDevices() {
   @Suppress("UnstableApiUsage") managedDevices.configureGradleManagedDevices()

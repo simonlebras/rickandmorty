@@ -10,7 +10,11 @@ plugins {
 }
 
 kotlin {
-  compilerOptions { allWarningsAsErrors = true }
+  compilerOptions {
+    allWarningsAsErrors = true
+
+    freeCompilerArgs.addAll("-Xcollection-literals")
+  }
 
   explicitApi()
 }
