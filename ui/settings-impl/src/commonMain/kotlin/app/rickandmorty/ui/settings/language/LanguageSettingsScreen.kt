@@ -133,7 +133,7 @@ private fun LazyListScope.systemDefault(
   currentAppLocale: Locale?,
   onSelectLocale: (Locale?) -> Unit,
 ) {
-  item(key = "system_default", contentType = SettingsContentType.LIST_ITEM) {
+  item(key = "system_default", contentType = SettingsContentType.ListItem) {
     LocaleItem(
       text = stringResource(L10nRes.string.settings_language_system_default),
       selected = currentAppLocale == null,

@@ -21,6 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.designsystem.theme.RamTheme
+import app.rickandmorty.core.rootcontent.RootContent
 import app.rickandmorty.inject.UiGraph
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoMap
@@ -33,7 +34,10 @@ import kotlinx.coroutines.launch
 
 @ContributesIntoMap(AppScope::class, binding<Activity>())
 @ActivityKey
-class MainActivity(private val uiGraphFactory: UiGraph.Factory) : AppCompatActivity() {
+class MainActivity(
+  private val uiGraphFactory: UiGraph.Factory,
+  private val rootContent: RootContent,
+) : AppCompatActivity() {
   init {
     // https://issuetracker.google.com/issues/139738913
     if (Build.VERSION.SDK_INT == 29 && isTaskRoot) {
@@ -69,13 +73,17 @@ class MainActivity(private val uiGraphFactory: UiGraph.Factory) : AppCompatActiv
     setContent {
       CompositionLocalProvider(LocalMetroViewModelFactory provides viewModelFactory) {
         RamTheme(useDynamicColor = uiState.useDynamicColor) {
-          val appState =
-            rememberRamAppState(
-              entryProvider = entryProvider,
-              savedStateConfiguration = savedStateConfiguration,
+          rootContent.Content {
+            val appState =
+              rememberRamAppState(
+                entryProvider = entryProvider,
+                savedStateConfiguration = savedStateConfiguration,
+              )
+            RamApp(
+              appState = appState,
+              modifier = Modifier.semantics { testTagsAsResourceId = true },
             )
-
-          RamApp(appState = appState, modifier = Modifier.semantics { testTagsAsResourceId = true })
+          }
         }
       }
     }

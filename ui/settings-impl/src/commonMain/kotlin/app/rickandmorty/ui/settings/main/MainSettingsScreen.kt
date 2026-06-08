@@ -27,6 +27,8 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.BackNavButton
+import app.rickandmorty.core.designsystem.component.SettingsHeader
+import app.rickandmorty.core.designsystem.component.SettingsItem
 import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.settings_about_title
@@ -46,7 +48,6 @@ import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.locale.Locale
 import app.rickandmorty.data.theme.Theme
-import app.rickandmorty.ui.settings.common.Header
 import app.rickandmorty.ui.settings.common.SettingsContentType
 import app.rickandmorty.ui.settings.common.loader
 import app.rickandmorty.ui.settings.common.util.label
@@ -150,15 +151,15 @@ private fun LazyListScope.generalSettings(
   onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
 ) {
-  item(key = MainSettingsItem.GeneralHeader, contentType = SettingsContentType.HEADER) {
-    Header(
+  item(key = MainSettingsItem.GeneralHeader, contentType = SettingsContentType.Header) {
+    SettingsHeader(
       text = stringResource(L10nRes.string.settings_general_title),
       modifier = Modifier.fillMaxWidth(),
     )
   }
 
-  item(key = MainSettingsItem.Theme, contentType = SettingsContentType.LIST_ITEM) {
-    ListItem(
+  item(key = MainSettingsItem.Theme, contentType = SettingsContentType.ListItem) {
+    SettingsItem(
       headlineContent = { Text(text = stringResource(L10nRes.string.settings_theme_title)) },
       modifier =
         Modifier.clickable(
@@ -170,8 +171,8 @@ private fun LazyListScope.generalSettings(
   }
 
   if (isDynamicColorAvailable) {
-    item(key = MainSettingsItem.DynamicColor, contentType = SettingsContentType.LIST_ITEM) {
-      ListItem(
+    item(key = MainSettingsItem.DynamicColor, contentType = SettingsContentType.ListItem) {
+      SettingsItem(
         headlineContent = {
           Text(text = stringResource(L10nRes.string.settings_dynamic_color_title))
         },
@@ -188,7 +189,7 @@ private fun LazyListScope.generalSettings(
     }
   }
 
-  item(key = MainSettingsItem.Language, contentType = SettingsContentType.LIST_ITEM) {
+  item(key = MainSettingsItem.Language, contentType = SettingsContentType.ListItem) {
     val clickLabel = stringResource(L10nRes.string.settings_language_tap_action)
     ListItem(
       selected = selectedItem == MainSettingsItem.Language,
@@ -217,14 +218,14 @@ private fun LazyListScope.aboutSettings(
   versionName: String,
   onNavigateToLicenseSettings: () -> Unit,
 ) {
-  item(key = MainSettingsItem.AboutHeader, contentType = SettingsContentType.HEADER) {
-    Header(
+  item(key = MainSettingsItem.AboutHeader, contentType = SettingsContentType.Header) {
+    SettingsHeader(
       text = stringResource(L10nRes.string.settings_about_title),
       modifier = Modifier.fillMaxWidth(),
     )
   }
 
-  item(key = MainSettingsItem.Licenses, contentType = SettingsContentType.LIST_ITEM) {
+  item(key = MainSettingsItem.Licenses, contentType = SettingsContentType.ListItem) {
     val clickLabel = stringResource(L10nRes.string.settings_license_tap_action)
     ListItem(
       selected = selectedItem == MainSettingsItem.Licenses,
@@ -242,8 +243,8 @@ private fun LazyListScope.aboutSettings(
     }
   }
 
-  item(key = MainSettingsItem.AppVersion, contentType = SettingsContentType.LIST_ITEM) {
-    ListItem(
+  item(key = MainSettingsItem.AppVersion, contentType = SettingsContentType.ListItem) {
+    SettingsItem(
       headlineContent = { Text(text = stringResource(L10nRes.string.settings_app_version_title)) },
       supportingContent = { Text(text = versionName) },
     )
