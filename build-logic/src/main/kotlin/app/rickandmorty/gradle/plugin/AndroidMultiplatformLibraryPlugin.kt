@@ -25,7 +25,7 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
           targets.withType<KotlinMultiplatformAndroidLibraryTarget>().configureEach {
             lint { configureLint() }
 
-            localDependencySelection { selectBuildTypeFrom.set(listOf("release")) }
+            localDependencySelection { selectBuildTypeFrom.set(["release"]) }
 
             enableCoreLibraryDesugaring = true
           }

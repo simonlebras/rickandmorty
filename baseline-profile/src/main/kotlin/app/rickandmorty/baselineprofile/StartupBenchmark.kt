@@ -30,7 +30,7 @@ class StartupBenchmark {
   private fun benchmark(compilationMode: CompilationMode) {
     rule.measureRepeated(
       packageName = PACKAGE_NAME,
-      metrics = listOf(StartupTimingMetric()),
+      metrics = [StartupTimingMetric()],
       iterations = 10,
       experimentalConfig =
         ExperimentalConfig(startupInsightsConfig = StartupInsightsConfig(isEnabled = true)),

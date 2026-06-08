@@ -39,8 +39,8 @@ fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
     NavDisplay(
       entries = appState.currentEntries,
       modifier = modifier,
-      sceneStrategies = listOf(listDetailStrategy),
-      sceneDecoratorStrategies = listOf(navigationSuiteStrategy),
+      sceneStrategies = [listDetailStrategy],
+      sceneDecoratorStrategies = [navigationSuiteStrategy],
       sharedTransitionScope = LocalSharedTransitionScope.current,
       onBack = navigator::goBack,
     )
