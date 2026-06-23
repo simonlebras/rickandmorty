@@ -20,6 +20,7 @@
   "ignorePresets": [
     "workarounds:javaLTSVersions",
   ],
+  "ignoreUnstable": false,
   "packageRules": [
     {
       "groupName": "Android Tools",
@@ -27,13 +28,6 @@
       "matchPackageNames": [
         "com.android.tools:{/,}**",
         "com.android.tools.build:{/,}**",
-      ],
-    },
-    {
-      "description": "Libraries allowed to use non-stable releases",
-      "ignoreUnstable": false,
-      "matchDepNames": [
-        "/^androidx\\.([\\w-:]+)$/",
       ],
     },
     {
