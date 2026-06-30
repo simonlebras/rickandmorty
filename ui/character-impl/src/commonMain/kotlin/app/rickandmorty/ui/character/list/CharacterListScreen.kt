@@ -204,5 +204,9 @@ private fun CharacterListScreenAppBar(
 private fun CharacterItemPreview(
   @PreviewParameter(CharacterPreviewParameterProvider::class) character: Character
 ) {
-  RamTheme { ProvideColorImagePreviewHandler { CharacterItem(character = character) } }
+  RamTheme {
+    ProvideColorImagePreviewHandler {
+      CharacterItem(character = character)
+    }
+  }
 }

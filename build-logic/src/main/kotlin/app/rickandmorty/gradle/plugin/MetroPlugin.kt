@@ -23,7 +23,9 @@ public class MetroPlugin : Plugin<Project> {
 
       pluginManager.withPlugin(libs.plugins.dependencyanalysis) {
         configure<DependencyAnalysisSubExtension> {
-          issues { onIncorrectConfiguration { exclude(libs.metro.runtime) } }
+          issues {
+            onIncorrectConfiguration { exclude(libs.metro.runtime) }
+          }
         }
       }
     }

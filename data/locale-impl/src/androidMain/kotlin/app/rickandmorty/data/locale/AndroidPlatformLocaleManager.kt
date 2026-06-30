@@ -87,13 +87,13 @@ internal class AndroidPlatformLocaleManager(
         resources.getIdentifier(LOCALE_CONFIG_FILE, "xml", context.packageName)
       resources.getXml(localeConfigFileId).use { parser ->
         buildList {
-            while (parser.eventType != XmlPullParser.END_DOCUMENT) {
-              if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
-                add(Locale(parser.getAttributeValue(0)))
-              }
-              parser.next()
+          while (parser.eventType != XmlPullParser.END_DOCUMENT) {
+            if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
+              add(Locale(parser.getAttributeValue(0)))
             }
+            parser.next()
           }
+        }
           .toImmutableList()
       }
     }

@@ -5,7 +5,6 @@ plugins {
   alias(libs.plugins.android.lint)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.sam)
-  alias(libs.plugins.ktfmt)
   alias(libs.plugins.tapmoc)
 }
 
@@ -22,8 +21,6 @@ kotlin {
 configureJavaCompatibility(21)
 
 samWithReceiver { annotation(HasImplicitReceiver::class.qualifiedName!!) }
-
-ktfmt { googleStyle() }
 
 lint {
   warningsAsErrors = true
@@ -44,7 +41,6 @@ dependencies {
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.firebase.perf))
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
-  compileOnly(plugin(libs.plugins.ktfmt))
   compileOnly(plugin(libs.plugins.metro))
   compileOnly(plugin(libs.plugins.tapmoc))
 

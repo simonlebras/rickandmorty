@@ -4,4 +4,6 @@ plugins {
   alias(libs.plugins.rickandmorty.metro)
 }
 
-kotlin { dependencies { api(libs.okio) } }
+kotlin {
+  dependencies { api(libs.okio) }
+}

@@ -18,5 +18,9 @@ kotlin {
     api(libs.kotlinx.serialization.json)
   }
 
-  sourceSets { androidMain { dependencies { api(project(":core:metro-common")) } } }
+  sourceSets {
+    androidMain {
+      dependencies { api(project(":core:metro-common")) }
+    }
+  }
 }

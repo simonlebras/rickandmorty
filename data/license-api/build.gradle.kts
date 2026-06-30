@@ -3,4 +3,6 @@ plugins {
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
 }
 
-kotlin { dependencies { api(libs.kotlinx.collectionsimmutable) } }
+kotlin {
+  dependencies { api(libs.kotlinx.collectionsimmutable) }
+}

@@ -32,7 +32,9 @@ public class AndroidLibraryPlugin : Plugin<Project> {
       configure<LibraryExtension> {
         configureAndroid()
 
-        buildTypes { release { isDefault = true } }
+        buildTypes {
+          release { isDefault = true }
+        }
         testBuildType = "release"
       }
 

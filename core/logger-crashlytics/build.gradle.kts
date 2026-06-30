@@ -15,8 +15,12 @@ kotlin {
   }
 
   sourceSets {
-    androidMain { dependencies { implementation(libs.kermit.crashlytics) } }
+    androidMain {
+      dependencies { implementation(libs.kermit.crashlytics) }
+    }
 
-    nativeMain { dependencies { implementation(libs.kermit.crashlytics) } }
+    nativeMain {
+      dependencies { implementation(libs.kermit.crashlytics) }
+    }
   }
 }

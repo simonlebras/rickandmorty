@@ -12,4 +12,8 @@ kotlin {
   }
 }
 
-dependencyAnalysis { issues { onUnusedDependencies { exclude(libs.jetbrains.compose.runtime) } } }
+dependencyAnalysis {
+  issues {
+    onUnusedDependencies { exclude(libs.jetbrains.compose.runtime) }
+  }
+}

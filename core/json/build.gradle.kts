@@ -4,4 +4,6 @@ plugins {
   alias(libs.plugins.rickandmorty.metro)
 }
 
-kotlin { dependencies { api(libs.kotlinx.serialization.json) } }
+kotlin {
+  dependencies { api(libs.kotlinx.serialization.json) }
+}

@@ -1,0 +1,12 @@
+# kempt configuration: https://github.com/ZacSweers/kempt
+
+[ktfmt]
+version = "0.64"
+
+[paths]
+exclude = [
+    "**/build/**",
+    "**/target/**",
+    "**/.gradle/**",
+    "**/generated/**",
+]

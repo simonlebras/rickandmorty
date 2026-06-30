@@ -32,5 +32,7 @@ kotlin {
 }
 
 dependencyAnalysis {
-  issues { onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptive.navigation3) } }
+  issues {
+    onUnusedDependencies { exclude(libs.jetbrains.compose.material3.adaptive.navigation3) }
+  }
 }

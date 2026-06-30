@@ -10,5 +10,9 @@ kotlin {
 
   dependencies { api(libs.kotlinx.coroutines.core) }
 
-  sourceSets { androidMain { dependencies { implementation(project(":core:base")) } } }
+  sourceSets {
+    androidMain {
+      dependencies { implementation(project(":core:base")) }
+    }
+  }
 }
