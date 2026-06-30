@@ -11,8 +11,12 @@ kotlin {
   dependencies { api(project(":core:startup")) }
 
   sourceSets {
-    androidMain { dependencies { implementation(libs.crashkios.crashlytics) } }
+    androidMain {
+      dependencies { implementation(libs.crashkios.crashlytics) }
+    }
 
-    nativeMain { dependencies { implementation(libs.crashkios.crashlytics) } }
+    nativeMain {
+      dependencies { implementation(libs.crashkios.crashlytics) }
+    }
   }
 }

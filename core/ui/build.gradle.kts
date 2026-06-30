@@ -28,7 +28,11 @@ kotlin {
     implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
   }
 
-  sourceSets { androidMain { dependencies { implementation(libs.androidx.activity.compose) } } }
+  sourceSets {
+    androidMain {
+      dependencies { implementation(libs.androidx.activity.compose) }
+    }
+  }
 }
 
 dependencyAnalysis {

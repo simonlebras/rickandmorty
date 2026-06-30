@@ -24,7 +24,9 @@ public class FirebasePerfPlugin : Plugin<Project> {
         pluginManager.withPlugin(libs.plugins.android.application) {
           configure<ApplicationExtension> {
             buildTypes {
-              debug { configure<FirebasePerfExtension> { setInstrumentationEnabled(false) } }
+              debug {
+                configure<FirebasePerfExtension> { setInstrumentationEnabled(false) }
+              }
             }
           }
         }

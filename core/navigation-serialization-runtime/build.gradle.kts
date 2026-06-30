@@ -12,5 +12,7 @@ kotlin {
 }
 
 dependencyAnalysis {
-  issues { onUnusedDependencies { exclude(libs.androidx.navigation3.runtime) } }
+  issues {
+    onUnusedDependencies { exclude(libs.androidx.navigation3.runtime) }
+  }
 }

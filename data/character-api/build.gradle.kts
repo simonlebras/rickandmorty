@@ -13,4 +13,8 @@ kotlin {
   }
 }
 
-dependencyAnalysis { issues { onUnusedDependencies { exclude(libs.androidx.paging.common) } } }
+dependencyAnalysis {
+  issues {
+    onUnusedDependencies { exclude(libs.androidx.paging.common) }
+  }
+}

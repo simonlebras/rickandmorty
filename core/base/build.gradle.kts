@@ -4,4 +4,6 @@ plugins {
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
 }
 
-kotlin { android { namespace = "app.rickandmorty.core.base" } }
+kotlin {
+  android { namespace = "app.rickandmorty.core.base" }
+}

@@ -29,7 +29,11 @@ kotlin {
     api(libs.androidx.sqlite.bundled)
   }
 
-  sourceSets { jvmMain { dependencies { implementation(libs.okio) } } }
+  sourceSets {
+    jvmMain {
+      dependencies { implementation(libs.okio) }
+    }
+  }
 
   kspDependenciesForAllTargets { ksp(libs.androidx.room.compiler) }
 }

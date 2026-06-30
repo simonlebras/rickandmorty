@@ -50,10 +50,22 @@ private fun NestedNavigationSuiteScaffoldLayout(
   val contentInsets = remember { MutableWindowInsets() }
 
   val navigationContent: @Composable () -> Unit =
-    remember(navigationSuite) { { Box { navigationSuite() } } }
+    remember(navigationSuite) {
+      {
+        Box {
+          navigationSuite()
+        }
+      }
+    }
   val bodyContent: @Composable () -> Unit =
     remember(content, contentInsets) {
-      { Box { CompositionLocalProvider(LocalScaffoldInsets provides contentInsets) { content() } } }
+      {
+        Box {
+          CompositionLocalProvider(LocalScaffoldInsets provides contentInsets) {
+            content()
+          }
+        }
+      }
     }
 
   val layoutDirection = LocalLayoutDirection.current

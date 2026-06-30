@@ -1,45 +1,57 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "customManagers": [
-    {
-      "customType": "regex",
-      "datasourceTemplate": "java-version",
-      "depNameTemplate": "java",
-      "extractVersionTemplate": "^(?<version>\\d+)",
-      "managerFilePatterns": [
-        "/\\.java-version$/",
-      ],
-      "matchStrings": [
-        "(?<currentValue>.*)\\n",
-      ],
-    },
-  ],
-  "extends": [
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
     "config:recommended",
   ],
-  "ignorePresets": [
+  ignorePresets: [
     "workarounds:javaLTSVersions",
   ],
-  "ignoreUnstable": false,
-  "packageRules": [
+  ignoreUnstable: false,
+  customManagers: [
     {
-      "groupName": "Android Tools",
-      "groupSlug": "android-tools",
-      "matchPackageNames": [
+      customType: "regex",
+      managerFilePatterns: [
+        "/\\.java-version$/"
+      ],
+      matchStrings: [
+        "(?<currentValue>.*)\\n"
+      ],
+      datasourceTemplate: "java-version",
+      depNameTemplate: "java",
+      extractVersionTemplate: "^(?<version>\\d+)",
+    },
+    {
+      customType: "regex",
+      managerFilePatterns: [
+        "(^|/)\\.kempt\\.toml$"
+      ],
+      matchStrings: [
+        "\\[ktfmt\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      datasourceTemplate: "maven",
+      registryUrlTemplate: "https://repo1.maven.org/maven2",
+      depNameTemplate: "com.facebook:ktfmt",
+    },
+  ],
+  packageRules: [
+    {
+      groupName: "Android Tools",
+      groupSlug: "android-tools",
+      matchPackageNames: [
         "com.android.tools:{/,}**",
         "com.android.tools.build:{/,}**",
       ],
     },
     {
-      "automerge": true,
-      "automergeType": "pr",
-      "description": "Automatically merge minor and patch-level updates",
-      "matchUpdateTypes": [
+      description: "Automerge minor and patch updates",
+      matchUpdateTypes: [
         "minor",
         "patch",
         "digest",
       ],
-      "platformAutomerge": true,
+      automerge: true,
+      automergeType: "pr",
+      platformAutomerge: true,
     },
   ],
 }

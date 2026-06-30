@@ -26,7 +26,9 @@ public class AndroidTestPlugin : Plugin<Project> {
       configure<TestExtension> {
         configureAndroid()
 
-        buildTypes { debug { matchingFallbacks += "release" } }
+        buildTypes {
+          debug { matchingFallbacks += "release" }
+        }
       }
     }
 }

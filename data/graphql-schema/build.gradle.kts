@@ -18,4 +18,6 @@ apollo {
   }
 }
 
-kotlin { dependencies { api(libs.apollo.api) } }
+kotlin {
+  dependencies { api(libs.apollo.api) }
+}

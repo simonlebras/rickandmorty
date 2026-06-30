@@ -4,4 +4,6 @@ plugins {
   alias(libs.plugins.rickandmorty.navigation.serialization)
 }
 
-kotlin { dependencies { api(project(":core:metro-common")) } }
+kotlin {
+  dependencies { api(project(":core:metro-common")) }
+}

@@ -32,6 +32,8 @@ private fun Project.configureDependencyAnalysis() {
       }
     }
 
-    abi { exclusions { ignoreGeneratedCode() } }
+    abi {
+      exclusions { ignoreGeneratedCode() }
+    }
   }
 }

@@ -27,10 +27,10 @@ fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
   val navigator = remember(navigationState) { Navigator(navigationState) }
 
   val windowAdaptiveInfo = currentWindowAdaptiveInfoV2()
-  val directive = remember(windowAdaptiveInfo) {
-    calculatePaneScaffoldDirective(windowAdaptiveInfo)
-      .copy(horizontalPartitionSpacerSize = 0.dp)
-  }
+  val directive =
+    remember(windowAdaptiveInfo) {
+      calculatePaneScaffoldDirective(windowAdaptiveInfo).copy(horizontalPartitionSpacerSize = 0.dp)
+    }
   val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>(directive = directive)
 
   val navigationSuiteStrategy = rememberNavigationSuiteSceneStrategy<NavKey>(appState)

@@ -181,7 +181,9 @@ private fun LazyListScope.generalSettings(
             role = Role.RadioButton,
             onValueChange = onUpdateUseDynamicColor,
           ),
-        trailingContent = { Switch(checked = currentTheme.useDynamicColor, onCheckedChange = null) },
+        trailingContent = {
+          Switch(checked = currentTheme.useDynamicColor, onCheckedChange = null)
+        },
       )
     }
   }
