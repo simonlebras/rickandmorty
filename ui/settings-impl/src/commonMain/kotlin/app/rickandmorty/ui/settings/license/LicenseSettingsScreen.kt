@@ -2,6 +2,8 @@ package app.rickandmorty.ui.settings.license
 
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,12 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.BackNavButton
+import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.settings_license_title
 import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.license.License
-import app.rickandmorty.ui.settings.common.loader
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
@@ -61,16 +63,16 @@ private fun LicenseSettingsScreen(
       )
     },
   ) { contentPadding ->
-    LazyColumn(
-      modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
-      contentPadding = contentPadding,
-    ) {
-      when {
-        uiState.isLoading -> {
-          loader()
-        }
+    when {
+      uiState.isLoading -> {
+        Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
+      }
 
-        else -> {
+      else -> {
+        LazyColumn(
+          modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+          contentPadding = contentPadding,
+        ) {
           val licenses = uiState.licenses()!!
           items(licenses.size) { index ->
             val license = licenses[index]

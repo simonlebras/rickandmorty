@@ -6,6 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.selection.toggleable
@@ -27,6 +29,7 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.BackNavButton
+import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.SettingsHeader
 import app.rickandmorty.core.designsystem.component.SettingsItem
 import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
@@ -49,7 +52,6 @@ import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.locale.Locale
 import app.rickandmorty.data.theme.Theme
 import app.rickandmorty.ui.settings.common.SettingsContentType
-import app.rickandmorty.ui.settings.common.loader
 import app.rickandmorty.ui.settings.common.util.label
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
@@ -96,16 +98,16 @@ private fun MainSettingsScreen(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = { MainSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior) },
   ) { contentPadding ->
-    LazyColumn(
-      modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
-      contentPadding = contentPadding,
-    ) {
-      when {
-        uiState.isLoading -> {
-          loader()
-        }
+    when {
+      uiState.isLoading -> {
+        Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
+      }
 
-        else -> {
+      else -> {
+        LazyColumn(
+          modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
+          contentPadding = contentPadding,
+        ) {
           generalSettings(
             selectedItem = selectedItem,
             currentTheme = uiState.theme()!!,
