@@ -11,6 +11,17 @@
     <string name="character_list_title">Characters</string>
     <string name="character_list_empty">No character available</string>
 
+    <string name="debug_title">Debug</string>
+    <string name="debug_build_information_title">Build information</string>
+    <string name="debug_version_title">Version</string>
+    <string name="debug_package_title">Package</string>
+    <string name="debug_ui_debugging_title">UI debugging</string>
+    <string name="debug_keyline_overlay_title">Keyline overlay</string>
+    <string name="debug_lookahead_debugging_title">Lookahead debugging</string>
+    <string name="debug_images_title">Images</string>
+    <string name="debug_clear_image_cache_title">Clear image cache</string>
+    <string name="debug_clear_image_cache_tap_action">Clear the image memory and disk caches</string>
+
     <string name="episode_list_title">Episodes</string>
     <string name="episode_list_empty">No episode available</string>
 

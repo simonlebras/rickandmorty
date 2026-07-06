@@ -84,6 +84,7 @@ dependencies {
   implementation(project(":core:process-lifecycle"))
   implementation(project(":core:resource-state"))
   implementation(project(":core:resources-app"))
+  implementation(project(":core:root-content"))
   implementation(project(":core:startup"))
   implementation(project(":core:ui"))
 
@@ -123,6 +124,10 @@ dependencies {
   debugImplementation(project(":core:coil-logger"))
   debugImplementation(project(":core:logger-debug"))
   debugImplementation(project(":core:strict-mode"))
+
+  debugImplementation(project(":data:debug-impl"))
+
+  debugImplementation(project(":ui:debug-drawer"))
 
   compileOnly(project(":core:metro-common"))
 
