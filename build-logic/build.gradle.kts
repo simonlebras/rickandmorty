@@ -42,6 +42,7 @@ dependencies {
 
   compileOnly(libs.android.tools.common)
   compileOnly(libs.android.tools.gradleapi)
+  compileOnly(plugin(libs.plugins.aboutlibraries))
   compileOnly(plugin(libs.plugins.compose.compiler))
   compileOnly(plugin(libs.plugins.dependencyanalysis))
   compileOnly(plugin(libs.plugins.firebase.perf))
@@ -54,6 +55,9 @@ dependencies {
 
 gradlePlugin {
   plugins {
+    register("app.rickandmorty.aboutlibraries") {
+      implementationClass = "app.rickandmorty.gradle.plugin.AboutLibrariesPlugin"
+    }
     register("app.rickandmorty.android-application") {
       implementationClass = "app.rickandmorty.gradle.plugin.AndroidApplicationPlugin"
     }

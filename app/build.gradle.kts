@@ -1,6 +1,5 @@
-import app.cash.licensee.SpdxId
-
 plugins {
+  alias(libs.plugins.rickandmorty.aboutlibraries)
   alias(libs.plugins.rickandmorty.android.application)
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
@@ -9,10 +8,7 @@ plugins {
   alias(libs.plugins.rickandmorty.metro)
 
   alias(libs.plugins.androidx.baselineprofile)
-  alias(libs.plugins.licensee)
 }
-
-val licensesAssetPath = "licenses.json"
 
 android {
   namespace = "app.rickandmorty"
@@ -21,11 +17,7 @@ android {
     applicationId = "app.rickandmorty"
     versionCode = 1
     versionName = "1.0"
-
-    buildConfigField("String", "LICENSES_ASSET_PATH", "\"$licensesAssetPath\"")
   }
-
-  buildFeatures { buildConfig = true }
 
   androidResources { generateLocaleConfig = true }
 
@@ -103,7 +95,9 @@ dependencies {
 
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.appcompat)
+  implementation(libs.androidx.browser)
   implementation(libs.androidx.core.splashscreen)
+  implementation(libs.androidx.lifecycle.runtime.compose)
 
   implementation(libs.coil)
 
@@ -156,18 +150,4 @@ dependencyAnalysis {
       )
     }
   }
-}
-
-licensee {
-  bundleAndroidAsset = true
-  androidAssetReportPath = licensesAssetPath
-
-  allow(SpdxId.Apache_20)
-  allow(SpdxId.BSD_3_Clause)
-  allow(SpdxId.MIT)
-  allowUrl("https://developer.android.com/studio/terms.html")
-  allowUrl("https://opensource.org/license/mit")
-  allowUrl(
-    "https://raw.githubusercontent.com/apollographql/apollo-kotlin-ktor-support/main/LICENSE"
-  )
 }

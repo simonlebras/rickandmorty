@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -31,6 +32,7 @@ import dev.zacsweers.metro.ContributesIntoMap
 import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.android.ActivityKey
 import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
+import kotlin.getValue
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -82,14 +84,20 @@ class MainActivity(
     val navigator = uiGraph.navigator
 
     setContent {
-      CompositionLocalProvider(LocalMetroViewModelFactory provides metroViewModelFactory) {
-        RamTheme(useDynamicColor = uiState.useDynamicColor) {
+      RamTheme(useDynamicColor = uiState.useDynamicColor) {
+        val customTabUriHandler = rememberCustomTabsUriHandler()
+
+        CompositionLocalProvider(
+          LocalMetroViewModelFactory provides metroViewModelFactory,
+          LocalUriHandler provides customTabUriHandler,
+        ) {
           rootContent.Content {
             val appState =
               rememberRamAppState(
                 entryProvider = entryProvider,
                 navigationState = navigationState,
               )
+
             RamApp(
               appState = appState,
               onTopLevelRouteClick = { navigator.navigate(it) },
