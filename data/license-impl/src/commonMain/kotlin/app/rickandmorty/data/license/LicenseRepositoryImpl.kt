@@ -20,4 +20,5 @@ internal class LicenseRepositoryImpl(
   }
 }
 
-private fun LicenseJson.toLicense() = License(groupId, artifactId, version)
+private fun LicenseJson.toLicense() =
+  License(artifactId = artifactId, groupId = groupId, version = version, url = url)

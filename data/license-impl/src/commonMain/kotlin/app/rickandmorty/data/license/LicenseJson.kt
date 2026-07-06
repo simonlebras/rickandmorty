@@ -4,15 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class LicenseJson(
-  val groupId: String,
   val artifactId: String,
+  val groupId: String,
   val version: String,
-  val spdxLicenses: List<SpdxLicenseJson>?,
-  val name: String?,
-  val scm: ScmJson?,
+  val url: String?,
 )
-
-@Serializable
-public data class SpdxLicenseJson(val identifier: String, val name: String, val url: String)
-
-@Serializable public data class ScmJson(val url: String)

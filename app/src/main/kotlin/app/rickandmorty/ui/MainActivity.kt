@@ -57,6 +57,8 @@ class MainActivity(
   private val uiGraph
     get() = uiGraphHolder.graph
 
+  private val customTabsUriHandler = CustomTabsUriHandler(this)
+
   private val metroViewModelFactory by unsafeLazy { uiGraph.metroViewModelFactory }
   private val viewModel by viewModels<MainViewModel>(factoryProducer = { metroViewModelFactory })
 

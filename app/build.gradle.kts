@@ -6,13 +6,11 @@ plugins {
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.firebase.crashlytics)
   alias(libs.plugins.rickandmorty.firebase.perf)
+  alias(libs.plugins.rickandmorty.licensee)
   alias(libs.plugins.rickandmorty.metro)
 
   alias(libs.plugins.androidx.baselineprofile)
-  alias(libs.plugins.licensee)
 }
-
-val licensesAssetPath = "licenses.json"
 
 android {
   namespace = "app.rickandmorty"
@@ -21,11 +19,7 @@ android {
     applicationId = "app.rickandmorty"
     versionCode = 1
     versionName = "1.0"
-
-    buildConfigField("String", "LICENSES_ASSET_PATH", "\"$licensesAssetPath\"")
   }
-
-  buildFeatures { buildConfig = true }
 
   androidResources { generateLocaleConfig = true }
 
@@ -71,6 +65,17 @@ baselineProfile {
   dexLayoutOptimization = true
 }
 
+licensee {
+  allow(SpdxId.Apache_20)
+  allow(SpdxId.BSD_3_Clause)
+  allow(SpdxId.MIT)
+  allowUrl("https://developer.android.com/studio/terms.html")
+  allowUrl("https://opensource.org/license/mit")
+  allowUrl(
+    "https://raw.githubusercontent.com/apollographql/apollo-kotlin-ktor-support/main/LICENSE"
+  )
+}
+
 dependencies {
   implementation(project(":core:base"))
   implementation(project(":core:coil"))
@@ -103,6 +108,7 @@ dependencies {
 
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.appcompat)
+  implementation(libs.androidx.browser)
   implementation(libs.androidx.core.splashscreen)
 
   implementation(libs.coil)
@@ -156,18 +162,4 @@ dependencyAnalysis {
       )
     }
   }
-}
-
-licensee {
-  bundleAndroidAsset = true
-  androidAssetReportPath = licensesAssetPath
-
-  allow(SpdxId.Apache_20)
-  allow(SpdxId.BSD_3_Clause)
-  allow(SpdxId.MIT)
-  allowUrl("https://developer.android.com/studio/terms.html")
-  allowUrl("https://opensource.org/license/mit")
-  allowUrl(
-    "https://raw.githubusercontent.com/apollographql/apollo-kotlin-ktor-support/main/LICENSE"
-  )
 }
