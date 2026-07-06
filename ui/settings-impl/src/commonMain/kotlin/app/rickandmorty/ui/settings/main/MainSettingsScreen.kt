@@ -14,6 +14,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -21,9 +22,11 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
@@ -32,9 +35,11 @@ import app.rickandmorty.core.designsystem.component.BackNavButton
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.SettingsHeader
 import app.rickandmorty.core.designsystem.component.SettingsItem
+import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.designsystem.theme.isDynamicColorAvailable
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.settings_about_title
+import app.rickandmorty.core.l10n.resources.settings_app_version_copy_tap_action
 import app.rickandmorty.core.l10n.resources.settings_app_version_title
 import app.rickandmorty.core.l10n.resources.settings_dynamic_color_title
 import app.rickandmorty.core.l10n.resources.settings_general_title
@@ -53,7 +58,10 @@ import app.rickandmorty.data.locale.Locale
 import app.rickandmorty.data.theme.Theme
 import app.rickandmorty.ui.settings.common.SettingsContentType
 import app.rickandmorty.ui.settings.common.util.label
+import app.rickandmorty.ui.settings.common.util.setPlainText
 import dev.zacsweers.metrox.viewmodel.metroViewModel
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -246,9 +254,24 @@ private fun LazyListScope.aboutSettings(
   }
 
   item(key = MainSettingsItem.AppVersion, contentType = SettingsContentType.ListItem) {
+    val clipboard = LocalClipboard.current
+    val scope = rememberCoroutineScope()
+    val title = stringResource(L10nRes.string.settings_app_version_title)
+
     SettingsItem(
-      headlineContent = { Text(text = stringResource(L10nRes.string.settings_app_version_title)) },
+      headlineContent = { Text(text = title) },
+      modifier =
+        Modifier.clickable(
+          onClickLabel = stringResource(L10nRes.string.settings_app_version_copy_tap_action),
+          onClick = { scope.launch { clipboard.setPlainText(label = title, text = versionName) } },
+        ),
       supportingContent = { Text(text = versionName) },
+      trailingContent = {
+        Icon(
+          painter = painterResource(RamIcons.Outlined.ContentCopy),
+          contentDescription = null,
+        )
+      },
     )
   }
 }
