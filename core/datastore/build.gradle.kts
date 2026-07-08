@@ -9,7 +9,8 @@ kotlin {
   android { namespace = "app.rickandmorty.core.datastore" }
 
   dependencies {
-    api(libs.androidx.datastore)
+    api(libs.androidx.datastore.core)
+    api(libs.androidx.datastore.core.okio)
 
     api(libs.okio)
 
@@ -20,11 +21,5 @@ kotlin {
     androidMain {
       dependencies { api(project(":core:metro-common")) }
     }
-  }
-}
-
-dependencyAnalysis {
-  issues {
-    onUnusedDependencies { exclude(libs.androidx.datastore) }
   }
 }
