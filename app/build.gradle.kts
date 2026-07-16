@@ -149,6 +149,11 @@ dependencyAnalysis {
         libs.jetbrains.compose.material3.adaptivenavigationsuite,
         libs.jetbrains.navigation3.ui,
       )
+      exclude(
+        ":core:compose-diagnostic",
+        ":core:crashlytics",
+        ":core:logger-crashlytics",
+      )
     }
   }
 }
