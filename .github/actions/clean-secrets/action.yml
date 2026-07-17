@@ -3,7 +3,7 @@ name: Clean secrets
 description: Clean secrets
 
 runs:
-  using: "composite"
+  using: 'composite'
 
   steps:
     - run: |
