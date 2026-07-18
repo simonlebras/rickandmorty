@@ -50,14 +50,14 @@ android {
   }
 
   buildTypes {
-    val debug by getting {
+    debug {
       signingConfig = signingConfigs["debug"]
       applicationIdSuffix = ".debug"
       versionNameSuffix = "-debug"
       isPseudoLocalesEnabled = true
     }
 
-    val release by getting {
+    release {
       signingConfig = signingConfigs[if (useReleaseKeystore) "release" else "debug"]
       isShrinkResources = true
       isMinifyEnabled = true
