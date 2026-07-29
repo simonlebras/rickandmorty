@@ -35,6 +35,11 @@ tasks {
 }
 
 dependencies {
+  // Workaround for https://github.com/gradle/gradle/issues/15383
+  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+
+  implementation(libs.truth)
+
   compileOnly(libs.android.tools.common)
   compileOnly(libs.android.tools.gradleapi)
   compileOnly(plugin(libs.plugins.compose.compiler))
@@ -43,11 +48,6 @@ dependencies {
   compileOnly(plugin(libs.plugins.kotlin.multiplatform))
   compileOnly(plugin(libs.plugins.metro))
   compileOnly(plugin(libs.plugins.tapmoc))
-
-  implementation(libs.truth)
-
-  // Workaround for https://github.com/gradle/gradle/issues/15383
-  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 
   lintChecks(libs.androidx.gradle.lints)
 }

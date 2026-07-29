@@ -32,6 +32,18 @@
       registryUrlTemplate: "https://repo1.maven.org/maven2",
       depNameTemplate: "com.facebook:ktfmt",
     },
+    {
+      customType: "regex",
+      managerFilePatterns: [
+        "(^|/)\\.kempt\\.toml$"
+      ],
+      matchStrings: [
+        "\\[gradle-dependencies-sorter\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      datasourceTemplate: "maven",
+      registryUrlTemplate: "https://repo1.maven.org/maven2",
+      depNameTemplate: "com.squareup:sort-gradle-dependencies-app",
+    },
   ],
   packageRules: [
     {
