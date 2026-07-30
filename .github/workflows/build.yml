@@ -60,7 +60,6 @@ jobs:
         run: |
           ./gradlew :build-logic:check \
           buildHealth \
-          checkSortDependencies \
           test \
           :app:checkReleaseBadging \
           :app:lintRelease

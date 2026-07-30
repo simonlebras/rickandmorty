@@ -11,6 +11,6 @@ public class CodeHealthPlugin : Plugin<Project> {
     with(target) {
       val libs = the<LibrariesForLibs>()
 
-      apply(libs.plugins.dependencyanalysis, libs.plugins.sortdependencies)
+      apply(libs.plugins.dependencyanalysis)
     }
 }

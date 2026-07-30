@@ -20,6 +20,5 @@ plugins {
   alias(libs.plugins.ksp) apply false
   alias(libs.plugins.licensee) apply false
   alias(libs.plugins.metro) apply false
-  alias(libs.plugins.sortdependencies) apply false
   alias(libs.plugins.tapmoc) apply false
 }
