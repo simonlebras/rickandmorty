@@ -38,7 +38,7 @@ plugins {
   id("com.android.settings") version agpVersion
 
   id("com.gradle.develocity") version "4.5.0"
-  id("com.gradle.common-custom-user-data-gradle-plugin") version "2.7.0"
+  id("com.gradle.common-custom-user-data-gradle-plugin") version "2.8.0"
 }
 
 android {
