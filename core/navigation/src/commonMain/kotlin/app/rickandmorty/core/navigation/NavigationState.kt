@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewmodel.compose.rememberViewModelStoreProvider
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavEntry
@@ -73,13 +74,14 @@ public class NavigationState(
 
   @Composable
   public fun toDecoratedEntries(entryProvider: EntryProvider): ImmutableList<NavEntry<NavKey>> {
-    val decorators =
-      [
-        rememberSaveableStateHolderNavEntryDecorator<NavKey>(),
-        rememberViewModelStoreNavEntryDecorator(),
-      ]
+    val decoratedEntries = backStacks.mapValues { (key, stack) ->
+      val viewModelStoreProvider = rememberViewModelStoreProvider(key = key)
+      val decorators =
+        [
+          rememberSaveableStateHolderNavEntryDecorator<NavKey>(),
+          rememberViewModelStoreNavEntryDecorator(viewModelStoreProvider),
+        ]
 
-    val decoratedEntries = backStacks.mapValues { (_, stack) ->
       rememberDecoratedNavEntries(
         backStack = stack,
         entryDecorators = decorators,
