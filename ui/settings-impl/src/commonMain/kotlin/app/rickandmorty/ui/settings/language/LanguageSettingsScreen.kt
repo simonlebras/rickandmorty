@@ -38,8 +38,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun LanguageSettingsScreen(
   onNavigateUp: () -> Unit,
-  viewModel: LanguageSettingsViewModel = metroViewModel(),
   showBackButton: Boolean = true,
+  viewModel: LanguageSettingsViewModel = metroViewModel(),
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

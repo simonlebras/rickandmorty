@@ -3,6 +3,8 @@ plugins {
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.metro)
+
+  alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {

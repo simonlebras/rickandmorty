@@ -30,8 +30,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 internal fun LicenseSettingsScreen(
   onNavigateUp: () -> Unit,
-  viewModel: LicenseSettingsViewModel = metroViewModel(),
   showBackButton: Boolean = true,
+  viewModel: LicenseSettingsViewModel = metroViewModel(),
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

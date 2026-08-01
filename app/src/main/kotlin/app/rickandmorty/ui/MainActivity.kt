@@ -17,8 +17,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.rootcontent.RootContent
@@ -45,10 +48,17 @@ class MainActivity(
     }
   }
 
-  private val uiGraph by unsafeLazy { uiGraphFactory.create() }
+  private val uiGraphHolder by
+    viewModels<UiGraphHolder> {
+      viewModelFactory {
+        initializer { UiGraphHolder(uiGraphFactory.create(), createSavedStateHandle()) }
+      }
+    }
+  private val uiGraph
+    get() = uiGraphHolder.graph
 
-  private val viewModelFactory by unsafeLazy { uiGraph.viewModelFactory }
-  private val viewModel by viewModels<MainViewModel>(factoryProducer = { viewModelFactory })
+  private val metroViewModelFactory by unsafeLazy { uiGraph.metroViewModelFactory }
+  private val viewModel by viewModels<MainViewModel>(factoryProducer = { metroViewModelFactory })
 
   override fun onCreate(savedInstanceState: Bundle?) {
     val splashScreen = installSplashScreen()
@@ -68,19 +78,22 @@ class MainActivity(
     splashScreen.setKeepOnScreenCondition { uiState.isLoading }
 
     val entryProvider = uiGraph.entryProvider
-    val savedStateConfiguration = uiGraph.savedStateConfiguration
+    val navigationState = uiGraph.navigationState
+    val navigator = uiGraph.navigator
 
     setContent {
-      CompositionLocalProvider(LocalMetroViewModelFactory provides viewModelFactory) {
+      CompositionLocalProvider(LocalMetroViewModelFactory provides metroViewModelFactory) {
         RamTheme(useDynamicColor = uiState.useDynamicColor) {
           rootContent.Content {
             val appState =
               rememberRamAppState(
                 entryProvider = entryProvider,
-                savedStateConfiguration = savedStateConfiguration,
+                navigationState = navigationState,
               )
             RamApp(
               appState = appState,
+              onTopLevelRouteClick = { navigator.navigate(it) },
+              onBack = navigator::goBack,
               modifier = Modifier.semantics { testTagsAsResourceId = true },
             )
           }

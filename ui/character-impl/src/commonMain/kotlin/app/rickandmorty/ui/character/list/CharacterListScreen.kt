@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -65,10 +67,19 @@ internal fun CharacterListScreen(
   viewModel: CharacterListViewModel = metroViewModel(),
 ) {
   val characters = viewModel.characters.collectAsLazyPagingItems()
+  val listState = rememberLazyListState()
+
+  LaunchedEffect(viewModel) {
+    viewModel.scrollToTopEvents.collect { listState.animateScrollToItem(0) }
+  }
 
   ReportDrawnWhen { characters.loadState.isIdle }
 
-  CharacterListScreen(characters = characters, onNavigateToSettings = onNavigateToSettings)
+  CharacterListScreen(
+    characters = characters,
+    listState = listState,
+    onNavigateToSettings = onNavigateToSettings,
+  )
 }
 
 // Todo localize errors
@@ -76,6 +87,7 @@ internal fun CharacterListScreen(
 @Composable
 private fun CharacterListScreen(
   characters: LazyPagingItems<Character>,
+  listState: LazyListState,
   onNavigateToSettings: () -> Unit,
 ) {
   val snackbarHostState = remember { SnackbarHostState() }
@@ -134,6 +146,7 @@ private fun CharacterListScreen(
           indicatorPadding = contentPadding,
         ) {
           LazyColumn(
+            state = listState,
             modifier =
               Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
                 .fillMaxSize()

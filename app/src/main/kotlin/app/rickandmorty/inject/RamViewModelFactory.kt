@@ -1,14 +1,14 @@
 package app.rickandmorty.inject
 
 import androidx.lifecycle.ViewModel
-import dev.zacsweers.metro.AppScope
+import app.rickandmorty.core.metro.UiScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metrox.viewmodel.ManualViewModelAssistedFactory
 import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
 import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
 import kotlin.reflect.KClass
 
-@ContributesBinding(AppScope::class)
+@ContributesBinding(UiScope::class)
 class RamViewModelFactory(
   override val viewModelProviders: Map<KClass<out ViewModel>, () -> ViewModel>,
   override val assistedFactoryProviders: Map<KClass<out ViewModel>, () -> ViewModelAssistedFactory>,

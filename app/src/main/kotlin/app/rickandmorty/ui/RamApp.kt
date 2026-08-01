@@ -12,19 +12,19 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.NavDisplay
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
-import app.rickandmorty.core.navigation.LocalNavigator
-import app.rickandmorty.core.navigation.Navigator
 import app.rickandmorty.core.ui.LocalHazeState
 import app.rickandmorty.core.ui.rememberNavigationSuiteSceneStrategy
 import dev.chrisbanes.haze.rememberHazeState
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
+fun RamApp(
+  appState: RamAppState,
+  onTopLevelRouteClick: (NavKey) -> Unit,
+  onBack: () -> Unit,
+  modifier: Modifier = Modifier,
+) {
   val hazeState = rememberHazeState()
-
-  val navigationState = appState.navigationState
-  val navigator = remember(navigationState) { Navigator(navigationState) }
 
   val windowAdaptiveInfo = currentWindowAdaptiveInfoV2()
   val directive =
@@ -33,16 +33,20 @@ fun RamApp(appState: RamAppState, modifier: Modifier = Modifier) {
     }
   val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>(directive = directive)
 
-  val navigationSuiteStrategy = rememberNavigationSuiteSceneStrategy<NavKey>(appState)
+  val navigationSuiteStrategy =
+    rememberNavigationSuiteSceneStrategy<NavKey>(
+      navigationSuiteState = appState,
+      onTopLevelRouteClick = onTopLevelRouteClick,
+    )
 
-  CompositionLocalProvider(LocalHazeState provides hazeState, LocalNavigator provides navigator) {
+  CompositionLocalProvider(LocalHazeState provides hazeState) {
     NavDisplay(
       entries = appState.currentEntries,
       modifier = modifier,
       sceneStrategies = [listDetailStrategy],
       sceneDecoratorStrategies = [navigationSuiteStrategy],
       sharedTransitionScope = LocalSharedTransitionScope.current,
-      onBack = navigator::goBack,
+      onBack = onBack,
     )
   }
 }

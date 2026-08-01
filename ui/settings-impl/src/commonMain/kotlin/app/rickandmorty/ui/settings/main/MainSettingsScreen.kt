@@ -22,7 +22,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -59,6 +62,7 @@ import app.rickandmorty.data.theme.Theme
 import app.rickandmorty.ui.settings.common.SettingsContentType
 import app.rickandmorty.ui.settings.common.util.label
 import app.rickandmorty.ui.settings.common.util.setPlainText
+import app.rickandmorty.ui.settings.theme.ThemeSettingsDialog
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -68,12 +72,13 @@ import org.jetbrains.compose.resources.stringResource
 internal fun MainSettingsScreen(
   selectedItem: MainSettingsItem?,
   onNavigateUp: () -> Unit,
-  onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
   onNavigateToLicenseSettings: () -> Unit,
   viewModel: MainSettingsViewModel = metroViewModel(),
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+  var showThemeSettingsDialog by rememberSaveable { mutableStateOf(false) }
 
   ReportDrawnWhen { !uiState.isLoading }
 
@@ -82,10 +87,14 @@ internal fun MainSettingsScreen(
     selectedItem = selectedItem,
     onNavigateUp = onNavigateUp,
     onUpdateUseDynamicColor = viewModel::setUseDynamicColor,
-    onNavigateToThemeSettings = onNavigateToThemeSettings,
+    onNavigateToThemeSettings = { showThemeSettingsDialog = true },
     onNavigateToLanguageSettings = onNavigateToLanguageSettings,
     onNavigateToLicenseSettings = onNavigateToLicenseSettings,
   )
+
+  if (showThemeSettingsDialog) {
+    ThemeSettingsDialog(onDismiss = { showThemeSettingsDialog = false })
+  }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
