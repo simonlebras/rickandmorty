@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -53,16 +55,26 @@ internal fun EpisodeListScreen(
   viewModel: EpisodeListViewModel = metroViewModel(),
 ) {
   val episodes = viewModel.episodes.collectAsLazyPagingItems()
+  val listState = rememberLazyListState()
+
+  LaunchedEffect(viewModel) {
+    viewModel.scrollToTopEvents.collect { listState.animateScrollToItem(0) }
+  }
 
   ReportDrawnWhen { episodes.loadState.isIdle }
 
-  EpisodeListScreen(episodes = episodes, onNavigateToSettings = onNavigateToSettings)
+  EpisodeListScreen(
+    episodes = episodes,
+    listState = listState,
+    onNavigateToSettings = onNavigateToSettings,
+  )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EpisodeListScreen(
   episodes: LazyPagingItems<Episode>,
+  listState: LazyListState,
   onNavigateToSettings: () -> Unit,
 ) {
   val snackbarHostState = remember { SnackbarHostState() }
@@ -121,6 +133,7 @@ private fun EpisodeListScreen(
           indicatorPadding = contentPadding,
         ) {
           LazyColumn(
+            state = listState,
             modifier =
               Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
                 .fillMaxSize()

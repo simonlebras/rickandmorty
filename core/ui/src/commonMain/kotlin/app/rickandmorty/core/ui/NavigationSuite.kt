@@ -20,9 +20,9 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
-import app.rickandmorty.core.navigation.LocalNavigator
 import dev.chrisbanes.haze.blur.HazeBlurDefaults.blurEnabled
 import dev.chrisbanes.haze.blur.blurEffect
 import dev.chrisbanes.haze.hazeEffect
@@ -30,7 +30,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-public fun NavigationSuiteState.NavigationSuite(
+internal fun NavigationSuiteState.NavigationSuite(
+  onItemClick: (NavKey) -> Unit,
   modifier: Modifier = Modifier,
   navigationSuiteType: NavigationSuiteType =
     NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfoV2()),
@@ -59,13 +60,11 @@ public fun NavigationSuiteState.NavigationSuite(
         ),
       verticalArrangement = Arrangement.Center,
     ) {
-      val navigator = LocalNavigator.current
-
       topLevelDestinations.forEach { item ->
         val isSelected = topLevelRoute == item.route
         NavigationSuiteItem(
           selected = isSelected,
-          onClick = { navigator.navigate(item.route) },
+          onClick = { onItemClick(item.route) },
           icon = {
             Icon(
               painter = painterResource(if (isSelected) item.selectedIcon else item.unselectedIcon),

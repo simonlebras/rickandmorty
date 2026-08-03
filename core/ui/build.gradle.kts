@@ -19,9 +19,10 @@ kotlin {
     api(libs.jetbrains.compose.material3.adaptivenavigationsuite)
     api(libs.jetbrains.navigation3.ui)
 
+    api(libs.kotlinx.collectionsimmutable)
+
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
-    implementation(project(":core:navigation"))
 
     implementation(libs.haze.blur)
 
