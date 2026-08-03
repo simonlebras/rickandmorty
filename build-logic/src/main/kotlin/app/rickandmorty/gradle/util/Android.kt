@@ -16,11 +16,7 @@ internal fun CommonExtension.configureAndroid() {
 
   testOptions.animationsDisabled = true
 
-  compileOptions.isCoreLibraryDesugaringEnabled = true
-
   project.dependencies {
-    coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
-
     lintChecks(libs.android.tools.security.lints)
   }
 }

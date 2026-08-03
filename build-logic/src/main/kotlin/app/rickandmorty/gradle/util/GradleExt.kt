@@ -20,10 +20,6 @@ internal fun DependencyHandler.implementation(vararg dependencyNotations: Any) {
   dependencyNotations.forEach { add("implementation", it) }
 }
 
-internal fun DependencyHandler.coreLibraryDesugaring(vararg dependencyNotations: Any) {
-  dependencyNotations.forEach { add("coreLibraryDesugaring", it) }
-}
-
 internal fun DependencyHandler.ksp(vararg dependencyNotations: Any) {
   dependencyNotations.forEach { add("ksp", it) }
 }

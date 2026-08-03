@@ -1,5 +1,4 @@
 [versions]
-android-desugarjdklibs = "2.1.5"
 android-plugin = "9.4.0-alpha07"
 android-security-lints = "1.0.4"
 android-tools = "32.4.0-alpha07"
@@ -66,7 +65,6 @@ turbine = "1.2.1"
 
 [libraries]
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools" }
-android-tools-desugarjdklibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugarjdklibs" }
 android-tools-gradleapi = { group = "com.android.tools.build", name = "gradle-api", version.ref = "android-plugin" }
 android-tools-security-lints = { group = "com.android.security.lint", name = "lint", version.ref = "android-security-lints" }
 
