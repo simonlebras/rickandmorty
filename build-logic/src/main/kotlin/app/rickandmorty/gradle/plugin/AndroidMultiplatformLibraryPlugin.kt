@@ -4,7 +4,6 @@ import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.dsl.withType
 import app.rickandmorty.gradle.util.configureLint
-import app.rickandmorty.gradle.util.coreLibraryDesugaring
 import app.rickandmorty.gradle.util.kotlinMultiplatform
 import app.rickandmorty.gradle.util.lintChecks
 import app.rickandmorty.gradle.util.withPlugin
@@ -26,14 +25,10 @@ public class AndroidMultiplatformLibraryPlugin : Plugin<Project> {
             lint { configureLint() }
 
             localDependencySelection { selectBuildTypeFrom.set(["release"]) }
-
-            enableCoreLibraryDesugaring = true
           }
 
           sourceSets.androidMain {
             dependencies.apply {
-              coreLibraryDesugaring(libs.android.tools.desugarjdklibs)
-
               lintChecks(libs.android.tools.security.lints)
             }
           }
