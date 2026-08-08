@@ -18,14 +18,16 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteItem
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
+import dev.chrisbanes.haze.HazeInput
 import dev.chrisbanes.haze.blur.HazeBlurDefaults.blurEnabled
-import dev.chrisbanes.haze.blur.blurEffect
-import dev.chrisbanes.haze.hazeEffect
+import dev.chrisbanes.haze.blur.HazeBlurStyle
+import dev.chrisbanes.haze.blur.hazeBlur
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -38,11 +40,15 @@ internal fun NavigationSuiteState.NavigationSuite(
 ) {
   Box(
     modifier =
-      modifier.navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType).hazeEffect(
-        state = LocalHazeState.current
-      ) {
-        blurEffect { blurEnabled = true }
-      }
+      modifier
+        .navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType)
+        .hazeBlur(
+          input = HazeInput.Sources(LocalHazeState.current),
+          style =
+            HazeBlurStyle {
+              blurEnabled(true)
+            },
+        )
   ) {
     NavigationSuite(
       navigationSuiteType = navigationSuiteType,
@@ -118,6 +124,7 @@ private data object NavigationBarSharedElementKey
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private val NavigationBarTransitionEnter
   @Composable
+  @ReadOnlyComposable
   get() =
     slideInVertically(
       animationSpec = MaterialTheme.motionScheme.defaultSpatialSpec(),
@@ -126,6 +133,7 @@ private val NavigationBarTransitionEnter
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private val NavigationBarTransitionExit
   @Composable
+  @ReadOnlyComposable
   get() =
     slideOutVertically(
       animationSpec = MaterialTheme.motionScheme.defaultSpatialSpec(),
@@ -137,6 +145,7 @@ private data object NavigationRailSharedElementKey
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private val NavigationRailTransitionEnter
   @Composable
+  @ReadOnlyComposable
   get() =
     slideInHorizontally(
       animationSpec = MaterialTheme.motionScheme.defaultSpatialSpec(),
@@ -145,6 +154,7 @@ private val NavigationRailTransitionEnter
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private val NavigationRailTransitionExit
   @Composable
+  @ReadOnlyComposable
   get() =
     slideOutHorizontally(
       animationSpec = MaterialTheme.motionScheme.defaultSpatialSpec(),
