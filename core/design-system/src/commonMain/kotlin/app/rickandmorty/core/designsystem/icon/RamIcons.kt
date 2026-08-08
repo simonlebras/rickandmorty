@@ -7,6 +7,7 @@ import app.rickandmorty.core.designsystem.resources.face
 import app.rickandmorty.core.designsystem.resources.face_filled
 import app.rickandmorty.core.designsystem.resources.map
 import app.rickandmorty.core.designsystem.resources.map_filled
+import app.rickandmorty.core.designsystem.resources.open_in_new
 import app.rickandmorty.core.designsystem.resources.settings_filled
 import app.rickandmorty.core.designsystem.resources.tv
 import app.rickandmorty.core.designsystem.resources.tv_filled
@@ -25,6 +26,7 @@ public object RamIcons {
     public val ContentCopy: DrawableResource = Res.drawable.content_copy
     public val Face: DrawableResource = Res.drawable.face
     public val Map: DrawableResource = Res.drawable.map
+    public val OpenInNew: DrawableResource = Res.drawable.open_in_new
     public val Tv: DrawableResource = Res.drawable.tv
   }
 }

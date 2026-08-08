@@ -5,6 +5,7 @@ plugins {
   alias(libs.plugins.android.lint)
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.sam)
+  alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.tapmoc)
 }
 
@@ -37,6 +38,8 @@ tasks {
 dependencies {
   // Workaround for https://github.com/gradle/gradle/issues/15383
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+
+  implementation(libs.kotlinx.serialization.json)
 
   implementation(libs.truth)
 
@@ -83,6 +86,9 @@ gradlePlugin {
     }
     register("app.rickandmorty.kotlin-multiplatform") {
       implementationClass = "app.rickandmorty.gradle.plugin.KotlinMultiplatformPlugin"
+    }
+    register("app.rickandmorty.licensee") {
+      implementationClass = "app.rickandmorty.gradle.plugin.LicenseePlugin"
     }
     register("app.rickandmorty.metro") {
       implementationClass = "app.rickandmorty.gradle.plugin.MetroPlugin"
