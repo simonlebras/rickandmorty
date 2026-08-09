@@ -5,10 +5,8 @@ import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.configureAndroid
 import app.rickandmorty.gradle.util.configureBadgingTasks
-import app.rickandmorty.gradle.util.configureCompilerOptions
-import app.rickandmorty.gradle.util.configureJvmCompatibility
+import app.rickandmorty.gradle.util.configureKotlin
 import app.rickandmorty.gradle.util.isAndroidTestEnabled
-import app.rickandmorty.gradle.util.kotlinAndroid
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.HasUnitTestBuilder
@@ -23,9 +21,7 @@ public class AndroidApplicationPlugin : Plugin<Project> {
 
       apply(libs.plugins.android.application)
 
-      kotlinAndroid { configureCompilerOptions() }
-
-      configureJvmCompatibility()
+      configureKotlin()
 
       configure<ApplicationExtension> {
         configureAndroid()

@@ -2,8 +2,7 @@ package app.rickandmorty.gradle.plugin
 
 import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.the
-import app.rickandmorty.gradle.util.configureCompilerOptions
-import app.rickandmorty.gradle.util.configureJvmCompatibility
+import app.rickandmorty.gradle.util.configureKotlin
 import app.rickandmorty.gradle.util.kotlinMultiplatform
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Plugin
@@ -16,7 +15,7 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
 
       apply(libs.plugins.kotlin.multiplatform)
 
-      configureJvmCompatibility()
+      configureKotlin()
 
       kotlinMultiplatform {
         applyDefaultHierarchyTemplate()
@@ -25,8 +24,6 @@ public class KotlinMultiplatformPlugin : Plugin<Project> {
         iosSimulatorArm64()
 
         jvm()
-
-        configureCompilerOptions()
 
         explicitApi()
       }
