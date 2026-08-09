@@ -4,8 +4,7 @@ import app.rickandmorty.gradle.dsl.apply
 import app.rickandmorty.gradle.dsl.configure
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.util.configureAndroid
-import app.rickandmorty.gradle.util.configureCompilerOptions
-import app.rickandmorty.gradle.util.configureJvmCompatibility
+import app.rickandmorty.gradle.util.configureKotlin
 import app.rickandmorty.gradle.util.isAndroidTestEnabled
 import app.rickandmorty.gradle.util.kotlinAndroid
 import com.android.build.api.dsl.LibraryExtension
@@ -21,13 +20,9 @@ public class AndroidLibraryPlugin : Plugin<Project> {
 
       apply(libs.plugins.android.library)
 
-      kotlinAndroid {
-        configureCompilerOptions()
+      kotlinAndroid { explicitApi() }
 
-        explicitApi()
-      }
-
-      configureJvmCompatibility()
+      configureKotlin()
 
       configure<LibraryExtension> {
         configureAndroid()
