@@ -10,9 +10,10 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import dev.chrisbanes.haze.HazeInput
 import dev.chrisbanes.haze.HazeState
-import dev.chrisbanes.haze.blur.blurEffect
-import dev.chrisbanes.haze.hazeEffect
+import dev.chrisbanes.haze.blur.HazeBlurStyle
+import dev.chrisbanes.haze.blur.hazeBlur
 import dev.chrisbanes.haze.hazeSource
 
 @Composable
@@ -34,7 +35,16 @@ public fun HazeScaffold(
     topBar =
       if (topBar != null) {
         {
-          Box(Modifier.hazeEffect(state = hazeState) { blurEffect { blurEnabled = true } }) {
+          Box(
+            modifier =
+              Modifier.hazeBlur(
+                input = HazeInput.Sources(hazeState),
+                style =
+                  HazeBlurStyle {
+                    blurEnabled(true)
+                  },
+              )
+          ) {
             topBar()
           }
         }
@@ -44,7 +54,16 @@ public fun HazeScaffold(
     bottomBar =
       if (bottomBar != null) {
         {
-          Box(Modifier.hazeEffect(state = hazeState) { blurEffect { blurEnabled = true } }) {
+          Box(
+            modifier =
+              Modifier.hazeBlur(
+                input = HazeInput.Sources(hazeState),
+                style =
+                  HazeBlurStyle {
+                    blurEnabled(true)
+                  },
+              )
+          ) {
             bottomBar()
           }
         }
@@ -58,7 +77,7 @@ public fun HazeScaffold(
     contentColor = contentColor,
     contentWindowInsets = contentWindowInsets,
     content = { contentPadding ->
-      Box(Modifier.hazeSource(state = hazeState)) { content(contentPadding) }
+      Box(modifier = Modifier.hazeSource(state = hazeState)) { content(contentPadding) }
     },
   )
 }
