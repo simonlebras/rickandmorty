@@ -44,6 +44,7 @@
     <string name="settings_license_title">Open source licenses</string>
     <string name="settings_license_summary">License details for open source software</string>
     <string name="settings_license_tap_action">Open open source licenses</string>
+    <string name="settings_license_item_tap_action">View license details</string>
     <string name="settings_app_version_title">App version</string>
     <string name="settings_app_version_copy_tap_action">Copy app version to clipboard</string>
 </resources>

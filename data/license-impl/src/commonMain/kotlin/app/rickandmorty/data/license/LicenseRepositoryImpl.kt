@@ -1,6 +1,9 @@
 package app.rickandmorty.data.license
 
 import app.rickandmorty.core.coroutines.inject.IODispatcher
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.entity.Library
+import com.mikepenz.aboutlibraries.entity.License as AboutLibrariesLicense
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import kotlin.coroutines.CoroutineContext
@@ -10,14 +13,36 @@ import kotlinx.coroutines.withContext
 
 @ContributesBinding(AppScope::class)
 internal class LicenseRepositoryImpl(
-  private val platformLicenseManager: PlatformLicenseManager,
+  private val licensesJsonSource: LicensesJsonSource,
   @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : LicenseRepository {
   override suspend fun getLicenses(): ImmutableList<License> {
     return withContext(ioDispatcher) {
-      platformLicenseManager.getLicenses().map { license -> license.toLicense() }.toImmutableList()
+      Libs.Builder()
+        .withJson(licensesJsonSource.getLicensesJson())
+        .build()
+        .libraries
+        .map { library -> library.toLicense() }
+        .toImmutableList()
     }
   }
 }
 
-private fun LicenseJson.toLicense() = License(groupId, artifactId, version)
+private fun Library.toLicense() =
+  License(
+    uniqueId = uniqueId,
+    name = name.ifBlank { uniqueId.substringAfterLast(':') },
+    author =
+      developers
+        .mapNotNull { developer -> developer.name }
+        .joinToString()
+        .ifBlank { organization?.name.orEmpty() }
+        .ifBlank { null },
+    version = artifactVersion.orEmpty(),
+    spdxIds =
+      licenses
+        .map { license -> license.spdxId.orEmpty().ifBlank { license.name } }
+        .filter(String::isNotBlank)
+        .toImmutableList(),
+    url = licenses.firstNotNullOfOrNull(AboutLibrariesLicense::url) ?: website ?: scm?.url,
+  )

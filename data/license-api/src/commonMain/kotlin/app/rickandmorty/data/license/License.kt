@@ -1,3 +1,12 @@
 package app.rickandmorty.data.license
 
-public data class License(val artifactId: String, val groupId: String, val version: String)
+import kotlinx.collections.immutable.ImmutableList
+
+public data class License(
+  val uniqueId: String,
+  val name: String,
+  val author: String?,
+  val version: String,
+  val spdxIds: ImmutableList<String>,
+  val url: String?,
+)
