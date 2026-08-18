@@ -23,7 +23,7 @@
     {
       customType: "regex",
       managerFilePatterns: [
-        "(^|/)\\.kempt\\.toml$"
+        "/(^|\\/)\\.kempt\\.toml$/"
       ],
       matchStrings: [
         "\\[ktfmt\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
@@ -35,7 +35,7 @@
     {
       customType: "regex",
       managerFilePatterns: [
-        "(^|/)\\.kempt\\.toml$"
+        "/(^|\\/)\\.kempt\\.toml$/"
       ],
       matchStrings: [
         "\\[gradle-dependencies-sorter\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
