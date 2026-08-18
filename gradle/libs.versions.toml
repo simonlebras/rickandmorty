@@ -1,5 +1,5 @@
 [versions]
-aboutlibraries = "15.1.0-b01"
+aboutlibraries = "15.1.0-b02"
 android-plugin = "9.5.0-alpha01"
 android-security-lints = "1.0.4"
 android-tools = "32.5.0-alpha01"
