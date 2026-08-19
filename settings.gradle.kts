@@ -43,7 +43,7 @@ plugins {
 
 android {
   compileSdk { version = release(37) }
-  minSdk { version = release(28) }
+  minSdk { version = release(31) }
   targetSdk { version = release(37) }
 }
 

@@ -27,7 +27,7 @@ kotlin {
 
         implementation(project(":core:base"))
 
-        implementation(libs.androidx.appcompat)
+        implementation(libs.androidx.core)
       }
     }
   }
