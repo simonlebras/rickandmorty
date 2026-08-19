@@ -9,10 +9,4 @@ kotlin {
   android { namespace = "app.rickandmorty.core.coroutines" }
 
   dependencies { api(libs.kotlinx.coroutines.core) }
-
-  sourceSets {
-    androidMain {
-      dependencies { implementation(project(":core:base")) }
-    }
-  }
 }

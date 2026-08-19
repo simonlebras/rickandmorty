@@ -1,9 +1,7 @@
 package app.rickandmorty.ui
 
 import android.app.Activity
-import android.os.Build
 import android.os.Bundle
-import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -43,13 +41,6 @@ class MainActivity(
   private val uiGraphFactory: UiGraph.Factory,
   private val rootContent: RootContent,
 ) : AppCompatActivity() {
-  init {
-    // https://issuetracker.google.com/issues/139738913
-    if (Build.VERSION.SDK_INT == 29 && isTaskRoot) {
-      onBackPressedDispatcher.addCallback { finishAfterTransition() }
-    }
-  }
-
   private val uiGraphHolder by
     viewModels<UiGraphHolder> {
       viewModelFactory {
@@ -112,8 +103,6 @@ class MainActivity(
 
   private fun setupEdgeToEdge() {
     enableEdgeToEdge()
-    if (Build.VERSION.SDK_INT >= 29) {
-      window.isNavigationBarContrastEnforced = false
-    }
+    window.isNavigationBarContrastEnforced = false
   }
 }

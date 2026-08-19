@@ -22,9 +22,7 @@
         android:theme="@style/Theme.Ram.Splash"
         tools:targetApi="33">
 
-        <profileable
-            android:shell="true"
-            tools:targetApi="29" />
+        <profileable android:shell="true" />
 
         <meta-data
             android:name="google_analytics_automatic_screen_reporting_enabled"

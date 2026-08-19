@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
+private val defaultNightMode = NightMode.FollowSystem
+
 @ContributesBinding(AppScope::class)
 internal class ThemeRepositoryImpl(
   private val dataStore: DataStore<ThemeProto>,
@@ -45,7 +47,6 @@ internal class ThemeRepositoryImpl(
 
 private fun NightMode.toNightModeProto() =
   when (this) {
-    NightMode.AutoBattery -> NightModeProto.AUTO_BATTERY
     NightMode.FollowSystem -> NightModeProto.FOLLOW_SYSTEM
     NightMode.Light -> NightModeProto.LIGHT
     NightMode.Dark -> NightModeProto.DARK
