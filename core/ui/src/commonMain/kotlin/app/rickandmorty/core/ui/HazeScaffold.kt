@@ -39,10 +39,7 @@ public fun HazeScaffold(
             modifier =
               Modifier.hazeBlur(
                 input = HazeInput.Sources(hazeState),
-                style =
-                  HazeBlurStyle {
-                    blurEnabled(true)
-                  },
+                style = HazeBlurStyle { blurEnabled(true) },
               )
           ) {
             topBar()
@@ -58,10 +55,7 @@ public fun HazeScaffold(
             modifier =
               Modifier.hazeBlur(
                 input = HazeInput.Sources(hazeState),
-                style =
-                  HazeBlurStyle {
-                    blurEnabled(true)
-                  },
+                style = HazeBlurStyle { blurEnabled(true) },
               )
           ) {
             bottomBar()

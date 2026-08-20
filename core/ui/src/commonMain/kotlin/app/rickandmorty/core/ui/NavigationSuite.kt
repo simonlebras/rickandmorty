@@ -25,7 +25,6 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
 import dev.chrisbanes.haze.HazeInput
-import dev.chrisbanes.haze.blur.HazeBlurDefaults.blurEnabled
 import dev.chrisbanes.haze.blur.HazeBlurStyle
 import dev.chrisbanes.haze.blur.hazeBlur
 import org.jetbrains.compose.resources.painterResource
@@ -44,10 +43,7 @@ internal fun NavigationSuiteState.NavigationSuite(
         .navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType)
         .hazeBlur(
           input = HazeInput.Sources(LocalHazeState.current),
-          style =
-            HazeBlurStyle {
-              blurEnabled(true)
-            },
+          style = HazeBlurStyle { blurEnabled(true) },
         )
   ) {
     NavigationSuite(
