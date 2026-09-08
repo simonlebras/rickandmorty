@@ -7,6 +7,7 @@ import com.apollographql.apollo.interceptor.RetryOnErrorInterceptor
 import com.apollographql.apollo.network.NetworkMonitor
 import com.apollographql.ktor.http.KtorHttpEngine
 import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
 import io.ktor.client.HttpClient
@@ -17,26 +18,25 @@ import kotlinx.coroutines.CoroutineDispatcher
 private const val SERVER_URL = "https://rickandmortyapi.com/graphql"
 
 @OptIn(ApolloExperimental::class, ExperimentalStdlibApi::class)
+@BindingContainer
 @ContributesTo(AppScope::class)
-public interface ApolloClientProvider {
-  public companion object {
-    @Provides
-    public fun provideApolloClient(
-      httpClient: HttpClient,
-      @IODispatcher ioDispatcher: CoroutineContext,
-      networkMonitor: NetworkMonitor? = null,
-    ): ApolloClient =
-      ApolloClient.Builder()
-        .serverUrl(SERVER_URL)
-        .httpEngine(KtorHttpEngine(client = httpClient))
-        .apply {
-          networkMonitor?.let { monitor ->
-            retryOnErrorInterceptor(RetryOnErrorInterceptor(monitor))
-          }
+public object ApolloClientProvider {
+  @Provides
+  public fun provideApolloClient(
+    httpClient: HttpClient,
+    @IODispatcher ioDispatcher: CoroutineContext,
+    networkMonitor: NetworkMonitor? = null,
+  ): ApolloClient =
+    ApolloClient.Builder()
+      .serverUrl(SERVER_URL)
+      .httpEngine(KtorHttpEngine(client = httpClient))
+      .apply {
+        networkMonitor?.let { monitor ->
+          retryOnErrorInterceptor(RetryOnErrorInterceptor(monitor))
         }
-        .failFastIfOffline(true)
-        .dispatcher(ioDispatcher[ContinuationInterceptor] as CoroutineDispatcher)
-        .enableAutoPersistedQueries(true)
-        .build()
-  }
+      }
+      .failFastIfOffline(true)
+      .dispatcher(ioDispatcher[ContinuationInterceptor] as CoroutineDispatcher)
+      .enableAutoPersistedQueries(true)
+      .build()
 }

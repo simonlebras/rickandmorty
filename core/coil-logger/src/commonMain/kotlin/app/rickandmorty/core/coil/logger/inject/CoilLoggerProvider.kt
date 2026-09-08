@@ -5,16 +5,16 @@ import co.touchlab.kermit.Severity
 import coil3.util.Logger as CoilLogger
 import coil3.util.Logger.Level
 import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
 
 private const val TAG = "Coil"
 
+@BindingContainer
 @ContributesTo(AppScope::class)
-public interface CoilLoggerProvider {
-  public companion object {
-    @Provides public fun provideLogger(): CoilLogger = KermitLogger.asCoilLogger()
-  }
+public object CoilLoggerProvider {
+  @Provides public fun provideLogger(): CoilLogger = KermitLogger.asCoilLogger()
 }
 
 private fun KermitLogger.asCoilLogger(): CoilLogger =
