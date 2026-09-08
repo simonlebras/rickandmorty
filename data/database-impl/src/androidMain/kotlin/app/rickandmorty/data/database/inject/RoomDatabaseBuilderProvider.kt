@@ -5,18 +5,18 @@ import app.rickandmorty.core.metro.AppContext
 import app.rickandmorty.data.database.DATABASE_NAME
 import app.rickandmorty.data.database.RamDatabase
 import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.Provides
 
+@BindingContainer
 @ContributesTo(AppScope::class)
-public interface RoomDatabaseBuilderProvider {
-  public companion object {
-    @Provides
-    public fun provideRoomDatabaseBuilder(
-      @AppContext context: Context
-    ): RoomDatabase.Builder<RamDatabase> {
-      val databaseFile = context.getDatabasePath(DATABASE_NAME)
-      return Room.databaseBuilder<RamDatabase>(context = context, name = databaseFile.absolutePath)
-    }
+public object RoomDatabaseBuilderProvider {
+  @Provides
+  public fun provideRoomDatabaseBuilder(
+    @AppContext context: Context
+  ): RoomDatabase.Builder<RamDatabase> {
+    val databaseFile = context.getDatabasePath(DATABASE_NAME)
+    return Room.databaseBuilder<RamDatabase>(context = context, name = databaseFile.absolutePath)
   }
 }

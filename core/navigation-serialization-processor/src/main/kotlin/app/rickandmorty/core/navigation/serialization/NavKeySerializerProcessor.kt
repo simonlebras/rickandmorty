@@ -23,6 +23,7 @@ import com.squareup.kotlinpoet.asClassName
 import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import com.squareup.kotlinpoet.ksp.toClassName
 import com.squareup.kotlinpoet.ksp.writeTo
+import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.IntoMap
 import dev.zacsweers.metro.Provides
@@ -37,14 +38,12 @@ internal class NavKeySerializerProcessor(
 
     val (valid, invalid) = symbols.partition { it.validate() }
 
-    valid.filterIsInstance<KSClassDeclaration>().forEach { clazz ->
-      generateProviderInterface(clazz)
-    }
+    valid.filterIsInstance<KSClassDeclaration>().forEach { clazz -> generateProviderObject(clazz) }
 
     return invalid
   }
 
-  private fun generateProviderInterface(clazz: KSClassDeclaration) {
+  private fun generateProviderObject(clazz: KSClassDeclaration) {
     if (!isSupportedKind(clazz)) return
 
     val scopeType = getScopeType(clazz) ?: return
@@ -52,42 +51,38 @@ internal class NavKeySerializerProcessor(
     val packageName = clazz.packageName.asString()
     val className = clazz.simpleName.asString()
     val navKeyClassName = clazz.toClassName()
-    val interfaceName = "${className}NavKeyProvider"
+    val objectName = "${className}NavKeyProvider"
 
     val typeSpec =
-      TypeSpec.interfaceBuilder(interfaceName)
+      TypeSpec.objectBuilder(objectName)
         .addModifiers(KModifier.PUBLIC)
         .addOriginatingKSFile(clazz.containingFile!!)
+        .addAnnotation(BindingContainer::class)
         .addAnnotation(
           AnnotationSpec.builder(ContributesTo::class)
             .addMember("%T::class", scopeType.toClassName())
             .build()
         )
-        .addType(
-          TypeSpec.companionObjectBuilder()
+        .addFunction(
+          FunSpec.builder("provide${className}Serializer")
             .addModifiers(KModifier.PUBLIC)
-            .addFunction(
-              FunSpec.builder("provide${className}Serializer")
-                .addModifiers(KModifier.PUBLIC)
-                .addAnnotation(Provides::class)
-                .addAnnotation(IntoMap::class)
-                .addAnnotation(
-                  AnnotationSpec.builder(NavKeySerializerKey::class.asClassName())
-                    .addMember("value = %T::class", navKeyClassName)
-                    .build()
-                )
-                .returns(
-                  KSerializer::class.asClassName()
-                    .parameterizedBy(WildcardTypeName.producerOf(NavKey::class))
-                )
-                .addStatement("return %T.serializer()", navKeyClassName)
+            .addAnnotation(Provides::class)
+            .addAnnotation(IntoMap::class)
+            .addAnnotation(
+              AnnotationSpec.builder(NavKeySerializerKey::class.asClassName())
+                .addMember("value = %T::class", navKeyClassName)
                 .build()
             )
+            .returns(
+              KSerializer::class.asClassName()
+                .parameterizedBy(WildcardTypeName.producerOf(NavKey::class))
+            )
+            .addStatement("return %T.serializer()", navKeyClassName)
             .build()
         )
         .build()
 
-    val fileSpec = FileSpec.builder(packageName, interfaceName).addType(typeSpec).build()
+    val fileSpec = FileSpec.builder(packageName, objectName).addType(typeSpec).build()
     fileSpec.writeTo(codeGenerator = codeGenerator, aggregating = false)
   }
 
