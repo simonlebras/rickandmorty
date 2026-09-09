@@ -149,6 +149,7 @@ jetbrains-navigation3-ui = { group = "org.jetbrains.androidx.navigation3", name 
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 
 kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+kermit-coil = { group = "co.touchlab", name = "kermit-coil", version.ref = "kermit" }
 kermit-crashlytics = { group = "co.touchlab", name = "kermit-crashlytics", version.ref = "kermit" }
 
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }

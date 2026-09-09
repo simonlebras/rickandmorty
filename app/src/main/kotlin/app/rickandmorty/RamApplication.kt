@@ -15,7 +15,7 @@ import dev.zacsweers.metrox.android.MetroApplication
 class RamApplication : Application(), MetroApplication, SingletonImageLoader.Factory {
   private val appGraph by unsafeLazy { createGraphFactory<AppGraph.Factory>().create(this) }
 
-  @Inject lateinit var imageLoader: ImageLoader
+  @Inject lateinit var imageLoader: Lazy<ImageLoader>
 
   override val appComponentProviders: MetroAppComponentProviders
     get() = appGraph
@@ -31,5 +31,5 @@ class RamApplication : Application(), MetroApplication, SingletonImageLoader.Fac
     initializers.forEach(Initializer::initialize)
   }
 
-  override fun newImageLoader(context: PlatformContext): ImageLoader = imageLoader
+  override fun newImageLoader(context: PlatformContext): ImageLoader = imageLoader.value
 }

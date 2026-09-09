@@ -12,7 +12,7 @@ internal class DebugLoggerInitializer : Initializer {
   override fun initialize() {
     with(Logger) {
       setMinSeverity(Severity.Debug)
-      addLogWriter(platformLogWriter())
+      setLogWriters(platformLogWriter())
     }
   }
 }
