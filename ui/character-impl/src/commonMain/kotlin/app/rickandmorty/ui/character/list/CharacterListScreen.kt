@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -83,7 +82,6 @@ internal fun CharacterListScreen(
 }
 
 // Todo localize errors
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CharacterListScreen(
   characters: LazyPagingItems<Character>,
@@ -173,7 +171,6 @@ private fun CharacterListScreen(
 @Composable
 private fun CharacterItem(character: Character) {
   ListItem(
-    headlineContent = { Text(text = character.name) },
     supportingContent = {
       Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -191,10 +188,11 @@ private fun CharacterItem(character: Character) {
         modifier = Modifier.size(64.dp).clip(MaterialTheme.shapes.small),
       )
     },
-  )
+  ) {
+    Text(text = character.name)
+  }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CharacterListScreenAppBar(
   onNavigateToSettings: () -> Unit,

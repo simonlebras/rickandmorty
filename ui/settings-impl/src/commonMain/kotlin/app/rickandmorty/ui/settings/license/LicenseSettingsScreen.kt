@@ -3,7 +3,6 @@ package app.rickandmorty.ui.settings.license
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -58,7 +56,6 @@ internal fun LicenseSettingsScreen(
   )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LicenseSettingsScreen(
   uiState: LicenseSettingsUiState,
@@ -98,11 +95,9 @@ private fun LicenseSettingsScreen(
   }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun LicenseItem(license: License, onClick: () -> Unit) {
   ListItem(
-    headlineContent = { Text(text = license.name) },
     modifier =
       Modifier.clickable(
         enabled = license.url != null,
@@ -133,7 +128,9 @@ private fun LicenseItem(license: License, onClick: () -> Unit) {
         contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
       )
     },
-  )
+  ) {
+    Text(text = license.name)
+  }
 }
 
 @Composable
@@ -147,7 +144,6 @@ private fun LibraryChip(text: String, containerColor: Color, contentColor: Color
   }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LicenseSettingsAppBar(
   showBackButton: Boolean,

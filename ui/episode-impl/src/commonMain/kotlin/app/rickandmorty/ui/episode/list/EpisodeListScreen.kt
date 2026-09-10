@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.SnackbarHost
@@ -70,7 +69,6 @@ internal fun EpisodeListScreen(
   )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EpisodeListScreen(
   episodes: LazyPagingItems<Episode>,
@@ -159,13 +157,11 @@ private fun EpisodeListScreen(
 
 @Composable
 private fun EpisodeItem(episode: Episode) {
-  ListItem(
-    headlineContent = { Text(text = episode.name) },
-    supportingContent = { Text(text = episode.episode) },
-  )
+  ListItem(supportingContent = { Text(text = episode.episode) }) {
+    Text(text = episode.name)
+  }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EpisodeListScreenAppBar(
   onNavigateToSettings: () -> Unit,

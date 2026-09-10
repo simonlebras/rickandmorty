@@ -18,7 +18,6 @@ import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 public fun NestedNavigationSuiteScaffold(
   navigationSuite: @Composable () -> Unit,
