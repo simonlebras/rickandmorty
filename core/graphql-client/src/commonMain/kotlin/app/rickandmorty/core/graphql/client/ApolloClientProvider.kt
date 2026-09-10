@@ -2,7 +2,6 @@ package app.rickandmorty.core.graphql.client
 
 import app.rickandmorty.core.coroutines.inject.IODispatcher
 import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.annotations.ApolloExperimental
 import com.apollographql.apollo.interceptor.RetryOnErrorInterceptor
 import com.apollographql.apollo.network.NetworkMonitor
 import com.apollographql.ktor.http.KtorHttpEngine
@@ -17,7 +16,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 
 private const val SERVER_URL = "https://rickandmortyapi.com/graphql"
 
-@OptIn(ApolloExperimental::class, ExperimentalStdlibApi::class)
 @BindingContainer
 @ContributesTo(AppScope::class)
 public object ApolloClientProvider {

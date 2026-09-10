@@ -163,17 +163,15 @@ private fun LazyListScope.buildInformation(
   }
 
   item(key = DebugDrawerItem.Version, contentType = DebugDrawerContentType.ListItem) {
-    SettingsItem(
-      headlineContent = { Text(text = stringResource(L10nRes.string.debug_version_title)) },
-      supportingContent = { Text(text = "$versionName ($versionCode)") },
-    )
+    SettingsItem(supportingContent = { Text(text = "$versionName ($versionCode)") }) {
+      Text(text = stringResource(L10nRes.string.debug_version_title))
+    }
   }
 
   item(key = DebugDrawerItem.Package, contentType = DebugDrawerContentType.ListItem) {
-    SettingsItem(
-      headlineContent = { Text(text = stringResource(L10nRes.string.debug_package_title)) },
-      supportingContent = { Text(text = packageName) },
-    )
+    SettingsItem(supportingContent = { Text(text = packageName) }) {
+      Text(text = stringResource(L10nRes.string.debug_package_title))
+    }
   }
 }
 
@@ -188,7 +186,6 @@ private fun LazyListScope.uiDebugging(
 
   item(key = DebugDrawerItem.KeylineOverlay, contentType = DebugDrawerContentType.ListItem) {
     SettingsItem(
-      headlineContent = { Text(text = stringResource(L10nRes.string.debug_keyline_overlay_title)) },
       modifier =
         Modifier.toggleable(
           value = settings.keylineOverlayEnabled,
@@ -198,14 +195,13 @@ private fun LazyListScope.uiDebugging(
       trailingContent = {
         Switch(checked = settings.keylineOverlayEnabled, onCheckedChange = null)
       },
-    )
+    ) {
+      Text(text = stringResource(L10nRes.string.debug_keyline_overlay_title))
+    }
   }
 
   item(key = DebugDrawerItem.LookaheadDebugging, contentType = DebugDrawerContentType.ListItem) {
     SettingsItem(
-      headlineContent = {
-        Text(text = stringResource(L10nRes.string.debug_lookahead_debugging_title))
-      },
       modifier =
         Modifier.toggleable(
           value = settings.lookaheadDebuggingEnabled,
@@ -215,7 +211,9 @@ private fun LazyListScope.uiDebugging(
       trailingContent = {
         Switch(checked = settings.lookaheadDebuggingEnabled, onCheckedChange = null)
       },
-    )
+    ) {
+      Text(text = stringResource(L10nRes.string.debug_lookahead_debugging_title))
+    }
   }
 }
 
@@ -226,14 +224,13 @@ private fun LazyListScope.images(onClearImageCache: () -> Unit) {
 
   item(key = DebugDrawerItem.ClearImageCache, contentType = DebugDrawerContentType.ListItem) {
     SettingsItem(
-      headlineContent = {
-        Text(text = stringResource(L10nRes.string.debug_clear_image_cache_title))
-      },
       modifier =
         Modifier.clickable(
           onClickLabel = stringResource(L10nRes.string.debug_clear_image_cache_tap_action),
           onClick = onClearImageCache,
-        ),
-    )
+        )
+    ) {
+      Text(text = stringResource(L10nRes.string.debug_clear_image_cache_title))
+    }
   }
 }

@@ -12,16 +12,17 @@ import androidx.compose.ui.graphics.Color
  */
 @Composable
 public fun SettingsItem(
-  headlineContent: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   supportingContent: @Composable (() -> Unit)? = null,
   trailingContent: @Composable (() -> Unit)? = null,
+  content: @Composable () -> Unit,
 ) {
   ListItem(
-    headlineContent = headlineContent,
     modifier = modifier,
     supportingContent = supportingContent,
     trailingContent = trailingContent,
     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-  )
+  ) {
+    content()
+  }
 }

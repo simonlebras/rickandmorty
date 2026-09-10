@@ -6,7 +6,6 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -117,7 +116,6 @@ private fun Modifier.navigationSuiteSharedElement(
 
 private data object NavigationBarSharedElementKey
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private val NavigationBarTransitionEnter
   @Composable
   @ReadOnlyComposable
@@ -126,7 +124,6 @@ private val NavigationBarTransitionEnter
       animationSpec = MaterialTheme.motionScheme.defaultSpatialSpec(),
       initialOffsetY = { it },
     )
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private val NavigationBarTransitionExit
   @Composable
   @ReadOnlyComposable
@@ -138,7 +135,6 @@ private val NavigationBarTransitionExit
 
 private data object NavigationRailSharedElementKey
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private val NavigationRailTransitionEnter
   @Composable
   @ReadOnlyComposable
@@ -147,7 +143,6 @@ private val NavigationRailTransitionEnter
       animationSpec = MaterialTheme.motionScheme.defaultSpatialSpec(),
       initialOffsetX = { -it },
     )
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 private val NavigationRailTransitionExit
   @Composable
   @ReadOnlyComposable
