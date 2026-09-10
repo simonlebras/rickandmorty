@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -97,7 +96,6 @@ internal fun MainSettingsScreen(
   }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainSettingsScreen(
   uiState: MainSettingsUiState,
@@ -146,7 +144,6 @@ private fun MainSettingsScreen(
   }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainSettingsAppBar(onNavigateUp: () -> Unit, scrollBehavior: TopAppBarScrollBehavior) {
   CenterAlignedTopAppBar(
@@ -179,22 +176,20 @@ private fun LazyListScope.generalSettings(
 
   item(key = MainSettingsItem.Theme, contentType = SettingsContentType.ListItem) {
     SettingsItem(
-      headlineContent = { Text(text = stringResource(L10nRes.string.settings_theme_title)) },
       modifier =
         Modifier.clickable(
           onClickLabel = stringResource(L10nRes.string.settings_theme_tap_action),
           onClick = onNavigateToThemeSettings,
         ),
       supportingContent = { Text(text = stringResource(currentTheme.nightMode.label)) },
-    )
+    ) {
+      Text(text = stringResource(L10nRes.string.settings_theme_title))
+    }
   }
 
   if (isDynamicColorAvailable) {
     item(key = MainSettingsItem.DynamicColor, contentType = SettingsContentType.ListItem) {
       SettingsItem(
-        headlineContent = {
-          Text(text = stringResource(L10nRes.string.settings_dynamic_color_title))
-        },
         modifier =
           Modifier.toggleable(
             value = currentTheme.useDynamicColor,
@@ -204,7 +199,9 @@ private fun LazyListScope.generalSettings(
         trailingContent = {
           Switch(checked = currentTheme.useDynamicColor, onCheckedChange = null)
         },
-      )
+      ) {
+        Text(text = stringResource(L10nRes.string.settings_dynamic_color_title))
+      }
     }
   }
 
@@ -268,7 +265,6 @@ private fun LazyListScope.aboutSettings(
     val title = stringResource(L10nRes.string.settings_app_version_title)
 
     SettingsItem(
-      headlineContent = { Text(text = title) },
       modifier =
         Modifier.clickable(
           onClickLabel = stringResource(L10nRes.string.settings_app_version_copy_tap_action),
@@ -281,6 +277,8 @@ private fun LazyListScope.aboutSettings(
           contentDescription = null,
         )
       },
-    )
+    ) {
+      Text(text = title)
+    }
   }
 }
