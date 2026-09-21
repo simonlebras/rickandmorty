@@ -36,7 +36,7 @@ internal class NavKeySerializerProcessor(
   override fun process(resolver: Resolver): List<KSAnnotated> {
     val symbols = resolver.getSymbolsWithAnnotation(NavKeySerializer::class.qualifiedName!!)
 
-    val (valid, invalid) = symbols.partition { it.validate(enableNewFeatures = true) }
+    val [valid, invalid] = symbols.partition { it.validate(enableNewFeatures = true) }
 
     valid.filterIsInstance<KSClassDeclaration>().forEach { clazz -> generateProviderObject(clazz) }
 

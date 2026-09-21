@@ -64,7 +64,7 @@ public class NavigationState(
         NavigationSnapshot(
           topLevelRoute = topLevelRoute,
           backStacks =
-            backStacks.map { (route, stack) ->
+            backStacks.map { [route, stack] ->
               NavigationSnapshot.BackStack(route, stack.toList())
             },
         ),
@@ -90,7 +90,7 @@ public class NavigationState(
 
   @Composable
   public fun toDecoratedEntries(entryProvider: EntryProvider): ImmutableList<NavEntry<NavKey>> {
-    val decoratedEntries = backStacks.mapValues { (key, stack) ->
+    val decoratedEntries = backStacks.mapValues { [key, stack] ->
       val viewModelStoreProvider = rememberViewModelStoreProvider(key = key)
       rememberDecoratedNavEntries(
         backStack = stack,

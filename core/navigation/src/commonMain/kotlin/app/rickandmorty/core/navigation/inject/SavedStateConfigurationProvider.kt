@@ -26,7 +26,7 @@ public interface SavedStateConfigurationProvider {
     ): SavedStateConfiguration = SavedStateConfiguration {
       serializersModule = SerializersModule {
         polymorphic(NavKey::class) {
-          navKeySerializers.forEach { (keyClass, serializer) ->
+          navKeySerializers.forEach { [keyClass, serializer] ->
             @Suppress("UNCHECKED_CAST")
             subclass(keyClass as KClass<NavKey>, serializer as KSerializer<NavKey>)
           }
