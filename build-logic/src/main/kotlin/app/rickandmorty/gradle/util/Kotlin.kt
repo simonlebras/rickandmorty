@@ -20,7 +20,11 @@ internal fun Project.configureKotlin() {
       compilerOptions {
         progressiveMode.set(true)
         allWarningsAsErrors.convention(true)
-        freeCompilerArgs.addAll("-Xcollection-literals", "-Xcontext-sensitive-resolution")
+        freeCompilerArgs.addAll(
+          "-Xcollection-literals",
+          "-Xcontext-sensitive-resolution",
+          "-Xname-based-destructuring=complete",
+        )
 
         when (this) {
           is KotlinJvmCompilerOptions -> freeCompilerArgs.add("-jvm-default=no-compatibility")
