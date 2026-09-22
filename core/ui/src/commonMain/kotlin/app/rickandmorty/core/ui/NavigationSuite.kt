@@ -41,7 +41,7 @@ internal fun NavigationSuiteState.NavigationSuite(
       modifier
         .navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType)
         .hazeBlur(
-          input = HazeInput.Sources(LocalHazeState.current),
+          input = HazeInput.Backdrop(LocalHazeState.current),
           style = HazeBlurStyle { blurEnabled(true) },
         )
   ) {

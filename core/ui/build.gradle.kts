@@ -3,12 +3,15 @@ plugins {
   alias(libs.plugins.rickandmorty.codehealth)
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
+  alias(libs.plugins.rickandmorty.metro)
 }
 
 kotlin {
   android { namespace = "app.rickandmorty.core.ui" }
 
   dependencies {
+    api(project(":core:startup"))
+
     api(project(":data:character-api"))
 
     api(libs.androidx.navigation3.runtime)
