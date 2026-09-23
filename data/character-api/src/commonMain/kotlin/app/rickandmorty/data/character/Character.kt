@@ -16,7 +16,7 @@ public data class Character(
     Dead,
     Unknown;
 
-    public companion object {
+    companion {
       public fun from(value: String): Status =
         entries.findByNameOrElse(name = value, defaultValue = Unknown)
     }
@@ -28,7 +28,7 @@ public data class Character(
     Humanoid,
     Other;
 
-    public companion object {
+    companion {
       public fun from(value: String): Species =
         entries.findByNameOrElse(name = value, defaultValue = Other)
     }
@@ -40,7 +40,7 @@ public data class Character(
     Genderless,
     Unknown;
 
-    public companion object {
+    companion {
       public fun from(value: String): Gender =
         entries.findByNameOrElse(name = value, defaultValue = Unknown)
     }

@@ -120,9 +120,9 @@ private class CustomTabsUriHandler(
     }
   }
 
-  private companion object {
+  companion {
     /** https://developer.chrome.com/docs/android/custom-tabs/howto-custom-tab-check */
-    fun findCustomTabsBrowser(context: Context): String? {
+    private fun findCustomTabsBrowser(context: Context): String? {
       val activityIntent =
         Intent(Intent.ACTION_VIEW, "https://".toUri()).addCategory(Intent.CATEGORY_BROWSABLE)
       val packageManager = context.packageManager
