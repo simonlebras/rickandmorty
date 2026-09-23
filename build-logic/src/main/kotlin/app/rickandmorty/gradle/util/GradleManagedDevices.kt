@@ -7,9 +7,9 @@ import org.gradle.api.GradleException
 
 private val deviceConfigs =
   [
-    DeviceConfig(device = "Pixel 4", apiLevel = 30, systemImageSource = "aosp-atd"),
-    DeviceConfig(device = "Pixel 6", apiLevel = 31, systemImageSource = "aosp"),
-    DeviceConfig(device = "Pixel C", apiLevel = 30, systemImageSource = "aosp-atd"),
+    DeviceConfig(device = "Pixel 4", apiLevel = 31, systemImageSource = "aosp-atd"),
+    DeviceConfig(device = "Pixel 6", apiLevel = 33, systemImageSource = "aosp-atd"),
+    DeviceConfig(device = "Pixel C", apiLevel = 35, systemImageSource = "aosp-atd"),
   ]
 
 public fun TestOptions.configureGradleManagedDevices() {
