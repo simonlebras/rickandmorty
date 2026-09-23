@@ -67,7 +67,7 @@ jobs:
       - name: Build all build type and flavor permutations
         run: |
           ./gradlew assemble \
-          -x :baseline-profile:pixel6Api31AospSetup \
+          -x :baseline-profile:pixel6api33AospatdSetup \
           -Pandroidx.baselineprofile.skipgeneration
 
       - name: Upload build outputs
@@ -111,9 +111,9 @@ jobs:
         id: set-matrix
         run: |
           MATRIX='
-            {"device": "pixel4", "api-level": "30", "system-image-source": "aospatd"},
-            {"device": "pixel6", "api-level": "31", "system-image-source": "aosp"},
-            {"device": "pixelc", "api-level": "30", "system-image-source": "aospatd"}
+            {"device": "pixel4", "api-level": "31", "system-image-source": "aospatd"},
+            {"device": "pixel6", "api-level": "33", "system-image-source": "aospatd"},
+            {"device": "pixelc", "api-level": "35", "system-image-source": "aospatd"}
           '
           echo "matrix={\"include\":[${MATRIX//$'\n'/}]}" >> $GITHUB_OUTPUT
 
