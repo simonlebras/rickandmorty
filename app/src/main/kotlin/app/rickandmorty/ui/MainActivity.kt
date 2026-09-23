@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.lifecycleScope
@@ -56,7 +57,7 @@ class MainActivity(
   override fun onCreate(savedInstanceState: Bundle?) {
     val splashScreen = installSplashScreen()
 
-    setupEdgeToEdge()
+    WindowCompat.enableEdgeToEdge(window)
 
     super.onCreate(savedInstanceState)
 
@@ -99,10 +100,5 @@ class MainActivity(
         }
       }
     }
-  }
-
-  private fun setupEdgeToEdge() {
-    enableEdgeToEdge()
-    window.isNavigationBarContrastEnforced = false
   }
 }
