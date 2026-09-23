@@ -14,7 +14,7 @@ internal class CrashlyticsLoggerInitializer : Initializer {
   override fun initialize() {
     with(Logger) {
       setMinSeverity(Severity.Error)
-      addLogWriter(CrashlyticsLogWriter())
+      setLogWriters(CrashlyticsLogWriter())
     }
   }
 }

@@ -9,5 +9,6 @@ kotlin {
     api(libs.coil.core)
 
     implementation(libs.kermit)
+    implementation(libs.kermit.coil)
   }
 }
