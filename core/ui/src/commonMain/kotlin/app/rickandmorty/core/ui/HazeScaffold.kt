@@ -10,12 +10,13 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import dev.chrisbanes.haze.ExperimentalHazeApi
 import dev.chrisbanes.haze.HazeInput
 import dev.chrisbanes.haze.HazeState
-import dev.chrisbanes.haze.blur.HazeBlurStyle
-import dev.chrisbanes.haze.blur.hazeBlur
+import dev.chrisbanes.haze.glass.hazeGlass
 import dev.chrisbanes.haze.hazeSource
 
+@OptIn(ExperimentalHazeApi::class)
 @Composable
 public fun HazeScaffold(
   modifier: Modifier = Modifier,
@@ -37,10 +38,7 @@ public fun HazeScaffold(
         {
           Box(
             modifier =
-              Modifier.hazeBlur(
-                input = HazeInput.Backdrop(hazeState),
-                style = HazeBlurStyle { blurEnabled(true) },
-              )
+              Modifier.hazeGlass(input = HazeInput.Backdrop(hazeState), style = BarGlassStyle)
           ) {
             topBar()
           }
@@ -53,10 +51,7 @@ public fun HazeScaffold(
         {
           Box(
             modifier =
-              Modifier.hazeBlur(
-                input = HazeInput.Backdrop(hazeState),
-                style = HazeBlurStyle { blurEnabled(true) },
-              )
+              Modifier.hazeGlass(input = HazeInput.Backdrop(hazeState), style = BarGlassStyle)
           ) {
             bottomBar()
           }

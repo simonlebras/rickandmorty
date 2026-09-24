@@ -19,8 +19,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ram.Splash"
-        tools:targetApi="33">
+        android:theme="@style/Theme.Ram.Splash">
 
         <profileable android:shell="true" />
 

@@ -48,7 +48,7 @@ android {
         minorApiLevel = 2
       }
   }
-  minSdk { version = release(31) }
+  minSdk { version = release(33) }
   targetSdk { version = release(37) }
 }
 
