@@ -22,6 +22,7 @@ internal fun Project.configureKotlin() {
         allWarningsAsErrors.convention(true)
         freeCompilerArgs.addAll(
           "-Xcollection-literals",
+          "-Xcompanion-blocks-and-extensions",
           "-Xcontext-sensitive-resolution",
           "-Xname-based-destructuring=complete",
         )
