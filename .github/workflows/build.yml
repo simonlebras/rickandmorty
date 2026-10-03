@@ -111,9 +111,7 @@ jobs:
         id: set-matrix
         run: |
           MATRIX='
-            {"device": "pixel4", "api-level": "31", "system-image-source": "aospatd"},
-            {"device": "pixel6", "api-level": "33", "system-image-source": "aospatd"},
-            {"device": "pixelc", "api-level": "35", "system-image-source": "aospatd"}
+            {"device": "pixel6", "api-level": "33", "system-image-source": "aospatd"}
           '
           echo "matrix={\"include\":[${MATRIX//$'\n'/}]}" >> $GITHUB_OUTPUT
 

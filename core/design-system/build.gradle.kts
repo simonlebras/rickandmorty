@@ -23,7 +23,8 @@ kotlin {
 
     implementation(libs.compose.placeholder.material3)
 
-    implementation(libs.haze.blur.materials)
+    implementation(libs.haze.glass)
+    implementation(libs.haze.glass.material3)
 
     implementation(libs.jetbrains.navigation3.ui)
   }

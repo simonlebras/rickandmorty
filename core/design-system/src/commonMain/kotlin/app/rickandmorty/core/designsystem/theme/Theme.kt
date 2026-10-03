@@ -8,8 +8,11 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import dev.chrisbanes.haze.blur.LocalHazeBlurStyle
-import dev.chrisbanes.haze.blur.materials.HazeMaterials
+import dev.chrisbanes.haze.ExperimentalHazeApi
+import dev.chrisbanes.haze.glass.GlassStyle
+import dev.chrisbanes.haze.glass.LocalGlassAccessibilitySettings
+import dev.chrisbanes.haze.glass.LocalGlassStyle
+import dev.chrisbanes.haze.glass.material3.material3
 
 internal val RamLightColorScheme =
   lightColorScheme(
@@ -77,6 +80,7 @@ internal val RamDarkColorScheme =
     onSurfaceVariant = DarkOnSurfaceVariant,
   )
 
+@OptIn(ExperimentalHazeApi::class)
 @Composable
 public fun RamTheme(
   useDarkTheme: Boolean = isSystemInDarkTheme(),
@@ -93,7 +97,8 @@ public fun RamTheme(
   ) {
     SharedTransitionLayout {
       CompositionLocalProvider(
-        LocalHazeBlurStyle provides HazeMaterials.ultraThin(),
+        LocalGlassAccessibilitySettings provides rememberGlassAccessibilitySettings(),
+        LocalGlassStyle provides GlassStyle.regular.material3(),
         LocalSharedTransitionScope provides this,
       ) {
         content()
