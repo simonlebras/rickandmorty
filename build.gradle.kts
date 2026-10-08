@@ -9,7 +9,6 @@ plugins {
   alias(libs.plugins.android.test) apply false
   alias(libs.plugins.androidx.baselineprofile) apply false
   alias(libs.plugins.androidx.room) apply false
-  alias(libs.plugins.apollo) apply false
   alias(libs.plugins.compose.compiler) apply false
   alias(libs.plugins.compose.multiplatform) apply false
   alias(libs.plugins.dependencyanalysis) apply false

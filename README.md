@@ -1,2 +1,2 @@
 # Rick & Morty
-GraphQL based Android application using https://rickandmortyapi.com/graphql
+Android application using the REST API from https://rickandmortyapi.com

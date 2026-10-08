@@ -28,9 +28,6 @@ androidx-test-truth = "1.7.0"
 androidx-test-uiautomator = "2.4.0"
 androidx-tracing = "2.0.3"
 androidx-window = "1.6.0-alpha05"
-apollo = "5.2.0"
-apollo-adapters = "0.8.0"
-apollo-ktor = "1.0.0-alpha.0"
 coil = "3.6.3"
 compose-placeholder = "1.0.12"
 crashkios-crashlytics = "0.10.0"
@@ -108,11 +105,6 @@ androidx-test-truth = { group = "androidx.test.ext", name = "truth", version.ref
 androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "androidx-test-uiautomator" }
 androidx-tracing = { group = "androidx.tracing", name = "tracing", version.ref = "androidx-tracing" }
 androidx-window = { group = "androidx.window", name = "window", version.ref = "androidx-window" }
-
-apollo-adapters-kotlinx-datetime = { group = "com.apollographql.adapters", name = "apollo-adapters-kotlinx-datetime", version.ref = "apollo-adapters" }
-apollo-api = { group = "com.apollographql.apollo", name = "apollo-api", version.ref = "apollo" }
-apollo-ktor = { group = "com.apollographql.ktor", name = "apollo-engine-ktor", version.ref = "apollo-ktor" }
-apollo-runtime = { group = "com.apollographql.apollo", name = "apollo-runtime", version.ref = "apollo" }
 
 coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
@@ -217,7 +209,6 @@ android-multiplatformlibrary = { id = "com.android.kotlin.multiplatform.library"
 android-test = { id = "com.android.test", version.ref = "android-plugin" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-benchmark" }
 androidx-room = { id = "androidx.room3", version.ref = "androidx-room" }
-apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose" }
 dependencyanalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyanalysis" }

@@ -13,7 +13,7 @@ import app.rickandmorty.data.database.dao.LocationDao
 import app.rickandmorty.data.database.dao.LocationPagedEntryDao
 import app.rickandmorty.data.database.entity.LocationEntity
 import app.rickandmorty.data.database.entity.LocationPagedEntryEntity
-import com.apollographql.apollo.ApolloClient
+import app.rickandmorty.data.network.RickAndMortyApi
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.map
 
 @ContributesBinding(AppScope::class)
 internal class LocationRepositoryImpl(
-  private val apolloClient: ApolloClient,
+  private val api: RickAndMortyApi,
   private val transactionRunner: TransactionRunner,
   private val locationDao: LocationDao,
   private val locationPagedEntryDao: LocationPagedEntryDao,
@@ -34,9 +34,7 @@ internal class LocationRepositoryImpl(
           transactionRunner.readTransaction { locationPagedEntryDao.getPagedEntry(location.id) }
         },
         pageFetcher = { page ->
-          val data = apolloClient.query(GetLocationsQuery(page = page)).execute().dataAssertNoErrors
-
-          val (info, results) = data.locations!!
+          val (info, results) = api.getLocations(page)
 
           val resultSize = results.size
           val locations = ArrayList<LocationEntity>(resultSize)
@@ -44,7 +42,7 @@ internal class LocationRepositoryImpl(
           results.forEachIndexed { index, remoteLocation ->
             val location =
               LocationEntity(
-                id = remoteLocation.id,
+                id = remoteLocation.id.toString(),
                 name = remoteLocation.name,
                 type = remoteLocation.type,
                 dimension = remoteLocation.dimension,
@@ -54,7 +52,7 @@ internal class LocationRepositoryImpl(
             val pagedEntry =
               LocationPagedEntryEntity(
                 page = page,
-                nextPage = info.next,
+                nextPage = info.nextPage,
                 index = index,
                 locationId = location.id,
               )
@@ -68,7 +66,7 @@ internal class LocationRepositoryImpl(
             locationPagedEntryDao.insertAll(pagedEntries)
           }
 
-          return@PageKeyedRemoteMediator PageResult(count = info.count, nextPage = info.next)
+          return@PageKeyedRemoteMediator PageResult(count = info.count, nextPage = info.nextPage)
         },
       )
     return Pager(

@@ -69,7 +69,6 @@ dependencies {
   implementation(project(":core:coroutines"))
   implementation(project(":core:design-system"))
   implementation(project(":core:filesystem"))
-  implementation(project(":core:graphql-client"))
   implementation(project(":core:json"))
   implementation(project(":core:ktor"))
   implementation(project(":core:l10n"))
@@ -86,6 +85,7 @@ dependencies {
   implementation(project(":data:license-impl"))
   implementation(project(":data:locale-impl"))
   implementation(project(":data:location-impl"))
+  implementation(project(":data:network"))
   implementation(project(":data:theme-impl"))
 
   implementation(project(":ui:character-impl"))

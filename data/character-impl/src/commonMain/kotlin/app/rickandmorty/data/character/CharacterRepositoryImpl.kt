@@ -13,7 +13,7 @@ import app.rickandmorty.data.database.dao.CharacterDao
 import app.rickandmorty.data.database.dao.CharacterPagedEntryDao
 import app.rickandmorty.data.database.entity.CharacterEntity
 import app.rickandmorty.data.database.entity.CharacterPagedEntryEntity
-import com.apollographql.apollo.ApolloClient
+import app.rickandmorty.data.network.RickAndMortyApi
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.map
 
 @ContributesBinding(AppScope::class)
 internal class CharacterRepositoryImpl(
-  private val apolloClient: ApolloClient,
+  private val api: RickAndMortyApi,
   private val transactionRunner: TransactionRunner,
   private val characterDao: CharacterDao,
   private val characterPagedEntryDao: CharacterPagedEntryDao,
@@ -34,10 +34,7 @@ internal class CharacterRepositoryImpl(
           transactionRunner.readTransaction { characterPagedEntryDao.getPagedEntry(character.id) }
         },
         pageFetcher = { page ->
-          val data =
-            apolloClient.query(GetCharactersQuery(page = page)).execute().dataAssertNoErrors
-
-          val (info, results) = data.characters!!
+          val (info, results) = api.getCharacters(page)
 
           val resultSize = results.size
           val characters = ArrayList<CharacterEntity>(resultSize)
@@ -45,7 +42,7 @@ internal class CharacterRepositoryImpl(
           results.forEachIndexed { index, remoteCharacter ->
             val character =
               CharacterEntity(
-                id = remoteCharacter.id,
+                id = remoteCharacter.id.toString(),
                 name = remoteCharacter.name,
                 status = remoteCharacter.status,
                 species = remoteCharacter.species,
@@ -58,7 +55,7 @@ internal class CharacterRepositoryImpl(
             val pagedEntry =
               CharacterPagedEntryEntity(
                 page = page,
-                nextPage = info.next,
+                nextPage = info.nextPage,
                 index = index,
                 characterId = character.id,
               )
@@ -72,7 +69,7 @@ internal class CharacterRepositoryImpl(
             characterPagedEntryDao.insertAll(pagedEntries)
           }
 
-          return@PageKeyedRemoteMediator PageResult(count = info.count, nextPage = info.next)
+          return@PageKeyedRemoteMediator PageResult(count = info.count, nextPage = info.nextPage)
         },
       )
     return Pager(

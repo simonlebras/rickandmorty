@@ -13,7 +13,7 @@ import app.rickandmorty.data.database.dao.EpisodeDao
 import app.rickandmorty.data.database.dao.EpisodePagedEntryDao
 import app.rickandmorty.data.database.entity.EpisodeEntity
 import app.rickandmorty.data.database.entity.EpisodePagedEntryEntity
-import com.apollographql.apollo.ApolloClient
+import app.rickandmorty.data.network.RickAndMortyApi
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.map
 
 @ContributesBinding(AppScope::class)
 internal class EpisodeRepositoryImpl(
-  private val apolloClient: ApolloClient,
+  private val api: RickAndMortyApi,
   private val transactionRunner: TransactionRunner,
   private val episodeDao: EpisodeDao,
   private val episodePagedEntryDao: EpisodePagedEntryDao,
@@ -34,9 +34,7 @@ internal class EpisodeRepositoryImpl(
           transactionRunner.readTransaction { episodePagedEntryDao.getPagedEntry(episode.id) }
         },
         pageFetcher = { page ->
-          val data = apolloClient.query(GetEpisodesQuery(page = page)).execute().dataAssertNoErrors
-
-          val (info, results) = data.episodes!!
+          val (info, results) = api.getEpisodes(page)
 
           val resultSize = results.size
           val episodes = ArrayList<EpisodeEntity>(resultSize)
@@ -44,9 +42,9 @@ internal class EpisodeRepositoryImpl(
           results.forEachIndexed { index, remoteEpisode ->
             val episode =
               EpisodeEntity(
-                id = remoteEpisode.id,
+                id = remoteEpisode.id.toString(),
                 name = remoteEpisode.name,
-                airDate = remoteEpisode.air_date,
+                airDate = remoteEpisode.airDate,
                 episode = remoteEpisode.episode,
               )
             episodes.add(episode)
@@ -54,7 +52,7 @@ internal class EpisodeRepositoryImpl(
             val pagedEntry =
               EpisodePagedEntryEntity(
                 page = page,
-                nextPage = info.next,
+                nextPage = info.nextPage,
                 index = index,
                 episodeId = episode.id,
               )
@@ -68,7 +66,7 @@ internal class EpisodeRepositoryImpl(
             episodePagedEntryDao.insertAll(pagedEntries)
           }
 
-          return@PageKeyedRemoteMediator PageResult(count = info.count, nextPage = info.next)
+          return@PageKeyedRemoteMediator PageResult(count = info.count, nextPage = info.nextPage)
         },
       )
     return Pager(
