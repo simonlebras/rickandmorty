@@ -18,7 +18,7 @@ internal class EpisodeNavEntryInstaller(private val navigator: Navigator) : NavE
   @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun EntryProviderScope<NavKey>.install() {
     entry<EpisodeListNavKey>(
-      metadata = metadata { navigationSuite() } + ListDetailSceneStrategy.listPane()
+      metadata = metadata { navigationSuite() } + ListDetailSceneStrategy.listPane(),
     ) {
       EpisodeListScreen(onNavigateToSettings = { navigator.navigate(MainSettingsNavKey) })
     }

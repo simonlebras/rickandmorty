@@ -61,7 +61,7 @@ internal class NavKeySerializerProcessor(
         .addAnnotation(
           AnnotationSpec.builder(ContributesTo::class)
             .addMember("%T::class", scopeType.toClassName())
-            .build()
+            .build(),
         )
         .addFunction(
           FunSpec.builder("provide${className}Serializer")
@@ -71,14 +71,14 @@ internal class NavKeySerializerProcessor(
             .addAnnotation(
               AnnotationSpec.builder(NavKeySerializerKey::class.asClassName())
                 .addMember("value = %T::class", navKeyClassName)
-                .build()
+                .build(),
             )
             .returns(
               KSerializer::class.asClassName()
-                .parameterizedBy(WildcardTypeName.producerOf(NavKey::class))
+                .parameterizedBy(WildcardTypeName.producerOf(NavKey::class)),
             )
             .addStatement("return %T.serializer()", navKeyClassName)
-            .build()
+            .build(),
         )
         .build()
 

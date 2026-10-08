@@ -21,7 +21,7 @@ internal fun Project.apply(vararg plugins: String) {
 }
 
 internal inline fun <reified T : Any> ExtensionAware.configure(
-  noinline configuration: T.() -> Unit
+  noinline configuration: T.() -> Unit,
 ): Unit = extensions.configure(typeOf<T>(), configuration)
 
 internal fun Project.dependencies(configuration: DependencyHandler.() -> Unit) {

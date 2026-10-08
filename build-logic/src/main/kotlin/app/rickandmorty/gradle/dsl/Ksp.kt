@@ -18,7 +18,7 @@ public fun KotlinTarget.kspDependencies(block: KspDependencies.() -> Unit) {
 }
 
 public fun KotlinMultiplatformExtension.kspDependenciesForAllTargets(
-  block: KspDependencies.() -> Unit
+  block: KspDependencies.() -> Unit,
 ) {
   targets.configureEach {
     if (targetName != "metadata") {

@@ -35,7 +35,7 @@ public class ResourceController<T>(private val resource: Flow<T>) {
             .onStart { emit(Loading()) }
             .catch { error -> emit(Fail(error = error)) }
         }
-        .map { state -> state.combine(prevState).also { prevState = it } }
+        .map { state -> state.combine(prevState).also { prevState = it } },
     )
   }
 }

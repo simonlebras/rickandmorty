@@ -7,6 +7,6 @@ internal fun Lint.configureLint() {
   checkReleaseBuilds = false
   warningsAsErrors = true
   disable.addAll(
-    ["AndroidGradlePluginVersion", "GradleDependency", "Instantiatable", "OldTargetApi"]
+    ["AndroidGradlePluginVersion", "GradleDependency", "Instantiatable", "OldTargetApi"],
   )
 }

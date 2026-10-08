@@ -14,7 +14,7 @@ import dev.zacsweers.metro.Provides
 public object RoomDatabaseBuilderProvider {
   @Provides
   public fun provideRoomDatabaseBuilder(
-    @AppContext context: Context
+    @AppContext context: Context,
   ): RoomDatabase.Builder<RamDatabase> {
     val databaseFile = context.getDatabasePath(DATABASE_NAME)
     return Room.databaseBuilder<RamDatabase>(context = context, name = databaseFile.absolutePath)

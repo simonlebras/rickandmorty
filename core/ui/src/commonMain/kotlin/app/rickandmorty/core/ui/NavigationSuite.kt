@@ -41,7 +41,7 @@ internal fun NavigationSuiteState.NavigationSuite(
     modifier =
       modifier
         .navigationSuiteSharedElement(navigationSuiteType = navigationSuiteType)
-        .hazeGlass(input = HazeInput.Backdrop(LocalHazeState.current), style = BarGlassStyle)
+        .hazeGlass(input = HazeInput.Backdrop(LocalHazeState.current), style = BarGlassStyle),
   ) {
     NavigationSuite(
       navigationSuiteType = navigationSuiteType,
@@ -80,7 +80,7 @@ internal fun NavigationSuiteState.NavigationSuite(
 @Suppress("ComposeUnstableReceiver")
 @Composable
 private fun Modifier.navigationSuiteSharedElement(
-  navigationSuiteType: NavigationSuiteType
+  navigationSuiteType: NavigationSuiteType,
 ): Modifier {
   val animatedVisibilityScope = LocalNavAnimatedContentScope.current
   val sharedTransitionScope = LocalSharedTransitionScope.current
@@ -106,7 +106,7 @@ private fun Modifier.navigationSuiteSharedElement(
             .renderInSharedTransitionScopeOverlay(zIndexInOverlay = 1f)
         } else {
           Modifier
-        }
+        },
       )
     }
   }

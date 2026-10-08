@@ -23,7 +23,7 @@ public interface CharacterDao {
               INNER JOIN character_paged_entry ON character_paged_entry.character_id =
    character.id
               ORDER BY page ASC, `index` ASC
-          """
+          """,
   )
   public fun getPagedCharacters(): PagingSource<Int, CharacterEntity>
 }

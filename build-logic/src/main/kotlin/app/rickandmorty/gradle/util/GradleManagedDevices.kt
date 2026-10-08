@@ -49,7 +49,7 @@ private data class DeviceConfig(
         "google_apis_playstore" -> "googleplaystore"
         "android-desktop" -> "desktop"
         else -> throw GradleException("Unknown system image source: $systemImageSource")
-      }
+      },
     )
   }
 }

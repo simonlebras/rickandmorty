@@ -18,7 +18,7 @@ internal class CharacterNavEntryInstaller(private val navigator: Navigator) : Na
   @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun EntryProviderScope<NavKey>.install() {
     entry<CharacterListNavKey>(
-      metadata = metadata { navigationSuite() } + ListDetailSceneStrategy.listPane()
+      metadata = metadata { navigationSuite() } + ListDetailSceneStrategy.listPane(),
     ) {
       CharacterListScreen(onNavigateToSettings = { navigator.navigate(MainSettingsNavKey) })
     }

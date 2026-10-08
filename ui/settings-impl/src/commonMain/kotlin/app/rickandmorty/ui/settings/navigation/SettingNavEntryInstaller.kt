@@ -21,7 +21,7 @@ internal class SettingsNavEntryInstaller(private val navigator: Navigator) : Nav
   @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun EntryProviderScope<NavKey>.install() {
     entry<MainSettingsNavKey>(
-      metadata = ListDetailSceneStrategy.listPane(sceneKey = SettingsSceneKey)
+      metadata = ListDetailSceneStrategy.listPane(sceneKey = SettingsSceneKey),
     ) {
       val selectedItem =
         LocalListDetailSceneScope.current?.let {
@@ -45,7 +45,7 @@ internal class SettingsNavEntryInstaller(private val navigator: Navigator) : Nav
     }
 
     entry<LanguageSettingsNavKey>(
-      metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey)
+      metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey),
     ) {
       LanguageSettingsScreen(
         onNavigateUp = navigator::goBack,
@@ -54,7 +54,7 @@ internal class SettingsNavEntryInstaller(private val navigator: Navigator) : Nav
     }
 
     entry<LicenseSettingsNavKey>(
-      metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey)
+      metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey),
     ) {
       LicenseSettingsScreen(
         onNavigateUp = navigator::goBack,

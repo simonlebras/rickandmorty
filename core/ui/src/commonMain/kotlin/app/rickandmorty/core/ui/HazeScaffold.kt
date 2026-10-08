@@ -38,7 +38,7 @@ public fun HazeScaffold(
         {
           Box(
             modifier =
-              Modifier.hazeGlass(input = HazeInput.Backdrop(hazeState), style = BarGlassStyle)
+              Modifier.hazeGlass(input = HazeInput.Backdrop(hazeState), style = BarGlassStyle),
           ) {
             topBar()
           }
@@ -51,7 +51,7 @@ public fun HazeScaffold(
         {
           Box(
             modifier =
-              Modifier.hazeGlass(input = HazeInput.Backdrop(hazeState), style = BarGlassStyle)
+              Modifier.hazeGlass(input = HazeInput.Backdrop(hazeState), style = BarGlassStyle),
           ) {
             bottomBar()
           }

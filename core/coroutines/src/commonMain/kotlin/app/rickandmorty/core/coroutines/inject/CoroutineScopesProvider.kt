@@ -16,6 +16,6 @@ public object CoroutineScopesProvider {
   @SingleIn(AppScope::class)
   @ApplicationScope
   public fun provideApplicationScope(
-    @MainDispatcher mainDispatcher: CoroutineContext
+    @MainDispatcher mainDispatcher: CoroutineContext,
   ): CoroutineScope = CoroutineScope(SupervisorJob() + mainDispatcher)
 }
