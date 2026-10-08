@@ -1,0 +1,23 @@
+tasks:
+  check:
+    action: !app.rickandmorty.plugins.badging.checkBadging
+      bundle: ${pluginSettings.bundle}
+      golden: ${pluginSettings.golden}
+      aapt2: ${pluginSettings.aapt2}
+      moduleName: ${module.name}
+      workDir: ${taskOutputDir}
+
+  update:
+    action: !app.rickandmorty.plugins.badging.updateBadging
+      bundle: ${pluginSettings.bundle}
+      aapt2: ${pluginSettings.aapt2}
+      golden: ${pluginSettings.golden}
+      workDir: ${taskOutputDir}
+
+checks:
+  - name: badging
+    performedBy: check
+
+commands:
+  - name: updateBadging
+    performedBy: update

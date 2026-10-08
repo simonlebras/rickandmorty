@@ -1,0 +1,19 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+aliases:
+  - jvmAndAndroid: [jvm, android]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+
+dependencies:
+  - $libs.kotlinx.collectionsimmutable: exported
+  - $libs.kotlinx.coroutines.core: exported
+
+settings:
+  android:
+    namespace: app.rickandmorty.data.localeapi

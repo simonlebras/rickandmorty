@@ -1,0 +1,89 @@
+product: android/app
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/compose.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/base
+  - //core/coil
+  - //core/coil-logger
+  - //core/compose-diagnostic
+  - //core/coroutines
+  - //core/crashlytics
+  - //core/design-system
+  - //core/filesystem
+  - //core/json
+  - //core/ktor
+  - //core/l10n
+  - //core/logger-crashlytics
+  - //core/logger-debug
+  - //core/process-lifecycle
+  - //core/resource-state
+  - //core/root-content
+  - //core/startup
+  - //core/strict-mode
+  - //core/ui
+  - //data/data-character-impl
+  - //data/data-database-impl
+  - //data/data-debug-impl
+  - //data/data-episode-impl
+  - //data/data-license-impl
+  - //data/data-locale-impl
+  - //data/data-location-impl
+  - //data/data-network
+  - //data/data-theme-impl
+  - //ui/ui-character-impl
+  - //ui/ui-debug-drawer
+  - //ui/ui-episode-impl
+  - //ui/ui-location-impl
+  - //ui/ui-settings-impl
+  - $libs.androidx.activity.compose
+  - $libs.androidx.appcompat
+  - $libs.androidx.browser
+  - $libs.androidx.core.splashscreen
+  - $libs.androidx.lifecycle.runtime.compose
+  - $libs.coil
+  - $libs.jetbrains.compose.material3.adaptive.navigation3
+  - $libs.jetbrains.compose.material3.adaptivenavigationsuite
+  - $libs.jetbrains.compose.resources
+  - $libs.jetbrains.navigation3.ui
+  - $libs.kotlinx.collectionsimmutable
+  - $libs.metrox.android
+  - $libs.metrox.viewmodel.compose
+  - //core/metro-common: compile-only
+  - $libs.androidx.compose.runtime.tracing: runtime-only
+  - $libs.androidx.profileinstaller: runtime-only
+  - $libs.leakcanary.plumber: runtime-only
+  - bom: $libs.firebase.bom
+  - com.google.firebase:firebase-crashlytics
+  - com.google.firebase:firebase-perf
+
+settings:
+  android:
+    namespace: app.rickandmorty
+    applicationId: app.rickandmorty
+    versionCode: 1
+    versionName: "1.0"
+    signing: enabled
+    resourcePackaging:
+      excludes:
+        # Kotlin Multiplatform metadata from root artifacts that POM-only dependencies (Firebase) resolve to
+        - "**/default/manifest"
+        - "**/default/linkdata/**"
+        - "**/default/resources/**"
+        - META-INF/kotlin-project-structure-metadata.json
+
+plugins:
+  badging:
+    enabled: true
+    bundle: ../build/tasks/_app_bundleAndroid/gradle-project-release.aab
+    golden: release-badging.txt
+    aapt2:
+      - com.android.tools.build:aapt2:9.5.0-alpha08-16409357:osx
+      - com.android.tools.build:aapt2:9.5.0-alpha08-16409357:linux
+  licenses:
+    enabled: true
+    output: resources/aboutlibraries.json

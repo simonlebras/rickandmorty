@@ -1,0 +1,29 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/coroutines: exported
+  - //core/metro-common: exported
+  - //data/data-database-api: exported
+  - $libs.androidx.room.runtime: exported
+  - $libs.androidx.sqlite.bundled: exported
+
+dependencies@jvm:
+  - $libs.okio
+
+settings:
+  android:
+    namespace: app.rickandmorty.data.database.impl
+  kotlin:
+    ksp:
+      processors:
+        - $libs.androidx.room.compiler
+      processorOptions:
+        room.schemaLocation: ./schemas

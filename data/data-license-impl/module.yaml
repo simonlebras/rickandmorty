@@ -1,0 +1,18 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/coroutines: exported
+  - //data/data-license-api: exported
+  - $libs.aboutlibraries.core
+
+settings:
+  android:
+    namespace: app.rickandmorty.data.licenseimpl

@@ -9,4 +9,5 @@ runs:
     - run: |
         rm -f keystore/release.jks
         rm -f app/google-services.json
+        rm -f app/keystore.properties
       shell: bash

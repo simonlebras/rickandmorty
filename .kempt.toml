@@ -3,9 +3,6 @@
 [ktfmt]
 version = "0.65"
 
-[gradle-dependencies-sorter]
-version = "0.21.0"
-
 [paths]
 exclude = [
     "**/build/**",

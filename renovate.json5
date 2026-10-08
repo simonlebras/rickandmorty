@@ -11,18 +11,6 @@
     {
       customType: "regex",
       managerFilePatterns: [
-        "/\\.java-version$/"
-      ],
-      matchStrings: [
-        "(?<currentValue>.*)\\n"
-      ],
-      datasourceTemplate: "java-version",
-      depNameTemplate: "java",
-      extractVersionTemplate: "^(?<version>\\d+)",
-    },
-    {
-      customType: "regex",
-      managerFilePatterns: [
         "/(^|\\/)\\.kempt\\.toml$/"
       ],
       matchStrings: [
@@ -33,15 +21,26 @@
     },
     {
       customType: "regex",
+      description: "Maven coordinates in Kotlin Toolchain module and template files",
       managerFilePatterns: [
-        "/(^|\\/)\\.kempt\\.toml$/"
+        "/(^|\\/)module\\.yaml$/",
+        "/(^|\\/)templates\\/.+\\.yaml$/",
       ],
       matchStrings: [
-        "\\[gradle-dependencies-sorter\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+        "(?<depName>[\\w.-]+:[\\w.-]+):(?<currentValue>\\d[\\w.-]*)",
       ],
       datasourceTemplate: "maven",
-      registryUrlTemplate: "https://repo1.maven.org/maven2",
-      depNameTemplate: "com.squareup:sort-gradle-dependencies-app",
+      registryUrlTemplate: "https://dl.google.com/dl/android/maven2\nhttps://repo1.maven.org/maven2",
+    },
+    {
+      customType: "regex",
+      description: "Versions annotated with a renovate comment in Kotlin Toolchain files",
+      managerFilePatterns: [
+        "/(^|\\/)templates\\/.+\\.yaml$/",
+      ],
+      matchStrings: [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+\\w+: (?<currentValue>\\S+)",
+      ],
     },
   ],
   packageRules: [

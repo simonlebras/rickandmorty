@@ -1,0 +1,27 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/compose.module-template.yaml
+
+dependencies:
+  - $libs.coil.compose: exported
+  - $libs.jetbrains.compose.material3: exported
+  - $libs.jetbrains.compose.resources: exported
+  - $libs.jetbrains.compose.ui.tooling.preview: exported
+  - //core/l10n
+  - $libs.compose.placeholder.material3
+  - $libs.haze.glass
+  - $libs.haze.glass.material3
+  - $libs.jetbrains.navigation3.ui
+
+settings:
+  android:
+    namespace: app.rickandmorty.core.designsystem
+  compose:
+    resources:
+      packageName: app.rickandmorty.core.designsystem.resources

@@ -1,0 +1,26 @@
+product:
+  type: kmp/lib
+  platforms: [android, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/startup: exported
+  - //core/base
+
+dependencies@android:
+  - //core/metro-common
+  - bom: $libs.firebase.bom
+  - $libs.crashkios.crashlytics
+  - com.google.firebase:firebase-crashlytics
+
+dependencies@native:
+  - $libs.crashkios.crashlytics
+
+settings:
+  android:
+    namespace: app.rickandmorty.core.crashlytics

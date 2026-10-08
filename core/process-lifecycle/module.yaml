@@ -1,0 +1,17 @@
+product:
+  type: kmp/lib
+  platforms: [android]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies@android:
+  - $libs.androidx.lifecycle.common: exported
+  - $libs.androidx.lifecycle.process
+
+settings:
+  android:
+    namespace: app.rickandmorty.core.processlifecycle

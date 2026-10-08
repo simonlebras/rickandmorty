@@ -1,0 +1,12 @@
+product: jvm/lib
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/lib.module-template.yaml
+
+dependencies:
+  - //core/navigation-serialization-runtime
+  - $libs.kotlinpoet
+  - $libs.kotlinpoet.ksp
+  - $libs.ksp.api
+  - $libs.metro.runtime

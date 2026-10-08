@@ -1,0 +1,9 @@
+product: jvm/amper-plugin
+
+description: Checks the badging (`aapt2 dump badging`) of the release bundle against a golden file.
+
+dependencies:
+  - com.android.tools.build:bundletool:1.18.3
+
+pluginInfo:
+  settingsClass: app.rickandmorty.plugins.badging.BadgingSettings

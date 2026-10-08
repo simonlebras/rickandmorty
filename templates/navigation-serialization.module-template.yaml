@@ -1,0 +1,9 @@
+dependencies:
+  - //core/navigation-serialization-runtime: exported
+
+settings:
+  kotlin:
+    serialization: enabled
+    ksp:
+      processors:
+        - //core/navigation-serialization-processor

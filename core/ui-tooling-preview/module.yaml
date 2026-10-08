@@ -1,0 +1,21 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/compose.module-template.yaml
+
+dependencies:
+  - $libs.jetbrains.compose.ui.tooling.preview: exported
+  - $libs.coil.compose
+  - $libs.jetbrains.compose.material3
+
+dependencies@android:
+  - $libs.jetbrains.compose.ui.tooling: exported
+
+settings:
+  android:
+    namespace: app.rickandmorty.core.ui.tooling.preview
