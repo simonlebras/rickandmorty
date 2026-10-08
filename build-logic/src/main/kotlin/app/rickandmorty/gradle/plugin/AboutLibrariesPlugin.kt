@@ -20,7 +20,7 @@ public class AboutLibrariesPlugin : Plugin<Project> {
         export {
           // Everything the license settings screen does not show, to keep the asset small.
           excludeFields.set(
-            setOf("License.content", "Library.description", "Library.funding", "Library.tag")
+            setOf("License.content", "Library.description", "Library.funding", "Library.tag"),
           )
         }
 

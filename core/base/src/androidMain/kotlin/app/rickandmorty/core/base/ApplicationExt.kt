@@ -25,6 +25,6 @@ public inline fun Application.doOnActivityPreCreated(crossinline block: () -> Un
       override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) = Unit
 
       override fun onActivityDestroyed(activity: Activity) = Unit
-    }
+    },
   )
 }

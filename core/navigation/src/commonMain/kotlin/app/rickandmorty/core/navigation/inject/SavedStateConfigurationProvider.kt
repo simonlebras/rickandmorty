@@ -22,7 +22,7 @@ public interface SavedStateConfigurationProvider {
   public companion object {
     @Provides
     public fun provideSavedStateConfiguration(
-      navKeySerializers: NavKeySerializers
+      navKeySerializers: NavKeySerializers,
     ): SavedStateConfiguration = SavedStateConfiguration {
       serializersModule = SerializersModule {
         polymorphic(NavKey::class) {

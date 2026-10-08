@@ -89,14 +89,14 @@ private fun DebugDrawer(
             onClearImageCache = onClearImageCache,
           )
         }
-      }
+      },
     ) {
       CompositionLocalProvider(LocalLayoutDirection provides originalLayoutDirection) {
         Box(modifier = Modifier.fillMaxSize()) {
           val settings = uiState.debugSettings()
 
           LookaheadAnimationVisualDebugging(
-            isEnabled = settings?.lookaheadDebuggingEnabled == true
+            isEnabled = settings?.lookaheadDebuggingEnabled == true,
           ) {
             content()
           }
@@ -228,7 +228,7 @@ private fun LazyListScope.images(onClearImageCache: () -> Unit) {
         Modifier.clickable(
           onClickLabel = stringResource(L10nRes.string.debug_clear_image_cache_tap_action),
           onClick = onClearImageCache,
-        )
+        ),
     ) {
       Text(text = stringResource(L10nRes.string.debug_clear_image_cache_title))
     }

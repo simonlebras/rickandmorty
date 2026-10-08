@@ -71,7 +71,7 @@ private abstract class CheckBadgingTask : DefaultTask() {
   fun taskAction() {
     assertWithMessage(
         "Generated badging is different from golden badging! " +
-          "If this change is intended, run ./gradlew ${updateBadgingTaskName.get()}"
+          "If this change is intended, run ./gradlew ${updateBadgingTaskName.get()}",
       )
       .that(generatedBadging.get().asFile.readText())
       .isEqualTo(goldenBadging.get().asFile.readText())
@@ -91,8 +91,8 @@ internal fun ApplicationAndroidComponentsExtension.configureBadgingTasks() {
         aapt2Executable.set(sdkComponents.aapt2.flatMap { it.executable })
         badging.set(
           project.layout.buildDirectory.file(
-            "outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt"
-          )
+            "outputs/apk_from_bundle/${variant.name}/${variant.name}-badging.txt",
+          ),
         )
       }
 

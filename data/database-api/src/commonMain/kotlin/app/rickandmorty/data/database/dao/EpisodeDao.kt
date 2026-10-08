@@ -22,7 +22,7 @@ public interface EpisodeDao {
               SELECT episode.* FROM episode
               INNER JOIN episode_paged_entry ON episode_paged_entry.episode_id = episode.id
               ORDER BY page ASC, `index` ASC
-          """
+          """,
   )
   public fun getPagedEpisodes(): PagingSource<Int, EpisodeEntity>
 }

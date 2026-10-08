@@ -15,6 +15,6 @@ public object HttpClientProvider {
   @Provides
   @SingleIn(AppScope::class)
   public fun provideHttpClient(
-    httpClientEngineFactory: HttpClientEngineFactory<HttpClientEngineConfig>
+    httpClientEngineFactory: HttpClientEngineFactory<HttpClientEngineConfig>,
   ): HttpClient = HttpClient(httpClientEngineFactory) { engine { pipelining = true } }
 }

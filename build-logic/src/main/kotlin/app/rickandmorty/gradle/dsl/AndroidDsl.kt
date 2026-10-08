@@ -5,7 +5,7 @@ import com.android.build.api.dsl.KotlinMultiplatformAndroidHostTest
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 
 public fun KotlinMultiplatformAndroidLibraryTarget.hostTest(
-  configuration: KotlinMultiplatformAndroidHostTest.() -> Unit = {}
+  configuration: KotlinMultiplatformAndroidHostTest.() -> Unit = {},
 ) {
   withHostTest {
     isIncludeAndroidResources = true
@@ -15,7 +15,7 @@ public fun KotlinMultiplatformAndroidLibraryTarget.hostTest(
 }
 
 public fun KotlinMultiplatformAndroidLibraryTarget.deviceTest(
-  configuration: KotlinMultiplatformAndroidDeviceTest.() -> Unit = {}
+  configuration: KotlinMultiplatformAndroidDeviceTest.() -> Unit = {},
 ) {
   withDeviceTestBuilder { sourceSetTreeName = "test" }
     .configure {

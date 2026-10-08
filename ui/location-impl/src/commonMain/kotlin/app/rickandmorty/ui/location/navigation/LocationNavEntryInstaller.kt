@@ -18,7 +18,7 @@ internal class LocationNavEntryInstaller(private val navigator: Navigator) : Nav
   @OptIn(ExperimentalMaterial3AdaptiveApi::class)
   override fun EntryProviderScope<NavKey>.install() {
     entry<LocationListNavKey>(
-      metadata = metadata { navigationSuite() } + ListDetailSceneStrategy.listPane()
+      metadata = metadata { navigationSuite() } + ListDetailSceneStrategy.listPane(),
     ) {
       LocationListScreen(onNavigateToSettings = { navigator.navigate(MainSettingsNavKey) })
     }

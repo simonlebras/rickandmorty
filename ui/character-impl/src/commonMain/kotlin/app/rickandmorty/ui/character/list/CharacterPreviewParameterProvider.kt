@@ -14,6 +14,6 @@ internal class CharacterPreviewParameterProvider : PreviewParameterProvider<Char
         type = "",
         gender = Character.Gender.Male,
         image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-      )
+      ),
     )
 }

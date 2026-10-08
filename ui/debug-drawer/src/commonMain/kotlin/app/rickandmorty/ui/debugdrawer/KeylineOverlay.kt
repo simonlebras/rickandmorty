@@ -39,6 +39,6 @@ internal fun KeylineOverlay() {
         onDrawBehind {
           drawPath(path = path, color = gridColor, style = Stroke(width = 1f))
         }
-      }
+      },
   )
 }

@@ -92,14 +92,14 @@ private class CustomTabsUriHandler(
             CustomTabsIntent.COLOR_SCHEME_DARK
           } else {
             CustomTabsIntent.COLOR_SCHEME_LIGHT
-          }
+          },
         )
         .setDefaultColorSchemeParams(
           CustomTabColorSchemeParams.Builder()
             .setToolbarColor(appearance.toolbarColor)
             .setNavigationBarColor(appearance.navigationBarColor)
             .setNavigationBarDividerColor(appearance.navigationBarDividerColor)
-            .build()
+            .build(),
         )
         .build()
 
@@ -131,7 +131,7 @@ private class CustomTabsUriHandler(
       // flag enumerates every browser on its own.
       val packageNames =
         listOf(PackageManager.MATCH_DEFAULT_ONLY, PackageManager.MATCH_ALL).flatMapTo(
-          LinkedHashSet()
+          LinkedHashSet(),
         ) { flags ->
           packageManager.queryIntentActivities(activityIntent, flags).map { resolveInfo ->
             resolveInfo.activityInfo.packageName

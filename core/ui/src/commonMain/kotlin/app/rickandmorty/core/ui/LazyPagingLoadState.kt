@@ -17,7 +17,7 @@ public fun <T : Any> LazyListScope.appendLoadState(items: LazyPagingItems<T>) {
     item {
       Loader(
         modifier =
-          Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally).padding(16.dp)
+          Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally).padding(16.dp),
       )
     }
   }

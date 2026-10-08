@@ -22,7 +22,7 @@ public interface LocationDao {
               SELECT location.* FROM location
               INNER JOIN location_paged_entry ON location_paged_entry.location_id = location.id
               ORDER BY page ASC, `index` ASC
-          """
+          """,
   )
   public fun getPagedLocations(): PagingSource<Int, LocationEntity>
 }

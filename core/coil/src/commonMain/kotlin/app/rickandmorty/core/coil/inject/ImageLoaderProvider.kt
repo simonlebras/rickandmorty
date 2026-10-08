@@ -30,7 +30,7 @@ public object ImageLoaderProvider {
           KtorNetworkFetcherFactory(
             httpClient = httpClient,
             concurrentRequestStrategy = DeDupeConcurrentRequestStrategy(),
-          )
+          ),
         )
       }
       .logger(logger)

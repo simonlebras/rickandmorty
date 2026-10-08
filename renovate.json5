@@ -28,9 +28,8 @@
       matchStrings: [
         "\\[ktfmt\\][^\\[]*?version\\s*=\\s*\"(?<currentValue>[^\"]+)\""
       ],
-      datasourceTemplate: "maven",
-      registryUrlTemplate: "https://repo1.maven.org/maven2",
-      depNameTemplate: "com.facebook:ktfmt",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "Kotlin/ktfmt",
     },
     {
       customType: "regex",

@@ -26,7 +26,7 @@ public fun PullToRefreshBox(
 ) {
   Box(
     modifier =
-      modifier.pullToRefresh(state = state, isRefreshing = isRefreshing, onRefresh = onRefresh)
+      modifier.pullToRefresh(state = state, isRefreshing = isRefreshing, onRefresh = onRefresh),
   ) {
     content()
 

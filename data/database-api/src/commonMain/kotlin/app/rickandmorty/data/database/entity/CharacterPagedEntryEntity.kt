@@ -17,7 +17,7 @@ import app.rickandmorty.core.paging.PagedEntry
         parentColumns = ["id"],
         childColumns = ["character_id"],
         onDelete = ForeignKey.CASCADE,
-      )
+      ),
     ],
 )
 public data class CharacterPagedEntryEntity(
