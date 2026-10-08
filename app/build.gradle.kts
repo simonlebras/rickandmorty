@@ -66,21 +66,28 @@ baselineProfile {
 dependencies {
   implementation(project(":core:base"))
   implementation(project(":core:coil"))
+  implementation(project(":core:coil-logger"))
+  implementation(project(":core:compose-diagnostic"))
   implementation(project(":core:coroutines"))
+  implementation(project(":core:crashlytics"))
   implementation(project(":core:design-system"))
   implementation(project(":core:filesystem"))
   implementation(project(":core:json"))
   implementation(project(":core:ktor"))
   implementation(project(":core:l10n"))
+  implementation(project(":core:logger-crashlytics"))
+  implementation(project(":core:logger-debug"))
   implementation(project(":core:process-lifecycle"))
   implementation(project(":core:resource-state"))
   implementation(project(":core:resources-app"))
   implementation(project(":core:root-content"))
   implementation(project(":core:startup"))
+  implementation(project(":core:strict-mode"))
   implementation(project(":core:ui"))
 
   implementation(project(":data:character-impl"))
   implementation(project(":data:database-impl"))
+  implementation(project(":data:debug-impl"))
   implementation(project(":data:episode-impl"))
   implementation(project(":data:license-impl"))
   implementation(project(":data:locale-impl"))
@@ -89,6 +96,7 @@ dependencies {
   implementation(project(":data:theme-impl"))
 
   implementation(project(":ui:character-impl"))
+  implementation(project(":ui:debug-drawer"))
   implementation(project(":ui:episode-impl"))
   implementation(project(":ui:location-impl"))
   implementation(project(":ui:settings-impl"))
@@ -111,26 +119,12 @@ dependencies {
   implementation(libs.metrox.android)
   implementation(libs.metrox.viewmodel.compose)
 
-  debugImplementation(project(":core:coil-logger"))
-  debugImplementation(project(":core:logger-debug"))
-  debugImplementation(project(":core:strict-mode"))
-
-  debugImplementation(project(":data:debug-impl"))
-
-  debugImplementation(project(":ui:debug-drawer"))
-
-  releaseImplementation(project(":core:compose-diagnostic"))
-  releaseImplementation(project(":core:crashlytics"))
-  releaseImplementation(project(":core:logger-crashlytics"))
-
   compileOnly(project(":core:metro-common"))
 
   runtimeOnly(libs.androidx.compose.runtime.tracing)
   runtimeOnly(libs.androidx.profileinstaller)
 
   runtimeOnly(libs.leakcanary.plumber)
-
-  debugRuntimeOnly(libs.leakcanary)
 
   baselineProfile(project(":baseline-profile"))
 }

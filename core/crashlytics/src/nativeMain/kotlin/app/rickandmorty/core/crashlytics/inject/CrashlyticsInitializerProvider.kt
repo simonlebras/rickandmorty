@@ -1,0 +1,19 @@
+package app.rickandmorty.core.crashlytics.inject
+
+import app.rickandmorty.core.base.BuildFlags
+import app.rickandmorty.core.crashlytics.CrashlyticsInitializer
+import app.rickandmorty.core.startup.Initializer
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.BindingContainer
+import dev.zacsweers.metro.ContributesTo
+import dev.zacsweers.metro.ElementsIntoSet
+import dev.zacsweers.metro.Provides
+
+@BindingContainer
+@ContributesTo(AppScope::class)
+public object CrashlyticsInitializerProvider {
+  @Provides
+  @ElementsIntoSet
+  public fun provideCrashlyticsInitializer(): Set<Initializer> =
+    if (!BuildFlags.isDebug) setOf(CrashlyticsInitializer()) else emptySet()
+}

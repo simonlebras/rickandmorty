@@ -5,11 +5,8 @@ import co.touchlab.kermit.ExperimentalKermitApi
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
 import co.touchlab.kermit.crashlytics.CrashlyticsLogWriter
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesIntoSet
 
 @OptIn(ExperimentalKermitApi::class)
-@ContributesIntoSet(AppScope::class)
 internal class CrashlyticsLoggerInitializer : Initializer {
   override fun initialize() {
     with(Logger) {

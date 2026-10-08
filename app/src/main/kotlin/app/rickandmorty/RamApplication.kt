@@ -1,6 +1,9 @@
 package app.rickandmorty
 
 import android.app.Application
+import android.content.Context
+import app.rickandmorty.core.base.BuildFlags
+import app.rickandmorty.core.base.init
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.startup.Initializer
 import app.rickandmorty.inject.AppGraph
@@ -19,6 +22,12 @@ class RamApplication : Application(), MetroApplication, SingletonImageLoader.Fac
 
   override val appComponentProviders: MetroAppComponentProviders
     get() = appGraph
+
+  override fun attachBaseContext(base: Context) {
+    super.attachBaseContext(base)
+
+    BuildFlags.init(base)
+  }
 
   override fun onCreate() {
     super.onCreate()

@@ -8,6 +8,7 @@ kotlin {
   dependencies {
     api(libs.coil.core)
 
+    implementation(project(":core:base"))
     implementation(libs.kermit)
     implementation(libs.kermit.coil)
   }

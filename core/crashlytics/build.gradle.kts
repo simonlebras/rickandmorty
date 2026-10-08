@@ -8,11 +8,21 @@ plugins {
 kotlin {
   android { namespace = "app.rickandmorty.core.crashlytics" }
 
-  dependencies { api(project(":core:startup")) }
+  dependencies {
+    api(project(":core:startup"))
+
+    implementation(project(":core:base"))
+  }
 
   sourceSets {
     androidMain {
-      dependencies { implementation(libs.crashkios.crashlytics) }
+      dependencies {
+        implementation(project(":core:metro-common"))
+
+        implementation(project.dependencies.platform(libs.firebase.bom))
+        implementation(libs.crashkios.crashlytics)
+        implementation(libs.firebase.crashlytics)
+      }
     }
 
     nativeMain {

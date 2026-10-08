@@ -4,10 +4,7 @@ import app.rickandmorty.core.startup.Initializer
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.Severity
 import co.touchlab.kermit.platformLogWriter
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesIntoSet
 
-@ContributesIntoSet(AppScope::class)
 internal class DebugLoggerInitializer : Initializer {
   override fun initialize() {
     with(Logger) {

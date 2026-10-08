@@ -15,19 +15,15 @@ kotlin {
     api(project(":core:metro-common"))
     api(project(":core:resource-state"))
     api(project(":core:root-content"))
-
     api(project(":data:debug-api"))
-
     api(libs.coil.core)
 
+    implementation(project(":core:base"))
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
-
     implementation(libs.androidx.lifecycle.runtime.compose)
-
     implementation(libs.jetbrains.compose.animation)
     implementation(libs.jetbrains.compose.material3)
-
     implementation(libs.metrox.viewmodel.compose)
   }
 }

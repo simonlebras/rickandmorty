@@ -8,6 +8,7 @@ kotlin {
   dependencies {
     api(project(":core:startup"))
 
+    implementation(project(":core:base"))
     implementation(libs.kermit)
   }
 }
