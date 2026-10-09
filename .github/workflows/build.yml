@@ -18,12 +18,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up JDK
-        uses: actions/setup-java@v6
-        with:
-          distribution: 'zulu'
-          java-version-file: .github/.java-version
-
       - name: Run kempt
         uses: ZacSweers/kempt@main
         with:
@@ -32,9 +26,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    env:
-      ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD }}
-      ORG_GRADLE_PROJECT_RAM_RELEASE_KEY_PWD: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEY_PWD }}
 
     steps:
       - name: Checkout
@@ -45,30 +36,31 @@ jobs:
       - name: Check LFS files
         uses: actionsdesk/lfs-warning@v3.3
 
-      - name: Set up Gradle
-        uses: ./.github/actions/setup-gradle
+      - name: Cache Kotlin Toolchain
+        uses: actions/cache@v6
         with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+          path: ~/.cache/JetBrains/Kotlin
+          key: ${{ runner.os }}-kotlin-${{ hashFiles('kotlin', 'libs.versions.toml', '**/module.yaml', 'templates/*.yaml') }}
+          restore-keys: ${{ runner.os }}-kotlin-
 
       - name: Decrypt secrets
         uses: ./.github/actions/decrypt-secrets
         with:
           key: ${{ secrets.DECRYPT_KEY }}
+          keystore-password: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD }}
+          key-password: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEY_PWD }}
+
+      - name: Build
+        run: ./kotlin build --platform=android --platform=jvm
+
+      - name: Run tests
+        run: ./kotlin test --platform=jvm
+
+      - name: Package release bundle
+        run: ./kotlin package --module=app
 
       - name: Run checks
-        run: |
-          ./gradlew :build-logic:check \
-          buildHealth \
-          test \
-          :app:checkReleaseBadging \
-          :app:lintRelease
-
-      - name: Build all build type and flavor permutations
-        run: |
-          ./gradlew assemble \
-          -x :baseline-profile:pixel6api33AospatdSetup \
-          -Pandroidx.baselineprofile.skipgeneration
+        run: ./kotlin check badging licenses --module=app
 
       - name: Upload build outputs
         if: ${{ !cancelled() }}
@@ -76,111 +68,10 @@ jobs:
         with:
           name: build-outputs
           path: |
-            app/build/outputs
-
-      - name: Upload reports
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: reports
-          path: |
-            build/reports/dependency-analysis/build-health-report.txt
-            **/build/reports/lint-results-*.html
-            **/build/reports/screenshotTest/*
-
-      - name: Upload test results
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: test-results
-          path: |
-            **/build/test-results/*
+            build/tasks/_app_buildAndroidDebug/*.apk
+            build/tasks/_app_bundleAndroid/*.aab
+            build/tasks/_app_bundleAndroid/gradle-project/build/_app/outputs/mapping/release/mapping.txt
 
       - name: Clean secrets
         if: always()
         uses: ./.github/actions/clean-secrets
-
-  android-test-cfg:
-    needs: build
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-
-    steps:
-      - name: Set matrix
-        id: set-matrix
-        run: |
-          MATRIX='
-            {"device": "pixel6", "api-level": "33", "system-image-source": "aospatd"}
-          '
-          echo "matrix={\"include\":[${MATRIX//$'\n'/}]}" >> $GITHUB_OUTPUT
-
-  android-test-cfg-check:
-    needs: android-test-cfg
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check matrix configuration
-        run: |
-          matrix='${{ needs.android-test-cfg.outputs.matrix }}'
-          echo $matrix
-          echo $matrix | jq .
-
-  android-test:
-    needs: android-test-cfg
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.android-test-cfg.outputs.matrix) }}
-
-    steps:
-      - name: Enable KVM group perms
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
-          ls /dev/kvm
-
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Set up Gradle
-        uses: ./.github/actions/setup-gradle
-        with:
-          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
-          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
-
-      - name: Set ANDROID_USER_HOME
-        run: echo "ANDROID_USER_HOME=$HOME/.android" >> $GITHUB_ENV
-
-      - name: Accept licenses
-        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
-
-      - name: Cache AVD
-        if: ${{ (github.ref == 'refs/heads/main') }}
-        uses: actions/cache@v6
-        with:
-          path: |
-            ${{ env.ANDROID_USER_HOME }}/avd/gradle-managed/*
-            ${{ env.ANDROID_USER_HOME }}/adb*
-          key: ${{ runner.os }}-gmd-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
-
-      - name: Run instrumentation tests
-        run: |
-          ./gradlew ${{ matrix.device }}api${{ matrix.api-level }}${{ matrix.system-image-source }}Check \
-          -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect \
-          -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=none \
-          --no-parallel \
-          -Dorg.gradle.workers.max=1
-
-      - name: Upload test results
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: test-results-${{ matrix.device }}-${{ matrix.api-level }}-${{ matrix.system-image-source }}
-          path: |
-            **/build/reports/*
-            **/build/outputs/*/connected/*
-            **/out/failures/

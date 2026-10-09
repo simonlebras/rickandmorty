@@ -1,7 +1,6 @@
-# Gradle
-.gradle
+# Build outputs
 build
-/reports
+.gradle
 
 # Android
 local.properties
@@ -18,3 +17,4 @@ google-services.json
 
 # Keystore
 keystore/release.jks
+keystore.properties

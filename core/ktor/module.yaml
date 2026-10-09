@@ -1,0 +1,25 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+aliases:
+  - jvmAndAndroid: [jvm, android]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - $libs.ktor.client.core: exported
+
+dependencies@jvmAndAndroid:
+  - $libs.ktor.client.okhttp
+
+dependencies@native:
+  - $libs.ktor.client.darwin
+
+settings:
+  android:
+    namespace: app.rickandmorty.core.ktor

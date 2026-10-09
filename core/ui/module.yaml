@@ -1,0 +1,31 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/compose.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/startup: exported
+  - //data/data-character-api: exported
+  - $libs.androidx.navigation3.runtime: exported
+  - $libs.androidx.paging.compose: exported
+  - $libs.haze: exported
+  - $libs.jetbrains.compose.material3.adaptivenavigationsuite: exported
+  - $libs.jetbrains.navigation3.ui: exported
+  - $libs.kotlinx.collectionsimmutable: exported
+  - //core/design-system
+  - //core/l10n
+  - $libs.haze.glass
+  - $libs.jetbrains.compose.material3.adaptive.navigation3
+
+dependencies@android:
+  - $libs.androidx.activity.compose
+
+settings:
+  android:
+    namespace: app.rickandmorty.core.ui

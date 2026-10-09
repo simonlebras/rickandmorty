@@ -1,0 +1,24 @@
+product:
+  type: kmp/lib
+  platforms: [android, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/startup: exported
+  - //core/base
+  - $libs.kermit
+
+dependencies@android:
+  - $libs.kermit.crashlytics
+
+dependencies@native:
+  - $libs.kermit.crashlytics
+
+settings:
+  android:
+    namespace: app.rickandmorty.core.logger.crashlytics

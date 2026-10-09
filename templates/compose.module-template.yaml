@@ -1,0 +1,5 @@
+settings:
+  compose:
+    enabled: true
+    # renovate: datasource=maven depName=org.jetbrains.compose.runtime:runtime
+    version: 1.13.0-alpha02

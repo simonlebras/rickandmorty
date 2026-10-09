@@ -1,0 +1,7 @@
+settings:
+  android:
+    compileSdk:
+      apiLevel: 37
+      minorApiLevel: 2
+    minSdk: 33
+    targetSdk: 37

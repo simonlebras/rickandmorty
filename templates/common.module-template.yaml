@@ -1,0 +1,31 @@
+settings:
+  kotlin:
+    # renovate: datasource=maven depName=org.jetbrains.kotlin:kotlin-stdlib
+    version: 2.5.0-Beta1
+    progressiveMode: true
+    allWarningsAsErrors: true
+    freeCompilerArgs:
+      - -Xcollection-literals
+      - -Xcompanion-blocks-and-extensions
+      - -Xcontext-sensitive-resolution
+      - -Xname-based-destructuring=complete
+      - -Xexpect-actual-classes
+    ksp:
+      # renovate: datasource=maven depName=com.google.devtools.ksp:symbol-processing-api
+      version: 2.3.12
+  jvm:
+    release: 17
+
+settings@jvm:
+  kotlin:
+    freeCompilerArgs:
+      - -jvm-default=no-compatibility
+
+settings@android:
+  kotlin:
+    freeCompilerArgs:
+      - -jvm-default=no-compatibility
+
+settings@native:
+  kotlin:
+    allWarningsAsErrors: false

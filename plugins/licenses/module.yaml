@@ -1,0 +1,9 @@
+product: jvm/amper-plugin
+
+description: Generates the AboutLibraries licenses JSON from the Android runtime dependencies.
+
+dependencies:
+  - $libs.kotlinx.serialization.json
+
+pluginInfo:
+  settingsClass: app.rickandmorty.plugins.licenses.LicensesSettings

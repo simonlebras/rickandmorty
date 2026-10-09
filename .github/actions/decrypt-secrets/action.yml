@@ -1,10 +1,16 @@
 name: Decrypt secrets
 
-description: Decrypt secrets
+description: Decrypt secrets and write the release signing configuration
 
 inputs:
   key:
     description: Decrypt key
+    required: true
+  keystore-password:
+    description: Release keystore password
+    required: true
+  key-password:
+    description: Release key password
     required: true
 
 runs:
@@ -14,4 +20,10 @@ runs:
     - run: |
         ./scripts/decrypt-secret.sh -k ${{ inputs.key }} firebase/google-services.gpg app/google-services.json
         ./scripts/decrypt-secret.sh -k ${{ inputs.key }} keystore/release.gpg keystore/release.jks
+        cat > app/keystore.properties <<EOF
+        storeFile=../keystore/release.jks
+        storePassword=${{ inputs.keystore-password }}
+        keyAlias=release
+        keyPassword=${{ inputs.key-password }}
+        EOF
       shell: bash

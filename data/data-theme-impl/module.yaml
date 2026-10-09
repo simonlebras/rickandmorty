@@ -1,0 +1,27 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/coroutines: exported
+  - //core/datastore: exported
+  - //data/data-theme-api: exported
+  - $libs.kotlinx.serialization.protobuf: exported
+
+dependencies@android:
+  - //core/process-lifecycle: exported
+  - //core/startup: exported
+  - //core/base
+  - $libs.androidx.core
+
+settings:
+  android:
+    namespace: app.rickandmorty.data.theme.impl
+  kotlin:
+    serialization: enabled

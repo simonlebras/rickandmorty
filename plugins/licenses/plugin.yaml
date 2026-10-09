@@ -1,0 +1,24 @@
+tasks:
+  check:
+    action: !app.rickandmorty.plugins.licenses.checkLicenses
+      projectRoot: ${project.rootDir}
+      moduleName: ${module.name}
+      allowedLicenses: ${pluginSettings.allowedLicenses}
+      output: ${pluginSettings.output}
+      workDir: ${taskOutputDir}
+
+  update:
+    action: !app.rickandmorty.plugins.licenses.updateLicenses
+      projectRoot: ${project.rootDir}
+      moduleName: ${module.name}
+      allowedLicenses: ${pluginSettings.allowedLicenses}
+      output: ${pluginSettings.output}
+      workDir: ${taskOutputDir}
+
+checks:
+  - name: licenses
+    performedBy: check
+
+commands:
+  - name: updateLicenses
+    performedBy: update

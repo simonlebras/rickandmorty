@@ -1,0 +1,30 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/compose.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/app-info: exported
+  - //core/coroutines: exported
+  - //core/metro-common: exported
+  - //core/resource-state: exported
+  - //core/root-content: exported
+  - //data/data-debug-api: exported
+  - $libs.coil.core: exported
+  - //core/base
+  - //core/design-system
+  - //core/l10n
+  - $libs.androidx.lifecycle.runtime.compose
+  - $libs.jetbrains.compose.animation
+  - $libs.jetbrains.compose.material3
+  - $libs.metrox.viewmodel.compose
+
+settings:
+  android:
+    namespace: app.rickandmorty.ui.debugdrawer

@@ -1,0 +1,17 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies@android:
+  - //core/metro-common: exported
+  - $libs.androidx.core
+
+settings:
+  android:
+    namespace: app.rickandmorty.core.appinfo

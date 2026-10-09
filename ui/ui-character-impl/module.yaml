@@ -1,0 +1,28 @@
+product:
+  type: kmp/lib
+  platforms: [android, jvm, iosArm64, iosSimulatorArm64]
+
+apply:
+  - //templates/common.module-template.yaml
+  - //templates/android.module-template.yaml
+  - //templates/lib.module-template.yaml
+  - //templates/compose.module-template.yaml
+  - //templates/metro.module-template.yaml
+
+dependencies:
+  - //core/metro-common: exported
+  - //core/navigation: exported
+  - //data/data-character-api: exported
+  - //ui/ui-character-api: exported
+  - //core/design-system
+  - //core/l10n
+  - //core/ui
+  - //core/ui-tooling-preview
+  - //ui/ui-settings-api
+  - $libs.androidx.paging.compose
+  - $libs.jetbrains.compose.material3.adaptive.navigation3
+  - $libs.metrox.viewmodel.compose
+
+settings:
+  android:
+    namespace: app.rickandmorty.ui.character

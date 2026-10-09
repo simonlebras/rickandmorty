@@ -20,3 +20,8 @@
 -assumevalues public class androidx.compose.runtime.ComposeRuntimeFlags {
     static boolean isLinkBufferComposerEnabled return true;
 }
+
+# Debug-only code is guarded by BuildFlags.isDebug, which is always false in release builds.
+-assumevalues class app.rickandmorty.core.base.BuildFlags {
+    public static boolean isDebug() return false;
+}
