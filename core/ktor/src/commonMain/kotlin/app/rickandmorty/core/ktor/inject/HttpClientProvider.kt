@@ -14,6 +14,7 @@ import io.ktor.client.engine.HttpClientEngineFactory
 public object HttpClientProvider {
   @Provides
   @SingleIn(AppScope::class)
+  @BaseHttpClient
   public fun provideHttpClient(
     httpClientEngineFactory: HttpClientEngineFactory<HttpClientEngineConfig>,
   ): HttpClient = HttpClient(httpClientEngineFactory) { engine { pipelining = true } }
