@@ -9,6 +9,7 @@ kotlin {
   android { namespace = "app.rickandmorty.core.coil" }
 
   dependencies {
+    api(project(":core:ktor"))
     api(project(":core:metro-common"))
 
     api(libs.coil.core)

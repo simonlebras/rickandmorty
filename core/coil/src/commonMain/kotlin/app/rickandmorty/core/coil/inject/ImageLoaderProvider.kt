@@ -1,5 +1,6 @@
 package app.rickandmorty.core.coil.inject
 
+import app.rickandmorty.core.ktor.inject.BaseHttpClient
 import coil3.ImageLoader
 import coil3.PlatformContext
 import coil3.annotation.ExperimentalCoilApi
@@ -21,7 +22,7 @@ public object ImageLoaderProvider {
   @SingleIn(AppScope::class)
   public fun provideImageLoader(
     context: PlatformContext,
-    httpClient: HttpClient,
+    @BaseHttpClient httpClient: HttpClient,
     logger: Logger? = null,
   ): ImageLoader =
     ImageLoader.Builder(context)
