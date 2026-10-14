@@ -2,13 +2,13 @@ package app.rickandmorty.gradle.util
 
 import app.rickandmorty.gradle.dsl.the
 import app.rickandmorty.gradle.dsl.withType
+import com.gradleup.tapmoc.configureJavaCompatibility
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinNativeCompilerOptions
 import org.jetbrains.kotlin.gradle.plugin.KotlinBasePlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-import tapmoc.configureJavaCompatibility
 
 internal fun Project.configureKotlin() {
   val libs = the<LibrariesForLibs>()
