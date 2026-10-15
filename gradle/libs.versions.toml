@@ -1,6 +1,6 @@
 [versions]
 aboutlibraries = "15.3.0"
-android-plugin = "9.5.0-alpha09"
+android-plugin = "9.5.0-alpha10"
 android-security-lints = "1.0.4"
 android-tools = "32.5.0-alpha09"
 androidx-activity = "1.14.0-alpha03"
