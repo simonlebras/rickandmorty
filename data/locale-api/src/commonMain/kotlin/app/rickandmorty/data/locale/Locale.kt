@@ -1,5 +1,8 @@
 package app.rickandmorty.data.locale
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 public class Locale(languageTag: String) {
   public val platformLocale: PlatformLocale = platformLocaleDelegate.fromLanguageTag(languageTag)
 

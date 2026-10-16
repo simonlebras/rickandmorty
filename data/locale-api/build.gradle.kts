@@ -5,6 +5,8 @@ plugins {
 
 kotlin {
   dependencies {
+    api(libs.androidx.compose.runtime.annotation)
+
     api(libs.kotlinx.collectionsimmutable)
     api(libs.kotlinx.coroutines.core)
   }

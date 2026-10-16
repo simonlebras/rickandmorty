@@ -1,7 +1,9 @@
 package app.rickandmorty.data.character
 
+import androidx.compose.runtime.Immutable
 import app.rickandmorty.core.base.findByNameOrElse
 
+@Immutable
 public data class Character(
   val id: String,
   val name: String,

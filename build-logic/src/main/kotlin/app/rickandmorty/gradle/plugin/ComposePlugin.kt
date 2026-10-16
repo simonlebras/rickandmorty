@@ -18,6 +18,11 @@ public class ComposePlugin : Plugin<Project> {
       apply(libs.plugins.compose.compiler, libs.plugins.compose.multiplatform)
 
       configure<ComposeCompilerGradlePluginExtension> {
+        stabilityConfigurationFiles.add(
+          @Suppress("UnstableApiUsage")
+          isolated.rootProject.projectDirectory.file("compose-stability.conf"),
+        )
+
         val enableComposeCompilerReports =
           providers.getBooleanProperty(name = "ram.enableComposeCompilerReports", default = false)
         if (enableComposeCompilerReports) {
