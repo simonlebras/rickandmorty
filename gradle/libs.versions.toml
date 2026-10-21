@@ -56,7 +56,7 @@ okio = "3.18.2"
 slack-compose-lints = "1.6.1"
 store = "5.1.0-beta01"
 tapmoc = "0.5.0"
-testparameterinjector = "1.24"
+testparameterinjector = "1.25"
 truth = "1.4.5"
 turbine = "1.2.1"
 
