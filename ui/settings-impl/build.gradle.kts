@@ -4,6 +4,8 @@ plugins {
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.metro)
+
+  alias(libs.plugins.snapshottable)
 }
 
 kotlin {
@@ -11,9 +13,9 @@ kotlin {
 
   dependencies {
     api(project(":core:app-info"))
+    api(project(":core:coroutines"))
     api(project(":core:metro-common"))
     api(project(":core:navigation"))
-    api(project(":core:resource-state"))
 
     api(project(":data:license-api"))
     api(project(":data:locale-api"))
@@ -21,15 +23,17 @@ kotlin {
 
     api(project(":ui:settings-api"))
 
+    api(libs.mutator.coroutines)
+
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
     implementation(project(":core:ui"))
 
-    implementation(libs.androidx.lifecycle.runtime.compose)
-
     implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
 
     implementation(libs.metrox.viewmodel.compose)
+
+    implementation(libs.mutator.compose)
   }
 }
 

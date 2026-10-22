@@ -8,6 +8,7 @@ plugins {
   alias(libs.plugins.rickandmorty.metro)
 
   alias(libs.plugins.androidx.baselineprofile)
+  alias(libs.plugins.snapshottable)
 }
 
 android {
@@ -73,7 +74,6 @@ dependencies {
   implementation(project(":core:ktor"))
   implementation(project(":core:l10n"))
   implementation(project(":core:process-lifecycle"))
-  implementation(project(":core:resource-state"))
   implementation(project(":core:resources-app"))
   implementation(project(":core:root-content"))
   implementation(project(":core:startup"))
@@ -111,6 +111,9 @@ dependencies {
   implementation(libs.metrox.android)
   implementation(libs.metrox.viewmodel.compose)
 
+  implementation(libs.mutator.core)
+  implementation(libs.mutator.coroutines)
+
   debugImplementation(project(":core:coil-logger"))
   debugImplementation(project(":core:logger-debug"))
   debugImplementation(project(":core:strict-mode"))
@@ -142,6 +145,7 @@ dependencyAnalysis {
         libs.jetbrains.compose.material3.adaptive.navigation3,
         libs.jetbrains.compose.material3.adaptivenavigationsuite,
         libs.jetbrains.navigation3.ui,
+        libs.mutator.core,
       )
       exclude(
         ":core:compose-diagnostic",
@@ -150,5 +154,6 @@ dependencyAnalysis {
         ":core:logger-crashlytics",
       )
     }
+    onRuntimeOnly { exclude(":data:locale-impl") }
   }
 }

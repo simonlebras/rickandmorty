@@ -22,29 +22,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.dismiss
 import app.rickandmorty.core.l10n.resources.settings_theme_title
 import app.rickandmorty.core.ui.ReportDrawnWhen
-import app.rickandmorty.data.theme.NightMode
 import app.rickandmorty.ui.settings.common.util.label
+import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ThemeSettingsDialog(
   onDismiss: () -> Unit,
-  viewModel: ThemeSettingsViewModel = metroViewModel(),
+  stateHolder: ThemeSettingsStateHolder = metroViewModel<ThemeSettingsViewModel>(),
 ) {
-  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+  val uiState = stateHolder.produceStateWithLifecycle()
 
   ReportDrawnWhen { !uiState.isLoading }
 
   ThemeSettingsDialog(
     uiState = uiState,
     onDismiss = onDismiss,
-    onSelectNightMode = viewModel::setNightMode,
+    actions = stateHolder.accept,
   )
 }
 
@@ -52,26 +51,26 @@ internal fun ThemeSettingsDialog(
 private fun ThemeSettingsDialog(
   uiState: ThemeSettingsUiState,
   onDismiss: () -> Unit,
-  onSelectNightMode: (NightMode) -> Unit,
+  actions: (ThemeSettingsAction) -> Unit,
 ) {
   AlertDialog(
     onDismissRequest = onDismiss,
     title = { Text(text = stringResource(L10nRes.string.settings_theme_title)) },
     text = {
       Column(modifier = Modifier.selectableGroup().verticalScroll(rememberScrollState())) {
-        when {
-          uiState.isLoading -> {
+        when (val theme = uiState.theme) {
+          null -> {
             CircularProgressIndicator(modifier = Modifier.padding(vertical = 16.dp))
           }
 
           else -> {
-            val currentNightMode = uiState.theme()!!.nightMode
-            uiState.availableNightModes()!!.forEach { nightMode ->
+            val currentNightMode = theme.nightMode
+            uiState.availableNightModes.forEach { nightMode ->
               key(nightMode) {
                 ThemeItem(
                   text = stringResource(nightMode.label),
                   selected = nightMode == currentNightMode,
-                  onClick = { onSelectNightMode(nightMode) },
+                  onClick = { actions(ThemeSettingsAction.SelectNightMode(nightMode)) },
                 )
               }
             }

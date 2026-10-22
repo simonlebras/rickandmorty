@@ -4,9 +4,9 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.Flow
 
 internal interface PlatformLocaleManager {
-  fun getAppLocale(): Flow<Locale?>
+  fun getAppLocale(): Flow<AppLocale>
 
-  suspend fun setAppLocale(locale: Locale?)
+  suspend fun setAppLocale(appLocale: AppLocale)
 
-  suspend fun getAvailableAppLocales(): ImmutableList<Locale>
+  suspend fun getAvailableAppLocales(): ImmutableList<AppLocale.Specific>
 }

@@ -14,7 +14,6 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItem
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -32,7 +31,6 @@ import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.BackNavButton
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.SettingsHeader
@@ -45,7 +43,6 @@ import app.rickandmorty.core.l10n.resources.settings_app_version_copy_tap_action
 import app.rickandmorty.core.l10n.resources.settings_app_version_title
 import app.rickandmorty.core.l10n.resources.settings_dynamic_color_title
 import app.rickandmorty.core.l10n.resources.settings_general_title
-import app.rickandmorty.core.l10n.resources.settings_language_system_default
 import app.rickandmorty.core.l10n.resources.settings_language_tap_action
 import app.rickandmorty.core.l10n.resources.settings_language_title
 import app.rickandmorty.core.l10n.resources.settings_license_summary
@@ -56,12 +53,13 @@ import app.rickandmorty.core.l10n.resources.settings_theme_title
 import app.rickandmorty.core.l10n.resources.settings_title
 import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
-import app.rickandmorty.data.locale.Locale
+import app.rickandmorty.data.locale.AppLocale
 import app.rickandmorty.data.theme.Theme
 import app.rickandmorty.ui.settings.common.SettingsContentType
 import app.rickandmorty.ui.settings.common.util.label
 import app.rickandmorty.ui.settings.common.util.setPlainText
 import app.rickandmorty.ui.settings.theme.ThemeSettingsDialog
+import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -73,9 +71,9 @@ internal fun MainSettingsScreen(
   onNavigateUp: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
   onNavigateToLicenseSettings: () -> Unit,
-  viewModel: MainSettingsViewModel = metroViewModel(),
+  stateHolder: MainSettingsStateHolder = metroViewModel<MainSettingsViewModel>(),
 ) {
-  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+  val uiState = stateHolder.produceStateWithLifecycle()
 
   var showThemeSettingsDialog by rememberSaveable { mutableStateOf(false) }
 
@@ -85,7 +83,7 @@ internal fun MainSettingsScreen(
     uiState = uiState,
     selectedItem = selectedItem,
     onNavigateUp = onNavigateUp,
-    onUpdateUseDynamicColor = viewModel::setUseDynamicColor,
+    actions = stateHolder.accept,
     onNavigateToThemeSettings = { showThemeSettingsDialog = true },
     onNavigateToLanguageSettings = onNavigateToLanguageSettings,
     onNavigateToLicenseSettings = onNavigateToLicenseSettings,
@@ -101,7 +99,7 @@ private fun MainSettingsScreen(
   uiState: MainSettingsUiState,
   selectedItem: MainSettingsItem?,
   onNavigateUp: () -> Unit,
-  onUpdateUseDynamicColor: (Boolean) -> Unit,
+  actions: (MainSettingsAction) -> Unit,
   onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
   onNavigateToLicenseSettings: () -> Unit,
@@ -113,8 +111,10 @@ private fun MainSettingsScreen(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = { MainSettingsAppBar(onNavigateUp = onNavigateUp, scrollBehavior = scrollBehavior) },
   ) { contentPadding ->
+    val theme = uiState.theme
+    val appLocale = uiState.appLocale
     when {
-      uiState.isLoading -> {
+      theme == null || appLocale == null -> {
         Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
       }
 
@@ -125,10 +125,12 @@ private fun MainSettingsScreen(
         ) {
           generalSettings(
             selectedItem = selectedItem,
-            currentTheme = uiState.theme()!!,
-            currentAppLocale = uiState.appLocale(),
+            currentTheme = theme,
+            currentAppLocale = appLocale,
             isDynamicColorAvailable = isDynamicColorAvailable,
-            onUpdateUseDynamicColor = onUpdateUseDynamicColor,
+            onUpdateUseDynamicColor = { useDynamicColor ->
+              actions(MainSettingsAction.SetUseDynamicColor(useDynamicColor))
+            },
             onNavigateToThemeSettings = onNavigateToThemeSettings,
             onNavigateToLanguageSettings = onNavigateToLanguageSettings,
           )
@@ -161,7 +163,7 @@ private fun MainSettingsAppBar(onNavigateUp: () -> Unit, scrollBehavior: TopAppB
 private fun LazyListScope.generalSettings(
   selectedItem: MainSettingsItem?,
   currentTheme: Theme,
-  currentAppLocale: Locale?,
+  currentAppLocale: AppLocale,
   isDynamicColorAvailable: Boolean,
   onUpdateUseDynamicColor: (Boolean) -> Unit,
   onNavigateToThemeSettings: () -> Unit,
@@ -207,7 +209,7 @@ private fun LazyListScope.generalSettings(
 
   item(key = MainSettingsItem.Language, contentType = SettingsContentType.ListItem) {
     val clickLabel = stringResource(L10nRes.string.settings_language_tap_action)
-    ListItem(
+    SettingsItem(
       selected = selectedItem == MainSettingsItem.Language,
       onClick = onNavigateToLanguageSettings,
       modifier =
@@ -218,10 +220,7 @@ private fun LazyListScope.generalSettings(
           }
         },
       supportingContent = {
-        val localeName =
-          currentAppLocale?.getLocalizedName()
-            ?: stringResource(L10nRes.string.settings_language_system_default)
-        Text(text = localeName)
+        Text(text = currentAppLocale.label())
       },
     ) {
       Text(text = stringResource(L10nRes.string.settings_language_title))
@@ -243,7 +242,7 @@ private fun LazyListScope.aboutSettings(
 
   item(key = MainSettingsItem.Licenses, contentType = SettingsContentType.ListItem) {
     val clickLabel = stringResource(L10nRes.string.settings_license_tap_action)
-    ListItem(
+    SettingsItem(
       selected = selectedItem == MainSettingsItem.Licenses,
       onClick = onNavigateToLicenseSettings,
       modifier =

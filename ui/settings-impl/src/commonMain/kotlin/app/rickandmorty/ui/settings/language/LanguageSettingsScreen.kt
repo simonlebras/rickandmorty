@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
@@ -21,16 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.semantics.Role
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.BackNavButton
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
-import app.rickandmorty.core.l10n.resources.settings_language_system_default
 import app.rickandmorty.core.l10n.resources.settings_language_title
 import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
-import app.rickandmorty.data.locale.Locale
+import app.rickandmorty.data.locale.AppLocale
 import app.rickandmorty.ui.settings.common.SettingsContentType
+import app.rickandmorty.ui.settings.common.util.label
+import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
@@ -38,9 +37,9 @@ import org.jetbrains.compose.resources.stringResource
 internal fun LanguageSettingsScreen(
   onNavigateUp: () -> Unit,
   showBackButton: Boolean = true,
-  viewModel: LanguageSettingsViewModel = metroViewModel(),
+  stateHolder: LanguageSettingsStateHolder = metroViewModel<LanguageSettingsViewModel>(),
 ) {
-  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+  val uiState = stateHolder.produceStateWithLifecycle()
 
   ReportDrawnWhen { !uiState.isLoading }
 
@@ -48,10 +47,7 @@ internal fun LanguageSettingsScreen(
     uiState = uiState,
     onNavigateUp = onNavigateUp,
     showBackButton = showBackButton,
-    onSelectLocale = { locale ->
-      viewModel.setAppLocale(locale)
-      onNavigateUp()
-    },
+    actions = stateHolder.accept,
   )
 }
 
@@ -60,8 +56,13 @@ private fun LanguageSettingsScreen(
   uiState: LanguageSettingsUiState,
   onNavigateUp: () -> Unit,
   showBackButton: Boolean,
-  onSelectLocale: (Locale?) -> Unit,
+  actions: (LanguageSettingsAction) -> Unit,
 ) {
+  val onSelectLocale: (AppLocale) -> Unit = { appLocale ->
+    actions(LanguageSettingsAction.SelectLocale(appLocale))
+    onNavigateUp()
+  }
+
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
   HazeScaffold(
@@ -74,8 +75,10 @@ private fun LanguageSettingsScreen(
       )
     },
   ) { contentPadding ->
+    val appLocale = uiState.appLocale
+    val availableAppLocales = uiState.availableAppLocales
     when {
-      uiState.isLoading -> {
+      appLocale == null || availableAppLocales == null -> {
         Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
       }
 
@@ -84,16 +87,15 @@ private fun LanguageSettingsScreen(
           modifier = Modifier.fillMaxSize().selectableGroup(),
           contentPadding = contentPadding,
         ) {
-          val currentAppLocale = uiState.appLocale()
-
-          systemDefault(currentAppLocale = currentAppLocale, onSelectLocale = onSelectLocale)
-
-          val availableAppLocales = uiState.availableAppLocales()!!
-          items(items = availableAppLocales, key = { locale -> locale.toLanguageTag() }) { locale ->
+          items(
+            items = availableAppLocales,
+            key = AppLocale::key,
+            contentType = { SettingsContentType.ListItem },
+          ) { option ->
             LocaleItem(
-              text = locale.getLocalizedName(),
-              selected = locale == currentAppLocale,
-              onClick = { onSelectLocale(locale) },
+              text = option.label(),
+              selected = option == appLocale,
+              onClick = { onSelectLocale(option) },
             )
           }
         }
@@ -124,19 +126,6 @@ private fun LanguageSettingsAppBar(
   )
 }
 
-private fun LazyListScope.systemDefault(
-  currentAppLocale: Locale?,
-  onSelectLocale: (Locale?) -> Unit,
-) {
-  item(key = "system_default", contentType = SettingsContentType.ListItem) {
-    LocaleItem(
-      text = stringResource(L10nRes.string.settings_language_system_default),
-      selected = currentAppLocale == null,
-      onClick = { onSelectLocale(null) },
-    )
-  }
-}
-
 @Composable
 private fun LocaleItem(text: String, selected: Boolean, onClick: () -> Unit) {
   ListItem(
@@ -148,3 +137,10 @@ private fun LocaleItem(text: String, selected: Boolean, onClick: () -> Unit) {
     Text(text = text)
   }
 }
+
+private val AppLocale.key: String
+  get() =
+    when (this) {
+      AppLocale.System -> "system"
+      is AppLocale.Specific -> languageTag
+    }

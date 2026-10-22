@@ -26,3 +26,24 @@ public fun SettingsItem(
     content()
   }
 }
+
+@Composable
+public fun SettingsItem(
+  selected: Boolean,
+  onClick: () -> Unit,
+  modifier: Modifier = Modifier,
+  supportingContent: @Composable (() -> Unit)? = null,
+  trailingContent: @Composable (() -> Unit)? = null,
+  content: @Composable () -> Unit,
+) {
+  ListItem(
+    selected = selected,
+    onClick = onClick,
+    modifier = modifier,
+    supportingContent = supportingContent,
+    trailingContent = trailingContent,
+    colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+  ) {
+    content()
+  }
+}

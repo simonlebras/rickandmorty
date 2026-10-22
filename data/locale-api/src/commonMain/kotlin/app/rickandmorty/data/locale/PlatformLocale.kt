@@ -1,10 +1,8 @@
 package app.rickandmorty.data.locale
 
-public expect class PlatformLocale
+internal expect class PlatformLocale
 
 internal expect fun PlatformLocale.getLocalizedName(): String
-
-internal expect fun PlatformLocale.getLanguageTag(): String
 
 internal fun interface PlatformLocaleDelegate {
   fun fromLanguageTag(languageTag: String): PlatformLocale

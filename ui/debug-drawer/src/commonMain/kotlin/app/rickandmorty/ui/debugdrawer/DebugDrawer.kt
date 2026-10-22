@@ -25,7 +25,6 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.designsystem.component.SettingsHeader
 import app.rickandmorty.core.designsystem.component.SettingsItem
@@ -41,21 +40,20 @@ import app.rickandmorty.core.l10n.resources.debug_title
 import app.rickandmorty.core.l10n.resources.debug_ui_debugging_title
 import app.rickandmorty.core.l10n.resources.debug_version_title
 import app.rickandmorty.data.debug.DebugSettings
+import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DebugDrawer(
-  viewModel: DebugDrawerViewModel = metroViewModel(),
+  stateHolder: DebugDrawerStateHolder = metroViewModel<DebugDrawerViewModel>(),
   content: @Composable () -> Unit,
 ) {
-  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+  val uiState = stateHolder.produceStateWithLifecycle()
 
   DebugDrawer(
     uiState = uiState,
-    onKeylineOverlayEnabledChange = viewModel::setKeylineOverlayEnabled,
-    onLookaheadDebuggingEnabledChange = viewModel::setLookaheadDebuggingEnabled,
-    onClearImageCache = viewModel::clearImageCache,
+    actions = stateHolder.accept,
     content = content,
   )
 }
@@ -64,9 +62,7 @@ internal fun DebugDrawer(
 @Composable
 private fun DebugDrawer(
   uiState: DebugDrawerUiState,
-  onKeylineOverlayEnabledChange: (Boolean) -> Unit,
-  onLookaheadDebuggingEnabledChange: (Boolean) -> Unit,
-  onClearImageCache: () -> Unit,
+  actions: (DebugDrawerAction) -> Unit,
   content: @Composable () -> Unit,
 ) {
   // The layout direction is inverted so that the drawer opens from the end edge, keeping the
@@ -84,16 +80,20 @@ private fun DebugDrawer(
         CompositionLocalProvider(LocalLayoutDirection provides originalLayoutDirection) {
           DebugDrawerSheet(
             uiState = uiState,
-            onKeylineOverlayEnabledChange = onKeylineOverlayEnabledChange,
-            onLookaheadDebuggingEnabledChange = onLookaheadDebuggingEnabledChange,
-            onClearImageCache = onClearImageCache,
+            onKeylineOverlayEnabledChange = { enabled ->
+              actions(DebugDrawerAction.SetKeylineOverlayEnabled(enabled))
+            },
+            onLookaheadDebuggingEnabledChange = { enabled ->
+              actions(DebugDrawerAction.SetLookaheadDebuggingEnabled(enabled))
+            },
+            onClearImageCache = { actions(DebugDrawerAction.ClearImageCache) },
           )
         }
       },
     ) {
       CompositionLocalProvider(LocalLayoutDirection provides originalLayoutDirection) {
         Box(modifier = Modifier.fillMaxSize()) {
-          val settings = uiState.debugSettings()
+          val settings = uiState.debugSettings
 
           LookaheadAnimationVisualDebugging(
             isEnabled = settings?.lookaheadDebuggingEnabled == true,
@@ -124,8 +124,8 @@ private fun DebugDrawerSheet(
       modifier = Modifier.padding(16.dp).semantics { heading() },
     )
 
-    when {
-      uiState.isLoading -> {
+    when (val debugSettings = uiState.debugSettings) {
+      null -> {
         Loader(modifier = Modifier.fillMaxSize().wrapContentSize())
       }
 
@@ -138,7 +138,7 @@ private fun DebugDrawerSheet(
           )
 
           uiDebugging(
-            settings = uiState.debugSettings()!!,
+            settings = debugSettings,
             onKeylineOverlayEnabledChange = onKeylineOverlayEnabledChange,
             onLookaheadDebuggingEnabledChange = onLookaheadDebuggingEnabledChange,
           )

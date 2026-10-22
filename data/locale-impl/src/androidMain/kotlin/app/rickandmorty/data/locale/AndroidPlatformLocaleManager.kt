@@ -12,6 +12,7 @@ import app.rickandmorty.core.coroutines.inject.IODispatcher
 import app.rickandmorty.core.metro.AppContext
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
+import java.util.Locale as JavaLocale
 import kotlin.coroutines.CoroutineContext
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -29,14 +30,14 @@ internal class AndroidPlatformLocaleManager(
   @AppContext private val context: Context,
   @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : PlatformLocaleManager {
-  override fun getAppLocale(): Flow<Locale?> {
+  override fun getAppLocale(): Flow<AppLocale> {
     return callbackFlow {
-      trySend(AppCompatDelegate.getApplicationLocales().toLocale())
+      trySend(AppCompatDelegate.getApplicationLocales().toAppLocale())
 
       val receiver =
         object : BroadcastReceiver() {
           override fun onReceive(context: Context, intent: Intent) {
-            trySend(AppCompatDelegate.getApplicationLocales().toLocale())
+            trySend(AppCompatDelegate.getApplicationLocales().toAppLocale())
           }
         }
       context.registerReceiver(
@@ -49,15 +50,17 @@ internal class AndroidPlatformLocaleManager(
       .distinctUntilChanged()
   }
 
-  override suspend fun setAppLocale(locale: Locale?) {
+  override suspend fun setAppLocale(appLocale: AppLocale) {
     val localeList =
-      locale?.let { LocaleListCompat.forLanguageTags(it.toLanguageTag()) }
-        ?: LocaleListCompat.getEmptyLocaleList()
+      when (appLocale) {
+        AppLocale.System -> LocaleListCompat.getEmptyLocaleList()
+        is AppLocale.Specific -> LocaleListCompat.forLanguageTags(appLocale.languageTag)
+      }
     AppCompatDelegate.setApplicationLocales(localeList)
   }
 
   @SuppressLint("DiscouragedApi")
-  override suspend fun getAvailableAppLocales(): ImmutableList<Locale> {
+  override suspend fun getAvailableAppLocales(): ImmutableList<AppLocale.Specific> {
     return withContext(ioDispatcher) {
       val resources = context.resources
       val localeConfigFileId =
@@ -66,7 +69,7 @@ internal class AndroidPlatformLocaleManager(
         buildList {
           while (parser.eventType != XmlPullParser.END_DOCUMENT) {
             if (parser.eventType == XmlPullParser.START_TAG && parser.name == "locale") {
-              add(Locale(parser.getAttributeValue(0)))
+              add(AppLocale.Specific(normalizeLanguageTag(parser.getAttributeValue(0))))
             }
             parser.next()
           }
@@ -77,6 +80,9 @@ internal class AndroidPlatformLocaleManager(
   }
 }
 
-private fun LocaleListCompat.toLocale(): Locale? {
-  return get(0)?.let { Locale(it.toLanguageTag()) }
+private fun LocaleListCompat.toAppLocale(): AppLocale {
+  return get(0)?.let { AppLocale.Specific(it.toLanguageTag()) } ?: AppLocale.System
 }
+
+private fun normalizeLanguageTag(languageTag: String): String =
+  JavaLocale.forLanguageTag(languageTag).toLanguageTag()

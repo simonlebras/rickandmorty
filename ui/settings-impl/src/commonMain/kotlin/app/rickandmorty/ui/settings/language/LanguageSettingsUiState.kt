@@ -1,17 +1,28 @@
 package app.rickandmorty.ui.settings.language
 
-import androidx.compose.runtime.Immutable
-import app.rickandmorty.core.resourcestate.Incomplete
-import app.rickandmorty.core.resourcestate.ResourceState
-import app.rickandmorty.core.resourcestate.Uninitialized
-import app.rickandmorty.data.locale.Locale
+import androidx.compose.runtime.Stable
+import app.rickandmorty.data.locale.AppLocale
+import com.tunjid.snapshottable.SnapshotSpec
+import com.tunjid.snapshottable.Snapshottable
 import kotlinx.collections.immutable.ImmutableList
 
-@Immutable
-public data class LanguageSettingsUiState(
-  val appLocale: ResourceState<Locale?> = Uninitialized,
-  val availableAppLocales: ResourceState<ImmutableList<Locale>> = Uninitialized,
-) {
-  val isLoading: Boolean
-    get() = appLocale is Incomplete || availableAppLocales is Incomplete
+@Stable
+@Snapshottable
+public interface LanguageSettingsUiState {
+  @SnapshotSpec
+  public data class Immutable(
+    val appLocale: AppLocale? = null,
+    val availableAppLocales: ImmutableList<AppLocale>? = null,
+  ) : LanguageSettingsUiState
+}
+
+public companion operator fun LanguageSettingsUiState.invoke(): LanguageSettingsUiState.Immutable =
+  LanguageSettingsUiState.Immutable()
+
+public val LanguageSettingsUiState.isLoading: Boolean
+  get() = appLocale == null || availableAppLocales == null
+
+public sealed class LanguageSettingsAction(public val key: String) {
+  public data class SelectLocale(val appLocale: AppLocale) :
+    LanguageSettingsAction(key = "SelectLocale")
 }
