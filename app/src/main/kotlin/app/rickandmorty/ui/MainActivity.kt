@@ -7,9 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.semantics
@@ -32,8 +29,6 @@ import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.android.ActivityKey
 import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
 import kotlin.getValue
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @ContributesIntoMap(AppScope::class, binding<Activity>())
@@ -52,7 +47,8 @@ class MainActivity(
     get() = uiGraphHolder.graph
 
   private val metroViewModelFactory by unsafeLazy { uiGraph.metroViewModelFactory }
-  private val viewModel by viewModels<MainViewModel>(factoryProducer = { metroViewModelFactory })
+  private val stateHolder: MainStateHolder by
+    viewModels<MainViewModel>(factoryProducer = { metroViewModelFactory })
 
   override fun onCreate(savedInstanceState: Bundle?) {
     val splashScreen = installSplashScreen()
@@ -61,22 +57,18 @@ class MainActivity(
 
     super.onCreate(savedInstanceState)
 
-    var uiState by mutableStateOf(MainUiState())
-
     lifecycleScope.launch {
-      lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-        viewModel.uiState.onEach { uiState = it }.launchIn(this)
-      }
+      lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { stateHolder.collect() }
     }
 
-    splashScreen.setKeepOnScreenCondition { uiState.isLoading }
+    splashScreen.setKeepOnScreenCondition { stateHolder.state.isLoading }
 
     val entryProvider = uiGraph.entryProvider
     val navigationState = uiGraph.navigationState
     val navigator = uiGraph.navigator
 
     setContent {
-      RamTheme(useDynamicColor = uiState.useDynamicColor) {
+      RamTheme(useDynamicColor = stateHolder.state.useDynamicColor) {
         val customTabUriHandler = rememberCustomTabsUriHandler()
 
         CompositionLocalProvider(

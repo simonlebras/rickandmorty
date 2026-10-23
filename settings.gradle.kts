@@ -90,7 +90,6 @@ include(
   ":core:navigation-serialization-runtime",
   ":core:paging",
   ":core:process-lifecycle",
-  ":core:resource-state",
   ":core:resources-app",
   ":core:root-content",
   ":core:startup",

@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.rickandmorty.core.designsystem.component.BackNavButton
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
@@ -33,6 +32,7 @@ import app.rickandmorty.core.l10n.resources.settings_license_title
 import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.license.License
+import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
@@ -40,9 +40,9 @@ import org.jetbrains.compose.resources.stringResource
 internal fun LicenseSettingsScreen(
   onNavigateUp: () -> Unit,
   showBackButton: Boolean = true,
-  viewModel: LicenseSettingsViewModel = metroViewModel(),
+  stateHolder: LicenseSettingsStateHolder = metroViewModel<LicenseSettingsViewModel>(),
 ) {
-  val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+  val uiState = stateHolder.produceStateWithLifecycle()
 
   ReportDrawnWhen { !uiState.isLoading }
 
@@ -75,8 +75,8 @@ private fun LicenseSettingsScreen(
       )
     },
   ) { contentPadding ->
-    when {
-      uiState.isLoading -> {
+    when (val licenses = uiState.licenses) {
+      null -> {
         Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
       }
 
@@ -85,7 +85,6 @@ private fun LicenseSettingsScreen(
           modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
           contentPadding = contentPadding,
         ) {
-          val licenses = uiState.licenses()!!
           items(licenses, key = License::uniqueId) { license ->
             LicenseItem(license = license, onClick = { onLicenseClick(license) })
           }

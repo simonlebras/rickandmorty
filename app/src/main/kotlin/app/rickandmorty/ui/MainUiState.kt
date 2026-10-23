@@ -1,16 +1,20 @@
 package app.rickandmorty.ui
 
-import androidx.compose.runtime.Immutable
-import app.rickandmorty.core.resourcestate.Incomplete
-import app.rickandmorty.core.resourcestate.ResourceState
-import app.rickandmorty.core.resourcestate.Uninitialized
+import androidx.compose.runtime.Stable
 import app.rickandmorty.data.theme.Theme
+import com.tunjid.snapshottable.SnapshotSpec
+import com.tunjid.snapshottable.Snapshottable
 
-@Immutable
-data class MainUiState(val theme: ResourceState<Theme> = Uninitialized) {
-  val isLoading: Boolean
-    get() = theme is Incomplete
-
-  val useDynamicColor: Boolean
-    get() = theme()?.useDynamicColor ?: false
+@Stable
+@Snapshottable
+interface MainUiState {
+  @SnapshotSpec data class Immutable(val theme: Theme? = null) : MainUiState
 }
+
+companion operator fun MainUiState.invoke(): MainUiState.Immutable = MainUiState.Immutable()
+
+val MainUiState.isLoading: Boolean
+  get() = theme == null
+
+val MainUiState.useDynamicColor: Boolean
+  get() = theme?.useDynamicColor ?: false
