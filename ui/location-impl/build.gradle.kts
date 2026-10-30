@@ -23,6 +23,7 @@ kotlin {
 
     implementation(project(":ui:settings-api"))
 
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.paging.compose)
 
     implementation(libs.jetbrains.compose.material3.adaptive.navigation3)

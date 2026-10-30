@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.dropUnlessResumed
 import app.rickandmorty.core.designsystem.component.BackNavButton
 import app.rickandmorty.core.designsystem.component.Loader
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
@@ -86,7 +87,7 @@ private fun LicenseSettingsScreen(
           contentPadding = contentPadding,
         ) {
           items(licenses, key = License::uniqueId) { license ->
-            LicenseItem(license = license, onClick = { onLicenseClick(license) })
+            LicenseItem(license = license, onClick = dropUnlessResumed { onLicenseClick(license) })
           }
         }
       }
