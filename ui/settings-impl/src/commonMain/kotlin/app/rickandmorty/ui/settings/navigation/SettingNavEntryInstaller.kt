@@ -3,6 +3,7 @@ package app.rickandmorty.ui.settings.navigation
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
 import androidx.compose.material3.adaptive.navigation3.LocalListDetailSceneScope
+import androidx.lifecycle.compose.dropUnlessResumed
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import app.rickandmorty.core.metro.UiScope
@@ -34,13 +35,15 @@ internal class SettingsNavEntryInstaller(private val navigator: Navigator) : Nav
 
       MainSettingsScreen(
         selectedItem = selectedItem,
-        onNavigateUp = navigator::goBack,
-        onNavigateToLanguageSettings = {
-          navigator.navigate(route = LanguageSettingsNavKey, popUpTo = MainSettingsNavKey)
-        },
-        onNavigateToLicenseSettings = {
-          navigator.navigate(route = LicenseSettingsNavKey, popUpTo = MainSettingsNavKey)
-        },
+        onNavigateUp = dropUnlessResumed(block = navigator::goBack),
+        onNavigateToLanguageSettings =
+          dropUnlessResumed {
+            navigator.navigate(route = LanguageSettingsNavKey, popUpTo = MainSettingsNavKey)
+          },
+        onNavigateToLicenseSettings =
+          dropUnlessResumed {
+            navigator.navigate(route = LicenseSettingsNavKey, popUpTo = MainSettingsNavKey)
+          },
       )
     }
 
@@ -48,7 +51,7 @@ internal class SettingsNavEntryInstaller(private val navigator: Navigator) : Nav
       metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey),
     ) {
       LanguageSettingsScreen(
-        onNavigateUp = navigator::goBack,
+        onNavigateUp = dropUnlessResumed(block = navigator::goBack),
         showBackButton = LocalListDetailSceneScope.current == null,
       )
     }
@@ -57,7 +60,7 @@ internal class SettingsNavEntryInstaller(private val navigator: Navigator) : Nav
       metadata = ListDetailSceneStrategy.detailPane(sceneKey = SettingsSceneKey),
     ) {
       LicenseSettingsScreen(
-        onNavigateUp = navigator::goBack,
+        onNavigateUp = dropUnlessResumed(block = navigator::goBack),
         showBackButton = LocalListDetailSceneScope.current == null,
       )
     }

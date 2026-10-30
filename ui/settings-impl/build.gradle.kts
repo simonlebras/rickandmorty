@@ -29,6 +29,8 @@ kotlin {
     implementation(project(":core:l10n"))
     implementation(project(":core:ui"))
 
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
     implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
 
     implementation(libs.metrox.viewmodel.compose)
