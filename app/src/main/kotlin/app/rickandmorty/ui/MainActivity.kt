@@ -14,11 +14,8 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.rootcontent.RootContent
@@ -37,15 +34,7 @@ class MainActivity(
   private val uiGraphFactory: UiGraph.Factory,
   private val rootContent: RootContent,
 ) : AppCompatActivity() {
-  private val uiGraphHolder by
-    viewModels<UiGraphHolder> {
-      viewModelFactory {
-        initializer { UiGraphHolder(uiGraphFactory.create(), createSavedStateHandle()) }
-      }
-    }
-  private val uiGraph
-    get() = uiGraphHolder.graph
-
+  private val uiGraph by unsafeLazy { uiGraphFactory.create() }
   private val metroViewModelFactory by unsafeLazy { uiGraph.metroViewModelFactory }
   private val stateHolder: MainStateHolder by
     viewModels<MainViewModel>(factoryProducer = { metroViewModelFactory })
@@ -56,6 +45,8 @@ class MainActivity(
     WindowCompat.enableEdgeToEdge(window)
 
     super.onCreate(savedInstanceState)
+
+    uiGraph.navigationState.attachTo(savedStateRegistry)
 
     lifecycleScope.launch {
       lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { stateHolder.collect() }

@@ -9,10 +9,6 @@ import dev.zacsweers.metro.ContributesTo
 import dev.zacsweers.metro.GraphExtension
 import dev.zacsweers.metrox.viewmodel.ViewModelGraph
 
-/**
- * Retained across configuration changes by `UiGraphHolder`, so nothing bound here may reference the
- * platform host (on Android, the Activity or its Context) — it would outlive it.
- */
 @GraphExtension(UiScope::class)
 interface UiGraph : ViewModelGraph {
   val entryProvider: EntryProvider

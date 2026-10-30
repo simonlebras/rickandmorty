@@ -1,7 +1,9 @@
 package app.rickandmorty.ui.episode.navigation
 
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.metadata
@@ -20,7 +22,18 @@ internal class EpisodeNavEntryInstaller(private val navigator: Navigator) : NavE
     entry<EpisodeListNavKey>(
       metadata = metadata { navigationSuite() } + ListDetailSceneStrategy.listPane(),
     ) {
-      EpisodeListScreen(onNavigateToSettings = { navigator.navigate(MainSettingsNavKey) })
+      val listState = rememberLazyListState()
+
+      LaunchedEffect(Unit) {
+        navigator.reselectEvents(EpisodeListNavKey).collect {
+          listState.animateScrollToItem(0)
+        }
+      }
+
+      EpisodeListScreen(
+        listState = listState,
+        onNavigateToSettings = { navigator.navigate(MainSettingsNavKey) },
+      )
     }
   }
 }

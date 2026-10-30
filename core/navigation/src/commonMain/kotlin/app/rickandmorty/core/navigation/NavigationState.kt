@@ -7,7 +7,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewmodel.compose.rememberViewModelStoreProvider
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavBackStack
@@ -52,9 +51,9 @@ public class NavigationState(
     }
   }
 
-  public fun attachTo(savedStateHandle: SavedStateHandle) {
-    savedStateHandle.get<SavedState>(SavedStateKey)?.let(::restore)
-    savedStateHandle.setSavedStateProvider(key = SavedStateKey, provider = this)
+  public fun attachTo(savedStateRegistry: SavedStateRegistry) {
+    savedStateRegistry.consumeRestoredStateForKey(SavedStateKey)?.let(::restore)
+    savedStateRegistry.registerSavedStateProvider(SavedStateKey, this)
   }
 
   override fun saveState(): SavedState =
