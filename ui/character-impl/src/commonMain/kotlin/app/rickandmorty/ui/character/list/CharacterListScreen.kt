@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -62,15 +61,11 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun CharacterListScreen(
+  listState: LazyListState,
   onNavigateToSettings: () -> Unit,
   viewModel: CharacterListViewModel = metroViewModel(),
 ) {
   val characters = viewModel.characters.collectAsLazyPagingItems()
-  val listState = rememberLazyListState()
-
-  LaunchedEffect(viewModel) {
-    viewModel.scrollToTopEvents.collect { listState.animateScrollToItem(0) }
-  }
 
   ReportDrawnWhen { characters.loadState.isIdle }
 
