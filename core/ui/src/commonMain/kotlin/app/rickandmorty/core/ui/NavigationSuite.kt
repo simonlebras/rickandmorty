@@ -23,13 +23,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import app.rickandmorty.core.designsystem.theme.LocalSharedTransitionScope
-import dev.chrisbanes.haze.ExperimentalHazeApi
 import dev.chrisbanes.haze.HazeInput
 import dev.chrisbanes.haze.glass.hazeGlass
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
-@OptIn(ExperimentalHazeApi::class)
 @Composable
 internal fun NavigationSuiteState.NavigationSuite(
   onItemClick: (NavKey) -> Unit,
