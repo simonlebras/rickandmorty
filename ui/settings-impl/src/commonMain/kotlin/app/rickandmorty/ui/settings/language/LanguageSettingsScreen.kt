@@ -29,7 +29,6 @@ import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.locale.AppLocale
 import app.rickandmorty.ui.settings.common.SettingsContentType
 import app.rickandmorty.ui.settings.common.util.label
-import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
@@ -37,9 +36,9 @@ import org.jetbrains.compose.resources.stringResource
 internal fun LanguageSettingsScreen(
   onNavigateUp: () -> Unit,
   showBackButton: Boolean = true,
-  stateHolder: LanguageSettingsStateHolder = metroViewModel<LanguageSettingsViewModel>(),
+  viewModel: LanguageSettingsViewModel = metroViewModel(),
 ) {
-  val uiState = stateHolder.produceStateWithLifecycle()
+  val uiState by viewModel.state
 
   ReportDrawnWhen { !uiState.isLoading }
 
@@ -47,7 +46,7 @@ internal fun LanguageSettingsScreen(
     uiState = uiState,
     onNavigateUp = onNavigateUp,
     showBackButton = showBackButton,
-    actions = stateHolder.accept,
+    onSelectLocale = viewModel::selectLocale,
   )
 }
 
@@ -56,10 +55,10 @@ private fun LanguageSettingsScreen(
   uiState: LanguageSettingsUiState,
   onNavigateUp: () -> Unit,
   showBackButton: Boolean,
-  actions: (LanguageSettingsAction) -> Unit,
+  onSelectLocale: (AppLocale) -> Unit,
 ) {
-  val onSelectLocale: (AppLocale) -> Unit = { appLocale ->
-    actions(LanguageSettingsAction.SelectLocale(appLocale))
+  val onSelectLocaleAndNavigateUp: (AppLocale) -> Unit = { appLocale ->
+    onSelectLocale(appLocale)
     onNavigateUp()
   }
 
@@ -95,7 +94,7 @@ private fun LanguageSettingsScreen(
             LocaleItem(
               text = option.label(),
               selected = option == appLocale,
-              onClick = { onSelectLocale(option) },
+              onClick = { onSelectLocaleAndNavigateUp(option) },
             )
           }
         }

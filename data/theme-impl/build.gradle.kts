@@ -11,12 +11,9 @@ kotlin {
   android { namespace = "app.rickandmorty.data.theme.impl" }
 
   dependencies {
-    api(project(":core:coroutines"))
-    api(project(":core:datastore"))
+    api(project(":core:appstate"))
 
     api(project(":data:theme-api"))
-
-    api(libs.kotlinx.serialization.protobuf)
   }
 
   sourceSets {

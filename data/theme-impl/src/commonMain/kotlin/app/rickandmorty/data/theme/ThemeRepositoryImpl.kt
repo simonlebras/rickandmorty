@@ -1,63 +1,39 @@
 package app.rickandmorty.data.theme
 
-import androidx.datastore.core.DataStore
-import app.rickandmorty.core.coroutines.inject.ApplicationScope
+import androidx.appstate.statestore.StateStore
+import androidx.appstate.statestore.StateStoreKey
+import androidx.compose.runtime.State
+import app.rickandmorty.core.appstate.PersistToDataStoreCompat
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
+import kotlinx.serialization.Serializable
 
-private val defaultNightMode = NightMode.FollowSystem
+private val defaultTheme = Theme(nightMode = NightMode.FollowSystem, useDynamicColor = false)
+
+@Serializable
+private data object ThemeKey : StateStoreKey<Theme?>(defaultValue = null), PersistToDataStoreCompat
 
 @ContributesBinding(AppScope::class)
 internal class ThemeRepositoryImpl(
-  private val dataStore: DataStore<ThemeProto>,
-  @ApplicationScope private val applicationScope: CoroutineScope,
+  private val stateStore: StateStore,
 ) : ThemeRepository {
 
-  override fun getTheme(): Flow<Theme> =
-    dataStore.data
-      .map { theme ->
-        Theme(nightMode = theme.nightMode.toNightMode(), useDynamicColor = theme.useDynamicColor)
-      }
-      .distinctUntilChanged()
+  override val theme: State<Theme?> = stateStore.getState(ThemeKey)
 
-  override suspend fun setNightMode(nightMode: NightMode) {
-    applicationScope
-      .launch {
-        dataStore.updateData { theme -> theme.copy(nightMode = nightMode.toNightModeProto()) }
-      }
-      .join()
+  override fun setNightMode(nightMode: NightMode) {
+    stateStore.updateState(ThemeKey) { current ->
+      (current ?: defaultTheme).copy(nightMode = nightMode)
+    }
   }
 
-  override suspend fun setUseDynamicColor(useDynamicColor: Boolean) {
-    applicationScope
-      .launch { dataStore.updateData { theme -> theme.copy(useDynamicColor = useDynamicColor) } }
-      .join()
+  override fun setUseDynamicColor(useDynamicColor: Boolean) {
+    stateStore.updateState(ThemeKey) { current ->
+      (current ?: defaultTheme).copy(useDynamicColor = useDynamicColor)
+    }
   }
 
   override fun getAvailableNightModes(): ImmutableList<NightMode> =
-    persistentListOf(NightMode.Light, NightMode.Dark, defaultNightMode)
+    persistentListOf(NightMode.Light, NightMode.Dark, NightMode.FollowSystem)
 }
-
-private fun NightMode.toNightModeProto() =
-  when (this) {
-    NightMode.FollowSystem -> NightModeProto.FOLLOW_SYSTEM
-    NightMode.Light -> NightModeProto.LIGHT
-    NightMode.Dark -> NightModeProto.DARK
-  }
-
-private fun NightModeProto.toNightMode() =
-  when (this) {
-    NightModeProto.UNSPECIFIED,
-    NightModeProto.AUTO_BATTERY,
-    NightModeProto.FOLLOW_SYSTEM -> defaultNightMode
-
-    NightModeProto.LIGHT -> NightMode.Light
-    NightModeProto.DARK -> NightMode.Dark
-  }

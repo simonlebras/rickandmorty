@@ -26,24 +26,24 @@ import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.dismiss
 import app.rickandmorty.core.l10n.resources.settings_theme_title
 import app.rickandmorty.core.ui.ReportDrawnWhen
+import app.rickandmorty.data.theme.NightMode
 import app.rickandmorty.ui.settings.common.util.label
-import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ThemeSettingsDialog(
   onDismiss: () -> Unit,
-  stateHolder: ThemeSettingsStateHolder = metroViewModel<ThemeSettingsViewModel>(),
+  viewModel: ThemeSettingsViewModel = metroViewModel(),
 ) {
-  val uiState = stateHolder.produceStateWithLifecycle()
+  val uiState by viewModel.state
 
   ReportDrawnWhen { !uiState.isLoading }
 
   ThemeSettingsDialog(
     uiState = uiState,
     onDismiss = onDismiss,
-    actions = stateHolder.accept,
+    onSelectNightMode = viewModel::selectNightMode,
   )
 }
 
@@ -51,7 +51,7 @@ internal fun ThemeSettingsDialog(
 private fun ThemeSettingsDialog(
   uiState: ThemeSettingsUiState,
   onDismiss: () -> Unit,
-  actions: (ThemeSettingsAction) -> Unit,
+  onSelectNightMode: (NightMode) -> Unit,
 ) {
   AlertDialog(
     onDismissRequest = onDismiss,
@@ -70,7 +70,7 @@ private fun ThemeSettingsDialog(
                 ThemeItem(
                   text = stringResource(nightMode.label),
                   selected = nightMode == currentNightMode,
-                  onClick = { actions(ThemeSettingsAction.SelectNightMode(nightMode)) },
+                  onClick = { onSelectNightMode(nightMode) },
                 )
               }
             }

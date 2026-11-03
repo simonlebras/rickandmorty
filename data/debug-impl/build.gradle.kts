@@ -8,11 +8,8 @@ plugins {
 
 kotlin {
   dependencies {
-    api(project(":core:coroutines"))
-    api(project(":core:datastore"))
+    api(project(":core:appstate"))
 
     api(project(":data:debug-api"))
-
-    api(libs.kotlinx.serialization.protobuf)
   }
 }

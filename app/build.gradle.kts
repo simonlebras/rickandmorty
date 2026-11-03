@@ -8,7 +8,6 @@ plugins {
   alias(libs.plugins.rickandmorty.metro)
 
   alias(libs.plugins.androidx.baselineprofile)
-  alias(libs.plugins.snapshottable)
 }
 
 android {
@@ -78,7 +77,6 @@ dependencies {
   implementation(project(":core:root-content"))
   implementation(project(":core:startup"))
   implementation(project(":core:ui"))
-
   implementation(project(":data:character-impl"))
   implementation(project(":data:database-impl"))
   implementation(project(":data:episode-impl"))
@@ -87,39 +85,29 @@ dependencies {
   implementation(project(":data:location-impl"))
   implementation(project(":data:rest"))
   implementation(project(":data:theme-impl"))
-
   implementation(project(":ui:character-impl"))
   implementation(project(":ui:episode-impl"))
   implementation(project(":ui:location-impl"))
   implementation(project(":ui:settings-impl"))
-
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.appcompat)
+  implementation(libs.androidx.appstate.transform)
   implementation(libs.androidx.browser)
   implementation(libs.androidx.core.splashscreen)
   implementation(libs.androidx.lifecycle.runtime.compose)
-
   implementation(libs.coil)
-
   implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
   implementation(libs.jetbrains.compose.material3.adaptivenavigationsuite)
   implementation(libs.jetbrains.compose.resources)
   implementation(libs.jetbrains.navigation3.ui)
-
   implementation(libs.kotlinx.collectionsimmutable)
-
   implementation(libs.metrox.android)
   implementation(libs.metrox.viewmodel.compose)
-
-  implementation(libs.mutator.core)
-  implementation(libs.mutator.coroutines)
 
   debugImplementation(project(":core:coil-logger"))
   debugImplementation(project(":core:logger-debug"))
   debugImplementation(project(":core:strict-mode"))
-
   debugImplementation(project(":data:debug-impl"))
-
   debugImplementation(project(":ui:debug-drawer"))
 
   releaseImplementation(project(":core:compose-diagnostic"))
@@ -130,7 +118,6 @@ dependencies {
 
   runtimeOnly(libs.androidx.compose.runtime.tracing)
   runtimeOnly(libs.androidx.profileinstaller)
-
   runtimeOnly(libs.leakcanary.plumber)
 
   debugRuntimeOnly(libs.leakcanary)
@@ -145,7 +132,6 @@ dependencyAnalysis {
         libs.jetbrains.compose.material3.adaptive.navigation3,
         libs.jetbrains.compose.material3.adaptivenavigationsuite,
         libs.jetbrains.navigation3.ui,
-        libs.mutator.core,
       )
       exclude(
         ":core:compose-diagnostic",

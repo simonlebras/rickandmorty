@@ -3,6 +3,7 @@ package app.rickandmorty.data.theme
 import android.app.Application
 import android.app.UiModeManager
 import android.content.ComponentName
+import androidx.compose.runtime.snapshotFlow
 import androidx.core.content.getSystemService
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -13,17 +14,16 @@ import app.rickandmorty.core.base.doOnActivityPreCreated
 import app.rickandmorty.core.base.isComponentEnabled
 import app.rickandmorty.core.base.setComponentEnabled
 import app.rickandmorty.core.base.unsafeLazy
-import app.rickandmorty.core.coroutines.inject.IODispatcher
 import app.rickandmorty.core.processlifecycle.inject.ProcessLifecycleOwner
 import app.rickandmorty.core.startup.Initializer
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesIntoSet
-import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
@@ -35,7 +35,6 @@ internal class NightModeInitializer(
   private val application: Application,
   private val themeRepository: ThemeRepository,
   @ProcessLifecycleOwner private val processLifecycleOwner: LifecycleOwner,
-  @IODispatcher private val ioDispatcher: CoroutineContext,
 ) : Initializer {
   private val uiModeManager by unsafeLazy { application.getSystemService<UiModeManager>()!! }
 
@@ -67,13 +66,13 @@ internal class NightModeInitializer(
   }
 
   private fun getNightModeDeferred(): Deferred<NightMode> =
-    processLifecycleScope.async(context = ioDispatcher, start = CoroutineStart.LAZY) {
-      themeRepository.getTheme().first().nightMode
+    processLifecycleScope.async(start = CoroutineStart.LAZY) {
+      snapshotFlow { themeRepository.theme.value }.filterNotNull().first().nightMode
     }
 
   private fun observeNightModeUpdates() {
-    themeRepository
-      .getTheme()
+    snapshotFlow { themeRepository.theme.value }
+      .filterNotNull()
       .map { theme -> theme.nightMode }
       .distinctUntilChanged()
       .onEach { nightMode -> setApplicationNightMode(nightMode) }

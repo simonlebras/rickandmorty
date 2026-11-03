@@ -33,7 +33,6 @@ import app.rickandmorty.core.l10n.resources.settings_license_title
 import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.license.License
-import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
@@ -41,9 +40,9 @@ import org.jetbrains.compose.resources.stringResource
 internal fun LicenseSettingsScreen(
   onNavigateUp: () -> Unit,
   showBackButton: Boolean = true,
-  stateHolder: LicenseSettingsStateHolder = metroViewModel<LicenseSettingsViewModel>(),
+  viewModel: LicenseSettingsViewModel = metroViewModel(),
 ) {
-  val uiState = stateHolder.produceStateWithLifecycle()
+  val uiState by viewModel.state
 
   ReportDrawnWhen { !uiState.isLoading }
 

@@ -4,8 +4,6 @@ plugins {
   alias(libs.plugins.rickandmorty.compose)
   alias(libs.plugins.rickandmorty.kotlin.multiplatform)
   alias(libs.plugins.rickandmorty.metro)
-
-  alias(libs.plugins.snapshottable)
 }
 
 kotlin {
@@ -23,7 +21,7 @@ kotlin {
 
     api(project(":ui:settings-api"))
 
-    api(libs.mutator.coroutines)
+    api(libs.androidx.appstate.transform)
 
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
@@ -34,8 +32,6 @@ kotlin {
     implementation(libs.jetbrains.compose.material3.adaptive.navigation3)
 
     implementation(libs.metrox.viewmodel.compose)
-
-    implementation(libs.mutator.compose)
   }
 }
 

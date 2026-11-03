@@ -13,9 +13,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.rootcontent.RootContent
@@ -26,7 +23,6 @@ import dev.zacsweers.metro.binding
 import dev.zacsweers.metrox.android.ActivityKey
 import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
 import kotlin.getValue
-import kotlinx.coroutines.launch
 
 @ContributesIntoMap(AppScope::class, binding<Activity>())
 @ActivityKey
@@ -36,8 +32,7 @@ class MainActivity(
 ) : AppCompatActivity() {
   private val uiGraph by unsafeLazy { uiGraphFactory.create() }
   private val metroViewModelFactory by unsafeLazy { uiGraph.metroViewModelFactory }
-  private val stateHolder: MainStateHolder by
-    viewModels<MainViewModel>(factoryProducer = { metroViewModelFactory })
+  private val viewModel: MainViewModel by viewModels(factoryProducer = { metroViewModelFactory })
 
   override fun onCreate(savedInstanceState: Bundle?) {
     val splashScreen = installSplashScreen()
@@ -46,20 +41,16 @@ class MainActivity(
 
     super.onCreate(savedInstanceState)
 
+    splashScreen.setKeepOnScreenCondition { viewModel.state.value.isLoading }
+
     uiGraph.navigationState.attachTo(savedStateRegistry)
-
-    lifecycleScope.launch {
-      lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { stateHolder.collect() }
-    }
-
-    splashScreen.setKeepOnScreenCondition { stateHolder.state.isLoading }
 
     val entryProvider = uiGraph.entryProvider
     val navigationState = uiGraph.navigationState
     val navigator = uiGraph.navigator
 
     setContent {
-      RamTheme(useDynamicColor = stateHolder.state.useDynamicColor) {
+      RamTheme(useDynamicColor = viewModel.state.value.theme?.useDynamicColor == true) {
         val customTabUriHandler = rememberCustomTabsUriHandler()
 
         CompositionLocalProvider(

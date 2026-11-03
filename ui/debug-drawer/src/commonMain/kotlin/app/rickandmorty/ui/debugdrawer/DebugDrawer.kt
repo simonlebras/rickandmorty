@@ -40,20 +40,21 @@ import app.rickandmorty.core.l10n.resources.debug_title
 import app.rickandmorty.core.l10n.resources.debug_ui_debugging_title
 import app.rickandmorty.core.l10n.resources.debug_version_title
 import app.rickandmorty.data.debug.DebugSettings
-import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DebugDrawer(
-  stateHolder: DebugDrawerStateHolder = metroViewModel<DebugDrawerViewModel>(),
+  viewModel: DebugDrawerViewModel = metroViewModel(),
   content: @Composable () -> Unit,
 ) {
-  val uiState = stateHolder.produceStateWithLifecycle()
+  val uiState by viewModel.state
 
   DebugDrawer(
     uiState = uiState,
-    actions = stateHolder.accept,
+    onSetKeylineOverlayEnabled = viewModel::setKeylineOverlayEnabled,
+    onSetLookaheadDebuggingEnabled = viewModel::setLookaheadDebuggingEnabled,
+    onClearImageCache = viewModel::clearImageCache,
     content = content,
   )
 }
@@ -62,7 +63,9 @@ internal fun DebugDrawer(
 @Composable
 private fun DebugDrawer(
   uiState: DebugDrawerUiState,
-  actions: (DebugDrawerAction) -> Unit,
+  onSetKeylineOverlayEnabled: (Boolean) -> Unit,
+  onSetLookaheadDebuggingEnabled: (Boolean) -> Unit,
+  onClearImageCache: () -> Unit,
   content: @Composable () -> Unit,
 ) {
   // The layout direction is inverted so that the drawer opens from the end edge, keeping the
@@ -80,13 +83,9 @@ private fun DebugDrawer(
         CompositionLocalProvider(LocalLayoutDirection provides originalLayoutDirection) {
           DebugDrawerSheet(
             uiState = uiState,
-            onKeylineOverlayEnabledChange = { enabled ->
-              actions(DebugDrawerAction.SetKeylineOverlayEnabled(enabled))
-            },
-            onLookaheadDebuggingEnabledChange = { enabled ->
-              actions(DebugDrawerAction.SetLookaheadDebuggingEnabled(enabled))
-            },
-            onClearImageCache = { actions(DebugDrawerAction.ClearImageCache) },
+            onKeylineOverlayEnabledChange = onSetKeylineOverlayEnabled,
+            onLookaheadDebuggingEnabledChange = onSetLookaheadDebuggingEnabled,
+            onClearImageCache = onClearImageCache,
           )
         }
       },

@@ -70,6 +70,7 @@ include(
   ":app",
   ":baseline-profile",
   ":core:app-info",
+  ":core:appstate",
   ":core:base",
   ":core:coil",
   ":core:coil-logger",

@@ -1,11 +1,11 @@
 package app.rickandmorty.data.debug
 
-import kotlinx.coroutines.flow.Flow
+import androidx.compose.runtime.State
 
 public interface DebugSettingsRepository {
-  public fun getDebugSettings(): Flow<DebugSettings>
+  public val debugSettings: State<DebugSettings?>
 
-  public suspend fun setKeylineOverlayEnabled(enabled: Boolean)
+  public fun setKeylineOverlayEnabled(enabled: Boolean)
 
-  public suspend fun setLookaheadDebuggingEnabled(enabled: Boolean)
+  public fun setLookaheadDebuggingEnabled(enabled: Boolean)
 }

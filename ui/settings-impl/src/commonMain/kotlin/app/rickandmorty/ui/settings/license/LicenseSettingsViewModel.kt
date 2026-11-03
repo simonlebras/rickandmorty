@@ -1,63 +1,33 @@
 package app.rickandmorty.ui.settings.license
 
-import androidx.compose.runtime.Stable
+import androidx.appstate.transform.transform
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.CreationExtras
-import app.rickandmorty.core.coroutines.viewModelCoroutineScope
+import androidx.lifecycle.viewModelScope
 import app.rickandmorty.core.metro.UiScope
+import app.rickandmorty.data.license.License
 import app.rickandmorty.data.license.LicenseRepository
-import com.tunjid.mutator.coroutines.SuspendingStateMutator
-import com.tunjid.mutator.coroutines.launchedCollect
-import com.tunjid.mutator.coroutines.suspendingStateMutator
-import dev.zacsweers.metro.Assisted
-import dev.zacsweers.metro.AssistedFactory
-import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
-import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
-import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.flow
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
+import kotlinx.collections.immutable.ImmutableList
 
-@Stable public interface LicenseSettingsStateHolder : SuspendingStateMutator<LicenseSettingsUiState>
-
-@AssistedFactory
 @ContributesIntoMap(UiScope::class)
-@ViewModelAssistedFactoryKey(LicenseSettingsViewModel::class)
-public fun interface LicenseSettingsViewModelInitializer : ViewModelAssistedFactory {
-  override fun create(extras: CreationExtras): LicenseSettingsViewModel =
-    invoke(scope = viewModelCoroutineScope())
-
-  public fun invoke(@Assisted scope: CoroutineScope): LicenseSettingsViewModel
-}
-
+@ViewModelKey
 public class LicenseSettingsViewModel(
-  mutator: SuspendingStateMutator<LicenseSettingsUiState>,
-  scope: CoroutineScope,
-) :
-  ViewModel(viewModelScope = scope),
-  LicenseSettingsStateHolder,
-  SuspendingStateMutator<LicenseSettingsUiState> by mutator {
-  @AssistedInject
-  public constructor(
-    licenseRepository: LicenseRepository,
-    @Assisted scope: CoroutineScope,
-  ) : this(
-    mutator =
-      scope.suspendingStateMutator(
-        state = LicenseSettingsUiState().toSnapshotMutable(),
-        producer = { state ->
-          launchLoadLicensesMutations(state = state, licenseRepository = licenseRepository)
-        },
-      ),
-    scope = scope,
-  )
-}
+  private val licenseRepository: LicenseRepository,
+) : ViewModel() {
 
-context(productionScope: CoroutineScope)
-private fun launchLoadLicensesMutations(
-  state: LicenseSettingsUiState.Mutable,
-  licenseRepository: LicenseRepository,
-) = flow {
-  if (state.licenses == null) emit(licenseRepository.getLicenses())
+  public val state: State<LicenseSettingsUiState> =
+    transform(
+      initialValue = LicenseSettingsUiState(),
+      scope = viewModelScope,
+    ) { previous ->
+      val licenses by
+        produceState<ImmutableList<License>?>(null) {
+          value = licenseRepository.getLicenses()
+        }
+      LicenseSettingsUiState(licenses = licenses ?: return@transform previous)
+    }
 }
-  .launchedCollect { licenses -> state.licenses = licenses }

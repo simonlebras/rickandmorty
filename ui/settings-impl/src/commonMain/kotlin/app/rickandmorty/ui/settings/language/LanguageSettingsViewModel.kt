@@ -1,91 +1,43 @@
 package app.rickandmorty.ui.settings.language
 
-import androidx.compose.runtime.Stable
+import androidx.appstate.transform.transform
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.CreationExtras
-import app.rickandmorty.core.coroutines.viewModelCoroutineScope
+import androidx.lifecycle.viewModelScope
 import app.rickandmorty.core.metro.UiScope
+import app.rickandmorty.data.locale.AppLocale
 import app.rickandmorty.data.locale.LocaleRepository
-import com.tunjid.mutator.coroutines.ActionSuspendingStateMutator
-import com.tunjid.mutator.coroutines.actionSuspendingStateMutator
-import com.tunjid.mutator.coroutines.launchMutationsIn
-import com.tunjid.mutator.coroutines.launchedCollect
-import dev.zacsweers.metro.Assisted
-import dev.zacsweers.metro.AssistedFactory
-import dev.zacsweers.metro.AssistedInject
 import dev.zacsweers.metro.ContributesIntoMap
-import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactory
-import dev.zacsweers.metrox.viewmodel.ViewModelAssistedFactoryKey
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
+import kotlinx.collections.immutable.ImmutableList
 
-@Stable
-public interface LanguageSettingsStateHolder :
-  ActionSuspendingStateMutator<LanguageSettingsAction, LanguageSettingsUiState>
-
-@AssistedFactory
 @ContributesIntoMap(UiScope::class)
-@ViewModelAssistedFactoryKey(LanguageSettingsViewModel::class)
-public fun interface LanguageSettingsViewModelInitializer : ViewModelAssistedFactory {
-  override fun create(extras: CreationExtras): LanguageSettingsViewModel =
-    invoke(scope = viewModelCoroutineScope())
-
-  public fun invoke(@Assisted scope: CoroutineScope): LanguageSettingsViewModel
-}
-
+@ViewModelKey
 public class LanguageSettingsViewModel(
-  mutator: ActionSuspendingStateMutator<LanguageSettingsAction, LanguageSettingsUiState>,
-  scope: CoroutineScope,
-) :
-  ViewModel(viewModelScope = scope),
-  LanguageSettingsStateHolder,
-  ActionSuspendingStateMutator<LanguageSettingsAction, LanguageSettingsUiState> by mutator {
-  @AssistedInject
-  public constructor(
-    localeRepository: LocaleRepository,
-    @Assisted scope: CoroutineScope,
-  ) : this(
-    mutator =
-      scope.actionSuspendingStateMutator(
-        state = LanguageSettingsUiState().toSnapshotMutable(),
-        producer = { state, actions ->
-          launchAppLocaleMutations(state = state, localeRepository = localeRepository)
-          launchLoadAvailableAppLocalesMutations(state = state, localeRepository = localeRepository)
-          actions.launchMutationsIn(
-            productionScope = this,
-            keySelector = LanguageSettingsAction::key,
-          ) {
-            when (val action = type()) {
-              is LanguageSettingsAction.SelectLocale ->
-                action.flow.launchSelectLocaleMutations(localeRepository = localeRepository)
-            }
-          }
-        },
-      ),
-    scope = scope,
-  )
-}
+  private val localeRepository: LocaleRepository,
+) : ViewModel() {
 
-context(productionScope: CoroutineScope)
-private fun Flow<LanguageSettingsAction.SelectLocale>.launchSelectLocaleMutations(
-  localeRepository: LocaleRepository,
-) = launchedCollect { action -> localeRepository.setAppLocale(action.appLocale) }
+  public val state: State<LanguageSettingsUiState> =
+    transform(
+      initialValue =
+        LanguageSettingsUiState(
+          appLocale = localeRepository.appLocale.value,
+        ),
+      scope = viewModelScope,
+    ) { previous ->
+      val availableLocales by
+        produceState<ImmutableList<AppLocale>?>(null) {
+          value = localeRepository.getAvailableAppLocales()
+        }
+      LanguageSettingsUiState(
+        appLocale = localeRepository.appLocale.value,
+        availableAppLocales = availableLocales,
+      )
+    }
 
-context(productionScope: CoroutineScope)
-private fun launchAppLocaleMutations(
-  state: LanguageSettingsUiState.Mutable,
-  localeRepository: LocaleRepository,
-) =
-  localeRepository.getAppLocale().launchedCollect { appLocale ->
-    state.appLocale = appLocale
+  public fun selectLocale(appLocale: AppLocale) {
+    localeRepository.setAppLocale(appLocale)
   }
-
-context(productionScope: CoroutineScope)
-private fun launchLoadAvailableAppLocalesMutations(
-  state: LanguageSettingsUiState.Mutable,
-  localeRepository: LocaleRepository,
-) = flow {
-  if (state.availableAppLocales == null) emit(localeRepository.getAvailableAppLocales())
 }
-  .launchedCollect { availableAppLocales -> state.availableAppLocales = availableAppLocales }

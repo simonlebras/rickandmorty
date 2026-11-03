@@ -59,7 +59,6 @@ import app.rickandmorty.ui.settings.common.SettingsContentType
 import app.rickandmorty.ui.settings.common.util.label
 import app.rickandmorty.ui.settings.common.util.setPlainText
 import app.rickandmorty.ui.settings.theme.ThemeSettingsDialog
-import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -71,9 +70,9 @@ internal fun MainSettingsScreen(
   onNavigateUp: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
   onNavigateToLicenseSettings: () -> Unit,
-  stateHolder: MainSettingsStateHolder = metroViewModel<MainSettingsViewModel>(),
+  viewModel: MainSettingsViewModel = metroViewModel(),
 ) {
-  val uiState = stateHolder.produceStateWithLifecycle()
+  val uiState by viewModel.state
 
   var showThemeSettingsDialog by rememberSaveable { mutableStateOf(false) }
 
@@ -83,7 +82,7 @@ internal fun MainSettingsScreen(
     uiState = uiState,
     selectedItem = selectedItem,
     onNavigateUp = onNavigateUp,
-    actions = stateHolder.accept,
+    onUpdateUseDynamicColor = viewModel::setUseDynamicColor,
     onNavigateToThemeSettings = { showThemeSettingsDialog = true },
     onNavigateToLanguageSettings = onNavigateToLanguageSettings,
     onNavigateToLicenseSettings = onNavigateToLicenseSettings,
@@ -99,7 +98,7 @@ private fun MainSettingsScreen(
   uiState: MainSettingsUiState,
   selectedItem: MainSettingsItem?,
   onNavigateUp: () -> Unit,
-  actions: (MainSettingsAction) -> Unit,
+  onUpdateUseDynamicColor: (Boolean) -> Unit,
   onNavigateToThemeSettings: () -> Unit,
   onNavigateToLanguageSettings: () -> Unit,
   onNavigateToLicenseSettings: () -> Unit,
@@ -128,9 +127,7 @@ private fun MainSettingsScreen(
             currentTheme = theme,
             currentAppLocale = appLocale,
             isDynamicColorAvailable = isDynamicColorAvailable,
-            onUpdateUseDynamicColor = { useDynamicColor ->
-              actions(MainSettingsAction.SetUseDynamicColor(useDynamicColor))
-            },
+            onUpdateUseDynamicColor = onUpdateUseDynamicColor,
             onNavigateToThemeSettings = onNavigateToThemeSettings,
             onNavigateToLanguageSettings = onNavigateToLanguageSettings,
           )
