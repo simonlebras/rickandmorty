@@ -5,15 +5,10 @@ plugins {
 
 kotlin {
   dependencies {
+    api(project(":core:paging"))
+
     api(libs.androidx.compose.runtime.annotation)
-    api(libs.androidx.paging.common)
 
     api(libs.kotlinx.coroutines.core)
-  }
-}
-
-dependencyAnalysis {
-  issues {
-    onUnusedDependencies { exclude(libs.androidx.paging.common) }
   }
 }

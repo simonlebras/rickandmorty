@@ -16,9 +16,14 @@ import app.rickandmorty.data.database.entity.EpisodeEntity
 import app.rickandmorty.data.database.entity.EpisodePagedEntryEntity
 import app.rickandmorty.data.database.entity.LocationEntity
 import app.rickandmorty.data.database.entity.LocationPagedEntryEntity
+import org.mobilenativefoundation.store6.core.ExperimentalStoreApi
+import org.mobilenativefoundation.store6.room.Store6BookkeeperDao
+import org.mobilenativefoundation.store6.room.Store6BookkeepingEntity
+import org.mobilenativefoundation.store6.room.Store6WatermarkEntity
 
 internal const val DATABASE_NAME = "ram-database.db"
 
+@OptIn(ExperimentalStoreApi::class)
 @Database(
   entities =
     [
@@ -28,6 +33,8 @@ internal const val DATABASE_NAME = "ram-database.db"
       EpisodePagedEntryEntity::class,
       LocationEntity::class,
       LocationPagedEntryEntity::class,
+      Store6BookkeepingEntity::class,
+      Store6WatermarkEntity::class,
     ],
   version = 1,
 )
@@ -44,6 +51,8 @@ public abstract class RamDatabase : RoomDatabase() {
   public abstract fun locationDao(): LocationDao
 
   public abstract fun locationPagedEntryDao(): LocationPagedEntryDao
+
+  public abstract fun store6BookkeeperDao(): Store6BookkeeperDao
 }
 
 @Suppress("NO_ACTUAL_FOR_EXPECT")

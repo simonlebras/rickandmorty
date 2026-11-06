@@ -1,28 +1,23 @@
 package app.rickandmorty.data.database.dao
 
-import androidx.paging.PagingSource
 import androidx.room3.Dao
-import androidx.room3.DaoReturnTypeConverters
-import androidx.room3.Insert
-import androidx.room3.OnConflictStrategy
 import androidx.room3.Query
-import androidx.room3.Transaction
-import androidx.room3.paging.PagingSourceDaoReturnTypeConverter
+import androidx.room3.Upsert
 import app.rickandmorty.data.database.entity.LocationEntity
+import app.rickandmorty.data.database.entity.LocationPagedEntryEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-@DaoReturnTypeConverters(PagingSourceDaoReturnTypeConverter::class)
 public interface LocationDao {
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  public suspend fun insertAll(locations: List<LocationEntity>)
+  @Upsert public suspend fun upsertAll(locations: List<LocationEntity>)
 
-  @Transaction
   @Query(
     """
-              SELECT location.* FROM location
-              INNER JOIN location_paged_entry ON location_paged_entry.location_id = location.id
-              ORDER BY page ASC, `index` ASC
+              SELECT * FROM location_paged_entry
+              INNER JOIN location ON location.id = location_paged_entry.location_id
+              WHERE page = :page
+              ORDER BY `index` ASC
           """,
   )
-  public fun getPagedLocations(): PagingSource<Int, LocationEntity>
+  public fun getLocationPage(page: Int): Flow<Map<LocationPagedEntryEntity, LocationEntity>>
 }

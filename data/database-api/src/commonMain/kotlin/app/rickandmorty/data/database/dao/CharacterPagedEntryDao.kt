@@ -11,8 +11,11 @@ public interface CharacterPagedEntryDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   public suspend fun insertAll(pagedEntries: List<CharacterPagedEntryEntity>)
 
-  @Query("SELECT * FROM character_paged_entry WHERE character_id = :characterId")
-  public suspend fun getPagedEntry(characterId: String): CharacterPagedEntryEntity?
+  @Query("DELETE FROM character_paged_entry WHERE page = :page")
+  public suspend fun deletePage(page: Int)
+
+  @Query("DELETE FROM character_paged_entry WHERE page > :lastPage")
+  public suspend fun deletePagesAfter(lastPage: Int)
 
   @Query("DELETE FROM character_paged_entry") public suspend fun deleteAll()
 }

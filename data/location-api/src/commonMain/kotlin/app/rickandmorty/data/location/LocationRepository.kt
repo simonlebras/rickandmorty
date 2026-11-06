@@ -1,9 +1,10 @@
 package app.rickandmorty.data.location
 
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import app.rickandmorty.core.paging.Page
 import kotlinx.coroutines.flow.Flow
 
 public interface LocationRepository {
-  public fun getPagedLocations(config: PagingConfig): Flow<PagingData<Location>>
+  public fun getLocationPage(page: Int): Flow<Page<Location>>
+
+  public suspend fun refreshLocations()
 }

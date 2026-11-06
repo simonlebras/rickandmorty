@@ -4,6 +4,10 @@
     <string name="dismiss">Dismiss</string>
     <string name="retry">Retry</string>
 
+    <string name="list_load_error">Couldn't load</string>
+    <string name="list_refresh_error">Couldn't refresh</string>
+    <string name="list_revalidation_error">Couldn't update, showing saved items</string>
+
     <string name="character_status_alive">Alive</string>
     <string name="character_status_dead">Dead</string>
     <string name="character_status_unknown">Unknown</string>

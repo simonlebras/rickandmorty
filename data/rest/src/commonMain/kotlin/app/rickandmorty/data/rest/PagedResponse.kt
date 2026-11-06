@@ -1,6 +1,5 @@
 package app.rickandmorty.data.rest
 
-import io.ktor.http.Url
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,11 +9,7 @@ public data class PagedResponse<T>(
   @SerialName("results") val results: List<T>,
 ) {
   @Serializable
-  public data class Info(
-    @SerialName("count") val count: Int,
-    @SerialName("next") val next: String?,
-  ) {
-    val nextPage: Int?
-      get() = next?.let { url -> Url(url).parameters["page"]?.toInt() }
-  }
+  public data class Info(@SerialName("count") val count: Int, @SerialName("pages") val pages: Int)
 }
+
+public fun PagedResponse.Info.nextPage(page: Int): Int? = (page + 1).takeIf { it <= pages }
