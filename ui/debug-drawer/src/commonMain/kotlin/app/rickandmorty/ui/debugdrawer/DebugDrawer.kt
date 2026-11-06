@@ -95,6 +95,7 @@ private fun DebugDrawer(
         Box(modifier = Modifier.fillMaxSize()) {
           val settings = uiState.debugSettings
 
+          @Suppress("DisallowLookaheadAnimationVisualDebug")
           LookaheadAnimationVisualDebugging(
             isEnabled = settings?.lookaheadDebuggingEnabled == true,
           ) {

@@ -48,7 +48,7 @@ private class NavigationSuiteSceneStrategy<T : Any>(
   }
 }
 
-private class NavigationSuiteSceneDecorator<T : Any>(
+private data class NavigationSuiteSceneDecorator<T : Any>(
   private val scene: Scene<T>,
   private val navigationSuite: NavigationSuiteContent,
   private val movableNavigationSuite: NavigationSuiteContent,
