@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "55d557055c36d263e20ebacc326a324d",
+    "identityHash": "717924981de0fa09e15c6f424594d3bd",
     "entities": [
       {
         "tableName": "character",
@@ -309,11 +309,91 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "store6_bookkeeping",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`namespace` TEXT NOT NULL, `canonical_id` TEXT NOT NULL, `written_at_epoch_millis` INTEGER, `etag` TEXT, `last_success_sequence` INTEGER, `last_failure_at_epoch_millis` INTEGER, `consecutive_failures` INTEGER NOT NULL, `stale_sequence` INTEGER, PRIMARY KEY(`namespace`, `canonical_id`))",
+        "fields": [
+          {
+            "fieldPath": "namespace",
+            "columnName": "namespace",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "canonicalId",
+            "columnName": "canonical_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "writtenAtEpochMillis",
+            "columnName": "written_at_epoch_millis",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "etag",
+            "columnName": "etag",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "lastSuccessSequence",
+            "columnName": "last_success_sequence",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "lastFailureAtEpochMillis",
+            "columnName": "last_failure_at_epoch_millis",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "consecutiveFailures",
+            "columnName": "consecutive_failures",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "staleSequence",
+            "columnName": "stale_sequence",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "namespace",
+            "canonical_id"
+          ]
+        }
+      },
+      {
+        "tableName": "store6_watermarks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`scope` TEXT NOT NULL, `sequence` INTEGER NOT NULL, PRIMARY KEY(`scope`))",
+        "fields": [
+          {
+            "fieldPath": "scope",
+            "columnName": "scope",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "scope"
+          ]
+        }
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '55d557055c36d263e20ebacc326a324d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '717924981de0fa09e15c6f424594d3bd')"
     ]
   }
 }

@@ -1,9 +1,10 @@
 package app.rickandmorty.data.episode
 
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import app.rickandmorty.core.paging.Page
 import kotlinx.coroutines.flow.Flow
 
 public interface EpisodeRepository {
-  public fun getPagedEpisodes(config: PagingConfig): Flow<PagingData<Episode>>
+  public fun getEpisodePage(page: Int): Flow<Page<Episode>>
+
+  public suspend fun refreshEpisodes()
 }

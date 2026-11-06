@@ -23,6 +23,10 @@ dependencyResolutionManagement {
       }
     }
     mavenCentral()
+    maven("https://central.sonatype.com/repository/maven-snapshots/") {
+      mavenContent { snapshotsOnly() }
+      content { includeGroup("org.mobilenativefoundation.store") }
+    }
   }
 }
 
@@ -94,6 +98,7 @@ include(
   ":core:root-content",
   ":core:startup",
   ":core:strict-mode",
+  ":core:tiling",
   ":core:ui",
   ":core:ui-tooling-preview",
   ":data:character-api",
@@ -111,6 +116,7 @@ include(
   ":data:location-api",
   ":data:location-impl",
   ":data:rest",
+  ":data:store",
   ":data:theme-api",
   ":data:theme-impl",
   ":ui:character-api",

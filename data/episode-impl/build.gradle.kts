@@ -12,6 +12,6 @@ kotlin {
     api(project(":data:episode-api"))
     api(project(":data:rest"))
 
-    implementation(project(":core:paging"))
+    implementation(project(":data:store"))
   }
 }

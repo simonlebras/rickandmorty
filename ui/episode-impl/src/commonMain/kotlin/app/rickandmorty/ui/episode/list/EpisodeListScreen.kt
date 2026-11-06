@@ -1,12 +1,6 @@
 package app.rickandmorty.ui.episode.list
 
-import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -17,73 +11,83 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemContentType
-import androidx.paging.compose.itemKey
-import app.rickandmorty.core.designsystem.component.Loader
-import app.rickandmorty.core.designsystem.component.PullToRefreshBox
 import app.rickandmorty.core.designsystem.component.SettingsNavButton
 import app.rickandmorty.core.designsystem.icon.RamIcons
 import app.rickandmorty.core.l10n.resources.Res as L10nRes
 import app.rickandmorty.core.l10n.resources.episode_list_empty
 import app.rickandmorty.core.l10n.resources.episode_list_title
+import app.rickandmorty.core.tiling.isSettled
 import app.rickandmorty.core.ui.Empty
-import app.rickandmorty.core.ui.Error
 import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
-import app.rickandmorty.core.ui.appendLoadState
-import app.rickandmorty.core.ui.errorOrNull
-import app.rickandmorty.core.ui.isEmpty
-import app.rickandmorty.core.ui.isError
-import app.rickandmorty.core.ui.isLoading
+import app.rickandmorty.core.ui.TiledList
+import app.rickandmorty.core.ui.UiMessages
+import app.rickandmorty.core.ui.rememberTiledLazyListState
+import app.rickandmorty.core.ui.scrollToFirstPage
 import app.rickandmorty.data.episode.Episode
+import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun EpisodeListScreen(
-  listState: LazyListState,
   onNavigateToSettings: () -> Unit,
-  viewModel: EpisodeListViewModel = metroViewModel(),
+  reselectEvents: Flow<Unit> = emptyFlow(),
+  stateHolder: EpisodeListStateHolder = metroViewModel<EpisodeListViewModel>(),
 ) {
-  val episodes = viewModel.episodes.collectAsLazyPagingItems()
+  val uiState = stateHolder.produceStateWithLifecycle()
 
-  ReportDrawnWhen { episodes.loadState.isIdle }
+  ReportDrawnWhen { uiState.isSettled }
 
-  EpisodeListScreen(
-    episodes = episodes,
-    listState = listState,
+  EpisodeListContent(
+    uiState = uiState,
+    onAction = stateHolder.accept,
     onNavigateToSettings = onNavigateToSettings,
+    reselectEvents = reselectEvents,
   )
 }
 
 @Composable
-private fun EpisodeListScreen(
-  episodes: LazyPagingItems<Episode>,
-  listState: LazyListState,
+internal fun EpisodeListContent(
+  uiState: EpisodeListUiState,
+  onAction: (EpisodeListAction) -> Unit,
   onNavigateToSettings: () -> Unit,
+  modifier: Modifier = Modifier,
+  reselectEvents: Flow<Unit> = emptyFlow(),
 ) {
+  val listState = rememberTiledLazyListState(uiState, Episode::id)
   val snackbarHostState = remember { SnackbarHostState() }
-
-  val loadState = episodes.loadState
-
-  loadState.refresh.errorOrNull?.let { error ->
-    LaunchedEffect(snackbarHostState, error) { snackbarHostState.showSnackbar("Error") }
-  }
-  loadState.append.errorOrNull?.let { error ->
-    LaunchedEffect(snackbarHostState, error) { snackbarHostState.showSnackbar("Error") }
-  }
-
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
+  val currentUiState by rememberUpdatedState(uiState)
+  val currentOnAction by rememberUpdatedState(onAction)
+  LaunchedEffect(reselectEvents) {
+    reselectEvents.collect {
+      listState.scrollToFirstPage(currentUiState, Episode::id) {
+        currentOnAction(EpisodeListAction.Tile(it))
+      }
+    }
+  }
+
+  UiMessages(
+    messages = uiState.messages,
+    snackbarHostState = snackbarHostState,
+    onAction = onAction,
+    onMessageShown = { onAction(EpisodeListAction.MessageShown(it)) },
+  )
+
   HazeScaffold(
+    modifier = modifier,
     topBar = {
       EpisodeListScreenAppBar(
         onNavigateToSettings = onNavigateToSettings,
@@ -92,20 +96,14 @@ private fun EpisodeListScreen(
     },
     snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
   ) { contentPadding ->
-    when {
-      loadState.refresh.isLoading && episodes.isEmpty -> {
-        Loader(modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding))
-      }
-
-      loadState.refresh.isError && episodes.isEmpty -> {
-        Error(
-          text = "Error",
-          onRetry = episodes::retry,
-          modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
-        )
-      }
-
-      loadState.isIdle && episodes.isEmpty -> {
+    TiledList(
+      state = uiState,
+      itemKey = Episode::id,
+      onAction = { onAction(EpisodeListAction.Tile(it)) },
+      modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+      listState = listState,
+      contentPadding = contentPadding,
+      empty = {
         Empty(
           graphic = {
             Icon(
@@ -115,37 +113,10 @@ private fun EpisodeListScreen(
             )
           },
           title = { Text(text = stringResource(L10nRes.string.episode_list_empty)) },
-          modifier = Modifier.fillMaxSize().wrapContentSize().padding(contentPadding),
         )
-      }
-
-      else -> {
-        PullToRefreshBox(
-          isRefreshing = loadState.refresh.isLoading,
-          onRefresh = episodes::refresh,
-          indicatorPadding = contentPadding,
-        ) {
-          LazyColumn(
-            state = listState,
-            modifier =
-              Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
-                .fillMaxSize()
-                .consumeWindowInsets(contentPadding),
-            contentPadding = contentPadding,
-          ) {
-            items(
-              count = episodes.itemCount,
-              key = episodes.itemKey { it.id },
-              contentType = episodes.itemContentType { "episode" },
-            ) { index ->
-              val item = episodes[index]!!
-              EpisodeItem(item)
-            }
-
-            appendLoadState(items = episodes)
-          }
-        }
-      }
+      },
+    ) { episode ->
+      EpisodeItem(episode)
     }
   }
 }

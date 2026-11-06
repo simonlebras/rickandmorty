@@ -1,9 +1,7 @@
 package app.rickandmorty.ui.character.navigation
 
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.navigation3.ListDetailSceneStrategy
-import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.compose.dropUnlessResumed
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
@@ -23,17 +21,9 @@ internal class CharacterNavEntryInstaller(private val navigator: Navigator) : Na
     entry<CharacterListNavKey>(
       metadata = metadata { navigationSuite() } + ListDetailSceneStrategy.listPane(),
     ) {
-      val listState = rememberLazyListState()
-
-      LaunchedEffect(Unit) {
-        navigator.reselectEvents(CharacterListNavKey).collect {
-          listState.animateScrollToItem(0)
-        }
-      }
-
       CharacterListScreen(
-        listState = listState,
         onNavigateToSettings = dropUnlessResumed { navigator.navigate(MainSettingsNavKey) },
+        reselectEvents = navigator.reselectEvents(CharacterListNavKey),
       )
     }
   }

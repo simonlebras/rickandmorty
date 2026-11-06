@@ -11,11 +11,11 @@ kotlin {
 
   dependencies {
     api(project(":core:startup"))
+    api(project(":core:tiling"))
 
     api(project(":data:character-api"))
 
     api(libs.androidx.navigation3.runtime)
-    api(libs.androidx.paging.compose)
 
     api(libs.haze)
 

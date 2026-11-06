@@ -19,14 +19,19 @@ kotlin {
     lint { disable += "RestrictedApi" }
   }
 
+  compilerOptions { optIn.add("org.mobilenativefoundation.store6.core.ExperimentalStoreApi") }
+
   dependencies {
     api(project(":core:coroutines"))
     api(project(":core:metro-common"))
 
     api(project(":data:database-api"))
+    api(project(":data:store"))
 
     api(libs.androidx.room.runtime)
     api(libs.androidx.sqlite.bundled)
+
+    api(libs.store.room)
   }
 
   sourceSets {

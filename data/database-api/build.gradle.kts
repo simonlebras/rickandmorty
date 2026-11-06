@@ -5,9 +5,8 @@ plugins {
 
 kotlin {
   dependencies {
-    api(project(":core:paging"))
-
     api(libs.androidx.room.common)
-    api(libs.androidx.room.paging)
+
+    api(libs.kotlinx.coroutines.core)
   }
 }
