@@ -14,3 +14,9 @@ kotlin {
     implementation(project(":core:base"))
   }
 }
+
+dependencyAnalysis {
+  issues {
+    onIncorrectConfiguration { exclude(":core:paging") }
+  }
+}

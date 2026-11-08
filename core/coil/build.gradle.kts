@@ -10,10 +10,15 @@ kotlin {
 
   dependencies {
     api(project(":core:ktor"))
-    api(project(":core:metro-common"))
 
     api(libs.coil.core)
 
     implementation(libs.coil.network.ktor3)
+  }
+
+  sourceSets {
+    androidMain {
+      dependencies { api(project(":core:metro-common")) }
+    }
   }
 }

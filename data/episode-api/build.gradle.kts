@@ -12,3 +12,9 @@ kotlin {
     api(libs.kotlinx.coroutines.core)
   }
 }
+
+dependencyAnalysis {
+  issues {
+    onIncorrectConfiguration { exclude(":core:paging") }
+  }
+}

@@ -24,6 +24,7 @@ kotlin {
 
 dependencyAnalysis {
   issues {
+    onIncorrectConfiguration { exclude(":core:paging") }
     onUnusedDependencies { exclude(libs.jetbrains.compose.runtime) }
   }
 }

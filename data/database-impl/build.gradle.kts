@@ -23,7 +23,6 @@ kotlin {
 
   dependencies {
     api(project(":core:coroutines"))
-    api(project(":core:metro-common"))
 
     api(project(":data:database-api"))
     api(project(":data:store"))
@@ -35,6 +34,10 @@ kotlin {
   }
 
   sourceSets {
+    androidMain {
+      dependencies { api(project(":core:metro-common")) }
+    }
+
     jvmMain {
       dependencies { implementation(libs.okio) }
     }

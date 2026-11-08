@@ -9,9 +9,9 @@ plugins {
 kotlin {
   dependencies {
     api(project(":data:character-api"))
-    api(project(":data:database-api"))
-    api(project(":data:rest"))
 
+    implementation(project(":data:database-api"))
+    implementation(project(":data:rest"))
     implementation(project(":data:store"))
   }
 }

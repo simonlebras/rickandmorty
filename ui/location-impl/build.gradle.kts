@@ -20,8 +20,6 @@ kotlin {
 
     api(project(":data:location-api"))
 
-    api(project(":ui:location-api"))
-
     api(libs.androidx.lifecycle.viewmodel.savedstate)
 
     api(libs.mutator.coroutines)
@@ -29,6 +27,7 @@ kotlin {
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
 
+    implementation(project(":ui:location-api"))
     implementation(project(":ui:settings-api"))
 
     implementation(libs.androidx.lifecycle.runtime.compose)
