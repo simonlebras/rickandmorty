@@ -15,7 +15,11 @@ public class ComposePlugin : Plugin<Project> {
     with(target) {
       val libs = the<LibrariesForLibs>()
 
-      apply(libs.plugins.compose.compiler, libs.plugins.compose.multiplatform)
+      apply(libs.plugins.compose.compiler)
+
+      pluginManager.withPlugin(libs.plugins.kotlin.multiplatform) {
+        apply(libs.plugins.compose.multiplatform)
+      }
 
       configure<ComposeCompilerGradlePluginExtension> {
         stabilityConfigurationFiles.add(
@@ -33,8 +37,10 @@ public class ComposePlugin : Plugin<Project> {
         }
       }
 
-      pluginManager.withPlugin(libs.plugins.android.lint) {
-        configurations.getByName("lintChecks").dependencies.add(libs.slack.compose.lints.get())
+      configurations.configureEach {
+        if (name == "lintChecks") {
+          dependencies.add(libs.slack.compose.lints.get())
+        }
       }
     }
 }

@@ -62,7 +62,7 @@ jobs:
           buildHealth \
           test \
           :app:checkReleaseBadging \
-          lint \
+          lint -x :app:lint \
           :app:lintRelease
 
       - name: Build all build type and flavor permutations
