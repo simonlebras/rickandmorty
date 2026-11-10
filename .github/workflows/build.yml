@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   format:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04-arm
 
     steps:
       - name: Checkout
@@ -30,7 +30,7 @@ jobs:
           cache: true
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04-arm
     timeout-minutes: 60
     env:
       ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD: ${{ secrets.ORG_GRADLE_PROJECT_RAM_RELEASE_KEYSTORE_PWD }}
@@ -103,7 +103,7 @@ jobs:
 
   android-test-cfg:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04-arm
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -118,7 +118,7 @@ jobs:
 
   android-test-cfg-check:
     needs: android-test-cfg
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04-arm
 
     steps:
       - name: Check matrix configuration
@@ -129,7 +129,7 @@ jobs:
 
   android-test:
     needs: android-test-cfg
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04-arm
     timeout-minutes: 120
 
     strategy:

@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   clear-caches:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04-arm
 
     steps:
       - name: Clear caches
