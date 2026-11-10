@@ -8,19 +8,29 @@ plugins {
 kotlin {
   android { namespace = "app.rickandmorty.core.logger.crashlytics" }
 
-  dependencies {
-    api(project(":core:startup"))
-
-    implementation(libs.kermit)
-  }
+  dependencies { implementation(libs.kermit) }
 
   sourceSets {
     androidMain {
-      dependencies { implementation(libs.kermit.crashlytics) }
+      dependencies {
+        api(project(":core:startup"))
+
+        implementation(libs.kermit.crashlytics)
+      }
     }
 
     nativeMain {
-      dependencies { implementation(libs.kermit.crashlytics) }
+      dependencies {
+        api(project(":core:startup"))
+
+        implementation(libs.kermit.crashlytics)
+      }
     }
+  }
+}
+
+dependencyAnalysis {
+  issues {
+    onUnusedDependencies { exclude(":core:startup") }
   }
 }

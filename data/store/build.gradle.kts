@@ -12,3 +12,9 @@ kotlin {
     api(libs.store.core)
   }
 }
+
+dependencyAnalysis {
+  issues {
+    onIncorrectConfiguration { exclude(":core:paging") }
+  }
+}

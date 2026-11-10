@@ -20,8 +20,6 @@ kotlin {
 
     api(project(":data:character-api"))
 
-    api(project(":ui:character-api"))
-
     api(libs.androidx.lifecycle.viewmodel.savedstate)
 
     api(libs.mutator.coroutines)
@@ -30,6 +28,7 @@ kotlin {
     implementation(project(":core:l10n"))
     implementation(project(":core:ui-tooling-preview"))
 
+    implementation(project(":ui:character-api"))
     implementation(project(":ui:settings-api"))
 
     implementation(libs.androidx.lifecycle.runtime.compose)

@@ -13,7 +13,6 @@ kotlin {
 
   dependencies {
     api(project(":core:app-info"))
-    api(project(":core:coroutines"))
     api(project(":core:metro-common"))
     api(project(":core:navigation"))
 
@@ -21,13 +20,14 @@ kotlin {
     api(project(":data:locale-api"))
     api(project(":data:theme-api"))
 
-    api(project(":ui:settings-api"))
-
     api(libs.mutator.coroutines)
 
+    implementation(project(":core:coroutines"))
     implementation(project(":core:design-system"))
     implementation(project(":core:l10n"))
     implementation(project(":core:ui"))
+
+    implementation(project(":ui:settings-api"))
 
     implementation(libs.androidx.lifecycle.runtime.compose)
 
