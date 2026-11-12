@@ -35,6 +35,7 @@
             android:name=".ui.MainActivity"
             android:configChanges="allKnown"
             android:exported="true"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
