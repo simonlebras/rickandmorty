@@ -1,6 +1,7 @@
 package app.rickandmorty.ui
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +17,8 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation3.runtime.deeplink.DeepLinkRequest
+import androidx.navigation3.runtime.deeplink.invoke
 import app.rickandmorty.core.base.unsafeLazy
 import app.rickandmorty.core.designsystem.theme.RamTheme
 import app.rickandmorty.core.rootcontent.RootContent
@@ -47,6 +50,10 @@ class MainActivity(
     super.onCreate(savedInstanceState)
 
     uiGraph.navigationState.attachTo(savedStateRegistry)
+
+    if (savedInstanceState == null) {
+      handleDeepLink(intent)
+    }
 
     lifecycleScope.launch {
       lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { stateHolder.collect() }
@@ -83,5 +90,15 @@ class MainActivity(
         }
       }
     }
+  }
+
+  override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    setIntent(intent)
+    handleDeepLink(intent)
+  }
+
+  private fun handleDeepLink(intent: Intent?) {
+    intent?.let { uiGraph.deepLinkHandler.handle(DeepLinkRequest(it)) }
   }
 }

@@ -1,6 +1,7 @@
 package app.rickandmorty.inject
 
 import app.rickandmorty.core.metro.UiScope
+import app.rickandmorty.core.navigation.DeepLinkHandler
 import app.rickandmorty.core.navigation.EntryProvider
 import app.rickandmorty.core.navigation.NavigationState
 import app.rickandmorty.core.navigation.Navigator
@@ -12,6 +13,7 @@ import dev.zacsweers.metrox.viewmodel.ViewModelGraph
 @GraphExtension(UiScope::class)
 interface UiGraph : ViewModelGraph {
   val entryProvider: EntryProvider
+  val deepLinkHandler: DeepLinkHandler
   val navigationState: NavigationState
   val navigator: Navigator
 
