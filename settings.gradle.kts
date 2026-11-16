@@ -90,8 +90,6 @@ include(
   ":core:logger-debug",
   ":core:metro-common",
   ":core:navigation",
-  ":core:navigation-serialization-processor",
-  ":core:navigation-serialization-runtime",
   ":core:paging",
   ":core:process-lifecycle",
   ":core:resources-app",

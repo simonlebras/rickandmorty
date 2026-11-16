@@ -94,7 +94,6 @@ dependencies {
   implementation(project(":ui:episode-impl"))
   implementation(project(":ui:location-api"))
   implementation(project(":ui:location-impl"))
-  implementation(project(":ui:settings-api"))
   implementation(project(":ui:settings-impl"))
 
   implementation(libs.androidx.activity.compose)

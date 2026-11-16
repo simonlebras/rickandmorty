@@ -91,9 +91,6 @@ gradlePlugin {
     register("app.rickandmorty.metro") {
       implementationClass = "app.rickandmorty.gradle.plugin.MetroPlugin"
     }
-    register("app.rickandmorty.navigation-serialization") {
-      implementationClass = "app.rickandmorty.gradle.plugin.NavigationSerializationPlugin"
-    }
     register("app.rickandmorty.root") {
       implementationClass = "app.rickandmorty.gradle.plugin.RootPlugin"
     }
