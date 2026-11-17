@@ -19,8 +19,6 @@ compose.resources {
 
 dependencyAnalysis {
   issues {
-    onUnusedDependencies {
-      exclude(libs.jetbrains.compose.resources, libs.jetbrains.compose.runtime)
-    }
+    onUnusedDependencies { exclude(libs.jetbrains.compose.runtime) }
   }
 }

@@ -27,10 +27,3 @@ dependencies {
 
   implementation(libs.kotlin.test.junit)
 }
-
-dependencyAnalysis {
-  issues {
-    onRuntimeOnly { exclude(libs.kotlin.test.junit) }
-    onUnusedDependencies { exclude(libs.androidx.test.junit) }
-  }
-}

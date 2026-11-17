@@ -153,10 +153,8 @@ dependencyAnalysis {
       exclude(
         ":core:compose-diagnostic",
         ":core:crashlytics",
-        ":core:json",
         ":core:logger-crashlytics",
       )
     }
-    onRuntimeOnly { exclude(":data:locale-impl") }
   }
 }

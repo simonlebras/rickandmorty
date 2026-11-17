@@ -21,11 +21,3 @@ kotlin {
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
   }
 }
-
-dependencyAnalysis {
-  issues {
-    onUnusedDependencies {
-      exclude(libs.androidx.lifecycle.viewmodel.navigation3, libs.androidx.navigation3.runtime)
-    }
-  }
-}

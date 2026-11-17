@@ -31,12 +31,3 @@ kotlin {
 }
 
 compose.resources { packageOfResClass = "app.rickandmorty.core.designsystem.resources" }
-
-dependencyAnalysis {
-  issues {
-    onUnusedDependencies {
-      exclude(libs.jetbrains.compose.material3)
-      exclude(libs.jetbrains.compose.ui.tooling.preview, libs.jetbrains.navigation3.ui)
-    }
-  }
-}
