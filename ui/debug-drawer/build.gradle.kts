@@ -34,12 +34,3 @@ kotlin {
     implementation(libs.mutator.compose)
   }
 }
-
-dependencyAnalysis {
-  issues {
-    onUnusedDependencies {
-      exclude(libs.jetbrains.compose.animation)
-      exclude(libs.jetbrains.compose.material3)
-    }
-  }
-}

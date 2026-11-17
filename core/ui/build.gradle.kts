@@ -38,15 +38,3 @@ kotlin {
     }
   }
 }
-
-dependencyAnalysis {
-  issues {
-    onUnusedDependencies {
-      exclude(
-        libs.jetbrains.compose.material3.adaptive.navigation3,
-        libs.jetbrains.compose.material3.adaptivenavigationsuite,
-        libs.jetbrains.navigation3.ui,
-      )
-    }
-  }
-}
