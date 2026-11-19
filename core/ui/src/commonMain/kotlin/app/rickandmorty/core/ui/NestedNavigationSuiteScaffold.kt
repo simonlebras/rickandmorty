@@ -1,6 +1,5 @@
 package app.rickandmorty.core.ui
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.MutableWindowInsets
 import androidx.compose.foundation.layout.WindowInsets
@@ -14,9 +13,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.util.fastForEach
+import androidx.compose.ui.util.fastMap
+import androidx.compose.ui.util.fastMaxBy
 
 @Composable
 public fun NestedNavigationSuiteScaffold(
@@ -32,9 +33,8 @@ public fun NestedNavigationSuiteScaffold(
     NestedNavigationSuiteScaffoldLayout(
       navigationSuite = navigationSuite,
       navigationSuiteType = navigationSuiteType,
-    ) {
-      content()
-    }
+      content = content,
+    )
   }
 }
 
@@ -48,51 +48,57 @@ private fun NestedNavigationSuiteScaffoldLayout(
   val upstreamInsets = LocalScaffoldInsets.current
   val contentInsets = remember { MutableWindowInsets() }
 
-  val layoutDirection = LocalLayoutDirection.current
-
-  Layout(
-    content = {
-      Box {
-        navigationSuite()
-      }
-
-      Box {
-        CompositionLocalProvider(LocalScaffoldInsets provides contentInsets) {
-          content()
-        }
-      }
-    },
-  ) { measurables, constraints ->
+  SubcomposeLayout { constraints ->
     val layoutWidth = constraints.maxWidth
     val layoutHeight = constraints.maxHeight
     val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
 
     val isNavigationBar = navigationSuiteType.isNavigationBar
 
-    val navigationPlaceable = measurables[0].measure(looseConstraints)
+    val navigationPlaceables =
+      subcompose(NavigationSuiteScaffoldLayoutContent.Navigation, navigationSuite).fastMap {
+        it.measure(looseConstraints)
+      }
+
+    val navigationWidth = navigationPlaceables.fastMaxBy { it.width }?.width ?: 0
+    val navigationHeight = navigationPlaceables.fastMaxBy { it.height }?.height ?: 0
 
     val navigationSuiteInsets =
       if (isNavigationBar) {
-        WindowInsets(bottom = navigationPlaceable.height)
+        WindowInsets(bottom = navigationHeight)
       } else {
         if (layoutDirection == LayoutDirection.Ltr) {
-          WindowInsets(left = navigationPlaceable.width)
+          WindowInsets(left = navigationWidth)
         } else {
-          WindowInsets(right = navigationPlaceable.width)
+          WindowInsets(right = navigationWidth)
         }
       }
     contentInsets.insets = upstreamInsets.add(navigationSuiteInsets)
 
-    val contentPlaceable = measurables[1].measure(constraints)
+    val contentPlaceables =
+      subcompose(NavigationSuiteScaffoldLayoutContent.Content) {
+          CompositionLocalProvider(LocalScaffoldInsets provides contentInsets) { content() }
+        }
+        .fastMap { it.measure(looseConstraints) }
 
     layout(layoutWidth, layoutHeight) {
-      contentPlaceable.placeRelative(x = 0, y = 0)
+      contentPlaceables.fastForEach { it.place(0, 0, zIndex = ContentZIndex) }
 
       if (isNavigationBar) {
-        navigationPlaceable.placeRelative(x = 0, y = layoutHeight - navigationPlaceable.height)
+        navigationPlaceables.fastForEach {
+          it.place(0, layoutHeight - navigationHeight, zIndex = NavigationSuiteZIndex)
+        }
       } else {
-        navigationPlaceable.placeRelative(x = 0, y = 0)
+        navigationPlaceables.fastForEach { it.placeRelative(0, 0, zIndex = NavigationSuiteZIndex) }
       }
     }
   }
+}
+
+private const val ContentZIndex = 0f
+private const val NavigationSuiteZIndex = 1f
+
+private enum class NavigationSuiteScaffoldLayoutContent {
+  Navigation,
+  Content,
 }
