@@ -33,6 +33,7 @@ import app.rickandmorty.core.l10n.resources.settings_license_title
 import app.rickandmorty.core.ui.HazeScaffold
 import app.rickandmorty.core.ui.ReportDrawnWhen
 import app.rickandmorty.data.license.License
+import app.rickandmorty.ui.settings.common.SettingsContentType
 import com.tunjid.mutator.compose.produceStateWithLifecycle
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 import org.jetbrains.compose.resources.stringResource
@@ -86,7 +87,11 @@ private fun LicenseSettingsScreen(
           modifier = Modifier.fillMaxSize().consumeWindowInsets(contentPadding),
           contentPadding = contentPadding,
         ) {
-          items(licenses, key = License::uniqueId) { license ->
+          items(
+            items = licenses,
+            key = License::uniqueId,
+            contentType = { SettingsContentType.ListItem },
+          ) { license ->
             LicenseItem(license = license, onClick = dropUnlessResumed { onLicenseClick(license) })
           }
         }
