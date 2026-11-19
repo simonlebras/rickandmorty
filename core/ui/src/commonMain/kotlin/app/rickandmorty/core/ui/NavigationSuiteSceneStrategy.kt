@@ -53,6 +53,8 @@ private data class NavigationSuiteSceneDecorator<T : Any>(
   private val navigationSuite: NavigationSuiteContent,
   private val movableNavigationSuite: NavigationSuiteContent,
 ) : Scene<T> by scene {
+  override val key: Any = scene::class to scene.key
+
   override val content: @Composable () -> Unit = {
     val navigationSuiteType =
       NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(currentWindowAdaptiveInfoV2())
