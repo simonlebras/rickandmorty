@@ -9,6 +9,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,10 +59,15 @@ public fun <T> TiledList(
         modifier = modifier,
         indicatorPadding = contentPadding,
       ) {
-        LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
-          item(key = "empty") {
-            Box(Modifier.fillParentMaxSize(), contentAlignment = Alignment.Center) { empty() }
-          }
+        Box(
+          modifier =
+            Modifier.fillMaxSize()
+              .verticalScroll(rememberScrollState())
+              .padding(contentPadding)
+              .consumeWindowInsets(contentPadding),
+          contentAlignment = Alignment.Center,
+        ) {
+          empty()
         }
       }
 
@@ -89,7 +96,7 @@ public fun <T> TiledList(
             onRetry = { onAction(TilingState.Action.Retry) },
           )
 
-          items(items = items, key = itemKey, itemContent = item)
+          items(items = items, key = itemKey, contentType = { "item" }, itemContent = item)
 
           edgeLoadState(
             key = "append",
