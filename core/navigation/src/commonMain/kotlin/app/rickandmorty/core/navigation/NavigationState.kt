@@ -2,7 +2,6 @@ package app.rickandmorty.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,7 +20,6 @@ import androidx.savedstate.serialization.decodeFromSavedState
 import androidx.savedstate.serialization.encodeToSavedState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.PersistentMap
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentMap
 import kotlinx.serialization.Serializable
@@ -43,13 +41,13 @@ public class NavigationState(
   public val currentRoute: NavKey?
     get() = backStacks[topLevelRoute]?.lastOrNull()
 
-  private val topLevelRoutesInUse by derivedStateOf {
-    if (this@NavigationState.topLevelRoute == startRoute) {
-      persistentListOf(startRoute)
-    } else {
-      persistentListOf(startRoute, this@NavigationState.topLevelRoute)
-    }
-  }
+  private val topLevelRoutesInUse: List<NavKey>
+    get() =
+      if (topLevelRoute == startRoute) {
+        listOf(startRoute)
+      } else {
+        listOf(startRoute, topLevelRoute)
+      }
 
   public fun attachTo(savedStateRegistry: SavedStateRegistry) {
     savedStateRegistry.consumeRestoredStateForKey(SavedStateKey)?.let(::restore)
@@ -102,7 +100,7 @@ public class NavigationState(
       )
     }
 
-    return remember(topLevelRoutesInUse, decoratedEntries) {
+    return remember(topLevelRoute, decoratedEntries) {
       topLevelRoutesInUse.flatMap { decoratedEntries[it].orEmpty() }.toImmutableList()
     }
   }
