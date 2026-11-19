@@ -2,9 +2,9 @@ package app.rickandmorty.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.CompositionLocalProvider
@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +46,7 @@ class MainActivity(
   override fun onCreate(savedInstanceState: Bundle?) {
     val splashScreen = installSplashScreen()
 
-    WindowCompat.enableEdgeToEdge(window)
+    enableEdgeToEdge()
 
     super.onCreate(savedInstanceState)
 
@@ -96,6 +97,23 @@ class MainActivity(
     super.onNewIntent(intent)
     setIntent(intent)
     handleDeepLink(intent)
+  }
+
+  private fun enableEdgeToEdge() {
+    WindowCompat.enableEdgeToEdge(window)
+
+    val controller = WindowCompat.getInsetsController(window, window.decorView)
+    val updateSystemBars =
+      Consumer<Configuration> { configuration ->
+        val isDark =
+          (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+            Configuration.UI_MODE_NIGHT_YES
+        controller.isAppearanceLightStatusBars = !isDark
+        controller.isAppearanceLightNavigationBars = !isDark
+      }
+
+    updateSystemBars.accept(resources.configuration)
+    addOnConfigurationChangedListener(updateSystemBars)
   }
 
   private fun handleDeepLink(intent: Intent?) {
