@@ -14,7 +14,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 
@@ -48,41 +48,28 @@ private fun NestedNavigationSuiteScaffoldLayout(
   val upstreamInsets = LocalScaffoldInsets.current
   val contentInsets = remember { MutableWindowInsets() }
 
-  val navigationContent: @Composable () -> Unit =
-    remember(navigationSuite) {
-      {
-        Box {
-          navigationSuite()
-        }
-      }
-    }
-  val bodyContent: @Composable () -> Unit =
-    remember(content, contentInsets) {
-      {
-        Box {
-          CompositionLocalProvider(LocalScaffoldInsets provides contentInsets) {
-            content()
-          }
-        }
-      }
-    }
-
   val layoutDirection = LocalLayoutDirection.current
 
-  SubcomposeLayout { constraints ->
+  Layout(
+    content = {
+      Box {
+        navigationSuite()
+      }
+
+      Box {
+        CompositionLocalProvider(LocalScaffoldInsets provides contentInsets) {
+          content()
+        }
+      }
+    },
+  ) { measurables, constraints ->
     val layoutWidth = constraints.maxWidth
     val layoutHeight = constraints.maxHeight
     val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
 
     val isNavigationBar = navigationSuiteType.isNavigationBar
 
-    val navigationPlaceable =
-      subcompose(
-          slotId = NavigationSuiteScaffoldLayoutContent.Navigation,
-          content = navigationContent,
-        )
-        .first()
-        .measure(looseConstraints)
+    val navigationPlaceable = measurables[0].measure(looseConstraints)
 
     val navigationSuiteInsets =
       if (isNavigationBar) {
@@ -96,10 +83,7 @@ private fun NestedNavigationSuiteScaffoldLayout(
       }
     contentInsets.insets = upstreamInsets.add(navigationSuiteInsets)
 
-    val contentPlaceable =
-      subcompose(slotId = NavigationSuiteScaffoldLayoutContent.Content, content = bodyContent)
-        .first()
-        .measure(constraints)
+    val contentPlaceable = measurables[1].measure(constraints)
 
     layout(layoutWidth, layoutHeight) {
       contentPlaceable.placeRelative(x = 0, y = 0)
@@ -111,9 +95,4 @@ private fun NestedNavigationSuiteScaffoldLayout(
       }
     }
   }
-}
-
-private enum class NavigationSuiteScaffoldLayoutContent {
-  Navigation,
-  Content,
 }
